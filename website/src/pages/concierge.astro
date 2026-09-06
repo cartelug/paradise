@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+const services = [
+  ['Flights & connections', 'We consider routes, departure times, connection windows and cabin preferences as parts of the same journey. The aim is an itinerary that works in practice, not just on paper.', ['International and regional flight planning', 'Cabin and schedule preferences', 'Connections coordinated with the rest of your itinerary']],
+  ['Places worth staying', 'The right stay depends on more than a star rating. Location, atmosphere, privacy and the people travelling with you all shape the choice.', ['Hotels, resorts and individual stay preferences', 'Room types and occasion-specific requests', 'Clear discussion of inclusions and availability']],
+  ['Transfers & ground arrangements', 'Considered ground arrangements bring the journey together, from your first arrival to the next destination.', ['Airport and hotel transfer planning', 'Inter-destination ground connections', 'Private arrangements where available and agreed']],
+  ['Experiences & itineraries', 'Make space for the things that draw you to a place. We bring experiences into a balanced itinerary, leaving time to discover it in your own way.', ['Tailor-made day-to-day planning', 'Cultural, coastal and safari experiences', 'Honeymoons, celebrations and family journeys']],
+  ['Visa & travel guidance', 'We can help you identify documentation questions and prepare for the application process. Official authorities determine requirements, eligibility and decisions; guidance does not guarantee entry or visa approval.', ['Practical documentation guidance', 'Signposting to relevant official requirements', 'Preparation considered alongside your travel dates']]
+];
+---
+<Layout title="Your travel concierge" description="Flights, stays, transfers, itineraries and practical travel guidance brought together in one considered journey.">
+  <section class="page-intro"><p class="eyebrow">Your travel concierge</p><div class="page-intro-row"><h1>The details.<br /><em>Beautifully handled.</em></h1><p>A journey is made of many moving parts. We help bring them into one thoughtful plan.</p></div></section>
+  <Picture name="hero" alt="A peaceful pool with an uninterrupted ocean view" class="full-bleed-picture" eager sizes="100vw" />
+  <section class="service-editorial section-wrap"><div class="section-label"><span>What we can bring together</span></div><div>{services.map(([title, description, list], i) => <article class="service-detail" data-reveal><span>0{i + 1}</span><div><h2>{title}</h2><p>{description}</p><ul>{(list as string[]).map(item => <li>{item}</li>)}</ul></div></article>)}</div></section>
+</Layout>

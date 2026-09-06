@@ -1,0 +1,10 @@
+---
+import { path } from '../data/site';
+interface Props { name: string; alt: string; class?: string; eager?: boolean; sizes?: string; }
+const { name, alt, class: className, eager = false, sizes = '(max-width: 760px) 100vw, 60vw' } = Astro.props;
+---
+<picture class={className}>
+  <source type="image/avif" srcset={`${path(`images/${name}-640.avif`)} 640w, ${path(`images/${name}-1280.avif`)} 1280w, ${path(`images/${name}-1920.avif`)} 1920w`} sizes={sizes} />
+  <source type="image/webp" srcset={`${path(`images/${name}-640.webp`)} 640w, ${path(`images/${name}-1280.webp`)} 1280w, ${path(`images/${name}-1920.webp`)} 1920w`} sizes={sizes} />
+  <img src={path(`images/${name}-1280.webp`)} alt={alt} width="1280" height="960" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+</picture>

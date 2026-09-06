@@ -1,0 +1,6 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Arrow from '../components/Arrow.astro';
+import { path } from '../data/site';
+---
+<Layout title="A different direction" simpleFooter><section class="not-found"><p class="eyebrow">404 / A turn in the journey</p><h1>A different<br /><em>direction.</em></h1><p>This page isn’t here. Your next escape could be.</p><a class="text-button" href={path('destinations.html')}>Return to the collection <Arrow /></a></section></Layout>

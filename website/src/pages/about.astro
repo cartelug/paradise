@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import { path } from '../data/site';
+---
+<Layout title="The Pardus way" description="Travel designed around the individual. Discover the philosophy behind Pardus Luxury Escapes.">
+  <section class="feature-intro"><div class="feature-intro-content"><p class="eyebrow">The Pardus way</p><h1>Less ordinary.<br />More <em>personal.</em></h1><p>We believe the most memorable journeys begin with understanding the person taking them.</p></div><Picture name="seychelles" alt="Sculptural rocks beside the clear turquoise sea in Seychelles" eager /></section>
+  <section class="about-statement section-wrap"><div class="section-label"><span>A personal point of view</span></div><div><h2 data-reveal>Luxury is knowing<br />what matters <em>to you.</em></h2><p class="large-copy" data-reveal>Not everyone wants the same journey. Some want a new perspective. Some want to celebrate. Some simply want a little time that feels completely their own.</p><p class="large-copy" data-reveal>Pardus brings destinations, stays and the practical details together around those individual reasons for travelling. The ambition is simple: thoughtful planning that gives you more room to enjoy being there.</p></div></section>
+  <section class="detail-highlights section-wrap"><p class="eyebrow">Our approach</p><h2 data-reveal>Care in the choices.<br />Clarity in the details.</h2><ol class="process-list"><li data-reveal><span>01</span><div><h3>Listen before planning.</h3><p>We start with your interests, budget, timing and the people you are travelling with. Your brief leads the way.</p></div></li><li data-reveal><span>02</span><div><h3>Make it coherent.</h3><p>A beautiful hotel is only one part of the picture. Connections, pace and the overall experience matter too.</p></div></li><li data-reveal><span>03</span><div><h3>Keep it personal.</h3><p>Thoughtful options and a clear conversation, with arrangements agreed before the journey begins.</p></div></li></ol></section>
+  <section class="about-statement section-wrap"><div class="section-label"><span>From idea to itinerary</span></div><div><h2 data-reveal>A conversation<br />worth <em>having.</em></h2><p class="large-copy" data-reveal>You do not need an itinerary to begin. A destination, an occasion or a feeling is enough. We can help give it shape.</p><a class="text-button" href={path('journey.html')} data-reveal>Begin your journey <Arrow /></a></div></section>
+</Layout>

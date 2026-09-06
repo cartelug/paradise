@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import Brand from '../components/Brand.astro';
+import { path } from '../data/site';
+import { destinations } from '../data/destinations';
+---
+<Layout dark class="home-page">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow hero-kicker">Private journeys. Personally imagined.</p>
+      <h1 id="hero-title"><span class="text-mask"><span>A world</span></span><span class="text-mask"><span>apart.</span></span><span class="hero-italic text-mask"><span>Entirely yours.</span></span></h1>
+      <div class="hero-description"><span class="gold-rule"></span><p>Remarkable places. Your own pace.<br />Travel, thoughtfully put together.</p></div>
+      <a class="text-button hero-link" href={path('destinations.html')}>Find your escape <Arrow /></a>
+    </div>
+    <div class="hero-visual"><Picture name="hero" alt="An infinity pool overlooking a quiet ocean horizon at sunset" eager sizes="(max-width: 760px) 100vw, 57vw" class="hero-picture" /><div class="hero-photo-shade"></div><div class="hero-location"><span class="location-mark"></span><span>Somewhere worth slowing down.</span></div><a class="hero-discover" href={path('destination-maldives.html')}><span>Discover the<br /><strong>Indian Ocean</strong></span><span class="circle-arrow"><Arrow /></span></a></div>
+    <div class="hero-bottom"><span>01 — An invitation to elsewhere</span><a href="#collection">Scroll to explore <Arrow direction="down" /></a><span>For the way you want to travel.</span></div>
+  </section>
+
+  <section class="manifesto section-wrap" id="philosophy">
+    <div class="section-label"><span>01 / The Pardus perspective</span><span class="label-rule"></span></div>
+    <div class="manifesto-main"><h2 data-reveal>Not just a place.<br />A different <em>feeling.</em></h2><div class="manifesto-bottom"><Brand mark /><p data-reveal>There is a difference between going somewhere and feeling you’ve truly arrived. We plan travel around that difference. The right place, the right pace and the details that make a journey feel like yours.</p><a href={path('about.html')} class="text-button" data-reveal>The Pardus way <Arrow /></a></div></div>
+  </section>
+
+  <section class="collection-section section-wrap" id="collection">
+    <div class="section-label"><span>02 / Places with a pull</span><span class="label-rule"></span></div>
+    <div class="collection-heading"><h2 data-reveal>Where your mind<br />already <em>wanders.</em></h2><a class="text-button" href={path('destinations.html')}>Explore all destinations <Arrow /></a></div>
+    <div class="destination-editor" data-destination-editor>
+      <div class="destination-index" role="tablist" aria-label="Featured destinations">
+        {destinations.map((d, i) => <button id={`tab-${d.slug}`} role="tab" aria-controls={`panel-${d.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-destination-tab={d.slug}><span class="index-number">{d.number}</span><span class="index-place">{d.name}<small>{d.country}</small></span><Arrow /></button>)}
+        <p class="index-note">A starting point.<br /><em>Never a fixed itinerary.</em></p>
+      </div>
+      <div class="destination-stage">
+        {destinations.map((d, i) => <article class:list={['destination-panel', { active: i === 0 }]} id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}><a href={path(`destination-${d.slug}.html`)} class="destination-image-link" aria-label={`Explore ${d.name}`}><Picture name={d.image} alt={d.alt} /><div class="destination-photo-caption"><span>{d.caption}</span><span class="circle-arrow"><Arrow /></span></div></a><div class="destination-description"><p>{d.description}</p><span>{d.number} / 05</span></div></article>)}
+      </div>
+    </div>
+    <noscript><p class="no-script-help">Explore every destination from the <a href={path('destinations.html')}>destination collection</a>.</p></noscript>
+  </section>
+
+  <section class="atelier-section section-wrap">
+    <div class="atelier-image" data-reveal><Picture name="seychelles" alt="Sculptural granite boulders meeting clear tropical water in Seychelles" /><span class="vertical-caption">Space to be somewhere else.</span></div>
+    <div class="atelier-copy"><p class="eyebrow" data-reveal>Everything considered. Nothing off the shelf.</p><h2 data-reveal>It begins<br />with <em>you.</em></h2><p class="large-copy" data-reveal>A honeymoon that feels like no one else’s. A family adventure. A little time to disappear.</p><p data-reveal>We listen first. Then we bring flights, stays and experiences into one considered journey—with room for the moments you cannot plan.</p><a href={path('journey.html')} class="text-button" data-reveal>Tell us what you have in mind <Arrow /></a></div>
+  </section>
+
+  <section class="concierge-section section-wrap">
+    <div class="concierge-intro"><p class="eyebrow" data-reveal>The quiet work behind a beautiful journey</p><h2 data-reveal>Leave the<br />details <em>with us.</em></h2><a href={path('concierge.html')} class="text-button" data-reveal>Meet your travel concierge <Arrow /></a></div>
+    <div class="service-list">
+      {[['01', 'Flights & connections', 'Routes that work together, with considered connections and a schedule shaped around you.'], ['02', 'Exceptional stays', 'The right address for your kind of escape—from a quiet island to the centre of a city.'], ['03', 'Journeys & experiences', 'Ground arrangements, personal itineraries and the moments that give a place meaning.'], ['04', 'Travel guidance', 'Practical support with documentation and the questions that come before you go.']].map(([n, title, text]) => <details class="service-item" data-reveal><summary><span>{n}</span><h3>{title}</h3><span class="detail-toggle" aria-hidden="true"></span></summary><p>{text}</p></details>)}
+    </div>
+  </section>
+
+  <section class="business-section">
+    <Picture name="corporate" alt="A comfortable aircraft cabin interior" class="business-image" />
+    <div class="business-copy"><p class="eyebrow" data-reveal>Pardus for business</p><h2 data-reveal>Ahead of<br />the <em>agenda.</em></h2><p data-reveal>Thoughtful travel coordination for the people moving your business forward. Flights, stays and schedules, in one conversation.</p><a href={path('corporate.html')} class="text-button" data-reveal>Explore corporate travel <Arrow /></a></div>
+  </section>
+
+  <section class="process-section section-wrap">
+    <div class="section-label"><span>03 / From the first conversation</span><span class="label-rule"></span></div>
+    <h2 data-reveal>Good journeys begin<br />with a little <em>understanding.</em></h2>
+    <ol class="process-list"><li data-reveal><span>01</span><div><h3>We listen.</h3><p>The occasion. The people. The things you love, and the things you’d rather leave behind.</p></div></li><li data-reveal><span>02</span><div><h3>We shape.</h3><p>Places, stays and experiences, brought together into a journey that feels right.</p></div></li><li data-reveal><span>03</span><div><h3>You go.</h3><p>With arrangements agreed and the details confirmed, your next chapter begins.</p></div></li></ol>
+  </section>
+</Layout>

@@ -1,0 +1,24 @@
+{
+  "name": "pardus-private-travel",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0 --port 4173",
+    "build": "astro build",
+    "check": "astro check",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "astro preview --host 0.0.0.0 --port 4173"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.2.0",
+    "@fontsource/bodoni-moda": "^5.2.0",
+    "astro": "7.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "potrace": "^2.1.8",
+    "sharp": "^0.34.3",
+    "typescript": "^5.9.0"
+  }
+}

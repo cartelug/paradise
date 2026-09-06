@@ -1,0 +1,40 @@
+---
+import '@fontsource/bodoni-moda/latin-400.css';
+import '@fontsource/bodoni-moda/latin-400-italic.css';
+import '@fontsource-variable/manrope';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader.astro';
+import { site, path } from '../data/site';
+interface Props { title?: string; description?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
+const { title, description = site.description, dark = false, simpleFooter = false, class: className } = Astro.props;
+const canonical = new URL(Astro.url.pathname, 'https://cartelug.github.io');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071D2B" />
+    <meta name="description" content={description} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>{title ? `${title} — ${site.name}` : site.name}</title>
+    <link rel="icon" type="image/svg+xml" href={path('brand/favicon.svg')} />
+    <link rel="apple-touch-icon" href={path('brand/apple-touch-icon.png')} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title ? `${title} — Pardus` : site.name} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline src={path('opening.js')}></script>
+  </head>
+  <body id="top" class={className}>
+    <Preloader />
+    <Header dark={dark} />
+    <main id="main" tabindex="-1"><slot /></main>
+    <Footer simple={simpleFooter} />
+    <script>import '../scripts/site.ts';</script>
+  </body>
+</html>

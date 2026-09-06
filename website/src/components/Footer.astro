@@ -1,0 +1,21 @@
+---
+import Brand from './Brand.astro';
+import Arrow from './Arrow.astro';
+import { path } from '../data/site';
+interface Props { simple?: boolean; }
+const { simple = false } = Astro.props;
+---
+{!simple && <section class="closing-cta">
+  <div class="closing-top"><p class="eyebrow">The next chapter is yours.</p><span class="small-caption">Pardus / Personally planned</span></div>
+  <a class="closing-title" href={path('journey.html')}><span>Where <em>next?</em></span><span class="closing-arrow"><Arrow /></span></a>
+  <p>A place you’ve dreamed of. A reason to get away. Let’s begin there.</p>
+</section>}
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand"><a href={path()} aria-label="Pardus home"><Brand light /></a><p>Considered journeys.<br />A world of difference.</p></div>
+    <div class="footer-column"><p class="eyebrow">Explore</p><a href={path('destinations.html')}>Destinations</a><a href={path('concierge.html')}>Travel concierge</a><a href={path('corporate.html')}>Corporate travel</a></div>
+    <div class="footer-column"><p class="eyebrow">Pardus</p><a href={path('about.html')}>The Pardus way</a><a href={path('journey.html')}>Plan a journey</a><a href={path('contact.html')}>Contact</a></div>
+    <a class="back-top" href="#top" aria-label="Back to top"><Arrow direction="down" /></a>
+  </div>
+  <div class="footer-base"><span>© {new Date().getFullYear()} Pardus Luxury Escapes</span><div><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Website terms</a><button type="button" class="replay-opening">Replay the opening</button></div><span>Made for the journey.</span></div>
+</footer>
