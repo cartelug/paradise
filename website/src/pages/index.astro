@@ -8,13 +8,25 @@ import { destinations } from '../data/destinations';
 ---
 <Layout dark class="home-page">
   <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-media" data-scroll-media data-scroll-depth="38">
+      <picture class="hero-art">
+        <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/pardus-hero-mobile-768.avif')} 768w, ${path('images/pardus-hero-mobile-1200.avif')} 1200w`} sizes="100vw" />
+        <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/pardus-hero-mobile-768.webp')} 768w, ${path('images/pardus-hero-mobile-1200.webp')} 1200w`} sizes="100vw" />
+        <source type="image/avif" srcset={`${path('images/pardus-hero-desktop-1280.avif')} 1280w, ${path('images/pardus-hero-desktop-1920.avif')} 1920w, ${path('images/pardus-hero-desktop-2560.avif')} 2560w`} sizes="100vw" />
+        <source type="image/webp" srcset={`${path('images/pardus-hero-desktop-1280.webp')} 1280w, ${path('images/pardus-hero-desktop-1920.webp')} 1920w, ${path('images/pardus-hero-desktop-2560.webp')} 2560w`} sizes="100vw" />
+        <img src={path('images/pardus-hero-desktop-1920.webp')} alt="A golden leopard moving through a cinematic world of ocean, savannah, desert and city landscapes" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
+      </picture>
+    </div>
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-brand-mark" aria-hidden="true"><Brand mark light /></div>
     <div class="hero-copy">
       <p class="eyebrow hero-kicker">Private journeys. Personally imagined.</p>
       <h1 id="hero-title"><span class="text-mask"><span>A world</span></span><span class="text-mask"><span>apart.</span></span><span class="hero-italic text-mask"><span>Entirely yours.</span></span></h1>
       <div class="hero-description"><span class="gold-rule"></span><p>Remarkable places. Your own pace.<br />Travel, thoughtfully put together.</p></div>
       <a class="text-button hero-link" href={path('destinations.html')}>Find your escape <Arrow /></a>
     </div>
-    <div class="hero-visual"><Picture name="hero" alt="An infinity pool overlooking a quiet ocean horizon at sunset" eager sizes="(max-width: 760px) 100vw, 57vw" class="hero-picture" /><div class="hero-photo-shade"></div><div class="hero-location"><span class="location-mark"></span><span>Somewhere worth slowing down.</span></div><a class="hero-discover" href={path('destination-maldives.html')}><span>Discover the<br /><strong>Indian Ocean</strong></span><span class="circle-arrow"><Arrow /></span></a></div>
+    <div class="hero-world-note"><span class="eyebrow">Pardus across the world</span><span>Ocean · Savannah · City · Desert</span></div>
+    <a class="hero-discover" href={path('destinations.html')}><span>Begin with<br /><strong>somewhere extraordinary</strong></span><span class="circle-arrow"><Arrow /></span></a>
     <div class="hero-bottom"><span>01 — An invitation to elsewhere</span><a href="#collection">Scroll to explore <Arrow direction="down" /></a><span>For the way you want to travel.</span></div>
   </section>
 

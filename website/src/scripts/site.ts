@@ -32,7 +32,7 @@ async function playOpening(replay = false) {
   opening.setAttribute('aria-hidden', 'false');
   if (skipOpening) skipOpening.tabIndex = 0;
   document.querySelectorAll<HTMLElement>('.site-header, main, .site-footer, .closing-cta').forEach(el => { el.inert = true; });
-  const hero = document.querySelector<HTMLImageElement>('.hero-picture img');
+  const hero = document.querySelector<HTMLImageElement>('.hero-art img');
   const ready = Promise.allSettled([document.fonts.ready, hero?.decode() || Promise.resolve()]);
   // Brand choreography runs concurrently with real readiness; never wait on all site images.
   await Promise.all([wait(1250), Promise.race([ready, wait(2400)])]);
@@ -54,12 +54,61 @@ menu?.addEventListener('close', () => { toggle?.setAttribute('aria-expanded', 'f
 menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.close()));
 
 if ('IntersectionObserver' in window && !motion.matches) {
+  const sectionCounts = new Map<Element, number>();
+  const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal]')];
+  targets.forEach(target => {
+    const section = target.closest('section') || document.body;
+    const order = sectionCounts.get(section) || 0;
+    sectionCounts.set(section, order + 1);
+    target.style.setProperty('--reveal-delay', `${Math.min(order, 5) * 65}ms`);
+    if (!target.dataset.revealStyle) {
+      target.dataset.revealStyle = target.matches('h1,h2,.section-label') ? 'heading'
+        : target.matches('picture,.atelier-image,.business-image,.journey-card-picture,.destination-detail-hero,.full-bleed-picture') ? 'media'
+        : target.matches('li,details,.service-detail,.journey-card') ? 'card'
+        : 'copy';
+    }
+  });
   const reveal = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); reveal.unobserve(entry.target); } });
-  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-  document.querySelectorAll('[data-reveal]').forEach(el => reveal.observe(el));
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('revealed');
+      reveal.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+  targets.forEach(el => reveal.observe(el));
+
+  const sections = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('main section').forEach(section => sections.observe(section));
   root.classList.add('reveal-ready');
 }
+
+const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media], .atelier-image, .business-image, .journey-card-picture, .destination-detail-hero, .full-bleed-picture, .feature-intro>picture')]
+  .filter(element => element.querySelector('img'));
+scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.dataset.scrollMedia = ''; });
+let scrollFrame = 0;
+function paintScrollMotion() {
+  scrollFrame = 0;
+  const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  root.style.setProperty('--page-progress', String(Math.min(1, Math.max(0, window.scrollY / scrollable))));
+  if (motion.matches) return;
+  for (const element of scrollMedia) {
+    const box = element.getBoundingClientRect();
+    if (box.bottom < -100 || box.top > window.innerHeight + 100) continue;
+    const depth = Number(element.dataset.scrollDepth || 22);
+    const position = (window.innerHeight / 2 - (box.top + box.height / 2)) / (window.innerHeight + box.height);
+    const offset = Math.max(-depth, Math.min(depth, position * depth * 2));
+    element.style.setProperty('--scroll-y', `${offset.toFixed(2)}px`);
+  }
+}
+function requestScrollPaint() {
+  if (!scrollFrame) scrollFrame = requestAnimationFrame(paintScrollMotion);
+}
+window.addEventListener('scroll', requestScrollPaint, { passive: true });
+window.addEventListener('resize', requestScrollPaint);
+motion.addEventListener('change', requestScrollPaint);
+requestScrollPaint();
 
 document.querySelectorAll<HTMLElement>('[data-destination-editor]').forEach(editor => {
   const tabs = [...editor.querySelectorAll<HTMLButtonElement>('[data-destination-tab]')];

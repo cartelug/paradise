@@ -12,3 +12,7 @@ The logo in `public/brand/` is a deterministic vector reconstruction of the appr
 - dubai: https://images.unsplash.com/photo-1744416328915-1341add4a393?auto=format&fit=crop&w=1000&q=80
 - seychelles: https://images.pexels.com/photos/30358268/pexels-photo-30358268.jpeg?auto=compress&cs=tinysrgb&w=1100
 - corporate: https://images.pexels.com/photos/20562278/pexels-photo-20562278.jpeg?auto=compress&cs=tinysrgb&w=1400
+
+## Generated homepage artwork
+
+The homepage hero has two original AI-generated compositions created for this project: `source-assets/pardus-hero-desktop.png` (1672 × 941) and `source-assets/pardus-hero-mobile.png` (941 × 1672). They depict one golden leopard moving through a continuous world of ocean, savannah, European coast, desert and distant skyline. The images intentionally contain no text or generated brand mark; the approved Pardus vector is layered separately in the page. AVIF and WebP derivatives are generated for responsive delivery.
