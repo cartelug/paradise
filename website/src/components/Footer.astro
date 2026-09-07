@@ -2,6 +2,7 @@
 import Brand from './Brand.astro';
 import Arrow from './Arrow.astro';
 import { path } from '../data/site';
+import { destinations } from '../data/destinations';
 interface Props { simple?: boolean; }
 const { simple = false } = Astro.props;
 ---
@@ -11,11 +12,56 @@ const { simple = false } = Astro.props;
   <p>A place you’ve dreamed of. A reason to get away. Let’s begin there.</p>
 </section>}
 <footer class="site-footer">
-  <div class="footer-main">
-    <div class="footer-brand"><a href={path()} aria-label="Pardus home"><Brand light /></a><p>Considered journeys.<br />A world of difference.</p></div>
-    <div class="footer-column"><p class="eyebrow">Explore</p><a href={path('destinations.html')}>Destinations</a><a href={path('concierge.html')}>Travel concierge</a><a href={path('corporate.html')}>Corporate travel</a></div>
-    <div class="footer-column"><p class="eyebrow">Pardus</p><a href={path('about.html')}>The Pardus way</a><a href={path('journey.html')}>Plan a journey</a><a href={path('contact.html')}>Contact</a></div>
-    <a class="back-top" href="#top" aria-label="Back to top"><Arrow direction="down" /></a>
+  <div class="footer-mark" aria-hidden="true"><Brand light mark /></div>
+  <div class="footer-shell">
+    <div class="footer-intro">
+      <div data-reveal>
+        <p class="eyebrow">Pardus / Luxury escapes</p>
+        <p class="footer-intro-title">There is the world.<br /><em>Then there is your way through it.</em></p>
+      </div>
+      <a class="footer-plan" href={path('journey.html')} data-reveal>
+        <span><small>Ready when you are</small>Plan a journey</span>
+        <span class="footer-plan-icon"><Arrow /></span>
+      </a>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href={path()} aria-label="Pardus home"><Brand light /></a>
+        <p>Private holidays, meaningful escapes and considered business travel—personally planned from first idea to final detail.</p>
+        <span class="footer-signature"><i aria-hidden="true"></i>Personally planned</span>
+      </div>
+
+      <nav class="footer-column footer-column--destinations" aria-labelledby="footer-destinations-title">
+        <p class="eyebrow" id="footer-destinations-title">Destinations</p>
+        <div class="footer-links">
+          {destinations.map(destination => <a href={path(`destination-${destination.slug}.html`)}>{destination.name}</a>)}
+          <a class="footer-view-all" href={path('destinations.html')}>View all <Arrow /></a>
+        </div>
+      </nav>
+
+      <nav class="footer-column" aria-labelledby="footer-travel-title">
+        <p class="eyebrow" id="footer-travel-title">Ways to travel</p>
+        <div class="footer-links">
+          <a href={path('concierge.html')}>Travel concierge</a>
+          <a href={path('corporate.html')}>Corporate travel</a>
+          <a href={path('journey.html')}>Plan a journey</a>
+        </div>
+      </nav>
+
+      <nav class="footer-column" aria-labelledby="footer-pardus-title">
+        <p class="eyebrow" id="footer-pardus-title">Pardus</p>
+        <div class="footer-links">
+          <a href={path('about.html')}>The Pardus way</a>
+          <a href={path('contact.html')}>Contact</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer-base">
+      <div class="footer-copyright"><span>© {new Date().getFullYear()} Pardus Luxury Escapes</span><span class="footer-divider" aria-hidden="true"></span><span>Made for the journey.</span></div>
+      <div class="footer-utility"><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Website terms</a><button type="button" class="replay-opening">Replay the opening</button></div>
+      <a class="back-top" href="#top" aria-label="Back to top"><span>Back to top</span><span class="back-top-icon"><Arrow /></span></a>
+    </div>
   </div>
-  <div class="footer-base"><span>© {new Date().getFullYear()} Pardus Luxury Escapes</span><div><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Website terms</a><button type="button" class="replay-opening">Replay the opening</button></div><span>Made for the journey.</span></div>
 </footer>
