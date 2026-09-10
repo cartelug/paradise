@@ -35,7 +35,21 @@ export const destinations: Destination[] = [
     ]
   },
   {
-    slug: 'africa', name: 'East Africa', country: 'Safari country', category: 'wild', number: '03',
+    slug: 'seychelles', name: 'Seychelles', country: 'Indian Ocean', category: 'islands', number: '03',
+    title: 'Where the jungle meets the shore.', subtitle: 'Granite islands. A wilder kind of beautiful.',
+    description: 'Sculptural boulders, powder-soft sand and a coastline that still feels a little wild.',
+    image: 'seychelles', alt: 'Sculptural granite boulders meeting clear tropical water in Seychelles',
+    caption: 'Granite and turquoise / Seychelles', mood: 'For beauty with a little more wildness.',
+    intro: 'Some coastlines are beautiful. This one feels alive.',
+    paragraphs: ['Giant granite boulders lean into the shallows, palms crowd the tideline and the forest never quite gives way to the beach. Seychelles rewards slow travel between a handful of islands, each with its own shoreline and character.', 'Your route matters here. We help you choose between islands, arrange the crossings between them, and build in enough unhurried time to actually notice the place.'],
+    highlights: [
+      { name: 'An island, then another', text: 'Mahé, Praslin, La Digue or a quieter outpost, sequenced to suit your pace and the sea.' },
+      { name: 'The right shoreline', text: 'A boulder-strewn cove, a long open beach or a private retreat, chosen around how you want your days to feel.' },
+      { name: 'Time between islands', text: 'Ferries, light aircraft and private transfers arranged so the crossing feels part of the trip, not a delay before it.' }
+    ]
+  },
+  {
+    slug: 'africa', name: 'East Africa', country: 'Safari country', category: 'wild', number: '04',
     title: 'Out here, the world feels bigger.', subtitle: 'Wild landscapes. Lasting perspective.',
     description: 'Open plains, early light and the extraordinary privilege of being a guest in the wild.',
     image: 'africa', alt: 'An acacia tree silhouetted against the warm light of the East African plains',
@@ -49,7 +63,7 @@ export const destinations: Destination[] = [
     ]
   },
   {
-    slug: 'europe', name: 'Europe', country: 'The Mediterranean & beyond', category: 'culture', number: '04',
+    slug: 'europe', name: 'Europe', country: 'The Mediterranean & beyond', category: 'culture', number: '05',
     title: 'Stay a little. See a little more.', subtitle: 'Old-world character. Your own route.',
     description: 'Long lunches, beautiful cities and a coast worth taking the scenic route for.',
     image: 'europe', alt: 'Whitewashed buildings and blue domes overlooking the sea in Santorini',
@@ -63,7 +77,7 @@ export const destinations: Destination[] = [
     ]
   },
   {
-    slug: 'dubai', name: 'Dubai', country: 'United Arab Emirates', category: 'culture', number: '05',
+    slug: 'dubai', name: 'Dubai', country: 'United Arab Emirates', category: 'culture', number: '06',
     title: 'A city of possibilities.', subtitle: 'A different view of Dubai.',
     description: 'Distinctive stays, late dinners and a little space beyond the skyline.',
     image: 'dubai', alt: 'The Dubai skyline in warm evening light',

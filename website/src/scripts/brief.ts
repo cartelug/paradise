@@ -12,7 +12,7 @@ export function validDeparture(value: string, minimum: string): boolean {
   return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value && value >= minimum;
 }
 
-export function briefText(d: JourneyBrief): string {
+export function briefText(d: JourneyBrief, delivered = false): string {
   return [
     'PARDUS LUXURY ESCAPES', 'Your personal journey brief', '',
     `Destination: ${d.destination || 'Open to inspiration'}`,
@@ -24,7 +24,9 @@ export function briefText(d: JourneyBrief): string {
     `Departure city: ${d.departure || 'To discuss'}`,
     `Name: ${d.name || 'Not provided'}`, '', 'What would make it special:',
     d.notes || 'To be discussed.', '',
-    'This brief has not been sent to Pardus and does not confirm a booking.',
+    delivered
+      ? 'A copy of this brief was submitted to Pardus as an online enquiry when you downloaded it.'
+      : 'This brief has not been sent to Pardus and does not confirm a booking.',
     'No payment, reservation or availability guarantee is created by this document.', ''
   ].join('\n');
 }

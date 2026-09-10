@@ -6,8 +6,16 @@ import { destinations } from '../data/destinations';
 import { path } from '../data/site';
 export function getStaticPaths() { return destinations.map((destination, i) => ({ params: { destination: `destination-${destination.slug}` }, props: { destination, next: destinations[(i + 1) % destinations.length] } })); }
 const { destination: d, next } = Astro.props;
+const breadcrumbSchema = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'The collection', item: new URL(path('destinations.html'), 'https://cartelug.github.io').toString() },
+    { '@type': 'ListItem', position: 2, name: d.name, item: new URL(path(`destination-${d.slug}.html`), 'https://cartelug.github.io').toString() },
+  ],
+};
 ---
-<Layout title={d.name} description={d.description}>
+<Layout title={d.name} description={d.description} image={`images/${d.image}-1920.webp`}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="destination-detail-hero"><Picture name={d.image} alt={d.alt} eager sizes="100vw" /><div class="destination-detail-title"><p class="eyebrow">The collection / {d.country}</p><h1>{d.name}</h1><p>{d.subtitle}</p></div></section>
   <section class="destination-essay section-wrap"><div><nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>The collection</a><span aria-hidden="true">/</span><span>{d.name}</span></nav><p class="eyebrow">{d.mood}</p><h2 data-reveal>{d.intro}</h2></div><div class="essay-copy">{d.paragraphs.map(p => <p data-reveal>{p}</p>)}<a class="text-button" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`} data-reveal>Plan my {d.name.replace('The ', '')} journey <Arrow /></a></div></section>
   <section class="detail-highlights section-wrap"><p class="eyebrow">The possibilities</p><h2 data-reveal>{d.title}</h2><ol class="process-list">{d.highlights.map((h, i) => <li data-reveal><span>0{i + 1}</span><div><h3>{h.name}</h3><p>{h.text}</p></div></li>)}</ol><p class="detail-note">An invitation to explore, not a fixed package. Accommodation, experiences and arrangements are tailored to your brief and confirmed separately, subject to availability.</p></section>

@@ -1,4 +1,7 @@
 import { cleanBrief, briefText, validDeparture } from './brief';
+import { deliverEnquiry } from './deliver';
+import { site, path } from '../data/site';
+import { destinations } from '../data/destinations';
 
 const root = document.documentElement;
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -162,6 +165,31 @@ if (planner) {
     if (value && [...field.options].some(option => option.value === value)) field.value = value;
   }
 
+  const asidePicture = planner.parentElement?.querySelector<HTMLElement>('.planner-aside-picture');
+  const avifSource = asidePicture?.querySelector<HTMLSourceElement>('source[type="image/avif"]');
+  const webpSource = asidePicture?.querySelector<HTMLSourceElement>('source[type="image/webp"]');
+  const asideImg = asidePicture?.querySelector<HTMLImageElement>('img');
+  if (asidePicture && asideImg) {
+    const srcset = (slug: string, format: string) => [640, 1280, 1920].map(w => `${path(`images/${slug}-${w}.${format}`)} ${w}w`).join(', ');
+    destination.addEventListener('change', () => {
+      const slug = destination.selectedOptions[0]?.dataset.slug;
+      const match = slug ? destinations.find(d => d.slug === slug) : undefined;
+      const image = match?.image || 'maldives';
+      if (avifSource) avifSource.srcset = srcset(image, 'avif');
+      if (webpSource) webpSource.srcset = srcset(image, 'webp');
+      asideImg.src = path(`images/${image}-1280.webp`);
+      asideImg.alt = match ? `An escape in ${match.name}` : 'An overwater escape in the Maldives';
+    });
+  }
+
+  const notes = planner.querySelector<HTMLTextAreaElement>('[name="notes"]');
+  const charCount = planner.querySelector<HTMLElement>('[data-char-count]');
+  if (notes && charCount) {
+    const updateCount = () => { charCount.textContent = `${notes.value.length}/1500`; };
+    notes.addEventListener('input', updateCount);
+    updateCount();
+  }
+
   const summary = () => {
     const data = cleanBrief(new FormData(planner));
     const list = planner.querySelector<HTMLDListElement>('.brief-summary')!;
@@ -188,7 +216,7 @@ if (planner) {
   };
   render();
   back.addEventListener('click', () => { if (step > 1) { step--; render(true); } });
-  planner.addEventListener('submit', event => {
+  planner.addEventListener('submit', async event => {
     event.preventDefault();
     if (step === 2 && !validDeparture(date.value, date.min)) {
       error.textContent = 'Choose today or a future departure date, or leave it empty if you’re flexible.';
@@ -196,15 +224,48 @@ if (planner) {
     }
     date.removeAttribute('aria-invalid');
     if (step < 3) { step++; render(true); return; }
+    const data = cleanBrief(new FormData(planner));
+    let delivered = false;
+    if (site.enquiryEndpoint) {
+      status.textContent = 'Sending your enquiry…';
+      next.disabled = true;
+      const payload = new FormData();
+      Object.entries(data).forEach(([key, value]) => payload.set(key, value));
+      payload.set('_subject', `Pardus journey brief — ${data.destination || 'Open to inspiration'}`);
+      const gotcha = planner.querySelector<HTMLInputElement>('[name="_gotcha"]');
+      if (gotcha) payload.set('_gotcha', gotcha.value);
+      delivered = await deliverEnquiry(site.enquiryEndpoint, payload);
+      next.disabled = false;
+    }
     try {
-      const content = briefText(cleanBrief(new FormData(planner)));
+      const content = briefText(data, delivered);
       const url = URL.createObjectURL(new Blob([content], { type: 'text/plain;charset=utf-8' }));
       const download = document.createElement('a'); download.href = url; download.download = 'Pardus-My-Journey-Brief.txt';
       document.body.append(download); download.click(); download.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
-      status.textContent = 'Your brief is ready to keep. It has not been sent to Pardus and is not a booking.';
+      status.textContent = delivered
+        ? 'Your brief is ready to keep, and your enquiry has been sent to Pardus.'
+        : site.enquiryEndpoint
+          ? 'Your brief is ready to keep. We could not send your enquiry automatically — please share the download with us directly, or try again shortly.'
+          : 'Your brief is ready to keep. It has not been sent to Pardus and is not a booking.';
       const printable = document.querySelector('.print-brief'); if (printable) printable.textContent = content;
     } catch {
       error.textContent = 'Your browser could not create the download. Your entries are still here; please try again.';
     }
+  });
+}
+
+const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
+if (contactForm) {
+  const status = contactForm.querySelector<HTMLElement>('[data-form-status]')!;
+  const error = contactForm.querySelector<HTMLElement>('[data-error]')!;
+  const submit = contactForm.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!contactForm.reportValidity()) return;
+    error.textContent = ''; status.textContent = 'Sending your message…'; submit.disabled = true;
+    const delivered = await deliverEnquiry(site.enquiryEndpoint, new FormData(contactForm));
+    submit.disabled = false;
+    if (delivered) { status.textContent = 'Thank you — your message has been sent to Pardus.'; contactForm.reset(); }
+    else { status.textContent = ''; error.textContent = 'We could not send your message. Please try again, or email us directly.'; }
   });
 }

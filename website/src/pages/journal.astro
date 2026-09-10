@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import { journal } from '../data/journal';
+import { path } from '../data/site';
+---
+<Layout title="The Pardus journal" description="Practical, honest notes on planning a luxury journey — from choosing an island to what a safari day actually involves.">
+  <section class="page-intro"><p class="eyebrow">The Pardus journal</p><div class="page-intro-row"><h1>Notes worth<br />reading <em>first.</em></h1><p>Practical thinking on choosing well, wherever your journey takes you.</p></div></section>
+  <section class="destination-collection" aria-label="Journal articles">
+    <div class="collection-grid">{journal.map(entry => <article class="journey-card" data-reveal><a href={path(`journal-${entry.slug}.html`)}><div class="journey-card-picture"><Picture name={entry.image} alt={entry.alt} sizes="(max-width: 760px) 100vw, 70vw" /><span class="circle-arrow"><Arrow /></span></div><div class="journey-card-meta"><div><p class="eyebrow">{entry.category}</p><h2>{entry.title}</h2></div><p>{entry.description}</p></div></a></article>)}</div>
+  </section>
+</Layout>

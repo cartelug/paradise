@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import { journal } from '../data/journal';
+import { path } from '../data/site';
+export function getStaticPaths() { return journal.map((entry, i) => ({ params: { journal: `journal-${entry.slug}` }, props: { entry, next: journal[(i + 1) % journal.length] } })); }
+const { entry, next } = Astro.props;
+---
+<Layout title={entry.title} description={entry.description} image={`images/${entry.image}-1920.webp`}>
+  <section class="destination-detail-hero"><Picture name={entry.image} alt={entry.alt} eager sizes="100vw" /><div class="destination-detail-title"><p class="eyebrow">The journal / {entry.category}</p><h1>{entry.title}</h1><p>{entry.subtitle}</p></div></section>
+  <section class="journal-article section-wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('journal.html')}>The journal</a><span aria-hidden="true">/</span><span>{entry.title}</span></nav>
+    <h2 data-reveal>{entry.intro}</h2>
+    <div class="journal-copy">{entry.paragraphs.map(p => <p data-reveal>{p}</p>)}</div>
+    <a class="text-button" href={path('journey.html')} data-reveal>Begin your journey <Arrow /></a>
+  </section>
+  <section class="next-destination"><div><p class="eyebrow">Keep reading</p><h2>{next.title}</h2></div><a class="text-button" href={path(`journal-${next.slug}.html`)}>Next in the journal <Arrow /></a></section>
+</Layout>

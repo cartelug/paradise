@@ -7,9 +7,21 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Preloader from '../components/Preloader.astro';
 import { site, path } from '../data/site';
-interface Props { title?: string; description?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
-const { title, description = site.description, dark = false, simpleFooter = false, class: className } = Astro.props;
-const canonical = new URL(Astro.url.pathname, 'https://cartelug.github.io');
+interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
+const { title, description = site.description, image = 'images/pardus-hero-desktop-1920.webp', dark = false, simpleFooter = false, class: className } = Astro.props;
+// GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
+const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), 'https://cartelug.github.io');
+const ogImage = new URL(path(image), 'https://cartelug.github.io').toString();
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  '@id': `${canonical.origin}${path()}#organization`,
+  name: site.name,
+  description: site.description,
+  url: `${canonical.origin}${path()}`,
+  logo: new URL(path('brand/pardus-primary-512.png'), 'https://cartelug.github.io').toString(),
+  ...(site.email ? { email: site.email } : {}),
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -24,10 +36,17 @@ const canonical = new URL(Astro.url.pathname, 'https://cartelug.github.io');
     <link rel="apple-touch-icon" href={path('brand/apple-touch-icon.png')} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title ? `${title} — Pardus` : site.name} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ? `${title} — Pardus` : site.name} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline src={path('opening.js')}></script>
   </head>
   <body id="top" class={className}>
