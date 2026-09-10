@@ -35,7 +35,7 @@ Review the generated changes, commit them with the source, and push `main`. The 
 
 ## Design and behaviour
 
-Newsreader and DM Sans are self-hosted as a refined editorial display and contemporary interface pairing. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
+Fraunces and Plus Jakarta Sans are self-hosted as a refined editorial display and contemporary interface pairing. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
 
 The homepage uses separate AI-generated desktop and mobile hero compositions. The exact Pardus leopard mark remains a real vector overlay, keeping the brand crisp while the cinematic world-travel artwork art-directs each viewport. Scroll motion uses progressive reveal groups, image depth and a slim reading-progress line, with all decorative motion removed when reduced motion is requested.
 

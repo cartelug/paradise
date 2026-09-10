@@ -24,8 +24,8 @@
     --gold-dark: #796038;
     --muted: #626660;
     --line: #d5d5ca;
-    --serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
-    --sans: 'DM Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+    --serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+    --sans: 'Plus Jakarta Sans Variable', 'Helvetica Neue', Arial, sans-serif;
     --ease: cubic-bezier(.22, 1, .36, 1);
     --gutter: clamp(24px, 5.8vw, 112px);
     --page-max: 1680px;
@@ -179,7 +179,9 @@
   .footer-view-all:hover .arrow-icon { transform: translateX(5px); }
   .footer-base { display: grid; grid-template-columns: minmax(0,1fr) auto auto; gap: clamp(24px,3vw,50px); align-items: center; padding-top: 22px; border-top: 1px solid #ffffff24; color: #aeb9bc; font-size: 11px; line-height: 1.5; }
   .footer-copyright, .footer-utility { display: flex; align-items: center; }
-  .footer-copyright { gap: 16px; }
+  .footer-copyright { gap: 16px; flex-wrap: wrap; row-gap: 10px; }
+  .footer-credit { display: inline-flex; align-items: center; gap: 8px; }
+  .footer-credit img { width: 18px; height: 18px; border-radius: 4px; }
   .footer-divider { width: 22px; height: 1px; background: #ffffff42; }
   .footer-utility { gap: clamp(18px,2.3vw,34px); }
   .footer-utility a, .footer-utility .replay-opening { position: relative; min-height: 38px; padding: 10px 0; white-space: nowrap; transition: color .3s; }

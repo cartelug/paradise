@@ -35,7 +35,7 @@ Review the generated changes, commit them with the source, and push `main`. The 
 
 ## Design and behaviour
 
-Bodoni Moda and Manrope are self-hosted. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
+Fraunces and Plus Jakarta Sans are self-hosted. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
 
 The introduction runs once per tab session, can be skipped or replayed, and has a hard timeout. Reduced motion bypasses it and disables decorative movement. Page content remains accessible without JavaScript. Mobile navigation uses a native dialog; collection tabs and filters support keyboard use. No third-party scripts are loaded.
 
