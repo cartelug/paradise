@@ -1,8 +1,10 @@
 ---
 import Brand from './Brand.astro';
+import { path } from '../data/site';
 ---
 <div class="preloader" aria-hidden="true">
   <div class="preloader-centre"><Brand light class="loader-brand" /><div class="loader-track"><span></span></div><p class="eyebrow">Your world awaits.</p></div>
   <button type="button" class="skip-opening" tabindex="-1">Skip introduction</button>
   <span class="preloader-caption">Pardus Luxury Escapes</span>
+  <span class="preloader-credit"><img src={path('brand/97-design-logo.png')} alt="" width="20" height="20" decoding="async" /><span>Made by 97 Design</span></span>
 </div>
