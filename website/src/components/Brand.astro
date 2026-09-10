@@ -1,13 +1,16 @@
 ---
 import logo from '../data/logo.json';
+import { path } from '../data/site';
 interface Props { class?: string; light?: boolean; mark?: boolean; }
 const { class: className, light = false, mark = false } = Astro.props;
 ---
-<svg class:list={['brand-svg', className, { 'brand-light': light, 'brand-symbol': mark }]} viewBox={mark ? '170 5 600 135' : '0 0 900 370'} fill="none" aria-hidden="true" focusable="false">
-  <g class="logo-leopard"><path d={logo.leopard} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
-  {!mark && <>
-    <g class="logo-letters">{logo.letters.map((d, i) => <path class={`logo-letter letter-${i}`} d={d} fill="var(--logo-ink, #082C4C)" fill-rule="evenodd" />)}</g>
-    <g class="logo-plane"><path d={logo.plane} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
-    <g class="logo-tagline"><path d={logo.tagline} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
-  </>}
-</svg>
+{mark ? (
+  <svg class:list={['brand-svg', className, { 'brand-light': light, 'brand-symbol': mark }]} viewBox="170 5 600 135" fill="none" aria-hidden="true" focusable="false">
+    <g class="logo-leopard"><path d={logo.leopard} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
+  </svg>
+) : (
+  <span class:list={['brand-lockup', className, { 'brand-on-dark': light }]} aria-hidden="true">
+    <img src={path('brand/pardus-approved-primary.png')} width="920" height="374" alt="" decoding="async" />
+    <span class="brand-tagline">Travel.Explore</span>
+  </span>
+)}

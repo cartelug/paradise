@@ -1,8 +1,8 @@
 # Image sources
 
-Approved Pardus logo: user-uploaded JPEG. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
+Approved Pardus logo: user-uploaded source artwork. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
 
-The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The opening animation uses separate vector paths from `src/data/logo.json`.
+The exact approved full-colour lockup is preserved as `public/brand/pardus-approved-primary.png`, including the complete metallic-gold aircraft sweep. It is presented with the confirmed `Travel.Explore` tagline across the header, opening and footer. The earlier vector reconstruction remains available for the standalone leopard mark and decorative motion.
 
 - hero: https://images.unsplash.com/photo-1762254923872-5bdc4210eb90?auto=format&fit=crop&w=2000&q=85
 - maldives: https://images.pexels.com/photos/9482140/pexels-photo-9482140.jpeg?auto=compress&cs=tinysrgb&w=1500

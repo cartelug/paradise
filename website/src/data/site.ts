@@ -1,6 +1,6 @@
 export const site = {
   name: 'Pardus Luxury Escapes',
-  description: 'Personally planned holidays, private journeys and considered corporate travel. Discover the world with Pardus Luxury Escapes.',
+  description: 'Highly personalised luxury journeys from Africa to the world, seamlessly curated around you by Pardus Luxury Escapes.',
   // Only add business-approved contacts. Empty values never render fake links.
   email: '',
   whatsapp: '',
