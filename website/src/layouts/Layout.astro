@@ -51,7 +51,7 @@ const organizationSchema = {
     <meta name="twitter:image" content={ogImage} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
-    <script is:inline src={path('opening.js')}></script>
+    <script is:inline src={`${path('opening.js')}?v=3`}></script>
   </head>
   <body id="top" class={className}>
     <div class="page-progress" aria-hidden="true"><span></span></div>

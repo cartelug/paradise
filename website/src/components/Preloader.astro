@@ -3,8 +3,11 @@ import Brand from './Brand.astro';
 import { path } from '../data/site';
 ---
 <div class="preloader" role="dialog" aria-modal="true" aria-label="Welcome to Pardus Luxury Escapes" aria-hidden="true">
-  <div class="preloader-centre"><Brand vector light /><div class="loader-track"><span></span></div><p class="eyebrow">Your world awaits.</p></div>
-  <button type="button" class="skip-opening" tabindex="-1">Skip introduction</button>
-  <span class="preloader-caption">Pardus Luxury Escapes</span>
-  <span class="preloader-credit"><img src={path('brand/97-design-logo.png')} alt="" width="20" height="20" decoding="async" /><span>Made by 97 Design</span></span>
+  <div class="opening-shutter opening-shutter-top" aria-hidden="true"></div>
+  <div class="opening-shutter opening-shutter-bottom" aria-hidden="true"></div>
+  <div class="opening-landscape" data-opening-desktop={path('images/section-2-coast-desktop-1280.webp')} data-opening-mobile={path('images/section-2-coast-mobile-720.webp')} aria-hidden="true"></div>
+  <div class="opening-horizon" aria-hidden="true"></div>
+  <div class="opening-topline" aria-hidden="true"><span>Pardus / Private travel</span><span>From Africa to the world</span></div>
+  <div class="preloader-centre"><Brand vector light /><div class="opening-signature"><span class="opening-signature-rule" aria-hidden="true"></span><p>Somewhere <em>extraordinary.</em></p></div></div>
+  <div class="opening-bottomline"><span class="preloader-credit"><img src={path('brand/97-design-logo.png')} alt="" width="20" height="20" decoding="async" /><span>Made by 97 Design</span></span><button type="button" class="skip-opening" tabindex="-1"><span>Skip introduction</span><svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.2" /></svg></button></div>
 </div>
