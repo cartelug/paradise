@@ -70,6 +70,10 @@
   .brand-svg { width: 100%; height: auto; overflow: visible; }
   .brand-light { --logo-ink: #faf7ef; --logo-gold: #c5ab77; }
   .brand-symbol { width: 170px; }
+  .brand-lockup-vector { display: block; width: 100%; line-height: 1; }
+  .brand-lockup-vector .brand-svg { width: 100%; height: auto; overflow: visible; }
+  /* Groups animate in viewBox units, so transforms must resolve against the viewBox, not the bounding box. */
+  .brand-lockup-vector g { transform-box: view-box; transform-origin: center; }
   .brand-lockup { display: block; width: 100%; padding: 4px 7px 5px; line-height: 1; }
   .brand-lockup img { width: 100%; height: auto; }
   .brand-tagline { display: block; margin-top: 2px; color: var(--logo-ink,#082c4c); font-size: 8px; font-weight: 650; line-height: 1; letter-spacing: .24em; text-align: center; text-transform: none; }
