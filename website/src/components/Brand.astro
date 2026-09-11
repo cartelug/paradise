@@ -1,15 +1,18 @@
 ---
 import logo from '../data/logo.json';
 import { path } from '../data/site';
-interface Props { class?: string; light?: boolean; mark?: boolean; vector?: boolean; }
-const { class: className, light = false, mark = false, vector = false } = Astro.props;
+interface Props { class?: string; light?: boolean; mark?: boolean; vector?: boolean; tagline?: boolean; }
+const { class: className, light = false, mark = false, vector = false, tagline = false } = Astro.props;
 ---
 {mark ? (
-  <svg class:list={['brand-svg', className, { 'brand-light': light, 'brand-symbol': mark }]} viewBox="170 5 600 135" fill="none" aria-hidden="true" focusable="false">
+  /* Symbol only. The viewBox is trimmed to the leopard's ink, so a set width always yields the same height. */
+  <svg class:list={['brand-svg', className, { 'brand-light': light, 'brand-symbol': mark }]} viewBox="193 15 575 113" fill="none" aria-hidden="true" focusable="false">
     <g class="logo-leopard"><path d={logo.leopard} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
   </svg>
 ) : vector ? (
-  /* Separable paths so the opening can reveal the leopard, aircraft, letters and tagline in turn. */
+  /* Separable paths so the opening can reveal the leopard, aircraft, letters and tagline in turn.
+     Sizing is driven by --brand-cap (the cap height of PARDUS) rather than by a container width,
+     so the lockup's height is known before it paints and never outgrows the bar holding it. */
   <span class:list={['brand-lockup-vector', className, { 'brand-light': light }]} aria-hidden="true">
     <svg class="brand-svg" viewBox="0 0 900 370" fill="none" focusable="false">
       <g class="logo-leopard"><path d={logo.leopard} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
@@ -17,11 +20,11 @@ const { class: className, light = false, mark = false, vector = false } = Astro.
       <g class="logo-plane"><path d={logo.plane} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
       <g class="logo-tagline"><path d={logo.tagline} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
     </svg>
-    <span class="brand-tagline">Travel.Explore</span>
+    {tagline && <span class="brand-tagline">Travel.Explore</span>}
   </span>
 ) : (
   <span class:list={['brand-lockup', className, { 'brand-on-dark': light }]} aria-hidden="true">
     <img src={path('brand/pardus-approved-primary.png')} width="920" height="374" alt="" decoding="async" />
-    <span class="brand-tagline">Travel.Explore</span>
+    {tagline && <span class="brand-tagline">Travel.Explore</span>}
   </span>
 )}

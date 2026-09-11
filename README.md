@@ -57,6 +57,7 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 - `src/scripts/site.ts`: opening, navigation, destination controls and planner.
 - `src/scripts/brief.ts`: brief data handling and date validation.
 - `public/brand/`: final transparent logo assets.
+- `LOGO-BRIEF.md`: measured lockup geometry and the sizing and placement rules for the logo.
 - `scripts/prepare-brand.mjs`: reconstructs the logo from the original approved 1536 × 864 JPEG.
 - `scripts/prepare-images.mjs`: produces local AVIF and WebP derivatives.
 
