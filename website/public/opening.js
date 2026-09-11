@@ -1,12 +1,8 @@
 /* Small, external early boot. The timeout guarantees access even if the main bundle fails. */
 (() => {
   const root = document.documentElement;
-  root.classList.add('js');
-  let seen = true;
-  try { seen = sessionStorage.getItem('pardus-opening-v2') === 'seen'; } catch { seen = false; }
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!seen && !reduced) root.classList.add('is-opening');
-  else root.classList.add('page-ready');
+  // Only the successfully initialized main bundle enables JavaScript-only controls.
+  root.classList.add('page-ready');
   setTimeout(() => {
     root.classList.remove('is-opening');
     root.classList.add('page-ready');

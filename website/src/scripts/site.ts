@@ -77,17 +77,17 @@ if ('IntersectionObserver' in window && !motion.matches) {
       entry.target.classList.add('revealed');
       reveal.unobserve(entry.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0, rootMargin: '80px 0px' });
   targets.forEach(el => reveal.observe(el));
 
   const sections = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('main section').forEach(section => sections.observe(section));
-  root.classList.add('reveal-ready');
+  // Observers enhance decoration only; content remains visible before observation.
 }
 
-const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media], .atelier-image, .business-image, .journey-card-picture, .destination-detail-hero, .full-bleed-picture, .feature-intro>picture')]
+const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media]')]
   .filter(element => element.querySelector('img'));
 scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.dataset.scrollMedia = ''; });
 let scrollFrame = 0;
@@ -99,7 +99,7 @@ function paintScrollMotion() {
   for (const element of scrollMedia) {
     const box = element.getBoundingClientRect();
     if (box.bottom < -100 || box.top > window.innerHeight + 100) continue;
-    const depth = Number(element.dataset.scrollDepth || 22);
+    const depth = window.innerWidth <= 760 ? 0 : Number(element.dataset.scrollDepth || 12);
     const position = (window.innerHeight / 2 - (box.top + box.height / 2)) / (window.innerHeight + box.height);
     const offset = Math.max(-depth, Math.min(depth, position * depth * 2));
     element.style.setProperty('--scroll-y', `${offset.toFixed(2)}px`);
@@ -148,6 +148,33 @@ filters.forEach(button => button.addEventListener('click', () => {
 }));
 
 const planner = document.querySelector<HTMLFormElement>('#journey-planner');
+document.querySelectorAll<HTMLElement>('[data-journal]').forEach(library => {
+  const search = library.querySelector<HTMLInputElement>('[data-journal-search]');
+  const topics = [...library.querySelectorAll<HTMLButtonElement>('[data-journal-topic]')];
+  const stories = [...library.querySelectorAll<HTMLElement>('[data-story]')];
+  const count = library.querySelector<HTMLElement>('[data-journal-count]');
+  const empty = library.querySelector<HTMLElement>('[data-journal-empty]');
+  let topic = 'all';
+  const filterStories = () => {
+    const words = (search?.value || '').trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    stories.forEach(story => {
+      story.hidden = (topic !== 'all' && story.dataset.topic !== topic)
+        || !words.every(word => (story.dataset.search || '').includes(word));
+      if (!story.hidden) visible++;
+    });
+    if (count) count.textContent = `${visible} ${visible === 1 ? 'story' : 'stories'}`;
+    if (empty) empty.hidden = visible > 0;
+  };
+  search?.addEventListener('input', filterStories);
+  topics.forEach(button => button.addEventListener('click', () => {
+    topic = button.dataset.journalTopic || 'all';
+    topics.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    filterStories();
+  }));
+  filterStories();
+});
+
 if (planner) {
   let step = 1;
   const steps = [...planner.querySelectorAll<HTMLFieldSetElement>('[data-step]')];
@@ -180,6 +207,7 @@ if (planner) {
       asideImg.src = path(`images/${image}-1280.webp`);
       asideImg.alt = match ? `An escape in ${match.name}` : 'An overwater escape in the Maldives';
     });
+    destination.dispatchEvent(new Event('change'));
   }
 
   const notes = planner.querySelector<HTMLTextAreaElement>('[name="notes"]');
@@ -269,3 +297,6 @@ if (contactForm) {
     else { status.textContent = ''; error.textContent = 'We could not send your message. Please try again, or email us directly.'; }
   });
 }
+
+// Enable interactive controls only after their handlers are registered.
+root.classList.add('js');
