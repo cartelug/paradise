@@ -2,6 +2,12 @@
    Deliberately unlayered so these final component rules take precedence over the legacy layers. */
 :root { --paper: #f3f5f2; --sand: #e3e9e5; --muted: #4f615f; --line: #c4cfca; --gold: #c6a66a; --gold-dark: #725627; }
 body { font-size: 17px; }
+html.is-opening { overflow: hidden; }
+.preloader { background: #071d2b; transition: opacity .5s ease, visibility .5s; }
+.preloader-centre { width: min(460px,76vw); }
+.is-opening .preloader .brand-lockup-vector { animation: lockup-arrive 1s var(--ease) both; }
+.skip-opening:focus-visible { outline-color: #e8cc94; }
+.opening-ready .replay-opening { display: inline; border: 0; background: transparent; font: inherit; padding: 8px 0; }
 main, .home-page main { background: var(--paper); }
 h1, h2, h3 { text-wrap: balance; }
 h1, h2 { padding-bottom: .07em; }

@@ -2,7 +2,7 @@
 import Brand from './Brand.astro';
 import { path } from '../data/site';
 ---
-<div class="preloader" aria-hidden="true">
+<div class="preloader" role="dialog" aria-modal="true" aria-label="Welcome to Pardus Luxury Escapes" aria-hidden="true">
   <div class="preloader-centre"><Brand vector light /><div class="loader-track"><span></span></div><p class="eyebrow">Your world awaits.</p></div>
   <button type="button" class="skip-opening" tabindex="-1">Skip introduction</button>
   <span class="preloader-caption">Pardus Luxury Escapes</span>

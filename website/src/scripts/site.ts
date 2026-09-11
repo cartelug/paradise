@@ -5,50 +5,6 @@ import { destinations } from '../data/destinations';
 
 const root = document.documentElement;
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const wait = (duration: number) => new Promise(resolve => setTimeout(resolve, duration));
-const opening = document.querySelector<HTMLElement>('.preloader');
-const skipOpening = document.querySelector<HTMLButtonElement>('.skip-opening');
-let openingSequence = 0;
-let openingReturn: HTMLElement | null = null;
-
-function endOpening(sequence: number) {
-  if (sequence !== openingSequence) return;
-  root.classList.remove('is-opening');
-  root.classList.add('page-ready');
-  opening?.setAttribute('aria-hidden', 'true');
-  if (skipOpening) skipOpening.tabIndex = -1;
-  document.querySelectorAll<HTMLElement>('.site-header, main, .site-footer, .closing-cta').forEach(el => { el.inert = false; });
-  try { sessionStorage.setItem('pardus-opening-v2', 'seen'); } catch { /* Storage may be unavailable in privacy mode. */ }
-  if (document.activeElement === skipOpening) {
-    (openingReturn || document.querySelector<HTMLElement>('.brand-link'))?.focus({ preventScroll: true });
-  }
-}
-
-async function playOpening(replay = false) {
-  if (!opening || motion.matches) { endOpening(openingSequence); return; }
-  if (!replay && !root.classList.contains('is-opening')) return;
-  const sequence = ++openingSequence;
-  openingReturn = replay && document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  root.classList.remove('page-ready');
-  if (replay) window.scrollTo({ top: 0, behavior: 'instant' });
-  root.classList.add('is-opening');
-  opening.setAttribute('aria-hidden', 'false');
-  if (skipOpening) skipOpening.tabIndex = 0;
-  document.querySelectorAll<HTMLElement>('.site-header, main, .site-footer, .closing-cta').forEach(el => { el.inert = true; });
-  const hero = document.querySelector<HTMLImageElement>('.hero-art img');
-  const ready = Promise.allSettled([document.fonts.ready, hero?.decode() || Promise.resolve()]);
-  // Brand choreography runs concurrently with real readiness; never wait on all site images.
-  await Promise.all([wait(1250), Promise.race([ready, wait(2400)])]);
-  endOpening(sequence);
-}
-skipOpening?.addEventListener('click', () => { endOpening(openingSequence); });
-document.querySelector('.replay-opening')?.addEventListener('click', () => { void playOpening(true); });
-window.addEventListener('pageshow', e => { if (e.persisted) endOpening(openingSequence); });
-motion.addEventListener('change', e => { if (e.matches) endOpening(openingSequence); });
-void playOpening();
-// A second fail-safe also clears inert state after the early boot's hard timeout.
-setTimeout(() => { if (!root.classList.contains('is-opening')) endOpening(openingSequence); }, 3600);
-
 const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
 const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 toggle?.addEventListener('click', () => { menu?.showModal(); toggle.setAttribute('aria-expanded', 'true'); });
