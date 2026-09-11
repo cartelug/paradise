@@ -31,4 +31,24 @@ for (const asset of [
   }
 }
 
-console.log('Responsive AVIF and WebP images ready, including art-directed hero media.');
+const scenes = ['section-2-coast', 'section-3-sandbank', 'section-4-terrace', 'section-5-arrival'];
+for (const name of scenes) {
+  for (const asset of [
+    { variant: 'desktop', widths: [960, 1280, 1672], ratio: 1672 / 941 },
+    { variant: 'mobile', widths: [480, 720, 941], ratio: 941 / 1672 },
+  ]) {
+    const input = `source-assets/${name}-${asset.variant}.png`;
+    for (const width of asset.widths) {
+      const height = Math.round(width / asset.ratio);
+      for (const format of ['avif', 'webp']) {
+        const target = `public/images/${name}-${asset.variant}-${width}.${format}`;
+        try { await stat(target); continue; } catch {}
+        const image = sharp(input).resize(width, height, { fit: 'cover', position: 'center', withoutEnlargement: true });
+        if (format === 'avif') await image.avif({ quality: 65, effort: 6 }).toFile(target);
+        else await image.webp({ quality: 84, effort: 6 }).toFile(target);
+      }
+    }
+  }
+}
+
+console.log('Responsive AVIF and WebP images ready, including art-directed hero and section media.');

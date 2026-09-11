@@ -1,7 +1,6 @@
 ---
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
-import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -31,6 +30,10 @@ const organizationSchema = {
     <meta name="theme-color" content="#071D2B" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" />
+    <link rel="preload" href={path('fonts/Montserrat-VariableFont_wght.ttf')} as="font" type="font/ttf" crossorigin="anonymous" />
+    <style is:inline set:html={`@font-face{font-family:'Montserrat';src:url('${path('fonts/Montserrat-VariableFont_wght.ttf')}') format('truetype');font-style:normal;font-weight:100 900;font-display:swap;}`} />
     <title>{title ? `${title} — ${site.name}` : site.name}</title>
     <link rel="icon" type="image/svg+xml" href={path('brand/favicon.svg')} />
     <link rel="apple-touch-icon" href={path('brand/apple-touch-icon.png')} />

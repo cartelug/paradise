@@ -1,0 +1,19 @@
+---
+import { path } from '../data/site';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const desktop = `${name}-desktop`;
+const mobile = `${name}-mobile`;
+---
+<picture class:list={['scene-media', className]} aria-hidden="true">
+  <source media="(max-width: 760px)" type="image/avif" srcset={`${path(`images/${mobile}-480.avif`)} 480w, ${path(`images/${mobile}-720.avif`)} 720w, ${path(`images/${mobile}-941.avif`)} 941w`} sizes="100vw" />
+  <source media="(max-width: 760px)" type="image/webp" srcset={`${path(`images/${mobile}-480.webp`)} 480w, ${path(`images/${mobile}-720.webp`)} 720w, ${path(`images/${mobile}-941.webp`)} 941w`} sizes="100vw" />
+  <source type="image/avif" srcset={`${path(`images/${desktop}-960.avif`)} 960w, ${path(`images/${desktop}-1280.avif`)} 1280w, ${path(`images/${desktop}-1672.avif`)} 1672w`} sizes="100vw" />
+  <source type="image/webp" srcset={`${path(`images/${desktop}-960.webp`)} 960w, ${path(`images/${desktop}-1280.webp`)} 1280w, ${path(`images/${desktop}-1672.webp`)} 1672w`} sizes="100vw" />
+  <img src={path(`images/${desktop}-1672.webp`)} alt="" width="1672" height="941" loading="lazy" decoding="async" />
+</picture>
