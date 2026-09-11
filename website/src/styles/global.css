@@ -78,7 +78,7 @@
   .brand-lockup { display: block; width: 100%; padding: 4px 7px 5px; line-height: 1; }
   .brand-lockup img { width: 100%; height: auto; }
   .brand-tagline { display: block; margin-top: 2px; color: var(--logo-ink,#082c4c); font-size: 8px; font-weight: 650; line-height: 1; letter-spacing: .24em; text-align: center; text-transform: none; }
-  .brand-on-dark { padding: 7px 10px 8px; border: 1px solid #d4bd882e; background: #fffdf7; box-shadow: 0 12px 35px #020b1261; }
+  .header-dark .brand-lockup-vector, .mobile-menu .brand-lockup-vector { filter: drop-shadow(0 7px 20px #020b126e); }
   .no-script-help { margin-top: 24px; }
   .no-script-help a { text-decoration: underline; }
   .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -578,7 +578,6 @@
     html { scroll-padding-top: 83px; }
     .site-header { height: 83px; padding-block: 10px; gap: 15px; }
     .brand-link, .header-dark .brand-link { width: 150px; }
-    .brand-on-dark { padding: 5px 7px 6px; }
     .brand-tagline { font-size: 7px; letter-spacing: .2em; }
     .header-journey>span:first-child { display: none; }
     .header-journey .circle-arrow { width: 40px; height: 40px; }
