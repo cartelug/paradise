@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import { journeys } from '../data/journeys';
+import { path } from '../data/site';
+
+export function getStaticPaths() {
+  return journeys.map((journey, index) => ({
+    params: { experience: `journey-${journey.slug}` },
+    props: { journey, next: journeys[(index + 1) % journeys.length] },
+  }));
+}
+
+const { journey, next } = Astro.props;
+const canonical = new URL(path(`journey-${journey.slug}.html`), 'https://cartelug.github.io').toString();
+const schemas = [
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Journeys', item: new URL(path('journeys.html'), 'https://cartelug.github.io').toString() },
+      { '@type': 'ListItem', position: 2, name: journey.name, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'TouristTrip', name: journey.name,
+    description: journey.description, touristType: journey.idealFor,
+    itinerary: journey.destinations.join(' and '), url: canonical,
+  },
+];
+---
+<Layout title={journey.name} description={journey.description} image={`images/${journey.image}-1920.webp`} class="journey-detail-page">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
+  <header class="journey-detail-hero">
+    <Picture name={journey.image} alt={journey.alt} eager sizes="100vw" />
+    <div class="journey-detail-shade" aria-hidden="true"></div>
+    <div class="journey-detail-copy"><p class="eyebrow">{journey.number} / {journey.eyebrow}</p><h1>{journey.name}</h1><p>{journey.title}</p></div>
+    <p class="journey-detail-caption">{journey.caption}</p>
+  </header>
+
+  <section class="journey-overview section-wrap">
+    <div><nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys.html')}>Journeys</a><span aria-hidden="true">/</span><span>{journey.name}</span></nav><p class="eyebrow">A possible rhythm</p><h2>{journey.title}</h2></div>
+    <div class="journey-overview-copy"><p>{journey.description}</p><dl><div><dt>Suggested length</dt><dd>{journey.duration.split(' / ')[1]}</dd></div><div><dt>Setting</dt><dd>{journey.place}</dd></div><div><dt>Pace</dt><dd>{journey.pace}</dd></div><div><dt>Reason</dt><dd>{journey.reason}</dd></div></dl><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><span data-save-label>Save to your Folio</span><span aria-hidden="true">+</span></button></div>
+  </section>
+
+  <section class="journey-rhythm section-wrap" aria-labelledby="rhythm-title">
+    <div class="journey-rhythm-heading"><p class="eyebrow">The shape, before the schedule</p><h2 id="rhythm-title">Three acts.<br /><em>Room to adapt.</em></h2></div>
+    <ol>{journey.chapters.map((chapter, index) => <li><span>0{index + 1}</span><div><h3>{chapter.title}</h3><p>{chapter.text}</p></div></li>)}</ol>
+  </section>
+
+  <section class="journey-practical section-wrap">
+    <div><p class="eyebrow">Who it may suit</p><ul>{journey.idealFor.map(item => <li>{item}</li>)}</ul></div>
+    <div><p class="eyebrow">The working rhythm</p><ul>{journey.rhythm.map(item => <li>{item}</li>)}</ul></div>
+    <div><p class="eyebrow">What can change</p><ul>{journey.flexibility.map(item => <li>{item}</li>)}</ul></div>
+  </section>
+
+  <section class="journey-disclaimer section-wrap"><p>This is an editorial journey concept, not a package or availability promise. The route, accommodation, transfers, experiences, timing and price are discussed and confirmed around your brief.</p><a class="button" href={`${path('journey.html')}?style=${encodeURIComponent(journey.name)}&place=${journey.place}&pace=${journey.pace}&reason=${journey.reason}`}><span>Shape this journey</span><Arrow /></a></section>
+
+  <section class="next-destination"><div><p class="eyebrow">Another way to travel</p><h2>{next.name}</h2></div><a class="text-button" href={path(`journey-${next.slug}.html`)}>Next journey <Arrow /></a></section>
+</Layout>

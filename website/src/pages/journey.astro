@@ -3,30 +3,50 @@ import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import Arrow from '../components/Arrow.astro';
 import { destinations } from '../data/destinations';
+import { journeys } from '../data/journeys';
 import { site, path } from '../data/site';
 ---
 <Layout title="Begin your journey" description="Create a personal Pardus journey brief, from destination and travel style to the details that make it yours." simpleFooter>
   <section class="planner-layout">
     <aside class="planner-aside"><p class="eyebrow">A thoughtful beginning</p><h1>Your next<br /><em>chapter.</em></h1><p>Tell us the shape of your escape. Start with a place, an occasion or simply the feeling you are looking for.</p><Picture name="maldives" alt="An overwater escape in the Maldives" class="planner-aside-picture" /><div class="planner-note"><span class="gold-rule"></span><p>{site.enquiryEndpoint ? 'This planner creates a brief you can keep, and sends your enquiry to Pardus. It does not confirm a booking.' : 'This planner creates a brief you can keep. It does not send an enquiry or confirm a booking.'}</p></div></aside>
-    <form id="journey-planner" class="planner" novalidate action={site.enquiryEndpoint || undefined} method={site.enquiryEndpoint ? 'POST' : undefined}>
+    <form id="journey-planner" class="planner planner-v2" novalidate action={site.enquiryEndpoint || undefined} method={site.enquiryEndpoint ? 'POST' : undefined}>
       <input type="hidden" name="_subject" value="Pardus journey brief" />
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="visually-hidden" />
-      <div class="planner-progress"><span data-step-label>01 / 03 — The journey</span><div class="step-indicators" aria-hidden="true"><i class="active"></i><i></i><i></i></div></div>
-      <fieldset data-step="1"><legend>Where does your mind wander?</legend>
-        <label for="destination">Your destination</label><select name="destination" id="destination"><option>Open to inspiration</option>{destinations.map(d => <option data-slug={d.slug}>{d.name}</option>)}<option>Somewhere else</option></select>
-        <label for="style">What brings you away?</label><select name="style" id="style"><option>A well-deserved escape</option><option>Honeymoon & celebration</option><option>Safari & adventure</option><option>Family & friends</option><option>Wellness & retreat</option><option>Corporate travel</option></select>
-        <div class="form-row"><div><label for="travellers">Travellers</label><select name="travellers" id="travellers"><option>2 travellers</option><option>1 traveller</option><option>3–4 travellers</option><option>5+ travellers</option></select></div><div><label for="budget">Budget per person</label><select name="budget" id="budget"><option>Let’s discuss</option><option>Under USD 3,000</option><option>USD 3,000–7,000</option><option>USD 7,000–15,000</option><option>USD 15,000+</option></select></div></div>
+      <div class="planner-progress"><span data-step-label>01 / 04 — The shape</span><div class="step-indicators" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i></div></div>
+      <fieldset data-step="1"><legend>What should this journey feel like?</legend>
+        <p class="planner-step-intro">Your Folio choices appear here automatically. Keep them, change them or leave anything open.</p>
+        <div class="form-row form-row-three">
+          <div><label for="place">Place</label><select name="place" id="place"><option value="">Open</option>{['Island', 'Wild', 'City', 'Culture'].map(item => <option>{item}</option>)}</select></div>
+          <div><label for="pace">Pace</label><select name="pace" id="pace"><option value="">Open</option>{['Still', 'Balanced', 'Immersive'].map(item => <option>{item}</option>)}</select></div>
+          <div><label for="reason">Reason</label><select name="reason" id="reason"><option value="">Open</option>{['Escape', 'Celebration', 'Family', 'Business'].map(item => <option>{item}</option>)}</select></div>
+        </div>
+        <label for="destination">Destination</label><select name="destination" id="destination"><option>Open to inspiration</option>{destinations.map(d => <option data-slug={d.slug}>{d.name}</option>)}<option>Somewhere else</option></select>
+        <label for="style">Journey idea</label><select name="style" id="style"><option value="">No fixed concept</option>{journeys.map(journey => <option>{journey.name}</option>)}<option>A different idea</option></select>
       </fieldset>
-      <fieldset data-step="2"><legend>A few personal details.</legend>
-        <div class="form-row"><div><label for="date">Preferred departure <span>(optional)</span></label><input id="date" name="date" type="date" aria-describedby="planner-error" /></div><div><label for="nights">Length of stay</label><select name="nights" id="nights"><option>I’m flexible</option><option>3–5 nights</option><option>6–9 nights</option><option>10–14 nights</option><option>15+ nights</option></select></div></div>
-        <label for="departure">Departure city <span>(optional)</span></label><input name="departure" id="departure" maxlength="120" placeholder="e.g. Entebbe" />
-        <label for="notes">What would make it special? <span>(optional)</span> <span data-char-count class="small-caption">0/1500</span></label><textarea name="notes" id="notes" rows="4" maxlength="1500" placeholder="An occasion, a favourite kind of stay, or a wish you’ve had for a while…"></textarea>
+      <fieldset data-step="2"><legend>Give it a practical frame.</legend>
+        <p class="planner-step-intro">Approximate information is enough. Nothing here creates a reservation or price.</p>
+        <div class="form-row"><div><label for="date">Preferred departure <span>(optional)</span></label><input id="date" name="date" type="date" aria-describedby="planner-error" /></div><div><label for="date-flexibility">Date flexibility</label><select name="dateFlexibility" id="date-flexibility"><option>Dates are flexible</option><option>A few days either side</option><option>These dates matter</option><option>Still deciding</option></select></div></div>
+        <div class="form-row"><div><label for="nights">Length of stay</label><select name="nights" id="nights"><option>I’m flexible</option><option>3–5 nights</option><option>6–9 nights</option><option>10–14 nights</option><option>15+ nights</option></select></div><div><label for="departure">Departure city <span>(optional)</span></label><input name="departure" id="departure" maxlength="120" autocomplete="address-level2" placeholder="e.g. Entebbe" /></div></div>
+        <div class="form-row form-row-three"><div><label for="adults">Adults</label><select name="adults" id="adults">{['1', '2', '3', '4', '5+'].map(item => <option value={item}>{item}</option>)}</select></div><div><label for="children">Children</label><select name="children" id="children"><option>None</option><option>1 child</option><option>2 children</option><option>3+ children</option></select></div><div><label for="budget">Budget per person</label><select name="budget" id="budget"><option>Let’s discuss</option><option>Under USD 3,000</option><option>USD 3,000–7,000</option><option>USD 7,000–15,000</option><option>USD 15,000+</option></select></div></div>
       </fieldset>
-      <fieldset data-step="3"><legend>A journey, taking shape.</legend><label for="name">Your name <span>(optional)</span></label><input id="name" name="name" autocomplete="name" maxlength="120" placeholder="How should we address you?" /><dl class="brief-summary"></dl><p class="local-notice">{site.enquiryEndpoint ? 'Your download is a personal planning brief—not a reservation. Submitting also sends your enquiry to Pardus. No payment is taken.' : 'Your download is a personal planning brief—not a reservation. Nothing is sent to Pardus. No payment is taken.'}</p></fieldset>
+      <fieldset data-step="3"><legend>What matters most?</legend>
+        <p class="planner-step-intro">Choose any priorities that should shape the first conversation.</p>
+        <div class="priority-grid" role="group" aria-label="Journey priorities">{['Privacy', 'Exceptional food', 'Time in nature', 'Culture and design', 'Wellness', 'Family ease', 'A special occasion', 'Fewer transfers'].map(item => <label><input type="checkbox" name="priorities" value={item} /><span>{item}</span></label>)}</div>
+        <label for="access">Mobility, dietary or practical considerations <span>(optional)</span></label><textarea name="access" id="access" rows="3" maxlength="500" placeholder="Anything we should consider from the beginning"></textarea>
+        <label for="notes">What would make it yours? <span>(optional)</span> <span data-char-count class="small-caption">0/1500</span></label><textarea name="notes" id="notes" rows="5" maxlength="1500" placeholder="An occasion, a favourite kind of stay, or a wish you’ve had for a while…"></textarea>
+      </fieldset>
+      <fieldset data-step="4"><legend>Your brief, ready to keep.</legend>
+        <p class="planner-step-intro">{site.enquiryEndpoint ? 'Add a reply route so Pardus can continue the conversation.' : 'Contact fields remain optional while online delivery is being finalised. Your download stays on this device.'}</p>
+        <div class="form-row"><div><label for="name">Your name {site.enquiryEndpoint ? <span>(required)</span> : <span>(optional)</span>}</label><input id="name" name="name" required={Boolean(site.enquiryEndpoint)} autocomplete="name" maxlength="120" placeholder="How should we address you?" /></div><div><label for="country">Country <span>(optional)</span></label><input id="country" name="country" autocomplete="country-name" maxlength="100" /></div></div>
+        <div class="form-row"><div><label for="email">Email {site.enquiryEndpoint ? <span>(required)</span> : <span>(optional)</span>}</label><input id="email" name="email" type="email" inputmode="email" required={Boolean(site.enquiryEndpoint)} autocomplete="email" maxlength="200" /></div><div><label for="phone">Telephone / WhatsApp <span>(optional)</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="60" /></div></div>
+        <label for="contact-preference">Preferred reply</label><select id="contact-preference" name="contactPreference"><option>Email</option><option>Telephone</option><option>WhatsApp</option><option>No preference</option></select>
+        {site.enquiryEndpoint && <label class="consent-row"><input type="checkbox" name="serviceConsent" required /><span>I understand that Pardus will use these details to respond to this travel enquiry. <a href={path('privacy.html')}>Privacy information</a>.</span></label>}
+        <dl class="brief-summary"></dl><p class="local-notice">{site.enquiryEndpoint ? 'Submitting sends this planning brief to Pardus and creates no booking or payment.' : 'Downloading creates a personal planning brief on your device. Nothing is sent to Pardus and no booking is created.'}</p>
+      </fieldset>
       <p class="form-error" id="planner-error" data-error role="alert"></p>
       <div class="planner-actions"><button type="button" class="planner-back" data-back hidden>Back</button><button type="submit" class="button" data-next><span>Add the details</span><Arrow /></button></div>
       <p class="form-status" data-form-status role="status"></p>
-      <p class="form-footnote">{site.enquiryEndpoint ? 'Submitting sends your entries to Pardus to begin a conversation.' : 'Your entries stay in this page.'} <a href={path('privacy.html')}>Read our privacy information.</a></p>
+      <p class="form-footnote">{site.enquiryEndpoint ? 'Submitting sends your entries to Pardus to begin a conversation.' : 'Your entries stay in this page until you download the brief.'} <a href={path('privacy.html')}>Read our privacy information.</a></p>
       <noscript><p class="no-script-help">This planner needs JavaScript to create a downloadable brief. You can read the questions above and keep your own notes; no information is submitted.</p></noscript>
     </form>
     <pre class="print-brief" aria-hidden="true"></pre>

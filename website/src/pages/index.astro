@@ -6,6 +6,7 @@ import Arrow from '../components/Arrow.astro';
 import Brand from '../components/Brand.astro';
 import { path } from '../data/site';
 import { destinations } from '../data/destinations';
+import { journeys } from '../data/journeys';
 ---
 <Layout dark class="home-page">
   <section class="hero" aria-labelledby="hero-title">
@@ -24,11 +25,33 @@ import { destinations } from '../data/destinations';
       <p class="eyebrow hero-kicker">Personally planned. From Africa to the world.</p>
       <h1 id="hero-title" class="pardus-masthead"><span class="masthead-name">Pardus</span><span class="masthead-descriptor">Luxury Escapes</span></h1>
       <div class="hero-description"><span class="gold-rule"></span><p>A private island. An open horizon.<br />A journey that could only be yours.</p></div>
-      <div class="hero-actions"><a class="text-button hero-link" href={path('destinations.html')}>Explore the collection <Arrow /></a><a class="hero-secondary" href={path('journey.html')}>Design your journey</a></div>
+      <div class="hero-actions"><a class="text-button hero-link" href="#folio-builder">Begin your Folio <Arrow direction="down" /></a><a class="hero-secondary" href={path('destinations.html')}>Explore destinations</a></div>
     </div>
     <div class="hero-world-note"><span class="eyebrow">The art of travelling well</span><span>Travel.Explore</span></div>
     <a class="hero-discover" href={path('destinations.html')}><span>Begin with<br /><strong>somewhere extraordinary</strong></span><span class="circle-arrow"><Arrow /></span></a>
     <div class="hero-bottom"><span>Journeys shaped around you</span><a href="#philosophy">Explore Pardus <Arrow direction="down" /></a><span>Private travel · Personal perspective</span></div>
+  </section>
+
+  <section class="folio-builder section-wrap" id="folio-builder" aria-labelledby="folio-builder-title">
+    <div class="folio-builder-heading">
+      <div><p class="eyebrow">The Pardus Folio</p><h2 id="folio-builder-title">Begin with<br /><em>instinct.</em></h2></div>
+      <div><p>You do not need a destination or itinerary. Choose the setting, rhythm and reason that feel closest. We will keep them together while you explore.</p><button type="button" class="text-button requires-js" data-folio-trigger>Review your Folio <Arrow /></button><noscript><a class="text-button" href={path('journey.html')}>Begin an open brief <Arrow /></a></noscript></div>
+    </div>
+    <div class="folio-choice-grid requires-js">
+      <fieldset class="folio-choice-group"><legend><span>01</span>Place</legend><p>What kind of world is pulling you?</p><div>{['Island', 'Wild', 'City', 'Culture', 'Open'].map(item => <button type="button" data-folio-choice="place" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+      <fieldset class="folio-choice-group"><legend><span>02</span>Pace</legend><p>How should the days move?</p><div>{['Still', 'Balanced', 'Immersive'].map(item => <button type="button" data-folio-choice="pace" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+      <fieldset class="folio-choice-group"><legend><span>03</span>Reason</legend><p>What brings you away?</p><div>{['Escape', 'Celebration', 'Family', 'Business'].map(item => <button type="button" data-folio-choice="reason" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+    </div>
+  </section>
+
+  <section class="home-journeys section-wrap" aria-labelledby="home-journeys-title">
+    <div class="home-journeys-heading"><p class="eyebrow">Selected journey concepts</p><h2 id="home-journeys-title">A possible shape.<br /><em>Never a fixed package.</em></h2><a class="text-button" href={path('journeys.html')}>Explore all journeys <Arrow /></a></div>
+    <div class="home-journey-grid">
+      {journeys.slice(0, 3).map(journey => <article class="home-concept-card">
+        <a class="home-concept-image" href={path(`journey-${journey.slug}.html`)}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 760px) 100vw, 34vw" /><span>{journey.number}</span></a>
+        <div><p class="eyebrow">{journey.eyebrow}</p><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><p>{journey.description}</p><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><span data-save-label>Save to your Folio</span><span aria-hidden="true">+</span></button></div>
+      </article>)}
+    </div>
   </section>
 
   <section class="manifesto home-scene section-wrap" id="philosophy">

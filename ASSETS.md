@@ -4,6 +4,10 @@ Approved Pardus logo: user-uploaded source artwork. Photography reused from the 
 
 The exact approved full-colour lockup is preserved as `public/brand/pardus-approved-primary.png`, including the complete metallic-gold aircraft sweep. It is presented with the confirmed `Travel.Explore` tagline across the header, opening and footer. The earlier vector reconstruction remains available for the standalone leopard mark and decorative motion.
 
+## Typography
+
+The production build self-hosts Satoshi Light, Regular, Medium and Bold plus the Montserrat variable family as WOFF2. Both families were supplied by the user. Fraunces is bundled from the project dependency. No Fontshare request is used. Confirm Satoshi web-use approval before commercial launch; Montserrat's OFL file is included with the exported fonts.
+
 - hero: https://images.unsplash.com/photo-1762254923872-5bdc4210eb90?auto=format&fit=crop&w=2000&q=85
 - maldives: https://images.pexels.com/photos/9482140/pexels-photo-9482140.jpeg?auto=compress&cs=tinysrgb&w=1500
 - zanzibar: https://images.unsplash.com/photo-1762118817730-955d832b2cb7?auto=format&fit=crop&w=900&q=80

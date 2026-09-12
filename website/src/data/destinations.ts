@@ -2,6 +2,8 @@ export interface Destination {
   slug: string; name: string; country: string; category: string; number: string;
   title: string; subtitle: string; description: string; image: string; alt: string;
   caption: string; mood: string; intro: string; paragraphs: string[];
+  place: 'Island' | 'Wild' | 'City' | 'Culture'; pace: 'Still' | 'Balanced' | 'Immersive'; reasons: string[];
+  seasonNote: string; suggestedStay: string; idealFor: string[]; routePairs: string[]; considerations: string[];
   highlights: { name: string; text: string }[];
 }
 
@@ -12,6 +14,12 @@ export const destinations: Destination[] = [
     description: 'Overwater mornings. Barefoot evenings. A horizon that belongs to the sea.',
     image: 'maldives', alt: 'Overwater villas reaching into turquoise water in the Maldives',
     caption: 'Overwater living / The Maldives', mood: 'For doing less, beautifully.',
+    place: 'Island', pace: 'Still', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'The right period depends on rainfall tolerance, marine interests, value and the atoll. We confirm current conditions and transfer schedules before recommending dates.',
+    suggestedStay: 'Usually 7–10 nights',
+    idealFor: ['Quiet couples’ escapes', 'Honeymoons and anniversaries', 'One-base family stays'],
+    routePairs: ['Dubai stopover', 'Sri Lanka chapter', 'A longer Indian Ocean journey'],
+    considerations: ['Speedboat or seaplane transfer', 'House reef and lagoon character', 'Beach versus overwater room', 'Resort scale and atmosphere'],
     intro: 'An island is a wonderful place to find a little perspective.',
     paragraphs: ['Wake to a different shade of blue. Let the day unfold between the lagoon, a quiet table and somewhere comfortable with a view. In the Maldives, the simplest moments can be the ones you remember.', 'Your island, room category and transfers matter as much as the destination. We shape the stay around who you are travelling with, the occasion and how you want your days to feel.'],
     highlights: [
@@ -26,6 +34,12 @@ export const destinations: Destination[] = [
     description: 'A slower shore, spice-scented streets and the warm pull of the Indian Ocean.',
     image: 'zanzibar', alt: 'A pale sandbar in the blue-green waters off Zanzibar',
     caption: 'A quieter shoreline / Zanzibar', mood: 'A little culture. A lot of coast.',
+    place: 'Island', pace: 'Balanced', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'Coastal weather, tides and the location of the hotel can change the experience. We match timing and shoreline to the trip rather than treating the island as one season.',
+    suggestedStay: 'Usually 5–8 nights',
+    idealFor: ['Safari-and-coast journeys', 'Couples seeking culture and water', 'Families wanting a slower close'],
+    routePairs: ['Tanzania safari', 'Kenya safari', 'Stone Town and a beach stay'],
+    considerations: ['Tidal variation by coast', 'Time in Stone Town', 'Road transfer length', 'Beach atmosphere and privacy'],
     intro: 'An island escape with another story around every corner.',
     paragraphs: ['Zanzibar invites more than beach time. Wander through Stone Town, discover the island’s food and culture, then return to a shore where the pace is entirely different.', 'We bring the coast and the cultural experiences together in a balanced itinerary. The right base, a thoughtful transfer and enough unscheduled time can make all the difference.'],
     highlights: [
@@ -40,6 +54,12 @@ export const destinations: Destination[] = [
     description: 'Sculptural boulders, powder-soft sand and a coastline that still feels a little wild.',
     image: 'seychelles', alt: 'Sculptural granite boulders meeting clear tropical water in Seychelles',
     caption: 'Granite and turquoise / Seychelles', mood: 'For beauty with a little more wildness.',
+    place: 'Island', pace: 'Still', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'Wind, sea conditions and island-to-island logistics matter as much as temperature. Timing is considered against the exact route and activities.',
+    suggestedStay: 'Usually 8–12 nights',
+    idealFor: ['Island-hopping couples', 'Nature-led beach stays', 'Celebrations with a wilder edge'],
+    routePairs: ['Mahé and Praslin', 'Praslin and La Digue', 'A private-island close'],
+    considerations: ['Ferry, flight or helicopter connection', 'Beach orientation and sea conditions', 'Number of island changes', 'Terrain and mobility'],
     intro: 'Some coastlines are beautiful. This one feels alive.',
     paragraphs: ['Giant granite boulders lean into the shallows, palms crowd the tideline and the forest never quite gives way to the beach. Seychelles rewards slow travel between a handful of islands, each with its own shoreline and character.', 'Your route matters here. We help you choose between islands, arrange the crossings between them, and build in enough unhurried time to actually notice the place.'],
     highlights: [
@@ -54,6 +74,12 @@ export const destinations: Destination[] = [
     description: 'Open plains, early light and the extraordinary privilege of being a guest in the wild.',
     image: 'africa', alt: 'An acacia tree silhouetted against the warm light of the East African plains',
     caption: 'First light on the plains / East Africa', mood: 'For a different kind of connection.',
+    place: 'Wild', pace: 'Immersive', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'East Africa contains many distinct ecosystems. Wildlife movement, rainfall, access and camp openings are checked for the exact countries and areas in a proposed route.',
+    suggestedStay: 'Usually 7–12 safari nights',
+    idealFor: ['First or returning safari travellers', 'Families across generations', 'Couples combining wild and coast'],
+    routePairs: ['Safari and Zanzibar', 'Two complementary ecosystems', 'Safari and an Indian Ocean island'],
+    considerations: ['Distance between camps', 'Vehicle and guiding style', 'Camp atmosphere and comfort', 'Wildlife is never guaranteed'],
     intro: 'Some places change the way you look at everything else.',
     paragraphs: ['A safari is built from small, unrepeatable moments: the quiet before sunrise, a track in the dust, the slow return to camp. The landscape sets the agenda.', 'We help bring together destinations, camps, guides and connections around your interests. Wildlife sightings are never guaranteed; the journey is about the experience of being there.'],
     highlights: [
@@ -68,6 +94,12 @@ export const destinations: Destination[] = [
     description: 'Long lunches, beautiful cities and a coast worth taking the scenic route for.',
     image: 'europe', alt: 'Whitewashed buildings and blue domes overlooking the sea in Santorini',
     caption: 'A Mediterranean moment / Santorini', mood: 'For the pleasure of taking your time.',
+    place: 'Culture', pace: 'Immersive', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'The best timing depends on the exact region, crowd tolerance and whether the trip is led by coast, food, culture or events. The route is assessed place by place.',
+    suggestedStay: 'Usually 8–14 nights',
+    idealFor: ['Slow cultural routes', 'Food-led couples’ journeys', 'Family city-and-coast combinations'],
+    routePairs: ['City and coast', 'Rail-linked cultural route', 'Mainland and island'],
+    considerations: ['Crowd levels and local events', 'Rail, road, ferry or flight trade-offs', 'Hotel location', 'Realistic number of stops'],
     intro: 'The best European journeys leave room between the landmarks.',
     paragraphs: ['A favourite neighbourhood. A terrace at the right time of day. An island reached without a rush. Europe offers countless ways to travel well, and the most rewarding itinerary is rarely the busiest.', 'We help shape a coherent route, pairing places to stay with the transport and experiences that connect them. Start with a city, a coastline or simply a season you have in mind.'],
     highlights: [
@@ -82,6 +114,12 @@ export const destinations: Destination[] = [
     description: 'Distinctive stays, late dinners and a little space beyond the skyline.',
     image: 'dubai', alt: 'The Dubai skyline in warm evening light',
     caption: 'When the city lights up / Dubai', mood: 'A city break with your name on it.',
+    place: 'City', pace: 'Balanced', reasons: ['Escape', 'Celebration', 'Family', 'Business'],
+    seasonNote: 'Heat changes how the city is experienced. Travel dates, outdoor plans, arrival time and the purpose of the stay guide the neighbourhood and daily rhythm.',
+    suggestedStay: 'Usually 3–6 nights',
+    idealFor: ['Stopovers with purpose', 'Celebrations and family breaks', 'Executive and event travel'],
+    routePairs: ['Dubai and the Maldives', 'Dubai and Europe', 'City and desert'],
+    considerations: ['Neighbourhood and transfer time', 'Indoor/outdoor balance', 'Family or business schedule', 'Stopover versus standalone stay'],
     intro: 'Make the city yours, one considered choice at a time.',
     paragraphs: ['Dubai can be a pause between journeys, a celebration or a destination in its own right. The experience changes with the neighbourhood, the hotel and the rhythm of your days.', 'We shape your stay around what draws you here: food, design, a family escape, time by the water or business with a little more breathing room.'],
     highlights: [

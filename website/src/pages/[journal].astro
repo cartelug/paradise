@@ -7,11 +7,20 @@ import { path } from '../data/site';
 export function getStaticPaths() { return journal.map((entry, i) => ({ params: { journal: `journal-${entry.slug}` }, props: { entry, next: journal[(i + 1) % journal.length] } })); }
 const { entry, next } = Astro.props;
 const readMinutes = Math.max(1, Math.ceil([entry.intro, ...entry.paragraphs].join(' ').split(/\s+/).length / 200));
+const displayDate = (value: string) => new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
+const articleUrl = new URL(path(`journal-${entry.slug}.html`), 'https://cartelug.github.io').toString();
+const articleSchema = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: entry.title,
+  description: entry.description, datePublished: entry.publishedAt, dateModified: entry.updatedAt,
+  author: { '@type': 'Organization', name: entry.author }, publisher: { '@type': 'Organization', name: 'Pardus Luxury Escapes' },
+  image: new URL(path(`images/${entry.image}-1920.webp`), 'https://cartelug.github.io').toString(), mainEntityOfPage: articleUrl,
+};
 ---
 <Layout title={entry.title} class="article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
-  <header class="article-heading"><a href={path('journal.html')} class="article-back">← The Journal</a><p class="eyebrow">{entry.category} · {readMinutes} min read</p><h1>{entry.title}</h1><p>{entry.subtitle}</p></header>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <header class="article-heading"><a href={path('journal.html')} class="article-back">← The Journal</a><p class="eyebrow">{entry.category} · {readMinutes} min read</p><h1>{entry.title}</h1><p>{entry.subtitle}</p><p class="article-byline">By {entry.author} · Published <time datetime={entry.publishedAt}>{displayDate(entry.publishedAt)}</time> · Updated <time datetime={entry.updatedAt}>{displayDate(entry.updatedAt)}</time></p></header>
   <figure class="article-photo"><Picture name={entry.image} alt={entry.alt} eager sizes="100vw" /><figcaption>{entry.alt}</figcaption></figure>
-  <div class="article-layout"><aside class="article-margin"><p class="eyebrow">A Pardus perspective</p><p>Thoughtful notes for<br />a personal journey.</p><a href={path('journal.html')}>Explore all stories <Arrow /></a></aside><article class="journal-article">
+  <div class="article-layout"><aside class="article-margin"><p class="eyebrow">A Pardus perspective</p><p>Thoughtful notes for<br />a personal journey.</p><a href={path('journal.html')}>Explore all stories <Arrow /></a>{entry.relatedDestination && <a href={path(`destination-${entry.relatedDestination}.html`)}>Explore the destination <Arrow /></a>}</aside><article class="journal-article">
     <h2 data-reveal>{entry.intro}</h2>
     <div class="journal-copy">{entry.paragraphs.map(p => <p data-reveal>{p}</p>)}</div>
     <a class="text-button" href={path('journey.html')} data-reveal>Begin your journey <Arrow /></a>

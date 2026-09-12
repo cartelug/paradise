@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
+import Arrow from '../components/Arrow.astro';
+import { journeys } from '../data/journeys';
+import { path } from '../data/site';
+---
+<Layout title="Journey concepts" description="Begin with the feeling, rhythm or reason for travelling. Explore flexible Pardus journey concepts, then shape one around you.">
+  <section class="page-intro journey-index-intro">
+    <p class="eyebrow">A place to begin</p>
+    <div class="page-intro-row"><h1>Journeys with<br />a point of <em>view.</em></h1><p>These are possible shapes, never fixed packages. Begin with the one that feels closest, then change every part of it.</p></div>
+  </section>
+
+  <section class="journey-index section-wrap" aria-labelledby="journey-index-title" data-journey-library>
+    <div class="journey-index-tools">
+      <div><p class="eyebrow">Choose by reason</p><h2 id="journey-index-title">Six ways into the world.</h2></div>
+      <div class="journey-filter requires-js" role="group" aria-label="Filter journey concepts">
+        {['All', 'Escape', 'Celebration', 'Family', 'Business'].map((reason, index) => <button type="button" data-journey-filter={reason.toLowerCase()} aria-pressed={index === 0 ? 'true' : 'false'}>{reason}</button>)}
+      </div>
+    </div>
+    <div class="journey-concept-grid">
+      {journeys.map(journey => <article class="concept-card" data-journey-card data-reason={journey.reason.toLowerCase()}>
+        <a class="concept-image" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 760px) 100vw, 50vw" /><span class="concept-number">{journey.number}</span></a>
+        <div class="concept-body">
+          <p class="eyebrow">{journey.eyebrow}</p>
+          <h2><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h2>
+          <p>{journey.description}</p>
+          <div class="concept-meta"><span>{journey.pace} pace</span><span>{journey.duration.replace('Suggested rhythm / ', '').replace('Typical frame / ', '')}</span></div>
+          <div class="concept-actions"><a class="text-button" href={path(`journey-${journey.slug}.html`)}>Explore the idea <Arrow /></a><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><span data-save-label>Save to your Folio</span><span aria-hidden="true">+</span></button></div>
+        </div>
+      </article>)}
+    </div>
+    <p class="journey-filter-empty" data-journey-empty hidden>No journey concepts match that reason yet. Explore all concepts or begin with an open brief.</p>
+  </section>
+
+  <aside class="journal-note journey-index-cta"><p class="eyebrow">Nothing needs to fit exactly</p><p>Keep the feeling.<br /><em>Change the rest.</em></p><a class="text-button" href={path('journey.html')}>Start an open brief <Arrow /></a></aside>
+</Layout>
+

@@ -5,21 +5,23 @@ import { navigation, path } from '../data/site';
 interface Props { dark?: boolean; }
 const { dark = false } = Astro.props;
 const current = Astro.url.pathname.split('/').pop() || '';
+const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class:list={['site-header', { 'header-dark': dark }]}>
   <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light={dark} /></a>
   <nav class="desktop-nav" aria-label="Main navigation">
-    {navigation.map(item => <a href={path(item.href)} aria-current={current === item.href ? 'page' : undefined}>{item.label}</a>)}
+    {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
-  <a class="header-journey" href={path('journey.html')} aria-label="Begin your journey"><span>Begin your journey</span><span class="circle-arrow"><Arrow /></span></a>
+  <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Folio</span><small data-folio-count hidden>0</small></button>
+  <a class="header-journey" href={path('journey.html')} aria-label="Plan a journey"><span>Plan a journey</span><span class="circle-arrow"><Arrow /></span></a>
   <button class="menu-toggle" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="menu-title">
   <div class="menu-top"><a class="brand-link" href={path()} aria-label="Pardus home"><Brand vector light /></a><button class="menu-close" aria-label="Close navigation"><span></span><span></span></button></div>
   <p id="menu-title" class="eyebrow">A world of possibilities</p>
   <nav aria-label="Mobile navigation">
-    {[...navigation, { label: 'Begin your journey', href: 'journey.html' }].map((item, i) => <a href={path(item.href)}><small>0{i + 1}</small><span>{item.label}</span><Arrow /></a>)}
+    {[...navigation, { label: 'Concierge', href: 'concierge.html' }, { label: 'Plan a journey', href: 'journey.html' }].map((item, i) => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><small>0{i + 1}</small><span>{item.label}</span><Arrow /></a>)}
   </nav>
   <div class="menu-bottom"><span>Personally planned. Beautifully travelled.</span><a href={path('contact.html')}>Contact Pardus</a></div>
 </dialog>

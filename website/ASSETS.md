@@ -4,6 +4,14 @@ Approved Pardus logo: user-uploaded JPEG. Photography reused from the previous P
 
 The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The opening animation uses separate vector paths from `src/data/logo.json`.
 
+## Typography
+
+- Satoshi Light, Regular, Medium and Bold were supplied by the user in `satoshi.zip` and converted locally from OTF to WOFF2 for web delivery.
+- Montserrat was supplied by the user in `montserrat.zip`; the variable TTF was converted locally to WOFF2. The OFL text is kept at `public/fonts/Montserrat-OFL.txt`.
+- Fraunces is provided by the checked-in `@fontsource-variable/fraunces` dependency.
+
+Confirm that the supplied Satoshi files are approved for public web use before a commercial launch. The site no longer loads fonts from Fontshare.
+
 `public/brand/97-design-logo.png` (+`@2x`) is the 97 Design maker's mark used for the "Made by 97 Design" footer credit, trimmed and resized from `source-assets/97-design-logo-source.png` by `scripts/prepare-97-logo.mjs`.
 
 - hero: https://images.unsplash.com/photo-1762254923872-5bdc4210eb90?auto=format&fit=crop&w=2000&q=85
