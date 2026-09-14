@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes
+# Pardus Luxury Escapes — V3
 
-An editorial travel website built with Astro. The experience includes 29 static pages, responsive destination photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation, and an animated opening made from the approved Pardus logo.
+An editorial travel website built with Astro. V3 adds a quieter overlaid navigation system, a cinematic Pardus planning studio, practical homepage field notes and fail-safe scroll choreography to the 29-page V2 architecture. The experience includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation, and an animated opening made from the approved Pardus logo.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -53,7 +53,7 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 - `src/data/destinations.ts`: destination dossiers and planning context.
 - `src/data/journeys.ts`: journey concepts and Folio signals.
 - `src/data/journal.ts`: accountable editorial records with author and dates.
-- `src/styles/global.css`, `editorial.css`, `v2.css`: foundations, editorial layer and explicitly owned V2 components.
+- `src/styles/global.css`, `editorial.css`, `v2.css`, `v3.css`: foundations, editorial layer, V2 product architecture and V3 art direction.
 - `src/scripts/site.ts`: navigation, filters and planner orchestration.
 - `src/scripts/folio.ts`: local Folio state, dialog and planner handoff.
 - `src/scripts/brief.ts`: brief data handling and date validation.
@@ -61,4 +61,4 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 - `scripts/prepare-brand.mjs`: reconstructs the logo from the original approved 1536 × 864 JPEG.
 - `scripts/prepare-images.mjs`: produces local AVIF and WebP derivatives.
 
-Read `V2-MAINTENANCE.md` before changing content or releasing. Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.
+Read `V3-MAINTENANCE.md` before changing content or releasing. Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.

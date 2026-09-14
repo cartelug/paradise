@@ -20,3 +20,7 @@ The production build self-hosts Satoshi Light, Regular, Medium and Bold plus the
 ## Generated homepage artwork
 
 The homepage hero has two original AI-generated compositions created for this project: `source-assets/pardus-hero-desktop.png` (1672 × 941) and `source-assets/pardus-hero-mobile.png` (941 × 1672). They depict one golden leopard moving through a continuous world of ocean, savannah, European coast, desert and distant skyline. The images intentionally contain no text or generated brand mark; the approved Pardus vector is layered separately in the page. AVIF and WebP derivatives are generated for responsive delivery.
+
+## V3 commissioned planning-studio visual
+
+The responsive `v3-studio-*` AVIF and WebP files were generated specifically for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026. The coordinated desktop and mobile compositions depict a fictional coastal travel-planning table with a route map, brass compass and navy folio. They contain no brand marks or readable text and do not represent a named property, partner or destination. The final prompts are recorded in `website/ASSETS.md`.

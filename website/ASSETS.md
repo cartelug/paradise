@@ -12,6 +12,14 @@ The logo in `public/brand/` is a deterministic vector reconstruction of the appr
 
 Confirm that the supplied Satoshi files are approved for public web use before a commercial launch. The site no longer loads fonts from Fontshare.
 
+## V3 commissioned visual
+
+The responsive `v3-studio-*` AVIF and WebP files were generated for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026. They depict a fictional private-travel planning table and do not represent a named property, partner or destination.
+
+Desktop prompt: “Create a cinematic editorial photograph of a refined dark-stone travel-planning table on an East African coastal terrace at blue hour, with a tactile route map, brass compass, navy folio, handwritten planning card, understated sunglasses and one white frangipani; quiet-luxury magazine art direction, generous negative space, no people, logos, readable text or conspicuous wealth symbols.”
+
+Mobile prompt: “Create a coordinated portrait version of the same coastal planning-table scene for a narrow screen, with the objects forming a confident diagonal through the lower two-thirds and a calmer upper quarter; preserve the restrained navy, slate, ivory and brass palette; no people, logos or readable text.”
+
 `public/brand/97-design-logo.png` (+`@2x`) is the 97 Design maker's mark used for the "Made by 97 Design" footer credit, trimmed and resized from `source-assets/97-design-logo-source.png` by `scripts/prepare-97-logo.mjs`.
 
 - hero: https://images.unsplash.com/photo-1762254923872-5bdc4210eb90?auto=format&fit=crop&w=2000&q=85

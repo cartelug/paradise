@@ -7,6 +7,7 @@ import Brand from '../components/Brand.astro';
 import { path } from '../data/site';
 import { destinations } from '../data/destinations';
 import { journeys } from '../data/journeys';
+import { journal } from '../data/journal';
 ---
 <Layout dark class="home-page">
   <section class="hero" aria-labelledby="hero-title">
@@ -95,20 +96,38 @@ import { journeys } from '../data/journeys';
     <div class="business-copy"><p class="eyebrow" data-reveal>Pardus for business</p><h2 data-reveal>Ahead of<br />the <em>agenda.</em></h2><p data-reveal>Thoughtful travel coordination for the people moving your business forward. Flights, stays and schedules, in one conversation.</p><a href={path('corporate.html')} class="text-button" data-reveal>Explore corporate travel <Arrow /></a></div>
   </section>
 
-  <section class="process-section section-wrap">
-    <div class="section-label"><span>03 / From the first conversation</span><span class="label-rule"></span></div>
-    <h2 data-reveal>Good journeys begin<br />with a little <em>understanding.</em></h2>
-    <ol class="process-list"><li data-reveal><span>01</span><div><h3>We listen.</h3><p>The occasion. The people. The things you love, and the things you’d rather leave behind.</p></div></li><li data-reveal><span>02</span><div><h3>We shape.</h3><p>Places, stays and experiences, brought together into a journey that feels right.</p></div></li><li data-reveal><span>03</span><div><h3>You go.</h3><p>With arrangements agreed and the details confirmed, your next chapter begins.</p></div></li></ol>
+  <section class="v3-studio" aria-labelledby="v3-studio-title">
+    <div class="v3-studio-media" data-scroll-media data-scroll-depth="16">
+      <picture>
+        <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/v3-studio-mobile-480.avif')} 480w, ${path('images/v3-studio-mobile-720.avif')} 720w, ${path('images/v3-studio-mobile-1120.avif')} 1120w`} sizes="100vw" />
+        <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/v3-studio-mobile-480.webp')} 480w, ${path('images/v3-studio-mobile-720.webp')} 720w, ${path('images/v3-studio-mobile-1120.webp')} 1120w`} sizes="100vw" />
+        <source type="image/avif" srcset={`${path('images/v3-studio-desktop-960.avif')} 960w, ${path('images/v3-studio-desktop-1536.avif')} 1536w`} sizes="(max-width: 1100px) 100vw, 58vw" />
+        <source type="image/webp" srcset={`${path('images/v3-studio-desktop-960.webp')} 960w, ${path('images/v3-studio-desktop-1536.webp')} 1536w`} sizes="(max-width: 1100px) 100vw, 58vw" />
+        <img src={path('images/v3-studio-desktop-1536.webp')} alt="A route map, brass compass and travel folio arranged on a coastal terrace at blue hour" width="1536" height="1024" loading="lazy" decoding="async" />
+      </picture>
+      <p><span>Field desk / 01</span><span>Every detail begins with a direction.</span></p>
+    </div>
+    <div class="v3-studio-copy section-wrap">
+      <div class="v3-studio-heading"><p class="eyebrow">The Pardus standard</p><h2 id="v3-studio-title" data-reveal>One journey.<br /><em>Held from every angle.</em></h2><p data-reveal>Great travel should feel effortless to the traveller. Behind that ease is a clear brief, a coherent route and decisions made in the right order.</p></div>
+      <ol class="v3-studio-steps">
+        <li data-reveal><span>01 / Before</span><div><h3>Understand the reason.</h3><p>We begin with who is travelling, why this time matters and what should feel different when you arrive.</p></div></li>
+        <li data-reveal><span>02 / In motion</span><div><h3>Hold the whole route.</h3><p>Flights, stays, transfers and experiences are treated as one journey, with the quiet gaps considered too.</p></div></li>
+        <li data-reveal><span>03 / Throughout</span><div><h3>Keep decisions clear.</h3><p>Availability, price, terms and changes stay legible from first proposal to the final traveller-ready details.</p></div></li>
+      </ol>
+      <a class="text-button" href={path('about.html')}>See how Pardus works <Arrow /></a>
+    </div>
   </section>
 
-  <section class="promise-section section-wrap">
-    <div class="section-label"><span>04 / What you can expect</span><span class="label-rule"></span></div>
-    <h2 data-reveal>Clear from <br />the <em>first message.</em></h2>
-    <ul class="promise-list">
-      <li data-reveal><span class="promise-number">01</span><h3>We listen before we plan.</h3><p>Nothing is proposed until we understand who is travelling, and why.</p></li>
-      <li data-reveal><span class="promise-number">02</span><h3>Nothing is confirmed without you.</h3><p>Every price, date and detail is agreed before anything is booked.</p></li>
-      <li data-reveal><span class="promise-number">03</span><h3>One brief, one conversation.</h3><p>A single point of contact, from the first idea to the final detail.</p></li>
-      <li data-reveal><span class="promise-number">04</span><h3>Clear terms, always.</h3><p>Costs and cancellation conditions are set out plainly, before you decide.</p></li>
-    </ul>
+  <section class="v3-dispatches section-wrap" aria-labelledby="v3-dispatches-title">
+    <div class="v3-dispatches-heading"><div><p class="eyebrow">The Pardus journal</p><h2 id="v3-dispatches-title" data-reveal>Useful perspective,<br /><em>before you decide.</em></h2></div><p data-reveal>Practical notes for choosing well—written to make a high-value journey clearer, not noisier.</p><a class="text-button" href={path('journal.html')}>Read every note <Arrow /></a></div>
+    <div class="v3-dispatch-grid">
+      {journal.slice(1, 4).map((story, index) => <article class:list={['v3-dispatch-card', { 'v3-dispatch-card--lead': index === 0 }]} data-reveal>
+        <a href={path(`journal-${story.slug}.html`)}>
+          <div class="v3-dispatch-image"><Picture name={story.image} alt={story.alt} sizes={index === 0 ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 25vw'} /><span>{String(index + 1).padStart(2, '0')}</span></div>
+          <div class="v3-dispatch-meta"><p class="eyebrow">{story.category}</p><p>{new Date(story.publishedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</p></div>
+          <h3>{story.title}</h3><p>{story.description}</p><span class="v3-dispatch-link">Read the field note <Arrow /></span>
+        </a>
+      </article>)}
+    </div>
   </section>
 </Layout>

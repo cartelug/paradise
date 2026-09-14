@@ -34,6 +34,14 @@ test('every editorial image has responsive AVIF and WebP derivatives', async () 
   }
 });
 
+test('the V3 planning studio has separate responsive desktop and mobile art', async () => {
+  for (const [variant, widths] of [['desktop', [960, 1536]], ['mobile', [480, 720, 1120]]]) {
+    for (const width of widths) {
+      for (const format of ['avif', 'webp']) await access(new URL(`../public/images/v3-studio-${variant}-${width}.${format}`, import.meta.url));
+    }
+  }
+});
+
 test('production typography is local and does not call Fontshare', async () => {
   for (const file of ['Satoshi-Light.woff2', 'Satoshi-Regular.woff2', 'Satoshi-Medium.woff2', 'Satoshi-Bold.woff2', 'Montserrat-Variable.woff2']) {
     await access(new URL(`../public/fonts/${file}`, import.meta.url));
@@ -41,4 +49,3 @@ test('production typography is local and does not call Fontshare', async () => {
   const layout = await readFile(new URL('../src/layouts/Layout.astro', import.meta.url), 'utf8');
   assert.equal(layout.includes('api.fontshare.com'), false);
 });
-

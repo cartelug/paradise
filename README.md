@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes
+# Pardus Luxury Escapes — V3
 
-An editorial travel website built with Astro. The V2 experience includes 29 static pages, responsive destination photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation, and an animated opening made from the approved Pardus logo.
+An editorial travel website built with Astro. V3 adds a quieter overlaid navigation system, a cinematic Pardus planning studio, practical homepage field notes and fail-safe scroll choreography to the 29-page architecture. The experience includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation, and an animated opening made from the approved Pardus logo.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -53,9 +53,9 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 
 - `website/src/pages/`: public pages and generated destination, journey and Journal routes.
 - `website/src/data/`: destination, journey, Journal and business sources of truth.
-- `website/src/styles/`: foundations, editorial styles and V2 component rules.
+- `website/src/styles/`: foundations, editorial styles, V2 product components and the V3 art-direction layer.
 - `website/src/scripts/`: Folio, filters, planner and delivery behaviour.
 - `website/public/brand/`: final transparent logo assets.
-- `website/V2-MAINTENANCE.md`: content, integration, QA and release rules.
+- `website/V3-MAINTENANCE.md`: content, integration, QA and release rules.
 
 Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.

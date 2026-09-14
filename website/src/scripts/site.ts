@@ -6,6 +6,10 @@ import { destinations } from '../data/destinations';
 
 const root = document.documentElement;
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const header = document.querySelector<HTMLElement>('.site-header');
+const paintHeader = () => header?.classList.toggle('header-scrolled', window.scrollY > 42);
+window.addEventListener('scroll', paintHeader, { passive: true });
+paintHeader();
 const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
 const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 toggle?.addEventListener('click', () => { menu?.showModal(); toggle.setAttribute('aria-expanded', 'true'); });
@@ -36,7 +40,13 @@ if ('IntersectionObserver' in window && !motion.matches) {
       reveal.unobserve(entry.target);
     });
   }, { threshold: 0, rootMargin: '80px 0px' });
-  targets.forEach(el => reveal.observe(el));
+  targets.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight + 80) el.classList.add('revealed');
+    else reveal.observe(el);
+  });
+  root.classList.add('motion-ready');
+  // A slow or interrupted observer must never leave content hidden.
+  window.setTimeout(() => targets.forEach(el => el.classList.add('revealed')), 2400);
 
   const sections = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
