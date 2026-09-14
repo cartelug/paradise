@@ -57,6 +57,7 @@ if ('IntersectionObserver' in window && !motion.matches) {
 
 const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media]')]
   .filter(element => element.querySelector('img'));
+const scrollSignature = document.querySelector<HTMLElement>('[data-v4-scroll-signature]');
 scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.dataset.scrollMedia = ''; });
 let scrollFrame = 0;
 function paintScrollMotion() {
@@ -71,6 +72,18 @@ function paintScrollMotion() {
     const position = (window.innerHeight / 2 - (box.top + box.height / 2)) / (window.innerHeight + box.height);
     const offset = Math.max(-depth, Math.min(depth, position * depth * 2));
     element.style.setProperty('--scroll-y', `${offset.toFixed(2)}px`);
+  }
+  if (scrollSignature) {
+    const box = scrollSignature.getBoundingClientRect();
+    const distance = Math.max(1, box.height - window.innerHeight);
+    const progress = Math.min(1, Math.max(0, -box.top / distance));
+    const route = Math.min(1, Math.max(0, (progress - .2) / .58));
+    const notes = Math.min(1, Math.max(0, (progress - .56) / .22));
+    scrollSignature.style.setProperty('--v4-title-y', `${((1 - progress) * 76).toFixed(2)}px`);
+    scrollSignature.style.setProperty('--v4-image-scale', (1.11 - progress * .11).toFixed(4));
+    scrollSignature.style.setProperty('--v4-copy-opacity', Math.min(1, progress * 2.9).toFixed(3));
+    scrollSignature.style.setProperty('--v4-route-progress', route.toFixed(3));
+    scrollSignature.style.setProperty('--v4-notes-opacity', notes.toFixed(3));
   }
 }
 function requestScrollPaint() {

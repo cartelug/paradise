@@ -24,13 +24,39 @@ import { journal } from '../data/journal';
     <div class="hero-brand-mark" aria-hidden="true"><Brand mark light /></div>
     <div class="hero-copy">
       <p class="eyebrow hero-kicker">Personally planned. From Africa to the world.</p>
-      <h1 id="hero-title" class="pardus-masthead"><span class="masthead-name">Pardus</span><span class="masthead-descriptor">Luxury Escapes</span></h1>
+      <h1 id="hero-title" class="v4-hero-title"><span class="visually-hidden">Pardus Luxury Escapes</span><span class="v4-hero-logo" aria-hidden="true"><Brand vector light /></span><span class="v4-hero-luxury" aria-hidden="true">Luxury Escapes</span></h1>
       <div class="hero-description"><span class="gold-rule"></span><p>A private island. An open horizon.<br />A journey that could only be yours.</p></div>
       <div class="hero-actions"><a class="text-button hero-link" href="#folio-builder">Begin your Folio <Arrow direction="down" /></a><a class="hero-secondary" href={path('destinations.html')}>Explore destinations</a></div>
     </div>
-    <div class="hero-world-note"><span class="eyebrow">The art of travelling well</span><span>Travel.Explore</span></div>
     <a class="hero-discover" href={path('destinations.html')}><span>Begin with<br /><strong>somewhere extraordinary</strong></span><span class="circle-arrow"><Arrow /></span></a>
     <div class="hero-bottom"><span>Journeys shaped around you</span><a href="#philosophy">Explore Pardus <Arrow direction="down" /></a><span>Private travel · Personal perspective</span></div>
+  </section>
+
+  <section class="v4-scroll-signature" aria-labelledby="travel-explore-title" data-v4-scroll-signature>
+    <div class="v4-signature-sticky">
+      <div class="v4-signature-media" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/v3-studio-mobile-480.avif')} 480w, ${path('images/v3-studio-mobile-720.avif')} 720w, ${path('images/v3-studio-mobile-1120.avif')} 1120w`} sizes="100vw" />
+          <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/v3-studio-mobile-480.webp')} 480w, ${path('images/v3-studio-mobile-720.webp')} 720w, ${path('images/v3-studio-mobile-1120.webp')} 1120w`} sizes="100vw" />
+          <source type="image/avif" srcset={`${path('images/v3-studio-desktop-960.avif')} 960w, ${path('images/v3-studio-desktop-1536.avif')} 1536w`} sizes="100vw" />
+          <source type="image/webp" srcset={`${path('images/v3-studio-desktop-960.webp')} 960w, ${path('images/v3-studio-desktop-1536.webp')} 1536w`} sizes="100vw" />
+          <img src={path('images/v3-studio-desktop-1536.webp')} alt="" width="1536" height="1024" loading="eager" decoding="async" />
+        </picture>
+      </div>
+      <div class="v4-signature-shade" aria-hidden="true"></div>
+      <svg class="v4-route-line" viewBox="0 0 1000 620" fill="none" aria-hidden="true"><path d="M70 480C180 350 280 425 385 300S585 180 705 242 840 180 935 80" pathLength="1"/><circle cx="70" cy="480" r="7"/><circle cx="385" cy="300" r="7"/><circle cx="705" cy="242" r="7"/><circle cx="935" cy="80" r="7"/></svg>
+      <div class="v4-signature-copy">
+        <p class="eyebrow">A direction becomes a journey</p>
+        <h2 id="travel-explore-title"><span>Travel.</span><span>Explore.</span></h2>
+        <p>Follow the pull. We will shape the route.</p>
+      </div>
+      <ol class="v4-route-notes" aria-label="How a journey takes shape">
+        <li><span>01</span><strong>Place</strong><small>Where the instinct begins</small></li>
+        <li><span>02</span><strong>Pace</strong><small>How the days should move</small></li>
+        <li><span>03</span><strong>Purpose</strong><small>What the time is for</small></li>
+      </ol>
+      <a class="v4-signature-continue" href="#folio-builder">Shape your direction <Arrow direction="down" /></a>
+    </div>
   </section>
 
   <section class="folio-builder section-wrap" id="folio-builder" aria-labelledby="folio-builder-title">

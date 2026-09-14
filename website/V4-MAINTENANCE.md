@@ -1,6 +1,6 @@
-# Pardus V3 maintenance and release guide
+# Pardus V4 maintenance and release guide
 
-This file describes the production rules behind the Pardus V3 website. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
+This file describes the production rules behind the Pardus V4 website. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
 
 ## Sources of truth
 
@@ -10,6 +10,7 @@ This file describes the production rules behind the Pardus V3 website. Edit the 
 - `src/data/journal.ts` — Journal metadata and article content.
 - `src/styles/v2.css` — Folio, journey, destination, planner and responsive product components.
 - `src/styles/v3.css` — V3 art direction, planning-studio composition, collection refinement and motion states.
+- `src/styles/v4.css` — leopard-only navigation, hero identity and the scroll-driven Travel.Explore chapter.
 - `src/scripts/folio.ts` — local Folio state and planner handoff.
 - `src/scripts/site.ts` — navigation, filters, Journal search and planner behaviour.
 
@@ -52,7 +53,7 @@ The public article is generated as `journal-[slug].html` with Article structured
 
 Use `scripts/prepare-images.mjs` for the existing named image families. New image families must produce AVIF and WebP at 640, 1280 and 1920 pixels unless a component has a documented art-directed size set.
 
-The V3 planning-studio family is intentionally art-directed: desktop uses 960 and 1536 pixel sources; mobile uses 480, 720 and 1120 pixel sources. Preserve both aspect ratios and the `<picture>` media queries in `src/pages/index.astro`.
+The planning-studio family is intentionally art-directed: desktop uses 960 and 1536 pixel sources; mobile uses 480, 720 and 1120 pixel sources. Preserve both aspect ratios and both `<picture>` media-query sets in `src/pages/index.astro`; V4 uses the family in the Travel.Explore scroll chapter and the later service studio.
 
 Update `ASSETS.md` with source, creator, licence, actual location, allowed usage and crop notes. An attractive image is not enough if the location or rights are uncertain.
 
