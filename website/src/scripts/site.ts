@@ -1,4 +1,4 @@
-import { cleanBrief, briefText, validDeparture, validEmail } from './brief';
+import { cleanBrief, briefText, normalisePlannerDraft, resolvePlannerContext, validDeparture, validEmail } from './brief';
 import { deliverEnquiry } from './deliver';
 import { initFolio, readFolio } from './folio';
 import { site, path } from '../data/site';
@@ -57,7 +57,7 @@ if ('IntersectionObserver' in window && !motion.matches) {
 
 const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media]')]
   .filter(element => element.querySelector('img'));
-const scrollSignature = document.querySelector<HTMLElement>('[data-v4-scroll-signature]');
+const scrollSignature = document.querySelector<HTMLElement>('[data-v20-scroll-signature]');
 scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.dataset.scrollMedia = ''; });
 let scrollFrame = 0;
 function paintScrollMotion() {
@@ -75,15 +75,13 @@ function paintScrollMotion() {
   }
   if (scrollSignature) {
     const box = scrollSignature.getBoundingClientRect();
-    const distance = Math.max(1, box.height - window.innerHeight);
-    const progress = Math.min(1, Math.max(0, -box.top / distance));
-    const route = Math.min(1, Math.max(0, (progress - .2) / .58));
-    const notes = Math.min(1, Math.max(0, (progress - .56) / .22));
-    scrollSignature.style.setProperty('--v4-title-y', `${((1 - progress) * 76).toFixed(2)}px`);
-    scrollSignature.style.setProperty('--v4-image-scale', (1.11 - progress * .11).toFixed(4));
-    scrollSignature.style.setProperty('--v4-copy-opacity', Math.min(1, progress * 2.9).toFixed(3));
-    scrollSignature.style.setProperty('--v4-route-progress', route.toFixed(3));
-    scrollSignature.style.setProperty('--v4-notes-opacity', notes.toFixed(3));
+    // Begin as the scene enters; the complete title arrives before the sticky interval ends.
+    const distance = Math.max(1, box.height - window.innerHeight * .45);
+    const progress = Math.min(1, Math.max(0, (window.innerHeight * .55 - box.top) / distance));
+    scrollSignature.style.setProperty('--explore-y', `${((1 - progress) * 48).toFixed(2)}px`);
+    scrollSignature.style.setProperty('--explore-scale', (1.06 - progress * .06).toFixed(4));
+    scrollSignature.style.setProperty('--explore-opacity', Math.min(1, progress * 2.7).toFixed(3));
+    scrollSignature.style.setProperty('--explore-route', Math.min(1, progress * 1.5).toFixed(3));
   }
 }
 function requestScrollPaint() {
@@ -199,42 +197,41 @@ if (planner) {
   date.min = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
   const choose = (field: HTMLSelectElement, value: string | null | undefined) => {
-    if (value && [...field.options].some(option => option.value === value)) field.value = value;
+    if (value != null && [...field.options].some(option => option.value === value)) field.value = value;
   };
 
+  let draft: ReturnType<typeof normalisePlannerDraft> = {};
   try {
-    const saved = JSON.parse(sessionStorage.getItem(DRAFT_KEY) || '{}') as Record<string, string>;
-    for (const [name, value] of Object.entries(saved)) {
+    draft = normalisePlannerDraft(JSON.parse(sessionStorage.getItem(DRAFT_KEY) || '{}'));
+    for (const [name, value] of Object.entries(draft)) {
       if (name === 'priorities') {
         const selected = value.split(', ');
         planner.querySelectorAll<HTMLInputElement>('[name="priorities"]').forEach(input => { input.checked = selected.includes(input.value); });
         continue;
       }
       const field = planner.elements.namedItem(name);
-      if (field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement) field.value = value;
+      if (field instanceof HTMLSelectElement) choose(field, value);
+      else if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) field.value = value;
     }
   } catch {}
 
-  const folio = readFolio();
-  choose(signalFields.place, folio.place);
-  choose(signalFields.pace, folio.pace);
-  choose(signalFields.reason, folio.reason);
-  choose(destination, folio.items.find(item => item.type === 'destination')?.label);
-  choose(style, folio.items.find(item => item.type === 'journey')?.label);
-
   const params = new URLSearchParams(window.location.search);
-  choose(destination, params.get('destination'));
-  choose(style, params.get('style'));
-  choose(signalFields.place, params.get('place'));
-  choose(signalFields.pace, params.get('pace'));
-  choose(signalFields.reason, params.get('reason'));
+  const context = resolvePlannerContext(draft, readFolio(), params);
+  choose(destination, context.destination);
+  choose(style, context.style);
+  choose(signalFields.place, context.place);
+  choose(signalFields.pace, context.pace);
+  choose(signalFields.reason, context.reason);
+  const savedInspiration = planner.querySelector<HTMLInputElement>('[name="saved"]');
+  const savedNotice = planner.querySelector<HTMLElement>('[data-saved-inspiration]');
+  const savedCopy = planner.querySelector<HTMLElement>('[data-saved-inspiration-copy]');
+  if (savedInspiration) savedInspiration.value = context.saved;
+  if (savedNotice) savedNotice.hidden = !context.saved;
+  if (savedCopy) savedCopy.textContent = context.saved;
 
   const saveDraft = () => {
     try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(cleanBrief(new FormData(planner)))); } catch {}
   };
-  planner.addEventListener('input', saveDraft);
-  planner.addEventListener('change', saveDraft);
-
   const asidePicture = planner.parentElement?.querySelector<HTMLElement>('.planner-aside-picture');
   const avifSource = asidePicture?.querySelector<HTMLSourceElement>('source[type="image/avif"]');
   const webpSource = asidePicture?.querySelector<HTMLSourceElement>('source[type="image/webp"]');
@@ -266,17 +263,28 @@ if (planner) {
     const rows = [
       ['Shape', [data.place, data.pace, data.reason].filter(Boolean).join(' · ') || 'Open'],
       ['Destination', data.destination || 'Open to inspiration'], ['Journey idea', data.style || 'No fixed concept'],
+      ['Saved inspiration', data.saved || 'None selected'],
       ['Travellers', `${data.adults || '—'} adults · ${data.children || 'No children noted'}`],
+      ['Budget per person', data.budget || 'To discuss'],
       ['Timing', `${data.date || 'Flexible'} · ${data.dateFlexibility || 'To discuss'}`], ['Length', data.nights || 'Flexible'],
       ['From', data.departure || 'To discuss'], ['Priorities', data.priorities || 'To discuss'],
       ['Practical notes', data.access || 'None noted'], ['Personal note', data.notes || 'To discuss'],
-      ['Reply', data.email || data.phone || 'Not provided'],
+      ['Your name', data.name || 'Not provided'],
+      ['Reply', [data.email, data.phone].filter(Boolean).join(' · ') || 'Not provided'],
+      ['Preferred reply', data.contactPreference || 'To discuss'], ['Country', data.country || 'Not provided'],
     ];
     rows.forEach(([key, value]) => {
       const row = document.createElement('div'); const term = document.createElement('dt'); const detail = document.createElement('dd');
       term.textContent = key; detail.textContent = value; row.append(term, detail); list.append(row);
     });
   };
+
+  const updateDraft = () => {
+    saveDraft();
+    if (step === TOTAL_STEPS) summary();
+  };
+  planner.addEventListener('input', updateDraft);
+  planner.addEventListener('change', updateDraft);
 
   const render = (focus = false) => {
     steps.forEach((fieldset, index) => { fieldset.hidden = index !== step - 1; });

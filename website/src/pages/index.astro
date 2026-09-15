@@ -2,158 +2,66 @@
 import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import SceneMedia from '../components/SceneMedia.astro';
+import Horizon from '../components/Horizon.astro';
 import Arrow from '../components/Arrow.astro';
 import Brand from '../components/Brand.astro';
 import { path } from '../data/site';
 import { destinations } from '../data/destinations';
 import { journeys } from '../data/journeys';
 import { journal } from '../data/journal';
+import '../styles/home.css';
+const atlas = ['maldives', 'seychelles', 'zanzibar', 'africa', 'dubai', 'europe'].map(slug => destinations.find(d => d.slug === slug)!);
+const notes = [journal.find(s => s.slug === 'choosing-your-maldives-island')!, journal.find(s => s.slug === 'what-a-private-safari-involves')!];
 ---
-<Layout dark class="home-page">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-media" data-scroll-media data-scroll-depth="38">
-      <picture class="hero-art">
-        <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/pardus-hero-mobile-768.avif')} 768w, ${path('images/pardus-hero-mobile-1200.avif')} 1200w`} sizes="100vw" />
-        <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/pardus-hero-mobile-768.webp')} 768w, ${path('images/pardus-hero-mobile-1200.webp')} 1200w`} sizes="100vw" />
-        <source type="image/avif" srcset={`${path('images/pardus-hero-desktop-1280.avif')} 1280w, ${path('images/pardus-hero-desktop-1920.avif')} 1920w, ${path('images/pardus-hero-desktop-2560.avif')} 2560w`} sizes="100vw" />
-        <source type="image/webp" srcset={`${path('images/pardus-hero-desktop-1280.webp')} 1280w, ${path('images/pardus-hero-desktop-1920.webp')} 1920w, ${path('images/pardus-hero-desktop-2560.webp')} 2560w`} sizes="100vw" />
-        <img src={path('images/pardus-hero-desktop-1920.webp')} alt="A golden leopard moving through a cinematic world of ocean, savannah, desert and city landscapes" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async" />
-      </picture>
+<Layout dark class="home-page" image="images/v20-horizon-desktop-1586.webp">
+  <section class="v20-hero" aria-labelledby="hero-title">
+    <Horizon />
+    <div class="v20-hero-content">
+      <h1 id="hero-title"><span class="visually-hidden">Pardus Luxury Escapes</span><span class="v20-wordmark" aria-hidden="true"><Brand vector light /></span><span class="v20-luxury" aria-hidden="true">Luxury Escapes</span></h1>
+      <p class="v20-hero-line">A world away. <em>Entirely yours.</em></p>
+      <p class="v20-hero-description">Private journeys, thoughtfully planned<br class="v20-mobile-break" /> from Africa to the world.</p>
+      <a class="v20-button" href="#collection">Find your elsewhere <Arrow direction="down" /></a>
     </div>
-    <div class="hero-vignette" aria-hidden="true"></div>
-    <div class="hero-brand-mark" aria-hidden="true"><Brand mark light /></div>
-    <div class="hero-copy">
-      <p class="eyebrow hero-kicker">Personally planned. From Africa to the world.</p>
-      <h1 id="hero-title" class="v4-hero-title"><span class="visually-hidden">Pardus Luxury Escapes</span><span class="v4-hero-logo" aria-hidden="true"><Brand vector light /></span><span class="v4-hero-luxury" aria-hidden="true">Luxury Escapes</span></h1>
-      <div class="hero-description"><span class="gold-rule"></span><p>A private island. An open horizon.<br />A journey that could only be yours.</p></div>
-      <div class="hero-actions"><a class="text-button hero-link" href="#folio-builder">Begin your Folio <Arrow direction="down" /></a><a class="hero-secondary" href={path('destinations.html')}>Explore destinations</a></div>
-    </div>
-    <a class="hero-discover" href={path('destinations.html')}><span>Begin with<br /><strong>somewhere extraordinary</strong></span><span class="circle-arrow"><Arrow /></span></a>
-    <div class="hero-bottom"><span>Journeys shaped around you</span><a href="#philosophy">Explore Pardus <Arrow direction="down" /></a><span>Private travel · Personal perspective</span></div>
+    <div class="v20-hero-edge"><span>Personally planned</span><a href="#travel-explore">Scroll to explore <Arrow direction="down" /></a><span>Africa · Indian Ocean · Beyond</span></div>
   </section>
-
-  <section class="v4-scroll-signature" aria-labelledby="travel-explore-title" data-v4-scroll-signature>
-    <div class="v4-signature-sticky">
-      <div class="v4-signature-media" aria-hidden="true">
-        <picture>
-          <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/v3-studio-mobile-480.avif')} 480w, ${path('images/v3-studio-mobile-720.avif')} 720w, ${path('images/v3-studio-mobile-1120.avif')} 1120w`} sizes="100vw" />
-          <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/v3-studio-mobile-480.webp')} 480w, ${path('images/v3-studio-mobile-720.webp')} 720w, ${path('images/v3-studio-mobile-1120.webp')} 1120w`} sizes="100vw" />
-          <source type="image/avif" srcset={`${path('images/v3-studio-desktop-960.avif')} 960w, ${path('images/v3-studio-desktop-1536.avif')} 1536w`} sizes="100vw" />
-          <source type="image/webp" srcset={`${path('images/v3-studio-desktop-960.webp')} 960w, ${path('images/v3-studio-desktop-1536.webp')} 1536w`} sizes="100vw" />
-          <img src={path('images/v3-studio-desktop-1536.webp')} alt="" width="1536" height="1024" loading="eager" decoding="async" />
-        </picture>
-      </div>
-      <div class="v4-signature-shade" aria-hidden="true"></div>
-      <svg class="v4-route-line" viewBox="0 0 1000 620" fill="none" aria-hidden="true"><path d="M70 480C180 350 280 425 385 300S585 180 705 242 840 180 935 80" pathLength="1"/><circle cx="70" cy="480" r="7"/><circle cx="385" cy="300" r="7"/><circle cx="705" cy="242" r="7"/><circle cx="935" cy="80" r="7"/></svg>
-      <div class="v4-signature-copy">
-        <p class="eyebrow">A direction becomes a journey</p>
-        <h2 id="travel-explore-title"><span>Travel.</span><span>Explore.</span></h2>
-        <p>Follow the pull. We will shape the route.</p>
-      </div>
-      <ol class="v4-route-notes" aria-label="How a journey takes shape">
-        <li><span>01</span><strong>Place</strong><small>Where the instinct begins</small></li>
-        <li><span>02</span><strong>Pace</strong><small>How the days should move</small></li>
-        <li><span>03</span><strong>Purpose</strong><small>What the time is for</small></li>
-      </ol>
-      <a class="v4-signature-continue" href="#folio-builder">Shape your direction <Arrow direction="down" /></a>
+  <section class="v20-explore" id="travel-explore" aria-labelledby="travel-explore-title" data-v20-scroll-signature>
+    <div class="v20-explore-frame">
+      <SceneMedia name="section-3-sandbank" />
+      <div class="v20-explore-fade" aria-hidden="true"></div>
+      <svg class="v20-route" viewBox="0 0 1000 620" fill="none" aria-hidden="true"><path d="M70 480C180 350 280 425 385 300S585 180 705 242 840 180 935 80" pathLength="1"/><circle cx="70" cy="480" r="5"/><circle cx="385" cy="300" r="5"/><circle cx="935" cy="80" r="5"/></svg>
+      <div class="v20-explore-copy"><h2 id="travel-explore-title"><span>Travel.</span><em>Explore.</em></h2><p>Find the place that changes your pace.</p></div>
+      <div class="v20-explore-bottom"><div><span>The wild</span><span>The water</span><span>The world beyond</span></div><a class="text-button" href="#collection">Explore destinations <Arrow /></a></div>
     </div>
   </section>
-
-  <section class="folio-builder section-wrap" id="folio-builder" aria-labelledby="folio-builder-title">
-    <div class="folio-builder-heading">
-      <div><p class="eyebrow">The Pardus Folio</p><h2 id="folio-builder-title">Begin with<br /><em>instinct.</em></h2></div>
-      <div><p>You do not need a destination or itinerary. Choose the setting, rhythm and reason that feel closest. We will keep them together while you explore.</p><button type="button" class="text-button requires-js" data-folio-trigger>Review your Folio <Arrow /></button><noscript><a class="text-button" href={path('journey.html')}>Begin an open brief <Arrow /></a></noscript></div>
+  <section class="v20-atlas v20-section" id="collection" aria-labelledby="atlas-title">
+    <div class="v20-heading"><h2 id="atlas-title">Where would you <em>rather be?</em></h2><a class="text-button" href={path('destinations.html')}>View all destinations <Arrow /></a></div>
+    <div class="v20-atlas-layout" data-destination-editor>
+      <div class="v20-atlas-tabs" role="tablist" aria-label="Featured destinations" aria-orientation="vertical">{atlas.map((d, i) => <button id={`tab-${d.slug}`} role="tab" aria-controls={`panel-${d.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-destination-tab={d.slug}><span>{d.name}<small>{d.country}</small></span><Arrow /></button>)}</div>
+      <div class="v20-atlas-stage">{atlas.map((d, i) => <article id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}>
+        <a class="v20-atlas-image" href={path(`destination-${d.slug}.html`)} aria-label={`Explore ${d.name}`}><Picture name={d.image} alt={d.alt} sizes="(max-width: 760px) 100vw, 65vw" /><span>{d.caption}</span></a>
+        <div class="v20-atlas-caption"><div><h3>{d.mood}</h3><p>{d.suggestedStay}</p></div><a class="text-button" href={path(`destination-${d.slug}.html`)}>Discover {d.name.replace('The ', 'the ')} <Arrow /></a></div>
+      </article>)}</div>
     </div>
-    <div class="folio-choice-grid requires-js">
-      <fieldset class="folio-choice-group"><legend><span>01</span>Place</legend><p>What kind of world is pulling you?</p><div>{['Island', 'Wild', 'City', 'Culture', 'Open'].map(item => <button type="button" data-folio-choice="place" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-      <fieldset class="folio-choice-group"><legend><span>02</span>Pace</legend><p>How should the days move?</p><div>{['Still', 'Balanced', 'Immersive'].map(item => <button type="button" data-folio-choice="pace" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-      <fieldset class="folio-choice-group"><legend><span>03</span>Reason</legend><p>What brings you away?</p><div>{['Escape', 'Celebration', 'Family', 'Business'].map(item => <button type="button" data-folio-choice="reason" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-    </div>
+    <noscript><p class="no-script-help">Browse all six places in the <a href={path('destinations.html')}>destination collection</a>.</p></noscript>
   </section>
-
-  <section class="home-journeys section-wrap" aria-labelledby="home-journeys-title">
-    <div class="home-journeys-heading"><p class="eyebrow">Selected journey concepts</p><h2 id="home-journeys-title">A possible shape.<br /><em>Never a fixed package.</em></h2><a class="text-button" href={path('journeys.html')}>Explore all journeys <Arrow /></a></div>
-    <div class="home-journey-grid">
-      {journeys.slice(0, 3).map(journey => <article class="home-concept-card">
-        <a class="home-concept-image" href={path(`journey-${journey.slug}.html`)}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 760px) 100vw, 34vw" /><span>{journey.number}</span></a>
-        <div><p class="eyebrow">{journey.eyebrow}</p><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><p>{journey.description}</p><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><span data-save-label>Save to your Folio</span><span aria-hidden="true">+</span></button></div>
-      </article>)}
-    </div>
+  <section class="v20-journeys v20-section" aria-labelledby="home-journeys-title">
+    <div class="v20-heading"><h2 id="home-journeys-title">Some journeys<br /><em>stay with you.</em></h2><div><p>A starting point for something personal.</p><a class="text-button" href={path('journeys.html')}>Explore all journeys <Arrow /></a></div></div>
+    <div class="v20-journey-grid">{journeys.slice(0,3).map(journey => <article class="home-concept-card v20-concept">
+      <a class="v20-concept-image" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 760px) 100vw, 45vw" /></a>
+      <p class="eyebrow">{journey.eyebrow}</p><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><p class="v20-concept-duration">{journey.duration.replace('Suggested rhythm / ', '')}<span> · {journey.pace} pace</span></p>
+      <div class="v20-concept-actions"><a class="text-button" href={path(`journey-${journey.slug}.html`)}>Explore the journey <Arrow /></a><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false" aria-label={`Save ${journey.name} to your Folio`}><span data-save-label>Save</span><span aria-hidden="true">+</span></button></div>
+    </article>)}</div>
   </section>
-
-  <section class="manifesto home-scene section-wrap" id="philosophy">
-    <SceneMedia name="section-2-coast" />
-    <div class="section-label"><span>01 / The Pardus perspective</span><span class="label-rule"></span></div>
-    <div class="manifesto-main"><h2 data-reveal>Not just a place.<br />A different <em>feeling.</em></h2><div class="manifesto-bottom"><Brand mark light /><p data-reveal>Pardus connects each client with remarkable places, experiences and moments. The right place, the right pace and every thoughtful detail are shaped into a journey that feels unmistakably yours.</p><a href={path('about.html')} class="text-button" data-reveal>The Pardus way <Arrow /></a></div></div>
+  <section class="v20-folio v20-section" id="folio-builder" aria-labelledby="folio-builder-title">
+    <div class="v20-folio-intro"><Brand mark light /><h2 id="folio-builder-title">Tell us what<br /><em>draws you.</em></h2><p>Choose a place, a pace, a reason.<br />Your Folio keeps the ideas together.</p><a class="v20-about-link" href={path('about.html')}>Discover the Pardus way <Arrow /></a></div>
+    <div class="v20-folio-controls"><div class="v20-choice-rows requires-js">
+      <fieldset><legend>Place</legend><div>{['Island','Wild','City','Culture','Open'].map(item => <button type="button" data-folio-choice="place" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+      <fieldset><legend>Pace</legend><div>{['Still','Balanced','Immersive'].map(item => <button type="button" data-folio-choice="pace" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+      <fieldset><legend>Reason</legend><div>{['Escape','Celebration','Family','Business'].map(item => <button type="button" data-folio-choice="reason" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
+    </div><button type="button" class="v20-button requires-js" data-folio-trigger>Review your Folio <Arrow /></button><noscript><p>A place, a pace, a reason. Begin with whatever you know.</p><a class="v20-button" href={path('journey.html')}>Begin a journey brief <Arrow /></a></noscript><p class="v20-folio-note">Ideas are saved on this device. You can change them any time.</p></div>
   </section>
-
-  <section class="collection-section home-scene section-wrap" id="collection">
-    <SceneMedia name="section-3-sandbank" />
-    <div class="section-label"><span>02 / Places with a pull</span><span class="label-rule"></span></div>
-    <div class="collection-heading"><h2 data-reveal>Where your mind<br />already <em>wanders.</em></h2><a class="text-button" href={path('destinations.html')}>Explore all destinations <Arrow /></a></div>
-    <div class="destination-editor" data-destination-editor>
-      <div class="destination-index" role="tablist" aria-label="Featured destinations">
-        {destinations.map((d, i) => <button id={`tab-${d.slug}`} role="tab" aria-controls={`panel-${d.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-destination-tab={d.slug}><span class="index-number">{d.number}</span><span class="index-place">{d.name}<small>{d.country}</small></span><Arrow /></button>)}
-        <p class="index-note">A starting point.<br /><em>Never a fixed itinerary.</em></p>
-      </div>
-      <div class="destination-stage">
-        {destinations.map((d, i) => <article class:list={['destination-panel', { active: i === 0 }]} id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}><a href={path(`destination-${d.slug}.html`)} class="destination-image-link" aria-label={`Explore ${d.name}`}><Picture name={d.image} alt={d.alt} /><div class="destination-photo-caption"><span>{d.caption}</span><span class="circle-arrow"><Arrow /></span></div></a><div class="destination-description"><p>{d.description}</p><span>{d.number} / {String(destinations.length).padStart(2, '0')}</span></div></article>)}
-      </div>
-    </div>
-    <noscript><p class="no-script-help">Explore every destination from the <a href={path('destinations.html')}>destination collection</a>.</p></noscript>
-  </section>
-
-  <section class="atelier-section home-scene section-wrap">
-    <SceneMedia name="section-4-terrace" />
-    <span class="atelier-scene-caption">Space to be somewhere else.</span>
-    <div class="atelier-copy"><p class="eyebrow" data-reveal>Everything considered. Nothing off the shelf.</p><h2 data-reveal>It begins<br />with <em>you.</em></h2><p class="large-copy" data-reveal>A honeymoon that feels like no one else’s. A family adventure. A little time to disappear.</p><p data-reveal>We listen first. Then we bring flights, stays and experiences into one considered journey—with room for the moments you cannot plan.</p><a href={path('journey.html')} class="text-button" data-reveal>Tell us what you have in mind <Arrow /></a></div>
-  </section>
-
-  <section class="concierge-section home-scene section-wrap">
-    <SceneMedia name="section-5-arrival" />
-    <div class="concierge-intro"><p class="eyebrow" data-reveal>The quiet work behind a beautiful journey</p><h2 data-reveal>Leave the<br />details <em>with us.</em></h2><a href={path('concierge.html')} class="text-button" data-reveal>Meet your travel concierge <Arrow /></a></div>
-    <div class="service-list">
-      {[['01', 'Flights & connections', 'Routes that work together, with considered connections and a schedule shaped around you.'], ['02', 'Exceptional stays', 'The right address for your kind of escape—from a quiet island to the centre of a city.'], ['03', 'Journeys & experiences', 'Ground arrangements, personal itineraries and the moments that give a place meaning.'], ['04', 'Travel guidance', 'Practical support with documentation and the questions that come before you go.']].map(([n, title, text]) => <details class="service-item" data-reveal><summary><span>{n}</span><h3>{title}</h3><span class="detail-toggle" aria-hidden="true"></span></summary><p>{text}</p></details>)}
-    </div>
-  </section>
-
-  <section class="business-section">
-    <Picture name="corporate" alt="A comfortable aircraft cabin interior" class="business-image" />
-    <div class="business-copy"><p class="eyebrow" data-reveal>Pardus for business</p><h2 data-reveal>Ahead of<br />the <em>agenda.</em></h2><p data-reveal>Thoughtful travel coordination for the people moving your business forward. Flights, stays and schedules, in one conversation.</p><a href={path('corporate.html')} class="text-button" data-reveal>Explore corporate travel <Arrow /></a></div>
-  </section>
-
-  <section class="v3-studio" aria-labelledby="v3-studio-title">
-    <div class="v3-studio-media" data-scroll-media data-scroll-depth="16">
-      <picture>
-        <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/v3-studio-mobile-480.avif')} 480w, ${path('images/v3-studio-mobile-720.avif')} 720w, ${path('images/v3-studio-mobile-1120.avif')} 1120w`} sizes="100vw" />
-        <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/v3-studio-mobile-480.webp')} 480w, ${path('images/v3-studio-mobile-720.webp')} 720w, ${path('images/v3-studio-mobile-1120.webp')} 1120w`} sizes="100vw" />
-        <source type="image/avif" srcset={`${path('images/v3-studio-desktop-960.avif')} 960w, ${path('images/v3-studio-desktop-1536.avif')} 1536w`} sizes="(max-width: 1100px) 100vw, 58vw" />
-        <source type="image/webp" srcset={`${path('images/v3-studio-desktop-960.webp')} 960w, ${path('images/v3-studio-desktop-1536.webp')} 1536w`} sizes="(max-width: 1100px) 100vw, 58vw" />
-        <img src={path('images/v3-studio-desktop-1536.webp')} alt="A route map, brass compass and travel folio arranged on a coastal terrace at blue hour" width="1536" height="1024" loading="lazy" decoding="async" />
-      </picture>
-      <p><span>Field desk / 01</span><span>Every detail begins with a direction.</span></p>
-    </div>
-    <div class="v3-studio-copy section-wrap">
-      <div class="v3-studio-heading"><p class="eyebrow">The Pardus standard</p><h2 id="v3-studio-title" data-reveal>One journey.<br /><em>Held from every angle.</em></h2><p data-reveal>Great travel should feel effortless to the traveller. Behind that ease is a clear brief, a coherent route and decisions made in the right order.</p></div>
-      <ol class="v3-studio-steps">
-        <li data-reveal><span>01 / Before</span><div><h3>Understand the reason.</h3><p>We begin with who is travelling, why this time matters and what should feel different when you arrive.</p></div></li>
-        <li data-reveal><span>02 / In motion</span><div><h3>Hold the whole route.</h3><p>Flights, stays, transfers and experiences are treated as one journey, with the quiet gaps considered too.</p></div></li>
-        <li data-reveal><span>03 / Throughout</span><div><h3>Keep decisions clear.</h3><p>Availability, price, terms and changes stay legible from first proposal to the final traveller-ready details.</p></div></li>
-      </ol>
-      <a class="text-button" href={path('about.html')}>See how Pardus works <Arrow /></a>
-    </div>
-  </section>
-
-  <section class="v3-dispatches section-wrap" aria-labelledby="v3-dispatches-title">
-    <div class="v3-dispatches-heading"><div><p class="eyebrow">The Pardus journal</p><h2 id="v3-dispatches-title" data-reveal>Useful perspective,<br /><em>before you decide.</em></h2></div><p data-reveal>Practical notes for choosing well—written to make a high-value journey clearer, not noisier.</p><a class="text-button" href={path('journal.html')}>Read every note <Arrow /></a></div>
-    <div class="v3-dispatch-grid">
-      {journal.slice(1, 4).map((story, index) => <article class:list={['v3-dispatch-card', { 'v3-dispatch-card--lead': index === 0 }]} data-reveal>
-        <a href={path(`journal-${story.slug}.html`)}>
-          <div class="v3-dispatch-image"><Picture name={story.image} alt={story.alt} sizes={index === 0 ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 25vw'} /><span>{String(index + 1).padStart(2, '0')}</span></div>
-          <div class="v3-dispatch-meta"><p class="eyebrow">{story.category}</p><p>{new Date(story.publishedAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</p></div>
-          <h3>{story.title}</h3><p>{story.description}</p><span class="v3-dispatch-link">Read the field note <Arrow /></span>
-        </a>
-      </article>)}
-    </div>
+  <section class="v20-notes v20-section" aria-labelledby="notes-title">
+    <div class="v20-heading"><div><p class="eyebrow">The Pardus journal</p><h2 id="notes-title">Before you <em>go.</em></h2></div><a class="text-button" href={path('journal.html')}>Read the journal <Arrow /></a></div>
+    <div class="v20-note-grid">{notes.map(story => <article><a href={path(`journal-${story.slug}.html`)}><div class="v20-note-image"><Picture name={story.image} alt={story.alt} sizes="(max-width: 760px) 100vw, 50vw" /></div><p class="eyebrow">{story.category}</p><h3>{story.title}<Arrow /></h3></a></article>)}</div>
   </section>
 </Layout>

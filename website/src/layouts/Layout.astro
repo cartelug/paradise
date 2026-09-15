@@ -1,18 +1,15 @@
 ---
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
-import '../styles/global.css';
-import '../styles/editorial.css';
-import '../styles/v2.css';
-import '../styles/v3.css';
-import '../styles/v4.css';
+import '../styles/site.css';
+import '../styles/refinements.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Preloader from '../components/Preloader.astro';
 import Folio from '../components/Folio.astro';
 import { site, path } from '../data/site';
 interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
-const { title, description = site.description, image = 'images/pardus-hero-desktop-1920.webp', dark = false, simpleFooter = false, class: className } = Astro.props;
+const { title, description = site.description, image = 'images/v20-horizon-desktop-1586.webp', dark = false, simpleFooter = false, class: className } = Astro.props;
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), 'https://cartelug.github.io');
 const ogImage = new URL(path(image), 'https://cartelug.github.io').toString();
@@ -62,7 +59,7 @@ const organizationSchema = {
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline src={`${path('opening.js')}?v=3`}></script>
   </head>
-  <body id="top" class={className} data-pardus-version="4">
+  <body id="top" class={className} data-pardus-version="20">
     <div class="page-progress" aria-hidden="true"><span></span></div>
     <Preloader />
     <Header dark={dark} />

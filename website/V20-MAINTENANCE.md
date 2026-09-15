@@ -1,6 +1,6 @@
-# Pardus V4 maintenance and release guide
+# Pardus V20 maintenance and release guide
 
-This file describes the production rules behind the Pardus V4 website. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
+This file describes the production rules behind the Pardus V20 website. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
 
 ## Sources of truth
 
@@ -8,9 +8,10 @@ This file describes the production rules behind the Pardus V4 website. Edit the 
 - `src/data/destinations.ts` — destination dossiers and Folio classification.
 - `src/data/journeys.ts` — flexible journey concepts and place/pace/reason signals.
 - `src/data/journal.ts` — Journal metadata and article content.
-- `src/styles/v2.css` — Folio, journey, destination, planner and responsive product components.
-- `src/styles/v3.css` — V3 art direction, planning-studio composition, collection refinement and motion states.
-- `src/styles/v4.css` — leopard-only navigation, hero identity and the scroll-driven Travel.Explore chapter.
+- `src/styles/site.css` — shared foundations and product components.
+- `src/styles/refinements.css` — V20 palette, typography, navigation and footer.
+- `src/styles/home.css` — V20 homepage and scroll scene.
+- `src/styles/journal-v20.css` — Journal index and article layouts.
 - `src/scripts/folio.ts` — local Folio state and planner handoff.
 - `src/scripts/site.ts` — navigation, filters, Journal search and planner behaviour.
 
@@ -53,7 +54,7 @@ The public article is generated as `journal-[slug].html` with Article structured
 
 Use `scripts/prepare-images.mjs` for the existing named image families. New image families must produce AVIF and WebP at 640, 1280 and 1920 pixels unless a component has a documented art-directed size set.
 
-The planning-studio family is intentionally art-directed: desktop uses 960 and 1536 pixel sources; mobile uses 480, 720 and 1120 pixel sources. Preserve both aspect ratios and both `<picture>` media-query sets in `src/pages/index.astro`; V4 uses the family in the Travel.Explore scroll chapter and the later service studio.
+The V20 horizon is art-directed: desktop uses 960 and 1586 pixel sources; mobile uses 480 and 960 pixel sources. Preserve the separate compositions and the `<picture>` source sets in `src/components/Horizon.astro`. Travel.Explore reuses the existing desktop and mobile sandbank image family. Never bake text or the brand mark into photography.
 
 Update `ASSETS.md` with source, creator, licence, actual location, allowed usage and crop notes. An attractive image is not enough if the location or rights are uncertain.
 
@@ -88,6 +89,7 @@ npm run check
 npm test
 PARDUS_BASE=/paradise/ npm run build
 node scripts/export-github.mjs
+npm run verify:export
 ```
 
 After export, review the diff. Confirm that the root contains the current HTML pages and only the current hashed files under `static/`.
@@ -113,3 +115,7 @@ Do not describe the website as fully operational until these external facts are 
 - Any team, testimonial, partner, membership or accreditation claim.
 
 Design polish cannot substitute for those facts.
+
+## Browser regression
+
+With the export served at http://127.0.0.1:4180/paradise/, run `python tests/browser-smoke.py` from `website/`. Requires Python Playwright and its Chromium browser. Override `PARDUS_QA_BASE` to test another served export. This covers all 29 routes at five sizes, visible lazy images, runtime failures, atlas keyboard use, mobile navigation, Folio and planner state, intercepted delivery, download contents, reduced motion and no-JavaScript reading.

@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes — V4
+# Pardus Luxury Escapes — V20
 
-An editorial travel website built with Astro. V4 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
+An editorial travel website built with Astro. V20 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The homepage moves directly from the coastal identity through Travel.Explore to an interactive destination atlas, journey ideas and a practical Folio. The Journal has a new editorial masthead, lead story and searchable archive. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -29,6 +29,7 @@ npm run check
 npm test
 PARDUS_BASE=/paradise/ npm run build
 node scripts/export-github.mjs
+npm run verify:export
 ```
 
 Review the generated changes, commit them with the source, and push `main`. The default base path is `/` for local development; the Pages build must use `/paradise/`.
@@ -37,7 +38,7 @@ Review the generated changes, commit them with the source, and push `main`. The 
 
 Satoshi, Montserrat and Fraunces are self-hosted. The live site makes no remote font request. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
 
-The homepage uses separate AI-generated desktop and mobile hero compositions. The exact Pardus leopard mark remains a real vector overlay, keeping the brand crisp while the cinematic world-travel artwork art-directs each viewport. Scroll motion uses progressive reveal groups, image depth and a slim reading-progress line, with all decorative motion removed when reduced motion is requested.
+The homepage uses separate AI-generated desktop and mobile hero compositions. The exact Pardus leopard mark remains a real vector overlay, keeping the brand crisp while the coastal artwork art-directs each viewport. Scroll motion uses progressive reveal groups, image depth and a slim reading-progress line, with all decorative motion removed when reduced motion is requested.
 
 The introduction runs once per tab session, can be skipped or replayed, and has a hard timeout. Reduced motion bypasses it and disables decorative movement. Page content remains accessible without JavaScript. Mobile navigation and the Pardus Folio use native dialogs; filters support keyboard use. Folio choices remain on the visitor's device for 30 days and send nothing by themselves.
 
@@ -53,9 +54,9 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 
 - `website/src/pages/`: public pages and generated destination, journey and Journal routes.
 - `website/src/data/`: destination, journey, Journal and business sources of truth.
-- `website/src/styles/`: foundations, product components and the V3/V4 art-direction layers.
+- `website/src/styles/`: foundations, product components and shared foundations and scoped V20 page compositions.
 - `website/src/scripts/`: Folio, filters, planner and delivery behaviour.
 - `website/public/brand/`: final transparent logo assets.
-- `website/V4-MAINTENANCE.md`: content, integration, QA and release rules.
+- `website/V20-MAINTENANCE.md`: content, integration, QA and release rules.
 
 Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.

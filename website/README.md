@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes — V4
+# Pardus Luxury Escapes — V20
 
-An editorial travel website built with Astro. V4 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
+An editorial travel website built with Astro. V20 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The homepage moves directly from the coastal identity through Travel.Explore to an interactive destination atlas, journey ideas and a practical Folio. The Journal has a new editorial masthead, lead story and searchable archive. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -29,6 +29,7 @@ npm run check
 npm test
 PARDUS_BASE=/paradise/ npm run build
 node scripts/export-github.mjs
+npm run verify:export
 ```
 
 Review the generated changes, commit them with the source, and push `main`. The default base path is `/` for local development; the Pages build must use `/paradise/`.
@@ -53,7 +54,7 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 - `src/data/destinations.ts`: destination dossiers and planning context.
 - `src/data/journeys.ts`: journey concepts and Folio signals.
 - `src/data/journal.ts`: accountable editorial records with author and dates.
-- `src/styles/global.css`, `editorial.css`, `v2.css`, `v3.css`, `v4.css`: foundations, product architecture and versioned art-direction layers.
+- `src/styles/site.css`, `refinements.css`, `home.css`, `journal-v20.css`: shared foundations and scoped page compositions.
 - `src/scripts/site.ts`: navigation, filters and planner orchestration.
 - `src/scripts/folio.ts`: local Folio state, dialog and planner handoff.
 - `src/scripts/brief.ts`: brief data handling and date validation.
@@ -61,4 +62,4 @@ Destination copy and images are illustrative. See `ASSETS.md` for the existing p
 - `scripts/prepare-brand.mjs`: reconstructs the logo from the original approved 1536 × 864 JPEG.
 - `scripts/prepare-images.mjs`: produces local AVIF and WebP derivatives.
 
-Read `V4-MAINTENANCE.md` before changing content or releasing. Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.
+Read `V20-MAINTENANCE.md` before changing content or releasing. Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.

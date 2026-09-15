@@ -23,7 +23,7 @@
     background().forEach(el => { el.inert = false; });
     const opening = document.querySelector('.preloader');
     if (opening?.contains(document.activeElement)) {
-      (returnFocus || document.querySelector('.brand-link'))?.focus({ preventScroll: true });
+      (returnFocus || document.querySelector('main'))?.focus({ preventScroll: true });
     }
     opening?.setAttribute('aria-hidden', 'true');
     const skip = document.querySelector('.skip-opening');
@@ -53,7 +53,7 @@
       const source = matchMedia('(max-width: 760px)').matches ? landscape.dataset.openingMobile : landscape.dataset.openingDesktop;
       if (source) landscape.style.backgroundImage = `url("${source}")`;
     }
-    const hero = document.querySelector('.hero-art img');
+    const hero = document.querySelector('.v20-horizon img');
     const ready = Promise.allSettled([document.fonts.ready, hero?.decode() || Promise.resolve()]);
     await Promise.all([wait(2250), Promise.race([ready, wait(2600)])]);
     finish(id);

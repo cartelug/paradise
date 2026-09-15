@@ -1,4 +1,5 @@
 ---
+import '../styles/journal-v20.css';
 import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import Arrow from '../components/Arrow.astro';
@@ -10,14 +11,14 @@ const ordered = [journal[3], journal[2], journal[0], journal[4], featured];
 const displayDate = (value: string) => new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
 ---
 <Layout title="The Pardus journal" class="journal-page" description="Destination notes and considered advice for a more personal way to travel.">
-  <header class="journal-masthead"><div class="journal-edition"><span class="eyebrow">Pardus / Perspectives</span><span>Places. People. A sense of elsewhere.</span></div><h1>The <em>Journal.</em></h1><p>For the curious. For the considered.<br />For the journey before the journey.</p></header>
+  <header class="journal-masthead"><h1>The <em>Journal.</em></h1><p>Places worth knowing.<br />Details worth considering.</p></header>
   <section class="journal-cover" aria-labelledby="cover-title">
     <a class="journal-cover-image" href={path(`journal-${featured.slug}.html`)} aria-label={`Read ${featured.title}`}><Picture name={featured.image} alt={featured.alt} eager sizes="(max-width: 760px) 100vw, 65vw" /><span class="cover-caption">The Maldives / Indian Ocean</span></a>
     <div class="journal-cover-copy"><p class="eyebrow">In focus · {readingTime(featured)} min read</p><h2 id="cover-title">One ocean.<br /><em>Your own island.</em></h2><p>{featured.description}</p><p class="journal-byline">By {featured.author} · {displayDate(featured.publishedAt)}</p><a class="text-button" href={path(`journal-${featured.slug}.html`)}>Read the island guide <Arrow /></a></div>
   </section>
   <section class="journal-library section-wrap" aria-labelledby="library-title" data-journal>
-    <div class="library-heading"><div><p class="eyebrow">Ideas to take with you</p><h2 id="library-title">The reading room</h2></div><label class="journal-search">Find a story<input type="search" data-journal-search placeholder="Try safari, islands, planning…" /></label></div>
-    <div class="journal-controls"><div class="journal-topics" role="group" aria-label="Filter journal by topic">{['All stories', 'Destination notes', 'Process', 'Before you book'].map((topic, i) => <button type="button" data-journal-topic={i === 0 ? 'all' : topic} aria-pressed={i === 0 ? 'true' : 'false'}>{topic}</button>)}</div><p data-journal-count role="status">{journal.length} stories</p></div>
+    <div class="library-heading"><div><p class="eyebrow">Ideas to take with you</p><h2 id="library-title">The reading room</h2></div><label class="journal-search requires-js">Find a story<input type="search" data-journal-search placeholder="Try safari, islands, planning…" /></label></div>
+    <div class="journal-controls requires-js"><div class="journal-topics" role="group" aria-label="Filter journal by topic">{['All stories', 'Destination notes', 'Process', 'Before you book'].map((topic, i) => <button type="button" data-journal-topic={i === 0 ? 'all' : topic} aria-pressed={i === 0 ? 'true' : 'false'}>{topic}</button>)}</div><p data-journal-count role="status">{journal.length} stories</p></div>
     <div class="journal-stories">{ordered.map(entry => <article class="story" data-story data-topic={entry.category} data-search={`${entry.title} ${entry.description} ${entry.category} ${entry.author}`.toLowerCase()}><a href={path(`journal-${entry.slug}.html`)}><div class="story-image"><Picture name={entry.image} alt={entry.alt} sizes="(max-width: 760px) 100vw, 45vw" /><span class="story-read">Read story <Arrow /></span></div><div class="story-meta"><span>{entry.category}</span><span>{readingTime(entry)} min read</span></div><h3>{entry.title}</h3><p>{entry.description}</p><p class="story-byline">{entry.author} · {displayDate(entry.publishedAt)}</p></a></article>)}</div>
     <div class="journal-empty" data-journal-empty hidden><p>No stories match that search.</p><button type="button" data-journal-reset>Clear search and topics</button></div>
   </section>

@@ -1,0 +1,9 @@
+---
+import { path } from '../data/site';
+---
+<picture class="v20-horizon">
+  <source media="(max-width: 760px)" type="image/avif" srcset={`${path('images/v20-horizon-mobile-480.avif')} 480w, ${path('images/v20-horizon-mobile-960.avif')} 960w`} sizes="100vw" />
+  <source media="(max-width: 760px)" type="image/webp" srcset={`${path('images/v20-horizon-mobile-480.webp')} 480w, ${path('images/v20-horizon-mobile-960.webp')} 960w`} sizes="100vw" />
+  <source type="image/avif" srcset={`${path('images/v20-horizon-desktop-960.avif')} 960w, ${path('images/v20-horizon-desktop-1586.avif')} 1586w`} sizes="100vw" />
+  <img src={path('images/v20-horizon-desktop-1586.webp')} srcset={`${path('images/v20-horizon-desktop-960.webp')} 960w, ${path('images/v20-horizon-desktop-1586.webp')} 1586w`} sizes="100vw" alt="An imagined Indian Ocean coastline at blue hour, with granite shores and a warmly lit terrace" width="1586" height="992" loading="eager" fetchpriority="high" decoding="async" />
+</picture>

@@ -1,0 +1,64 @@
+/* Shared V20 tokens and navigation. Page compositions live in their own stylesheets. */
+:root { --ink: #081f29; --navy: #102f3a; --paper: #f1f4f2; --paper-100: #f1f4f2; --white: #fff; --sand: #e6ece9; --gold: #cbb278; --gold-dark: #806435; --muted: #52646b; --line: #c8d2cf; --gutter: clamp(24px,4.8vw,92px); }
+body { background: #f1f4f2; }
+h1,h2,h3 { font-variation-settings: 'SOFT' 0,'WONK' 0; }
+.text-button { font-weight: 450; font-size: 13px; }
+.site-header,.home-page .site-header,.home-page .site-header.header-scrolled { height: 86px; gap: 26px; padding: 15px var(--gutter); }
+.site-header .brand-link.header-leopard,.site-header.header-dark .brand-link.header-leopard,.home-page .site-header .brand-link.header-leopard { width: 104px; min-width: 104px; }
+.header-leopard .brand-svg { width: 100%; --logo-gold: #a28349; }
+.home-page .header-leopard .brand-svg,.mobile-menu .header-leopard .brand-svg { --logo-gold: #d6bb82; }
+.site-header .desktop-nav { gap: clamp(18px,1.8vw,30px); }
+.site-header .desktop-nav a { font-size: 12px; font-weight: 450; letter-spacing: .015em; }
+.site-header .header-journey { margin-left: 0; min-height: 44px; padding: 10px 19px; border: 1px solid #a78a53; font-size: 12px; letter-spacing: .035em; transition: background .25s,color .25s; }
+.site-header .header-journey>.circle-arrow { display: none; }
+.site-header .header-journey:hover { background: #cbb278; color: #081f29; }
+.site-header .header-folio { font: 450 12px/1.4 var(--sans); text-transform: none; letter-spacing: .025em; border-bottom: 0; padding-inline: 0; }
+.home-page .site-header { background: linear-gradient(#081f29b3,transparent); border-bottom: 0; }
+.home-page .site-header.header-scrolled { background: #081f29f5; border-bottom: 1px solid #ffffff26; }
+.mobile-menu .header-leopard { width: 120px; }
+.mobile-menu nav a { font-family: var(--serif); font-weight: 360; }
+.mobile-menu nav small { display: none; }
+.page-intro { padding-top: 84px; padding-bottom: 72px; }
+.page-intro::after { display: none; }
+.page-intro h1 { font-weight: 360; line-height: 1.04; font-size: clamp(56px,7.4vw,110px); }
+.page-intro-row>p { font-size: 17px; line-height: 1.7; }
+.collection-filters,.journey-index-tools { border-block-color: #c8d2cf; }
+.filter-button,.journey-filter button,.journal-topics button { border-radius: 0; }
+.concept-card { box-shadow: none; }
+.concept-body h2 { font-weight: 360; }
+.journey-detail-heading h1,.destination-detail-heading h1 { font-weight: 360; }
+.closing-cta { background: #e2e9e5; padding-top: 64px; padding-bottom: 65px; }
+.closing-title { font-weight: 360; }
+.closing-top>.small-caption { display: none; }
+.footer-main { padding-top: 68px; padding-bottom: 62px; }
+.site-footer { background: #081f29; }
+.site-footer::before { background: none; }
+.footer-mark { display: none; }
+.footer-brand>p { font-size: 13px; max-width: 310px; }
+.footer-brand .brand-tagline,.footer-signature { display: none; }
+.site-footer .brand-lockup-vector { filter: none; }
+.footer-base { font-size: 10px; }
+.next-destination .eyebrow { color: #6f5227; }
+main:focus { outline: none; }
+@media (max-width: 1240px) { .site-header .desktop-nav { display: none; } .site-header .header-folio { margin-left: auto; } .js .site-header .menu-toggle { display: flex !important; } }
+@media (max-width: 760px) {
+ .site-header,.home-page .site-header,.home-page .site-header.header-scrolled { height: 76px; padding: 13px 24px; gap: 20px; }
+ .site-header .brand-link.header-leopard,.site-header.header-dark .brand-link.header-leopard,.home-page .site-header .brand-link.header-leopard { width: 80px; min-width: 80px; }
+ .site-header .header-journey { min-height: 40px; padding: 8px 13px; font-size: 11px; }
+ .site-header .header-journey>span:first-child { display: inline; }
+ .site-header .header-folio { min-width: 34px; }
+ .site-header .header-folio::before { display: none; }
+ .site-header .header-folio>span { display: inline; position: static; width: auto; height: auto; overflow: visible; clip: auto; font-size: 11px; }
+ .site-header .header-folio small { position: absolute; top: -4px; right: -8px; min-width: 16px; height: 16px; font-size: 8px; }
+ .site-header .menu-toggle { flex: 0 0 26px; width: 26px; height: 44px; }
+ .page-intro { padding-top: 55px; padding-bottom: 48px; }
+ .page-intro h1 { font-size: clamp(47px,11.5vw,76px); }
+ .page-intro-row>p { font-size: 16px; }
+ .closing-cta { padding-top: 48px; padding-bottom: 48px; }
+ .footer-main { padding-top: 48px; padding-bottom: 44px; }
+}
+@media (max-width: 380px) {
+ .site-header,.home-page .site-header,.home-page .site-header.header-scrolled { padding-inline: 20px; gap: 14px; }
+ .site-header .brand-link.header-leopard,.site-header.header-dark .brand-link.header-leopard,.home-page .site-header .brand-link.header-leopard { width: 64px; min-width: 64px; }
+ .site-header .header-journey { padding-inline: 10px; }
+}
