@@ -362,7 +362,7 @@ if (contactForm) {
     const delivered = await deliverEnquiry(site.enquiryEndpoint, new FormData(contactForm));
     submit.disabled = false;
     if (delivered) { status.textContent = 'Thank you — your message has been sent to Pardus.'; contactForm.reset(); }
-    else { status.textContent = ''; error.textContent = 'We could not send your message. Please try again, or email us directly.'; }
+    else { status.textContent = ''; error.textContent = `We could not send your message. Please try again shortly${site.email ? `, or email us at ${site.email}` : ''}.`; }
   });
 }
 
