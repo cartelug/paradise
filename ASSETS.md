@@ -17,13 +17,17 @@ The production build self-hosts Satoshi Light, Regular, Medium and Bold plus the
 - seychelles: https://images.pexels.com/photos/30358268/pexels-photo-30358268.jpeg?auto=compress&cs=tinysrgb&w=1100
 - corporate: https://images.pexels.com/photos/20562278/pexels-photo-20562278.jpeg?auto=compress&cs=tinysrgb&w=1400
 
-## Earlier generated homepage artwork (archived)
+## Travel.Explore sandbank scene (live)
 
-The earlier homepage hero used two original AI-generated compositions created for this project: `source-assets/pardus-hero-desktop.png` (1672 × 941) and `source-assets/pardus-hero-mobile.png` (941 × 1672). They depict one golden leopard moving through a continuous world of ocean, savannah, European coast, desert and distant skyline. The images intentionally contain no text or generated brand mark; the approved Pardus vector is layered separately in the page. AVIF and WebP derivatives are generated for responsive delivery.
+The `section-3-sandbank-*` family is the homepage Travel.Explore chapter. Its masters are `website/source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
 
-## V3 commissioned planning-studio visual
+## Retired artwork (removed in V21)
 
-The responsive `v3-studio-*` AVIF and WebP files were generated specifically for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026. The coordinated desktop and mobile compositions depict a fictional coastal travel-planning table with a route map, brass compass and navy folio. They contain no brand marks or readable text and do not represent a named property, partner or destination. The final prompts are recorded in `website/ASSETS.md`.
+These families are no longer used by any page and were removed from the published site and the repository in V21. They remain in git history.
+
+- `pardus-hero-*`: an earlier homepage hero, two original AI-generated compositions (1672 × 941 and 941 × 1672) of a golden leopard moving through ocean, savannah, coast, desert and skyline.
+- `section-2-coast-*`, `section-4-terrace-*`, `section-5-arrival-*`: V4 scroll scenes, source not recorded.
+- `v3-studio-*`: a V3 planning-studio visual generated with the built-in OpenAI image workflow on 14 September 2026, depicting a fictional travel-planning table.
 
 ## V20 coastal horizon
 

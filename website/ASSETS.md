@@ -12,9 +12,13 @@ The logo in `public/brand/` is a deterministic vector reconstruction of the appr
 
 Confirm that the supplied Satoshi files are approved for public web use before a commercial launch. The site no longer loads fonts from Fontshare.
 
-## V3 commissioned visual
+## Travel.Explore sandbank scene (live)
 
-The responsive `v3-studio-*` AVIF and WebP files were generated for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026. They depict a fictional private-travel planning table and do not represent a named property, partner or destination.
+The `section-3-sandbank-*` family is the homepage Travel.Explore chapter, produced by `scripts/prepare-images.mjs` from `source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
+
+## Retired artwork (removed in V21)
+
+No page uses these families any more, so V21 removed them from `public/images`, `source-assets` and the image script. They remain in git history: `pardus-hero-*` (earlier AI-generated homepage hero), `section-2-coast-*`, `section-4-terrace-*` and `section-5-arrival-*` (V4 scroll scenes, source not recorded), and `v3-studio-*`, generated for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026, depicting a fictional private-travel planning table. Its prompts are kept below for the record.
 
 Desktop prompt: “Create a cinematic editorial photograph of a refined dark-stone travel-planning table on an East African coastal terrace at blue hour, with a tactile route map, brass compass, navy folio, handwritten planning card, understated sunglasses and one white frangipani; quiet-luxury magazine art direction, generous negative space, no people, logos, readable text or conspicuous wealth symbols.”
 

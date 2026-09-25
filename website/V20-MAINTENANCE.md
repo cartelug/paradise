@@ -1,10 +1,11 @@
-# Pardus V20 maintenance and release guide
+# Pardus maintenance and release guide
 
-This file describes the production rules behind the Pardus V20 website. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
+This file describes the production rules behind the Pardus website: the V20 architecture as released in V21, the handover release. For what the business still needs to supply and how to switch each item on, start with `../HANDOVER.md`. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
 
 ## Sources of truth
 
-- `src/data/site.ts` — business identity, verified contacts, enquiry endpoint, analytics token and navigation.
+- `astro.config.mjs` — site origin and base path, read from `PARDUS_SITE` and `PARDUS_BASE` at build time. Canonical links, social previews, structured data, the sitemap and `robots.txt` all derive from these two values.
+- `src/data/site.ts` — business identity, verified contacts, enquiry endpoint, analytics token, social profiles and navigation.
 - `src/data/destinations.ts` — destination dossiers and Folio classification.
 - `src/data/journeys.ts` — flexible journey concepts and place/pace/reason signals.
 - `src/data/journal.ts` — Journal metadata and article content.
@@ -80,6 +81,8 @@ The website remains download-only until verified business data is supplied. To a
 
 Do not change copy to say an enquiry was sent until the live recipient has received the test.
 
+The switched-on state was rehearsed for V21 against an intercepted endpoint: the planner and contact form post once with the traveller, reply route, notes and an inbox subject; empty required fields block submission; a server error or an 8-second timeout keeps the planner draft and says delivery failed; and no message mentions an email address until `site.email` is set. That rehearsal proves the code path, not the live inbox, so steps 4 and 5 still apply with the real endpoint.
+
 ## Required checks
 
 From `website/`:
@@ -93,6 +96,8 @@ npm run verify:export
 ```
 
 After export, review the diff. Confirm that the root contains the current HTML pages and only the current hashed files under `static/`.
+
+For a custom domain, build with both values and verify with the same base, for example `PARDUS_SITE=https://www.example.com PARDUS_BASE=/ npm run build`, then `PARDUS_BASE=/ npm run verify:export`. The full move is described in `../HANDOVER.md`.
 
 Rendered QA must cover:
 

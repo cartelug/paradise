@@ -3,6 +3,7 @@ export const site = {
   description: 'Highly personalised luxury journeys from Africa to the world, seamlessly curated around you by Pardus Luxury Escapes.',
   // Only add business-approved contacts. Empty values never render fake links.
   email: '',
+  // International format, e.g. '+256 700 000 000'; spaces and symbols are ignored in the link.
   whatsapp: '',
   // A Formspree-compatible POST endpoint (e.g. https://formspree.io/f/xxxxxxx) that receives the
   // journey planner brief and the contact form. Empty disables all network delivery: forms keep
@@ -23,6 +24,9 @@ export const path = (route = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '
 
 // Absolute URL on the configured site origin (astro.config `site`, set with PARDUS_SITE).
 export const absolute = (route = '') => new URL(path(route), import.meta.env.SITE).toString();
+
+const whatsappDigits = site.whatsapp.replace(/\D/g, '');
+export const whatsappUrl = whatsappDigits ? `https://wa.me/${whatsappDigits}` : '';
 
 export const socialLinks = [
   { label: 'Instagram', href: site.social.instagram },

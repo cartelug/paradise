@@ -1,4 +1,6 @@
-# Pardus Luxury Escapes — V20
+# Pardus Luxury Escapes — V21 (handover release)
+
+**Start with [`HANDOVER.md`](HANDOVER.md)** — what is live, what the business still needs to supply, and where each setting goes.
 
 An editorial travel website built with Astro. V20 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The homepage moves directly from the coastal identity through Travel.Explore to an interactive destination atlas, journey ideas and a practical Folio. The Journal has a new editorial masthead, lead story and searchable archive. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
 
@@ -14,7 +16,7 @@ The published output is committed so GitHub Pages can continue deploying from `m
 
 ## Development and publishing
 
-Use Node.js 24.
+Use Node.js 22 or newer.
 
 ```sh
 cd website
@@ -46,7 +48,7 @@ The introduction runs once per tab session, can be skipped or replayed, and has 
 
 The planner creates a local downloadable text brief. It does **not** submit enquiries, reserve travel, take payment or promise availability while the verified endpoint remains unset. The interface states this before the visitor starts and when the brief is downloaded. Planner drafts use session storage to protect the current brief and expire when the browser session ends.
 
-Business email and WhatsApp details remain unset in `src/data/site.ts` until verified contacts are supplied. A production lead-delivery integration, business-approved legal details, analytics and CMS accounts require separate configuration. Do not change the interface to claim that an enquiry was sent without implementing and verifying delivery.
+Business email and WhatsApp details remain unset in `src/data/site.ts` until verified contacts are supplied. Online delivery for the planner and a Contact page form is built and rehearsed; it switches on when `enquiryEndpoint` is set (see `HANDOVER.md`). Business-approved legal details and any CMS remain separate work. Do not change the interface to claim that an enquiry was sent without implementing and verifying delivery.
 
 Destination copy and images are illustrative. See `ASSETS.md` for the existing photography sources. No fabricated ratings, client counts, supplier affiliations or prices are included.
 
