@@ -1,13 +1,13 @@
 ---
 import Brand from './Brand.astro';
 import Arrow from './Arrow.astro';
-import { path } from '../data/site';
+import { path, socialLinks } from '../data/site';
 import { destinations } from '../data/destinations';
 interface Props { simple?: boolean; }
 const { simple = false } = Astro.props;
 ---
-{!simple && <section class="closing-cta">
-  <div class="closing-top"><p class="eyebrow">The next chapter is yours.</p><span class="small-caption">Pardus / Personally planned</span></div>
+{!simple && <section class="closing-cta" aria-labelledby="closing-cta-title">
+  <div class="closing-top"><p class="eyebrow" id="closing-cta-title">The next chapter is yours.</p><span class="small-caption">Pardus / Personally planned</span></div>
   <a class="closing-title" href={path('journey.html')}><span>Where <em>next?</em></span><span class="closing-arrow"><Arrow /></span></a>
   <p>A place you’ve dreamed of. A reason to get away. Let’s begin there.</p>
 </section>}
@@ -45,6 +45,7 @@ const { simple = false } = Astro.props;
           <a href={path('about.html')}>The Pardus way</a>
           <a href={path('journal.html')}>Journal</a>
           <a href={path('contact.html')}>Contact</a>
+          {socialLinks.map(link => <a href={link.href} rel="me">{link.label}</a>)}
         </div>
       </nav>
     </div>

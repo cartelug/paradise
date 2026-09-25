@@ -37,10 +37,10 @@ const notes = [journal.find(s => s.slug === 'choosing-your-maldives-island')!, j
     <div class="v20-heading"><h2 id="atlas-title">Where would you <em>rather be?</em></h2><a class="text-button" href={path('destinations.html')}>View all destinations <Arrow /></a></div>
     <div class="v20-atlas-layout" data-destination-editor>
       <div class="v20-atlas-tabs" role="tablist" aria-label="Featured destinations" aria-orientation="vertical">{atlas.map((d, i) => <button id={`tab-${d.slug}`} role="tab" aria-controls={`panel-${d.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-destination-tab={d.slug}><span>{d.name}<small>{d.country}</small></span><Arrow /></button>)}</div>
-      <div class="v20-atlas-stage">{atlas.map((d, i) => <article id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}>
+      <div class="v20-atlas-stage">{atlas.map((d, i) => <div id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}>
         <a class="v20-atlas-image" href={path(`destination-${d.slug}.html`)} aria-label={`Explore ${d.name}`}><Picture name={d.image} alt={d.alt} sizes="(max-width: 760px) 100vw, 65vw" /><span>{d.caption}</span></a>
         <div class="v20-atlas-caption"><div><h3>{d.mood}</h3><p>{d.suggestedStay}</p></div><a class="text-button" href={path(`destination-${d.slug}.html`)}>Discover {d.name.replace('The ', 'the ')} <Arrow /></a></div>
-      </article>)}</div>
+      </div>)}</div>
     </div>
     <noscript><p class="no-script-help">Browse all six places in the <a href={path('destinations.html')}>destination collection</a>.</p></noscript>
   </section>

@@ -34,10 +34,16 @@ test('every editorial image has responsive AVIF and WebP derivatives', async () 
   }
 });
 
-test('the V3 planning studio has separate responsive desktop and mobile art', async () => {
-  for (const [variant, widths] of [['desktop', [960, 1536]], ['mobile', [480, 720, 1120]]]) {
-    for (const width of widths) {
-      for (const format of ['avif', 'webp']) await access(new URL(`../public/images/v3-studio-${variant}-${width}.${format}`, import.meta.url));
+test('art-directed scenes have separate responsive desktop and mobile art', async () => {
+  const scenes = {
+    'v20-horizon': { desktop: [960, 1586], mobile: [480, 960] },
+    'section-3-sandbank': { desktop: [960, 1280, 1672], mobile: [480, 720, 941] },
+  };
+  for (const [scene, variants] of Object.entries(scenes)) {
+    for (const [variant, widths] of Object.entries(variants)) {
+      for (const width of widths) {
+        for (const format of ['avif', 'webp']) await access(new URL(`../public/images/${scene}-${variant}-${width}.${format}`, import.meta.url));
+      }
     }
   }
 });

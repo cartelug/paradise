@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://cartelug.github.io/paradise/sitemap-index.xml

@@ -2,8 +2,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 const base = process.env.PARDUS_BASE || '/';
+const site = process.env.PARDUS_SITE || 'https://cartelug.github.io';
 export default defineConfig({
-  site: 'https://cartelug.github.io',
+  site,
   base,
   output: 'static',
   trailingSlash: 'never',

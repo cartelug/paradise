@@ -10,6 +10,7 @@ h1,h2,h3 { font-variation-settings: 'SOFT' 0,'WONK' 0; }
 .site-header .desktop-nav { gap: clamp(18px,1.8vw,30px); }
 .site-header .desktop-nav a { font-size: 12px; font-weight: 450; letter-spacing: .015em; }
 .site-header .header-journey { margin-left: 0; min-height: 44px; padding: 10px 19px; border: 1px solid #a78a53; font-size: 12px; letter-spacing: .035em; transition: background .25s,color .25s; }
+.site-header:not(.header-dark) .header-journey { border-color: #796038; }
 .site-header .header-journey>.circle-arrow { display: none; }
 .site-header .header-journey:hover { background: #cbb278; color: #081f29; }
 .site-header .header-folio { font: 450 12px/1.4 var(--sans); text-transform: none; letter-spacing: .025em; border-bottom: 0; padding-inline: 0; }

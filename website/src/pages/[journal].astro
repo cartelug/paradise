@@ -4,17 +4,17 @@ import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import Arrow from '../components/Arrow.astro';
 import { journal } from '../data/journal';
-import { path } from '../data/site';
+import { path, absolute } from '../data/site';
 export function getStaticPaths() { return journal.map((entry, i) => ({ params: { journal: `journal-${entry.slug}` }, props: { entry, next: journal[(i + 1) % journal.length] } })); }
 const { entry, next } = Astro.props;
 const readMinutes = Math.max(1, Math.ceil([entry.intro, ...entry.paragraphs].join(' ').split(/\s+/).length / 200));
 const displayDate = (value: string) => new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
-const articleUrl = new URL(path(`journal-${entry.slug}.html`), 'https://cartelug.github.io').toString();
+const articleUrl = absolute(`journal-${entry.slug}.html`);
 const articleSchema = {
   '@context': 'https://schema.org', '@type': 'Article', headline: entry.title,
   description: entry.description, datePublished: entry.publishedAt, dateModified: entry.updatedAt,
   author: { '@type': 'Organization', name: entry.author }, publisher: { '@type': 'Organization', name: 'Pardus Luxury Escapes' },
-  image: new URL(path(`images/${entry.image}-1920.webp`), 'https://cartelug.github.io').toString(), mainEntityOfPage: articleUrl,
+  image: absolute(`images/${entry.image}-1920.webp`), mainEntityOfPage: articleUrl,
 };
 ---
 <Layout title={entry.title} class="article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>

@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import Arrow from '../components/Arrow.astro';
 import { journeys } from '../data/journeys';
-import { path } from '../data/site';
+import { path, absolute } from '../data/site';
 
 export function getStaticPaths() {
   return journeys.map((journey, index) => ({
@@ -13,12 +13,12 @@ export function getStaticPaths() {
 }
 
 const { journey, next } = Astro.props;
-const canonical = new URL(path(`journey-${journey.slug}.html`), 'https://cartelug.github.io').toString();
+const canonical = absolute(`journey-${journey.slug}.html`);
 const schemas = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Journeys', item: new URL(path('journeys.html'), 'https://cartelug.github.io').toString() },
+      { '@type': 'ListItem', position: 1, name: 'Journeys', item: absolute('journeys.html') },
       { '@type': 'ListItem', position: 2, name: journey.name, item: canonical },
     ],
   },

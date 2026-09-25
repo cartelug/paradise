@@ -21,7 +21,7 @@
 .v20-wordmark .brand-svg { width: 100%; margin-bottom: -7%; }
 .v20-luxury { display: block; margin-top: 8px; color: #dec895; font: italic 340 clamp(27px,3vw,43px)/1.3 var(--serif); letter-spacing: .055em; }
 .v20-hero-line { margin-top: 44px; font: 360 clamp(26px,2.7vw,42px)/1.25 var(--serif); letter-spacing: -.025em; }
-.v20-hero-line em { font-weight: 360; }
+.v20-hero-line em { font-weight: 360; white-space: nowrap; }
 .v20-hero-description { margin-top: 12px; color: #f0f3f4; font-size: 16px; line-height: 1.65; }
 .v20-hero-content>.v20-button { margin-top: 32px; background: #081f2933; }
 .v20-hero-content>.v20-button:hover { background: #cbb278; }
@@ -67,7 +67,7 @@
 .v20-atlas-caption .text-button { flex-shrink: 0; font-size: 12px; }
 .v20-journeys { padding-top: 30px; }
 .v20-journey-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 28px; }
-.v20-concept { min-width: 0; background: transparent; border: 0; }
+.v20-concept { min-width: 0; background: transparent; border: 0; display: flex; flex-direction: column; }
 .v20-concept-image { display: block; height: clamp(290px,32vw,480px); overflow: hidden; }
 .v20-concept-image picture,.v20-concept-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .v20-concept-image img { transition: transform .8s var(--ease); }
@@ -76,7 +76,7 @@
 .v20-concept>h3 { margin-top: 9px; font-size: clamp(27px,2.6vw,37px); font-weight: 360; }
 .v20-concept-duration { margin-top: 12px; font-size: 11px; color: #52646b; }
 .v20-concept-duration span { white-space: nowrap; }
-.v20-concept-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 21px; }
+.v20-concept-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 21px; }
 .v20-concept-actions .text-button { gap: 16px; font-size: 12px; }
 .v20-concept-actions .folio-save { gap: 8px; padding: 8px 0; font-size: 11px; white-space: nowrap; }
 .v20-folio { display: grid; grid-template-columns: .85fr 1.15fr; gap: 7vw; background: #081f29; color: #fff; }

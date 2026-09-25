@@ -11,9 +11,23 @@ export const site = {
   enquiryEndpoint: '',
   // Cloudflare Web Analytics beacon token. Empty disables all analytics script injection.
   analyticsId: '',
+  // Full profile URLs, e.g. https://www.instagram.com/yourhandle/ and https://www.tiktok.com/@yourhandle.
+  // Empty values render nothing; each link appears in the footer and structured data once set.
+  social: {
+    instagram: '',
+    tiktok: '',
+  },
 };
 
 export const path = (route = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${route}`;
+
+// Absolute URL on the configured site origin (astro.config `site`, set with PARDUS_SITE).
+export const absolute = (route = '') => new URL(path(route), import.meta.env.SITE).toString();
+
+export const socialLinks = [
+  { label: 'Instagram', href: site.social.instagram },
+  { label: 'TikTok', href: site.social.tiktok },
+].filter(link => link.href.startsWith('https://'));
 
 export const navigation = [
   { label: 'Destinations', href: 'destinations.html' },

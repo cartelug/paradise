@@ -7,12 +7,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Preloader from '../components/Preloader.astro';
 import Folio from '../components/Folio.astro';
-import { site, path } from '../data/site';
+import { site, path, absolute, socialLinks } from '../data/site';
 interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
 const { title, description = site.description, image = 'images/v20-horizon-desktop-1586.webp', dark = false, simpleFooter = false, class: className } = Astro.props;
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
-const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), 'https://cartelug.github.io');
-const ogImage = new URL(path(image), 'https://cartelug.github.io').toString();
+const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
+const ogImage = absolute(image);
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'TravelAgency',
@@ -20,8 +20,9 @@ const organizationSchema = {
   name: site.name,
   description: site.description,
   url: `${canonical.origin}${path()}`,
-  logo: new URL(path('brand/pardus-primary-512.png'), 'https://cartelug.github.io').toString(),
+  logo: absolute('brand/pardus-primary-512.png'),
   ...(site.email ? { email: site.email } : {}),
+  ...(socialLinks.length ? { sameAs: socialLinks.map(link => link.href) } : {}),
 };
 ---
 <!doctype html>
@@ -41,7 +42,7 @@ const organizationSchema = {
       @font-face{font-family:'Satoshi';src:url('${path('fonts/Satoshi-Bold.woff2')}') format('woff2');font-style:normal;font-weight:700 900;font-display:swap;}
       @font-face{font-family:'Montserrat';src:url('${path('fonts/Montserrat-Variable.woff2')}') format('woff2');font-style:normal;font-weight:100 900;font-display:swap;}
     `} />
-    <title>{title ? `${title} — ${site.name}` : site.name}</title>
+    <title>{title ? (`${title} — ${site.name}`.length > 60 ? `${title} — Pardus` : `${title} — ${site.name}`) : site.name}</title>
     <link rel="icon" type="image/svg+xml" href={path('brand/favicon.svg')} />
     <link rel="apple-touch-icon" href={path('brand/apple-touch-icon.png')} />
     <link rel="canonical" href={canonical} />
@@ -59,7 +60,7 @@ const organizationSchema = {
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline src={`${path('opening.js')}?v=3`}></script>
   </head>
-  <body id="top" class={className} data-pardus-version="20">
+  <body id="top" class={className} data-pardus-version="21">
     <div class="page-progress" aria-hidden="true"><span></span></div>
     <Preloader />
     <Header dark={dark} />

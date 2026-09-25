@@ -178,7 +178,7 @@
   .footer-copyright, .footer-utility { display: flex; align-items: center; }
   .footer-copyright { gap: 16px; flex-wrap: wrap; row-gap: 10px; }
   .footer-credit { display: inline-flex; align-items: center; gap: 8px; }
-  .footer-credit img { width: 18px; height: 18px; }
+  .footer-credit img { width: 18px; height: 18px; filter: invert(1); }
   .footer-divider { width: 22px; height: 1px; background: #ffffff42; }
   .footer-utility { gap: clamp(18px,2.3vw,34px); }
   .footer-utility a, .footer-utility .replay-opening { position: relative; min-height: 38px; padding: 10px 0; white-space: nowrap; transition: color .3s; }
@@ -662,7 +662,7 @@ html.is-opening { overflow: hidden; }
 .opening-bottomline { bottom: 26px; }
 .is-opening .opening-topline, .is-opening .opening-bottomline { opacity: 1; }
 .preloader-credit { position: static; font-size: 11px; color: #b1bfc1; }
-.preloader-credit img { filter: brightness(0) invert(1); opacity: .8; }
+.preloader-credit img { filter: invert(1); opacity: .85; }
 .is-opening .preloader-credit { animation: none; }
 .skip-opening { position: static; display: inline-flex; align-items: center; gap: 24px; min-height: 48px; padding: 8px 0; border-bottom: 1px solid #d4bc8755; color: #ece7dc; font-size: 12px; }
 .skip-opening svg { transition: transform .3s ease; }
@@ -752,6 +752,7 @@ button, a { text-underline-offset: .25em; }
 .destination-essay h2 { font-size: clamp(42px,4vw,62px); }
 .essay-copy p { font-size: 18px; }
 .detail-highlights { background: #e0e8e3; }
+.detail-highlights .process-list li>span { color: #796038; }
 .next-destination { background: #d4dfd8; }
 .service-editorial { grid-template-columns: 240px minmax(0,1fr); }
 .service-editorial>.section-label { position: sticky; top: 125px; }
@@ -1254,6 +1255,8 @@ html:not(.js) .filter-buttons { display: none; }
 .text-button { transition: color .25s ease,border-color .25s ease; }
 .text-button:hover { border-color: var(--v3-brass); }
 .circle-arrow { position: relative; overflow: hidden; }
+/* Unlayered rules beat the layered card rule regardless of specificity, so restate its positioning here. */
+.journey-card-picture>.circle-arrow { position: absolute; }
 .circle-arrow>.arrow-icon { position: relative; z-index: 1; }
 .circle-arrow::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: currentColor; opacity: 0; transform: scale(.55); transition: opacity .3s,transform .45s var(--v3-ease); }
 .circle-arrow:hover::before,.closing-title:hover .closing-arrow::before { opacity: .08; transform: scale(1); }
