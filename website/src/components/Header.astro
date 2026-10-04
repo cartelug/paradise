@@ -1,6 +1,5 @@
 ---
 import Brand from './Brand.astro';
-import Arrow from './Arrow.astro';
 import { navigation, path } from '../data/site';
 interface Props { dark?: boolean; }
 const { dark = false } = Astro.props;
@@ -9,19 +8,19 @@ const activeHref = current.startsWith('destination-') ? 'destinations.html' : cu
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class:list={['site-header', { 'header-dark': dark }]}>
-  <a href={path()} class="brand-link header-leopard" aria-label="Pardus home"><Brand mark light={dark} /></a>
+  <a href={path()} class="brand-link header-leopard" aria-label="Pardus Luxury Escapes home"><Brand vector light /></a>
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
-  <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Folio</span><small data-folio-count hidden>0</small></button>
-  <a class="header-journey" href={path('journey.html')} aria-label="Plan a journey"><span>Plan a journey</span><span class="circle-arrow"><Arrow /></span></a>
+  <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Saved trips</span><small data-folio-count hidden>0</small></button>
+  <a class="header-journey" href={path('journey.html')}><span>Plan your escape</span></a>
   <button class="menu-toggle requires-js" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <dialog id="mobile-menu" class="mobile-menu" aria-labelledby="menu-title">
-  <div class="menu-top"><a class="brand-link header-leopard" href={path()} aria-label="Pardus home"><Brand mark light /></a><button class="menu-close" aria-label="Close navigation"><span></span><span></span></button></div>
+  <div class="menu-top"><a class="brand-link header-leopard" href={path()} aria-label="Pardus home"><Brand vector light /></a><button class="menu-close" aria-label="Close navigation"><span></span><span></span></button></div>
   <p id="menu-title" class="eyebrow">A world of possibilities</p>
   <nav aria-label="Mobile navigation">
-    {[...navigation, { label: 'Concierge', href: 'concierge.html' }, { label: 'Plan a journey', href: 'journey.html' }].map((item, i) => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><small>0{i + 1}</small><span>{item.label}</span><Arrow /></a>)}
+    {[...navigation, { label: 'Plan your escape', href: 'journey.html' }, { label: 'Contact Pardus', href: 'contact.html' }].map((item, i) => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><small>0{i + 1}</small><span>{item.label}</span></a>)}
   </nav>
   <div class="menu-bottom"><span>Personally planned. Beautifully travelled.</span><a href={path('contact.html')}>Contact Pardus</a></div>
 </dialog>

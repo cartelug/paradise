@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TravelDesk from '../components/TravelDesk.astro';
+---
+<Layout title="Pardus travel desk" description="Dated official travel and aviation updates, Dubai seasonal experiences and airline news, with links to the original notices." class="escape-inner" simpleFooter>
+  <section class="escape-page-intro"><p class="eyebrow">Pardus travel desk</p><h1>Travel with<br /><em>a clearer picture.</em></h1><p>Useful destination and aviation updates, direct from official sources. Check what has changed before planning your journey.</p></section>
+  <section class="escape-section" style="padding-top:0"><TravelDesk limit={8} /><div class="travel-source-links"><a href="https://www.visitdubai.com/en/festivals-and-events/dubai-events-calendar" target="_blank" rel="noopener noreferrer">Dubai events calendar</a><a href="https://www.emirates.com/media-centre/" target="_blank" rel="noopener noreferrer">Emirates airline news</a><a href="https://caa.go.ug/" target="_blank" rel="noopener noreferrer">Uganda aviation updates</a></div></section>
+</Layout>

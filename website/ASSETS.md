@@ -2,7 +2,7 @@
 
 Approved Pardus logo: user-uploaded JPEG. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
 
-The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The opening animation uses separate vector paths from `src/data/logo.json`.
+The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The current header and footer use faithful vector paths from `src/data/logo.json`. V22 traces the 1280 × 720 approved October logo, including its diagonal aircraft; the original is preserved in `source-assets/pardus-approved-logo-2026-10.jpeg`.
 
 ## Typography
 
@@ -12,9 +12,9 @@ The logo in `public/brand/` is a deterministic vector reconstruction of the appr
 
 Confirm that the supplied Satoshi files are approved for public web use before a commercial launch. The site no longer loads fonts from Fontshare.
 
-## Travel.Explore sandbank scene (live)
+## Travel.Explore sandbank scene (retained legacy asset)
 
-The `section-3-sandbank-*` family is the homepage Travel.Explore chapter, produced by `scripts/prepare-images.mjs` from `source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
+The `section-3-sandbank-*` family was the former homepage Travel.Explore chapter, produced by `scripts/prepare-images.mjs` from `source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
 
 ## Retired artwork (removed in V21)
 
@@ -40,3 +40,9 @@ Mobile prompt: “Create a coordinated portrait version of the same coastal plan
 The `v20-horizon-*` family was generated with the built-in OpenAI image tool on 15 September 2026. The landscape and portrait masters are separate compositions of an imagined Indian Ocean coastline at blue hour, with granite, palms, distant islands and a small warm architectural light. They do not depict a verified named hotel or supplier. The brief calls for natural photographic detail, generous clear sky for the separately rendered Pardus identity, and no text or logos.
 
 Desktop sources: 960 and 1586 pixels wide. Mobile sources: 480 and 960 pixels wide. AVIF is preferred, with WebP fallback. `Horizon.astro` selects the correct art direction; the opening uses the smaller derivatives. Masters and six image-generated UI concepts, with their prompts, are included in the separate V20 handoff. Sharp produced the responsive size and format derivatives. Brand marks and all text remain real vector/HTML elements.
+
+## V22 walking leopard and yacht scene
+
+Generated on 4 October 2026 with OpenAI image generation. The photographic leopard is an eight-frame transparent 4 × 2 walk cycle, converted to `leopard-walk.webp` and animated with CSS. It is a decorative Pardus brand character, not wildlife footage. The yacht scene is a generic, imagined Indian Ocean sunset with no identifiable operator, property or destination landmark. It has AVIF/WebP responsive derivatives at 640, 1280 and 1920 pixels. It is not evidence of a named vessel being available.
+
+Generation briefs: a realistic adult leopard walking elegantly in eight consistent right-facing poses, locked camera and baseline, transparent background, natural anatomy and no text or logos; a cinematic photographic white motor yacht on calm teal ocean water at sunset, generic island coastline, restrained luxury styling, generous dark space for HTML copy, no text, logos or identifiable landmarks. Sharp produced size and format derivatives; all copy and the approved logo remain native HTML/vector elements.

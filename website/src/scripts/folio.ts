@@ -59,7 +59,7 @@ function hasContent(state: FolioState) {
 }
 
 export function buildPlannerUrl(href: string, state: FolioState, baseUrl: string): string {
-  const url = new URL(href || 'journey.html', baseUrl);
+  const url = new URL(href || 'planner.html', baseUrl);
   // Rendering starts from the current link, which may describe a previous selection.
   // Remove every Folio-owned parameter before writing the current state.
   for (const key of ['place', 'pace', 'reason', 'saved']) url.searchParams.delete(key);
@@ -137,7 +137,7 @@ export function initFolio() {
       if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
       trigger.setAttribute('aria-label', count ? `Open your Pardus Folio, ${count} saved ${count === 1 ? 'note' : 'notes'}` : 'Open your empty Pardus Folio');
     });
-    plan.href = buildPlannerUrl(plan.getAttribute('href') || 'journey.html', state, window.location.href);
+    plan.href = buildPlannerUrl(plan.getAttribute('href') || 'planner.html', state, window.location.href);
     window.dispatchEvent(new CustomEvent('pardus:folio', { detail: structuredClone(state) }));
   };
 

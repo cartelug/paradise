@@ -1,0 +1,14 @@
+---
+import data from '../../public/travel-updates.json';
+import { path } from '../data/site';
+interface Props { limit?: number; }
+const { limit = 6 } = Astro.props;
+const date = (value: string) => new Date(value).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
+const items = data.items.filter(item => !('expiresAt' in item) || !item.expiresAt || item.expiresAt >= new Date().toISOString().slice(0,10)).slice(0,limit);
+---
+<div data-travel-desk data-limit={limit} data-local-feed={path('travel-updates.json')}>
+  <p class="travel-desk-status" data-feed-status>Official travel updates · Feed checked {date(data.updatedAt || '2026-10-04')}</p>
+  <div class="travel-desk-grid" data-feed-items>{items.map(item => <article class="travel-update"><div class="travel-update-meta"><span>{item.category}</span><time datetime={item.publishedAt}>{date(item.publishedAt)}</time></div><h3>{item.title}</h3><p>{item.summary}</p><a href={item.url} target="_blank" rel="noopener noreferrer">Read at {item.source}</a></article>)}</div>
+  <p class="travel-desk-note">Updates link to official sources. Entry requirements and offers can change; check the original notice for your nationality, route and travel dates.</p>
+</div>
+<script>import '../scripts/travel-desk';</script>

@@ -1,12 +1,30 @@
 # Image sources
 
-Approved Pardus logo: user-uploaded source artwork. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
+Approved Pardus logo: user-uploaded JPEG. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
 
-The exact approved full-colour lockup is preserved as `public/brand/pardus-approved-primary.png`, including the complete metallic-gold aircraft sweep. V20 renders the transparent vector identity in the hero with a separate Luxury Escapes signature, and the standalone leopard in navigation. Travel.Explore is a separate scroll chapter. The raster lockup remains an archival asset.
+The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The current header and footer use faithful vector paths from `src/data/logo.json`. V22 traces the 1280 × 720 approved October logo, including its diagonal aircraft; the original is preserved in `source-assets/pardus-approved-logo-2026-10.jpeg`.
 
 ## Typography
 
-The production build self-hosts Satoshi Light, Regular, Medium and Bold plus the Montserrat variable family as WOFF2. Both families were supplied by the user. Fraunces is bundled from the project dependency. No Fontshare request is used. Confirm Satoshi web-use approval before commercial launch; Montserrat's OFL file is included with the exported fonts.
+- Satoshi Light, Regular, Medium and Bold were supplied by the user in `satoshi.zip` and converted locally from OTF to WOFF2 for web delivery.
+- Montserrat was supplied by the user in `montserrat.zip`; the variable TTF was converted locally to WOFF2. The OFL text is kept at `public/fonts/Montserrat-OFL.txt`.
+- Fraunces is provided by the checked-in `@fontsource-variable/fraunces` dependency.
+
+Confirm that the supplied Satoshi files are approved for public web use before a commercial launch. The site no longer loads fonts from Fontshare.
+
+## Travel.Explore sandbank scene (retained legacy asset)
+
+The `section-3-sandbank-*` family was the former homepage Travel.Explore chapter, produced by `scripts/prepare-images.mjs` from `source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
+
+## Retired artwork (removed in V21)
+
+No page uses these families any more, so V21 removed them from `public/images`, `source-assets` and the image script. They remain in git history: `pardus-hero-*` (earlier AI-generated homepage hero), `section-2-coast-*`, `section-4-terrace-*` and `section-5-arrival-*` (V4 scroll scenes, source not recorded), and `v3-studio-*`, generated for Pardus V3 with the built-in OpenAI image-generation workflow on 14 September 2026, depicting a fictional private-travel planning table. Its prompts are kept below for the record.
+
+Desktop prompt: “Create a cinematic editorial photograph of a refined dark-stone travel-planning table on an East African coastal terrace at blue hour, with a tactile route map, brass compass, navy folio, handwritten planning card, understated sunglasses and one white frangipani; quiet-luxury magazine art direction, generous negative space, no people, logos, readable text or conspicuous wealth symbols.”
+
+Mobile prompt: “Create a coordinated portrait version of the same coastal planning-table scene for a narrow screen, with the objects forming a confident diagonal through the lower two-thirds and a calmer upper quarter; preserve the restrained navy, slate, ivory and brass palette; no people, logos or readable text.”
+
+`public/brand/97-design-logo.png` (+`@2x`) is the 97 Design maker's mark used for the "Made by 97 Design" footer credit, trimmed and resized from `source-assets/97-design-logo-source.png` by `scripts/prepare-97-logo.mjs`.
 
 - hero: https://images.unsplash.com/photo-1762254923872-5bdc4210eb90?auto=format&fit=crop&w=2000&q=85
 - maldives: https://images.pexels.com/photos/9482140/pexels-photo-9482140.jpeg?auto=compress&cs=tinysrgb&w=1500
@@ -17,20 +35,14 @@ The production build self-hosts Satoshi Light, Regular, Medium and Bold plus the
 - seychelles: https://images.pexels.com/photos/30358268/pexels-photo-30358268.jpeg?auto=compress&cs=tinysrgb&w=1100
 - corporate: https://images.pexels.com/photos/20562278/pexels-photo-20562278.jpeg?auto=compress&cs=tinysrgb&w=1400
 
-## Travel.Explore sandbank scene (live)
-
-The `section-3-sandbank-*` family is the homepage Travel.Explore chapter. Its masters are `website/source-assets/section-3-sandbank-desktop.png` (1672 × 941) and `-mobile.png` (941 × 1672), added on 11 September 2026 (commit 687c32d). Their source was not recorded when they were added. Confirm the source and usage rights before a commercial launch.
-
-## Retired artwork (removed in V21)
-
-These families are no longer used by any page and were removed from the published site and the repository in V21. They remain in git history.
-
-- `pardus-hero-*`: an earlier homepage hero, two original AI-generated compositions (1672 × 941 and 941 × 1672) of a golden leopard moving through ocean, savannah, coast, desert and skyline.
-- `section-2-coast-*`, `section-4-terrace-*`, `section-5-arrival-*`: V4 scroll scenes, source not recorded.
-- `v3-studio-*`: a V3 planning-studio visual generated with the built-in OpenAI image workflow on 14 September 2026, depicting a fictional travel-planning table.
-
 ## V20 coastal horizon
 
 The `v20-horizon-*` family was generated with the built-in OpenAI image tool on 15 September 2026. The landscape and portrait masters are separate compositions of an imagined Indian Ocean coastline at blue hour, with granite, palms, distant islands and a small warm architectural light. They do not depict a verified named hotel or supplier. The brief calls for natural photographic detail, generous clear sky for the separately rendered Pardus identity, and no text or logos.
 
 Desktop sources: 960 and 1586 pixels wide. Mobile sources: 480 and 960 pixels wide. AVIF is preferred, with WebP fallback. `Horizon.astro` selects the correct art direction; the opening uses the smaller derivatives. Masters and six image-generated UI concepts, with their prompts, are included in the separate V20 handoff. Sharp produced the responsive size and format derivatives. Brand marks and all text remain real vector/HTML elements.
+
+## V22 walking leopard and yacht scene
+
+Generated on 4 October 2026 with OpenAI image generation. The photographic leopard is an eight-frame transparent 4 × 2 walk cycle, converted to `leopard-walk.webp` and animated with CSS. It is a decorative Pardus brand character, not wildlife footage. The yacht scene is a generic, imagined Indian Ocean sunset with no identifiable operator, property or destination landmark. It has AVIF/WebP responsive derivatives at 640, 1280 and 1920 pixels. It is not evidence of a named vessel being available.
+
+Generation briefs: a realistic adult leopard walking elegantly in eight consistent right-facing poses, locked camera and baseline, transparent background, natural anatomy and no text or logos; a cinematic photographic white motor yacht on calm teal ocean water at sunset, generic island coastline, restrained luxury styling, generous dark space for HTML copy, no text, logos or identifiable landmarks. Sharp produced size and format derivatives; all copy and the approved logo remain native HTML/vector elements.

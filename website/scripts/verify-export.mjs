@@ -13,7 +13,7 @@ const escaped = base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // A root base needs a stricter pattern so closing tags and protocol-relative URLs are not read as paths.
 const reference = base === '/'
   ? /(?<=["'(\s,])\/(?!\/)([A-Za-z0-9_][^\s"'<>),?#]*)/g
-  : new RegExp(`${escaped}([^\\s"'<>),?#]*)`, 'g');
+  : new RegExp(`(?<=["'(\\s,])${escaped}([^\\s"'<>),?#]*)`, 'g');
 
 async function filesBelow(directory) {
   const found = [];
@@ -28,7 +28,8 @@ async function filesBelow(directory) {
 const all = await filesBelow(repository);
 const publicFiles = all.filter(file => !file.startsWith(resolve(repository, '.git')) && !file.startsWith(project));
 const html = publicFiles.filter(file => extname(file) === '.html');
-if (html.length !== 29) throw new Error(`Expected 29 generated HTML pages; found ${html.length}.`);
+const generatedPages = (await readdir(resolve(project, 'dist'))).filter(file => file.endsWith('.html')).length;
+if (html.length !== generatedPages) throw new Error(`Expected ${generatedPages} generated HTML pages; found ${html.length}.`);
 
 const textFiles = publicFiles.filter(file => ['.html', '.css', '.js', '.xml'].includes(extname(file)));
 const missing = new Set();
@@ -53,4 +54,3 @@ for (const retired of ['app.js', 'styles.css']) {
 }
 
 console.log(`Verified ${html.length} HTML pages and ${textFiles.length} generated text assets; every ${base} reference resolves.`);
-

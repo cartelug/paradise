@@ -17,7 +17,7 @@ const { simple = false } = Astro.props;
     <div class="footer-main">
       <div class="footer-brand">
         <a href={path()} aria-label="Pardus home"><Brand vector light /></a>
-        <p>Highly personalised luxury journeys from Africa to the world—seamlessly curated from first idea to final detail.</p>
+        <p>Luxury travel, beautifully arranged.<br />You tell us where you want to go. We arrange the rest.</p>
         <span class="footer-signature"><i aria-hidden="true"></i>Travel.Explore</span>
       </div>
 
@@ -33,9 +33,10 @@ const { simple = false } = Astro.props;
         <p class="eyebrow" id="footer-travel-title">Ways to travel</p>
         <div class="footer-links">
           <a href={path('journeys.html')}>Journey concepts</a>
+          <a href={path('cruises.html')}>Private boat & yacht cruises</a>
           <a href={path('concierge.html')}>Travel concierge</a>
           <a href={path('corporate.html')}>Corporate travel</a>
-          <a href={path('journey.html')}>Plan a journey</a>
+          <a href={path('journey.html')}>Plan your escape</a>
         </div>
       </nav>
 
@@ -44,6 +45,8 @@ const { simple = false } = Astro.props;
         <div class="footer-links">
           <a href={path('about.html')}>The Pardus way</a>
           <a href={path('journal.html')}>Journal</a>
+          <a href={path('travel-desk.html')}>Travel desk</a>
+          <a href={path('concept-note.html')}>The Pardus concept note</a>
           <a href={path('contact.html')}>Contact</a>
           {socialLinks.map(link => <a href={link.href} rel="me">{link.label}</a>)}
         </div>
@@ -52,7 +55,7 @@ const { simple = false } = Astro.props;
 
     <div class="footer-base">
       <div class="footer-copyright"><span>© {new Date().getFullYear()} Pardus Luxury Escapes</span><span class="footer-divider" aria-hidden="true"></span><span>Made for the journey.</span><span class="footer-divider" aria-hidden="true"></span><span class="footer-credit"><img src={path('brand/97-design-logo.png')} alt="" width="18" height="18" loading="lazy" decoding="async" />Made by 97 Design</span></div>
-      <div class="footer-utility"><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Website terms</a><button type="button" class="replay-opening">Replay the opening</button></div>
+      <div class="footer-utility"><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Website terms</a></div>
       <a class="back-top" href="#top" aria-label="Back to top"><span>Back to top</span><span class="back-top-icon"><Arrow /></span></a>
     </div>
   </div>

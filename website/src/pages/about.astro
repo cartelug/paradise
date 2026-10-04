@@ -1,27 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Picture from '../components/Picture.astro';
-import Arrow from '../components/Arrow.astro';
 import { path } from '../data/site';
 ---
-<Layout title="The Pardus way" description="Travel designed around the individual. Discover the philosophy behind Pardus Luxury Escapes.">
-  <section class="feature-intro"><div class="feature-intro-content"><p class="eyebrow">The Pardus way</p><h1>Less ordinary.<br />More <em>personal.</em></h1><p>We believe the most memorable journeys begin with understanding the person taking them.</p></div><Picture name="seychelles" alt="Sculptural rocks beside the clear turquoise sea in Seychelles" eager /></section>
-  <section class="about-statement section-wrap"><div class="section-label"><span>A personal point of view</span></div><div><h2 data-reveal>Luxury is knowing<br />what matters <em>to you.</em></h2><p class="large-copy" data-reveal>Not everyone wants the same journey. Some want a new perspective. Some want to celebrate. Some simply want a little time that feels completely their own.</p><p class="large-copy" data-reveal>Pardus brings destinations, stays and the practical details together around those individual reasons for travelling. The ambition is simple: thoughtful planning that gives you more room to enjoy being there.</p></div></section>
-  <section class="brand-charter section-wrap" aria-labelledby="brand-charter-title">
-    <div class="charter-heading">
-      <p class="eyebrow">Our direction</p>
-      <h2 id="brand-charter-title" data-reveal>Built around the person.<br /><em>Bound for the world.</em></h2>
-      <span class="charter-signature">Pardus / Travel.Explore</span>
-    </div>
-    <div class="charter-grid">
-      <article class="charter-card charter-mission" data-reveal><span>01 / Mission</span><h3>Journeys, deeply personal.</h3><p>To create highly personalised luxury journeys that connect our clients with the world’s most remarkable places, experiences and moments—seamlessly curated around them.</p></article>
-      <article class="charter-card charter-vision" data-reveal><span>02 / Vision</span><h3>From Africa to the world.</h3><p>To redefine luxury travel from Africa to the world, becoming synonymous with exceptional journeys, extraordinary destinations and service without compromise.</p></article>
-    </div>
-    <div class="culture-statement" data-reveal>
-      <p class="eyebrow">The culture behind every journey</p>
-      <p>Pardus is a culture of <strong>refined service</strong>, <strong>uncompromising excellence</strong>, <strong>genuine hospitality</strong> and <strong>personalised discovery</strong>—where every detail is thoughtfully curated to create extraordinary journeys.</p>
-    </div>
-  </section>
-  <section class="detail-highlights section-wrap pardus-process"><p class="eyebrow">How a journey takes shape</p><h2 data-reveal>Clear from the first idea<br />to the point you <em>decide.</em></h2><ol class="process-list"><li data-reveal><span>01</span><div><h3>Make an enquiry.</h3><p>Begin with a destination, an occasion or an open brief. Nothing needs to be fully formed.</p></div></li><li data-reveal><span>02</span><div><h3>Find the direction.</h3><p>Pardus considers the people, pace, timing and practical frame before shaping an initial route.</p></div></li><li data-reveal><span>03</span><div><h3>Review the proposal.</h3><p>Availability, inclusions, price, payment schedule and supplier terms are made clear before a decision.</p></div></li><li data-reveal><span>04</span><div><h3>Confirm with confidence.</h3><p>Arrangements are booked only after the proposal and applicable conditions have been accepted.</p></div></li></ol></section>
-  <section class="about-statement section-wrap"><div class="section-label"><span>From idea to itinerary</span></div><div><h2 data-reveal>A conversation<br />worth <em>having.</em></h2><p class="large-copy" data-reveal>You do not need an itinerary to begin. A destination, an occasion or a feeling is enough. We can help give it shape.</p><a class="text-button" href={path('journey.html')} data-reveal>Begin your journey <Arrow /></a></div></section>
+<Layout title="Why Pardus" description="Pardus arranges flights, stays, transfers and experiences around your dates, budget and the people travelling." class="escape-inner" simpleFooter>
+  <section class="escape-page-intro"><p class="eyebrow">Why Pardus</p><h1>Luxury travel.<br /><em>Less to think about.</em></h1><p>You tell us where you want to go. We bring the flights, hotels, transfers and experiences into one journey, planned around you.</p></section>
+  <section class="escape-why escape-section"><div class="escape-why-grid"><div><h3>One point of contact</h3><p>Keep the itinerary, arrangements and practical questions in one conversation.</p></div><div><h3>Made around you</h3><p>Your dates, budget, occasion and fellow travellers shape the plan.</p></div><div><h3>Clear before you book</h3><p>Review your itinerary, USD price, inclusions, payment schedule and supplier terms before confirming.</p></div></div></section>
+  <section class="escape-section"><h2>Beautiful places.<br /><em>Thoughtfully arranged.</em></h2><p class="escape-detail-note">Maldives and Seychelles island escapes. Dubai city breaks. East African safaris. Europe, family journeys and private time on the water.</p><a class="escape-underlined" href={path('journey.html')}>Plan your escape</a></section>
 </Layout>

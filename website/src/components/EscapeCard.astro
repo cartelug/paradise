@@ -1,0 +1,15 @@
+---
+import Picture from './Picture.astro';
+import { path } from '../data/site';
+import { destinationFor, priceText, type EscapeOffer } from '../data/offers';
+interface Props { offer: EscapeOffer; featured?: boolean; }
+const { offer, featured = false } = Astro.props;
+const d = destinationFor(offer.slug);
+---
+<article class:list={['escape-card', { 'escape-card-featured': featured }]} data-category={d.category} data-reveal>
+  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 33vw'} /><span class="escape-duration">{offer.nights}</span></a>
+  <div class="escape-card-copy"><p class="eyebrow">{d.country}</p><h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3><p>{offer.experience}</p>
+    {featured && <ul class="escape-highlights">{offer.highlights.map(item => <li>{item}</li>)}</ul>}
+    <div class="escape-card-price"><div><span class="price-label">Your escape</span><strong>{priceText(offer)}</strong>{offer.fromUSD !== null && <small>{offer.priceBasis} · subject to availability</small>}</div><a class="escape-enquire" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`}>Enquire</a></div>
+  </div>
+</article>

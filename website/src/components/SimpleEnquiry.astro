@@ -1,0 +1,21 @@
+---
+import { destinations } from '../data/destinations';
+import { site, path } from '../data/site';
+interface Props { id?: string; defaultDestination?: string; }
+const { id = 'escape-enquiry', defaultDestination = '' } = Astro.props;
+---
+<form class="escape-form" data-escape-enquiry data-recipient={site.bookingsEmail}>
+  <div class="escape-form-grid">
+    <div><label for={`${id}-destination`}>Where would you like to go?</label><select id={`${id}-destination`} name="destination"><option>Help me choose</option>{destinations.map(d => <option selected={defaultDestination === d.name}>{d.name}</option>)}<option selected={defaultDestination === 'Private boat & yacht experience'}>Private boat & yacht experience</option><option>Somewhere else</option></select></div>
+    <div><label for={`${id}-date`}>Preferred departure <span>(optional)</span></label><input id={`${id}-date`} name="date" type="date" /></div>
+    <div><label for={`${id}-travellers`}>Travellers</label><select id={`${id}-travellers`} name="travellers"><option>2 travellers</option><option>1 traveller</option><option>3–4 travellers</option><option>5–8 travellers</option><option>9+ travellers</option></select></div>
+    <div><label for={`${id}-budget`}>Budget per person in USD</label><select id={`${id}-budget`} name="budget"><option>Let’s discuss</option><option>Under USD 1,500</option><option>USD 1,500–3,000</option><option>USD 3,000–5,000</option><option>USD 5,000+</option></select></div>
+    <div><label for={`${id}-name`}>Your name <span>(optional)</span></label><input id={`${id}-name`} name="name" autocomplete="name" maxlength="100" /></div>
+    <div><label for={`${id}-email`}>Your email <span>(optional)</span></label><input id={`${id}-email`} name="email" type="email" autocomplete="email" maxlength="200" /></div>
+  </div>
+  <label for={`${id}-notes`}>Anything you have in mind? <span>(optional)</span></label><textarea id={`${id}-notes`} name="notes" rows="3" maxlength="1500" placeholder="A honeymoon, family holiday, private cruise, or a place you have always wanted to visit…"></textarea>
+  <div class="escape-form-actions"><button class="escape-button requires-js" type="submit">Prepare my email enquiry</button><button class="escape-save requires-js" type="button" data-download-enquiry>Download my enquiry</button><noscript><a class="escape-button" href={`mailto:${site.bookingsEmail}?subject=Pardus%20travel%20enquiry`}>Email your travel enquiry</a></noscript></div>
+  <p class="escape-form-note">Opens a draft in your email app. Send it there to contact Pardus. This does not make a booking. <a href={path('privacy.html')}>Privacy</a></p>
+  <p class="escape-form-status" data-enquiry-status role="status" aria-live="polite"></p>
+</form>
+<script>import '../scripts/enquiry';</script>

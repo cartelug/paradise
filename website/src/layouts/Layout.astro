@@ -3,9 +3,9 @@ import '@fontsource-variable/fraunces';
 import '@fontsource-variable/fraunces/wght-italic.css';
 import '../styles/site.css';
 import '../styles/refinements.css';
+import '../styles/luxury.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Preloader from '../components/Preloader.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks } from '../data/site';
 interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
@@ -30,7 +30,7 @@ const organizationSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#071D2B" />
+    <meta name="theme-color" content="#071426" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preload" href={path('fonts/Satoshi-Light.woff2')} as="font" type="font/woff2" crossorigin="anonymous" />
@@ -58,11 +58,10 @@ const organizationSchema = {
     <meta name="twitter:image" content={ogImage} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
-    <script is:inline src={`${path('opening.js')}?v=3`}></script>
+    <script is:inline>document.documentElement.classList.add('js', 'page-ready');</script>
   </head>
-  <body id="top" class={className} data-pardus-version="21">
+  <body id="top" class={className} data-pardus-version="22">
     <div class="page-progress" aria-hidden="true"><span></span></div>
-    <Preloader />
     <Header dark={dark} />
     <Folio />
     <main id="main" tabindex="-1"><slot /></main>

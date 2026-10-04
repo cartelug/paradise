@@ -1,0 +1,33 @@
+name: Refresh Pardus travel desk
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/travel-desk.yml'
+      - 'website/scripts/update-travel-desk.py'
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pardus-travel-desk
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Read official travel updates
+        run: python3 website/scripts/update-travel-desk.py
+      - name: Save the latest public feed
+        run: |
+          git add travel-updates.json website/public/travel-updates.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh official Pardus travel updates'
+          git push origin HEAD:main

@@ -1,0 +1,94 @@
+{
+  "updatedAt": "2026-10-04T07:30:38.503615+00:00",
+  "items": [
+    {
+      "id": "dubai-winter-2026",
+      "title": "Dubai’s winter events calendar",
+      "summary": "Explore seasonal entertainment, food and sporting events before choosing the dates for your Dubai escape.",
+      "source": "Visit Dubai",
+      "category": "Dubai",
+      "url": "https://www.visitdubai.com/articles/events-to-look-forward-to-this-season",
+      "publishedAt": "2026-09-16",
+      "checkedAt": "2026-10-04",
+      "expiresAt": "2027-01-15"
+    },
+    {
+      "id": "emirates-dubai-winter-2026",
+      "title": "Emirates announces Dubai winter attraction offers",
+      "summary": "Check the airline’s eligible ticket dates, departure markets and full conditions before planning around the offer.",
+      "source": "Emirates",
+      "category": "Airline news",
+      "url": "https://www.emirates.com/media-centre/emirates-invites-travellers-to-discover-dubais-action-packed-calendar-of-events-and-attractions-this-winter/",
+      "publishedAt": "2026-09-29",
+      "checkedAt": "2026-10-04",
+      "expiresAt": "2026-10-12"
+    },
+    {
+      "id": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
+      "title": "Jambojet Returns to Uganda: Strengthening Regional Connectivity",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
+      "publishedAt": "2026-10-01",
+      "checkedAt": "2026-10-04"
+    },
+    {
+      "id": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
+      "title": "Principal Engineer, Aerodrome Planning & Development",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
+      "publishedAt": "2026-09-15",
+      "checkedAt": "2026-10-04"
+    },
+    {
+      "id": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
+      "title": "Senior Civil Engineer, Aerodrome Planning & Development",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
+      "publishedAt": "2026-09-15",
+      "checkedAt": "2026-10-04"
+    },
+    {
+      "id": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
+      "title": "Civil Engineer, Aerodrome Planning & Development",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
+      "publishedAt": "2026-09-15",
+      "checkedAt": "2026-10-04"
+    },
+    {
+      "id": "https://caa.go.ug/manager-marketing-and-commercial-services/",
+      "title": "Manager Marketing And Commercial Services",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/manager-marketing-and-commercial-services/",
+      "publishedAt": "2026-09-15",
+      "checkedAt": "2026-10-04"
+    },
+    {
+      "id": "https://caa.go.ug/senior-flight-operations-inspector/",
+      "title": "Senior Flight Operations Inspector",
+      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "source": "Uganda CAA",
+      "category": "Aviation update",
+      "url": "https://caa.go.ug/senior-flight-operations-inspector/",
+      "publishedAt": "2026-09-15",
+      "checkedAt": "2026-10-04"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Uganda Civil Aviation Authority",
+      "url": "https://caa.go.ug/feed/",
+      "lastSuccessfulCheck": "2026-10-04T07:30:38.503615+00:00"
+    }
+  ]
+}

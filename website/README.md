@@ -1,67 +1,37 @@
-# Pardus Luxury Escapes — V21 (handover release)
+# Pardus Luxury Escapes — V22
 
-**Start with [`HANDOVER.md`](../HANDOVER.md)** — what is live, what the business still needs to supply, and where each setting goes.
-
-An editorial travel website built with Astro. V20 uses the standalone leopard in the navigation, presents the Pardus wordmark with a separately typeset Luxury Escapes signature, and introduces Travel.Explore as a scroll-driven cinematic route chapter. The homepage moves directly from the coastal identity through Travel.Explore to an interactive destination atlas, journey ideas and a practical Folio. The Journal has a new editorial masthead, lead story and searchable archive. The 29-page architecture also includes responsive photography, six flexible journey concepts, the locally saved Pardus Folio, a four-stage journey planner, keyboard navigation and an animated opening.
+A simpler luxury travel website in midnight navy, with the approved Pardus logo, a cinematic walking leopard, prominent Maldives and Seychelles escapes, private boat and yacht experiences, and direct enquiries in USD.
 
 Live website: https://cartelug.github.io/paradise/
 
-## Repository structure
+The revised four-page concept note is available at `documents/PARDUS_Luxury_Escapes_Concept_Note.pdf`. See [HANDOVER.md](../HANDOVER.md) for business settings and ongoing updates.
 
-- `website/`: maintained Astro source, components, design tokens, public assets, scripts and tests.
-- Root HTML, `static/`, `images/`, `brand/` and `opening.js`: generated GitHub Pages output.
-- `ASSETS.md`: photography provenance and logo information.
+## Source and publishing
 
-The published output is committed so GitHub Pages can continue deploying from `main` at the repository root. Edit the source in `website/`, then rebuild and export; generated HTML is not the authoring surface.
-
-## Development and publishing
-
-Use Node.js 22 or newer.
+Edit the Astro source in `website/`. The HTML and assets at the repository root are generated GitHub Pages output. Commit source and generated output together.
 
 ```sh
 cd website
 npm ci
-npm run dev
-```
-
-For GitHub Pages:
-
-```sh
 npm run check
 npm test
 PARDUS_BASE=/paradise/ npm run build
-node scripts/export-github.mjs
+npm run export:github
 npm run verify:export
 ```
 
-Review the generated changes, commit them with the source, and push `main`. The default base path is `/` for local development; the Pages build must use `/paradise/`.
-
-## Design and behaviour
-
-Satoshi, Montserrat and Fraunces are self-hosted. Satoshi and Montserrat are supplied as WOFF2 files; the live site makes no Fontshare request. Photography has AVIF and WebP variants with responsive sources. The approved navy and gold logo is reconstructed as transparent vector paths, with primary, light and monochrome SVGs and transparent PNG exports up to 4096 pixels wide. The leopard, aircraft and lettering animate independently during the opening.
-
-The introduction runs once per tab session, can be skipped or replayed, and has a hard timeout. Reduced motion bypasses it and disables decorative movement. Page content remains accessible without JavaScript. Mobile navigation and the Pardus Folio use native dialogs; collection tabs and filters support keyboard use. The Folio stores selected signals and saved chapters locally for 30 days, requires no account, and sends nothing by itself.
-
-## Journey planner and outstanding integrations
-
-The planner creates a local downloadable text brief. It does **not** submit enquiries, reserve travel, take payment or promise availability while the verified endpoint remains unset. The interface states this before the visitor starts and when the brief is downloaded. Planner drafts use session storage so Back navigation and accidental refreshes do not erase the current brief; the draft expires when the browser session ends.
-
-Business email and WhatsApp details remain unset in `src/data/site.ts` until verified contacts are supplied. Online delivery for the planner and a Contact page form is built and rehearsed; it switches on when `enquiryEndpoint` is set (see `HANDOVER.md`). Business-approved legal details and any CMS remain separate work. Do not change the interface to claim that an enquiry was sent without implementing and verifying delivery.
-
-Destination copy and images are illustrative. See `ASSETS.md` for the existing photography sources. No fabricated ratings, client counts, supplier affiliations or prices are included.
+Push `main` after reviewing the export. Node.js 22 or newer is required. Local development uses a `/` base; GitHub Pages uses `/paradise/`.
 
 ## Editing
 
-- `src/pages/`: homepage, destination collection and detail pages, service pages, journey planner, contact, privacy, terms and 404.
-- `src/data/destinations.ts`: destination dossiers and planning context.
-- `src/data/journeys.ts`: journey concepts and Folio signals.
-- `src/data/journal.ts`: accountable editorial records with author and dates.
-- `src/styles/site.css`, `refinements.css`, `home.css`, `journal-v20.css`: shared foundations and scoped page compositions.
-- `src/scripts/site.ts`: navigation, filters and planner orchestration.
-- `src/scripts/folio.ts`: local Folio state, dialog and planner handoff.
-- `src/scripts/brief.ts`: brief data handling and date validation.
-- `public/brand/`: final transparent logo assets.
-- `scripts/prepare-brand.mjs`: reconstructs the logo from the original approved 1536 × 864 JPEG.
-- `scripts/prepare-images.mjs`: produces local AVIF and WebP derivatives.
+- `website/src/data/offers.ts`: suggested stays, experiences and approved USD starting rates.
+- `website/src/data/site.ts`: contacts and optional delivery/analytics settings.
+- `website/src/pages/`: page content and layouts.
+- `website/src/styles/luxury.css`: V22 design and responsive layouts.
+- `website/scripts/make-concept-note.py`: regenerate the PDF after updating offer data.
+- `website/scripts/update-travel-desk.py`: fetch the official Uganda CAA news feed.
+- `.github/workflows/travel-desk.yml`: refresh travel updates daily.
 
-Read `V20-MAINTENANCE.md` before changing content or releasing. Run source checks, tests, the production build and rendered browser QA after editing. Delivery integrations require a real end-to-end test; a successful build alone does not prove that an enquiry reached Pardus.
+No approved package prices were supplied. Offers therefore display **USD quote on request**. Add real rates and their price basis in `offers.ts`, then regenerate the PDF and website. Do not substitute invented prices.
+
+Enquiries prepare an email draft for the visitor to send, or download a text brief. Direct server delivery remains disabled until a real endpoint is connected and tested. The existing saved Folio, optional detailed planner, journey ideas and Journal remain available.

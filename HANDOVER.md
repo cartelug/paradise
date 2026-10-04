@@ -1,97 +1,55 @@
-# Pardus Luxury Escapes — website handover
+# Pardus Luxury Escapes — V22 handover
 
-**Release:** V21, the handover release, 25 September 2026 · **Built by:** 97 Design
-**Live preview:** https://cartelug.github.io/paradise/
+Release: 4 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
-This is the starting point for whoever runs the site next. It covers what is finished, what the business still needs to supply, and exactly where each item goes. For content editing and release rules, see `website/V20-MAINTENANCE.md`.
+## Revised experience
 
-## What is live
+The homepage now moves from a cinematic, immediately readable hero to Maldives and Seychelles, the full service offering, private cruises, Dubai and other destinations, clear reasons to choose Pardus, current travel updates and one simple enquiry.
 
-29 pages, published from the `main` branch by GitHub Pages:
+The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with pause and reduced-motion support. Destination cards show suggested duration, experience, a USD price field and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
 
-- **Homepage:** the animated opening, the Travel.Explore chapter, an interactive destination atlas, journey ideas, the Folio and Journal highlights.
-- **Destinations (6):** the Maldives, Zanzibar, Seychelles, East Africa, Europe and Dubai, each with a full dossier page.
-- **Journey ideas (6):** Safari & Shore, Private Island Reset, Celebration in Two Acts, Family in the Wild, Mediterranean at Human Pace and Executive Arrivals.
-- **Journal (5 articles):** with an index, search and topic filters.
-- **Journey planner:** four guided steps that produce a downloadable brief, with online delivery built in (see below).
-- **The Pardus way, Travel concierge, Corporate travel, Contact, Privacy, Terms and a 404 page.**
+New dedicated pages cover private cruises, the travel desk and the concept note. The former four-stage planner is retained at `planner.html`; `journey.html` is now a simple enquiry. Existing Folio, journey ideas and Journal routes remain.
 
-Quality checks at release: type check with no errors; 16 unit tests; the browser regression suite (all 29 pages at five screen sizes, plus menus, Folio, planner, reduced motion and no-JavaScript reading); axe-core accessibility scan with no violations on any page at desktop and mobile; and a link, anchor, metadata and structured-data audit of every page. The switched-on enquiry, social and custom-domain paths were each rehearsed on a separate build.
+## Prices and contact details
 
-## What the business needs to supply
+The latest instruction requests USD. All rates in `website/src/data/offers.ts` remain `null` because the supplied sample brochure contained discounts, not approved package prices. Those fields display **USD quote on request**. Set each `fromUSD` and `priceBasis` only after approval; regenerate the PDF and website together.
 
-Every item below is a setting, not development work. Empty settings show nothing, so the site never displays a fake contact or a dead link.
+The planned contact addresses from the latest brief are:
 
-All settings except the domain live in `website/src/data/site.ts`.
+| Purpose | Address |
+| --- | --- |
+| General enquiries | info@pardusescapes.com |
+| Bookings and travel enquiries | bookings@pardusescapes.com |
+| Support and feedback | support@pardusescapes.com |
+| Director | director@pardusescapes.com |
 
-| Supply | Setting | What changes on the site |
-| --- | --- | --- |
-| A form-delivery address (Formspree or any compatible service) | `enquiryEndpoint` | The planner sends each brief to Pardus as well as downloading it. The Contact page gains a message form. Planner, privacy and terms wording updates to match. |
-| Business email | `email` | Shown on the Contact page, offered if a message fails to send, and added to search-engine business data. |
-| WhatsApp number (international format, e.g. `+256 700 000 000`) | `whatsapp` | A "Message us on WhatsApp" link on the Contact page. |
-| Instagram and TikTok profile links (full `https://` URLs) | `social.instagram`, `social.tiktok` | Links in the footer of every page, plus search-engine business data. |
-| Cloudflare Web Analytics token (optional) | `analyticsId` | Cookieless visit statistics. The privacy page names the provider automatically. |
-| Own domain | build settings (see below) | Every page address, the sitemap, `robots.txt` and link previews move to the new domain. |
+The first three appear on the contact page. Forms address bookings. The director address is reserved for executive use. Mailbox activation has not been verified; domain/email-provider setup is separate from the GitHub Pages site. No DNS or mailbox configuration was changed.
 
-After changing a setting, publish (see *Publishing a change*). Before announcing online enquiries, send a real test through the planner and the Contact page and confirm it arrives. The code path is rehearsed, but only a real test proves the inbox receives it.
+The simple form opens a prepared email draft. The visitor sends it from their email app. It also downloads a text enquiry and clearly states that downloading does not send it. No booking, payment or availability is promised. Set `enquiryEndpoint` in `website/src/data/site.ts` only after configuring delivery, and verify a real received enquiry before advertising server submission. WhatsApp remains hidden until a verified business number is supplied.
 
-## Moving to your own domain
+## Travel desk
 
-1. Buy the domain. In the GitHub repository, open **Settings → Pages**, enter the domain under **Custom domain**, and turn on **Enforce HTTPS** once it is offered.
-2. Create `website/public/CNAME` containing only the domain, e.g. `www.yourdomain.com`, so every export keeps it.
-3. At your domain registrar, point DNS at GitHub Pages as GitHub's Pages documentation describes. Use a `CNAME` record from `www` to `cartelug.github.io`, and for the bare domain the four `A` records `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`.
-4. Rebuild for the new address:
+`website/scripts/update-travel-desk.py` retrieves official Uganda Civil Aviation Authority headlines. Curated Dubai entries link directly to Visit Dubai and Emirates and carry dates and expiry dates. Only short original summaries are shown.
 
-   ```sh
-   cd website
-   PARDUS_SITE=https://www.yourdomain.com PARDUS_BASE=/ npm run build
-   node scripts/export-github.mjs
-   PARDUS_BASE=/ npm run verify:export
-   ```
+`.github/workflows/travel-desk.yml` runs daily at 04:17 UTC and can be run manually. It updates both public JSON copies. The browser reads the current raw GitHub feed, with the locally exported feed as a fallback. This allows fresh news without relying on an Actions-bot commit to trigger a GitHub Pages rebuild. Expired curated entries disappear. Failed retrieval retains the last successful check date instead of claiming freshness.
 
-5. Commit and push `main`. From then on, always build with those two values.
+## Concept note
 
-Business email addresses (the planned 10+ inboxes such as hello@ and bookings@) are set up with the email provider bought alongside the domain. They are not part of the website.
-
-## Publishing a change
-
-Use Node.js 22 or newer.
+The four-page note uses the same destination, duration and price data as the website, with concise benefits, private cruises and all thirteen services. Regenerate using:
 
 ```sh
 cd website
-npm ci
-npm run check
-npm test
-PARDUS_BASE=/paradise/ npm run build
-node scripts/export-github.mjs
-npm run verify:export
+python scripts/make-concept-note.py
 ```
 
-Then review the changes, commit the source and the regenerated root files together, and push `main`. GitHub Pages deploys within a few minutes. The export replaces all generated files at the repository root, so never edit those by hand; edit `website/` instead.
+Python dependencies: ReportLab and Pillow; the generator uses locally installed DejaVu fonts. Inspect rendered pages after changing copy or prices.
 
-For the full browser regression, serve the repository so the export is available at `http://127.0.0.1:4180/paradise/` and run `python tests/browser-smoke.py` from `website/`. After a domain move, serve the export at the root and set `PARDUS_QA_BASE=http://127.0.0.1:4180`.
+## Release checks
 
-## Before promoting the site widely
+V22 passed the Astro source check with no diagnostics, all 16 unit tests, the production build and export verification for 33 pages. Browser review covered desktop, tablet (768 px) and mobile (375 px), with mobile menu navigation, destination filtering, enquiry preselection and downloading, and the leopard pause control. All four concept-note pages were rendered and inspected.
 
-These are business confirmations, not website tasks:
+Run the source check, unit tests, Pages build, export and reference verification as described in README.md. Inspect the website in a browser at desktop, tablet and mobile widths, including the menu, pause control, destination filters, enquiry preselection and download. Check the PDF visually. Do not reuse old V21 full-regression or accessibility claims as proof of a new release.
 
-- **Photography rights.** Destination photos are illustrative stock images and the homepage artwork is AI-generated. The Travel.Explore sandbank scene has no recorded source. Confirm rights for each image before commercial use (`ASSETS.md`).
-- **Font licence.** Confirm that the supplied Satoshi font files are licensed for public web use.
-- **Commitments in the copy.** The Pardus way page describes a four-step process, including that prices and terms are made clear before a decision and that nothing is booked until the proposal is accepted. The business should be sure it will honour this.
-- **Legal pages.** The privacy and terms pages describe this website only. Have them reviewed once the business identity, contact channels and booking terms are final.
+## Assets
 
-## Known limits
-
-- **Morocco and South Africa** are not included. Adding them needs properly licensed photography for each. Supply images, or source them from an environment that can reach stock-photo sites. The rest is one entry per destination in `website/src/data/destinations.ts`.
-- **No content management system.** Text and content live in `website/src/data/*.ts` and page files, so edits go through the publishing steps above.
-- **Hosting.** GitHub Pages cannot add custom security headers. If those become a requirement, the same build can be hosted on Cloudflare Pages or Netlify without code changes.
-
-## Where things live
-
-- `website/src/data/site.ts`: business settings, from the table above.
-- `website/src/data/destinations.ts`, `journeys.ts` and `journal.ts`: all destination, journey and Journal content.
-- `website/src/pages/`: page templates.
-- `website/src/styles/`: design (colours, typography, layouts).
-- `website/public/brand/`: the logo kit (primary, light and monochrome, SVG and PNG up to 4096 px), plus the 97 Design mark.
-- `website/V20-MAINTENANCE.md`: content rules, image production, enquiry activation and QA.
-- `ASSETS.md`: where every image came from.
+See ASSETS.md for retained stock photography, font provenance and generated imagery. New yacht imagery represents a generic private ocean experience; it does not advertise a specific vessel, hotel or operator. The original approved logo is preserved in `website/source-assets/pardus-approved-logo-2026-10.jpeg`.

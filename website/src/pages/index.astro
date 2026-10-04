@@ -1,67 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
-import SceneMedia from '../components/SceneMedia.astro';
-import Horizon from '../components/Horizon.astro';
-import Arrow from '../components/Arrow.astro';
 import Brand from '../components/Brand.astro';
+import EscapeCard from '../components/EscapeCard.astro';
+import SimpleEnquiry from '../components/SimpleEnquiry.astro';
+import TravelDesk from '../components/TravelDesk.astro';
 import { path } from '../data/site';
-import { destinations } from '../data/destinations';
-import { journeys } from '../data/journeys';
-import { journal } from '../data/journal';
-import '../styles/home.css';
-const atlas = ['maldives', 'seychelles', 'zanzibar', 'africa', 'dubai', 'europe'].map(slug => destinations.find(d => d.slug === slug)!);
-const notes = [journal.find(s => s.slug === 'choosing-your-maldives-island')!, journal.find(s => s.slug === 'what-a-private-safari-involves')!];
+import { offerFor, services } from '../data/offers';
 ---
-<Layout dark class="home-page" image="images/v20-horizon-desktop-1586.webp">
-  <section class="v20-hero" aria-labelledby="hero-title">
-    <Horizon />
-    <div class="v20-hero-content">
-      <h1 id="hero-title"><span class="visually-hidden">Pardus Luxury Escapes</span><span class="v20-wordmark" aria-hidden="true"><Brand vector light /></span><span class="v20-luxury" aria-hidden="true">Luxury Escapes</span></h1>
-      <p class="v20-hero-line">A world away. <em>Entirely yours.</em></p>
-      <p class="v20-hero-description">Private journeys, thoughtfully planned<br class="v20-mobile-break" /> from Africa to the world.</p>
-      <a class="v20-button" href="#collection">Find your elsewhere <Arrow direction="down" /></a>
-    </div>
-    <div class="v20-hero-edge"><span>Personally planned</span><a href="#travel-explore">Scroll to explore <Arrow direction="down" /></a><span>Africa · Indian Ocean · Beyond</span></div>
+<Layout dark simpleFooter class="escape-home">
+  <section class="escape-hero" aria-labelledby="hero-title">
+    <div class="escape-hero-media" data-scroll-media data-scroll-depth="20"><Picture name="maldives" alt="Overwater villas above the turquoise Indian Ocean in the Maldives" eager sizes="100vw" /></div>
+    <div class="escape-hero-shade" aria-hidden="true"></div>
+    <div class="escape-hero-copy"><p class="eyebrow">From Africa to the world</p><h1 id="hero-title">Luxury travel,<br /><em>beautifully</em><br />arranged.</h1><p class="escape-hero-description">Flights, exceptional stays and private experiences.<br class="desktop-only" /> You choose the destination. We take care of the details.</p><div class="escape-hero-actions"><a class="escape-button" href="#destinations">Explore destinations</a><a class="escape-button escape-button-outline" href="#enquire">Plan your escape</a></div></div>
+    <div class="leopard-route" aria-hidden="true"><div class="leopard-traveller"><div class="leopard-sprite" style={`--leopard-sheet:url('${path('images/leopard-walk.webp')}')`}></div></div></div>
+    <button class="motion-toggle requires-js" data-pause-leopard type="button" aria-pressed="false">Pause animation</button>
+    <div class="escape-hero-bottom"><span>Maldives · Seychelles · Dubai · Beyond</span><a href="#destinations">Discover your next escape</a></div>
   </section>
-  <section class="v20-explore" id="travel-explore" aria-labelledby="travel-explore-title" data-v20-scroll-signature>
-    <div class="v20-explore-frame">
-      <SceneMedia name="section-3-sandbank" />
-      <div class="v20-explore-fade" aria-hidden="true"></div>
-      <svg class="v20-route" viewBox="0 0 1000 620" fill="none" aria-hidden="true"><path d="M70 480C180 350 280 425 385 300S585 180 705 242 840 180 935 80" pathLength="1"/><circle cx="70" cy="480" r="5"/><circle cx="385" cy="300" r="5"/><circle cx="935" cy="80" r="5"/></svg>
-      <div class="v20-explore-copy"><h2 id="travel-explore-title"><span>Travel.</span><em>Explore.</em></h2><p>Find the place that changes your pace.</p></div>
-      <div class="v20-explore-bottom"><div><span>The wild</span><span>The water</span><span>The world beyond</span></div><a class="text-button" href="#collection">Explore destinations <Arrow /></a></div>
-    </div>
+  <section class="escape-featured escape-section" id="destinations" aria-labelledby="featured-title">
+    <div class="escape-heading"><div><p class="eyebrow">The signature escapes</p><h2 id="featured-title">Two islands.<br /><em>Endless possibilities.</em></h2></div><p>The Maldives and Seychelles, arranged around you.<br />Choose your escape. We’ll put the journey together.</p></div>
+    <div class="escape-featured-grid">{['maldives','seychelles'].map(slug => <EscapeCard offer={offerFor(slug)} featured />)}</div>
+    <p class="escape-price-note">Your proposal confirms the USD price, flights, room type, transfers and experiences for your travel dates. Suggested stays can be tailored.</p>
   </section>
-  <section class="v20-atlas v20-section" id="collection" aria-labelledby="atlas-title">
-    <div class="v20-heading"><h2 id="atlas-title">Where would you <em>rather be?</em></h2><a class="text-button" href={path('destinations.html')}>View all destinations <Arrow /></a></div>
-    <div class="v20-atlas-layout" data-destination-editor>
-      <div class="v20-atlas-tabs" role="tablist" aria-label="Featured destinations" aria-orientation="vertical">{atlas.map((d, i) => <button id={`tab-${d.slug}`} role="tab" aria-controls={`panel-${d.slug}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-destination-tab={d.slug}><span>{d.name}<small>{d.country}</small></span><Arrow /></button>)}</div>
-      <div class="v20-atlas-stage">{atlas.map((d, i) => <div id={`panel-${d.slug}`} role="tabpanel" aria-labelledby={`tab-${d.slug}`} data-panel={d.slug} hidden={i !== 0}>
-        <a class="v20-atlas-image" href={path(`destination-${d.slug}.html`)} aria-label={`Explore ${d.name}`}><Picture name={d.image} alt={d.alt} sizes="(max-width: 760px) 100vw, 65vw" /><span>{d.caption}</span></a>
-        <div class="v20-atlas-caption"><div><h3>{d.mood}</h3><p>{d.suggestedStay}</p></div><a class="text-button" href={path(`destination-${d.slug}.html`)}>Discover {d.name.replace('The ', 'the ')} <Arrow /></a></div>
-      </div>)}</div>
-    </div>
-    <noscript><p class="no-script-help">Browse all six places in the <a href={path('destinations.html')}>destination collection</a>.</p></noscript>
+  <section class="escape-services escape-section" id="what-we-arrange" aria-labelledby="arrange-title">
+    <div class="escape-heading"><div><p class="eyebrow">What Pardus arranges</p><h2 id="arrange-title">You choose where.<br /><em>We arrange the rest.</em></h2></div><p>A complete holiday, a business trip or one exceptional experience. Tell us what you need.</p></div>
+    <ul class="escape-service-grid">{services.map((service, i) => <li data-reveal><span>{String(i + 1).padStart(2,'0')}</span>{service}</li>)}</ul>
+    <a class="escape-underlined" href={path('concierge.html')}>Explore our travel services</a>
   </section>
-  <section class="v20-journeys v20-section" aria-labelledby="home-journeys-title">
-    <div class="v20-heading"><h2 id="home-journeys-title">Some journeys<br /><em>stay with you.</em></h2><div><p>A starting point for something personal.</p><a class="text-button" href={path('journeys.html')}>Explore all journeys <Arrow /></a></div></div>
-    <div class="v20-journey-grid">{journeys.slice(0,3).map(journey => <article class="home-concept-card v20-concept">
-      <a class="v20-concept-image" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 760px) 100vw, 45vw" /></a>
-      <p class="eyebrow">{journey.eyebrow}</p><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><p class="v20-concept-duration">{journey.duration.replace('Suggested rhythm / ', '')}<span> · {journey.pace} pace</span></p>
-      <div class="v20-concept-actions"><a class="text-button" href={path(`journey-${journey.slug}.html`)}>Explore the journey <Arrow /></a><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false" aria-label={`Save ${journey.name} to your Folio`}><span data-save-label>Save</span><span aria-hidden="true">+</span></button></div>
-    </article>)}</div>
+  <section class="escape-cruise" aria-labelledby="cruise-title">
+    <div class="escape-cruise-media" data-scroll-media data-scroll-depth="18"><Picture name="yacht-sunset" alt="A private motor yacht cruising across calm teal water at sunset" sizes="100vw" /></div><div class="escape-cruise-shade" aria-hidden="true"></div>
+    <div class="escape-cruise-copy"><p class="eyebrow">Private boat & yacht experiences</p><h2 id="cruise-title">Your own<br /><em>piece of the ocean.</em></h2><p>Dubai yacht cruises. Island excursions. Sunset moments.<br />Private celebrations, beautifully arranged.</p><div class="escape-cruise-price"><strong>USD quote on request</strong><span>Choose your destination, group size and time on the water.</span></div><a class="escape-button" href={path('cruises.html')}>Explore private cruises</a></div>
   </section>
-  <section class="v20-folio v20-section" id="folio-builder" aria-labelledby="folio-builder-title">
-    <div class="v20-folio-intro"><Brand mark light /><h2 id="folio-builder-title">Tell us what<br /><em>draws you.</em></h2><p>Choose a place, a pace, a reason.<br />Your Folio keeps the ideas together.</p><a class="v20-about-link" href={path('about.html')}>Discover the Pardus way <Arrow /></a></div>
-    <div class="v20-folio-controls"><div class="v20-choice-rows requires-js">
-      <fieldset><legend>Place</legend><div>{['Island','Wild','City','Culture','Open'].map(item => <button type="button" data-folio-choice="place" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-      <fieldset><legend>Pace</legend><div>{['Still','Balanced','Immersive'].map(item => <button type="button" data-folio-choice="pace" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-      <fieldset><legend>Reason</legend><div>{['Escape','Celebration','Family','Business'].map(item => <button type="button" data-folio-choice="reason" data-value={item} aria-pressed="false">{item}</button>)}</div></fieldset>
-    </div><button type="button" class="v20-button requires-js" data-folio-trigger>Review your Folio <Arrow /></button><noscript><p>A place, a pace, a reason. Begin with whatever you know.</p><a class="v20-button" href={path('journey.html')}>Begin a journey brief <Arrow /></a></noscript><p class="v20-folio-note">Ideas are saved on this device. You can change them any time.</p></div>
+  <section class="escape-more escape-section" aria-labelledby="more-title">
+    <div class="escape-heading"><div><p class="eyebrow">More places. More ways to escape.</p><h2 id="more-title">Where will you<br /><em>go next?</em></h2></div><a class="escape-underlined" href={path('destinations.html')}>All destinations</a></div>
+    <article class="escape-dubai" data-reveal><a class="escape-dubai-image" href={path('destination-dubai.html')} aria-label="Explore Dubai"><Picture name="dubai" alt="Dubai skyline overlooking the water" sizes="(max-width: 760px) 100vw, 55vw" /></a><div class="escape-dubai-copy"><p class="eyebrow">The city escape · 4 nights</p><h3>Dubai, beautifully done.</h3><p>Luxury hotels. Shopping and dining. Desert experiences. A private yacht cruise. A short escape with something for everyone.</p><a class="escape-source-link" href="https://www.visitdubai.com/articles/events-to-look-forward-to-this-season" target="_blank" rel="noopener noreferrer">Explore Dubai’s current winter events · Visit Dubai</a><div class="escape-card-price"><div><span class="price-label">Your escape</span><strong>USD quote on request</strong></div><a class="escape-enquire" href={`${path('journey.html')}?destination=Dubai`}>Enquire</a></div></div></article>
+    <div class="escape-secondary-grid">{['africa','zanzibar','europe'].map(slug => <EscapeCard offer={offerFor(slug)} />)}</div>
   </section>
-  <section class="v20-notes v20-section" aria-labelledby="notes-title">
-    <div class="v20-heading"><div><p class="eyebrow">The Pardus journal</p><h2 id="notes-title">Before you <em>go.</em></h2></div><a class="text-button" href={path('journal.html')}>Read the journal <Arrow /></a></div>
-    <div class="v20-note-grid">{notes.map(story => <article><a href={path(`journal-${story.slug}.html`)}><div class="v20-note-image"><Picture name={story.image} alt={story.alt} sizes="(max-width: 760px) 100vw, 50vw" /></div><p class="eyebrow">{story.category}</p><h3>{story.title}<Arrow /></h3></a></article>)}</div>
-  </section>
+  <section class="escape-why escape-section" aria-labelledby="why-title"><div class="escape-heading"><div><p class="eyebrow">Why Pardus</p><h2 id="why-title">A beautiful journey.<br /><em>A simpler way to plan.</em></h2></div><Brand mark /></div><div class="escape-why-grid">{[['One conversation','Flights, stays, transfers and experiences brought into one clear plan.'],['Made around you','Your dates, your budget and the people you are travelling with come first.'],['Clear before you book','Review your itinerary, USD price, inclusions and terms before confirming.']].map(([title,text],i) => <div data-reveal><span class="eyebrow">0{i+1}</span><h3>{title}</h3><p>{text}</p></div>)}</div></section>
+  <section class="escape-news escape-section" id="travel-desk" aria-labelledby="desk-title"><div class="escape-heading"><div><p class="eyebrow">Pardus travel desk</p><h2 id="desk-title">Know before<br /><em>you go.</em></h2></div><a class="escape-underlined" href={path('travel-desk.html')}>More travel updates</a></div><TravelDesk limit={3} /></section>
+  <section class="escape-enquiry-section escape-section" id="enquire" aria-labelledby="enquire-title"><div class="escape-enquiry-intro"><p class="eyebrow">Plan your escape</p><h2 id="enquire-title">Tell us where.<br /><em>We’ll take it from here.</em></h2><p>A destination, your dates and a little about your plans. That is all we need to start.</p><a class="escape-underlined" href={path('contact.html')}>Contact Pardus</a></div><SimpleEnquiry /></section>
 </Layout>
