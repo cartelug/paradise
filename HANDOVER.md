@@ -1,18 +1,22 @@
-# Pardus Luxury Escapes — V22 handover
+# Pardus Luxury Escapes — V23 handover
 
 Release: 4 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
 ## Revised experience
 
+V23 builds forward from V22. The new imagined island sunset hero has responsive AVIF/WebP assets, gentle camera drift and masked headline reveals. The approved logo draws and fills into place, its aircraft arrives, and the introduction lifts away after about four seconds. It runs once per browser tab session and can be replayed or skipped with the button or Escape. Focus returns to the invoking control. A failsafe keeps the page accessible if loading is interrupted.
+
+The leopard uses sixteen aligned transparent photographic poses, a continuous frame-rate-independent path, soft ground shadow and a subtle reflection. Animation stops off-screen or in hidden tabs. Pause stops the hero motion; reduced-motion preferences skip the introduction and remove movement. Destination reveals, pointer-responsive photography, service-row highlights and progressive page transitions complete the motion layer. Browsers without view-transition support retain normal links.
+
 The homepage now moves from a cinematic, immediately readable hero to Maldives and Seychelles, the full service offering, private cruises, Dubai and other destinations, clear reasons to choose Pardus, current travel updates and one simple enquiry.
 
-The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with pause and reduced-motion support. Destination cards show suggested duration, experience, a USD price field and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
+The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with pause and reduced-motion support. Destination cards show duration, experience, sample inclusions, an illustrative USD starting price and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
 
 New dedicated pages cover private cruises, the travel desk and the concept note. The former four-stage planner is retained at `planner.html`; `journey.html` is now a simple enquiry. Existing Folio, journey ideas and Journal routes remain.
 
 ## Prices and contact details
 
-The latest instruction requests USD. All rates in `website/src/data/offers.ts` remain `null` because the supplied sample brochure contained discounts, not approved package prices. Those fields display **USD quote on request**. Set each `fromUSD` and `priceBasis` only after approval; regenerate the PDF and website together.
+The client explicitly requested sample prices for this release. All six destinations now show illustrative USD starting prices per person, based on two sharing, plus sample inclusions. Flights, visas and travel insurance are extra. The four private cruise examples use a separate per-boat or per-charter basis with duration and guest count. These are design examples, not supplier quotes or live availability. All destination records in `website/src/data/offers.ts` have `sample: true`. Replace with verified rates and approved terms before changing that flag; regenerate the concept note and exported site together.
 
 The planned contact addresses from the latest brief are:
 
@@ -46,7 +50,9 @@ Python dependencies: ReportLab and Pillow; the generator uses locally installed 
 
 ## Release checks
 
-V22 passed the Astro source check with no diagnostics, all 16 unit tests, the production build and export verification for 33 pages. Browser review covered desktop, tablet (768 px) and mobile (375 px), with mobile menu navigation, destination filtering, enquiry preselection and downloading, and the leopard pause control. All four concept-note pages were rendered and inspected.
+V23 passed the Astro source check with no diagnostics and all 16 existing unit tests. Browser review covered desktop, tablet (768 px) and mobile (375 px), the sixteen-pose transparent leopard, intro replay and Escape skip, focus restoration, motion pause, all six destination sample prices, destination filtering and Dubai enquiry preselection. The fixed paused leopard position and stopped sprite/hero animations were verified across separate observations. Mobile enquiry had no horizontal page overflow. All four updated concept-note pages were rendered and inspected.
+
+Production build and export checks cover all 33 pages and their local asset references. Reduced-motion CSS and lifecycle fallbacks are implemented; this release does not claim a separate emulated-device accessibility audit.
 
 Run the source check, unit tests, Pages build, export and reference verification as described in README.md. Inspect the website in a browser at desktop, tablet and mobile widths, including the menu, pause control, destination filters, enquiry preselection and download. Check the PDF visually. Do not reuse old V21 full-regression or accessibility claims as proof of a new release.
 

@@ -39,9 +39,3 @@ document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form
     status.textContent = 'Your enquiry has been downloaded. It has not been sent to Pardus.';
   });
 });
-
-const pause = document.querySelector<HTMLButtonElement>('[data-pause-leopard]');
-pause?.addEventListener('click', () => {
-  const paused = document.body.classList.toggle('leopard-paused');
-  pause.setAttribute('aria-pressed', String(paused)); pause.textContent = paused ? 'Play animation' : 'Pause animation';
-});

@@ -1,4 +1,4 @@
-"""Build the revised Pardus concept note from the website's approved offer data."""
+"""Build the revised Pardus concept note from the website's clearly labelled sample offer data."""
 from pathlib import Path
 from io import BytesIO
 import json, re, subprocess
@@ -44,44 +44,52 @@ def header(label,title):
     text(label.upper(),42,H-36,510,9,gold if False else '#806025')
     text(title,42,H-61,510,30,ink,'PardusSerif',35)
 def price(o):
-    return 'USD quote on request' if o['fromUSD'] is None else 'From USD {:,.0f} {}'.format(o['fromUSD'],o['priceBasis'])
+    return 'USD quote on request' if o['fromUSD'] is None else 'From USD {:,.0f} · illustrative sample'.format(o['fromUSD'])
 # 01 - brand and proposition
 c.setFillColor(HexColor(navy));c.rect(0,0,W,H,fill=1,stroke=0)
 c.drawImage(str(project/'public/brand/pardus-light-2048.png'),42,H-113,width=200,height=81,mask='auto')
 text('LUXURY TRAVEL, BEAUTIFULLY ARRANGED.',42,H-138,510,9,gold)
 text('Your next escape.<br/>Beautifully arranged.',42,H-173,510,39,'#ffffff','PardusSerif',47)
-photo(project/'public/images/maldives-1920.webp',0,260,W,305)
+photo(project/'public/images/island-cinematic-1920.webp',0,260,W,305)
 text('You tell us where you want to go. We arrange the flights,<br/>stays, transfers and experiences around you.',42,231,510,13,'#edf1f5',leading=20)
 text('MALDIVES  /  SEYCHELLES  /  DUBAI  /  SAFARIS  /  PRIVATE CRUISES',42,148,510,9,gold)
-text('Every journey is quoted in USD for your dates, your chosen stay<br/>and the people travelling. Review the details before you book.',42,118,510,11,'#cad2df')
+text('Sample escape prices in USD. Your final itinerary, availability<br/>and price are confirmed for your dates before you book.',42,118,510,11,'#cad2df')
 footer(1,True);c.showPage()
 # 02 - two flagship islands
 header('The signature escapes','Maldives & Seychelles')
+text('Sample prices per person, two sharing. Flights, visas and insurance are extra.',42,725,511,9,muted)
 for o,top in zip(offers[:2],[699,381]):
     photo(project/f'public/images/{o["slug"]}-1280.webp',42,top-128,511,128)
     text(o['label'],42,top-144,350,25,ink,'PardusSerif',30)
     text(o['nights'].upper(),398,top-148,155,9,'#806025')
     text(price(o),42,top-184,511,13,'#806025')
     bottom=text(xml.escape(o['experience']),42,top-213,511,12,muted,leading=17)
-    text('ARRANGE: '+xml.escape(' / '.join(o['highlights'])),42,bottom-12,511,9,ink,leading=14)
+    text('SAMPLE INCLUDES: '+xml.escape(' / '.join(o['inclusions'])),42,bottom-12,511,9,ink,leading=14)
     text('Request your dates, resort choice, transfers and private experiences in one clear proposal.',42,top-285,511,9,muted)
 footer(2);c.showPage()
 # 03 - other destinations, direct product cards
 header('More ways to escape','City, safari, coast & culture')
+text('Sample prices per person, two sharing. Flights, visas and insurance are extra.',42,725,511,9,muted)
 for o,(x,top) in zip(offers[2:],[(42,699),(309,699),(42,382),(309,382)]):
     photo(project/f'public/images/{o["slug"]}-1280.webp',x,top-115,244,115)
     text(o['label'],x,top-131,244,22,ink,'PardusSerif',27)
     text(o['nights'].upper(),x,top-166,244,9,'#806025')
     text(price(o),x,top-188,244,11,'#806025')
     bottom=text(xml.escape(o['experience']),x,top-215,244,11,muted,leading=16)
-    text('Tailored dates, stays and experiences.',x,bottom-10,244,9,muted)
+    text('SAMPLE INCLUDES: '+xml.escape(' / '.join(o['inclusions'])),x,bottom-10,244,9,muted,leading=13)
 footer(3);c.showPage()
 # 04 - cruises, services and enquiry
 header('Private boat & yacht experiences','Beautiful days on the water.')
 photo(project/'public/images/yacht-sunset-1280.webp',42,524,511,175)
-text('USD quote on request',42,504,511,14,'#806025')
-text('Dubai yacht cruises  /  Sunset & romantic cruises<br/>Island excursions  /  Private celebrations',42,476,511,12,ink,leading=20)
-text('Your proposal confirms the boat, route, duration, group size and requested inclusions.',42,420,511,10,muted)
+text('ILLUSTRATIVE PRIVATE CRUISE PRICES',42,507,511,9,'#806025')
+for title,amount,basis,x,top in [
+    ('Dubai yacht cruises',450,'Per yacht · 3 hours · up to 6 guests',42,486),
+    ('Sunset & romantic cruises',280,'Per boat · 2 hours · 2 guests',309,486),
+    ('Island excursions',650,'Per boat · 4 hours · up to 4 guests',42,444),
+    ('Private celebrations',1200,'Per charter · 4 hours · up to 10 guests',309,444)]:
+    text(xml.escape(title)+' — USD {:,}'.format(amount),x,top,244,10,ink)
+    text(basis,x,top-17,244,8,muted)
+text('Sample prices, not live offers. Boat, route, inclusions and final price are confirmed for your date.',42,408,511,8,muted)
 rule(390)
 text('YOU CHOOSE WHERE. WE ARRANGE THE REST.',42,372,511,10,'#806025')
 services=['Flights','Luxury hotels & resorts','Private transfers','Visa guidance','Boat & yacht cruises','Safaris','Honeymoons','Family holidays','Group travel','Corporate travel','Private tours','Activities & experiences','Custom itineraries']

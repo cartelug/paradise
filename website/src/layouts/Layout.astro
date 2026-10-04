@@ -4,12 +4,14 @@ import '@fontsource-variable/fraunces/wght-italic.css';
 import '../styles/site.css';
 import '../styles/refinements.css';
 import '../styles/luxury.css';
+import '../styles/cinematic.css';
+import CinematicIntro from '../components/CinematicIntro.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks } from '../data/site';
-interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; }
-const { title, description = site.description, image = 'images/v20-horizon-desktop-1586.webp', dark = false, simpleFooter = false, class: className } = Astro.props;
+interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; intro?: boolean; }
+const { title, description = site.description, image = 'images/v20-horizon-desktop-1586.webp', dark = false, simpleFooter = false, class: className, intro = false } = Astro.props;
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
 const ogImage = absolute(image);
@@ -59,13 +61,20 @@ const organizationSchema = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline>document.documentElement.classList.add('js', 'page-ready');</script>
+    {intro && <script is:inline>
+      (()=>{try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('pardus-intro-v23')){document.documentElement.classList.add('intro-active');document.documentElement.dataset.introStarted=String(performance.now());document.documentElement.dataset.introFailsafe=String(setTimeout(()=>{document.documentElement.classList.remove('intro-active','intro-exiting');document.documentElement.classList.add('cinema-arrived');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},6500));}}catch{document.documentElement.classList.add('cinema-arrived');}})();
+    </script>}
   </head>
-  <body id="top" class={className} data-pardus-version="22">
+  <body id="top" class={className} data-pardus-version="23">
+    {intro && <CinematicIntro />}
+    <div data-pardus-shell>
     <div class="page-progress" aria-hidden="true"><span></span></div>
     <Header dark={dark} />
     <Folio />
     <main id="main" tabindex="-1"><slot /></main>
     <Footer simple={simpleFooter} />
+    </div>
     <script>import '../scripts/site.ts';</script>
+    <script>import '../scripts/cinematic.ts';</script>
   </body>
 </html>

@@ -20,7 +20,8 @@ initFolio();
 
 if ('IntersectionObserver' in window && !motion.matches) {
   const sectionCounts = new Map<Element, number>();
-  const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal]')];
+  const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal], .escape-heading h2, .escape-heading .eyebrow, .escape-enquiry-intro h2, .escape-page-intro h1, .escape-detail-heading h1')];
+  targets.forEach(target => { target.dataset.reveal = ''; });
   targets.forEach(target => {
     const section = target.closest('section') || document.body;
     const order = sectionCounts.get(section) || 0;
@@ -45,8 +46,9 @@ if ('IntersectionObserver' in window && !motion.matches) {
     else reveal.observe(el);
   });
   root.classList.add('motion-ready');
-  // A slow or interrupted observer must never leave content hidden.
-  window.setTimeout(() => targets.forEach(el => el.classList.add('revealed')), 2400);
+  // IntersectionObserver reveals each section when it enters the viewport.
+  // A failed enhancement removes the motion gate so the content stays readable.
+  window.addEventListener('error', () => root.classList.remove('motion-ready'), {once:true});
 
   const sections = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
@@ -64,7 +66,7 @@ function paintScrollMotion() {
   scrollFrame = 0;
   const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   root.style.setProperty('--page-progress', String(Math.min(1, Math.max(0, window.scrollY / scrollable))));
-  if (motion.matches) return;
+  if (motion.matches || root.classList.contains('motion-paused')) return;
   for (const element of scrollMedia) {
     const box = element.getBoundingClientRect();
     if (box.bottom < -100 || box.top > window.innerHeight + 100) continue;
