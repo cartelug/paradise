@@ -7,7 +7,6 @@ const skip = document.querySelector<HTMLButtonElement>('[data-skip-intro]');
 let introTimer = 0;
 let closingTimer = 0;
 let deadline = 0;
-let introReturnFocus: HTMLElement | null = null;
 if (root.dataset.introFailsafe) window.clearTimeout(Number(root.dataset.introFailsafe));
 
 function finishIntro(immediate = false) {
@@ -21,7 +20,7 @@ function finishIntro(immediate = false) {
     root.classList.add('cinema-arrived');
     shell?.removeAttribute('inert');
     try { sessionStorage.setItem('pardus-intro-v23', 'seen'); } catch { /* storage is optional */ }
-    if (restoreFocus) (introReturnFocus || document.querySelector<HTMLElement>('#main'))?.focus({preventScroll:true});
+    if (restoreFocus) document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
     syncMotion();
   };
   if (immediate || reduced.matches) complete();
@@ -32,15 +31,9 @@ function finishIntro(immediate = false) {
   }
 }
 
-function beginIntro(replay = false) {
+function beginIntro() {
   if (!intro || reduced.matches) { root.classList.add('cinema-arrived'); return; }
   window.clearTimeout(introTimer); window.clearTimeout(closingTimer); window.clearTimeout(deadline);
-  if (replay) {
-    introReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    root.classList.remove('intro-active', 'intro-exiting', 'cinema-arrived');
-    void intro.offsetWidth;
-    root.dataset.introStarted = String(performance.now());
-  }
   root.classList.add('intro-active');
   shell?.setAttribute('inert', '');
   skip?.focus({preventScroll:true});
@@ -54,19 +47,16 @@ intro?.addEventListener('keydown', event => {
   if (event.key === 'Escape') finishIntro(true);
   if (event.key === 'Tab') { event.preventDefault(); skip?.focus(); }
 });
-document.querySelectorAll<HTMLButtonElement>('[data-replay-intro]').forEach(button => button.addEventListener('click', () => beginIntro(true)));
 
 // A sixteen-pose, aligned gait moves on a continuous frame-rate-independent path.
-// Stop work when the hero is off-screen, hidden, paused, or reduced motion is requested.
+// Stop work when the hero is off-screen, hidden, or reduced motion is requested.
 const stage = document.querySelector<HTMLElement>('[data-leopard-stage]');
 const cat = document.querySelector<HTMLElement>('[data-leopard-traveller]');
 const hero = document.querySelector<HTMLElement>('.escape-hero');
-const pause = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
 let stageWidth = stage?.clientWidth || window.innerWidth;
 let catWidth = cat?.offsetWidth || 300;
 let position = Math.max(0, stageWidth * .57 - catWidth / 2);
 let visible = true;
-let paused = false;
 let frame = 0;
 let previous = 0;
 function paintCat() {
@@ -84,18 +74,11 @@ function tick(time: number) {
 }
 function syncMotion() {
   root.classList.toggle('motion-reduced', reduced.matches);
-  root.classList.toggle('motion-paused', paused);
   root.classList.toggle('hero-dormant', !visible || document.hidden);
-  const canRun = !!cat && visible && !document.hidden && !paused && !reduced.matches && !root.classList.contains('intro-active');
+  const canRun = !!cat && visible && !document.hidden && !reduced.matches && !root.classList.contains('intro-active');
   if (canRun && !frame) { previous = 0; frame = window.requestAnimationFrame(tick); }
   else if (!canRun && frame) { window.cancelAnimationFrame(frame); frame = 0; previous = 0; }
 }
-pause?.addEventListener('click', () => {
-  paused = !paused;
-  pause.setAttribute('aria-pressed', String(paused));
-  pause.textContent = paused ? 'Play motion' : 'Pause motion';
-  syncMotion();
-});
 if (hero && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; syncMotion(); }, {threshold:0});
   observer.observe(hero);
@@ -116,7 +99,7 @@ else { root.classList.add('cinema-arrived'); syncMotion(); }
 document.querySelectorAll<HTMLElement>('.escape-card-image,.escape-dubai-image').forEach(card => {
   let pending = 0, x = 0, y = 0;
   card.addEventListener('pointermove', event => {
-    if (!finePointer.matches || reduced.matches || paused) return;
+    if (!finePointer.matches || reduced.matches) return;
     const box = card.getBoundingClientRect();
     x = (event.clientX - box.left) / box.width - .5;
     y = (event.clientY - box.top) / box.height - .5;

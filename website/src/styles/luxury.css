@@ -1,5 +1,5 @@
 /* PARDUS V22: midnight navy, direct offers, restrained motion. */
-.js .escape-form .requires-js,.js .motion-toggle.requires-js{display:inline-flex!important}
+.js .escape-form .requires-js{display:inline-flex!important}
 :root{--ink:#071426;--navy:#0c1e36;--paper:#f5f6f8;--white:#fff;--sand:#e9edf2;--gold:#d7ba7d;--gold-dark:#806025;--muted:#5b6574;--line:#d6dce4;--gutter:clamp(22px,5vw,88px)}
 body{background:var(--paper)}
 .site-header,.home-page .site-header,.site-header.header-scrolled{height:88px;padding:12px var(--gutter);background:#071426f8;color:#f7f7f8;border-bottom:1px solid #ffffff16;gap:24px;backdrop-filter:blur(16px)}
@@ -26,8 +26,7 @@ body{background:var(--paper)}
 .escape-hero-bottom{position:absolute;left:var(--gutter);right:var(--gutter);bottom:22px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid #ffffff28;padding-top:17px;font-size:12px;color:#d4dce5}.escape-hero-bottom a{color:#f5e7cb}
 .leopard-route{position:absolute;bottom:52px;left:0;right:0;height:124px;overflow:hidden;pointer-events:none}.leopard-traveller{position:absolute;bottom:-16px;width:190px;height:190px;animation:leopard-cross 30s linear infinite;will-change:transform}
 .leopard-sprite{width:100%;height:100%;background-image:var(--leopard-sheet);background-size:400% 200%;background-repeat:no-repeat;animation:leopard-gait 1.55s steps(1,end) infinite}
-.motion-toggle{position:absolute;bottom:91px;right:var(--gutter);background:#071426a3;border:1px solid #ffffff40;color:#dce3eb;min-height:34px;padding:7px 11px;font-size:12px;z-index:3}
-.leopard-paused .leopard-traveller,.leopard-paused .leopard-sprite{animation-play-state:paused}
+
 @keyframes leopard-cross{from{transform:translateX(-210px)}to{transform:translateX(calc(100vw + 210px))}}
 @keyframes leopard-gait{0%{background-position:0 0}12.5%{background-position:33.333% 0}25%{background-position:66.666% 0}37.5%{background-position:100% 0}50%{background-position:0 100%}62.5%{background-position:33.333% 100%}75%{background-position:66.666% 100%}87.5%{background-position:100% 100%}}
 .escape-featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}.escape-card{min-width:0;background:#fff;color:var(--ink);border:1px solid #dde2e8;overflow:hidden}
@@ -90,7 +89,7 @@ body{background:var(--paper)}
 .escape-hero-copy{padding:58px 24px 205px}.escape-hero-copy>.eyebrow{font-size:11px;margin-bottom:22px}.escape-hero h1{font-size:clamp(47px,11.6vw,72px);line-height:1.08}
 .escape-hero-description{font-size:16px;margin-top:23px;max-width:360px}.escape-hero-actions{gap:12px;margin-top:26px;align-items:flex-start}.escape-hero-actions .escape-button{min-height:49px;padding:13px 15px;font-size:13px}
 .escape-hero-bottom{left:24px;right:24px;bottom:20px;font-size:11px;align-items:center}.escape-hero-bottom>span{max-width:195px}.escape-hero-bottom>a{max-width:115px;text-align:right}
-.leopard-route{bottom:56px;height:130px}.leopard-traveller{width:180px;height:180px;animation-duration:24s}.motion-toggle{right:24px;bottom:159px;font-size:11px;min-height:32px}
+.leopard-route{bottom:56px;height:130px}.leopard-traveller{width:180px;height:180px;animation-duration:24s}
 .escape-heading{display:block;margin-bottom:31px}.escape-heading>p{max-width:100%;margin-top:22px;font-size:16px}.escape-heading>.escape-underlined{margin-top:18px}.escape-home h2,.escape-inner h2{font-size:42px}.escape-heading .eyebrow{font-size:11px;margin-bottom:14px}
 .escape-featured-grid{grid-template-columns:1fr;gap:26px}.escape-card-featured .escape-card-image{height:280px}.escape-card-copy{padding:23px}.escape-card-featured h3{font-size:37px}.escape-card-price strong{font-size:16px}.escape-card-price{gap:12px}.escape-enquire{padding:10px 15px}
 .escape-highlights{display:block;margin-top:15px}.escape-highlights li{margin-top:4px;font-size:13px}.escape-price-note{text-align:left;line-height:1.6;font-size:12px;margin-top:20px}
@@ -109,7 +108,7 @@ body{background:var(--paper)}
 .escape-contacts{grid-template-columns:1fr;padding-top:0;gap:33px}.footer-main{grid-template-columns:1fr 1fr!important}.footer-column .eyebrow,.footer-column a{font-size:13px}.footer-base{font-size:12px;line-height:1.8}.footer-utility{gap:18px!important}.desktop-only{display:none}
 }
 @media(max-width:380px){.site-header{padding-inline:18px;gap:12px}.site-header .brand-link.header-leopard,.site-header.header-dark .brand-link.header-leopard{width:96px;min-width:96px}.site-header .header-journey{font-size:11px;padding:10px}.escape-hero{min-height:740px}.escape-form-grid{grid-template-columns:1fr}.escape-form label span{display:inline}.escape-service-grid{grid-template-columns:1fr}.escape-secondary-grid .escape-card-price{display:grid}.escape-hero-actions{flex-direction:column}.escape-home h2{font-size:38px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.leopard-traveller{animation:none;left:60%;transform:translateX(-50%)}.leopard-sprite{animation:none;background-position:0 0}.motion-toggle{display:none!important}.escape-hero-media img,.escape-cruise-media img{transform:none}.escape-button:hover{transform:none}.escape-card-image img{transition:none}.escape-card-image:hover img{transform:none}}
-@media print{.leopard-route,.motion-toggle,.escape-form{display:none}.escape-section{padding:25px}.escape-card,.escape-dubai{break-inside:avoid}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.leopard-traveller{animation:none;left:60%;transform:translateX(-50%)}.leopard-sprite{animation:none;background-position:0 0}.escape-hero-media img,.escape-cruise-media img{transform:none}.escape-button:hover{transform:none}.escape-card-image img{transition:none}.escape-card-image:hover img{transform:none}}
+@media print{.leopard-route,.escape-form{display:none}.escape-section{padding:25px}.escape-card,.escape-dubai{break-inside:avoid}}
 .escape-cruise-grid{grid-template-columns:repeat(2,1fr)}
 @media(max-width:760px){.escape-cruise-grid{grid-template-columns:1fr}}

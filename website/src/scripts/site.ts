@@ -66,7 +66,7 @@ function paintScrollMotion() {
   scrollFrame = 0;
   const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   root.style.setProperty('--page-progress', String(Math.min(1, Math.max(0, window.scrollY / scrollable))));
-  if (motion.matches || root.classList.contains('motion-paused')) return;
+  if (motion.matches) return;
   for (const element of scrollMedia) {
     const box = element.getBoundingClientRect();
     if (box.bottom < -100 || box.top > window.innerHeight + 100) continue;

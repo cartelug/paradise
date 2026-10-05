@@ -1,16 +1,18 @@
-# Pardus Luxury Escapes — V23 handover
+# Pardus Luxury Escapes — V24 handover
 
 Release: 4 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
 ## Revised experience
 
-V23 builds forward from V22. The new imagined island sunset hero has responsive AVIF/WebP assets, gentle camera drift and masked headline reveals. The approved logo draws and fills into place, its aircraft arrives, and the introduction lifts away after about four seconds. It runs once per browser tab session and can be replayed or skipped with the button or Escape. Focus returns to the invoking control. A failsafe keeps the page accessible if loading is interrupted.
+V24 builds forward from V23 and removes the hero’s Play intro and Pause motion controls. The approved animated logo introduction still runs automatically once per tab session. It lifts away after about four seconds, with Skip introduction, Escape, reduced-motion and a loading failsafe. Focus moves to the page when the introduction is skipped.
 
-The leopard uses sixteen aligned transparent photographic poses, a continuous frame-rate-independent path, soft ground shadow and a subtle reflection. Animation stops off-screen or in hidden tabs. Pause stops the hero motion; reduced-motion preferences skip the introduction and remove movement. Destination reveals, pointer-responsive photography, service-row highlights and progressive page transitions complete the motion layer. Browsers without view-transition support retain normal links.
+Eight photographic families now use verified Unsplash uploads from 2025 and 2026: the Maldives dusk hero and JOALI aerial view, La Digue in Seychelles, Dubai Marina at dusk, elephants in Amboseli, Zanzibar’s shoreline, Santorini and a Dubai Marina yacht. Sources, upload dates, licences and master checksums are recorded in `website/source-assets/v24-photography/credits.json`. Upload dates do not assert capture dates; destination imagery does not imply a supplier partnership. AVIF and WebP sizes at 640, 1280 and 1920 pixels are served locally. Destination pages, cards, journey ideas, the Journal, planner and concept note share the refreshed images.
+
+The sixteen-pose transparent leopard, continuous path, ground shadow, reflection, destination reveals, photography hover motion and page transitions remain. Animation stops off-screen or in hidden tabs. Operating-system reduced-motion preferences skip the introduction and remove movement. Browsers without view-transition support retain normal links.
 
 The homepage now moves from a cinematic, immediately readable hero to Maldives and Seychelles, the full service offering, private cruises, Dubai and other destinations, clear reasons to choose Pardus, current travel updates and one simple enquiry.
 
-The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with pause and reduced-motion support. Destination cards show duration, experience, sample inclusions, an illustrative USD starting price and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
+The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with reduced-motion support. Destination cards show duration, experience, sample inclusions, an illustrative USD starting price and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
 
 New dedicated pages cover private cruises, the travel desk and the concept note. The former four-stage planner is retained at `planner.html`; `journey.html` is now a simple enquiry. Existing Folio, journey ideas and Journal routes remain.
 
@@ -50,12 +52,12 @@ Python dependencies: ReportLab and Pillow; the generator uses locally installed 
 
 ## Release checks
 
-V23 passed the Astro source check with no diagnostics and all 16 existing unit tests. Browser review covered desktop, tablet (768 px) and mobile (375 px), the sixteen-pose transparent leopard, intro replay and Escape skip, focus restoration, motion pause, all six destination sample prices, destination filtering and Dubai enquiry preselection. The fixed paused leopard position and stopped sprite/hero animations were verified across separate observations. Mobile enquiry had no horizontal page overflow. All four updated concept-note pages were rendered and inspected.
+V24 passed the Astro source check with no diagnostics and all 16 existing unit tests. Browser review covered the desktop homepage, 375 px and 768 px responsive layouts, automatic logo introduction, removal of both hero controls, island image loading, all six refreshed destination families, the Maldives destination hero, Dubai yacht page and Maldives enquiry preselection. The mobile and tablet pages reviewed had no horizontal overflow. All four updated concept-note pages were rendered and visually inspected.
 
-Production build and export checks cover all 33 pages and their local asset references. Reduced-motion CSS and lifecycle fallbacks are implemented; this release does not claim a separate emulated-device accessibility audit.
+Production build and export checks cover all 33 pages and their local asset references. Reduced-motion CSS and lifecycle fallbacks remain implemented; this release does not claim a separate emulated-device accessibility audit.
 
-Run the source check, unit tests, Pages build, export and reference verification as described in README.md. Inspect the website in a browser at desktop, tablet and mobile widths, including the menu, pause control, destination filters, enquiry preselection and download. Check the PDF visually. Do not reuse old V21 full-regression or accessibility claims as proof of a new release.
+Run the source check, unit tests, Pages build, export and reference verification as described in README.md. Inspect the website in a browser at desktop, tablet and mobile widths, including the menu, destination filters, enquiry preselection and download. Check the PDF visually. Earlier release checks do not establish verification of a new release.
 
 ## Assets
 
-See ASSETS.md for retained stock photography, font provenance and generated imagery. New yacht imagery represents a generic private ocean experience; it does not advertise a specific vessel, hotel or operator. The original approved logo is preserved in `website/source-assets/pardus-approved-logo-2026-10.jpeg`.
+See ASSETS.md for retained stock photography, font provenance and generated imagery. The yacht photo depicts Dubai Marina and illustrates the experience; it does not advertise a specific vessel or operator. The original approved logo is preserved in `website/source-assets/pardus-approved-logo-2026-10.jpeg`.

@@ -1,6 +1,6 @@
 # Image sources
 
-Approved Pardus logo: user-uploaded JPEG. Photography reused from the previous Pardus concept. These are illustrative stock images, not evidence of owned properties or supplier partnerships. Confirm rights and destination accuracy before a public launch.
+Approved Pardus logo: user-uploaded JPEG. V24 refreshes the destination and yacht photography with verified, freely licensed Unsplash photographs. Retained legacy assets are documented below. Photography illustrates locations and experiences; it is not evidence of owned properties or supplier partnerships.
 
 The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The current header and footer use faithful vector paths from `src/data/logo.json`. V22 traces the 1280 × 720 approved October logo, including its diagonal aircraft; the original is preserved in `source-assets/pardus-approved-logo-2026-10.jpeg`.
 
@@ -52,3 +52,20 @@ Generation briefs: a realistic adult leopard walking elegantly in eight consiste
 Generated with OpenAI ImageGen on 4 October 2026: `source-assets/v23-island-hero.png` and `source-assets/v23-leopard-walk.png`. The hero depicts an imagined Indian Ocean island, not a named property. It was prompted as a striking sunset photograph with a crescent of white sand, luminous turquoise lagoons, palms, overwater villas and open space on the left for live text. The leopard was prompted as a consistent realistic adult in sixteen right-facing walk-cycle poses, a locked camera and ground baseline, natural anatomy and real alpha transparency. A second image edit removed the background while preserving the animal poses.
 
 `website/scripts/prepare-v23-assets.mjs` creates responsive AVIF/WebP hero derivatives and aligns the sixteen alpha poses into one horizontal WebP sprite. Frame anchors are recorded in `source-assets/v23-frame-alignment.json`. The original approved logo is animated directly from the established vector paths; no new logo was generated.
+
+## V24 researched destination photography
+
+Verified on 4 October 2026. All eight selected photographs are freely usable for commercial web display under the [Unsplash License](https://unsplash.com/license), not Unsplash+. Dates below are the uploader’s publication dates, not claimed capture dates. These are real location photographs, replacing the active generated hero/yacht scenes and the older destination families. They do not establish a resort or vessel partnership, or guarantee that a pictured property is included in a sample price.
+
+| Asset | Location | Photographer | Published | Source |
+| --- | --- | --- | --- | --- |
+| `hero-maldives-v24` | Maldives | Rafael Peier | 2026-06-24 | [Photo](https://unsplash.com/photos/zJ5IHm2UyVI) |
+| `maldives-v24` | JOALI Maldives, Muravandhoo Island, Maldives | Fayaz Moosa | 2025-07-03 | [Photo](https://unsplash.com/photos/2jUzVYS5URE) |
+| `seychelles-v24` | La Digue Island, Seychelles | Datingscout | 2025-02-17 | [Photo](https://unsplash.com/photos/KxKzp4e7gak) |
+| `dubai-v24` | Dubai Marina, Dubai, United Arab Emirates | Nejc Soklič | 2026-01-10 | [Photo](https://unsplash.com/photos/city-skyline-at-dusk-with-warm-orange-sky-2sTdng2g7mM) |
+| `africa-v24` | Amboseli National Park, Kenya | Sweder Breet | 2025-02-02 | [Photo](https://unsplash.com/photos/wZE7X2sYgfU) |
+| `zanzibar-v24` | Z-Lodge Zanzibar, Zanzibar, Tanzania | Jack Balke | 2025-09-16 | [Photo](https://unsplash.com/photos/pZo2wyXQr-Q) |
+| `europe-v24` | Santorini, Greece | User_Pascal | 2025-05-23 | [Photo](https://unsplash.com/photos/EBtf5Zpgips) |
+| `yacht-dubai-v24` | Dubai Marina, Dubai, United Arab Emirates | Dawid Tkocz | 2026-01-15 | [Photo](https://unsplash.com/photos/RYnf6TWBaQc) |
+
+Masters, download URLs, alt text and SHA-256 checksums are in `website/source-assets/v24-photography/credits.json`. `website/scripts/prepare-v24-photography.mjs` produces local 3:2 crops as AVIF/WebP at 640, 1280 and 1920 pixels. The new versioned filenames avoid stale image caches. The V23 generated leopard and approved vector logo remain unchanged.

@@ -72,10 +72,6 @@ html.intro-active{overflow:hidden}
 .leopard-reflection{top:calc(100% - 34px);bottom:auto;height:100%;opacity:.1;transform:scaleY(-1);transform-origin:center top;filter:blur(1px);mask-image:linear-gradient(0deg,#000,transparent 24%)}
 @keyframes leopard-gait-v23{from{background-position:0 0}to{background-position:106.666667% 0}}
 @keyframes leopard-weight{0%,50%,100%{transform:scaleX(.96);opacity:.65}25%,75%{transform:scaleX(1.03);opacity:.85}}
-.hero-motion-controls{position:absolute;right:var(--gutter);top:24px;bottom:auto;z-index:4;display:flex;gap:15px;align-items:center}
-.js .hero-motion-controls .requires-js{display:inline-flex!important}
-.hero-motion-controls .motion-toggle,.motion-replay{position:static;min-height:38px;font-size:12px;color:#ecdfc4;background:#0614279c;border:1px solid #d5bf8e4d;padding:8px 12px;backdrop-filter:blur(8px)}
-.motion-replay{background:#0614279c;border-color:#d5bf8e4d;cursor:pointer}
 .hero-offers{bottom:24px;display:block;border-top-color:#d0b5854d;padding-top:15px}
 .hero-offers>p{display:flex;justify-content:space-between;font-size:12px;color:#ead6b1;margin-bottom:13px;letter-spacing:.035em}
 .hero-offers>p>span{color:#adb9c8;letter-spacing:0}
@@ -128,14 +124,11 @@ html.intro-active{overflow:hidden}
   .escape-cruise:not(.section-entered) .escape-cruise-media img{transform:scale(1.13)}
   .escape-cruise.section-entered .escape-cruise-media img{transition:transform 1.6s var(--cinema-ease)}
 }
-.motion-paused .leopard-sprite,.motion-paused .leopard-shadow,.motion-paused .escape-hero-media picture,.motion-paused .hero-light,
 .hero-dormant .leopard-sprite,.hero-dormant .leopard-shadow,.hero-dormant .escape-hero-media picture,.hero-dormant .hero-light,
 .intro-active .leopard-sprite,.intro-active .leopard-shadow{animation-play-state:paused!important}
-.motion-paused [data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
-.motion-paused .escape-card-image img,.motion-paused .escape-dubai-image img{transform:none!important;transition:none!important}
 @media(min-width:1600px){.escape-hero-copy{padding-top:75px}.leopard-traveller{width:370px;height:246.667px}.leopard-route{height:190px}}
-@media(max-width:1240px){.escape-hero h1{font-size:84px}.escape-hero-copy{padding-top:54px}.hero-offers-grid>a{display:block;padding-inline:22px}.hero-offers-grid strong{text-align:left;display:block;margin-top:8px}.hero-offers-grid>a>span{font-size:20px}.hero-offers-grid>a>span small{display:inline;margin-left:8px}.hero-offers{bottom:24px}.leopard-route{bottom:169px}.hero-motion-controls{bottom:auto}}
-@media(max-width:900px){.escape-hero{min-height:820px}.escape-hero h1{font-size:75px}.hero-offers-grid>a>span small{display:block;margin-left:0}.hero-offers-grid>a{padding-inline:17px}.hero-offers-grid strong{font-size:16px}.hero-offers-grid>a>span{font-size:20px}.leopard-route{bottom:184px}.hero-motion-controls{bottom:auto;gap:5px}.hero-motion-controls button{font-size:11px;padding:7px 9px}}
+@media(max-width:1240px){.escape-hero h1{font-size:84px}.escape-hero-copy{padding-top:54px}.hero-offers-grid>a{display:block;padding-inline:22px}.hero-offers-grid strong{text-align:left;display:block;margin-top:8px}.hero-offers-grid>a>span{font-size:20px}.hero-offers-grid>a>span small{display:inline;margin-left:8px}.hero-offers{bottom:24px}.leopard-route{bottom:169px}}
+@media(max-width:900px){.escape-hero{min-height:820px}.escape-hero h1{font-size:75px}.hero-offers-grid>a>span small{display:block;margin-left:0}.hero-offers-grid>a{padding-inline:17px}.hero-offers-grid strong{font-size:16px}.hero-offers-grid>a>span{font-size:20px}.leopard-route{bottom:184px}}
 @media(max-width:760px){
   .intro-centre{width:84vw}.intro-topline{top:25px;font-size:10px;left:24px;right:24px}.intro-topline>span:last-child{display:none}.intro-bottomline{left:24px;right:24px;bottom:22px;letter-spacing:0;font-size:11px}.intro-bottomline button{font-size:12px}
   .intro-orbit{width:115vw}.intro-orbit-second{width:145vw}.intro-promise{flex-direction:column;align-items:center;gap:5px;margin-top:20px;font-size:15px}.intro-promise em{font-size:23px}.intro-progress{margin-top:27px;width:95px}
@@ -160,8 +153,8 @@ html.intro-active{overflow:hidden}
   .leopard-route{bottom:204px;height:147px}
   .leopard-traveller{width:250px;height:166.667px;bottom:-13px}
   .leopard-shadow{bottom:13px;height:7px}.leopard-reflection{top:calc(100% - 26px)}
-  .hero-motion-controls{right:24px;top:auto;bottom:355px;gap:3px}
-  .hero-motion-controls button{font-size:10px;min-height:32px;padding:6px 8px}
+
+
   .escape-collection .filter-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:8px}
   .escape-collection .filter-buttons button{min-width:0;min-height:46px;padding:10px 8px;white-space:normal;font-size:13px}
   .escape-card-price .offer-price strong{font-size:24px}
@@ -172,16 +165,16 @@ html.intro-active{overflow:hidden}
   .escape-hero{min-height:845px}.escape-hero h1{font-size:49px}.escape-hero-copy{padding-bottom:346px}
   .escape-hero-actions{flex-direction:row;gap:9px}.escape-hero-actions .escape-button{font-size:11px;padding-inline:12px}
   .hero-offers-grid>a{padding-inline:7px}.hero-offers-grid>a>span{font-size:12px}.hero-offers-grid strong{font-size:12px}.hero-offers-grid small{font-size:9px!important}
-  .hero-motion-controls{bottom:355px}.offer-price .price-label{font-size:11px}
+  .offer-price .price-label{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){
   .pardus-intro{display:none!important}html.intro-active{overflow:auto}
   .escape-hero-media picture,.hero-light,.leopard-sprite,.leopard-shadow,.hero-line>*,.hero-eyebrow,.escape-hero-description,.escape-hero-actions,.hero-offers{animation:none!important}
   .escape-hero-media{transform:none}.leopard-sprite{background-position:0 0}.leopard-traveller{left:0;transform:translateX(var(--leopard-x,40vw));opacity:1}
-  .hero-motion-controls{display:none!important}
+
   [data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important}
   .escape-card-image img,.escape-dubai-image img,.escape-cruise-media img{transform:none!important;transition:none!important}
   .escape-button,.escape-enquire,.escape-service-grid li{transition:none}.escape-button::after,.escape-enquire::after{display:none}
   ::view-transition-old(root),::view-transition-new(root){animation:none!important}
 }
-@media print{.pardus-intro,.hero-motion-controls{display:none!important}}
+@media print{.pardus-intro{display:none!important}}
