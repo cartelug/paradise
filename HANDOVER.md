@@ -1,18 +1,18 @@
-# Pardus Luxury Escapes — V24 handover
+# Pardus Luxury Escapes — V25 handover
 
-Release: 4 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+Release: 5 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
 ## Revised experience
 
-V24 builds forward from V23 and removes the hero’s Play intro and Pause motion controls. The approved animated logo introduction still runs automatically once per tab session. It lifts away after about four seconds, with Skip introduction, Escape, reduced-motion and a loading failsafe. Focus moves to the page when the introduction is skipped.
+V25 gives the homepage a new photographic campaign composite: a large realistic leopard, island villas, turquoise water, a yacht and Dubai-inspired sunset city lights. Desktop and portrait compositions are served as local responsive AVIF/WebP files. The artwork is a brand montage, not a literal geographic scene or evidence of a supplier partnership. Verified V24 destination photography remains active on destination cards and pages, journey ideas, the Journal, planner and concept note. Sources are recorded in `website/source-assets/v24-photography/credits.json`; generated hero prompts and provenance are in `website/source-assets/v25/ARTWORK.md`.
 
-Eight photographic families now use verified Unsplash uploads from 2025 and 2026: the Maldives dusk hero and JOALI aerial view, La Digue in Seychelles, Dubai Marina at dusk, elephants in Amboseli, Zanzibar’s shoreline, Santorini and a Dubai Marina yacht. Sources, upload dates, licences and master checksums are recorded in `website/source-assets/v24-photography/credits.json`. Upload dates do not assert capture dates; destination imagery does not imply a supplier partnership. AVIF and WebP sizes at 640, 1280 and 1920 pixels are served locally. Destination pages, cards, journey ideas, the Journal, planner and concept note share the refreshed images.
+The approved logo opens with a gold outline, fill, rising wordmark, aircraft arrival, metallic sweep, meridian globe and route arcs. Two curtains open onto the hero. It runs once per tab session, waits for artwork decoding and local fonts, has a 3.8-second minimum brand sequence and a bounded loading deadline. Skip introduction and Escape remain available; focus returns to the page. Reduced-motion preferences skip the opening. No Play intro or Pause motion controls are shown.
 
-The sixteen-pose transparent leopard, continuous path, ground shadow, reflection, destination reveals, photography hover motion and page transitions remain. Animation stops off-screen or in hidden tabs. Operating-system reduced-motion preferences skip the introduction and remove movement. Browsers without view-transition support retain normal links.
+The hero image itself has continuous camera drift, subtle moving reflected light, gentle scroll depth and restrained pointer response. Motion pauses when the hero is off-screen or the tab is hidden. Reduced-motion preferences remove it. The earlier walking sprite remains archived, while the new large leopard is part of the campaign artwork. The V25 CSS refines buttons, photography, destination price overlays, dark navy services, cruise pricing, travel-desk cards and the enquiry form. Native links and forms remain available.
 
 The homepage now moves from a cinematic, immediately readable hero to Maldives and Seychelles, the full service offering, private cruises, Dubai and other destinations, clear reasons to choose Pardus, current travel updates and one simple enquiry.
 
-The navy and gold lockup is traced from the latest approved logo. A photographic leopard walks across the hero, with reduced-motion support. Destination cards show duration, experience, sample inclusions, an illustrative USD starting price and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
+The navy and gold lockup is traced from the latest approved logo. The large photographic leopard anchors the animated hero, with reduced-motion support. Destination cards show duration, experience, sample inclusions, an illustrative USD starting price and an enquiry link. Zanzibar is presented as Safari & Zanzibar, combining wildlife and beach travel. Dubai leads with hotels, dining, shopping, desert activities and private cruises; no broad reopening claim is published.
 
 New dedicated pages cover private cruises, the travel desk and the concept note. The former four-stage planner is retained at `planner.html`; `journey.html` is now a simple enquiry. Existing Folio, journey ideas and Journal routes remain.
 
@@ -52,7 +52,9 @@ Python dependencies: ReportLab and Pillow; the generator uses locally installed 
 
 ## Release checks
 
-V24 passed the Astro source check with no diagnostics and all 16 existing unit tests. Browser review covered the desktop homepage, 375 px and 768 px responsive layouts, automatic logo introduction, removal of both hero controls, island image loading, all six refreshed destination families, the Maldives destination hero, Dubai yacht page and Maldives enquiry preselection. The mobile and tablet pages reviewed had no horizontal overflow. All four updated concept-note pages were rendered and visually inspected.
+V25 passed the Astro source check with zero errors, warnings or hints, and all 16 existing unit tests. Browser review covered the desktop campaign hero and price links, the automatic full-logo reveal, immediate Skip introduction and Escape behavior, 375 px phone and 768 px tablet frames, mobile navigation and dismissal, destination photo prices, and Maldives enquiry preselection. Both responsive layouts had zero horizontal overflow. The 768 px layout uses the portrait composition so the leopard remains visible. Approved-logo and hero proof screenshots are in `documents/PARDUS_V25_Preloader.jpg` and `documents/PARDUS_V25_Preview.jpg`.
+
+The V24 four-page concept note and its verified photography remain unchanged in this visual release. All six sample destination prices, cruise examples, enquiry behavior and news refresh remain in place. Reduced-motion and off-screen/hidden-tab pausing are implemented; no emulated device or separate accessibility audit is claimed.
 
 Production build and export checks cover all 33 pages and their local asset references. Reduced-motion CSS and lifecycle fallbacks remain implemented; this release does not claim a separate emulated-device accessibility audit.
 

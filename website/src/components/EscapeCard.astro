@@ -2,13 +2,13 @@
 import Picture from './Picture.astro';
 import OfferPrice from './OfferPrice.astro';
 import { path } from '../data/site';
-import { destinationFor, type EscapeOffer } from '../data/offers';
+import { destinationFor, priceText, type EscapeOffer } from '../data/offers';
 interface Props { offer: EscapeOffer; featured?: boolean; }
 const { offer, featured = false } = Astro.props;
 const d = destinationFor(offer.slug);
 ---
 <article class:list={['escape-card', { 'escape-card-featured': featured }]} data-category={d.category} data-reveal>
-  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 33vw'} /><span class="escape-duration">{offer.nights}</span></a>
+  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 33vw'} /><span class="escape-duration">{offer.nights}</span><span class="escape-photo-price" aria-hidden="true"><small>Sample escape · per person</small><strong>{priceText(offer)}</strong></span></a>
   <div class="escape-card-copy"><p class="eyebrow">{d.country}</p><h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3><p>{offer.experience}</p>
     {featured && <ul class="escape-highlights">{offer.highlights.map(item => <li>{item}</li>)}</ul>}
     <div class="escape-inclusions" aria-label="Sample package inclusions">{offer.inclusions.map(item=><span>{item}</span>)}</div>

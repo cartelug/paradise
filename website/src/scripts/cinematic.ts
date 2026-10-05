@@ -4,42 +4,55 @@ const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const intro = document.querySelector<HTMLElement>('[data-pardus-intro]');
 const shell = document.querySelector<HTMLElement>('[data-pardus-shell]');
 const skip = document.querySelector<HTMLButtonElement>('[data-skip-intro]');
-let introTimer = 0;
-let closingTimer = 0;
-let deadline = 0;
+const hero = document.querySelector<HTMLElement>('.escape-hero');
+const scene = document.querySelector<HTMLElement>('[data-hero-depth]');
+let introTimer = 0, closingTimer = 0, deadline = 0;
+let visible = true;
 if (root.dataset.introFailsafe) window.clearTimeout(Number(root.dataset.introFailsafe));
 
+function syncMotion() {
+  root.classList.toggle('motion-reduced', reduced.matches);
+  root.classList.toggle('hero-dormant', !visible || document.hidden);
+}
 function finishIntro(immediate = false) {
-  window.clearTimeout(introTimer);
-  window.clearTimeout(deadline);
-  window.clearTimeout(closingTimer);
+  window.clearTimeout(introTimer); window.clearTimeout(deadline);
   if (!root.classList.contains('intro-active')) return;
+  if (root.classList.contains('intro-exiting') && !immediate) return;
+  window.clearTimeout(closingTimer);
+  intro?.style.setProperty('--intro-progress', '1');
   const restoreFocus = !!intro?.contains(document.activeElement);
   const complete = () => {
     root.classList.remove('intro-active', 'intro-exiting');
     root.classList.add('cinema-arrived');
     shell?.removeAttribute('inert');
-    try { sessionStorage.setItem('pardus-intro-v23', 'seen'); } catch { /* storage is optional */ }
+    try { sessionStorage.setItem('pardus-intro-v25', 'seen'); } catch { /* storage is optional */ }
     if (restoreFocus) document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
     syncMotion();
   };
   if (immediate || reduced.matches) complete();
   else {
     root.classList.add('intro-exiting', 'cinema-arrived');
-    window.clearTimeout(closingTimer);
     closingTimer = window.setTimeout(complete, 880);
   }
 }
-
 function beginIntro() {
-  if (!intro || reduced.matches) { root.classList.add('cinema-arrived'); return; }
-  window.clearTimeout(introTimer); window.clearTimeout(closingTimer); window.clearTimeout(deadline);
-  root.classList.add('intro-active');
+  if (!intro || reduced.matches) { finishIntro(true); root.classList.add('cinema-arrived'); return; }
   shell?.setAttribute('inert', '');
   skip?.focus({preventScroll:true});
-  const elapsed = performance.now() - Number(root.dataset.introStarted || performance.now());
-  introTimer = window.setTimeout(() => finishIntro(), Math.max(250, 3300 - elapsed));
-  deadline = window.setTimeout(() => finishIntro(true), 5800);
+  const started = Number(root.dataset.introStarted || performance.now());
+  intro.style.setProperty('--intro-progress', '.15');
+  const image = document.querySelector<HTMLImageElement>('[data-hero-image]');
+  const artworkReady = image ? image.decode().catch(() => undefined) : Promise.resolve();
+  artworkReady.then(() => {
+    if (root.classList.contains('intro-active') && !root.classList.contains('intro-exiting')) intro.style.setProperty('--intro-progress', '.65');
+  });
+  const fontsReady = document.fonts.ready;
+  Promise.allSettled([artworkReady, fontsReady]).then(() => {
+    if (!root.classList.contains('intro-active') || root.classList.contains('intro-exiting')) return;
+    intro.style.setProperty('--intro-progress', '.95');
+    introTimer = window.setTimeout(() => finishIntro(), Math.max(0, 3800 - (performance.now() - started)));
+  });
+  deadline = window.setTimeout(() => finishIntro(), Math.max(0, 5500 - (performance.now() - started)));
   syncMotion();
 }
 skip?.addEventListener('click', () => finishIntro(true));
@@ -47,53 +60,33 @@ intro?.addEventListener('keydown', event => {
   if (event.key === 'Escape') finishIntro(true);
   if (event.key === 'Tab') { event.preventDefault(); skip?.focus(); }
 });
-
-// A sixteen-pose, aligned gait moves on a continuous frame-rate-independent path.
-// Stop work when the hero is off-screen, hidden, or reduced motion is requested.
-const stage = document.querySelector<HTMLElement>('[data-leopard-stage]');
-const cat = document.querySelector<HTMLElement>('[data-leopard-traveller]');
-const hero = document.querySelector<HTMLElement>('.escape-hero');
-let stageWidth = stage?.clientWidth || window.innerWidth;
-let catWidth = cat?.offsetWidth || 300;
-let position = Math.max(0, stageWidth * .57 - catWidth / 2);
-let visible = true;
-let frame = 0;
-let previous = 0;
-function paintCat() {
-  cat?.style.setProperty('--leopard-x', position.toFixed(2) + 'px');
-  const fade = Math.min(1, Math.max(0, (position + catWidth - 20) / 70), Math.max(0, (stageWidth - position) / 70));
-  cat?.style.setProperty('--leopard-opacity', String(fade));
-}
-function tick(time: number) {
-  const delta = previous ? Math.min(40, time - previous) : 0;
-  previous = time;
-  position += delta * (stageWidth < 760 ? .057 : .074);
-  if (position > stageWidth + 20) position = -catWidth;
-  paintCat();
-  frame = window.requestAnimationFrame(tick);
-}
-function syncMotion() {
-  root.classList.toggle('motion-reduced', reduced.matches);
-  root.classList.toggle('hero-dormant', !visible || document.hidden);
-  const canRun = !!cat && visible && !document.hidden && !reduced.matches && !root.classList.contains('intro-active');
-  if (canRun && !frame) { previous = 0; frame = window.requestAnimationFrame(tick); }
-  else if (!canRun && frame) { window.cancelAnimationFrame(frame); frame = 0; previous = 0; }
-}
 if (hero && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; syncMotion(); }, {threshold:0});
   observer.observe(hero);
 }
-window.addEventListener('resize', () => {
-  stageWidth = stage?.clientWidth || window.innerWidth;
-  catWidth = cat?.offsetWidth || 300;
-  position = Math.min(position, stageWidth - catWidth * .4);
-  paintCat();
-}, {passive:true});
 document.addEventListener('visibilitychange', syncMotion);
 reduced.addEventListener('change', () => { if(reduced.matches) finishIntro(true); syncMotion(); });
-paintCat();
 if (root.classList.contains('intro-active')) beginIntro();
 else { root.classList.add('cinema-arrived'); syncMotion(); }
+
+// Only pointer events schedule a frame; ambient camera motion is handled by CSS.
+let heroPending = 0, sceneX = 0, sceneY = 0;
+hero?.addEventListener('pointermove', event => {
+  if (!scene || !finePointer.matches || reduced.matches) return;
+  const box = hero.getBoundingClientRect();
+  sceneX = ((event.clientX - box.left) / box.width - .5) * 12;
+  sceneY = ((event.clientY - box.top) / box.height - .5) * 8;
+  if (!heroPending) heroPending = requestAnimationFrame(() => {
+    scene.style.setProperty('--scene-x', sceneX.toFixed(2) + 'px');
+    scene.style.setProperty('--scene-y', sceneY.toFixed(2) + 'px');
+    heroPending = 0;
+  });
+}, {passive:true});
+hero?.addEventListener('pointerleave', () => {
+  if (heroPending) cancelAnimationFrame(heroPending);
+  heroPending = 0;
+  scene?.style.setProperty('--scene-x','0px'); scene?.style.setProperty('--scene-y','0px');
+});
 
 // Restrained pointer depth on imagery; touch interaction and native links stay unchanged.
 document.querySelectorAll<HTMLElement>('.escape-card-image,.escape-dubai-image').forEach(card => {

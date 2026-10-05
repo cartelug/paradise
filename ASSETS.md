@@ -69,3 +69,7 @@ Verified on 4 October 2026. All eight selected photographs are freely usable for
 | `yacht-dubai-v24` | Dubai Marina, Dubai, United Arab Emirates | Dawid Tkocz | 2026-01-15 | [Photo](https://unsplash.com/photos/RYnf6TWBaQc) |
 
 Masters, download URLs, alt text and SHA-256 checksums are in `website/source-assets/v24-photography/credits.json`. `website/scripts/prepare-v24-photography.mjs` produces local 3:2 crops as AVIF/WebP at 640, 1280 and 1920 pixels. The new versioned filenames avoid stale image caches. The V23 generated leopard and approved vector logo remain unchanged.
+
+## V25 campaign artwork
+
+Generated with the built-in image-generation tool on 5 October 2026. A realistic leopard is combined with island villas, a yacht and Dubai-inspired city lights in a deliberate campaign composite. The scenes do not coexist geographically; the artwork does not show a specific bookable property. Desktop master: `website/source-assets/v25/pardus-hero-desktop.png` (1536 × 1024). Portrait master: `website/source-assets/v25/pardus-hero-mobile.png` (1024 × 1536). Full prompts are in `website/source-assets/v25/ARTWORK.md`. Responsive AVIF/WebP versions are produced by `website/scripts/prepare-v25-assets.mjs`. Portrait art is selected below 900 px; the logo still uses the approved vector paths. The V24 real destination and Dubai yacht photographs remain active throughout the rest of the website. The earlier walking sprite is retained as an archive; the new hero makes the large leopard the central subject of the animated background.

@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes — V24
+# Pardus Luxury Escapes — V25
 
-A luxury travel website in midnight navy with a real Maldives dusk hero, refreshed destination photography, the approved Pardus logo, a sixteen-pose walking leopard, an automatic animated introduction and direct enquiries in USD. The hero’s Play intro and Pause motion controls have been removed; operating-system reduced-motion preferences remain supported.
+A luxury travel website in midnight navy with a new leopard-and-travel campaign hero, continuously animated artwork, a cinematic approved-logo preloader, refreshed real destination photography and direct enquiries in USD. The hero’s Play intro and Pause motion controls have been removed; operating-system reduced-motion preferences remain supported.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -28,7 +28,10 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 - `website/src/data/site.ts`: contacts and optional delivery/analytics settings.
 - `website/src/pages/`: page content and layouts.
 - `website/src/styles/luxury.css`: core design and responsive layouts.
-- `website/src/styles/cinematic.css` and `website/src/scripts/cinematic.ts`: automatic introduction, walking leopard, reveal and hover motion.
+- `website/src/styles/studio.css`: V25 animated artwork, new logo opening and premium surfaces.
+- `website/source-assets/v25/ARTWORK.md`: built-in generation prompts, master paths and provenance.
+- `website/scripts/prepare-v25-assets.mjs`: regenerate desktop and portrait AVIF/WebP artwork.
+- `website/src/styles/cinematic.css` and `website/src/scripts/cinematic.ts`: resource-aware introduction, hero pointer depth, reveal and hover motion.
 - `website/source-assets/v24-photography/credits.json`: verified photo locations, upload dates, sources and licences.
 - `website/scripts/prepare-v24-photography.mjs`: regenerate the eight responsive photo families.
 - `website/scripts/make-concept-note.py`: regenerate the PDF after updating offer data.
