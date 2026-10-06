@@ -1,6 +1,16 @@
-# Pardus Luxury Escapes — V25 handover
+# Pardus Luxury Escapes — V26 handover
 
-Release: 5 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+Release: 6 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+
+## V26 background animation
+
+The leopard is now a separate transparent mesh over the destination scenery. Its chest breathes, the head turns and lifts, the gaze follows fine pointers, the ears flick and the eyelids blink at different intervals. The scenery drifts on its own layer while the existing camera and reflected-light movement continue. Text, prices and links stay on their original layer.
+
+WebGL renders at up to 30 frames per second with a bounded raster buffer. Devices without WebGL use a photographic Canvas mesh at up to 20 frames per second on phones or 24 on larger screens. If artwork or graphics fail, the original V25 hero remains visible. Motion pauses off-screen, in hidden tabs and during page-cache transitions, and resumes without advancing through the hidden time. Reduced-motion settings render a still animal and disable CSS scene motion. The existing approved-logo introduction remains in place.
+
+The 22-test suite includes six new checks for both renderer lifecycles, reduced-motion changes, page visibility/cache restoration, image and GPU failure, and phone/tablet/desktop buffer bounds. These run against deterministic browser API substitutes: they do not verify actual GPU compilation or pixels. The saved `documents/PARDUS_V26_Responsive.jpg` from the earlier animation session was inspected for phone/tablet placement. Fresh browser QA was unavailable for this finalization because the managed browser-control skill was not installed; no new browser or real-device review is claimed. Release verification also includes Astro diagnostics, production build and all exported local references.
+
+V26 adds no customer-facing animation controls. Temporary motion and responsive QA pages are excluded from the published export. The earlier release notes below remain the record for preserved V25 features.
 
 ## Revised experience
 

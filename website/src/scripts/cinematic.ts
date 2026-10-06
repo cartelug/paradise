@@ -1,3 +1,5 @@
+import {createLeopardMotion} from './leopard-motion';
+
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -6,13 +8,16 @@ const shell = document.querySelector<HTMLElement>('[data-pardus-shell]');
 const skip = document.querySelector<HTMLButtonElement>('[data-skip-intro]');
 const hero = document.querySelector<HTMLElement>('.escape-hero');
 const scene = document.querySelector<HTMLElement>('[data-hero-depth]');
+const leopard = createLeopardMotion(document.querySelector<HTMLElement>('[data-leopard-scene]'));
 let introTimer = 0, closingTimer = 0, deadline = 0;
 let visible = true;
+let pageActive = true;
 if (root.dataset.introFailsafe) window.clearTimeout(Number(root.dataset.introFailsafe));
 
 function syncMotion() {
   root.classList.toggle('motion-reduced', reduced.matches);
-  root.classList.toggle('hero-dormant', !visible || document.hidden);
+  root.classList.toggle('hero-dormant', !visible || document.hidden || !pageActive);
+  leopard?.setActive(visible && !document.hidden && pageActive && !root.classList.contains('intro-active'),reduced.matches);
 }
 function finishIntro(immediate = false) {
   window.clearTimeout(introTimer); window.clearTimeout(deadline);
@@ -47,7 +52,7 @@ function beginIntro() {
     if (root.classList.contains('intro-active') && !root.classList.contains('intro-exiting')) intro.style.setProperty('--intro-progress', '.65');
   });
   const fontsReady = document.fonts.ready;
-  Promise.allSettled([artworkReady, fontsReady]).then(() => {
+  Promise.allSettled([artworkReady, fontsReady, leopard?.ready]).then(() => {
     if (!root.classList.contains('intro-active') || root.classList.contains('intro-exiting')) return;
     intro.style.setProperty('--intro-progress', '.95');
     introTimer = window.setTimeout(() => finishIntro(), Math.max(0, 3800 - (performance.now() - started)));
@@ -65,6 +70,8 @@ if (hero && 'IntersectionObserver' in window) {
   observer.observe(hero);
 }
 document.addEventListener('visibilitychange', syncMotion);
+window.addEventListener('pagehide', () => {pageActive=false;syncMotion();});
+window.addEventListener('pageshow', () => {pageActive=true;syncMotion();});
 reduced.addEventListener('change', () => { if(reduced.matches) finishIntro(true); syncMotion(); });
 if (root.classList.contains('intro-active')) beginIntro();
 else { root.classList.add('cinema-arrived'); syncMotion(); }
@@ -76,6 +83,7 @@ hero?.addEventListener('pointermove', event => {
   const box = hero.getBoundingClientRect();
   sceneX = ((event.clientX - box.left) / box.width - .5) * 12;
   sceneY = ((event.clientY - box.top) / box.height - .5) * 8;
+  leopard?.setLook(sceneX/6,sceneY/4);
   if (!heroPending) heroPending = requestAnimationFrame(() => {
     scene.style.setProperty('--scene-x', sceneX.toFixed(2) + 'px');
     scene.style.setProperty('--scene-y', sceneY.toFixed(2) + 'px');
@@ -85,6 +93,7 @@ hero?.addEventListener('pointermove', event => {
 hero?.addEventListener('pointerleave', () => {
   if (heroPending) cancelAnimationFrame(heroPending);
   heroPending = 0;
+  leopard?.setLook(0,0);
   scene?.style.setProperty('--scene-x','0px'); scene?.style.setProperty('--scene-y','0px');
 });
 

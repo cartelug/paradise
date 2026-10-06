@@ -1,4 +1,4 @@
-/* PARDUS V25 — campaign artwork, resource-aware brand opening and refined surfaces. */
+/* PARDUS V26 — living leopard, layered campaign artwork and refined surfaces. */
 :root{--paper:#f6f5f1;--sand:#eeece5;--line:#dfddd5;--studio-ease:cubic-bezier(.22,.8,.2,1)}
 body{background:var(--paper)}
 ::selection{background:#d7ba7d;color:#071426}
@@ -21,6 +21,15 @@ a:focus-visible,button:focus-visible{outline:2px solid #b59355;outline-offset:5p
 .hero-scene-depth{position:absolute;inset:0;transform:translate3d(var(--scene-x,0),var(--scene-y,0),0);transition:transform .8s var(--studio-ease)}
 .escape-hero-media .hero-artwork{display:block;width:100%;height:100%;animation:campaign-camera 22s ease-in-out infinite alternate;transform-origin:83% 38%;will-change:transform}
 .escape-hero-media .hero-artwork img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transform:none;filter:none}
+.hero-artwork{position:relative;isolation:isolate}
+.hero-artwork-fallback,.hero-living-scene,.hero-scenery,.hero-leopard{position:absolute;inset:0;display:block;width:100%;height:100%}
+.hero-artwork-fallback{opacity:1;transition:opacity .7s ease}
+.hero-living-scene{opacity:0;pointer-events:none;transition:opacity .7s ease}
+.leopard-ready .hero-artwork-fallback{opacity:0}
+.leopard-ready .hero-living-scene{opacity:1}
+.hero-leopard{z-index:1}
+.hero-scenery{animation:campaign-scenery 26s ease-in-out infinite alternate;will-change:transform}
+@keyframes campaign-scenery{from{transform:scale(1.025) translate3d(.35%,0,0)}to{transform:scale(1.045) translate3d(-.35%,-.25%,0)}}
 .escape-hero-shade{background:linear-gradient(90deg,#04102191 0%,#04102130 41%,transparent 65%),linear-gradient(0deg,#040e1de8 0%,#040e1d35 22%,transparent 49%)}
 .hero-water-light{position:absolute;inset:30% -40% 0;pointer-events:none;background:linear-gradient(112deg,transparent 35%,#d6ba7d0b 43%,#8ce2ee0d 49%,transparent 58%);mix-blend-mode:screen;animation:campaign-water 14s ease-in-out infinite alternate}
 .hero-light{background:radial-gradient(ellipse at 87% 12%,#f7bf7824,transparent 47%);animation:campaign-sun 9s ease-in-out infinite alternate}
@@ -39,7 +48,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #b59355;outline-offset:5p
 @keyframes campaign-camera{from{transform:scale(1.025) translate3d(.15%,0,0)}to{transform:scale(1.085) translate3d(-.8%,.5%,0)}}
 @keyframes campaign-water{from{transform:translate3d(-12%,0,0);opacity:.35}to{transform:translate3d(12%,0,0);opacity:.9}}
 @keyframes campaign-sun{from{opacity:.35}to{opacity:.85}}
-.hero-dormant .hero-artwork,.hero-dormant .hero-water-light,.hero-dormant .hero-light,.intro-active .hero-artwork,.intro-active .hero-water-light,.intro-active .hero-light{animation-play-state:paused!important}
+.hero-dormant .hero-artwork,.hero-dormant .hero-scenery,.hero-dormant .hero-water-light,.hero-dormant .hero-light,.intro-active .hero-artwork,.intro-active .hero-scenery,.intro-active .hero-water-light,.intro-active .hero-light{animation-play-state:paused!important}
 
 /* The approved logo is drawn, filled and illuminated without altering its shape. */
 .pardus-intro{background:transparent;perspective:1200px;--intro-progress:.15}
@@ -198,7 +207,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #b59355;outline-offset:5p
  .escape-service-grid{grid-template-columns:1fr}.escape-form-grid{grid-template-columns:1fr}.escape-form{padding:22px 18px}
 }
 @media(prefers-reduced-motion:reduce){
- .hero-artwork,.hero-water-light,.hero-light{animation:none!important;transform:none!important}
+ .hero-artwork-fallback,.hero-living-scene{transition:none}
+ .hero-artwork,.hero-scenery,.hero-water-light,.hero-light{animation:none!important;transform:none!important}
  .hero-scene-depth{transform:none!important;transition:none}
  .escape-hero-media{transform:none!important}.escape-button,.escape-enquire,.travel-update,.escape-card,.escape-service-grid li{transition:none}
  .escape-button:hover{transform:none}.pardus-intro{display:none!important}

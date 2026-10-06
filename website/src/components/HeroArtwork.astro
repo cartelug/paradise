@@ -1,10 +1,26 @@
 ---
 import {path} from '../data/site';
 const srcset = (name:string, widths:number[], format:string) => widths.map(width => `${path(`images/pardus-hero-${name}-v25-${width}.${format}`)} ${width}w`).join(', ');
+const sceneSet = (name:string, widths:number[], format:string) => widths.map(width => `${path(`images/pardus-scene-${name}-v26-${width}.${format}`)} ${width}w`).join(', ');
 ---
-<picture class="hero-artwork">
+<div class="hero-artwork" data-leopard-scene
+  data-leopard-open={path('images/pardus-leopard-open-v26-1536.webp')}
+  data-leopard-blink={path('images/pardus-leopard-blink-v26-1536.webp')}
+  data-leopard-open-small={path('images/pardus-leopard-open-v26-1024.webp')}
+  data-leopard-blink-small={path('images/pardus-leopard-blink-v26-1024.webp')}>
+<picture class="hero-artwork-fallback">
   <source media="(max-width: 900px)" type="image/avif" srcset={srcset('mobile',[480,768,1024],'avif')} sizes="100vw" width="1024" height="1536" />
   <source media="(max-width: 900px)" type="image/webp" srcset={srcset('mobile',[480,768,1024],'webp')} sizes="100vw" width="1024" height="1536" />
   <source type="image/avif" srcset={srcset('desktop',[640,1280,1536],'avif')} sizes="100vw" />
   <img src={path('images/pardus-hero-desktop-v25-1536.webp')} srcset={srcset('desktop',[640,1280,1536],'webp')} sizes="100vw" width="1536" height="1024" alt="Pardus campaign artwork combining a leopard, island villas, a yacht and Dubai-inspired city lights" loading="eager" fetchpriority="high" decoding="async" data-hero-image />
 </picture>
+<div class="hero-living-scene" aria-hidden="true">
+  <picture class="hero-scenery">
+    <source media="(max-width: 900px)" type="image/avif" srcset={sceneSet('mobile',[480,768,1024],'avif')} sizes="100vw" width="1024" height="1536" />
+    <source media="(max-width: 900px)" type="image/webp" srcset={sceneSet('mobile',[480,768,1024],'webp')} sizes="100vw" width="1024" height="1536" />
+    <source type="image/avif" srcset={sceneSet('desktop',[640,1280,1536],'avif')} sizes="100vw" />
+    <img src={path('images/pardus-scene-desktop-v26-1536.webp')} srcset={sceneSet('desktop',[640,1280,1536],'webp')} sizes="100vw" width="1536" height="1024" alt="" decoding="async" data-leopard-background />
+  </picture>
+  <canvas class="hero-leopard" data-leopard-canvas></canvas>
+</div>
+</div>

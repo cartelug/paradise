@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes — V25
+# Pardus Luxury Escapes — V26
 
-A luxury travel website in midnight navy with a new leopard-and-travel campaign hero, continuously animated artwork, a cinematic approved-logo preloader, refreshed real destination photography and direct enquiries in USD. The hero’s Play intro and Pause motion controls have been removed; operating-system reduced-motion preferences remain supported.
+A luxury travel website in midnight navy with a living leopard-and-travel hero, a cinematic approved-logo preloader, real destination photography and direct enquiries in USD. The leopard now breathes, turns its head, blinks, flicks its ears and responds to the pointer independently of the drifting scenery. WebGL has a Canvas fallback, with the original artwork retained if graphics or assets are unavailable. Motion pauses off-screen and in hidden tabs, and honors operating-system reduced-motion settings.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -28,7 +28,11 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 - `website/src/data/site.ts`: contacts and optional delivery/analytics settings.
 - `website/src/pages/`: page content and layouts.
 - `website/src/styles/luxury.css`: core design and responsive layouts.
-- `website/src/styles/studio.css`: V25 animated artwork, new logo opening and premium surfaces.
+- `website/src/styles/studio.css`: V26 layered scenery, animated artwork, logo opening and premium surfaces.
+- `website/src/scripts/leopard-motion.ts` and `leopard-canvas.ts`: independent animal motion, GPU and Canvas rendering, bounded raster sizes and lifecycle controls.
+- `website/tests/leopard.test.mjs`: deterministic lifecycle, failure, reduced-motion and responsive-buffer checks; these do not replace browser rendering checks.
+- `website/source-assets/v26/ARTWORK.md`: leopard/eyelid layers and clean scenery plate provenance.
+- `website/scripts/prepare-v26-assets.mjs`: regenerate the responsive scenery and transparent leopard layers.
 - `website/source-assets/v25/ARTWORK.md`: built-in generation prompts, master paths and provenance.
 - `website/scripts/prepare-v25-assets.mjs`: regenerate desktop and portrait AVIF/WebP artwork.
 - `website/src/styles/cinematic.css` and `website/src/scripts/cinematic.ts`: resource-aware introduction, hero pointer depth, reveal and hover motion.
