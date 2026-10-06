@@ -10,7 +10,7 @@ const bundle = async name => (await build({
   entryPoints: [fileURLToPath(new URL(`../src/scripts/${name}.ts`, import.meta.url))],
   bundle: true, write: false, format: 'cjs', platform: 'browser', logLevel: 'silent',
 })).outputFiles[0].text;
-const [rendererCode, cinematicCode] = await Promise.all([bundle('leopard-motion'), bundle('cinematic')]);
+const [rendererCode, cinematicCode] = await Promise.all([bundle('hero-film'), bundle('cinematic')]);
 
 function fixture(options = {}) {
   const frames = new Map(), events = new Map(), documentEvents = new Map(), canvasEvents = new Map();
@@ -26,7 +26,7 @@ function fixture(options = {}) {
     getShaderParameter: () => !options.shaderFailure, getProgramParameter: () => true, getAttribLocation: () => 0,
     getUniformLocation: (_, name) => name, isContextLost: () => false,
     uniform1f: (key, value) => uniforms.set(key, value), uniform2f: (key, ...value) => uniforms.set(key, value),
-    uniform4f: (key, ...value) => uniforms.set(key, value), drawElements: () => draws++,
+    uniform4f: (key, ...value) => uniforms.set(key, value), drawElements: () => draws++, drawArrays: () => draws++,
   }, {get: (target, key) => target[key] ?? (String(key).toUpperCase() === key ? 1 : () => {})});
   const paint = new Proxy({}, {get: (_, key) => key === 'drawImage' ? () => draws++ : () => {}});
   const canvas = {width: 1, height: 1, addEventListener: (type, cb) => canvasEvents.set(type, cb),
@@ -38,9 +38,9 @@ function fixture(options = {}) {
       }
       return paint;
     }};
-  const background = {decode: async () => {if (options.imageFailure) throw new Error('Artwork unavailable');}};
+  const background = {naturalWidth: options.width && options.width <= 1100 ? 1024 : 1672, naturalHeight: options.width && options.width <= 1100 ? 1536 : 941, addEventListener: () => {}, decode: async () => {if (options.imageFailure) throw new Error('Artwork unavailable');}};
   const scene = {
-    dataset: /** @type {Record<string, string>} */ ({leopardOpen: 'open.webp', leopardBlink: 'blink.webp', leopardOpenSmall: 'open-small.webp', leopardBlinkSmall: 'blink-small.webp'}),
+    dataset: /** @type {Record<string, string>} */ ({leopardOpen: 'open.webp', leopardBlink: 'blink.webp', leopardOpenSmall: 'open-small.webp', leopardBlinkSmall: 'blink-small.webp', leopardBlinkPortrait: 'portrait-blink.webp'}),
     clientWidth: options.width || 1440, clientHeight: options.height || 840, classList: classes(),
     querySelector: selector => selector === '[data-leopard-canvas]' ? canvas : background,
   };
@@ -58,7 +58,7 @@ function fixture(options = {}) {
     clearTimeout, setTimeout, addEventListener: (type, cb) => events.set(type, cb),
     matchMedia(query) {
       if (!media.has(query)) media.set(query, {
-        matches: query.includes('900px') ? scene.clientWidth <= 900 : query.includes('760px') ? scene.clientWidth <= 760 : false,
+        matches: query.includes('1100px') ? scene.clientWidth <= 1100 : query.includes('760px') ? scene.clientWidth <= 760 : false,
         addEventListener(_, cb) {this.change = cb;},
       });
       return media.get(query);
@@ -156,11 +156,28 @@ test('a blocked GPU uses the Canvas renderer; unavailable graphics preserve HTML
 });
 
 test('phone, tablet and desktop canvases keep a bounded raster size and finite layout', async () => {
-  for (const width of [320, 375, 768, 1440, 2560]) {
-    const f = fixture({width, height: width <= 900 ? 1000 : 840}), rig = f.run(); await rig.ready;
-    assert.ok(f.canvas.width <= 1800 && f.canvas.height <= 1500);
-    assert.ok(f.uniforms.get('u_layout').every(Number.isFinite));
+  for (const width of [320, 375, 768, 1100, 1101, 1440, 2560]) {
+    const f = fixture({width, height: width <= 760 ? 1000 : width <= 1100 ? 1080 : 840}), rig = f.run(); await rig.ready;
+    assert.ok(f.canvas.width <= 2400 && f.canvas.height <= 1800);
+    assert.ok(f.uniforms.get('u_crop').every(Number.isFinite));
     f.scene.clientWidth = 0; f.scene.clientHeight = 0; f.resize();
-    assert.ok(f.uniforms.get('u_view').every(value => value > 0));
+    assert.ok(f.uniforms.get('u_crop').every(Number.isFinite));
+  }
+});
+
+test('the photographed head and both ears stay inside the frame across cover crops and maximum camera push', async () => {
+  // Bounds measured from the masters, independent of the motion masks.
+  for (const [width,height] of [[320,1000],[375,1000],[760,1000],[768,1080],[1100,1080],[1101,820],[1440,820],[2560,1200]]) {
+    const f = fixture({width,height}), rig = f.run(); await rig.ready;
+    const [x,y,w,h] = f.uniforms.get('u_crop');
+    const bounds = width <= 1100 ? [.565,.48,.87,.72] : [.69,.185,.925,.64];
+    for (const zoom of [1,1.036]) {
+      for (const [px,py] of [[bounds[0],bounds[1]],[bounds[2],bounds[3]]]) {
+        const screenX = ((px-x)/w-.5)*zoom+.5;
+        const screenY = ((py-y)/h-.5)*zoom+.5;
+        assert.ok(screenX > .015 && screenX < .985 && screenY > .015 && screenY < .985,
+          `${width} × ${height} crops the head or an ear at camera scale ${zoom}`);
+      }
+    }
   }
 });

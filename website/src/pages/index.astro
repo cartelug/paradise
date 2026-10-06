@@ -10,13 +10,20 @@ import OfferPrice from '../components/OfferPrice.astro';
 import { path } from '../data/site';
 import { offerFor, services, priceText, usd, samplePriceNote, cruiseTypes } from '../data/offers';
 ---
-<Layout dark simpleFooter intro class="escape-home" image="images/pardus-hero-desktop-v25-1536.webp">
-  <section class="escape-hero" aria-labelledby="hero-title">
-    <div class="escape-hero-media" data-scroll-media data-scroll-depth="24"><div class="hero-scene-depth" data-hero-depth><HeroArtwork /><div class="hero-water-light" aria-hidden="true"></div></div></div>
+<Layout dark simpleFooter intro class="escape-home" image="images/hero-v27-desktop-1672.webp">
+  <section class="escape-hero atelier-hero" aria-labelledby="hero-title">
+    <div class="escape-hero-media"><div class="hero-scene-depth" data-hero-depth><HeroArtwork /></div></div>
     <div class="escape-hero-shade" aria-hidden="true"></div>
-    <div class="hero-light" aria-hidden="true"></div>
-    <div class="escape-hero-copy"><p class="eyebrow hero-eyebrow">From Africa to the world</p><h1 id="hero-title"><span class="hero-line"><span>Luxury travel,</span></span><span class="hero-line"><em>beautifully</em></span><span class="hero-line"><span>arranged.</span></span></h1><p class="escape-hero-description">Flights, exceptional stays and private experiences.<br class="desktop-only" /> You choose the destination. We take care of the details.</p><div class="escape-hero-actions"><a class="escape-button" href="#destinations">Explore destinations</a><a class="escape-button escape-button-outline" href="#enquire">Plan your escape</a></div></div>
-    <div class="escape-hero-bottom hero-offers"><p>Three ways to escape. <span>Sample prices · per person, two sharing.</span></p><div class="hero-offers-grid">{['maldives','seychelles','dubai'].map(slug=>{const offer=offerFor(slug);return <a href={path(`destination-${slug}.html`)}><span>{offer.label}<small>{offer.nights}</small></span><strong><span class="hero-from">From</span> <span class="hero-amount">{offer.fromUSD ? usd(offer.fromUSD) : 'Quote on request'}</span><small>per person · two sharing</small></strong></a>})}</div></div>
+    <div class="escape-hero-copy">
+      <p class="eyebrow hero-eyebrow">From Africa to the world</p>
+      <h1 id="hero-title"><span class="hero-line"><span>Escape </span></span><span class="hero-line"><em>beautifully.</em></span></h1>
+      <p class="escape-hero-description">Islands, city breaks and private cruises.<br />Flights, stays and experiences arranged around you.</p>
+      <div class="escape-hero-actions"><a class="escape-button" href="#destinations">Explore destinations</a><a class="escape-button escape-button-outline" href="#enquire">Plan your escape</a></div>
+    </div>
+    <div class="escape-hero-bottom hero-offers">
+      <p>Three extraordinary escapes. <span>Illustrative prices · per person, two sharing.</span></p>
+      <div class="hero-offers-grid">{['maldives','seychelles','dubai'].map(slug=>{const offer=offerFor(slug);return <a href={path('destination-'+slug+'.html')}><span>{offer.label}<small>{offer.nights}</small></span><strong><span class="hero-from">From</span> <span class="hero-amount">{offer.fromUSD ? usd(offer.fromUSD) : 'Quote on request'}</span></strong></a>})}</div>
+    </div>
   </section>
   <section class="escape-featured escape-section" id="destinations" aria-labelledby="featured-title">
     <div class="escape-heading"><div><p class="eyebrow">The signature escapes</p><h2 id="featured-title">Two islands.<br /><em>Endless possibilities.</em></h2></div><p>The Maldives and Seychelles, arranged around you.<br />Choose your escape. We’ll put the journey together.</p></div>

@@ -1,4 +1,4 @@
-import {createLeopardMotion} from './leopard-motion';
+import {createLeopardMotion} from './hero-film';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -30,14 +30,14 @@ function finishIntro(immediate = false) {
     root.classList.remove('intro-active', 'intro-exiting');
     root.classList.add('cinema-arrived');
     shell?.removeAttribute('inert');
-    try { sessionStorage.setItem('pardus-intro-v25', 'seen'); } catch { /* storage is optional */ }
+    try { sessionStorage.setItem('pardus-intro-v27', 'seen'); } catch { /* storage is optional */ }
     if (restoreFocus) document.querySelector<HTMLElement>('#main')?.focus({preventScroll:true});
     syncMotion();
   };
   if (immediate || reduced.matches) complete();
   else {
     root.classList.add('intro-exiting', 'cinema-arrived');
-    closingTimer = window.setTimeout(complete, 880);
+    closingTimer = window.setTimeout(complete, 700);
   }
 }
 function beginIntro() {
@@ -55,9 +55,9 @@ function beginIntro() {
   Promise.allSettled([artworkReady, fontsReady, leopard?.ready]).then(() => {
     if (!root.classList.contains('intro-active') || root.classList.contains('intro-exiting')) return;
     intro.style.setProperty('--intro-progress', '.95');
-    introTimer = window.setTimeout(() => finishIntro(), Math.max(0, 3800 - (performance.now() - started)));
+    introTimer = window.setTimeout(() => finishIntro(), Math.max(0, 2100 - (performance.now() - started)));
   });
-  deadline = window.setTimeout(() => finishIntro(), Math.max(0, 5500 - (performance.now() - started)));
+  deadline = window.setTimeout(() => finishIntro(), Math.max(0, 4200 - (performance.now() - started)));
   syncMotion();
 }
 skip?.addEventListener('click', () => finishIntro(true));
@@ -76,14 +76,14 @@ reduced.addEventListener('change', () => { if(reduced.matches) finishIntro(true)
 if (root.classList.contains('intro-active')) beginIntro();
 else { root.classList.add('cinema-arrived'); syncMotion(); }
 
-// Only pointer events schedule a frame; ambient camera motion is handled by CSS.
+// Only pointer events schedule depth updates; the film renderer handles ambient motion.
 let heroPending = 0, sceneX = 0, sceneY = 0;
 hero?.addEventListener('pointermove', event => {
   if (!scene || !finePointer.matches || reduced.matches) return;
   const box = hero.getBoundingClientRect();
-  sceneX = ((event.clientX - box.left) / box.width - .5) * 12;
-  sceneY = ((event.clientY - box.top) / box.height - .5) * 8;
-  leopard?.setLook(sceneX/6,sceneY/4);
+  sceneX = ((event.clientX - box.left) / box.width - .5) * 5;
+  sceneY = ((event.clientY - box.top) / box.height - .5) * 3;
+  leopard?.setLook(sceneX/2.5,sceneY/1.5);
   if (!heroPending) heroPending = requestAnimationFrame(() => {
     scene.style.setProperty('--scene-x', sceneX.toFixed(2) + 'px');
     scene.style.setProperty('--scene-y', sceneY.toFixed(2) + 'px');

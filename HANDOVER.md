@@ -1,6 +1,20 @@
-# Pardus Luxury Escapes — V26 handover
+# Pardus Luxury Escapes — V27 handover
 
 Release: 6 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+
+## V27 redesigned campaign and homepage
+
+V27 replaces the separate animal/scenery layers with a newly generated, continuous island scene. The leopard rests on the terrace with its contact shadow and full natural fur boundary already present in the photograph. Separate landscape and portrait masters provide clear space for live HTML copy. No animal alpha cutout or separately drifting matte is used. The former V25/V26 compositions remain archived, not active in the hero.
+
+The new renderer in `website/src/scripts/hero-film.ts` applies small, bounded head, chest and ear movements, natural local eyelid blending, slow camera motion and subtle water reflections. It renders the complete image as opaque. WebGL runs at up to 30 fps; the Canvas fallback provides photographic camera motion and blinks at 20 fps on phones or 24 fps on larger screens. GPU, image or context failure retains the intact responsive HTML poster. Hidden tabs, off-screen sections and page-cache transitions pause motion. Reduced-motion uses a still frame.
+
+The hero now reads “Escape beautifully.” with a direct description, two native links and an illustrative USD price rail. The rail sits left of the animal on desktop and beneath it on phones. Portrait art is selected through 1100 px. The homepage uses larger destination photographs, open cream sections, refined navy services and cruise sections, and a simpler enquiry surface. The approved logo opens with a trace, staggered letters and aircraft arrival, then fades after a roughly 2.1-second sequence when resources are ready. A bounded deadline, Skip introduction, Escape, focus restoration and reduced-motion remain supported. The once-per-tab key is `pardus-intro-v27`.
+
+Exact prompts, actual output dimensions, masters and derivative instructions are in `website/source-assets/v27/ARTWORK.md`. The landscape master is 1672 × 941; the portrait is 1024 × 1536. The scene is an imagined campaign illustration, not a verified property or partnership. The existing verified V24 destination photographs, six destination examples, cruise ideas, enquiry behavior, news updates and concept note are preserved.
+
+V27 passed Astro check with zero errors, warnings or hints, all 23 tests, the production build and exported-reference verification for 33 pages. Automated motion tests use deterministic browser API substitutes and cover lifecycle, failure, reduced-motion, raster limits and measured head/ear framing across cover crops. Separately, the actual GLSL compiled and rendered through Mesa/EGL (llvmpipe software OpenGL ES); open, closed-eye and later-motion frames were inspected at 960 × 540 and 375 × 1000. All pixels stayed opaque. `documents/PARDUS_V27_Motion_Preview.mp4` is a 12-second, 24 fps renderer preview and `documents/PARDUS_V27_Render_Report.json` records that environment. These are not browser layout screenshots. Fresh browser layout QA was unavailable because the required managed browser-control skill was not installed; no new browser or real-device review is claimed.
+
+The following V26 and V25 notes describe earlier releases; their hero compositions and opening timings do not describe the active V27 homepage.
 
 ## V26 background animation
 

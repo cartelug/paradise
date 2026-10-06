@@ -6,13 +6,14 @@ import '../styles/refinements.css';
 import '../styles/luxury.css';
 import '../styles/cinematic.css';
 import '../styles/studio.css';
+import '../styles/atelier.css';
 import CinematicIntro from '../components/CinematicIntro.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks } from '../data/site';
 interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; intro?: boolean; }
-const { title, description = site.description, image = 'images/pardus-hero-desktop-v25-1536.webp', dark = false, simpleFooter = false, class: className, intro = false } = Astro.props;
+const { title, description = site.description, image = 'images/hero-v27-desktop-1672.webp', dark = false, simpleFooter = false, class: className, intro = false } = Astro.props;
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
 const ogImage = absolute(image);
@@ -63,10 +64,10 @@ const organizationSchema = {
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline>document.documentElement.classList.add('js', 'page-ready');</script>
     {intro && <script is:inline>
-      (()=>{try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('pardus-intro-v25')){document.documentElement.classList.add('intro-active');document.documentElement.dataset.introStarted=String(performance.now());document.documentElement.dataset.introFailsafe=String(setTimeout(()=>{document.documentElement.classList.remove('intro-active','intro-exiting');document.documentElement.classList.add('cinema-arrived');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},7200));}}catch{document.documentElement.classList.add('cinema-arrived');}})();
+      (()=>{try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('pardus-intro-v27')){document.documentElement.classList.add('intro-active');document.documentElement.dataset.introStarted=String(performance.now());document.documentElement.dataset.introFailsafe=String(setTimeout(()=>{document.documentElement.classList.remove('intro-active','intro-exiting');document.documentElement.classList.add('cinema-arrived');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},6000));}}catch{document.documentElement.classList.add('cinema-arrived');}})();
     </script>}
   </head>
-  <body id="top" class={className} data-pardus-version="26">
+  <body id="top" class={className} data-pardus-version="27">
     {intro && <CinematicIntro />}
     <div data-pardus-shell>
     <div class="page-progress" aria-hidden="true"><span></span></div>
