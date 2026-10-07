@@ -36,3 +36,6 @@ input,select,textarea{accent-color:var(--gold-dark)}
 @media (forced-colors:active){
  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:Highlight}
 }
+
+/* Shared logo definitions (BrandSprite) take no space in the layout. */
+.brand-sprite{position:absolute;width:0;height:0;overflow:hidden}

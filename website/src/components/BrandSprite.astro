@@ -1,0 +1,17 @@
+---
+import logo from '../data/logo.json';
+// The approved logo's path data, defined once per page. <Brand> references it with
+// <use>, so the header, mobile menu and footer no longer each inline ~18 KB of paths.
+// Fills read --logo-gold and --logo-ink, which inherit through <use> from each instance.
+---
+<svg class="brand-sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="pardus-leopard"><path d={logo.leopard} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" /></g>
+    <g id="pardus-lockup">
+      <use href="#pardus-leopard" />
+      {logo.letters.map(letter => <path d={letter} fill="var(--logo-ink, #082C4C)" fill-rule="evenodd" />)}
+      <path d={logo.plane} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" />
+      <path d={logo.tagline} fill="var(--logo-gold, #B49A62)" fill-rule="evenodd" />
+    </g>
+  </defs>
+</svg>

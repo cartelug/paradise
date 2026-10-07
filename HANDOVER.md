@@ -2,6 +2,19 @@
 
 Release: 6 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## CSS polish and upgrade (October 2026)
+
+A source cleanup and polish pass on top of V27, without a redesign:
+
+- Shared tokens (`--ink`, `--navy`, `--paper`, `--sand`, `--gold`, `--gold-dark`, `--muted`, `--line`, `--gutter`) now have one definition in `site.css`. Four competing redefinitions were removed; the values kept are the ones that already won, so colours are unchanged.
+- 608 selectors, 526 rules and 38 keyframes that matched no markup (V20 homepage, V23 walking sprite, V25 curtain intro) were removed, along with the unused `home.css`. Before/after screenshots of all 33 pages at 1440 px and 390 px were pixel-identical.
+- Legibility: the hero price rail stacks each price under its destination so columns no longer collide. Text that was 9–10 px (hero eyebrow, rail labels, service numbers, Journal bylines and meta, planner progress) is now 11–12 px, and phone hero buttons are 13 px.
+- Focus: every focusable element has a ring of at least 3:1 against its background (1,271 checked across 33 pages); homepage form fields show a clear focus edge.
+- `polish.css` adds balanced headings, tabular price numerals, brand-coloured native controls, touch-safe hovers, forced-colours focus and cross-page view transitions (off under reduced motion).
+- The logo is defined once per page and reused, cutting HTML weight by about 40–57% (about.html 72 KB → 31 KB, index.html 123 KB → 79 KB) with identical rendering.
+
+`public/opening.js` and the `.is-opening`/`.preloader` styles belong to the retired V25 opening. No page loads them; they were left in place for history.
+
 ## V27 redesigned campaign and homepage
 
 V27 replaces the separate animal/scenery layers with a newly generated, continuous island scene. The leopard rests on the terrace with its contact shadow and full natural fur boundary already present in the photograph. Separate landscape and portrait masters provide clear space for live HTML copy. No animal alpha cutout or separately drifting matte is used. The former V25/V26 compositions remain archived, not active in the hero.

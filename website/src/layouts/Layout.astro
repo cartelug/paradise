@@ -9,6 +9,7 @@ import '../styles/studio.css';
 import '../styles/atelier.css';
 import '../styles/polish.css';
 import CinematicIntro from '../components/CinematicIntro.astro';
+import BrandSprite from '../components/BrandSprite.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
@@ -69,6 +70,7 @@ const organizationSchema = {
     </script>}
   </head>
   <body id="top" class={className} data-pardus-version="27">
+    <BrandSprite />
     {intro && <CinematicIntro />}
     <div data-pardus-shell>
     <div class="page-progress" aria-hidden="true"><span></span></div>

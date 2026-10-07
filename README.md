@@ -36,6 +36,9 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 - `website/scripts/render-hero-qa.py`: compile and render the shipped GLSL with Mesa/EGL; optional motion video.
 - `documents/PARDUS_V27_Motion_Preview.mp4`: 12-second renderer preview; this is not a browser screenshot.
 - `website/src/styles/studio.css`: retained base styles from earlier releases.
+- `website/src/styles/site.css` (`@layer tokens`): the single source for shared colour and spacing tokens. Other stylesheets add only namespaced tokens and must not redefine `--ink`, `--paper`, `--gold`, `--gutter` and the rest.
+- `website/src/styles/polish.css`: loaded last; cross-cutting focus rings (`--focus-ring` per surface), text wrapping, price numerals, touch hover and view transitions. Keep page layout out of it.
+- `website/src/components/BrandSprite.astro`: the logo paths, defined once per page; `Brand.astro` references them with `<use>`.
 - `website/source-assets/v25/` and `v26/`: earlier artwork and motion sources, retained for history.
 - `website/src/styles/cinematic.css` and `website/src/scripts/cinematic.ts`: resource-aware introduction, hero pointer depth, reveal and hover motion.
 - `website/source-assets/v24-photography/credits.json`: verified photo locations, upload dates, sources and licences.
