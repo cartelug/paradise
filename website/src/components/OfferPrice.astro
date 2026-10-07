@@ -1,6 +1,6 @@
 ---
-import { priceText, type EscapeOffer } from '../data/offers';
-interface Props { offer: Pick<EscapeOffer,'fromUSD'|'priceBasis'|'sample'>; }
+import { usd, type EscapeOffer } from '../data/offers';
+interface Props { offer: Pick<EscapeOffer,'fromUSD'|'priceBasis'>; }
 const { offer } = Astro.props;
 ---
-<div class="offer-price" data-sample-price={offer.sample ? '' : undefined}><span class="price-label">{offer.sample ? 'Illustrative sample' : 'Your escape'}</span><strong>{priceText(offer)}</strong>{offer.fromUSD !== null && <small>{offer.priceBasis}</small>}</div>
+<div class="offer-price">{offer.fromUSD !== null && <span class="price-label">From</span>}<strong>{offer.fromUSD === null ? 'Quote on request' : usd(offer.fromUSD)}</strong>{offer.fromUSD !== null && <small>{offer.priceBasis}</small>}</div>

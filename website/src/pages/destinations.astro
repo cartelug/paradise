@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EscapeCard from '../components/EscapeCard.astro';
-import { offers, samplePriceNote } from '../data/offers';
+import { offers, priceNote } from '../data/offers';
 ---
 <Layout title="Destinations & escapes" description="Explore Maldives, Seychelles, Dubai, East Africa, safari and Zanzibar journeys, with suggested stays and a clear USD quote for your dates." class="escape-inner" simpleFooter>
-  <section class="escape-page-intro"><p class="eyebrow">The Pardus destinations</p><h1>Choose your place.<br /><em>We’ll plan your escape.</em></h1><p>Choose a destination. See a sample stay and its starting price in USD. We’ll tailor the final proposal around you.</p></section>
+  <section class="escape-page-intro"><p class="eyebrow">The Pardus destinations</p><h1>Choose your place.<br /><em>We’ll plan your escape.</em></h1><p>Islands, cities, safari country and the coast. Explore your stay, see what is included, and let us tailor the journey around you.</p></section>
   <section class="escape-collection" aria-label="Destinations">
     <div class="collection-filters"><div class="filter-buttons" role="group" aria-label="Filter destinations"><button data-filter="all" aria-pressed="true">All destinations</button><button data-filter="islands" aria-pressed="false">Islands & beaches</button><button data-filter="wild" aria-pressed="false">Safaris</button><button data-filter="culture" aria-pressed="false">City & culture</button></div><p class="collection-count" data-collection-count aria-live="polite">{offers.length} destinations to explore</p></div>
     <div class="escape-collection-grid">{offers.map(offer => <EscapeCard offer={offer} />)}</div>
-    <p class="escape-price-note">{samplePriceNote}</p>
+    <p class="escape-price-note">{priceNote}</p>
   </section>
 </Layout>

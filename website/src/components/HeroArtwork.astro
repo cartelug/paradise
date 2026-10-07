@@ -12,7 +12,7 @@ const srcset=(name:'desktop'|'mobile',format:'webp'|'avif')=>artwork[name].width
     <source type="image/avif" srcset={srcset('desktop','avif')} sizes="100vw" />
     <img src={path('images/hero-v27-desktop-'+artwork.desktop.width+'.webp')} srcset={srcset('desktop','webp')} sizes="100vw"
       width={artwork.desktop.width} height={artwork.desktop.height}
-      alt="Illustrative Pardus campaign scene: a leopard resting on a coastal terrace above island villas and a private yacht at blue hour"
+      alt="A leopard resting on a coastal terrace above island villas and a private yacht at blue hour"
       loading="eager" fetchpriority="high" decoding="async" data-hero-image data-leopard-background />
   </picture>
   <canvas class="hero-film" data-leopard-canvas aria-hidden="true"></canvas>

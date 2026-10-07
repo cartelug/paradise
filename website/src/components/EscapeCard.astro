@@ -1,17 +1,21 @@
 ---
 import Picture from './Picture.astro';
 import OfferPrice from './OfferPrice.astro';
+import OfferInclusions from './OfferInclusions.astro';
+import TravelIcon from './TravelIcon.astro';
 import { path } from '../data/site';
-import { destinationFor, priceText, type EscapeOffer } from '../data/offers';
+import { destinationFor, type EscapeOffer } from '../data/offers';
 interface Props { offer: EscapeOffer; featured?: boolean; }
 const { offer, featured = false } = Astro.props;
 const d = destinationFor(offer.slug);
 ---
 <article class:list={['escape-card', { 'escape-card-featured': featured }]} data-category={d.category} data-reveal>
-  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 760px) 100vw, 33vw'} /><span class="escape-duration">{offer.nights}</span><span class="escape-photo-price" aria-hidden="true"><small>Sample escape · per person</small><strong>{priceText(offer)}</strong></span></a>
-  <div class="escape-card-copy"><p class="eyebrow">{d.country}</p><h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3><p>{offer.experience}</p>
-    {featured && <ul class="escape-highlights">{offer.highlights.map(item => <li>{item}</li>)}</ul>}
-    <div class="escape-inclusions" aria-label="Sample package inclusions">{offer.inclusions.map(item=><span>{item}</span>)}</div>
-    <div class="escape-card-price"><OfferPrice offer={offer}/><a class="escape-enquire" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`}>Enquire</a></div>
+  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw'} /></a>
+  <div class="escape-card-copy">
+    <header><div class="escape-card-meta"><p class="eyebrow">{d.country}</p><span class="escape-stay">{offer.nights}</span></div><h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3></header>
+    <p class="escape-card-description">{offer.experience}</p>
+    {featured && <ul class="escape-highlights" aria-label={`${offer.label} highlights`}>{offer.highlights.map(item => <li><TravelIcon name="check" /><span>{item}</span></li>)}</ul>}
+    <div class="escape-included"><p class="escape-block-label">Your escape includes</p><OfferInclusions items={offer.inclusions} /></div>
+    <div class="escape-card-price"><OfferPrice offer={offer}/><a class="escape-enquire" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`} aria-label={`Enquire about ${offer.label}`}>Plan this escape <TravelIcon name="arrow" /></a></div>
   </div>
 </article>

@@ -1,0 +1,7 @@
+---
+import TravelIcon from './TravelIcon.astro';
+interface Props { items: string[]; }
+const { items } = Astro.props;
+const iconFor = (item: string) => /breakfast|board|meals/i.test(item) ? 'dining' : /transfer/i.test(item) ? 'transfer' : /game drives/i.test(item) ? 'safari' : /tour/i.test(item) ? 'compass' : 'bed';
+---
+<ul class="escape-inclusions inclusion-list" aria-label="Escape inclusions">{items.map(item => <li><TravelIcon name={iconFor(item)} /><span>{item}</span></li>)}</ul>

@@ -1,14 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EscapeCard from '../components/EscapeCard.astro';
-import { offers, services, cruiseTypes, samplePriceNote, priceText } from '../data/offers';
+import { offers, services, cruiseTypes, priceNote, priceText } from '../data/offers';
 import { path } from '../data/site';
 ---
 <Layout title="The Pardus concept note" description="A clear guide to Pardus Luxury Escapes destinations, private cruises, travel services and how to enquire." class="escape-inner" simpleFooter>
   <section class="escape-page-intro"><p class="eyebrow">Pardus Luxury Escapes · October 2026</p><h1>Luxury travel,<br /><em>beautifully arranged.</em></h1><p>You tell us where you want to go. We arrange the flights, stays, transfers and experiences. Every journey begins with your dates, your budget and the people travelling.</p><a class="escape-button" style="margin-top:25px" href={path('documents/PARDUS_Luxury_Escapes_Concept_Note.pdf')} download>Download the concept note</a></section>
-  <section class="escape-collection"><div class="escape-featured-grid">{offers.slice(0,2).map(offer => <EscapeCard offer={offer} featured />)}</div><p class="escape-price-note">{samplePriceNote}</p></section>
+  <section class="escape-collection"><div class="escape-featured-grid">{offers.slice(0,2).map(offer => <EscapeCard offer={offer} featured />)}</div><p class="escape-price-note">{priceNote}</p></section>
   <section class="escape-section"><div class="escape-heading"><h2>More ways<br /><em>to get away.</em></h2></div><div class="escape-collection-grid">{offers.slice(2).map(offer => <EscapeCard offer={offer} />)}</div></section>
   <section class="escape-services escape-section"><p class="eyebrow">A complete service</p><h2>You choose where.<br /><em>We arrange the rest.</em></h2><ul class="escape-service-grid" style="margin-top:35px">{services.map((service,i) => <li><span>{String(i+1).padStart(2,'0')}</span>{service}</li>)}</ul></section>
-  <section class="escape-section"><p class="eyebrow">Private boat & yacht experiences</p><h2>Beautiful moments.<br /><em>Out on the water.</em></h2><div class="escape-experience-grid escape-cruise-grid">{cruiseTypes.map(type => <div><h3>{type.title}</h3><p>{type.text}</p><div class="cruise-sample-price"><span>Illustrative sample</span><strong>{priceText(type)}</strong><small>{type.basis}</small></div></div>)}</div><p class="escape-detail-note">Cruises are quoted in USD for your destination, group size, duration and occasion. Your proposal confirms the boat, route and inclusions.</p></section>
+  <section class="escape-section"><p class="eyebrow">Private boat & yacht experiences</p><h2>Beautiful moments.<br /><em>Out on the water.</em></h2><div class="escape-experience-grid escape-cruise-grid">{cruiseTypes.map(type => <div><h3>{type.title}</h3><p>{type.text}</p><div class="cruise-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></div>)}</div><p class="escape-detail-note">Cruises are quoted in USD for your destination, group size, duration and occasion. Your proposal confirms the boat, route and inclusions.</p></section>
   <section class="escape-enquiry-section escape-section"><div class="escape-enquiry-intro"><h2>Tell us where.<br /><em>We’ll take it from here.</em></h2><p>Share the destination, travel dates, number of travellers and budget. Review a clear itinerary and USD proposal. Confirm when the arrangements feel right.</p></div><div><a class="escape-button" href={path('journey.html')}>Plan your escape</a></div></section>
 </Layout>

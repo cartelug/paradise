@@ -3,8 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import { destinations } from '../data/destinations';
-import { offerFor, samplePriceNote } from '../data/offers';
+import { offerFor, priceNote } from '../data/offers';
 import OfferPrice from '../components/OfferPrice.astro';
+import OfferInclusions from '../components/OfferInclusions.astro';
+import TravelIcon from '../components/TravelIcon.astro';
 import { path, absolute } from '../data/site';
 export function getStaticPaths() { return destinations.map(destination => ({params:{destination:'destination-'+destination.slug},props:{destination}})); }
 const { destination: d } = Astro.props;
@@ -19,13 +21,17 @@ const ideas: Record<string,{title:string;text:string}[]> = {
 };
 const schema = {'@context':'https://schema.org','@type':'TouristDestination',name:d.name,description:offer.experience,url:absolute('destination-'+d.slug+'.html')};
 ---
-<Layout title={offer.label} description={offer.experience} image={'images/'+d.image+'-1920.webp'} class="escape-inner" simpleFooter>
+<Layout title={offer.label} description={offer.experience} image={'images/'+d.image+'-1920.webp'} class="escape-inner destination-page" simpleFooter>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
-  <section class="escape-detail-hero"><Picture name={d.image} alt={d.alt} eager sizes="100vw" /><div class="escape-detail-heading"><p class="eyebrow">{d.country} · {offer.nights}</p><h1>{offer.label}</h1><p>{offer.experience}</p><div class="escape-detail-offer"><OfferPrice offer={offer} /><a class="escape-button" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Enquire about this escape</a></div></div></section>
-  <section class="escape-overview escape-section"><div><p class="eyebrow">Your journey, clearly arranged</p><h2>See yourself here.<br /><em>Leave the planning to us.</em></h2></div><div><p>{offer.experience} Tell us your dates and the kind of stay you have in mind, and we’ll prepare a proposal around you.</p><h3>Inside this sample escape</h3><ul>{offer.inclusions.map(item=><li>{item}</li>)}</ul><p class="escape-detail-note">{samplePriceNote}</p><h3>What else we can arrange</h3><ul><li>Flights from your departure city</li><li>Selected hotels, resorts or safari stays</li><li>Airport and destination transfers</li><li>Private tours, activities and boat experiences</li><li>Visa guidance and a custom itinerary</li></ul><p class="escape-detail-note">The exact inclusions, USD price and supplier terms are confirmed in your proposal before booking.</p></div></section>
-  <section class="escape-possibilities escape-section"><p class="eyebrow">What you can do</p><h2>A stay worth<br /><em>looking forward to.</em></h2><div class="escape-experience-grid">{ideas[d.slug].map(idea => <div data-reveal><h3>{idea.title}</h3><p>{idea.text}</p></div>)}</div>
+  <header class="destination-intro">
+    <div class="destination-intro-media"><Picture name={d.image} alt={d.alt} eager sizes="(max-width: 760px) 100vw, 55vw" /></div>
+    <div class="destination-intro-copy"><nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>Destinations</a><span aria-hidden="true">/</span><span>{offer.label}</span></nav><div class="escape-card-meta"><p class="eyebrow">{d.country}</p><span class="escape-stay">{offer.nights}</span></div><h1>{offer.label}</h1><p>{offer.experience}</p><ul class="escape-highlights">{offer.highlights.map(item => <li><TravelIcon name="check" /><span>{item}</span></li>)}</ul></div>
+  </header>
+  <section class="destination-summary escape-section" aria-label="Your escape at a glance"><div class="destination-summary-inclusions"><p class="escape-block-label">Your escape includes</p><OfferInclusions items={offer.inclusions} /></div><div class="destination-summary-booking"><OfferPrice offer={offer} /><a class="escape-button" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <TravelIcon name="arrow" /></a></div><p class="escape-price-note">{priceNote}</p></section>
+  <section class="escape-overview escape-section"><div><p class="eyebrow">The destination</p><h2>{d.title}</h2></div><div>{d.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p>Flights, stays, transfers and experiences can be brought together in a proposal shaped around your dates and budget.</p><a class="escape-underlined" href="#enquire">Make it your journey</a></div></section>
+  <section class="escape-possibilities escape-section"><p class="eyebrow">The experiences</p><h2>A stay worth<br /><em>looking forward to.</em></h2><div class="escape-experience-grid">{ideas[d.slug].map((idea, i) => <article data-reveal><span class="experience-number">0{i+1}</span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}</div>
     {d.slug === 'dubai' && <p class="escape-detail-note">Planning around an event? <a class="escape-underlined" href="https://www.visitdubai.com/articles/events-to-look-forward-to-this-season" target="_blank" rel="noopener noreferrer">See the current winter calendar at Visit Dubai</a></p>}
   </section>
-  <section class="escape-section escape-overview"><div><p class="eyebrow">A few practical details</p><h2>Your dates.<br /><em>Your way to travel.</em></h2></div><div><h3>Suggested stay</h3><p>{offer.nights}. Add or reduce nights to suit your plans.</p><h3>Before you decide</h3><p>{d.seasonNote}</p><a class="escape-underlined" href={path('cruises.html')}>Explore private boat & yacht experiences</a></div></section>
+  <section class="escape-section destination-practical"><div class="escape-heading"><div><p class="eyebrow">The details that matter</p><h2>Your dates.<br /><em>Your way to travel.</em></h2></div></div><div class="destination-practical-grid"><div><h3>Time to enjoy it</h3><p>{offer.nights}. Extend or shorten your stay to suit your plans.</p><a class="escape-underlined" href={path('cruises.html')}>Add a private boat experience</a></div><div><h3>Made for</h3><ul>{d.idealFor.map(item => <li>{item}</li>)}</ul></div><div><h3>Before you travel</h3><p>{d.seasonNote}</p></div></div></section>
   <section class="escape-enquiry-section escape-section" id="enquire"><div class="escape-enquiry-intro"><p class="eyebrow">Make it your escape</p><h2>Plan your<br /><em>{offer.label.replace('Safari & ','')} journey.</em></h2><p>Tell us your dates and budget. We’ll take care of the next steps.</p></div><SimpleEnquiry id={'enquiry-'+d.slug} defaultDestination={d.name} /></section>
 </Layout>

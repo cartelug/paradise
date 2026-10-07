@@ -20,7 +20,7 @@ const articleSchema = {
 <Layout title={entry.title} class="article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <header class="article-heading"><a href={path('journal.html')} class="article-back">← The Journal</a><p class="eyebrow">{entry.category} · {readMinutes} min read</p><h1>{entry.title}</h1><p>{entry.subtitle}</p><p class="article-byline">By {entry.author} · Published <time datetime={entry.publishedAt}>{displayDate(entry.publishedAt)}</time> · Updated <time datetime={entry.updatedAt}>{displayDate(entry.updatedAt)}</time></p></header>
-  <figure class="article-photo"><Picture name={entry.image} alt={entry.alt} eager sizes="100vw" /><figcaption>{entry.alt}</figcaption></figure>
+  <figure class="article-photo"><Picture name={entry.image} alt={entry.alt} eager sizes="100vw" /></figure>
   <div class="article-layout"><aside class="article-margin"><p class="eyebrow">A Pardus perspective</p><p>Thoughtful notes for<br />a personal journey.</p><a href={path('journal.html')}>Explore all stories <Arrow /></a>{entry.relatedDestination && <a href={path(`destination-${entry.relatedDestination}.html`)}>Explore the destination <Arrow /></a>}</aside><article class="journal-article">
     <h2 data-reveal>{entry.intro}</h2>
     <div class="journal-copy">{entry.paragraphs.map(p => <p data-reveal>{p}</p>)}</div>

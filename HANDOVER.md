@@ -1,6 +1,14 @@
-# Pardus Luxury Escapes — V27 handover
+# Pardus Luxury Escapes — Final destination presentation
 
-Release: 6 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+
+## Final destination sections
+
+The signature islands now use alternating photograph-and-detail panels on desktop and a single-column reading order on phones. All destination photography is clear of price overlays and duration badges. Inclusions use shared line icons, with one price and one planning action per card. The popular-escape prices sit below the homepage hero, separate from the artwork. Dubai uses the same destination component; service features are grouped by travel essentials, experiences, occasions and tailored journeys.
+
+Every destination and the cruise page now separates its opening photograph from the heading and booking details. Destination pages include a clear inclusion summary, travel experiences, traveller suitability and timing considerations. Photo captions and sample labels were removed across published HTML, and the downloadable concept note was regenerated with matching wording. Starting figures and inclusions are retained from the supplied website; the itinerary and final price are confirmed for the selected dates.
+
+`website/src/styles/escapes.css` owns this final presentation. Shared source components are `EscapeCard`, `OfferPrice`, `OfferInclusions` and `TravelIcon`. Previous release notes below describe their respective historical states.
 
 ## CSS polish and upgrade (October 2026)
 
@@ -55,7 +63,7 @@ New dedicated pages cover private cruises, the travel desk and the concept note.
 
 ## Prices and contact details
 
-The client explicitly requested sample prices for this release. All six destinations now show illustrative USD starting prices per person, based on two sharing, plus sample inclusions. Flights, visas and travel insurance are extra. The four private cruise examples use a separate per-boat or per-charter basis with duration and guest count. These are design examples, not supplier quotes or live availability. All destination records in `website/src/data/offers.ts` have `sample: true`. Replace with verified rates and approved terms before changing that flag; regenerate the concept note and exported site together.
+The client requested the final presentation without sample labels. All six destinations retain the supplied USD starting prices per person, based on two sharing, with clearly separated inclusions and an enquiry link. Flights, visas and travel insurance are quoted separately. The four private cruise prices use their own per-boat or per-charter basis with duration and guest count. Availability, itinerary and final price remain subject to a dated proposal. Maintain the rates in `website/src/data/offers.ts` and regenerate the concept note and exported site together.
 
 The planned contact addresses from the latest brief are:
 

@@ -24,7 +24,7 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 
 ## Editing
 
-- `website/src/data/offers.ts`: suggested stays, experiences and illustrative USD prices, inclusions and price bases.
+- `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases.
 - `website/src/data/site.ts`: contacts and optional delivery/analytics settings.
 - `website/src/pages/`: page content and layouts.
 - `website/src/styles/luxury.css`: core design and responsive layouts.
@@ -44,7 +44,7 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 - `website/scripts/update-travel-desk.py`: fetch the official Uganda CAA news feed.
 - `.github/workflows/travel-desk.yml`: refresh travel updates daily.
 
-At the client’s request, all six destinations and four cruise ideas now show **illustrative sample prices in USD**, with their inclusions and price basis. These are design examples, not supplier quotes or bookable offers. Replace the figures with verified rates and set `sample: false` only when approved. Regenerate the PDF and website together.
+The final destination presentation retains the starting USD prices from the supplied website content. Photography is clear of duration badges, captions and repeated prices. Inclusions and the per-person or per-charter basis appear beside the enquiry action. Availability, the selected itinerary and the final price are confirmed for the traveller's dates before booking. Rate changes belong in `website/src/data/offers.ts`; regenerate the concept note and website together.
 
 Enquiries prepare an email draft for the visitor to send, or download a text brief. Direct server delivery remains disabled until a real endpoint is connected and tested. The existing saved Folio, optional detailed planner, journey ideas and Journal remain available.
 
