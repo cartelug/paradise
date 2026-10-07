@@ -11,7 +11,7 @@ const ordered = [journal[3], journal[2], journal[0], journal[4], featured];
 const displayDate = (value: string) => new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
 ---
 <Layout title="The Pardus journal" class="journal-page" description="Destination notes and considered advice for a more personal way to travel.">
-  <header class="journal-masthead"><h1>The <em>Journal.</em></h1><p>Places worth knowing.<br />Details worth considering.</p></header>
+  <header class="journal-masthead"><h1>The <em>Journal.</em></h1><p>Places worth knowing. <br />Details worth considering.</p></header>
   <section class="journal-cover" aria-labelledby="cover-title">
     <a class="journal-cover-image" href={path(`journal-${featured.slug}.html`)} aria-label={`Read ${featured.title}`}><Picture name={featured.image} alt={featured.alt} eager sizes="(max-width: 760px) 100vw, 65vw" /><span class="cover-caption">The Maldives / Indian Ocean</span></a>
     <div class="journal-cover-copy"><p class="eyebrow">In focus · {readingTime(featured)} min read</p><h2 id="cover-title">One ocean.<br /><em>Your own island.</em></h2><p>{featured.description}</p><p class="journal-byline">By {featured.author} · {displayDate(featured.publishedAt)}</p><a class="text-button" href={path(`journal-${featured.slug}.html`)}>Read the island guide <Arrow /></a></div>

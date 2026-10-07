@@ -1,0 +1,38 @@
+/* PARDUS V28 polish: cross-cutting accessibility and refinement rules, loaded last.
+   Page compositions stay in their own stylesheets; this file only adds behaviour that
+   applies everywhere, so it should stay short. */
+
+/* Focus: one visible ring, dark on light surfaces and light on dark ones (WCAG 2.4.11). */
+:root{--focus-ring:var(--gold-dark)}
+.site-header,.mobile-menu,.site-footer,.escape-hero,.escape-services,.escape-cruise,.escape-more,.escape-enquiry-section,.atelier-intro{--focus-ring:#e6cc96}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--focus-ring);outline-offset:4px;border-radius:1px}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+
+/* Type: balanced headings, no single-word last lines in copy, steady numerals in prices. */
+h1,h2,h3,.closing-title{text-wrap:balance}
+p,li,figcaption{text-wrap:pretty}
+.escape-card-price strong,.escape-cruise-price strong,.cruise-sample-price strong,.price-amount,.hero-amount{font-variant-numeric:lining-nums tabular-nums}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* Forms pick up the brand accent for native checkboxes, radios and range controls. */
+input,select,textarea{accent-color:var(--gold-dark)}
+.escape-enquiry-section :is(input,select,textarea){accent-color:var(--gold)}
+
+/* Touch screens: no hover lift that stays stuck after a tap; a press state instead. */
+@media (hover:none){
+ .escape-button:hover,.atelier-hero .escape-button:hover{transform:none}
+ .escape-card-image:hover img{transform:none}
+}
+.escape-button:active,.escape-enquire:active,.site-header .header-journey:active{transform:translateY(1px)}
+
+/* Cross-document view transitions: a short cross-fade between pages in supporting browsers. */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:cubic-bezier(.22,.7,.18,1)}
+
+@media (prefers-reduced-motion:reduce){
+ @view-transition{navigation:none}
+ .escape-button:active,.escape-enquire:active,.site-header .header-journey:active{transform:none}
+}
+@media (forced-colors:active){
+ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:Highlight}
+}

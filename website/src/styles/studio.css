@@ -2,7 +2,6 @@
 :root{--studio-ease:cubic-bezier(.22,.8,.2,1)}
 body{background:var(--paper)}
 ::selection{background:#d7ba7d;color:#071426}
-a:focus-visible,button:focus-visible{outline:2px solid #b59355;outline-offset:5px}
 .site-header,.site-header.header-scrolled{background:#061324ed;border-bottom-color:#d7ba7d23;box-shadow:0 8px 34px #020b1715;backdrop-filter:blur(20px)}
 .site-header .header-journey,.escape-button,.escape-enquire{border-radius:4px}
 .site-header .header-journey{transition:background .3s,box-shadow .3s;box-shadow:inset 0 1px 0 #fff5}
