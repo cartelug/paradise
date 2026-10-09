@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T11:26:12.542755+00:00",
+  "updatedAt": "2026-10-09T11:22:54.469175+00:00",
   "items": [
     {
       "id": "dubai-winter-2026",
@@ -31,7 +31,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "publishedAt": "2026-10-01",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     },
     {
       "id": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
@@ -41,7 +41,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     },
     {
       "id": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
@@ -51,7 +51,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     },
     {
       "id": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
@@ -61,7 +61,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     },
     {
       "id": "https://caa.go.ug/manager-marketing-and-commercial-services/",
@@ -71,7 +71,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/manager-marketing-and-commercial-services/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     },
     {
       "id": "https://caa.go.ug/senior-flight-operations-inspector/",
@@ -81,14 +81,14 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/senior-flight-operations-inspector/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-08"
+      "checkedAt": "2026-10-09"
     }
   ],
   "sources": [
     {
       "name": "Uganda Civil Aviation Authority",
       "url": "https://caa.go.ug/feed/",
-      "lastSuccessfulCheck": "2026-10-08T11:26:12.542755+00:00"
+      "lastSuccessfulCheck": "2026-10-09T11:22:54.469175+00:00"
     }
   ]
 }
