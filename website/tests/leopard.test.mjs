@@ -15,6 +15,10 @@ const [rendererCode, cinematicCode] = await Promise.all([bundle('hero-film'), bu
 function fixture(options = {}) {
   const frames = new Map(), events = new Map(), documentEvents = new Map(), canvasEvents = new Map();
   const uniforms = new Map(), media = new Map(), resizers = [];
+  const saved = new Map(options.userPaused ? [['pardus-scene-motion','paused']] : []);
+  const controlEvents = new Map(), controlAttributes = new Map(), controlLabel = {textContent:''};
+  const motionControl = {hidden:true, setAttribute:(key,value)=>controlAttributes.set(key,value),
+    querySelector:()=>controlLabel, addEventListener:(key,cb)=>controlEvents.set(key,cb)};
   let nextFrame = 0, now = 100, draws = 0, intersection;
   const classes = () => {
     const values = new Set();
@@ -50,7 +54,7 @@ function fixture(options = {}) {
   const shell = {setAttribute: () => {}, removeAttribute: () => {}};
   const document = {documentElement: root, hidden: false, fonts: {ready: Promise.resolve()},
     createElement: () => ({getContext: () => paint}),
-    querySelector: selector => ({'[data-leopard-scene]': scene, '.escape-hero': hero, '[data-hero-depth]': depth, '[data-pardus-shell]': shell})[selector] || null,
+    querySelector: selector => ({'[data-leopard-scene]': scene, '.escape-hero': hero, '[data-hero-depth]': depth, '[data-pardus-shell]': shell, '[data-scene-motion]': options.controls ? motionControl : null})[selector] || null,
     querySelectorAll: () => [], addEventListener: (type, cb) => documentEvents.set(type, cb),
   };
   class Observer {constructor(cb) {intersection = cb;} observe() {}}
@@ -58,7 +62,7 @@ function fixture(options = {}) {
     clearTimeout, setTimeout, addEventListener: (type, cb) => events.set(type, cb),
     matchMedia(query) {
       if (!media.has(query)) media.set(query, {
-        matches: query.includes('1100px') ? scene.clientWidth <= 1100 : query.includes('760px') ? scene.clientWidth <= 760 : false,
+        matches: query.includes('1100px') ? scene.clientWidth <= 1100 : query.includes('760px') ? scene.clientWidth <= 760 : query.includes('prefers-reduced-motion') ? !!options.reduced : false,
         addEventListener(_, cb) {this.change = cb;},
       });
       return media.get(query);
@@ -71,6 +75,7 @@ function fixture(options = {}) {
     requestAnimationFrame: cb => {const id = ++nextFrame; frames.set(id, cb); return id;},
     cancelAnimationFrame: id => frames.delete(id), performance: {now: () => now},
     sessionStorage: {setItem: () => {}}, setTimeout, clearTimeout,
+    localStorage: {getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)},
   };
   const step = (milliseconds = 1000) => {
     for (let elapsed = 0; elapsed < milliseconds; elapsed += 1000 / 60) {
@@ -79,7 +84,8 @@ function fixture(options = {}) {
     }
   };
   const run = () => {runInNewContext(rendererCode, sandbox); return module.exports.createLeopardMotion(scene);};
-  return {scene, canvas, frames, uniforms, media, document, events, root, step, run,
+  return {scene, canvas, frames, uniforms, media, document, events, root, step, run, motionControl, controlAttributes, controlLabel, saved,
+    clickMotion:()=>controlEvents.get('click')(),
     draws: () => draws, resize: () => resizers.forEach(cb => cb()),
     loseContext: () => canvasEvents.get('webglcontextlost')({preventDefault() {}}),
     async cinematic() {runInNewContext(cinematicCode, sandbox); await new Promise(resolve => setImmediate(resolve));},
@@ -133,6 +139,34 @@ test('hero visibility, hidden tabs and back/forward cache suspend and restore an
   reduced.matches = true; reduced.change();
   assert.equal(f.frames.size, 0);
   assert.equal(f.scene.dataset.leopardMotion, 'reduced');
+});
+
+test('a saved scene pause avoids loading the renderer and persists across visibility changes', async () => {
+  const f = fixture({controls:true,userPaused:true}); await f.cinematic(); f.step(1000);
+  assert.equal(f.draws(),0);
+  assert.equal(f.scene.dataset.leopardRenderer,undefined);
+  assert.equal(f.motionControl.hidden,false);
+  assert.equal(f.controlAttributes.get('aria-label'),'Resume background animation');
+  f.clickMotion(); await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(f.frames.size,1);
+  assert.equal(f.saved.get('pardus-scene-motion'),'playing');
+  f.clickMotion(); const stopped=f.draws();
+  f.hidden(true); f.hidden(false); f.events.get('pagehide')(); f.events.get('pageshow')(); f.step(2000);
+  assert.equal(f.draws(),stopped);
+  assert.equal(f.frames.size,0);
+  assert.equal(f.saved.get('pardus-scene-motion'),'paused');
+  assert.equal(f.controlAttributes.get('aria-pressed'),'true');
+});
+
+test('initial reduced motion keeps the photograph and can enable the scene after a preference change', async () => {
+  const f=fixture({controls:true,reduced:true}); await f.cinematic(); f.step(1000);
+  assert.equal(f.draws(),0);
+  assert.equal(f.scene.dataset.leopardRenderer,undefined);
+  assert.equal(f.motionControl.hidden,true);
+  const pref=f.media.get('(prefers-reduced-motion: reduce)'); pref.matches=false; pref.change();
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(f.frames.size,1);
+  assert.equal(f.motionControl.hidden,false);
 });
 
 test('missing artwork, shader failure and context loss retain the static hero', async () => {

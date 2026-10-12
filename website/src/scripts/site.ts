@@ -19,14 +19,9 @@ menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.
 initFolio();
 
 if ('IntersectionObserver' in window && !motion.matches) {
-  const sectionCounts = new Map<Element, number>();
   const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal], .escape-heading h2, .escape-heading .eyebrow, .escape-enquiry-intro h2, .escape-page-intro h1, .escape-detail-heading h1')];
   targets.forEach(target => { target.dataset.reveal = ''; });
   targets.forEach(target => {
-    const section = target.closest('section') || document.body;
-    const order = sectionCounts.get(section) || 0;
-    sectionCounts.set(section, order + 1);
-    target.style.setProperty('--reveal-delay', `${Math.min(order, 5) * 65}ms`);
     if (!target.dataset.revealStyle) {
       target.dataset.revealStyle = target.matches('h1,h2,.section-label') ? 'heading'
         : target.matches('picture,.atelier-image,.business-image,.journey-card-picture,.destination-detail-hero,.full-bleed-picture') ? 'media'
@@ -41,10 +36,8 @@ if ('IntersectionObserver' in window && !motion.matches) {
       reveal.unobserve(entry.target);
     });
   }, { threshold: 0, rootMargin: '80px 0px' });
-  targets.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight + 80) el.classList.add('revealed');
-    else reveal.observe(el);
-  });
+  const initiallyVisible = targets.map(el => ({el,visible:el.getBoundingClientRect().top < window.innerHeight + 80}));
+  initiallyVisible.forEach(({el,visible}) => {if(visible)el.classList.add('revealed');else reveal.observe(el);});
   root.classList.add('motion-ready');
   // IntersectionObserver reveals each section when it enters the viewport.
   // A failed enhancement removes the motion gate so the content stays readable.
@@ -54,6 +47,12 @@ if ('IntersectionObserver' in window && !motion.matches) {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('main section').forEach(section => sections.observe(section));
+  motion.addEventListener('change',()=>{
+    if (!motion.matches) return;
+    reveal.disconnect();sections.disconnect();
+    targets.forEach(el=>el.classList.add('revealed'));
+    root.classList.remove('motion-ready');
+  });
   // Observers enhance decoration only; content remains visible before observation.
 }
 
@@ -64,34 +63,45 @@ scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.datas
 let scrollFrame = 0;
 function paintScrollMotion() {
   scrollFrame = 0;
-  const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  root.style.setProperty('--page-progress', String(Math.min(1, Math.max(0, window.scrollY / scrollable))));
-  if (motion.matches) return;
-  for (const element of scrollMedia) {
-    const box = element.getBoundingClientRect();
-    if (box.bottom < -100 || box.top > window.innerHeight + 100) continue;
-    const depth = window.innerWidth <= 760 ? 0 : Number(element.dataset.scrollDepth || 12);
-    const position = (window.innerHeight / 2 - (box.top + box.height / 2)) / (window.innerHeight + box.height);
-    const offset = Math.max(-depth, Math.min(depth, position * depth * 2));
-    element.style.setProperty('--scroll-y', `${offset.toFixed(2)}px`);
+  const scrollable = Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+  const measurements = motion.matches ? [] : scrollMedia.map(element=>({element,box:element.getBoundingClientRect()}));
+  const signatureBox = !motion.matches && scrollSignature ? scrollSignature.getBoundingClientRect() : null;
+  // All layout reads finish before style writes.
+  root.style.setProperty('--page-progress',String(Math.min(1,Math.max(0,window.scrollY/scrollable))));
+  if (motion.matches) {
+    scrollMedia.forEach(element=>element.style.setProperty('--scroll-y','0px'));
+    scrollSignature?.style.setProperty('--explore-y','0px');
+    scrollSignature?.style.setProperty('--explore-scale','1');
+    scrollSignature?.style.setProperty('--explore-opacity','1');
+    scrollSignature?.style.setProperty('--explore-route','1');
+    return;
   }
-  if (scrollSignature) {
-    const box = scrollSignature.getBoundingClientRect();
-    // Begin as the scene enters; the complete title arrives before the sticky interval ends.
-    const distance = Math.max(1, box.height - window.innerHeight * .45);
-    const progress = Math.min(1, Math.max(0, (window.innerHeight * .55 - box.top) / distance));
-    scrollSignature.style.setProperty('--explore-y', `${((1 - progress) * 48).toFixed(2)}px`);
-    scrollSignature.style.setProperty('--explore-scale', (1.06 - progress * .06).toFixed(4));
-    scrollSignature.style.setProperty('--explore-opacity', Math.min(1, progress * 2.7).toFixed(3));
-    scrollSignature.style.setProperty('--explore-route', Math.min(1, progress * 1.5).toFixed(3));
+  for (const {element,box} of measurements) {
+    if (box.bottom < -100 || box.top > window.innerHeight+100) continue;
+    const depth = window.innerWidth<=760 ? 0 : Number(element.dataset.scrollDepth||12);
+    const position = (window.innerHeight/2-(box.top+box.height/2))/(window.innerHeight+box.height);
+    const offset = Math.max(-depth,Math.min(depth,position*depth*2));
+    element.style.setProperty('--scroll-y',offset.toFixed(2)+'px');
+  }
+  if (scrollSignature && signatureBox) {
+    const distance = Math.max(1,signatureBox.height-window.innerHeight*.45);
+    const progress = Math.min(1,Math.max(0,(window.innerHeight*.55-signatureBox.top)/distance));
+    scrollSignature.style.setProperty('--explore-y',((1-progress)*48).toFixed(2)+'px');
+    scrollSignature.style.setProperty('--explore-scale',(1.06-progress*.06).toFixed(4));
+    scrollSignature.style.setProperty('--explore-opacity',Math.min(1,progress*2.7).toFixed(3));
+    scrollSignature.style.setProperty('--explore-route',Math.min(1,progress*1.5).toFixed(3));
   }
 }
 function requestScrollPaint() {
-  if (!scrollFrame) scrollFrame = requestAnimationFrame(paintScrollMotion);
+  if (!document.hidden && !scrollFrame) scrollFrame=requestAnimationFrame(paintScrollMotion);
 }
-window.addEventListener('scroll', requestScrollPaint, { passive: true });
-window.addEventListener('resize', requestScrollPaint);
-motion.addEventListener('change', requestScrollPaint);
+function cancelScrollPaint() {if(scrollFrame)cancelAnimationFrame(scrollFrame);scrollFrame=0;}
+window.addEventListener('scroll',requestScrollPaint,{passive:true});
+window.addEventListener('resize',requestScrollPaint);
+window.addEventListener('pagehide',cancelScrollPaint);
+window.addEventListener('pageshow',requestScrollPaint);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelScrollPaint();else requestScrollPaint();});
+motion.addEventListener('change',requestScrollPaint);
 requestScrollPaint();
 
 document.querySelectorAll<HTMLElement>('[data-destination-editor]').forEach(editor => {

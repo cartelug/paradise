@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Design Guidelines"
+  short_description: "Review typography, accessibility and interface motion"
+  default_prompt: "Use $web-design-guidelines to review this website CSS, accessibility and animations."

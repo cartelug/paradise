@@ -1,0 +1,61 @@
+/* Motion has one small timing vocabulary; photography and words remain the focus. */
+:root { --motion-fast: 180ms; --motion-ui: 280ms; --motion-enter: 640ms; --motion-ease: cubic-bezier(.22,1,.36,1); }
+.hero-motion-toggle { position:absolute; right:var(--gutter); bottom:28px; z-index:5; display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:10px 14px; border:1px solid #d7ba7d80; border-radius:3px; color:#f7f4ed; background:#071426d9; font-size:.8125rem; line-height:1.4; font-weight:500; }
+.hero-motion-toggle svg { width:16px; height:16px; }
+.hero-motion-toggle:hover { background:#0c1e36; border-color:#d7ba7d; }
+.hero-motion-toggle[aria-pressed='true'] .motion-pause-icon { display:none; }
+.hero-motion-toggle:not([aria-pressed='true']) .motion-play-icon { display:none; }
+.escape-button, .button, .escape-enquire { transition:background var(--motion-ui),color var(--motion-ui),border-color var(--motion-ui),transform var(--motion-fast) var(--motion-ease); }
+.atelier-hero .escape-button, .atelier-hero .escape-button::after { transition:background var(--motion-ui),color var(--motion-ui),border-color var(--motion-ui),transform var(--motion-ui) var(--motion-ease); }
+.escape-button:active, .button:active, .escape-enquire:active { transform:translateY(1px); }
+.escape-underlined .travel-icon, .text-button .arrow-icon, .escape-enquire .travel-icon { transition:transform var(--motion-ui) var(--motion-ease); }
+.escape-underlined:hover .travel-icon, .text-button:hover .arrow-icon, .escape-enquire:hover .travel-icon { transform:translateX(3px); }
+.desktop-nav a::after { transform-origin:left; transition:transform var(--motion-ui) var(--motion-ease); }
+.site-header, .escape-home .site-header { transition:background var(--motion-ui),color var(--motion-ui),border-color var(--motion-ui); }
+.escape-card-image img, .escape-home .escape-card-image img { transition:transform 650ms var(--motion-ease); }
+.mobile-menu[open] { animation:pardus-menu-enter 360ms var(--motion-ease) both; }
+::view-transition-old(root) { animation:pardus-page-out 140ms ease both; }
+::view-transition-new(root) { animation:pardus-page-in 280ms var(--motion-ease) both; }
+.atelier-intro-trace path { animation:atelier-draw 700ms var(--motion-ease) 0ms both; }
+.atelier-intro-emblem { animation:atelier-arrive 400ms ease 280ms both; }
+.atelier-intro-letter { animation:atelier-arrive 440ms var(--motion-ease) calc(230ms + var(--letter-index)*40ms) both; }
+.atelier-intro-plane { animation:atelier-arrive 420ms var(--motion-ease) 380ms both; }
+.atelier-intro-tagline { animation:atelier-arrive 360ms ease 650ms both; }
+.atelier-intro-caption { animation:atelier-arrive 360ms ease 720ms both; }
+.intro-exiting .atelier-intro { animation:pardus-page-out 380ms ease both; }
+@keyframes pardus-title-enter { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pardus-copy-enter { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pardus-menu-enter { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pardus-page-out { to { opacity:0; } }
+@keyframes pardus-page-in { from { opacity:0; } to { opacity:1; } }
+@media (prefers-reduced-motion:no-preference) {
+  .cinema-arrived .atelier-hero .hero-line>* { animation:pardus-title-enter 780ms var(--motion-ease) both; }
+  .cinema-arrived .atelier-hero .hero-line:nth-child(2)>* { animation-delay:90ms; }
+  .cinema-arrived .atelier-hero .hero-eyebrow { animation:pardus-copy-enter 460ms var(--motion-ease) both; }
+  .cinema-arrived .atelier-hero .escape-hero-description { animation:pardus-copy-enter 580ms var(--motion-ease) 140ms both; }
+  .cinema-arrived .atelier-hero .escape-hero-actions { animation:pardus-copy-enter 580ms var(--motion-ease) 200ms both; }
+  /* Keep cards/copy readable. Only section headings receive a brief arrival. */
+  html.motion-ready [data-reveal][data-reveal-style]:not(.revealed), html.motion-ready [data-reveal][data-reveal-style].revealed { opacity:1; transform:none; clip-path:none; transition:none; }
+  html.motion-ready [data-reveal][data-reveal-style='heading']:not(.revealed) { opacity:0; transform:translateY(12px); }
+  html.motion-ready [data-reveal][data-reveal-style='heading'].revealed { opacity:1; transform:none; transition:opacity 500ms var(--motion-ease),transform 640ms var(--motion-ease); }
+}
+html.motion-paused .hero-artwork, html.hero-dormant .hero-artwork { animation-play-state:paused!important; }
+html.motion-paused .hero-scene-depth, html.hero-dormant .hero-scene-depth { transform:none; }
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .escape-card-image:hover img, .escape-home .escape-card-image:hover img { transform:scale(1.025); filter:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .hero-motion-toggle { display:none; }
+  .atelier-intro { display:none!important; }
+  .cinema-arrived .atelier-hero .hero-line>*, .cinema-arrived .atelier-hero .hero-eyebrow,
+  .cinema-arrived .atelier-hero .escape-hero-description, .cinema-arrived .atelier-hero .escape-hero-actions { animation:none!important; opacity:1; transform:none; }
+  .mobile-menu[open], .folio-panel[open], .folio-drawer[open] { animation:none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation:none; }
+  html.motion-ready [data-reveal] { opacity:1!important; transform:none!important; clip-path:none!important; transition:none!important; }
+  .button, .escape-button, .atelier-hero .escape-button, .atelier-hero .escape-button::after, .escape-enquire,
+  .site-header, .escape-home .site-header, .desktop-nav a::after, .escape-card-image img, .escape-home .escape-card-image img,
+  .escape-underlined .travel-icon, .text-button .arrow-icon, .escape-enquire .travel-icon { transition:none; }
+  .escape-card-image:hover img, .escape-home .escape-card-image:hover img, .escape-button:hover, .escape-button:active,
+  .text-button:hover .arrow-icon, .escape-underlined:hover .travel-icon, .escape-enquire:hover .travel-icon { transform:none; }
+}

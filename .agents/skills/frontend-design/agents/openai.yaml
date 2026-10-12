@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Design"
+  short_description: "Distinctive typography and deliberate visual design"
+  default_prompt: "Use $frontend-design to refine this website typography and visual hierarchy."

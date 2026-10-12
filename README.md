@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes — V27
+# Pardus Luxury Escapes — V28
 
-A luxury travel website with a newly composed blue-hour island hero, seamless photographic leopard motion, a shorter approved-logo opening and a redesigned cream-and-navy homepage. Separate landscape and portrait scenes keep the head and both ears in frame. Breathing, small head and ear movements, natural blinks, water reflections and a slow camera push are rendered from one continuous opaque image, avoiding the former animal cutout seam. Graphics and loading failures retain the photographic poster; motion pauses off-screen and in hidden tabs, and honors reduced-motion preferences.
+The V28 typography and motion release pairs local variable Newsreader headlines with Manrope body text and controls. It adds a shared responsive type scale, clearer phone copy, stronger actions, a shorter introduction and a persistent Pause scene control. The existing blue-hour photographic campaign, approved logo, routes and offer data are retained. Optional scene motion pauses off-screen, in hidden tabs and under reduced motion, with a static image fallback.
 
 Live website: https://cartelug.github.io/paradise/
 
@@ -24,6 +24,11 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 
 ## Editing
 
+- `website/src/components/FontFaces.astro`: local variable font declarations and critical preloads.
+- `website/src/styles/typography.css`: final shared font families, responsive scales and type details.
+- `website/src/styles/motion.css`: final interaction timing, hero arrival and reduced-motion variants.
+- `.agents/skills/`: project design and interface-review guidance.
+- `website/FONT_MOTION_NOTES.md`: font provenance, motion behavior and verification limits.
 - `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases.
 - `website/src/data/site.ts`: contacts and optional delivery/analytics settings.
 - `website/src/pages/`: page content and layouts.
@@ -37,7 +42,7 @@ Push `main` after reviewing the export. Node.js 22 or newer is required. Local d
 - `documents/PARDUS_V27_Motion_Preview.mp4`: 12-second renderer preview; this is not a browser screenshot.
 - `website/src/styles/studio.css`: retained base styles from earlier releases.
 - `website/src/styles/site.css` (`@layer tokens`): the single source for shared colour and spacing tokens. Other stylesheets add only namespaced tokens and must not redefine `--ink`, `--paper`, `--gold`, `--gutter` and the rest.
-- `website/src/styles/polish.css`: loaded last; cross-cutting focus rings (`--focus-ring` per surface), text wrapping, price numerals, touch hover and view transitions. Keep page layout out of it.
+- `website/src/styles/polish.css`: retained shared finishing styles; cross-cutting focus rings (`--focus-ring` per surface), text wrapping, price numerals, touch hover and view transitions. Keep page layout out of it.
 - `website/src/components/BrandSprite.astro`: the logo paths, defined once per page; `Brand.astro` references them with `<use>`.
 - `website/source-assets/v25/` and `v26/`: earlier artwork and motion sources, retained for history.
 - `website/src/styles/cinematic.css` and `website/src/scripts/cinematic.ts`: resource-aware introduction, hero pointer depth, reveal and hover motion.
@@ -51,4 +56,6 @@ The final destination presentation retains the starting USD prices from the supp
 
 Enquiries prepare an email draft for the visitor to send, or download a text brief. Direct server delivery remains disabled until a real endpoint is connected and tested. The existing saved Folio, optional detailed planner, journey ideas and Journal remain available.
 
-V27 validation: Astro check has zero errors, warnings or hints; all 23 tests pass. Mesa/EGL rendered and inspected the actual shaders on desktop and phone canvases, including closed-eye frames, with opaque output throughout. Fresh browser layout and real-device QA were unavailable. Production build and export verification cover all 33 pages.
+Previous V27 validation: Astro check has zero errors, warnings or hints; all 23 tests pass. Mesa/EGL rendered and inspected the actual shaders on desktop and phone canvases, including closed-eye frames, with opaque output throughout. Fresh browser layout and real-device QA were unavailable. Production build and export verification cover all 33 pages.
+
+V28 validation: Astro check passes for 73 files with zero errors, warnings or hints. All 25 tests pass, including saved-pause and initial reduced-motion behavior. The production build contains all 33 pages. Local browser preview is unavailable in this environment; real-device and performance measurements are not claimed.

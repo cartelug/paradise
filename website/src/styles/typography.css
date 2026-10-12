@@ -1,0 +1,131 @@
+/* V28 typography: Newsreader's optical-size axis and Manrope's real variable weights.
+   This module is imported after legacy page styles; shared decisions live here. */
+:root {
+  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --utility: var(--sans);
+  --display: var(--serif);
+  --type-caption: .8125rem;
+  --type-small: .875rem;
+  --type-body: clamp(1rem, .95rem + .22vw, 1.125rem);
+  --type-card: clamp(1.875rem, 1.45rem + 1.35vw, 2.75rem);
+  --type-section: clamp(2.375rem, 1.55rem + 3.4vw, 4.75rem);
+  --type-page: clamp(2.75rem, 1.65rem + 4.6vw, 6rem);
+  --type-hero: clamp(3rem, 1.5rem + 9vw, 7.25rem);
+  --leading-body: 1.7;
+  --leading-display: 1.08;
+  --measure-copy: 66ch;
+}
+html { font-size: 100%; }
+body { font-family: var(--sans); font-size: var(--type-body); font-weight: 400; line-height: var(--leading-body); font-synthesis: none; }
+button, input, select, textarea { font-family: var(--sans); }
+h1, h2, h3, h4 { font-family: var(--serif); font-optical-sizing: auto; font-kerning: normal; font-weight: 400; text-wrap: balance; overflow-wrap: break-word; }
+h1, h2 { letter-spacing: -.028em; line-height: var(--leading-display); }
+h1 { font-size: var(--type-page); }
+h2 { font-size: var(--type-section); }
+h3 { font-size: var(--type-card); line-height: 1.18; letter-spacing: -.018em; }
+em { font-weight: inherit; }
+p { text-wrap: pretty; }
+strong, b { font-weight: 650; }
+.eyebrow, .section-label, .small-caption { font-family: var(--utility); font-size: var(--type-caption); font-weight: 600; letter-spacing: .12em; line-height: 1.6; }
+.small-caption { letter-spacing: .015em; font-weight: 500; }
+.desktop-nav a, .site-header .header-journey, .header-folio { font-family: var(--sans); font-size: var(--type-small); font-weight: 600; letter-spacing: -.01em; }
+.desktop-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.site-header .header-journey, .escape-home .site-header .header-journey { min-height: 48px; font-size: var(--type-small); padding: 12px 18px; border-radius: 3px; }
+.mobile-menu nav a { font-family: var(--serif); font-size: clamp(2rem, 1.5rem + 3vw, 3.25rem); font-weight: 400; letter-spacing: -.015em; line-height: 1.2; }
+.mobile-menu, .folio-panel, .folio-drawer { overscroll-behavior: contain; }
+
+/* Copy occupies the existing calm field; the selected words remain real, selectable text. */
+.atelier-hero .escape-hero-copy { max-width: 48rem; }
+.atelier-hero h1 { font-size: var(--type-hero); font-weight: 400; line-height: 1.04; letter-spacing: -.032em; }
+.atelier-hero h1 em { font-weight: 400; letter-spacing: -.035em; }
+.atelier-hero .hero-line { overflow: visible; padding: 0; margin: 0; }
+.atelier-hero .escape-hero-copy>.eyebrow { font-size: var(--type-caption); font-weight: 500; letter-spacing: .15em; }
+.atelier-hero .escape-hero-description { font-size: var(--type-body); font-weight: 400; line-height: 1.7; max-width: 42ch; margin-top: 28px; }
+.atelier-hero .escape-hero-actions { gap: 16px; margin-top: 30px; align-items: stretch; }
+.button, .escape-button, .escape-enquire, .text-button, .escape-underlined { font-family: var(--sans); font-weight: 600; font-size: .9375rem; line-height: 1.4; letter-spacing: -.012em; }
+.button, .escape-button, .atelier-hero .escape-button { min-height: 54px; padding: 15px 24px; border-radius: 3px; font-size: .9375rem; font-weight: 600; }
+.atelier-hero .escape-button-outline { min-height: 54px; padding: 15px 24px; border: 1px solid #d7ba7d; color: #e7d5b3; background: transparent; }
+.atelier-hero .escape-button-outline:hover { border-color: #f7f4ed; background: #0714268c; color: #f7f4ed; }
+.text-button, .escape-underlined { min-height: 48px; text-underline-offset: .24em; }
+
+.escape-home .escape-heading h2, .escape-inner .escape-heading h2, .escape-home .escape-enquiry-intro h2, .escape-inner .escape-enquiry-intro h2,
+.destination-page .escape-overview h2, .escape-home .escape-cruise h2 { font-size: var(--type-section); line-height: 1.1; letter-spacing: -.028em; }
+.escape-page-intro h1, .escape-detail-heading h1, .destination-intro-copy h1 { font-size: var(--type-page); line-height: 1.08; letter-spacing: -.028em; }
+.cruise-page .destination-intro-copy h1 { font-size: clamp(2.5rem, 1.4rem + 3.5vw, 4.5rem); }
+.escape-heading>p, .escape-home .escape-heading>p, .escape-page-intro>p:not(.eyebrow), .escape-enquiry-intro>p:not(.eyebrow),
+.destination-intro-copy>p, .escape-overview p, .escape-home .escape-cruise-copy>p:not(.eyebrow) { font-size: var(--type-body); font-weight: 400; line-height: var(--leading-body); max-width: var(--measure-copy); }
+.escape-card .escape-card-copy, .escape-home .escape-card .escape-card-copy { min-width: 0; }
+.escape-card header h3, .escape-home .escape-card header h3, .escape-card.escape-card-featured header h3,
+.escape-home .escape-card.escape-card-featured header h3 { font-size: var(--type-card); font-weight: 400; line-height: 1.12; letter-spacing: -.025em; }
+.escape-card.escape-card-featured header h3, .escape-home .escape-card.escape-card-featured header h3 { font-size: clamp(2.25rem, 1.7rem + 2vw, 3.5rem); }
+.escape-card .escape-card-description, .escape-home .escape-card .escape-card-description,
+.escape-home .escape-secondary-grid .escape-card-copy>.escape-card-description { font-size: var(--type-body); line-height: 1.7; font-weight: 400; }
+.escape-card-meta { flex-wrap: wrap; gap: 6px 16px; }
+.escape-card-meta>.eyebrow, .escape-home .escape-card-meta>.eyebrow, .escape-stay,
+.escape-block-label, .escape-card .price-label, .escape-home .escape-secondary-grid .escape-card-price .price-label,
+.destination-summary .price-label { font-size: var(--type-caption); line-height: 1.55; font-weight: 500; }
+.escape-card .escape-highlights li, .destination-intro-copy .escape-highlights li,
+.escape-inclusions.inclusion-list span, .escape-home .escape-inclusions.inclusion-list span,
+.escape-home .escape-secondary-grid .escape-inclusions.inclusion-list span { font-size: var(--type-small); line-height: 1.6; }
+.escape-card .offer-price strong, .escape-home .escape-card .offer-price strong, .destination-summary .offer-price strong {
+  font-family: var(--sans); font-size: clamp(1.5rem, 1.35rem + .6vw, 1.875rem); font-weight: 600; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.025em;
+}
+.escape-card .offer-price small, .escape-home .escape-secondary-grid .escape-card-price small,
+.destination-summary .offer-price small, .cruise-price small { font-size: var(--type-caption); line-height: 1.65; }
+.escape-card .escape-card-price, .escape-home .escape-card .escape-card-price { flex-wrap: wrap; }
+.escape-card .escape-enquire, .escape-home .escape-card .escape-enquire,
+.escape-home .escape-secondary-grid .escape-enquire { font-size: .9375rem; font-weight: 600; min-height: 50px; padding: 14px 18px; border-radius: 3px; }
+.quick-destination { font-size: clamp(1.5rem, 1.25rem + .7vw, 1.875rem); line-height: 1.2; }
+.escape-quick-picks>.eyebrow, .escape-quick-grid small { font-size: var(--type-caption); line-height: 1.6; }
+.quick-rate strong { font-size: .9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.escape-home .escape-service-groups h3, .escape-why-grid h3, .escape-home .escape-why-grid h3,
+.escape-experience-grid h3, .destination-page .escape-experience-grid h3, .destination-practical-grid h3 { font-size: clamp(1.625rem, 1.35rem + 1vw, 2rem); line-height: 1.18; }
+.escape-service-groups article>p, .escape-service-groups li, .escape-why-grid p, .destination-practical-grid p, .destination-practical-grid li { font-size: var(--type-body); line-height: 1.7; }
+.escape-price-note, .escape-home .escape-price-note, .travel-desk-note, .travel-desk-status { font-size: var(--type-small); line-height: 1.75; }
+.travel-update h3, .escape-home .travel-update h3 { font-size: clamp(1.625rem, 1.4rem + .8vw, 2rem); line-height: 1.2; letter-spacing: -.02em; }
+.travel-update>p, .travel-update>a { font-size: var(--type-body); line-height: 1.7; }
+.travel-update-meta { font-size: var(--type-caption); line-height: 1.5; flex-wrap: wrap; row-gap: 6px; }
+.escape-form label, .escape-form-note, .escape-form label span { font-size: var(--type-small); line-height: 1.65; }
+.escape-form input, .escape-form select, .escape-form textarea, .planner-form input, .planner-form select, .planner-form textarea { font-size: 1rem; min-height: 50px; line-height: 1.5; }
+.escape-form-status { font-size: var(--type-small); }
+.escape-save { min-height: 48px; font-size: var(--type-small); font-weight: 600; }
+.footer-brand>p, .footer-column .eyebrow, .footer-column a { font-size: var(--type-small); line-height: 1.75; }
+.footer-base, .footer-utility button { font-size: var(--type-caption); line-height: 1.8; }
+.footer-column a, .footer-utility button { min-height: 44px; display: inline-flex; align-items: center; }
+:is(a, button, summary, input, select, textarea):focus-visible { outline: 3px solid #806025; outline-offset: 5px; }
+:is(.header-dark, .escape-hero, .escape-services, .escape-more, .escape-cruise, .escape-enquiry-section, .site-footer, .mobile-menu, .folio-panel) :is(a, button, summary, input, select, textarea):focus-visible { outline-color: #e7d5b3; }
+.escape-card :is(a, button):focus-visible { outline-color: #806025; }
+:is(a, button, summary) { touch-action: manipulation; }
+
+@media (max-width:760px) {
+  :root { --type-caption: .875rem; --type-small: .9375rem; --type-body: 1.0625rem; }
+  .atelier-hero .escape-hero-copy { max-width: 42rem; padding-inline: var(--gutter); }
+  .atelier-hero h1 { font-size: var(--type-hero); line-height: 1.06; }
+  .atelier-hero .escape-hero-description { font-size: var(--type-body); font-weight: 400; }
+  .atelier-hero .escape-hero-copy>.eyebrow { font-size: .75rem; letter-spacing: .13em; }
+  .atelier-hero .escape-hero-actions { gap: 14px; }
+  .site-header .menu-toggle { width: 48px; min-width: 48px; flex-basis: 48px; height: 48px; }
+  .site-header .header-journey, .escape-home .site-header .header-journey { font-size: .8125rem; padding: 12px 13px; min-height: 48px; }
+  .escape-home .escape-heading h2, .escape-inner .escape-heading h2 { font-size: var(--type-section); }
+  .escape-home .escape-service-groups { grid-template-columns: 1fr; }
+  .escape-service-groups article>p { min-height: 0; }
+  .escape-home .escape-card .escape-card-price .escape-enquire { width: 100%; justify-content: space-between; }
+  .escape-stay { white-space: normal; }
+  .escape-quick-grid>a { min-width: 0; flex-wrap: wrap; }
+  .quick-rate { margin-left: 0; }
+  .quick-rate strong { white-space: normal; }
+}
+@media (max-width:480px) {
+  .atelier-hero .escape-hero-actions { flex-direction: column; align-items: stretch; max-width: 24rem; }
+  .atelier-hero .escape-hero-actions .escape-button { width: 100%; justify-content: space-between; font-size: 1rem; }
+  .escape-home .site-header, .escape-home .site-header.header-scrolled { gap: 12px; padding-inline: 20px; }
+  .escape-home .site-header .brand-link.header-leopard { width: 100px; min-width: 100px; }
+}
+@media (max-width:360px) {
+  .escape-home .site-header, .escape-home .site-header.header-scrolled { gap: 8px; padding-inline: 16px; }
+  .escape-home .site-header .brand-link.header-leopard { width: 84px; min-width: 84px; }
+  .escape-home .site-header .header-journey { padding-inline: 10px; }
+  .inclusion-list { gap: 10px; }
+}
+@media print { .hero-motion-toggle { display:none!important; } }
