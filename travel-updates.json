@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T12:07:28.433077+00:00",
+  "updatedAt": "2026-10-13T11:53:18.027936+00:00",
   "items": [
     {
       "id": "dubai-winter-2026",
@@ -13,17 +13,6 @@
       "expiresAt": "2027-01-15"
     },
     {
-      "id": "emirates-dubai-winter-2026",
-      "title": "Emirates announces Dubai winter attraction offers",
-      "summary": "Check the airline’s eligible ticket dates, departure markets and full conditions before planning around the offer.",
-      "source": "Emirates",
-      "category": "Airline news",
-      "url": "https://www.emirates.com/media-centre/emirates-invites-travellers-to-discover-dubais-action-packed-calendar-of-events-and-attractions-this-winter/",
-      "publishedAt": "2026-09-29",
-      "checkedAt": "2026-10-04",
-      "expiresAt": "2026-10-12"
-    },
-    {
       "id": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "title": "Jambojet Returns to Uganda: Strengthening Regional Connectivity",
       "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
@@ -31,7 +20,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "publishedAt": "2026-10-01",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     },
     {
       "id": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
@@ -41,7 +30,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     },
     {
       "id": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
@@ -51,7 +40,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     },
     {
       "id": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
@@ -61,7 +50,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     },
     {
       "id": "https://caa.go.ug/manager-marketing-and-commercial-services/",
@@ -71,7 +60,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/manager-marketing-and-commercial-services/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     },
     {
       "id": "https://caa.go.ug/senior-flight-operations-inspector/",
@@ -81,14 +70,14 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/senior-flight-operations-inspector/",
       "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-12"
+      "checkedAt": "2026-10-13"
     }
   ],
   "sources": [
     {
       "name": "Uganda Civil Aviation Authority",
       "url": "https://caa.go.ug/feed/",
-      "lastSuccessfulCheck": "2026-10-12T12:07:28.433077+00:00"
+      "lastSuccessfulCheck": "2026-10-13T11:53:18.027936+00:00"
     }
   ]
 }
