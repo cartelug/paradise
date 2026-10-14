@@ -109,7 +109,7 @@ export function initFolio() {
       const saved = state.items.some(item => item.type === button.dataset.folioType && item.slug === button.dataset.folioSave);
       button.setAttribute('aria-pressed', String(saved));
       const label = button.querySelector('[data-save-label]');
-      if (label) label.textContent = saved ? 'Saved to your Folio' : 'Save to your Folio';
+      if (label) label.textContent = saved ? 'Saved' : 'Save this journey';
     });
     items.replaceChildren(...state.items.map(item => {
       const row = document.createElement('li');
@@ -122,7 +122,7 @@ export function initFolio() {
       copy.append(kind, label);
       remove.type = 'button';
       remove.textContent = 'Remove';
-      remove.setAttribute('aria-label', `Remove ${item.label} from your Folio`);
+      remove.setAttribute('aria-label', `Remove ${item.label} from saved trips`);
       remove.addEventListener('click', () => {
         state = writeFolio({ ...state, items: state.items.filter(saved => saved.type !== item.type || saved.slug !== item.slug) });
         announce(`${item.label} removed.`);
@@ -135,7 +135,7 @@ export function initFolio() {
     triggers.forEach(trigger => {
       const badge = trigger.querySelector<HTMLElement>('[data-folio-count]');
       if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
-      trigger.setAttribute('aria-label', count ? `Open your Pardus Folio, ${count} saved ${count === 1 ? 'note' : 'notes'}` : 'Open your empty Pardus Folio');
+      trigger.setAttribute('aria-label', count ? `Open saved trips, ${count} saved ${count === 1 ? 'note' : 'notes'}` : 'Open saved trips');
     });
     plan.href = buildPlannerUrl(plan.getAttribute('href') || 'planner.html', state, window.location.href);
     window.dispatchEvent(new CustomEvent('pardus:folio', { detail: structuredClone(state) }));
@@ -165,7 +165,7 @@ export function initFolio() {
       ...state,
       items: exists ? state.items.filter(item => item.type !== type || item.slug !== slug) : [...state.items, { type, slug, label }],
     });
-    announce(exists ? `${label} removed from your Folio.` : `${label} saved to your Folio.`);
+    announce(exists ? `${label} removed from saved trips.` : `${label} added to saved trips.`);
     render();
   }));
 
@@ -173,12 +173,12 @@ export function initFolio() {
     undoState = structuredClone(state);
     state = writeFolio(emptyState());
     render();
-    status.replaceChildren(document.createTextNode('Your Folio was cleared. '));
+    status.replaceChildren(document.createTextNode('Your saved trips were cleared. '));
     const undo = document.createElement('button');
     undo.type = 'button'; undo.textContent = 'Undo';
     undo.addEventListener('click', () => {
       if (!undoState) return;
-      state = writeFolio(undoState); undoState = null; announce('Your Folio was restored.'); render();
+      state = writeFolio(undoState); undoState = null; announce('Your saved trips were restored.'); render();
     });
     status.append(undo);
   });

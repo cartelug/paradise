@@ -1,13 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { site, path, whatsappUrl } from '../data/site';
 ---
-<Layout title="Contact Pardus" description="Contact Pardus Luxury Escapes about a holiday, booking, private yacht experience or travel support." class="escape-inner" simpleFooter>
-  <section class="escape-page-intro"><p class="eyebrow">Contact Pardus</p><h1>One conversation.<br /><em>A beautiful journey.</em></h1><p>Tell us the destination and what you have in mind. We’ll bring the travel arrangements into one clear plan.</p></section>
-  <section class="escape-section escape-contacts">
-    <div><h2>Plan a trip</h2><p>Destinations, reservations and travel proposals.</p><a href={'mailto:'+site.bookingsEmail}>{site.bookingsEmail}</a><br /><a class="escape-underlined" href={path('journey.html')}>Prepare a travel enquiry</a></div>
-    <div><h2>General enquiries</h2><p>Company information and general questions.</p><a href={'mailto:'+site.email}>{site.email}</a></div>
-    <div><h2>Support & feedback</h2><p>Post-booking help, reviews and service feedback.</p><a href={'mailto:'+site.supportEmail}>{site.supportEmail}</a></div>
+<Layout title="Contact Pardus" description="Contact Pardus Luxury Escapes about a holiday, booking, private yacht experience or travel support." class="inner" simpleFooter>
+  <PageHero eyebrow="Contact Pardus" compact>
+    <Fragment slot="title">One conversation. <em>A beautiful journey.</em></Fragment>
+    <p class="lead">Tell us the destination and what you have in mind. We’ll bring the travel arrangements into one clear plan.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="Ways to reach Pardus">
+    <div class="wrap">
+      <div class="contact-grid" data-stagger="120">
+        <div class="contact-card" data-reveal><span class="badge"><Icon name="plane" /></span><h2>Plan a trip</h2><p>Destinations, reservations and travel proposals.</p><a class="mail" href={'mailto:' + site.bookingsEmail}><Icon name="mail" /><span>{site.bookingsEmail}</span></a><a class="link" href={path('journey.html')}>Prepare a travel enquiry <Icon name="arrow-right" /></a></div>
+        <div class="contact-card" data-reveal><span class="badge"><Icon name="chat" /></span><h2>General enquiries</h2><p>Company information and general questions.</p><a class="mail" href={'mailto:' + site.email}><Icon name="mail" /><span>{site.email}</span></a></div>
+        <div class="contact-card" data-reveal><span class="badge"><Icon name="shield" /></span><h2>Support &amp; feedback</h2><p>Post-booking help, reviews and service feedback.</p><a class="mail" href={'mailto:' + site.supportEmail}><Icon name="mail" /><span>{site.supportEmail}</span></a></div>
+      </div>
+      {whatsappUrl && <p style="margin-top:32px"><a class="btn btn--ink" href={whatsappUrl}>Message Pardus on WhatsApp</a></p>}
+    </div>
   </section>
-  {whatsappUrl && <section class="escape-section"><a class="escape-button" href={whatsappUrl}>Message Pardus on WhatsApp</a></section>}
 </Layout>

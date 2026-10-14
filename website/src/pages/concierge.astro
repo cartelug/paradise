@@ -1,11 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { services } from '../data/offers';
+import { serviceIcons } from '../data/icons';
 import { path } from '../data/site';
+const occasions = [
+  { icon: 'heart' as const, title: 'Couples & honeymoons', text: 'Private island stays, beautiful hotels and romantic experiences, with the occasion considered.' },
+  { icon: 'users' as const, title: 'Families & groups', text: 'Comfortable stays, practical transfers and activities around the people coming with you.' },
+  { icon: 'briefcase' as const, title: 'Business travel', text: 'Flights, hotels and ground arrangements coordinated around your schedule.' },
+];
 ---
-<Layout title="What Pardus arranges" description="Flights, luxury hotels, private transfers, visa guidance, cruises, safaris, family holidays, honeymoons and corporate travel in one itinerary." class="escape-inner" simpleFooter>
-  <section class="escape-page-intro"><p class="eyebrow">What we arrange</p><h1>You tell us where.<br /><em>We arrange everything.</em></h1><p>From the first flight to the last transfer. A complete holiday, a business itinerary or one experience that makes the trip.</p></section>
-  <section class="escape-services escape-section"><ul class="escape-service-grid">{services.map((service,i) => <li><span>{String(i+1).padStart(2,'0')}</span>{service}</li>)}</ul><p class="escape-detail-note">You choose the services you need. Your proposal brings the itinerary, USD price, inclusions and terms together before anything is booked.</p></section>
-  <section class="escape-overview escape-section"><div><p class="eyebrow">Travel for every occasion</p><h2>Your holiday.<br /><em>Your way to travel.</em></h2></div><div><h3>Couples & honeymoons</h3><p>Private island stays, beautiful hotels and romantic experiences, with the occasion considered.</p><h3>Families & groups</h3><p>Comfortable stays, practical transfers and activities around the people coming with you.</p><h3>Business travel</h3><p>Flights, hotels and ground arrangements coordinated around your schedule.</p><a class="escape-underlined" href={path('cruises.html')}>Explore private boat & yacht experiences</a></div></section>
-  <section class="escape-enquiry-section escape-section"><div class="escape-enquiry-intro"><p class="eyebrow">One point of contact</p><h2>Start with a place.<br /><em>Leave the details with us.</em></h2><p>Let us know what you need and we’ll put a clear proposal together.</p></div><div><a class="escape-button" href={path('journey.html')}>Plan your escape</a></div></section>
+<Layout title="What Pardus arranges" description="Flights, luxury hotels, private transfers, visa guidance, cruises, safaris, family holidays, honeymoons and corporate travel in one itinerary." class="inner" simpleFooter>
+  <PageHero eyebrow="What we arrange">
+    <Fragment slot="title">You tell us where. <em>We arrange everything.</em></Fragment>
+    <p class="lead">From the first flight to the last transfer. A complete holiday, a business itinerary or one experience that makes the trip.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title" class="visually-hidden">Services</h2>
+      <ul class="tiles" data-stagger="60">{services.map(service => <li class="tile" data-reveal><span class="badge"><Icon name={serviceIcons[service] || 'sparkle'} /></span><strong>{service}</strong></li>)}</ul>
+      <p class="note">You choose the services you need. Your proposal brings the itinerary, USD price, inclusions and terms together before anything is booked.</p>
+    </div>
+  </section>
+  <section class="sec sec--sand" aria-labelledby="occasions-title">
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>Travel for every occasion</p><h2 id="occasions-title" data-split>Your holiday. <em>Your way to travel.</em></h2><p class="lead" style="margin-top:22px" data-reveal>Tell us the occasion and the people travelling. We build the plan from there.</p></div>
+      <div>
+        <div class="occasions" data-stagger="110">{occasions.map(item => <div class="occasion" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
+        <p style="margin-top:28px"><a class="link" href={path('cruises.html')}>Explore private boat &amp; yacht experiences <Icon name="arrow-right" /></a></p>
+      </div>
+    </div>
+  </section>
+  <section class="sec sec--dusk" aria-labelledby="cta-title">
+    <div class="wrap statement" style="justify-items:start">
+      <p class="eyebrow" data-reveal>One point of contact</p>
+      <h2 id="cta-title" data-split>Start with a place. <em>Leave the details with us.</em></h2>
+      <p class="lead" style="color:var(--mist)" data-reveal>Let us know what you need and we’ll put a clear proposal together.</p>
+      <a class="btn btn--gold" href={path('journey.html')} data-reveal>Plan your escape <Icon name="arrow-right" /></a>
+    </div>
+  </section>
 </Layout>

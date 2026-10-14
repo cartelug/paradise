@@ -1,8 +1,8 @@
 ---
-import '../styles/journal-v20.css';
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 import Picture from '../components/Picture.astro';
-import Arrow from '../components/Arrow.astro';
+import Icon from '../components/Icon.astro';
 import { journal } from '../data/journal';
 import { path, absolute } from '../data/site';
 export function getStaticPaths() { return journal.map((entry, i) => ({ params: { journal: `journal-${entry.slug}` }, props: { entry, next: journal[(i + 1) % journal.length] } })); }
@@ -17,14 +17,28 @@ const articleSchema = {
   image: absolute(`images/${entry.image}-1920.webp`), mainEntityOfPage: articleUrl,
 };
 ---
-<Layout title={entry.title} class="article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
+<Layout title={entry.title} class="inner article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-  <header class="article-heading"><a href={path('journal.html')} class="article-back">← The Journal</a><p class="eyebrow">{entry.category} · {readMinutes} min read</p><h1>{entry.title}</h1><p>{entry.subtitle}</p><p class="article-byline">By {entry.author} · Published <time datetime={entry.publishedAt}>{displayDate(entry.publishedAt)}</time> · Updated <time datetime={entry.updatedAt}>{displayDate(entry.updatedAt)}</time></p></header>
-  <figure class="article-photo"><Picture name={entry.image} alt={entry.alt} eager sizes="100vw" /></figure>
-  <div class="article-layout"><aside class="article-margin"><p class="eyebrow">A Pardus perspective</p><p>Thoughtful notes for<br />a personal journey.</p><a href={path('journal.html')}>Explore all stories <Arrow /></a>{entry.relatedDestination && <a href={path(`destination-${entry.relatedDestination}.html`)}>Explore the destination <Arrow /></a>}</aside><article class="journal-article">
-    <h2 data-reveal>{entry.intro}</h2>
-    <div class="journal-copy">{entry.paragraphs.map(p => <p data-reveal>{p}</p>)}</div>
-    <a class="text-button" href={path('journey.html')} data-reveal>Begin your journey <Arrow /></a>
-  </article></div>
-  <section class="article-next"><Picture name={next.image} alt={next.alt} /><div><p class="eyebrow">Keep reading</p><h2>{next.title}</h2><a class="text-button" href={path(`journal-${next.slug}.html`)}>Next in the journal <Arrow /></a></div></section>
+  <PageHero image={entry.image} alt={entry.alt} eyebrow={`${entry.category}, ${readMinutes} min read`}>
+    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journal.html')}><Icon name="arrow-left" /> The Journal</a></nav>
+    <Fragment slot="title">{entry.title}</Fragment>
+    <p class="lead">{entry.subtitle}</p>
+    <p class="small" style="margin-top:18px">By {entry.author}. Published <time datetime={entry.publishedAt}>{displayDate(entry.publishedAt)}</time>. Updated <time datetime={entry.updatedAt}>{displayDate(entry.updatedAt)}</time>.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="Article">
+    <div class="wrap article-layout">
+      <div class="article-margin"><p class="eyebrow">A Pardus perspective</p><p>Thoughtful notes for a personal journey.</p><a class="link" href={path('journal.html')}>Explore all stories <Icon name="arrow-right" /></a>{entry.relatedDestination && <a class="link" href={path(`destination-${entry.relatedDestination}.html`)}>Explore the destination <Icon name="arrow-right" /></a>}</div>
+      <article class="article-body">
+        <h2 data-reveal>{entry.intro}</h2>
+        {entry.paragraphs.map(p => <p data-reveal>{p}</p>)}
+        <p data-reveal><a class="btn btn--ink" href={path('journey.html')}>Begin your journey <Icon name="arrow-right" /></a></p>
+      </article>
+    </div>
+  </section>
+  <section class="sec sec--sand" aria-label="Keep reading">
+    <div class="wrap article-next">
+      <a class="frame" href={path(`journal-${next.slug}.html`)} aria-label={`Read ${next.title}`} data-reveal="clip"><Picture name={next.image} alt={next.alt} sizes="(max-width: 900px) 100vw, 50vw" /></a>
+      <div data-reveal><p class="eyebrow">Keep reading</p><h2>{next.title}</h2><a class="btn btn--ink" href={path(`journal-${next.slug}.html`)}>Next in the journal <Icon name="arrow-right" /></a></div>
+    </div>
+  </section>
 </Layout>

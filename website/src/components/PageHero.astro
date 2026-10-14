@@ -1,0 +1,15 @@
+---
+import Picture from './Picture.astro';
+interface Props { eyebrow?: string; image?: string; alt?: string; compact?: boolean; glance?: boolean; focusX?: string; focusY?: string; class?: string; }
+const { eyebrow, image, alt = '', compact = false, glance = false, focusX = '60%', focusY = '50%', class: className } = Astro.props;
+---
+<header class:list={['page-hero', { 'page-hero--image': !!image, 'page-hero--compact': compact, 'page-hero--glance': glance }, className]} style={`--focus-x:${focusX};--focus-y:${focusY}`}>
+  {image && <div class="page-hero-bg"><Picture name={image} alt={alt} eager sizes="100vw" /></div>}
+  {!image && <div class="page-hero-globe" aria-hidden="true"><svg viewBox="0 0 800 800" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="400" cy="400" r="326"/><ellipse cx="400" cy="400" rx="225" ry="326"/><ellipse cx="400" cy="400" rx="110" ry="326"/><ellipse cx="400" cy="400" rx="326" ry="215"/><ellipse cx="400" cy="400" rx="326" ry="100"/><path d="M74 400H726M400 74V726"/><path d="M121 531Q273 136 651 254" stroke-dasharray="3 9"/><path d="M191 185Q707 235 665 581" stroke-dasharray="3 9"/></svg></div>}
+  <div class="wrap page-hero-inner">
+    <slot name="breadcrumb" />
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1><slot name="title" /></h1>
+    <slot />
+  </div>
+</header>

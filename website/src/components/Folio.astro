@@ -1,21 +1,21 @@
 ---
-import Arrow from './Arrow.astro';
+import Icon from './Icon.astro';
 import { path } from '../data/site';
 ---
 <dialog class="folio-panel requires-js" id="pardus-folio" aria-labelledby="folio-title">
   <div class="folio-topline">
     <div>
       <p class="eyebrow">Your private travel notes</p>
-      <h2 id="folio-title">The Pardus Folio</h2>
+      <h2 id="folio-title">Saved trips</h2>
     </div>
-    <button type="button" class="folio-close" data-folio-close aria-label="Close your Pardus Folio"><span></span><span></span></button>
+    <button type="button" class="folio-close" data-folio-close aria-label="Close saved trips"><Icon name="close" /></button>
   </div>
 
   <div class="folio-content">
     <div class="folio-empty" data-folio-empty>
       <p class="folio-empty-title">Begin with a feeling.</p>
-      <p>Choose a place, pace or reason as you explore. Your notes stay on this device until you decide to shape a journey.</p>
-      <a href={path('#folio-builder')} class="text-button" data-folio-close-link>Begin on the homepage <Arrow /></a>
+      <p>Save journey ideas as you explore. Your notes stay on this device until you decide to shape a journey.</p>
+      <a href={path('journeys.html')} class="link" data-folio-close-link>Explore journey ideas <Icon name="arrow-right" /></a>
     </div>
 
     <div class="folio-selections" data-folio-content hidden>
@@ -25,16 +25,16 @@ import { path } from '../data/site';
         <div><dt>Reason</dt><dd data-folio-value="reason">Open</dd></div>
       </dl>
       <div class="folio-saved">
-        <p class="eyebrow">Saved chapters</p>
+        <p class="eyebrow">Saved journeys</p>
         <ul data-folio-items></ul>
       </div>
     </div>
   </div>
 
   <div class="folio-actions" data-folio-actions hidden>
-    <button type="button" class="folio-clear" data-folio-clear>Clear Folio</button>
-    <a class="button" href={path('planner.html')} data-folio-plan><span>Shape this journey</span><Arrow /></a>
+    <button type="button" class="folio-clear" data-folio-clear>Clear saved trips</button>
+    <a class="btn btn--gold btn--sm" href={path('planner.html')} data-folio-plan>Shape this journey <Icon name="arrow-right" /></a>
   </div>
-  <p class="folio-privacy">Saved locally for 30 days. Nothing is sent to Pardus until a live enquiry is submitted.</p>
+  <p class="folio-privacy">Saved locally for 30 days. Nothing is sent to Pardus until you submit an enquiry.</p>
   <p class="folio-status" data-folio-status aria-live="polite"></p>
 </dialog>

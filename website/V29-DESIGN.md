@@ -1,3 +1,5 @@
+> Superseded by `V30-DESIGN.md` (14 October 2026). Kept for history. The preloader dropped in V29 is restored and permanent.
+
 # PARDUS V29: private worlds, beautifully opened
 
 Implementation direction: midnight #071521; porcelain #F7F5EF; champagne #C9A96E. Instrument Serif Regular/Italic handles display; Instrument Sans variable handles body, controls and tabular pricing. Licensed Canela/Söhne files were not supplied, so the approved open-source route is implemented and its OFL files travel with the export.

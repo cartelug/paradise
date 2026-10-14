@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Picture from '../components/Picture.astro';
-import Arrow from '../components/Arrow.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { journeys } from '../data/journeys';
 import { path, absolute } from '../data/site';
 
@@ -29,31 +29,46 @@ const schemas = [
   },
 ];
 ---
-<Layout title={journey.name} description={journey.description} image={`images/${journey.image}-1920.webp`} class="journey-detail-page">
+<Layout title={journey.name} description={journey.description} image={`images/${journey.image}-1920.webp`} class="inner journey-detail-page">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
-  <header class="journey-detail-hero">
-    <Picture name={journey.image} alt={journey.alt} eager sizes="100vw" />
-    <div class="journey-detail-shade" aria-hidden="true"></div>
-    <div class="journey-detail-copy"><p class="eyebrow">{journey.number} / {journey.eyebrow}</p><h1>{journey.name}</h1><p>{journey.title}</p></div>
-  </header>
+  <PageHero image={journey.image} alt={journey.alt} eyebrow={journey.eyebrow}>
+    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys.html')}>Journeys</a><Icon name="chevron-right" /><span>{journey.name}</span></nav>
+    <Fragment slot="title">{journey.name}</Fragment>
+    <p class="lead">{journey.title}</p>
+  </PageHero>
 
-  <section class="journey-overview section-wrap">
-    <div><nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys.html')}>Journeys</a><span aria-hidden="true">/</span><span>{journey.name}</span></nav><p class="eyebrow">A possible rhythm</p><h2>{journey.title}</h2></div>
-    <div class="journey-overview-copy"><p>{journey.description}</p><dl><div><dt>Suggested length</dt><dd>{journey.duration.split(' / ')[1]}</dd></div><div><dt>Setting</dt><dd>{journey.place}</dd></div><div><dt>Pace</dt><dd>{journey.pace}</dd></div><div><dt>Reason</dt><dd>{journey.reason}</dd></div></dl><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><span data-save-label>Save to your Folio</span><span aria-hidden="true">+</span></button></div>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="overview-title">
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>A possible rhythm</p><h2 id="overview-title" data-split>{journey.title}</h2></div>
+      <div data-reveal>
+        <p class="prose">{journey.description}</p>
+        <dl class="overview-list"><div><dt>Suggested length</dt><dd>{journey.duration.split(' / ')[1]}</dd></div><div><dt>Setting</dt><dd>{journey.place}</dd></div><div><dt>Pace</dt><dd>{journey.pace}</dd></div><div><dt>Reason</dt><dd>{journey.reason}</dd></div></dl>
+        <button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><Icon name="bookmark" /><span data-save-label>Save this journey</span></button>
+      </div>
+    </div>
   </section>
 
-  <section class="journey-rhythm section-wrap" aria-labelledby="rhythm-title">
-    <div class="journey-rhythm-heading"><p class="eyebrow">The shape, before the schedule</p><h2 id="rhythm-title">Three acts.<br /><em>Room to adapt.</em></h2></div>
-    <ol>{journey.chapters.map((chapter, index) => <li><span>0{index + 1}</span><div><h3>{chapter.title}</h3><p>{chapter.text}</p></div></li>)}</ol>
+  <section class="sec sec--night blend-top" style="--blend:#f1e9d9" aria-labelledby="rhythm-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>The shape, before the schedule</p>
+      <h2 id="rhythm-title" data-split>Three acts. <em>Room to adapt.</em></h2>
+      <ol class="acts" style="margin-top:clamp(28px,4vw,56px)" data-stagger="120">{journey.chapters.map((chapter, index) => <li data-reveal><span class="num">0{index + 1}</span><div><h3>{chapter.title}</h3><p>{chapter.text}</p></div></li>)}</ol>
+    </div>
   </section>
 
-  <section class="journey-practical section-wrap">
-    <div><p class="eyebrow">Who it may suit</p><ul>{journey.idealFor.map(item => <li>{item}</li>)}</ul></div>
-    <div><p class="eyebrow">The working rhythm</p><ul>{journey.rhythm.map(item => <li>{item}</li>)}</ul></div>
-    <div><p class="eyebrow">What can change</p><ul>{journey.flexibility.map(item => <li>{item}</li>)}</ul></div>
+  <section class="sec sec--lagoon sec--tight" aria-label="Practical details">
+    <div class="wrap practical" style="margin-top:0" data-stagger="120">
+      <div data-reveal><h3>Who it may suit</h3><ul class="ticks">{journey.idealFor.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
+      <div data-reveal><h3>The working rhythm</h3><ul class="ticks">{journey.rhythm.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
+      <div data-reveal><h3>What can change</h3><ul class="ticks">{journey.flexibility.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
+    </div>
   </section>
 
-  <section class="journey-disclaimer section-wrap"><p>This is an editorial journey concept, not a package or availability promise. The route, accommodation, transfers, experiences, timing and price are discussed and confirmed around your brief.</p><a class="button" href={`${path('journey.html')}?style=${encodeURIComponent(journey.name)}&place=${journey.place}&pace=${journey.pace}&reason=${journey.reason}`}><span>Shape this journey</span><Arrow /></a></section>
-
-  <section class="next-destination"><div><p class="eyebrow">Another way to travel</p><h2>{next.name}</h2></div><a class="text-button" href={path(`journey-${next.slug}.html`)}>Next journey <Arrow /></a></section>
+  <section class="sec sec--dusk" aria-labelledby="shape-title">
+    <div class="wrap statement">
+      <h2 id="shape-title" data-split>Make it <em>yours.</em></h2>
+      <p data-reveal>This is an editorial journey concept, not a package or availability promise. The route, accommodation, transfers, experiences, timing and price are discussed and confirmed around your brief.</p>
+      <div class="actions" data-reveal><a class="btn btn--gold" href={`${path('journey.html')}?style=${encodeURIComponent(journey.name)}&place=${journey.place}&pace=${journey.pace}&reason=${journey.reason}`}>Shape this journey <Icon name="arrow-right" /></a><a class="btn btn--ghost" href={path(`journey-${next.slug}.html`)}>Next: {next.name} <Icon name="arrow-right" /></a></div>
+    </div>
+  </section>
 </Layout>

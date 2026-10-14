@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+import { offerFor, priceText } from '../data/offers';
+const rail = ['maldives', 'seychelles', 'dubai'].map(slug => offerFor(slug));
+const asset = (name: string) => path(`images/${name}`);
+const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
+---
+<section class="hero" aria-labelledby="hero-title" data-hero>
+  <div class="hero-media" aria-hidden="false">
+    <picture>
+      <source media="(max-width: 760px)" type="image/avif" srcset={set('pardus-hero-mobile-v25', [480, 768, 1024], 'avif')} sizes="100vw" />
+      <source media="(max-width: 760px)" type="image/webp" srcset={set('pardus-hero-mobile-v25', [480, 768, 1024], 'webp')} sizes="100vw" />
+      <source type="image/avif" srcset={set('pardus-hero-desktop-v25', [640, 1280, 1536], 'avif')} sizes="100vw" />
+      <img src={asset('pardus-hero-desktop-v25-1536.webp')} srcset={set('pardus-hero-desktop-v25', [640, 1280, 1536], 'webp')} sizes="100vw" width="1536" height="1024" alt="A leopard watching over a turquoise lagoon with overwater villas, a white yacht and a golden city skyline at sunset" fetchpriority="high" decoding="async" data-hero-image />
+    </picture>
+  </div>
+  <div class="hero-light" aria-hidden="true"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">From Africa to the world</p>
+      <h1 id="hero-title"><span class="line" style="--n:0"><span>Luxury travel,</span></span><span class="line" style="--n:1"><span><em>beautifully</em></span></span><span class="line" style="--n:2"><span>arranged.</span></span></h1>
+      <p class="hero-text">Flights, exceptional stays and private experiences. You choose the destination. We take care of the details.</p>
+      <div class="actions"><a class="btn btn--gold" href="#destinations">Explore destinations <Icon name="arrow-down" /></a><a class="btn btn--ghost" href={path('journey.html')}>Plan your escape <Icon name="arrow-right" /></a></div>
+    </div>
+    <div class="hero-rail glass">
+      <div class="hero-rail-head"><span><strong>Three ways to escape.</strong> Per person, two sharing.</span>
+        <button type="button" class="motion-toggle requires-js" data-scene-motion aria-pressed="false" aria-label="Pause background animation"><Icon name="pause" class="icon-pause" /><Icon name="play" class="icon-play" /><span data-scene-motion-label>Pause scene</span></button>
+      </div>
+      <nav class="hero-offers" aria-label="Popular escapes and starting prices">
+        {rail.map(offer => <a href={path(`destination-${offer.slug}.html`)}><span class="name">{offer.label}<small>{offer.nights}</small></span><span class="amount"><strong>{priceText(offer)}</strong><small>{offer.priceBasis}</small></span><Icon name="arrow-right" /></a>)}
+      </nav>
+    </div>
+  </div>
+</section>

@@ -2,6 +2,25 @@
 
 Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## V30 blue-hour redesign (14 October 2026)
+
+The site owner found V29 flat and unattractive: no section gradients, an odd condensed typeface and little scroll motion. V30 restores the V25 hero (leopard, overwater villas, Dubai skyline at sunset, yacht) and rebuilds every page on one design system.
+
+**Hard rule: the preloader is permanent.** The V25 opening (gold logo trace, wordmark, aircraft, meridian globe and route arcs, two curtains opening onto the hero) must be present in every build. It plays once per browser tab on the homepage. Skip introduction, Escape and a failsafe timer always release the visitor, and visitors who prefer reduced motion see a still brand screen instead of the animation. V29 had removed it; V30 restores it and adds `website/tests/preloader.test.mjs`, which fails the release if the files, the markup, the layout wiring or the exported `index.html` lose it. The rule is also recorded in `CLAUDE.md` for future sessions.
+
+What changed:
+
+- Palette from the hero photograph (midnight, lagoon teal, champagne, ember, ivory). Sections carry gradients and share colours at their seams; a soft haze joins dark and light sections.
+- Type: Newsreader for headlines, Manrope for body and controls. The squeezed Instrument Serif and Instrument Sans files were removed.
+- Scroll motion: a header that blurs after 40 px, hides on scroll down and returns on scroll up, with a gold progress line; hero parallax and fade; word-by-word heading reveals; staggered card reveals; photographs that clip in and drift inside their frames; the yacht band scales as it enters. Reduced motion removes all of it, and a Pause scene control stops the hero drift.
+- Mobile menu: a full-height dialog with an SVG symbol for each destination, the current page marked, large tap targets, the main action and email pinned at the foot, scroll lock, Escape, focus return and safe-area spacing. It closes itself if the window grows to the desktop layout.
+- One SVG icon set (`website/src/data/icons.ts`). No emoji and no text glyphs used as icons.
+- Saved trips (formerly the Folio) is a side drawer. Journey pages keep their save buttons.
+- Every inner page opens with the same dark photographic header, and the destination and cruise pages carry a summary card that overlaps it.
+- Removed: the V27 WebGL leopard renderer and its tests, the V29 walking-leopard hero, the twelve layered V20 to V29 stylesheets, gsap and the retired components. `public/opening.js` (the V25 loader script, loaded by no page) was left in place.
+
+Existing prices, destinations, journey ideas, journal entries, the approved logo, travel desk and enquiry behaviour are unchanged.
+
 ## Final destination sections
 
 The signature islands now use alternating photograph-and-detail panels on desktop and a single-column reading order on phones. All destination photography is clear of price overlays and duration badges. Inclusions use shared line icons, with one price and one planning action per card. The popular-escape prices sit below the homepage hero, separate from the artwork. Dubai uses the same destination component; service features are grouped by travel essentials, experiences, occasions and tailored journeys.
@@ -21,7 +40,7 @@ A source cleanup and polish pass on top of V27, without a redesign:
 - `polish.css` adds balanced headings, tabular price numerals, brand-coloured native controls, touch-safe hovers, forced-colours focus and cross-page view transitions (off under reduced motion).
 - The logo is defined once per page and reused, cutting HTML weight by about 40–57% (about.html 72 KB → 31 KB, index.html 123 KB → 79 KB) with identical rendering.
 
-`public/opening.js` and the `.is-opening`/`.preloader` styles belong to the retired V25 opening. No page loads them; they were left in place for history.
+`public/opening.js` is the retired V25 loader script. No page loads it; the active preloader is `CinematicIntro.astro` (see V30 above).
 
 ## V27 redesigned campaign and homepage
 
