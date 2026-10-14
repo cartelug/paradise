@@ -1,5 +1,9 @@
 # Image sources
 
+## V30 (14 October 2026)
+
+The homepage hero is the V25 campaign composite again: `public/images/pardus-hero-desktop-v25-*` and `pardus-hero-mobile-v25-*` (prompts and provenance in `source-assets/v25/ARTWORK.md`). It is an imagined brand montage, not a verified property or a supplier partnership. The V27 and V29 hero families, the V26 scene layers and the V23 walking leopard are no longer used by any page; they remain in `public/images` and in git history. Active typefaces are Newsreader and Manrope. The Instrument Serif and Instrument Sans files from V29 were removed.
+
 Approved Pardus logo: user-uploaded JPEG. V24 refreshes the destination and yacht photography with verified, freely licensed Unsplash photographs. Retained legacy assets are documented below. Photography illustrates locations and experiences; it is not evidence of owned properties or supplier partnerships.
 
 The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The current header and footer use faithful vector paths from `src/data/logo.json`. V22 traces the 1280 × 720 approved October logo, including its diagonal aircraft; the original is preserved in `source-assets/pardus-approved-logo-2026-10.jpeg`.

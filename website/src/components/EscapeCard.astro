@@ -2,20 +2,21 @@
 import Picture from './Picture.astro';
 import OfferPrice from './OfferPrice.astro';
 import OfferInclusions from './OfferInclusions.astro';
-import TravelIcon from './TravelIcon.astro';
+import Icon from './Icon.astro';
 import { path } from '../data/site';
 import { destinationFor, type EscapeOffer } from '../data/offers';
 interface Props { offer: EscapeOffer; featured?: boolean; }
 const { offer, featured = false } = Astro.props;
 const d = destinationFor(offer.slug);
 ---
-<article class:list={['escape-card', { 'escape-card-featured': featured }]} data-category={d.category} data-reveal>
-  <a class="escape-card-image" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw'} /></a>
-  <div class="escape-card-copy">
-    <header><div class="escape-card-meta"><p class="eyebrow">{d.country}</p><span class="escape-stay">{offer.nights}</span></div><h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3></header>
-    <p class="escape-card-description">{offer.experience}</p>
-    {featured && <ul class="escape-highlights" aria-label={`${offer.label} highlights`}>{offer.highlights.map(item => <li><TravelIcon name="check" /><span>{item}</span></li>)}</ul>}
-    <div class="escape-included"><p class="escape-block-label">Your escape includes</p><OfferInclusions items={offer.inclusions} /></div>
-    <div class="escape-card-price"><OfferPrice offer={offer}/><a class="escape-enquire" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`} aria-label={`Enquire about ${offer.label}`}>Plan this escape <TravelIcon name="arrow" /></a></div>
+<article class:list={['card', { 'card--featured': featured }]} data-category={d.category} data-reveal>
+  <a class="card-media frame" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 33vw'} /></a>
+  <div class="card-body">
+    <div class="card-meta"><span class="country">{d.country}</span><span class="stay">{offer.nights}</span></div>
+    <h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3>
+    <p class="card-text">{offer.experience}</p>
+    {featured && <ul class="ticks" aria-label={`${offer.label} highlights`}>{offer.highlights.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul>}
+    <div class="card-incl"><span class="card-label">Your escape includes</span><OfferInclusions items={offer.inclusions} /></div>
+    <div class="card-foot"><OfferPrice offer={offer} /><a class="btn btn--ink btn--sm" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`} aria-label={`Plan ${offer.label}`}>Plan this escape <Icon name="arrow-right" /></a></div>
   </div>
 </article>

@@ -1,37 +1,78 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Picture from '../components/Picture.astro';
+import PageHero from '../components/PageHero.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
-import { destinations } from '../data/destinations';
-import { offerFor, priceNote } from '../data/offers';
 import OfferPrice from '../components/OfferPrice.astro';
 import OfferInclusions from '../components/OfferInclusions.astro';
-import TravelIcon from '../components/TravelIcon.astro';
+import Icon from '../components/Icon.astro';
+import { destinations } from '../data/destinations';
+import { offerFor, priceNote } from '../data/offers';
 import { path, absolute } from '../data/site';
 export function getStaticPaths() { return destinations.map(destination => ({params:{destination:'destination-'+destination.slug},props:{destination}})); }
 const { destination: d } = Astro.props;
 const offer = offerFor(d.slug);
-const ideas: Record<string,{title:string;text:string}[]> = {
-  maldives:[{title:'Your island stay',text:'An overwater villa or a beach retreat. We help you choose a resort and room around your budget and the occasion.'},{title:'Days on the lagoon',text:'Add snorkelling, watersports or an island excursion. Choose as much activity or quiet time as you like.'},{title:'A sunset on the water',text:'Make a private boat cruise part of your honeymoon, anniversary or a beautiful evening away.'}],
-  seychelles:[{title:'A beautiful beach base',text:'Choose a beachfront resort or a quieter island stay, with time for the coast and nature.'},{title:'Island-hopping',text:'Combine Mahé, Praslin or La Digue, with transfers arranged around a comfortable travel pace.'},{title:'Private boat days',text:'Add an island excursion, a snorkelling trip or a sunset cruise to your itinerary.'}],
-  dubai:[{title:'Hotels, shopping & dining',text:'A luxury city hotel or a beach stay, with time for shopping, restaurants and the attractions you want to see.'},{title:'Desert experiences',text:'Trade the skyline for the dunes with a desert excursion and an evening dinner arrangement.'},{title:'Your private yacht',text:'A skyline cruise, sunset celebration or a private boat experience for your family, partner or group.'}],
-  africa:[{title:'Safari stays',text:'Choose lodges and camps across Uganda, Kenya or Tanzania, matched to your route and preferred comfort.'},{title:'Private guided experiences',text:'Build your journey around game drives, landscapes and the interests of the people travelling.'},{title:'Safari & beach',text:'Pair time in the wild with a Zanzibar beach stay or another Indian Ocean escape.'}],
-  zanzibar:[{title:'Safari first',text:'Begin with a Kenya or Tanzania safari. We arrange the route, lodges and onward connections.'},{title:'The Zanzibar coast',text:'Finish on the beach with a comfortable resort, private transfers and time to enjoy the island.'},{title:'Dhow cruises & culture',text:'Add Stone Town, a spice visit or a sunset dhow cruise. A Zanzibar-only holiday is also available to plan.'}],
-  europe:[{title:'Beautiful city stays',text:'Start with the city you want to see and a hotel placed for the sights, restaurants and neighbourhoods you enjoy.'},{title:'Private tours & experiences',text:'Discover culture, food and landmarks with guided experiences and enough space to explore at your own pace.'},{title:'A Mediterranean finish',text:'Add an island, a coastline or a second city, with flights, rail or transfers brought into one itinerary.'}],
+type Idea = { icon: 'bed' | 'waves' | 'yacht' | 'sun' | 'city' | 'compass' | 'paw' | 'landmark' | 'sparkle'; title: string; text: string };
+const ideas: Record<string, Idea[]> = {
+  maldives:[{icon:'bed',title:'Your island stay',text:'An overwater villa or a beach retreat. We help you choose a resort and room around your budget and the occasion.'},{icon:'waves',title:'Days on the lagoon',text:'Add snorkelling, watersports or an island excursion. Choose as much activity or quiet time as you like.'},{icon:'yacht',title:'A sunset on the water',text:'Make a private boat cruise part of your honeymoon, anniversary or a beautiful evening away.'}],
+  seychelles:[{icon:'sun',title:'A beautiful beach base',text:'Choose a beachfront resort or a quieter island stay, with time for the coast and nature.'},{icon:'compass',title:'Island-hopping',text:'Combine Mahé, Praslin or La Digue, with transfers arranged around a comfortable travel pace.'},{icon:'yacht',title:'Private boat days',text:'Add an island excursion, a snorkelling trip or a sunset cruise to your itinerary.'}],
+  dubai:[{icon:'city',title:'Hotels, shopping & dining',text:'A luxury city hotel or a beach stay, with time for shopping, restaurants and the attractions you want to see.'},{icon:'sun',title:'Desert experiences',text:'Trade the skyline for the dunes with a desert excursion and an evening dinner arrangement.'},{icon:'yacht',title:'Your private yacht',text:'A skyline cruise, sunset celebration or a private boat experience for your family, partner or group.'}],
+  africa:[{icon:'bed',title:'Safari stays',text:'Choose lodges and camps across Uganda, Kenya or Tanzania, matched to your route and preferred comfort.'},{icon:'paw',title:'Private guided experiences',text:'Build your journey around game drives, landscapes and the interests of the people travelling.'},{icon:'waves',title:'Safari & beach',text:'Pair time in the wild with a Zanzibar beach stay or another Indian Ocean escape.'}],
+  zanzibar:[{icon:'paw',title:'Safari first',text:'Begin with a Kenya or Tanzania safari. We arrange the route, lodges and onward connections.'},{icon:'sun',title:'The Zanzibar coast',text:'Finish on the beach with a comfortable resort, private transfers and time to enjoy the island.'},{icon:'yacht',title:'Dhow cruises & culture',text:'Add Stone Town, a spice visit or a sunset dhow cruise. A Zanzibar-only holiday is also available to plan.'}],
+  europe:[{icon:'landmark',title:'Beautiful city stays',text:'Start with the city you want to see and a hotel placed for the sights, restaurants and neighbourhoods you enjoy.'},{icon:'compass',title:'Private tours & experiences',text:'Discover culture, food and landmarks with guided experiences and enough space to explore at your own pace.'},{icon:'waves',title:'A Mediterranean finish',text:'Add an island, a coastline or a second city, with flights, rail or transfers brought into one itinerary.'}],
 };
 const schema = {'@context':'https://schema.org','@type':'TouristDestination',name:d.name,description:offer.experience,url:absolute('destination-'+d.slug+'.html')};
+const focus: Record<string, [string, string]> = { maldives: ['55%', '45%'], seychelles: ['50%', '50%'], dubai: ['50%', '40%'], africa: ['55%', '45%'], zanzibar: ['50%', '50%'], europe: ['50%', '50%'] };
+const [fx, fy] = focus[d.slug] || ['55%', '50%'];
 ---
-<Layout title={offer.label} description={offer.experience} image={'images/'+d.image+'-1920.webp'} class="escape-inner destination-page" simpleFooter>
+<Layout title={offer.label} description={offer.experience} image={'images/'+d.image+'-1920.webp'} class="inner destination-page" simpleFooter>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
-  <header class="destination-intro">
-    <div class="destination-intro-media"><Picture name={d.image} alt={d.alt} eager sizes="(max-width: 760px) 100vw, 55vw" /></div>
-    <div class="destination-intro-copy"><nav class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>Destinations</a><span aria-hidden="true">/</span><span>{offer.label}</span></nav><div class="escape-card-meta"><p class="eyebrow">{d.country}</p><span class="escape-stay">{offer.nights}</span></div><h1>{offer.label}</h1><p>{offer.experience}</p><ul class="escape-highlights">{offer.highlights.map(item => <li><TravelIcon name="check" /><span>{item}</span></li>)}</ul></div>
-  </header>
-  <section class="destination-summary escape-section" aria-label="Your escape at a glance"><div class="destination-summary-inclusions"><p class="escape-block-label">Your escape includes</p><OfferInclusions items={offer.inclusions} /></div><div class="destination-summary-booking"><OfferPrice offer={offer} /><a class="escape-button" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <TravelIcon name="arrow" /></a></div><p class="escape-price-note">{priceNote}</p></section>
-  <section class="escape-overview escape-section"><div><p class="eyebrow">The destination</p><h2>{d.title}</h2></div><div>{d.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p>Flights, stays, transfers and experiences can be brought together in a proposal shaped around your dates and budget.</p><a class="escape-underlined" href="#enquire">Make it your journey</a></div></section>
-  <section class="escape-possibilities escape-section"><p class="eyebrow">The experiences</p><h2>A stay worth<br /><em>looking forward to.</em></h2><div class="escape-experience-grid">{ideas[d.slug].map((idea, i) => <article data-reveal><span class="experience-number">0{i+1}</span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}</div>
-    {d.slug === 'dubai' && <p class="escape-detail-note">Planning around an event? <a class="escape-underlined" href="https://www.visitdubai.com/articles/events-to-look-forward-to-this-season" target="_blank" rel="noopener noreferrer">See the current winter calendar at Visit Dubai</a></p>}
+  <PageHero glance image={d.image} alt={d.alt} eyebrow={d.country} focusX={fx} focusY={fy}>
+    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>Destinations</a><Icon name="chevron-right" /><span>{offer.label}</span></nav>
+    <Fragment slot="title">{offer.label}</Fragment>
+    <div class="meta"><span class="chip"><Icon name="clock" />{offer.nights}</span></div>
+    <p class="lead">{offer.experience}</p>
+    <ul class="ticks">{offer.highlights.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul>
+  </PageHero>
+
+  <section class="sec sec--ivory glance-sec" aria-label="Your escape at a glance">
+    <div class="wrap glance">
+      <div class="glance-card on-dark" data-reveal>
+        <div><span class="card-label">Your escape includes</span><OfferInclusions items={offer.inclusions} /></div>
+        <div class="glance-booking"><OfferPrice offer={offer} /><a class="btn btn--gold" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <Icon name="arrow-right" /></a></div>
+        <p class="glance-note">{priceNote}</p>
+      </div>
+    </div>
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>The destination</p><h2 data-split>{d.title}</h2></div>
+      <div class="prose" data-reveal>{d.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p>Flights, stays, transfers and experiences can be brought together in a proposal shaped around your dates and budget.</p><a class="link" href="#enquire">Make it your journey <Icon name="arrow-down" /></a></div>
+    </div>
   </section>
-  <section class="escape-section destination-practical"><div class="escape-heading"><div><p class="eyebrow">The details that matter</p><h2>Your dates.<br /><em>Your way to travel.</em></h2></div></div><div class="destination-practical-grid"><div><h3>Time to enjoy it</h3><p>{offer.nights}. Extend or shorten your stay to suit your plans.</p><a class="escape-underlined" href={path('cruises.html')}>Add a private boat experience</a></div><div><h3>Made for</h3><ul>{d.idealFor.map(item => <li>{item}</li>)}</ul></div><div><h3>Before you travel</h3><p>{d.seasonNote}</p></div></div></section>
-  <section class="escape-enquiry-section escape-section" id="enquire"><div class="escape-enquiry-intro"><p class="eyebrow">Make it your escape</p><h2>Plan your<br /><em>{offer.label.replace('Safari & ','')} journey.</em></h2><p>Tell us your dates and budget. We’ll take care of the next steps.</p></div><SimpleEnquiry id={'enquiry-'+d.slug} defaultDestination={d.name} /></section>
+
+  <section class="sec sec--sand" aria-labelledby="experiences-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>The experiences</p>
+      <h2 id="experiences-title" data-split>A stay worth <em>looking forward to.</em></h2>
+      <div class="exp-grid" data-stagger="120">{ideas[d.slug].map(idea => <article class="exp" data-reveal><span class="badge"><Icon name={idea.icon} /></span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}</div>
+      {d.slug === 'dubai' && <p class="note">Planning around an event? <a href="https://www.visitdubai.com/articles/events-to-look-forward-to-this-season" target="_blank" rel="noopener noreferrer">See the current winter calendar at Visit Dubai</a></p>}
+    </div>
+  </section>
+
+  <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="details-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>The details that matter</p>
+      <h2 id="details-title" data-split>Your dates. <em>Your way to travel.</em></h2>
+      <div class="practical" data-stagger="120">
+        <div data-reveal><h3>Time to enjoy it</h3><p>{offer.nights}. Extend or shorten your stay to suit your plans.</p><a class="link" href={path('cruises.html')}>Add a private boat experience <Icon name="arrow-right" /></a></div>
+        <div data-reveal><h3>Made for</h3><ul class="ticks">{d.idealFor.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
+        <div data-reveal><h3>Before you travel</h3><p>{d.seasonNote}</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dusk" id="enquire" aria-labelledby="enquire-title">
+    <div class="wrap enquiry">
+      <div class="enquiry-copy"><p class="eyebrow" data-reveal>Make it your escape</p><h2 id="enquire-title" data-split>Plan your <em>{offer.label.replace('Safari & ','')} journey.</em></h2><p class="lead" data-reveal>Tell us your dates and budget. We’ll take care of the next steps.</p></div>
+      <div class="enquiry-card glass" data-reveal><SimpleEnquiry id={'enquiry-'+d.slug} defaultDestination={d.name} /></div>
+    </div>
+  </section>
 </Layout>

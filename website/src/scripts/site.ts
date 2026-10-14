@@ -1,130 +1,12 @@
 import { cleanBrief, briefText, normalisePlannerDraft, resolvePlannerContext, validDeparture, validEmail } from './brief';
 import { deliverEnquiry } from './deliver';
-import { initFolio, readFolio } from './folio';
+import { readFolio } from './folio';
 import { site, path } from '../data/site';
 import { destinations } from '../data/destinations';
+import './ui';
 
-const root = document.documentElement;
+// Interactive features: destination filters, journey and journal libraries, and the detailed planner.
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const header = document.querySelector<HTMLElement>('.site-header');
-const paintHeader = () => header?.classList.toggle('header-scrolled', window.scrollY > 42);
-window.addEventListener('scroll', paintHeader, { passive: true });
-paintHeader();
-const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
-const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
-toggle?.addEventListener('click', () => { menu?.showModal(); toggle.setAttribute('aria-expanded', 'true'); });
-document.querySelector('.menu-close')?.addEventListener('click', () => menu?.close());
-menu?.addEventListener('close', () => { toggle?.setAttribute('aria-expanded', 'false'); toggle?.focus({ preventScroll: true }); });
-menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.close()));
-initFolio();
-
-if ('IntersectionObserver' in window && !motion.matches) {
-  const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal], .escape-heading h2, .escape-heading .eyebrow, .escape-enquiry-intro h2, .escape-page-intro h1, .escape-detail-heading h1')];
-  targets.forEach(target => { target.dataset.reveal = ''; });
-  targets.forEach(target => {
-    if (!target.dataset.revealStyle) {
-      target.dataset.revealStyle = target.matches('h1,h2,.section-label') ? 'heading'
-        : target.matches('picture,.atelier-image,.business-image,.journey-card-picture,.destination-detail-hero,.full-bleed-picture') ? 'media'
-        : target.matches('li,details,.service-detail,.journey-card') ? 'card'
-        : 'copy';
-    }
-  });
-  const reveal = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('revealed');
-      reveal.unobserve(entry.target);
-    });
-  }, { threshold: 0, rootMargin: '80px 0px' });
-  const initiallyVisible = targets.map(el => ({el,visible:el.getBoundingClientRect().top < window.innerHeight + 80}));
-  initiallyVisible.forEach(({el,visible}) => {if(visible)el.classList.add('revealed');else reveal.observe(el);});
-  root.classList.add('motion-ready');
-  // IntersectionObserver reveals each section when it enters the viewport.
-  // A failed enhancement removes the motion gate so the content stays readable.
-  window.addEventListener('error', () => root.classList.remove('motion-ready'), {once:true});
-
-  const sections = new IntersectionObserver(entries => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('section-entered'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('main section').forEach(section => sections.observe(section));
-  motion.addEventListener('change',()=>{
-    if (!motion.matches) return;
-    reveal.disconnect();sections.disconnect();
-    targets.forEach(el=>el.classList.add('revealed'));
-    root.classList.remove('motion-ready');
-  });
-  // Observers enhance decoration only; content remains visible before observation.
-}
-
-const scrollMedia = [...document.querySelectorAll<HTMLElement>('[data-scroll-media]')]
-  .filter(element => element.querySelector('img'));
-const scrollSignature = document.querySelector<HTMLElement>('[data-v20-scroll-signature]');
-scrollMedia.forEach(element => { if (!element.dataset.scrollMedia) element.dataset.scrollMedia = ''; });
-let scrollFrame = 0;
-function paintScrollMotion() {
-  scrollFrame = 0;
-  const scrollable = Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-  const measurements = motion.matches ? [] : scrollMedia.map(element=>({element,box:element.getBoundingClientRect()}));
-  const signatureBox = !motion.matches && scrollSignature ? scrollSignature.getBoundingClientRect() : null;
-  // All layout reads finish before style writes.
-  root.style.setProperty('--page-progress',String(Math.min(1,Math.max(0,window.scrollY/scrollable))));
-  if (motion.matches) {
-    scrollMedia.forEach(element=>element.style.setProperty('--scroll-y','0px'));
-    scrollSignature?.style.setProperty('--explore-y','0px');
-    scrollSignature?.style.setProperty('--explore-scale','1');
-    scrollSignature?.style.setProperty('--explore-opacity','1');
-    scrollSignature?.style.setProperty('--explore-route','1');
-    return;
-  }
-  for (const {element,box} of measurements) {
-    if (box.bottom < -100 || box.top > window.innerHeight+100) continue;
-    const depth = window.innerWidth<=760 ? 0 : Number(element.dataset.scrollDepth||12);
-    const position = (window.innerHeight/2-(box.top+box.height/2))/(window.innerHeight+box.height);
-    const offset = Math.max(-depth,Math.min(depth,position*depth*2));
-    element.style.setProperty('--scroll-y',offset.toFixed(2)+'px');
-  }
-  if (scrollSignature && signatureBox) {
-    const distance = Math.max(1,signatureBox.height-window.innerHeight*.45);
-    const progress = Math.min(1,Math.max(0,(window.innerHeight*.55-signatureBox.top)/distance));
-    scrollSignature.style.setProperty('--explore-y',((1-progress)*48).toFixed(2)+'px');
-    scrollSignature.style.setProperty('--explore-scale',(1.06-progress*.06).toFixed(4));
-    scrollSignature.style.setProperty('--explore-opacity',Math.min(1,progress*2.7).toFixed(3));
-    scrollSignature.style.setProperty('--explore-route',Math.min(1,progress*1.5).toFixed(3));
-  }
-}
-function requestScrollPaint() {
-  if (!document.hidden && !scrollFrame) scrollFrame=requestAnimationFrame(paintScrollMotion);
-}
-function cancelScrollPaint() {if(scrollFrame)cancelAnimationFrame(scrollFrame);scrollFrame=0;}
-window.addEventListener('scroll',requestScrollPaint,{passive:true});
-window.addEventListener('resize',requestScrollPaint);
-window.addEventListener('pagehide',cancelScrollPaint);
-window.addEventListener('pageshow',requestScrollPaint);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelScrollPaint();else requestScrollPaint();});
-motion.addEventListener('change',requestScrollPaint);
-requestScrollPaint();
-
-document.querySelectorAll<HTMLElement>('[data-destination-editor]').forEach(editor => {
-  const tabs = [...editor.querySelectorAll<HTMLButtonElement>('[data-destination-tab]')];
-  const panels = [...editor.querySelectorAll<HTMLElement>('[data-panel]')];
-  const activate = (tab: HTMLButtonElement) => {
-    tabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; });
-    panels.forEach(panel => { const active = panel.dataset.panel === tab.dataset.destinationTab; panel.hidden = !active; panel.classList.toggle('active', active); });
-  };
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activate(tab));
-    tab.addEventListener('keydown', event => {
-      let target = index;
-      if (['ArrowRight', 'ArrowDown'].includes(event.key)) target = (index + 1) % tabs.length;
-      else if (['ArrowLeft', 'ArrowUp'].includes(event.key)) target = (index + tabs.length - 1) % tabs.length;
-      else if (event.key === 'Home') target = 0;
-      else if (event.key === 'End') target = tabs.length - 1;
-      else return;
-      event.preventDefault(); activate(tabs[target]); tabs[target].focus();
-      tabs[target].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: motion.matches ? 'instant' : 'smooth' });
-    });
-  });
-});
 
 const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
 filters.forEach(button => button.addEventListener('click', () => {
@@ -132,7 +14,7 @@ filters.forEach(button => button.addEventListener('click', () => {
   let count = 0;
   document.querySelectorAll<HTMLElement>('[data-category]').forEach(card => {
     card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter;
-    if (!card.hidden) { count++; card.classList.add('revealed'); }
+    if (!card.hidden) { count++; card.classList.add('is-in'); }
   });
   const label = document.querySelector('[data-collection-count]');
   if (label) label.textContent = `${count} destination${count === 1 ? '' : 's'} to discover`;
@@ -361,22 +243,3 @@ if (planner) {
     }
   });
 }
-
-const contactForm = document.querySelector<HTMLFormElement>('#contact-form');
-if (contactForm) {
-  const status = contactForm.querySelector<HTMLElement>('[data-form-status]')!;
-  const error = contactForm.querySelector<HTMLElement>('[data-error]')!;
-  const submit = contactForm.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-  contactForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    if (!contactForm.reportValidity()) return;
-    error.textContent = ''; status.textContent = 'Sending your message…'; submit.disabled = true;
-    const delivered = await deliverEnquiry(site.enquiryEndpoint, new FormData(contactForm));
-    submit.disabled = false;
-    if (delivered) { status.textContent = 'Thank you — your message has been sent to Pardus.'; contactForm.reset(); }
-    else { status.textContent = ''; error.textContent = `We could not send your message. Please try again shortly${site.email ? `, or email us at ${site.email}` : ''}.`; }
-  });
-}
-
-// Enable interactive controls only after their handlers are registered.
-root.classList.add('js');

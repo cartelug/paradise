@@ -4,7 +4,7 @@ interface Props { offer: Pick<EscapeOffer,'fromUSD'|'fromUGX'|'priceBasis'>; }
 const { offer } = Astro.props;
 const price = displayPrice(offer);
 ---
-<div class="offer-price">
+<div class="price">
   {price.hasStartingPrice && <span class="price-label">From</span>}
   <strong>{price.amount}</strong>
   {price.hasStartingPrice && <small>{offer.priceBasis}</small>}

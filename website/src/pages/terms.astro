@@ -1,15 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
 ---
-<Layout title="Website information and terms" description="Information about your Pardus travel proposal, journey brief, travel requirements, bookings and cancellations." simpleFooter>
-  <article class="legal-page">
-    <p class="eyebrow">Before you travel</p><h1>A little <em>clarity.</em></h1>
-    <p>These notes explain the scope of this website. They are not booking terms or a travel contract.</p>
+<Layout title="Website information and terms" description="Information about your Pardus travel proposal, journey brief, travel requirements, bookings and cancellations." simpleFooter class="inner">
+  <PageHero eyebrow="Before you travel" compact>
+    <Fragment slot="title">A little <em>clarity.</em></Fragment>
+    <p class="lead">These notes explain the scope of this website. They are not booking terms or a travel contract.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="Terms details">
+    <div class="wrap">
+      <article class="legal">
+
     <h2>Your itinerary and proposal</h2><p>Explore destinations, stays and experiences, then discuss the journey you have in mind. Your accommodation, itinerary, inclusions, availability and final price are confirmed in your proposal before booking.</p>
     <h2>Your journey brief</h2><p>The planner produces a file for you to keep. {site.enquiryEndpoint ? 'Downloading it, and sending your brief to Pardus, does not reserve a service, take payment or create a contract with Pardus.' : 'Downloading it does not send an enquiry, reserve a service, take payment or create a contract with Pardus.'}</p>
     <h2>Travel requirements</h2><p>Entry, visa, health and documentation requirements depend on your circumstances and can change. Verify applicable requirements with official authorities before arranging travel. Guidance cannot guarantee a visa decision or permission to enter a destination.</p>
     <h2>Bookings and cancellations</h2><p>Before any booking or payment, request the confirmed itinerary, price, applicable supplier terms, payment schedule and cancellation conditions. Those details are not established by this website.</p>
     <h2>Destination photography</h2><p>Photography introduces the destinations and experiences you can discuss with Pardus. Your proposal identifies the accommodation and services selected for your trip.</p>
-  </article>
+      </article>
+    </div>
+  </section>
 </Layout>

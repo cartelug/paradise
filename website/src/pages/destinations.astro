@@ -1,13 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 import EscapeCard from '../components/EscapeCard.astro';
 import { offers, priceNote } from '../data/offers';
 ---
-<Layout title="Destinations & escapes" description="Explore Maldives, Seychelles, Dubai, East Africa, safari and Zanzibar journeys, with suggested stays and a clear USD quote for your dates." class="escape-inner" simpleFooter>
-  <section class="escape-page-intro"><p class="eyebrow">The Pardus destinations</p><h1>Choose your place.<br /><em>We’ll plan your escape.</em></h1><p>Islands, cities, safari country and the coast. Explore your stay, see what is included, and let us tailor the journey around you.</p></section>
-  <section class="escape-collection" aria-label="Destinations">
-    <div class="collection-filters"><div class="filter-buttons" role="group" aria-label="Filter destinations"><button data-filter="all" aria-pressed="true">All destinations</button><button data-filter="islands" aria-pressed="false">Islands & beaches</button><button data-filter="wild" aria-pressed="false">Safaris</button><button data-filter="culture" aria-pressed="false">City & culture</button></div><p class="collection-count" data-collection-count aria-live="polite">{offers.length} destinations to explore</p></div>
-    <div class="escape-collection-grid">{offers.map(offer => <EscapeCard offer={offer} />)}</div>
-    <p class="escape-price-note">{priceNote}</p>
+<Layout title="Destinations & escapes" description="Explore Maldives, Seychelles, Dubai, East Africa, safari and Zanzibar journeys, with suggested stays and a clear USD quote for your dates." class="inner" simpleFooter>
+  <PageHero eyebrow="The Pardus destinations">
+    <Fragment slot="title">Choose your place. <em>We’ll plan your escape.</em></Fragment>
+    <p class="lead">Islands, cities, safari country and the coast. Explore your stay, see what is included, and let us tailor the journey around you.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="Destinations">
+    <div class="wrap">
+      <h2 class="visually-hidden">All destinations</h2>
+      <div class="collection-bar">
+        <div class="pills" role="group" aria-label="Filter destinations"><button class="pill" data-filter="all" aria-pressed="true">All destinations</button><button class="pill" data-filter="islands" aria-pressed="false">Islands &amp; beaches</button><button class="pill" data-filter="wild" aria-pressed="false">Safaris</button><button class="pill" data-filter="culture" aria-pressed="false">City &amp; culture</button></div>
+        <p data-collection-count aria-live="polite">{offers.length} destinations to explore</p>
+      </div>
+      <div class="card-grid" data-stagger="90">{offers.map(offer => <EscapeCard offer={offer} />)}</div>
+      <p class="price-note">{priceNote}</p>
+    </div>
   </section>
 </Layout>

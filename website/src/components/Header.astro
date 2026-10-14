@@ -1,26 +1,49 @@
 ---
 import Brand from './Brand.astro';
-import { navigation, path } from '../data/site';
-interface Props { dark?: boolean; compact?: boolean; }
-const { dark = false, compact = false } = Astro.props;
+import Icon from './Icon.astro';
+import { navigation, path, site } from '../data/site';
 const current = Astro.url.pathname.split('/').pop() || '';
-const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
+const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') && current !== 'journey.html' ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
+const primary = [
+  { label: 'Destinations', href: 'destinations.html', icon: 'pin' as const, note: 'Islands, safaris and cities' },
+  { label: 'Private cruises', href: 'cruises.html', icon: 'anchor' as const, note: 'Yachts and island days' },
+  { label: 'What we arrange', href: 'concierge.html', icon: 'sparkle' as const, note: 'Flights, stays and transfers' },
+  { label: 'Travel desk', href: 'travel-desk.html', icon: 'globe' as const, note: 'Official travel updates' },
+];
+const more = [
+  { label: 'Journeys', href: 'journeys.html', icon: 'compass' as const },
+  { label: 'Journal', href: 'journal.html', icon: 'news' as const },
+  { label: 'Why Pardus', href: 'about.html', icon: 'heart' as const },
+  { label: 'Business travel', href: 'corporate.html', icon: 'briefcase' as const },
+];
 ---
 <a class="skip-link" href="#main">Skip to content</a>
-<header class:list={['site-header', { 'header-dark': dark }]}>
-  <a href={path()} class="brand-link header-leopard" aria-label="Pardus Luxury Escapes home"><Brand vector light /></a>
+<header class="site-header" data-header>
+  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light /></a>
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
-  {!compact && <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Saved trips</span><small data-folio-count hidden>0</small></button>}
-  <a class="header-journey" href={path('journey.html')}><span>Plan your escape</span></a>
-  <button class="menu-toggle requires-js" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
+  <div class="header-tools">
+    <button type="button" class="header-saved requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /><span>Saved trips</span><small data-folio-count hidden>0</small></button>
+    <a class="btn btn--gold btn--sm header-cta" href={path('journey.html')}>Plan your escape</a>
+    <button type="button" class="menu-toggle requires-js" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog"><Icon name="menu" /></button>
+  </div>
+  <div class="page-progress" aria-hidden="true"><span></span></div>
 </header>
-<dialog id="mobile-menu" class="mobile-menu" aria-labelledby="menu-title">
-  <div class="menu-top"><a class="brand-link header-leopard" href={path()} aria-label="Pardus home"><Brand vector light /></a><button class="menu-close" aria-label="Close navigation"><span></span><span></span></button></div>
-  <p id="menu-title" class="eyebrow">A world of possibilities</p>
-  <nav aria-label="Mobile navigation">
-    {[...navigation, { label: 'Plan your escape', href: 'journey.html' }, { label: 'Contact Pardus', href: 'contact.html' }].map((item, i) => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><small>0{i + 1}</small><span>{item.label}</span></a>)}
-  </nav>
-  <div class="menu-bottom"><span>Personally planned. Beautifully travelled.</span><a href={path('contact.html')}>Contact Pardus</a></div>
+<dialog id="mobile-menu" class="menu" aria-label="Menu">
+  <div class="menu-panel">
+    <div class="menu-top"><a class="brand-link" href={path()} aria-label="Pardus Luxury Escapes home"><Brand vector light /></a><button type="button" class="menu-close" aria-label="Close menu" autofocus><Icon name="close" /></button></div>
+    <p class="menu-kicker" style="--i:0">Where to?</p>
+    <nav class="menu-nav" aria-label="Mobile navigation">
+      {primary.map((item, i) => <a style={`--i:${i + 1}`} href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><span class="badge"><Icon name={item.icon} /></span><span><strong>{item.label}</strong><small>{item.note}</small></span><Icon name="chevron-right" /></a>)}
+    </nav>
+    <nav class="menu-more" style="--i:5" aria-label="More from Pardus">
+      {more.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><Icon name={item.icon} /><span>{item.label}</span></a>)}
+    </nav>
+    <div class="menu-foot" style="--i:6">
+      <a class="btn btn--gold" href={path('journey.html')}>Plan your escape <Icon name="arrow-right" /></a>
+      <button type="button" class="btn btn--ghost requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /> Saved trips</button>
+      <a class="menu-contact" href={`mailto:${site.bookingsEmail}`}><Icon name="mail" /><span>{site.bookingsEmail}</span></a>
+    </div>
+  </div>
 </dialog>

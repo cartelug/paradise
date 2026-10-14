@@ -1,9 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { path } from '../data/site';
+const promises = [
+  { icon: 'chat' as const, title: 'One point of contact', text: 'Keep the itinerary, arrangements and practical questions in one conversation.' },
+  { icon: 'heart' as const, title: 'Made around you', text: 'Your dates, budget, occasion and fellow travellers shape the plan.' },
+  { icon: 'shield' as const, title: 'Clear before you book', text: 'Review your itinerary, USD price, inclusions, payment schedule and supplier terms before confirming.' },
+];
 ---
-<Layout title="Why Pardus" description="Pardus arranges flights, stays, transfers and experiences around your dates, budget and the people travelling." class="escape-inner" simpleFooter>
-  <section class="escape-page-intro"><p class="eyebrow">Why Pardus</p><h1>Luxury travel.<br /><em>Less to think about.</em></h1><p>You tell us where you want to go. We bring the flights, hotels, transfers and experiences into one journey, planned around you.</p></section>
-  <section class="escape-why escape-section"><div class="escape-why-grid"><div><h3>One point of contact</h3><p>Keep the itinerary, arrangements and practical questions in one conversation.</p></div><div><h3>Made around you</h3><p>Your dates, budget, occasion and fellow travellers shape the plan.</p></div><div><h3>Clear before you book</h3><p>Review your itinerary, USD price, inclusions, payment schedule and supplier terms before confirming.</p></div></div></section>
-  <section class="escape-section"><h2>Beautiful places.<br /><em>Thoughtfully arranged.</em></h2><p class="escape-detail-note">Maldives and Seychelles island escapes. Dubai city breaks. East African safaris. Europe, family journeys and private time on the water.</p><a class="escape-underlined" href={path('journey.html')}>Plan your escape</a></section>
+<Layout title="Why Pardus" description="Pardus arranges flights, stays, transfers and experiences around your dates, budget and the people travelling." class="inner" simpleFooter>
+  <PageHero eyebrow="Why Pardus">
+    <Fragment slot="title">Luxury travel. <em>Less to think about.</em></Fragment>
+    <p class="lead">You tell us where you want to go. We bring the flights, hotels, transfers and experiences into one journey, planned around you.</p>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="What to expect">
+    <div class="wrap"><h2 class="visually-hidden">What to expect</h2><div class="promises promises--light" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div>
+  </section>
+  <section class="sec sec--sand" aria-labelledby="places-title">
+    <div class="wrap statement">
+      <h2 id="places-title" data-split>Beautiful places. <em>Thoughtfully arranged.</em></h2>
+      <p data-reveal>Maldives and Seychelles island escapes. Dubai city breaks. East African safaris. Europe, family journeys and private time on the water.</p>
+      <a class="btn btn--ink" href={path('journey.html')} data-reveal>Plan your escape <Icon name="arrow-right" /></a>
+    </div>
+  </section>
 </Layout>

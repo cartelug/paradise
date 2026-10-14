@@ -1,12 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Picture from '../components/Picture.astro';
-import Arrow from '../components/Arrow.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { path } from '../data/site';
+const steps = [
+  { title: 'Executive travel', text: 'Flights, well-placed accommodation and ground connections shaped around the purpose of the visit.' },
+  { title: 'Teams & groups', text: 'Coordinate traveller preferences and shared schedules for meetings, events and business journeys.' },
+  { title: 'Clear arrangements', text: 'Discuss budgets, approval processes and itinerary needs at the beginning, so expectations are agreed.' },
+];
+const frame = [
+  ['Schedule', 'Meeting locations, arrival windows and fixed commitments establish the route.'],
+  ['Traveller', 'Cabin, stay, transfer and communication preferences are captured once and considered together.'],
+  ['Approval', 'Budget responsibility, approvers and any company requirements are clarified before confirmation.'],
+  ['Support', 'The agreed contact route, change process and service boundaries are documented for each arrangement.'],
+];
 ---
-<Layout title="Pardus for business" description="Considered travel coordination for executives and teams, with flights, stays and schedules brought together around business needs.">
-  <section class="feature-intro"><div class="feature-intro-content"><p class="eyebrow">Pardus for business</p><h1>Time matters.<br />Travel <em>well.</em></h1><p>Travel coordination for the people moving your business forward. Considered around the agenda, with attention to the person behind it.</p></div><Picture name="corporate" alt="A refined aircraft cabin with comfortable seating" eager /></section>
-  <section class="destination-essay section-wrap"><div><p class="eyebrow">A considered business journey</p><h2 data-reveal>More focus.<br />Fewer moving <em>parts.</em></h2></div><div class="essay-copy"><p data-reveal>Work travel is different. Arrival times, meeting locations and changing priorities all matter. Pardus helps bring flights, accommodation and ground arrangements into a practical itinerary.</p><p data-reveal>Begin with your schedule, traveller preferences and company requirements. Service arrangements, availability and any ongoing support are agreed for your organisation before travel is confirmed.</p><a class="text-button" href={`${path('planner.html')}?style=Executive%20Arrivals&reason=Business`} data-reveal>Prepare a corporate travel brief <Arrow /></a></div></section>
-  <section class="detail-highlights section-wrap"><p class="eyebrow">Built around your business</p><h2 data-reveal>From the first meeting<br />to the journey <em>home.</em></h2><ol class="process-list"><li data-reveal><span>01</span><div><h3>Executive travel</h3><p>Flights, well-placed accommodation and ground connections shaped around the purpose of the visit.</p></div></li><li data-reveal><span>02</span><div><h3>Teams & groups</h3><p>Coordinate traveller preferences and shared schedules for meetings, events and business journeys.</p></div></li><li data-reveal><span>03</span><div><h3>Clear arrangements</h3><p>Discuss budgets, approval processes and itinerary needs at the beginning, so expectations are agreed.</p></div></li></ol></section>
-  <section class="corporate-frame section-wrap"><div><p class="eyebrow">A working frame</p><h2>Built around<br /><em>the agenda.</em></h2><p>Start with the non-negotiables, then bring comfort and preference into the space that remains.</p></div><dl><div><dt>01 / Schedule</dt><dd>Meeting locations, arrival windows and fixed commitments establish the route.</dd></div><div><dt>02 / Traveller</dt><dd>Cabin, stay, transfer and communication preferences are captured once and considered together.</dd></div><div><dt>03 / Approval</dt><dd>Budget responsibility, approvers and any company requirements are clarified before confirmation.</dd></div><div><dt>04 / Support</dt><dd>The agreed contact route, change process and service boundaries are documented for each arrangement.</dd></div></dl></section>
+<Layout title="Pardus for business" description="Considered travel coordination for executives and teams, with flights, stays and schedules brought together around business needs." class="inner">
+  <PageHero image="corporate" alt="A refined aircraft cabin with comfortable seating" eyebrow="Pardus for business" focusX="50%" focusY="55%">
+    <Fragment slot="title">Time matters. Travel <em>well.</em></Fragment>
+    <p class="lead">Travel coordination for the people moving your business forward. Considered around the agenda, with attention to the person behind it.</p>
+    <div class="actions"><a class="btn btn--gold" href={`${path('planner.html')}?style=Executive%20Arrivals&reason=Business`}>Prepare a corporate travel brief <Icon name="arrow-right" /></a></div>
+  </PageHero>
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="focus-title">
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>A considered business journey</p><h2 id="focus-title" data-split>More focus. Fewer moving <em>parts.</em></h2></div>
+      <div class="prose" data-reveal><p>Work travel is different. Arrival times, meeting locations and changing priorities all matter. Pardus helps bring flights, accommodation and ground arrangements into a practical itinerary.</p><p>Begin with your schedule, traveller preferences and company requirements. Service arrangements, availability and any ongoing support are agreed for your organisation before travel is confirmed.</p></div>
+    </div>
+  </section>
+  <section class="sec sec--sand" aria-labelledby="built-title">
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>Built around your business</p><h2 id="built-title" data-split>From the first meeting to the journey <em>home.</em></h2></div>
+      <ol class="process" data-stagger="110">{steps.map((step, i) => <li data-reveal><span class="num">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol>
+    </div>
+  </section>
+  <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="frame-title">
+    <div class="wrap split">
+      <div><p class="eyebrow" data-reveal>A working frame</p><h2 id="frame-title" data-split>Built around <em>the agenda.</em></h2><p class="lead" style="margin-top:20px" data-reveal>Start with the non-negotiables, then bring comfort and preference into the space that remains.</p></div>
+      <dl class="frame-list" data-stagger="100">{frame.map(([term, text]) => <div data-reveal><dt>{term}</dt><dd>{text}</dd></div>)}</dl>
+    </div>
+  </section>
 </Layout>

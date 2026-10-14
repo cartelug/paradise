@@ -1,7 +1,7 @@
 ---
-import TravelIcon from './TravelIcon.astro';
+import Icon from './Icon.astro';
 interface Props { items: string[]; }
 const { items } = Astro.props;
-const iconFor = (item: string) => /breakfast|board|meals/i.test(item) ? 'dining' : /transfer/i.test(item) ? 'transfer' : /game drives/i.test(item) ? 'safari' : /tour/i.test(item) ? 'compass' : 'bed';
+const iconFor = (item: string) => /breakfast|board|meals/i.test(item) ? 'dining' as const : /transfer/i.test(item) ? 'car' as const : /game drives/i.test(item) ? 'paw' as const : /tour/i.test(item) ? 'compass' as const : 'bed' as const;
 ---
-<ul class="escape-inclusions inclusion-list" aria-label="Escape inclusions">{items.map(item => <li><TravelIcon name={iconFor(item)} /><span>{item}</span></li>)}</ul>
+<ul class="incl" aria-label="Escape inclusions">{items.map(item => <li><Icon name={iconFor(item)} /><span>{item}</span></li>)}</ul>
