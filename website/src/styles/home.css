@@ -30,7 +30,7 @@
 .hero-copy { align-self: center; max-width: var(--copy-max); padding-block: clamp(14px, 3.4vh, 64px); transform: translate3d(0, var(--copy-shift, 0px), 0); opacity: var(--copy-fade, 1); }
 .hero h1 { font-size: clamp(2.75rem, min(1rem + 5.4vw, 10.4vh), 6.25rem); line-height: 1; letter-spacing: -.018em; color: #fff; text-shadow: 0 2px 30px rgb(2 8 18 / .5); }
 .hero h1 em { color: var(--gold-soft); }
-.hero .line { display: block; overflow: hidden; padding: 0 .06em .14em; margin: 0 -.06em -.1em; }
+.hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
 .hero .line > span { display: block; }
 .hero-text { max-width: 46ch; margin-top: clamp(18px, 2.2vw, 28px); font-size: var(--fs-lead); line-height: 1.6; color: #dbe3ee; text-shadow: 0 1px 16px rgb(2 8 18 / .6); }
 .hero .actions { margin-top: clamp(24px, 3vw, 38px); }
@@ -160,7 +160,7 @@
   html.stage-ready .scene:not([data-state]) .scene-photo, html.stage-ready .scene[data-state='after'] .scene-photo { clip-path: inset(100% 0 0 0 round 30px); }
   html.stage-ready .scene-photo picture { transform: scale(calc(1.16 - .1 * var(--lp, 0))); transition: transform 1s var(--ease); }
   html.stage-ready .scene:hover .scene-photo img { transform: none; }
-  html.stage-ready .scene-mark { display: block; position: absolute; right: -1%; bottom: -12%; z-index: -1; max-width: 100%; font-family: var(--font-display); font-weight: 600; font-size-adjust: var(--display-adjust); font-size: clamp(8rem, 15.5vw, 19rem); line-height: .8; letter-spacing: -.03em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgb(217 188 130 / .1); pointer-events: none; opacity: 0; transform: translate3d(calc((1 - var(--lp, 0)) * 90px), 0, 0); transition: opacity 1.1s ease; }
+  html.stage-ready .scene-mark { display: block; position: absolute; right: 2%; bottom: 5%; z-index: -1; max-width: 100%; font-family: var(--font-display); font-weight: 600; font-size-adjust: var(--display-adjust); font-size: clamp(6rem, 10.5vw, 14rem); line-height: 1.12; letter-spacing: -.03em; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgb(217 188 130 / .1); pointer-events: none; opacity: 0; transform: translate3d(calc((1 - var(--lp, 0)) * 36px), 0, 0); transition: opacity 1.1s ease; }
   html.stage-ready .scene[data-state='active'] .scene-mark { opacity: 1; }
   html.stage-ready .scene-panel { display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 1.7vh, 20px); min-height: 0; visibility: hidden; transition: visibility 0s .5s; }
   html.stage-ready .scene[data-state='active'] .scene-panel { visibility: visible; transition-delay: .4s; }

@@ -40,7 +40,7 @@ html.is-ready .page-hero .actions { animation: rise 1.1s var(--ease) .55s both; 
   html.motion-ready [data-reveal='clip'].is-in picture { clip-path: inset(0 0 0 0); }
   html.motion-ready [data-reveal='clip'].is-in img { transition: transform 1.8s var(--ease) var(--d, 0ms); }
   /* Heading lines slide up inside a mask. */
-  html.motion-ready [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+  html.motion-ready [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .08em .12em .32em; margin: -.08em -.12em -.32em; }
   html.motion-ready [data-split] .w > span { display: inline-block; transform: translate3d(0, 108%, 0); transition: transform 1.1s var(--ease) calc(var(--d, 0ms) + var(--w, 0) * 55ms); }
   html.motion-ready [data-split].is-in .w > span { transform: none; }
 
