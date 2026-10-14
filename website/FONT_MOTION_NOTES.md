@@ -20,6 +20,8 @@ Satoshi and the full Montserrat file remain in `public/fonts/` because the conte
 
 Motion lives in `src/styles/motion.css` and `src/scripts/ui.ts`. Content is complete in the HTML; hidden states exist only while the script runs. The hero drift, sun glow and light sweep are CSS animations that pause off-screen, in hidden tabs and when the visitor presses Pause scene (saved in local storage). Scroll effects use one frame per scroll event and read layout before writing styles. Reduced motion removes arrival animations, reveals, parallax and the drift.
 
+The hero leopard (`src/scripts/hero-life.ts`, `src/styles/hero.css`): breathing, the eye ignition, the light band and the sun glow are CSS and run on the compositor; the script adds gaze (pointer, touch, phone tilt, scroll), random blinks and glints, the torchlight on the fur and the motes. One `requestAnimationFrame` loop runs only while the hero is visible, the tab is shown, Pause scene is off and motion is allowed. If the first 120 frames average slower than about 33 fps it sets `data-quality="lite"` and the blended extras are dropped. The leopard layer translates by at most 7 px and its cutout runs past the right edge of the picture, so its cut edge is never seen.
+
 The "Your next escape" stage on large screens is driven by the same scroll frame: a sticky stage whose scene, route line and plane follow scroll progress, with tabs that jump to a scene. On phones, tablets, short windows and with reduced motion it falls back to stacked chapters.
 
 The preloader (`CinematicIntro.astro`, `preloader.css`, `preloader.ts`) is permanent and runs on every page; see CLAUDE.md.

@@ -7,15 +7,11 @@ import Brand from '../components/Brand.astro';
 import OfferPrice from '../components/OfferPrice.astro';
 import OfferInclusions from '../components/OfferInclusions.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
+import ServicePicker from '../components/ServicePicker.astro';
+import StickyCta from '../components/StickyCta.astro';
 import TravelDesk from '../components/TravelDesk.astro';
 import { path } from '../data/site';
 import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
-const families = [
-  { title: 'Travel', icon: 'plane' as const, image: 'corporate', items: ['Flights', 'Private transfers', 'Visa guidance'] },
-  { title: 'Stay', icon: 'bed' as const, image: 'maldives-v24', items: ['Luxury hotels & resorts', 'Stays chosen around you'] },
-  { title: 'Experience', icon: 'yacht' as const, image: 'yacht-dubai-v24', items: ['Boat & yacht cruises', 'Safaris & private tours', 'Activities & experiences'] },
-  { title: 'Occasion', icon: 'heart' as const, image: 'europe-v24', items: ['Honeymoons', 'Family & group holidays', 'Corporate & custom travel'] },
-];
 const promises = [
   { icon: 'chat' as const, title: 'One conversation', text: 'Flights, stays, transfers and experiences brought into one clear plan.' },
   { icon: 'heart' as const, title: 'Made around you', text: 'Your dates, your budget and the people you are travelling with come first.' },
@@ -27,8 +23,9 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
 ---
 <Layout class="home" simpleFooter image="images/pardus-hero-desktop-v25-1536.webp">
   <Fragment slot="head">
-    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={set('pardus-hero-mobile-v25', [480, 768, 1024], 'avif')} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={set('pardus-hero-desktop-v25', [640, 1280, 1536], 'avif')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'avif')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'avif')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" href={asset('pardus-leopard-v30.avif')} />
   </Fragment>
   <Hero />
 
@@ -83,15 +80,15 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
       <div class="services-intro">
         <p class="eyebrow" data-reveal>What we arrange</p>
         <h2 id="arrange-title" data-split>You choose where. <em>We arrange the rest.</em></h2>
-        <p class="lead" data-reveal>A complete holiday, a business trip or one exceptional experience.</p>
-        <a class="btn btn--ink" href={path('concierge.html')} data-reveal>Explore our travel services <Icon name="arrow-right" /></a>
+        <p class="lead" data-reveal>Flights, stays, transfers, visas, cruises and more. Tap what you want and we bring it together in one clear proposal.</p>
+        <ul class="services-points" data-reveal>
+          <li><Icon name="chat" /><span><strong>One conversation</strong>for the whole trip</span></li>
+          <li><Icon name="shield" /><span><strong>Price and inclusions</strong>before you decide</span></li>
+          <li><Icon name="compass" /><span><strong>Made around you</strong>never a package</span></li>
+        </ul>
+        <a class="link services-more" href={path('concierge.html')} data-reveal>See everything we arrange <Icon name="arrow-right" /></a>
       </div>
-      <div class="service-list" data-stagger="120">
-        {families.map(family => <article class="service" data-reveal>
-          <div class="frame"><Picture name={family.image} alt="" sizes="(max-width: 560px) 100vw, 210px" /></div>
-          <div class="service-body"><div class="service-title"><span class="badge"><Icon name={family.icon} /></span><h3>{family.title}</h3></div><ul class="ticks">{family.items.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
-        </article>)}
-      </div>
+      <ServicePicker />
     </div>
   </section>
 
@@ -137,4 +134,5 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
       <div class="enquiry-card glass" data-reveal><SimpleEnquiry /></div>
     </div>
   </section>
+  <StickyCta />
 </Layout>

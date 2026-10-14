@@ -9,6 +9,13 @@ document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form
   date.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
   const chosen = new URLSearchParams(location.search).get('destination');
   if (chosen && [...destination.options].some(option => option.value === chosen)) destination.value = chosen;
+  // Services ticked in the homepage picker arrive as ?services=Flights&services=... and start the note for you.
+  const services = new URLSearchParams(location.search).getAll('services').map(value => value.trim()).filter(Boolean).slice(0, 13);
+  const notes = form.querySelector<HTMLTextAreaElement>('[name="notes"]');
+  if (services.length && notes && !notes.value.trim()) {
+    notes.value = `I would like Pardus to arrange: ${services.join(', ')}.`;
+    notes.dispatchEvent(new Event('input', { bubbles: true }));
+  }
   const draft = () => {
     const fields = new FormData(form);
     return ['PARDUS TRAVEL ENQUIRY', '', `Destination: ${fields.get('destination')}`, `Departure: ${fields.get('date') || 'Flexible'}`, `Travellers: ${fields.get('travellers')}`, `Budget per person: ${fields.get('budget')}`, `Name: ${fields.get('name') || 'Not specified'}`, `Reply email: ${fields.get('email') || 'Reply to the sending email'}`, '', `Notes: ${fields.get('notes') || 'To discuss'}`, '', 'Please send a proposal in UGX, with a USD reference where useful, and the itinerary, inclusions and terms.'].join('\n');

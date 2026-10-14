@@ -54,8 +54,8 @@ function beginIntro() {
   const started = Number(root.dataset.introStarted || performance.now());
   const elapsed = () => performance.now() - started;
   // Fonts and the first photograph are awaited so the page opens complete, but never past the deadline.
-  const image = document.querySelector<HTMLImageElement>('[data-hero-image], .page-hero-bg img');
-  const artwork = image ? image.decode().catch(() => undefined) : Promise.resolve();
+  const images = [...document.querySelectorAll<HTMLImageElement>('[data-hero-image], .page-hero-bg img')];
+  const artwork = images.length ? Promise.all(images.map(image => image.decode().catch(() => undefined))) : Promise.resolve();
   Promise.allSettled([artwork, document.fonts?.ready]).then(() => {
     if (!root.classList.contains('intro-active') || root.classList.contains('intro-exiting')) return;
     minTimer = window.setTimeout(() => finishIntro(), Math.max(0, MIN_MS() - elapsed()));

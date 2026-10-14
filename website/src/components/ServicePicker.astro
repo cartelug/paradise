@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+import { serviceGroups } from '../data/offers';
+import { serviceIcons } from '../data/icons';
+// "You choose where. We arrange the rest." as something you can use: every one of the 13 services is a tile you can tap.
+// It is a real GET form, so it works without JavaScript; the choices travel to the enquiry as ?services=...
+const groupTitles = ['The essentials', 'Experiences', 'Occasions', 'Made for you'];
+let position = 0;
+const groups = serviceGroups.map((group, index) => ({
+  ...group,
+  short: groupTitles[index] ?? group.title,
+  items: group.items.map(label => ({ label, icon: serviceIcons[label] || 'sparkle', index: position++ })),
+}));
+const total = position;
+---
+<form class="picker" data-picker action={path('journey.html')} method="get" aria-labelledby="picker-title">
+  <div class="picker-head">
+    <p class="picker-q" id="picker-title"><span class="picker-step">1</span> What should we arrange?</p>
+    <button type="button" class="picker-clear requires-js" data-picker-clear hidden>Clear</button>
+  </div>
+  <div class="picker-groups" data-stagger="110">
+    {groups.map((group, g) => (
+      <div class="picker-group" role="group" aria-labelledby={`picker-group-${g}`} data-count={group.items.length} data-reveal>
+        <div class="picker-group-head"><span class="badge"><Icon name={group.icon} /></span><span class="picker-group-title" id={`picker-group-${g}`}>{group.short}</span><span class="picker-group-text">{group.text}</span></div>
+        <div class="picker-tiles">
+          {group.items.map(item => (
+            <label class="pick" style={`--i:${item.index}`}>
+              <input type="checkbox" name="services" value={item.label} />
+              <span class="pick-face">
+                <span class="pick-icon"><Icon name={item.icon} /><span class="pick-check" aria-hidden="true"><Icon name="check" /></span></span>
+                <span class="pick-label">{item.label}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="picker-bar" data-picker-bar>
+    <p class="picker-summary" data-picker-summary aria-live="polite" data-total={total}><strong>Your plan</strong> <span>Tap to choose</span></p>
+    <button type="submit" class="btn btn--gold picker-go"><span>Plan my escape</span> <Icon name="arrow-right" /></button>
+  </div>
+</form>
+<script>import '../scripts/picker.ts';</script>

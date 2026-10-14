@@ -1,34 +1,55 @@
 ---
 import Icon from './Icon.astro';
 import { path } from '../data/site';
-import { offerFor, priceText } from '../data/offers';
+import { offerFor, displayPrice } from '../data/offers';
+import layers from '../data/hero-layers.json';
+// The V25 hero, rebuilt in layers so the leopard can move on its own: a clean world plate, the animal, a blink patch
+// for the eyes, glow and light effects, and a small canvas of drifting motes. Everything is positioned in image
+// coordinates, so the artwork looks exactly as approved at rest and the animal never moves out of its place.
 const rail = ['maldives', 'seychelles', 'dubai'].map(slug => offerFor(slug));
 const asset = (name: string) => path(`images/${name}`);
 const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
 // Portrait artwork is used on phones and on any screen that is not clearly landscape, so the copy never sits on the animal.
 const stacked = '(max-width: 760px), (max-aspect-ratio: 11/10)';
+const { leopard } = layers;
+const vars = `--leopard-url:url(${asset('pardus-leopard-v30-mask.webp')})`;
 ---
-<section class="hero" aria-labelledby="hero-title" data-hero>
+<section class="hero" aria-labelledby="hero-title" data-hero data-hero-life>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy" data-hero-copy>
       <p class="eyebrow">From Africa to the world</p>
       <h1 id="hero-title"><span class="line" style="--n:0"><span>Luxury travel,</span></span><span class="line" style="--n:1"><span><em>beautifully</em></span></span><span class="line" style="--n:2"><span>arranged.</span></span></h1>
-      <p class="hero-text">Flights, exceptional stays and private experiences. You choose the destination. We take care of the details.</p>
-      <div class="actions"><a class="btn btn--gold" href="#destinations">Explore destinations <Icon name="arrow-down" /></a><a class="btn btn--ghost" href={path('journey.html')}>Plan your escape <Icon name="arrow-right" /></a></div>
+      <p class="hero-text">Flights, stays, transfers and private experiences. You choose where. We arrange everything.</p>
+      <div class="actions"><a class="btn btn--gold" href="#destinations" aria-label="Explore destinations"><span>Explore<span class="btn-long"> destinations</span></span> <Icon name="arrow-down" /></a><a class="btn btn--ghost" href={path('journey.html')}><span>Plan your escape</span> <Icon name="arrow-right" /></a></div>
     </div>
     <div class="hero-zone">
       <div class="hero-media">
-        <div class="hero-picture">
+        <div class="hero-picture" style={vars} role="img" aria-label="A leopard watching over a turquoise lagoon with overwater villas, a white yacht and a golden city skyline at sunset">
           <div class="hero-drift">
-            <picture>
-              <source media={stacked} type="image/avif" srcset={set('pardus-hero-mobile-v25', [480, 768, 1024], 'avif')} sizes="100vw" />
-              <source media={stacked} type="image/webp" srcset={set('pardus-hero-mobile-v25', [480, 768, 1024], 'webp')} sizes="100vw" />
-              <source type="image/avif" srcset={set('pardus-hero-desktop-v25', [640, 1280, 1536], 'avif')} sizes="100vw" />
-              <img src={asset('pardus-hero-desktop-v25-1536.webp')} srcset={set('pardus-hero-desktop-v25', [640, 1280, 1536], 'webp')} sizes="100vw" width="1536" height="1024" alt="A leopard watching over a turquoise lagoon with overwater villas, a white yacht and a golden city skyline at sunset" fetchpriority="high" decoding="async" data-hero-image />
+            <picture class="hl-world">
+              <source media={stacked} type="image/avif" srcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'avif')} sizes="100vw" />
+              <source media={stacked} type="image/webp" srcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'webp')} sizes="100vw" />
+              <source type="image/avif" srcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'avif')} sizes="100vw" />
+              <img src={asset('pardus-world-desktop-v30-1536.webp')} srcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'webp')} sizes="100vw" width="1536" height="1024" alt="" fetchpriority="high" decoding="async" data-hero-image />
             </picture>
             <span class="hero-glow" aria-hidden="true"></span>
-            <span class="leopard-box" aria-hidden="true" data-leopard-box></span>
+            <div class="hl-leopard" data-leopard aria-hidden="true">
+              <div class="hl-breath">
+                <picture class="hl-body">
+                  <source type="image/avif" srcset={asset('pardus-leopard-v30.avif')} />
+                  <img src={asset('pardus-leopard-v30.webp')} width={leopard.size.width} height={leopard.size.height} alt="" fetchpriority="high" decoding="async" data-hero-image />
+                </picture>
+                <picture class="hl-eyes" data-leopard-eyes>
+                  <source type="image/avif" srcset={asset('pardus-leopard-v30-eyes.avif')} />
+                  <img src={asset('pardus-leopard-v30-eyes.webp')} width="310" height="105" alt="" decoding="async" />
+                </picture>
+                <span class="hl-glows"><span class="hl-glow hl-glow--l"></span><span class="hl-glow hl-glow--r"></span></span>
+                <span class="hl-rim"></span>
+                <span class="leopard-box" data-leopard-box></span>
+              </div>
+            </div>
+            <canvas class="hl-motes" data-hero-motes aria-hidden="true"></canvas>
           </div>
         </div>
       </div>
@@ -38,8 +59,17 @@ const stacked = '(max-width: 760px), (max-aspect-ratio: 11/10)';
         <button type="button" class="motion-toggle requires-js" data-scene-motion aria-pressed="false" aria-label="Pause background animation"><Icon name="pause" class="icon-pause" /><Icon name="play" class="icon-play" /><span data-scene-motion-label>Pause scene</span></button>
       </div>
       <nav class="hero-offers" aria-label="Popular escapes and starting prices">
-        {rail.map(offer => <a href={path(`destination-${offer.slug}.html`)}><span class="name">{offer.label}<small>{offer.nights}</small></span><strong class="amount">{priceText(offer)}</strong><Icon name="arrow-right" /></a>)}
+        {rail.map((offer, index) => {
+          const price = displayPrice(offer);
+          return <a href={path(`destination-${offer.slug}.html`)} style={`--i:${index}`}>
+            <span class="offer-thumb" aria-hidden="true"><img src={asset(`pardus-thumb-${offer.slug}.webp`)} width="256" height="256" alt="" loading="lazy" decoding="async" /></span>
+            <span class="name">{offer.label}<small>{offer.nights}</small></span>
+            <strong class="amount"><span class="from">From</span> {price.amount}</strong>
+            <span class="offer-go" aria-hidden="true"><Icon name="arrow-right" /></span>
+          </a>;
+        })}
       </nav>
     </div>
   </div>
 </section>
+<script>import '../scripts/hero-life.ts';</script>

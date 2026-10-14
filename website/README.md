@@ -1,6 +1,6 @@
-# Pardus Luxury Escapes: V30
+# Pardus Luxury Escapes: V30.2
 
-V30 is the blue-hour redesign. It restores the V25 leopard hero and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
+V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is alive: it breathes, its eyes glow and blink, it follows your pointer, finger or tilted phone) and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
 
 **The preloader is permanent.** It must be present in every build. See [CLAUDE.md](../CLAUDE.md) and `website/tests/preloader.test.mjs`, which fails the release if it is removed.
 
@@ -30,13 +30,15 @@ Optional browser check (Python Playwright, any Chromium): serve the repository r
 
 - `website/src/styles/base.css`: tokens, type scale, section gradients, buttons, forms and shared components.
 - `website/src/styles/chrome.css`: header, mobile menu, saved-trips drawer and footer.
-- `website/src/styles/home.css`: the hero and homepage sections.
+- `website/src/styles/hero.css`: the layered hero for every screen size. `hero-layers.css` beside it is generated.
+- `website/src/styles/home.css`: the homepage sections, including the service picker and the floating phone button.
 - `website/src/styles/pages.css`: inner page headers, cards, destination pages, planner, journal and legal pages.
 - `website/src/styles/motion.css`: arrival and scroll-reveal motion and the reduced-motion rules.
 - `website/src/styles/preloader.css`, `website/src/components/CinematicIntro.astro`, `website/src/scripts/preloader.ts`: the preloader. Do not remove.
 - `website/src/scripts/ui.ts`: header behaviour, mobile menu, scroll motion, pause control. `site.ts` holds the filters, journal and planner logic.
 - `website/src/data/icons.ts` with `Icon.astro` and `IconSprite.astro`: the SVG icon set.
-- `website/src/components/Hero.astro`: the homepage hero (V25 artwork in `public/images/pardus-hero-*-v25-*`).
+- `website/src/components/Hero.astro` and `website/src/scripts/hero-life.ts`: the homepage hero and what makes the leopard move. The layers (`pardus-world-*-v30-*`, `pardus-leopard-v30*`, `pardus-thumb-*`) come from `website/scripts/prepare-v30-hero-layers.py`, which derives them from the V25 hero and the V26 layer set and writes `src/data/hero-layers.json` and `src/styles/hero-layers.css`. Run it again if the artwork changes.
+- `website/src/components/ServicePicker.astro` with `scripts/picker.ts`: the "What should we arrange?" picker (a plain GET form that sends `?services=` to the enquiry). `StickyCta.astro` is the floating "Plan your escape" button on phones.
 - `website/src/components/FontFaces.astro`: local variable font declarations and preloads.
 - `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases. Regenerate the concept note after a change.
 - `website/src/data/site.ts`: contacts and optional delivery and analytics settings.
@@ -51,6 +53,6 @@ The destination presentation keeps the supplied starting USD prices. Availabilit
 
 Enquiries prepare an email draft for the visitor to send, or download a text brief. Direct server delivery stays disabled until a real endpoint is connected and tested. Saved trips, the detailed planner, journey ideas and the Journal remain available.
 
-## V30 validation
+## V30.2 validation
 
-Astro check passes for 74 files with no errors, warnings or hints. All 29 tests pass, including the preloader guard against the exported `index.html`. The browser smoke test passes for the preloader (first visit, Skip, Escape, once per tab, reduced motion), the hero, the mobile menu, 33 routes at 320, 390, 768, 1024 and 1440 px (no script errors, failed requests, broken images or horizontal overflow), the filters, saved trips, planner and enquiry flows, and the no-JavaScript and reduced-motion fallbacks. An axe-core audit of 18 pages at 1440 and 390 px reports no violations. Real-device and performance measurements are not claimed.
+Astro check passes for 80 files with no errors, warnings or hints. All 37 tests pass, including the preloader guard and the hero and picker tests against the exported `index.html`. The browser smoke test passes for the preloader (first visit, Skip, Escape, once per tab, reduced motion); the leopard clearance at 19 screen sizes, including its extreme head turns; the leopard's animation (breathing, glowing eyes, gaze by pointer and finger, Pause scene, a still picture for reduced motion); the phone first screen on four phone sizes; the service picker with and without JavaScript; the hero and mobile menu; 33 routes at 320, 390, 768, 1024 and 1440 px (no script errors, failed requests, broken images or horizontal overflow); the filters, saved trips, planner and enquiry flows; and the no-JavaScript and reduced-motion fallbacks. An axe-core audit reports no violations. Real-device measurements are not claimed: the phone page weight (about 660 KB) and timings were measured in a throttled desktop browser.

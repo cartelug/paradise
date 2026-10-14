@@ -3,7 +3,6 @@ import { initFolio } from './folio';
 // Header, mobile menu and scroll motion for every page. Content is complete in the HTML without this script.
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 const desktop = window.matchMedia('(min-width: 1200px)');
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -111,6 +110,7 @@ function syncPause() {
     const label = button.querySelector('[data-scene-motion-label]');
     if (label) label.textContent = paused ? 'Resume scene' : 'Pause scene';
   });
+  window.dispatchEvent(new Event('pardus:motion'));
 }
 motionButtons.forEach(button => button.addEventListener('click', () => {
   paused = !paused;
@@ -224,25 +224,3 @@ window.addEventListener('resize', schedule);
 window.addEventListener('pageshow', schedule);
 header?.addEventListener('focusin', () => header.classList.remove('is-hidden'));
 schedule();
-
-/* Gentle pointer depth on the hero, fine pointers only. */
-if (hero) {
-  let pending = 0, px = 0, py = 0;
-  hero.addEventListener('pointermove', event => {
-    if (!finePointer.matches || reduced.matches || paused || document.hidden) return;
-    const box = hero.getBoundingClientRect();
-    px = ((event.clientX - box.left) / box.width - 0.5) * -16;
-    py = ((event.clientY - box.top) / box.height - 0.5) * -10;
-    if (!pending) pending = requestAnimationFrame(() => {
-      hero.style.setProperty('--px', `${px.toFixed(1)}px`);
-      hero.style.setProperty('--py', `${py.toFixed(1)}px`);
-      pending = 0;
-    });
-  }, { passive: true });
-  hero.addEventListener('pointerleave', () => {
-    if (pending) cancelAnimationFrame(pending);
-    pending = 0;
-    hero.style.setProperty('--px', '0px');
-    hero.style.setProperty('--py', '0px');
-  });
-}

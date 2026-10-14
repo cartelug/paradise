@@ -63,3 +63,14 @@ One SVG sprite (`Icon.astro`) in a single stroke style. No emoji. No arrow or pl
 ## Build and verification
 
 Astro check, node tests (including the preloader guard), production build, export to the repository root, `verify:export`, then browser screenshots at 320, 390, 768, 1024 and 1440 px with the preloader on and skipped.
+
+## V30.2 notes: the living hero, the phone hero, the service picker
+
+Why these choices. The competitor sites could not be loaded from the build environment, so this is reasoning from the research that could be reached, not a visual comparison.
+
+- **Cost early.** Sources agree that hiding price until late in a funnel raises abandonment, so every destination on the first phone screen carries a "From USD" price.
+- **No hidden swipe.** Carousels hide content and the first slide wins, so the three destinations sit side by side instead of in a swipe strip.
+- **Thumb-reachable action.** Tap targets are 44 px or more everywhere (54 px for buttons, 64 px for picker tiles) and a floating action follows the visitor on phones.
+- **Build a journey, hand it to an adviser.** A&K lets visitors build a tailored journey and save it for an adviser. The picker does the same in one screen, and carries the choices into the enquiry.
+- **What nobody else has.** A brand animal that watches you, blinks and follows your finger or tilt, plus the opening animation on every page.
+

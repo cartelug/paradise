@@ -3,7 +3,7 @@
 Run after building, exporting and starting a local static server:
     python tests/browser-smoke.py
 Set PARDUS_QA_BASE to test another served export (including GitHub Pages).
-Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,stage,hero,flows,fallback.
+Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,life,phone,picker,stage,hero,flows,fallback.
 Set PARDUS_QA_CHROMIUM to a Chromium executable when Playwright's own browser is not installed.
 HTML routes are discovered from the repository export. Screenshots and persistent
 artifacts are not written. Form submissions are intercepted inside the test.
@@ -25,7 +25,7 @@ BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
 VIEWPORTS = [(320, 568), (390, 844), (768, 1024), (1024, 768), (1440, 900)]
-PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,stage,hero,flows,fallback").split(","))
+PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,life,phone,picker,stage,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
 REMOTE_FEED = "https://raw.githubusercontent.com/cartelug/paradise/main/travel-updates.json*"
 LAYOUT_IMAGES = """() => [...document.images].filter(img =>
@@ -201,7 +201,8 @@ def leopard_clear(browser):
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
       const margin = 10;
       const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
-      const eyeY = box.t + (box.b - box.t) * 0.22;
+      const glow = document.querySelector('.hl-glow--l').getBoundingClientRect();
+      const eyeY = glow.top + glow.height / 2;
       return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight};
     }"""
     for reduced in ("reduce", "no-preference"):
@@ -211,11 +212,171 @@ def leopard_clear(browser):
             page.set_viewport_size({"width": width, "height": height})
             navigate(page)
             page.wait_for_timeout(900 if reduced == "reduce" else 2400)
-            result = page.evaluate(probe)
-            assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}): {result['hits']}"
-            assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
+            # The animal turns its head and breathes: also test it at the extremes of its gaze, with the animation held still.
+            poses = [(0, 0)] if reduced == "reduce" else [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1), (1, -1), (-1, 1)]
+            if reduced != "reduce":
+                page.evaluate("document.documentElement.classList.add('motion-paused')")
+            for gx, gy in poses:
+                page.evaluate("([gx, gy]) => { const p = document.querySelector('.hero-picture'); p.style.setProperty('--gx', gx); p.style.setProperty('--gy', gy); }", [gx, gy])
+                page.wait_for_timeout(0 if reduced == "reduce" else 260)
+                result = page.evaluate(probe)
+                assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, gaze {gx},{gy}): {result['hits']}"
+                assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()
     print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, static and animated", flush=True)
+
+
+def leopard_alive(browser):
+    """The leopard is animated: it breathes, its eyes glow, it turns toward the pointer and a finger, and it stills for reduced motion."""
+    context = context_for(browser, viewport={"width": 1440, "height": 900})
+    page = context.new_page()
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    navigate(page)
+    page.wait_for_timeout(2600)
+    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "running")
+    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationName") == "hl-breathe"
+    assert page.locator(".hl-glow--l").evaluate("el => parseFloat(getComputedStyle(el).opacity)") > 0.1
+    assert page.locator(".hl-eyes img").evaluate("img => img.complete && img.naturalWidth > 0")
+    # The blink patch sits over the eyes, not over the whole face.
+    box = page.evaluate("() => { const e = document.querySelector('.hl-eyes').getBoundingClientRect(), l = document.querySelector('.hl-leopard').getBoundingClientRect(); return {w: e.width / l.width, h: e.height / l.height}; }")
+    assert 0.3 < box["w"] < 0.6 and 0.05 < box["h"] < 0.2, box
+    # Gaze follows the pointer in both directions.
+    page.mouse.move(120, 450)
+    for step in range(12):
+        page.mouse.move(120 + step, 450)
+        page.wait_for_timeout(40)
+    page.wait_for_timeout(700)
+    left = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
+    for step in range(12):
+        page.mouse.move(1380 - step, 450)
+        page.wait_for_timeout(40)
+    page.wait_for_timeout(700)
+    right = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
+    assert left < -0.3 and right > 0.3, (left, right)
+    # Pausing stops every continuous effect and the script loop.
+    page.locator("[data-scene-motion]").click()
+    page.wait_for_timeout(300)
+    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "paused")
+    assert page.locator(".hl-rim").evaluate("el => getComputedStyle(el, '::before').animationPlayState") == "paused"
+    assert not errors, errors
+    context.close()
+
+    # Reduced motion: a complete, still picture. No loop, no breathing, no extras.
+    context = context_for(browser, viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
+    page = context.new_page()
+    navigate(page)
+    page.wait_for_timeout(700)
+    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "still")
+    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationName") == "none"
+    assert page.locator(".hl-motes").evaluate("el => getComputedStyle(el).display") == "none"
+    expect(page.locator(".hl-body img")).to_be_visible()
+    context.close()
+
+    # A finger turns the head too, and tapping the animal wakes it.
+    context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    page = context.new_page()
+    navigate(page)
+    page.wait_for_timeout(2400)
+    before = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
+    page.evaluate("""() => { const hero = document.querySelector('[data-hero-life]'); const point = (x, y) => new Touch({identifier: 1, target: hero, clientX: x, clientY: y});
+        for (const x of [60, 70, 80, 90]) hero.dispatchEvent(new TouchEvent('touchmove', {touches: [point(x, 400)], bubbles: true})); }""")
+    page.wait_for_timeout(900)
+    after = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
+    assert after < before - 0.2, (before, after)
+    context.close()
+    print("PASS the leopard is alive: it breathes, its eyes glow, it follows the pointer and a finger, pauses on request and is a still picture for reduced motion", flush=True)
+
+
+def phone_first_screen(browser):
+    """On phones the first screen holds the whole offer: headline, leopard, three priced destinations and both buttons."""
+    for width, height in [(390, 844), (412, 915), (430, 932), (360, 800)]:
+        context = context_for(browser, viewport={"width": width, "height": height}, has_touch=True, is_mobile=True)
+        page = context.new_page()
+        navigate(page)
+        page.wait_for_timeout(2200)
+        fit = page.evaluate("""() => {
+          const inside = e => { const b = e.getBoundingClientRect(); return b.top >= 0 && b.bottom <= innerHeight + 1 && b.left >= -1 && b.right <= innerWidth + 1; };
+          return {
+            h1: inside(document.querySelector('.hero h1')),
+            tiles: [...document.querySelectorAll('.hero-offers a')].map(inside),
+            buttons: [...document.querySelectorAll('.hero .actions .btn')].map(inside),
+            leopard: inside(document.querySelector('[data-leopard-box]')) || document.querySelector('[data-leopard-box]').getBoundingClientRect().top < innerHeight - 100,
+            wraps: [...document.querySelectorAll('.hero .actions .btn')].map(b => b.getBoundingClientRect().height),
+          };
+        }""")
+        assert fit["h1"] and all(fit["tiles"]) and all(fit["buttons"]) and fit["leopard"], (width, height, fit)
+        assert all(value < 70 for value in fit["wraps"]), (width, height, fit)  # a one-line button, never two
+        context.close()
+    # The floating button: out of the way over the hero, the picker and the enquiry; there in between.
+    context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    page = context.new_page()
+    navigate(page)
+    page.wait_for_timeout(1500)
+    cta = page.locator("[data-sticky-cta]")
+    expect(cta).to_have_attribute("data-on", "false")
+    page.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})")
+    expect(cta).to_have_attribute("data-on", "true")
+    page.evaluate("document.querySelector('.picker').scrollIntoView({block: 'center'})")
+    expect(cta).to_have_attribute("data-on", "false")
+    page.evaluate("document.querySelector('#enquire').scrollIntoView()")
+    expect(cta).to_have_attribute("data-on", "false")
+    page.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})")
+    expect(cta).to_have_attribute("data-on", "true")
+    with page.expect_navigation():
+        cta.click()
+    assert page.url.endswith("journey.html"), page.url
+    context.close()
+    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; the floating button appears only where it helps", flush=True)
+
+
+def service_picker(browser):
+    """\"You choose where. We arrange the rest.\": 13 tappable services whose choices carry into the enquiry, with and without JavaScript."""
+    context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    page = context.new_page()
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    navigate(page)
+    picker = page.locator("[data-picker]")
+    assert picker.locator('input[name="services"]').count() == 13
+    page.evaluate("document.querySelector('.picker').scrollIntoView()")
+    summary = page.locator("[data-picker-summary]")
+    expect(summary).to_contain_text("Tap to choose")
+    for label in ["Flights", "Luxury hotels & resorts", "Honeymoons"]:
+        picker.locator(".pick", has_text=label).tap()
+    expect(summary).to_contain_text("3 selected")
+    expect(summary).to_contain_text("Flights, Hotels, Honeymoons")
+    expect(picker.locator('input[name="services"]:checked')).to_have_count(3)
+    for box in picker.locator(".pick").all():
+        size = box.bounding_box()
+        assert size["height"] >= 56 and size["width"] >= 120, size  # generous tap targets
+    picker.locator(".pick", has_text="Honeymoons").tap()
+    expect(summary).to_contain_text("2 selected")
+    picker.get_by_role("button", name="Clear").tap()
+    expect(summary).to_contain_text("Tap to choose")
+    picker.locator(".pick", has_text="Visa guidance").tap()
+    picker.locator(".pick", has_text="Boat & yacht cruises").tap()
+    with page.expect_navigation():
+        picker.get_by_role("button", name="Plan my escape").tap()
+    navigate(page, page.url.replace(BASE, ""), wait_intro=True)
+    query = parse_qs(urlparse(page.url).query)
+    assert query["services"] == ["Visa guidance", "Boat & yacht cruises"], query
+    expect(page.locator('[name="notes"]')).to_have_value("I would like Pardus to arrange: Visa guidance, Boat & yacht cruises.")
+    assert not errors, errors
+    context.close()
+
+    # Without JavaScript it is still a form that sends the ticked services to the enquiry page.
+    context = context_for(browser, viewport={"width": 390, "height": 844}, java_script_enabled=False)
+    page = context.new_page()
+    page.goto(urljoin(BASE, "index.html"), wait_until="load")
+    page.locator(".pick", has_text="Safaris").click()
+    page.locator(".pick", has_text="Private transfers").click()
+    with page.expect_navigation():
+        page.locator(".picker-go").click()
+    assert parse_qs(urlparse(page.url).query)["services"] == ["Private transfers", "Safaris"], page.url
+    context.close()
+    print("PASS service picker: 13 tappable services, live summary, clear, generous tap targets, choices carried into the enquiry, works without JavaScript", flush=True)
+
 
 
 def escape_stage(browser):
@@ -264,9 +425,11 @@ def assert_hero(page, width):
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link svg").first).to_be_visible()
-    source = page.locator("[data-hero-image]").evaluate("img => img.currentSrc")
+    source = page.locator(".hl-world img").evaluate("img => img.currentSrc")
     portrait = page.evaluate("innerWidth <= 760 || innerWidth / innerHeight <= 1.1")
-    assert ("pardus-hero-mobile-v25" if portrait else "pardus-hero-desktop-v25") in source, source
+    assert ("pardus-world-mobile-v30" if portrait else "pardus-world-desktop-v30") in source, source
+    assert "pardus-leopard-v30" in page.locator(".hl-body img").evaluate("img => img.currentSrc")
+    assert page.locator(".hl-body img").evaluate("img => img.complete && img.naturalWidth > 0")
     rates = page.locator(".hero-offers a")
     assert rates.count() == 3
     text = rates.all_inner_texts()
@@ -336,6 +499,7 @@ def hero_and_menu(browser):
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     expect(control).to_have_accessible_name("Resume background animation")
     assert page.locator(".hero-drift").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
+    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
     navigate(page)
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     page.locator("[data-scene-motion]").click()
@@ -538,7 +702,7 @@ def main():
             launch["args"] = ["--no-sandbox"]
         browser = playwright.chromium.launch(**launch)
         try:
-            unknown = PHASES - {"matrix", "preloader", "leopard", "stage", "hero", "flows", "fallback"}
+            unknown = PHASES - {"matrix", "preloader", "leopard", "life", "phone", "picker", "stage", "hero", "flows", "fallback"}
             assert not unknown, f"Unknown QA phases: {unknown}"
             if "matrix" in PHASES:
                 route_matrix(browser)
@@ -546,6 +710,12 @@ def main():
                 preloader(browser)
             if "leopard" in PHASES:
                 leopard_clear(browser)
+            if "life" in PHASES:
+                leopard_alive(browser)
+            if "phone" in PHASES:
+                phone_first_screen(browser)
+            if "picker" in PHASES:
+                service_picker(browser)
             if "stage" in PHASES:
                 escape_stage(browser)
             if "hero" in PHASES:

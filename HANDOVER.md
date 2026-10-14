@@ -2,6 +2,15 @@
 
 Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## V30.2: the living leopard, a new phone hero and a service picker (14 October 2026)
+
+- **The leopard is alive.** The hero is built in layers (a clean world plate, the leopard, a closed-eye patch, glows, a light band and a few drifting motes). It breathes; its eyes ignite after the opening and blink at random; its head turns toward the pointer, a finger, or how a phone is tilted (Android), and wanders by itself when left alone; a warm light follows the pointer across its fur; tapping it makes its eyes flare; scrolling pushes it toward you. A speed check drops the light effects on slow phones. Reduced motion gives a complete still picture, Pause scene stops everything, and the animal never leaves its place so nothing ever covers it (`browser-smoke.py` phases `leopard` and `life` measure both).
+- **Phone hero.** Headline, leopard, all three destinations with their prices (as photograph tiles, no hidden swipe) and both buttons fit the first screen on 360, 390, 412 and 430 px wide phones. The headline has a slow gold sheen; the dock tiles rise in one after another.
+- **"You choose where. We arrange the rest."** is now a picker: all 13 services are tappable tiles in four groups, with a live summary and a bar that stays in reach. It is a plain GET form, so it works without JavaScript, and the choices arrive in the enquiry as the start of the note (`?services=`). A floating "Plan your escape" button appears on phones once the hero is behind you and steps aside over the picker, the enquiry form and the footer.
+- **Buttons.** One system for the site: a 54 px pill with a round arrow inside its end (added automatically to every trailing arrow), a sinking press state, a visible focus ring and a gold, ghost, ink and line variant.
+- **Weight.** The phone page is about 660 KB at load (it was 830 KB before the duplicate leopard file was replaced by a 10 KB mask and photographs below the fold were given low priority).
+- **Benchmark.** Competitor sites could not be opened from the build environment, so no live visual comparison was made. The decisions follow the findings that could be reached: show cost early; keep tap targets at least 44 px; keep one persistent, thumb-reachable action on phones; offer a way to build a tailored journey and hand it to an adviser (A&K does this with its book-it list); avoid hiding offers in carousels. See the V30.2 notes in `website/V30-DESIGN.md`.
+
 ## V30.1 refinements (14 October 2026)
 
 - **Type:** Montserrat only, site-wide: bold headlines (700, tight tracking) with the true Montserrat italic for gold accent words, and the same family for body, labels, prices and buttons. No other typeface is loaded. See `website/FONT_MOTION_NOTES.md`.

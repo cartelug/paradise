@@ -1,0 +1,171 @@
+@import './hero-layers.css';
+/* PARDUS V30.2: the layered leopard hero.
+   The artwork sits in a box that is exactly the picture, so every layer is positioned in picture coordinates: the world
+   plate, the leopard, its eyes and its glow. On landscape screens the leopard starts at about 70% of the width and copy and
+   the price rail are capped to the left 66%. On phones and portrait screens the copy sits above, the leopard has its own
+   zone, and the destination cards sit below it. Nothing the visitor reads or presses overlaps the animal. */
+.hero { --oy: 50%; --media-top: 56px; --copy-max: min(680px, calc(66vw - var(--gutter) - 12px)); --rail-max: min(860px, calc(66vw - var(--gutter) - 12px)); position: relative; isolation: isolate; display: grid; min-height: max(680px, 100svh); max-height: 1240px; overflow: hidden; background: var(--midnight); }
+@media (min-aspect-ratio: 3/2) and (max-aspect-ratio: 17/10) { .hero { --oy: 34%; } }
+@media (min-aspect-ratio: 17/10) and (max-aspect-ratio: 2/1) { .hero { --oy: 20%; } }
+@media (min-aspect-ratio: 2/1) { .hero { --oy: 8%; } }
+.hero-zone { display: contents; }
+.hero-media { position: absolute; inset: var(--media-top) 0 -2% 0; z-index: -3; overflow: hidden; container-type: size; transform: translate3d(0, var(--hero-shift, 0px), 0); will-change: transform; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px); }
+.hero-picture { --w: max(100cqw, 150cqh); position: absolute; width: var(--w); aspect-ratio: 3 / 2; left: calc((100cqw - var(--w)) * .7); top: calc((100cqh - var(--w) / 1.5) * var(--oy)); }
+.hero-drift { position: absolute; inset: 0; transform-origin: 70% 0; animation: hero-drift 30s ease-in-out infinite alternate; }
+.hero-drift picture, .hero-drift img { display: block; width: 100%; height: 100%; }
+.hero-drift img { object-fit: cover; }
+@keyframes hero-drift { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.07) translate3d(-.6%, 0, 0); } }
+
+/* World plate: nudged the opposite way to the animal, which is what makes the animal feel like it is in front. */
+.hl-world { position: absolute; inset: 0; transform: translate3d(calc(var(--gx, 0) * -5px), calc(var(--gy, 0) * -3px), 0) scale(1.014); transition: transform .12s linear; will-change: transform; }
+
+/* The sun glow lives in picture coordinates, so it always sits on the sun. */
+.hero-glow { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(13% 19% at 71.2% 27.8%, rgb(255 190 110 / .6), rgb(255 150 70 / .14) 58%, transparent 80%); opacity: .5; animation: sun-breathe 9s ease-in-out infinite alternate; }
+@keyframes sun-breathe { from { opacity: .3; } to { opacity: .72; } }
+.hero-media::after { content: ''; position: absolute; inset: -20% -50%; pointer-events: none; mix-blend-mode: screen; background: linear-gradient(104deg, transparent 42%, rgb(255 226 170 / .09) 50%, transparent 58%) 0 0 / 60% 100% no-repeat; animation: light-sweep 19s linear infinite; }
+@keyframes light-sweep { from { background-position: -80% 0; } to { background-position: 180% 0; } }
+
+/* The leopard. Three nested layers so their motion never fights:
+   .hl-leopard follows the visitor (gaze, tilt, scroll push, set from script),
+   .hl-breath breathes (pure CSS, runs on the compositor) and dissolves into the rock at the bottom,
+   the images, eye patch, glows and rim light sit inside it. */
+.hl-leopard { position: absolute; left: var(--lx); top: var(--ly); width: var(--lw); height: var(--lh); pointer-events: none; transform-origin: 62% 78%;
+  transform: perspective(1100px) translate3d(calc(var(--gx, 0) * 7px), calc(var(--gy, 0) * 4px + var(--push-y, 0px)), 0) rotateY(calc(var(--gx, 0) * 1.7deg)) rotateX(calc(var(--gy, 0) * -1.1deg)) scale(var(--push, 1));
+  transition: transform .14s linear; will-change: transform; }
+.hl-breath { position: absolute; inset: 0; transform-origin: 55% 25%; animation: hl-breathe 6.4s ease-in-out infinite;
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); }
+/* Inhale for about 2.7 s, exhale for about 3.7 s. The head barely moves; the chest and shoulders do. */
+@keyframes hl-breathe { 0%, 100% { transform: scale(1, 1) translate3d(0, 0, 0); } 42% { transform: scale(1.006, 1.014) translate3d(0, .1%, 0); } }
+.hl-body, .hl-body img { display: block; width: 100%; height: 100%; }
+.hero-drift .hl-eyes { position: absolute; left: var(--bl-x); top: var(--bl-y); width: var(--bl-w); height: var(--bl-h); opacity: 0; }
+.hero-drift .hl-eyes img { display: block; width: 100%; height: 100%; }
+.hl-glows { position: absolute; inset: 0; pointer-events: none; }
+.hl-glow { position: absolute; width: 15%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; mix-blend-mode: screen; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle, rgb(255 228 150 / .9) 0, rgb(255 182 70 / .4) 32%, rgb(255 150 40 / 0) 68%); }
+.hl-glow--l { left: var(--eye-lx); top: var(--eye-ly); }
+.hl-glow--r { left: var(--eye-rx); top: var(--eye-ry); }
+/* A slow band of warm light that crosses the fur. It is masked by the animal's own outline, so it never touches the sky. */
+.hl-rim { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: soft-light; opacity: .9;
+  -webkit-mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; }
+.hl-rim::before { content: ''; position: absolute; top: -10%; bottom: -10%; left: 0; width: 70%; transform: translate3d(-110%, 0, 0);
+  background: linear-gradient(100deg, transparent 20%, rgb(255 238 196 / .85) 50%, transparent 80%); animation: hl-rim 12s ease-in-out 2s infinite; }
+@keyframes hl-rim { 0% { transform: translate3d(-110%, 0, 0); } 46%, 100% { transform: translate3d(190%, 0, 0); } }
+/* A warm light that follows the pointer or a finger across the fur. Masked by the animal's outline, like the light band above. */
+.hl-rim::after { content: ''; position: absolute; inset: 0; opacity: var(--spot, 0); transition: opacity .7s ease; background: radial-gradient(circle at var(--sx, 50%) var(--sy, 30%), rgb(255 238 196 / .95) 0, rgb(255 214 150 / .45) 16%, transparent 38%); }
+.hl-motes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
+/* Invisible marker for the animal: tests and scripts measure against it. Percentages are of the leopard layer. */
+.leopard-box { position: absolute; left: 19%; top: 3%; width: 83%; height: calc(var(--fade-b, 85.4%) - 3%); pointer-events: none; visibility: hidden; }
+
+/* Entrance: after the opening the animal comes out of the dark and its eyes ignite. */
+html.js .hl-leopard { opacity: 0; }
+html.is-ready .hl-leopard { opacity: 1; animation: hl-emerge 2.2s var(--ease) .12s both; }
+@keyframes hl-emerge { from { opacity: 0; filter: brightness(.45) saturate(.7); } to { opacity: 1; filter: brightness(1) saturate(1); } }
+html.is-ready .hl-glow { animation: hl-ignite 2.8s var(--ease) 1s both, hl-glow-idle 5.6s ease-in-out 3.8s infinite alternate; }
+@keyframes hl-ignite { 0% { opacity: 0; scale: .35; } 34% { opacity: .95; scale: 1.3; } 100% { opacity: .34; scale: 1; } }
+@keyframes hl-glow-idle { from { opacity: .22; } to { opacity: .46; } }
+html:not(.js) .hl-glow { opacity: .3; }
+/* Slow devices keep the animal, its breath, its eyes and its glow; the blended extras are dropped. */
+.hero[data-quality='lite'] .hl-rim, .hero[data-quality='lite'] .hl-motes { display: none; }
+.hero[data-quality='lite'] .hero-media::after { display: none; }
+
+.hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
+  linear-gradient(90deg, rgb(5 12 26 / .86) 0%, rgb(5 12 26 / .5) 36%, rgb(5 12 26 / 0) 60%),
+  linear-gradient(0deg, var(--midnight) 0%, rgb(5 12 26 / .8) 8%, rgb(5 12 26 / 0) 34%),
+  linear-gradient(180deg, rgb(5 12 26 / .62), rgb(5 12 26 / 0) 20%); }
+.hero-inner { display: grid; grid-template-rows: 1fr auto; min-height: inherit; padding-top: calc(var(--header-h) + 1vh); padding-bottom: clamp(18px, 2.6vw, 34px); }
+.hero-copy { align-self: center; max-width: var(--copy-max); padding-block: clamp(14px, 3.4vh, 64px); transform: translate3d(0, var(--copy-shift, 0px), 0); opacity: var(--copy-fade, 1); }
+.hero h1 { font-size: clamp(2.4rem, min(0.85rem + 4.9vw, 9.4vh), 5.6rem); line-height: 1.06; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
+.hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
+@keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+@media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
+.hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
+.hero .line > span { display: block; }
+.hero-text { max-width: 46ch; margin-top: clamp(18px, 2.2vw, 28px); font-size: var(--fs-lead); line-height: 1.6; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
+.hero .actions { margin-top: clamp(24px, 3vw, 38px); }
+.hero .eyebrow { margin-bottom: clamp(16px, 2vw, 26px); text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
+
+.hero-rail { max-width: var(--rail-max); padding: clamp(12px, 1.4vw, 18px) clamp(16px, 2vw, 26px) clamp(8px, 1vw, 12px); transform: translate3d(0, var(--rail-shift, 0px), 0); }
+.hero-rail-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 4px; font-size: .8125rem; color: var(--mist); }
+.hero-rail-head strong { font-weight: 600; color: var(--gold-soft); letter-spacing: .02em; }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 12px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
+.motion-toggle:hover { border-color: var(--line-dark); color: var(--gold-soft); }
+.motion-toggle .icon { width: 16px; height: 16px; }
+.motion-toggle .icon-play { display: none; }
+.motion-toggle[aria-pressed='true'] .icon-play { display: block; }
+.motion-toggle[aria-pressed='true'] .icon-pause { display: none; }
+.hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hero-offers a { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 10px; padding: 10px clamp(10px, 1.6vw, 22px); border-left: 1px solid var(--line-dark); border-radius: 4px; text-decoration: none; transition: background-color .3s; }
+.hero-offers a:first-child { border-left: 0; padding-left: 0; }
+.hero-offers a:hover { background: rgb(236 215 168 / .06); }
+.offer-thumb { display: none; }
+.hero-offers .name { grid-column: 1; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px; font-weight: 700; font-size: clamp(0.874rem, 0.722rem + 0.608vw, 1.216rem); line-height: 1.15; color: #fff; }
+.hero-offers .name small { font-size: .75rem; font-weight: 500; color: var(--mist-2); }
+.hero-offers .amount { grid-column: 1; white-space: nowrap; font-size: clamp(.8125rem, .74rem + .28vw, .9375rem); font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
+.hero-offers .offer-go { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; color: var(--gold); }
+.hero-offers .offer-go .icon { width: 18px; height: 18px; transition: transform .35s var(--ease); }
+.hero-offers a:hover .offer-go .icon { transform: translateX(4px); }
+@media (min-width: 761px) and (min-aspect-ratio: 11/10) and (max-height: 820px) {
+  .hero-rail { position: relative; padding-top: 4px; }
+  .hero-rail-head { position: absolute; top: -48px; right: 0; z-index: 1; margin: 0; }
+  .hero-rail-head > span { display: none; }
+  .hero-rail-head .motion-toggle { border-color: var(--line-dark); background: rgb(5 12 26 / .55); backdrop-filter: blur(8px); color: var(--gold-soft); }
+  .hero-text { margin-top: 14px; font-size: 1.0625rem; }
+  .hero .actions { margin-top: 20px; }
+  .hero .eyebrow { margin-bottom: 14px; }
+}
+
+/* Stacked: phones and portrait screens. Copy on top, the leopard in its own zone, destination cards below it. */
+@media (max-width: 760px), (max-aspect-ratio: 11/10) {
+  .hero { --oy: 50%; --zone-h: clamp(240px, 68vw, 450px); display: flex; flex-direction: column; background: linear-gradient(180deg, #012046 0%, #052a58 52%, #071d3d 100%); }
+  .hero-inner { flex: 1 1 auto; display: flex; flex-direction: column; width: 100%; padding-inline: 0; padding-top: calc(var(--header-h) + 8px); padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .hero-copy { display: contents; }
+  .hero .eyebrow, .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
+  .hero .eyebrow { order: 10; margin-bottom: 12px; }
+  .hero h1 { order: 20; font-size: clamp(2rem, 10.4vw, 3.4rem); }
+  .hero-text { order: 30; font-size: .9375rem; max-width: 34ch; margin-top: 14px; }
+  .hero .actions { order: 60; flex-wrap: nowrap; gap: 8px; margin-top: 14px; }
+  .hero .actions .btn { flex: 1 1 auto; min-height: 56px; padding: 8px 14px; gap: 8px; font-size: .9375rem; white-space: nowrap; }
+  .hero .actions .btn:has(> .icon-arrow-down) { padding-left: 24px; }
+  .hero .actions .btn--ghost > .icon { display: none; }
+  .hero-zone { order: 40; display: block; position: relative; flex: 1 1 auto; width: 100vw; margin-inline: calc(50% - 50vw); min-height: clamp(240px, 68vw, 450px); container-type: size; }
+  .hero-media { inset: 0; overflow: visible; container-type: normal; transform: none; -webkit-mask-image: none; mask-image: none; }
+  /* The world plate fills the width and sits on the bottom of the zone, so the horizon lands just under the copy. The leopard is
+     sized from the zone instead, so it uses all the room between the copy and the cards however tall the phone is. */
+  .hero-picture { --w: 100cqw; left: auto; top: auto; right: 0; bottom: 0; aspect-ratio: 2 / 3;
+    --lwm: min(94cqw, calc(.938 * (var(--zone-h) - 44px))); --fade-a: 64%; --fade-b: 80%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 94%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 94%, transparent 100%); }
+  .hl-leopard { left: auto; top: auto; width: var(--lwm); height: calc(var(--lwm) * 1.3851); right: calc(var(--lwm) * -.06); bottom: calc(26px - var(--lwm) * .277); }
+  .hero-drift { transform-origin: 100% 0; animation-name: hero-drift-stacked; }
+  @keyframes hero-drift-stacked { from { transform: scale(1); } to { transform: scale(1.04); } }
+  .hl-world { inset: 7% 0 -7% 0; }
+  .hero-glow { background: radial-gradient(20% 13% at 91.8% 48.4%, rgb(255 190 110 / .6), rgb(255 150 70 / .14) 58%, transparent 80%); }
+  .hero-shade { background:
+    linear-gradient(180deg, rgb(5 12 26 / .7) 0%, rgb(5 12 26 / .25) 30%, rgb(5 12 26 / 0) 46%),
+    linear-gradient(0deg, rgb(5 12 26 / .9) 0%, rgb(5 12 26 / 0) 18%); }
+  .hero-rail { order: 50; max-width: none; padding: 0 var(--gutter); margin-inline: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+  .hero-rail-head { margin: 0 0 8px; font-size: .75rem; gap: 10px; }
+  .hero-rail-head > span { display: inline; line-height: 1.35; }
+  .motion-toggle { width: 38px; min-height: 38px; padding: 0; justify-content: center; flex: none; border-color: var(--line-dark); background: rgb(5 12 26 / .5); }
+  .motion-toggle [data-scene-motion-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  /* The dock: all three destinations and their prices at once, as photograph tiles. No hidden swipe. */
+  .hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0; }
+  .hero-offers a { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: clamp(92px, 25vw, 124px); padding: 10px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
+  .hero-offers a:first-child { padding-left: 10px; }
+  .hero-offers a:active { transform: scale(.97); }
+  .hero-offers a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(5 12 26 / .06) 0%, rgb(5 12 26 / .3) 36%, rgb(5 12 26 / .94) 100%); }
+  .offer-thumb { display: block; position: absolute; inset: 0; z-index: -2; }
+  .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform .9s var(--ease); }
+  .hero-offers a:hover .offer-thumb img { transform: scale(1.14); }
+  .hero-offers .name { grid-column: 1; font-size: clamp(.8125rem, .7rem + .5vw, .9375rem); flex-direction: column; align-items: flex-start; gap: 0; }
+  .hero-offers .name small { display: none; }
+  .hero-offers .amount { grid-column: 1; display: grid; gap: 0; font-size: clamp(.78rem, .66rem + .45vw, .9rem); font-weight: 700; color: #fff; line-height: 1.2; }
+  .hero-offers .amount .from { font-size: .625rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+  .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }
+  .hero-offers .offer-go .icon { width: 14px; height: 14px; }
+}
+@media (max-height: 740px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
+@media (max-width: 420px) { .hero .actions .btn .btn-long { display: none; } }
+@media (max-width: 340px) { .hero .actions .btn { white-space: normal; } }
+@media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
+@keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
+@media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.8rem, 7.2vw, 4.8rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }

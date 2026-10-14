@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+---
+<a class="btn btn--gold sticky-cta" href={path('journey.html')} data-sticky-cta data-on="false" tabindex="-1" aria-hidden="true"><span>Plan your escape</span> <Icon name="arrow-right" /></a>
+<script>import '../scripts/sticky-cta.ts';</script>
