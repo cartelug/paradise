@@ -27,6 +27,7 @@ Before every release, run `cd website && npm test` after the export. It checks t
 ## Other standing rules
 
 - The hero must never be covered by its own content: no text, button, price rail or header control may overlap the leopard at any screen size. `website/tests/browser-smoke.py` (phase `leopard`) measures this.
+- Typography is Montserrat only, site-wide (roman and italic). Do not add a second typeface; `--font-display` points at `--font-ui`. See `website/FONT_MOTION_NOTES.md`.
 - No emoji anywhere on the site. Icons are inline SVG symbols (see `website/src/components/Icon.astro`). Do not use text glyphs such as arrows or bullets as icons.
 - Edit the Astro source in `website/`. The HTML and assets at the repository root are generated GitHub Pages output; commit source and generated output together (see README.md).
 - Keep the approved logo, offer data (`website/src/data/offers.ts`) and verified travel-desk content unchanged unless asked.

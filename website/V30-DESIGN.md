@@ -22,7 +22,7 @@ Brief from the site owner (14 October 2026): the V29 site felt flat and ugly. It
 
 ## Type
 
-- Display: Cormorant Garamond variable (roman and italic), weight 600, with `font-size-adjust: ex-height .45` so its small x-height reads at the same size as the body. Replaces the squeezed Instrument Serif and the interim Newsreader (V30.1).
+- Display: Montserrat variable, weight 700, tracking -.022em, line height 1.05 to 1.1, with the true Montserrat italic for accent words. Headline sizes were reduced about 24% from the serif sizes because Montserrat is wider.
 - Interface and body: Montserrat variable, 15 to 17 px body, 1.7 line height, lines under 70 characters; labels at 11 px, weight 600, tracked .22em; prices in Montserrat 600.
 - A fluid scale from phone to wide desktop (`clamp`). Prices use tabular numerals.
 - No emoji, and no text glyphs standing in for icons.

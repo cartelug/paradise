@@ -24,10 +24,9 @@
   --line-dark: rgb(236 215 168 / .2);
   --line-light: rgb(11 22 38 / .14);
 
-  --font-display: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
+  /* One family for everything: Montserrat. Headlines use it bold and tightly spaced; accents use its true italic. */
   --font-ui: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  /* Cormorant has a small x-height; this scales every headline so it reads at its intended size. */
-  --display-adjust: ex-height .45;
+  --font-display: var(--font-ui);
 
   --gutter: clamp(20px, 5.2vw, 76px);
   --max: 1280px;
@@ -42,9 +41,9 @@
   --fs-small: clamp(.8125rem, .79rem + .1vw, .875rem);
   --fs-body: clamp(.9375rem, .9rem + .2vw, 1.0625rem);
   --fs-lead: clamp(1rem, .93rem + .4vw, 1.25rem);
-  --fs-h3: clamp(1.5rem, 1.25rem + 1vw, 2.125rem);
-  --fs-h2: clamp(2.125rem, 1.3rem + 3.3vw, 4.125rem);
-  --fs-h1: clamp(2.875rem, 1.6rem + 5.9vw, 6.75rem);
+  --fs-h3: clamp(1.14rem, 0.95rem + 0.76vw, 1.615rem);
+  --fs-h2: clamp(1.615rem, 0.988rem + 2.508vw, 3.135rem);
+  --fs-h1: clamp(2.185rem, 1.216rem + 4.484vw, 5.13rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -77,12 +76,12 @@ main { display: block; outline: none; }
 .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* Typography */
-h1, h2, h3, .display { font-family: var(--font-display); font-size-adjust: var(--display-adjust); font-weight: 600; letter-spacing: -.008em; font-variant-numeric: lining-nums; text-wrap: balance; }
-h1 { font-size: var(--fs-h1); line-height: 1; }
-h2 { font-size: var(--fs-h2); line-height: 1.04; }
-h3 { font-size: var(--fs-h3); line-height: 1.12; }
+h1, h2, h3, .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -.022em; font-variant-numeric: lining-nums; text-wrap: balance; }
+h1 { font-size: var(--fs-h1); line-height: 1.05; }
+h2 { font-size: var(--fs-h2); line-height: 1.1; }
+h3 { font-size: var(--fs-h3); line-height: 1.2; font-weight: 600; letter-spacing: -.012em; }
 h4 { font-family: var(--font-ui); font-size: 1rem; font-weight: 600; letter-spacing: .01em; }
-em { font-style: italic; font-family: var(--font-display); font-size-adjust: var(--display-adjust); font-weight: 600; color: var(--gold-soft); }
+em { font-style: italic; font-family: var(--font-ui); font-weight: 600; color: var(--gold-soft); }
 .sec--ivory em, .sec--sand em, .light em { color: var(--gold-ink); }
 p { text-wrap: pretty; }
 .lead { font-size: var(--fs-lead); line-height: 1.7; color: var(--mist); max-width: 58ch; }
@@ -267,7 +266,7 @@ p { text-wrap: pretty; }
 .faq details { border-bottom: 1px solid var(--line-light); }
 .faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 16px 0; list-style: none; cursor: pointer; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary h3 { font-family: var(--font-display); font-weight: 600; font-size-adjust: var(--display-adjust); font-size: clamp(1.2rem, 1.05rem + .6vw, 1.5rem); line-height: 1.25; }
+.faq summary h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.056rem, 0.924rem + 0.528vw, 1.32rem); line-height: 1.25; }
 .faq summary .icon { width: 22px; height: 22px; color: var(--gold-ink); transition: transform .35s var(--ease); }
 .faq details[open] summary .icon { transform: rotate(45deg); }
 .faq details > p { padding: 0 0 22px; max-width: 64ch; color: var(--ink-2); }

@@ -41,7 +41,7 @@ html.intro-quick.intro-exiting .intro-stage { animation-duration: .35s; }
 .intro-tagline { opacity: 0; transform: translateY(11px); animation: intro-tag .8s var(--intro-ease) 1.65s forwards; }
 .intro-metal-sheen { animation: intro-sheen 1.6s ease-in-out 2s both; }
 .intro-promise { display: flex; align-items: baseline; justify-content: center; gap: 9px; margin-top: 24px; font-family: var(--font-ui); font-size: 18px; font-weight: 300; animation: intro-soft-in .9s ease 1.8s both; }
-.intro-promise em { font-family: var(--font-display); font-weight: 600; font-size-adjust: var(--display-adjust); font-size: 25px; color: #e3c995; }
+.intro-promise em { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: #e3c995; }
 .intro-progress { width: 124px; height: 1px; margin: 35px auto 0; background: #e0c18a29; overflow: hidden; }
 .intro-progress span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #927349, #f9e9c4); transform-origin: left; animation: intro-progress 3.3s cubic-bezier(.18, .7, .35, 1) both; }
 .intro-destinations { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; font-family: var(--font-ui); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: #8696a9; animation: intro-soft-in .9s ease 2.3s both; }
@@ -85,7 +85,7 @@ html.intro-quick .intro-word-fill { animation-duration: .5s; animation-delay: .1
 html.intro-quick .intro-aircraft { animation-duration: .4s; animation-delay: .25s; }
 html.intro-quick .intro-tagline { animation-duration: .35s; animation-delay: .36s; }
 html.intro-quick .intro-metal-sheen { animation-duration: .7s; animation-delay: .36s; }
-html.intro-quick .intro-label { display: block; margin-top: 22px; font-family: var(--font-display); font-weight: 600; font-size-adjust: var(--display-adjust); font-style: italic; font-size: clamp(20px, 5vw, 26px); color: #e3c995; animation: intro-soft-in .4s ease .36s both; }
+html.intro-quick .intro-label { display: block; margin-top: 22px; font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(15.2px, 3.8vw, 19.76px); color: #e3c995; animation: intro-soft-in .4s ease .36s both; }
 html.intro-quick .intro-progress { width: 110px; margin-top: 24px; }
 html.intro-quick .intro-progress span { animation-duration: .75s; }
 

@@ -2,20 +2,19 @@
 
 ## Type
 
-Cormorant Garamond (display) and Montserrat (body, labels, prices and controls) are delivered locally as Latin-subset variable WOFF2 files from pinned Fontsource packages (`@fontsource-variable/cormorant-garamond`, `@fontsource-variable/montserrat`). Both licences are kept in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the faces and preloads Montserrat, Cormorant roman and, on pages whose hero uses it, Cormorant italic.
-
-Why this pair: Cormorant Garamond is a high-contrast Garamond with long, elegant ascenders and a calligraphic italic that suits a luxury travel house; Montserrat is a geometric sans with wide, open letters that stays clear at small sizes and gives labels and prices a firm, modern edge. The contrast between the two (old-style serif against geometric sans) is what makes headlines feel considered rather than decorative. Ten pairings were compared before the pick; Newsreader and Manrope (V30) were retired as too soft.
+**Montserrat only.** One typeface is used everywhere on the site: headlines, body text, labels, prices, buttons and the preloader. It is delivered locally as Latin-subset variable WOFF2 files from the pinned `@fontsource-variable/montserrat` package (roman and italic), with the licence in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the two faces and preloads the roman and, on pages whose hero uses it, the italic.
 
 How it is tuned (all in `src/styles/base.css`):
 
-- Cormorant has a small x-height, so every display rule uses `font-size-adjust: ex-height .45` (`--display-adjust`). Headlines then read at the same apparent size as a typical serif without rescaling the type scale.
-- Headlines are weight 600 with -.008em tracking and lining numerals; the gold italic accent (`em`) uses the same weight so it never looks thin beside the roman.
-- Body text is 15 to 17 px Montserrat at 1.7 line height; leads are 16 to 20 px. Form fields are 16 px so phones do not zoom.
-- Eyebrows and price labels are 11 px Montserrat 600, uppercase, tracked .2 to .22em. Buttons and text links are 14 px Montserrat 600.
-- Prices use Montserrat 600 (22 to 30 px) with tabular numerals, so figures align and feel factual rather than decorative.
-- Weight 700 is not used anywhere; 600 is the heaviest weight on the site.
+- Headlines are weight 700 with -.022em tracking and a 1.05 to 1.1 line height. Card and section titles (h3) are weight 600. Montserrat is much wider than the serif it replaced, so every headline size was reduced by about a quarter; the hero keeps its measured clearance from the leopard.
+- Accent words (`em`) use the true Montserrat italic in gold at weight 600, never a faked slant.
+- Body text is 15 to 17 px at 1.7 line height; leads are 16 to 20 px. Form fields are 16 px so phones do not zoom.
+- Eyebrows and price labels are 11 px, weight 600, uppercase, tracked .2 to .22em. Buttons and text links are 14 px, weight 600.
+- Prices use Montserrat 600 (22 to 30 px) with tabular numerals.
+- Weight 700 is used only for the large headlines; 600 for everything else bold.
+- `--font-display` still exists but now points at `--font-ui`, so a single change would switch the whole site.
 
-Satoshi and the full Montserrat file remain in `public/fonts/` because the content tests reference them.
+Satoshi and the full Montserrat file remain in `public/fonts/` because the content tests reference them; they are not loaded.
 
 ## Motion
 
