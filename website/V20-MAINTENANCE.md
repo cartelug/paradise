@@ -1,5 +1,7 @@
 # Pardus maintenance and release guide
 
+V29 is the current visual release. See `V29-DESIGN.md`, `PRICING.md` and `TRAVEL_DESK.md` for its active typography, motion, approved-currency contract and traveller-news rules. The older architecture notes below describe retained V20/V21 features; V29 production fonts are Instrument Serif and Instrument Sans, supplied locally with OFL licences. The current homepage has no blocking opening and uses `src/scripts/premium.ts`.
+
 This file describes the production rules behind the Pardus website: the V20 architecture as released in V21, the handover release. For what the business still needs to supply and how to switch each item on, start with `../HANDOVER.md`. Edit the Astro source in `website/`; files in the repository root are generated publishing output.
 
 ## Sources of truth

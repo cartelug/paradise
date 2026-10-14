@@ -1,55 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PremiumHero from '../components/PremiumHero.astro';
+import SignatureEscape from '../components/SignatureEscape.astro';
 import Picture from '../components/Picture.astro';
-import HeroArtwork from '../components/HeroArtwork.astro';
+import Arrow from '../components/Arrow.astro';
 import Brand from '../components/Brand.astro';
-import EscapeCard from '../components/EscapeCard.astro';
+import OfferPrice from '../components/OfferPrice.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import TravelDesk from '../components/TravelDesk.astro';
 import TravelIcon from '../components/TravelIcon.astro';
 import { path } from '../data/site';
-import { offerFor, serviceGroups, priceText, priceNote, cruiseTypes } from '../data/offers';
+import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
+import '../styles/premium-motion.css';
+const families = [
+  { title: 'Travel', icon: 'plane' as const, image: 'corporate', items: ['Flights', 'Private transfers', 'Visa guidance'] },
+  { title: 'Stay', icon: 'sun' as const, image: 'maldives-v24', items: ['Luxury hotels & resorts', 'Stays chosen around you'] },
+  { title: 'Experience', icon: 'waves' as const, image: 'yacht-dubai-v24', items: ['Boat & yacht cruises', 'Safaris & private tours', 'Activities & experiences'] },
+  { title: 'Occasion', icon: 'compass' as const, image: 'europe-v24', items: ['Honeymoons', 'Family & group holidays', 'Corporate & custom travel'] },
+];
 ---
-<Layout dark simpleFooter intro class="escape-home" image="images/hero-v27-desktop-1672.webp">
-  <section class="escape-hero atelier-hero" aria-labelledby="hero-title">
-    <div class="escape-hero-media"><div class="hero-scene-depth" data-hero-depth><HeroArtwork /></div></div>
-    <div class="escape-hero-shade" aria-hidden="true"></div>
-    <div class="escape-hero-copy">
-      <p class="eyebrow hero-eyebrow">From Africa to the world</p>
-      <h1 id="hero-title"><span class="hero-line"><span>The world.</span></span><span class="hero-line"><em>Your way.</em></span></h1>
-      <p class="escape-hero-description">Island stays, city escapes and private cruises.<br />Arranged around you.</p>
-      <div class="escape-hero-actions"><a class="escape-button" href="#enquire">Plan your escape</a><a class="escape-button escape-button-outline" href="#destinations">Explore destinations</a></div>
-    </div>
-    <button class="hero-motion-toggle" type="button" data-scene-motion aria-pressed="false" aria-label="Pause background animation" hidden>
-      <svg class="motion-pause-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2" /></svg>
-      <svg class="motion-play-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="currentColor" /></svg>
-      <span data-scene-motion-label>Pause scene</span>
-    </button>
+<Layout dark simpleFooter premium class="escape-home premium-home" image="images/hero-v29-desktop-1600.webp">
+  <PremiumHero />
+  <nav class="premium-quick" aria-label="Popular escapes and starting prices">{['maldives', 'seychelles', 'dubai'].map(slug => { const offer = offerFor(slug); return <a href={path(`destination-${slug}.html`)}><div><span>{offer.label}</span><small>{offer.nights}</small></div><div><strong>{priceText(offer)}</strong><small>{offer.priceBasis}</small></div><Arrow /></a>; })}</nav>
+  <section class="premium-featured premium-section" id="destinations" aria-labelledby="featured-title">
+    <div class="premium-heading" data-premium-reveal><h2 id="featured-title">Your next escape<span class="premium-dot">.</span></h2><p>The Maldives or Seychelles.<br />Choose your setting. We arrange the journey.</p></div>
+    <div class="premium-signatures">{['maldives', 'seychelles'].map(slug => <SignatureEscape offer={offerFor(slug)} />)}</div><p class="premium-price-note">{priceNote}</p>
   </section>
-  <nav class="escape-quick-picks" aria-label="Popular Pardus escapes">
-    <p class="eyebrow">Where will you begin?</p>
-    <div class="escape-quick-grid">{['maldives','seychelles','dubai'].map(slug => { const offer = offerFor(slug); return <a href={path('destination-'+slug+'.html')}><div><span class="quick-destination">{offer.label}</span><small>{offer.nights}</small></div><div class="quick-rate"><strong>{priceText(offer)}</strong><small>per person · two sharing</small></div><TravelIcon name="arrow" /></a> })}</div>
-  </nav>
-  <section class="escape-featured escape-section" id="destinations" aria-labelledby="featured-title">
-    <div class="escape-heading"><div><p class="eyebrow">The signature escapes</p><h2 id="featured-title">Exceptional islands.<br /><em>Beautifully arranged.</em></h2></div><p>The Maldives or Seychelles. Choose the setting that speaks to you, and let us bring the journey together.</p></div>
-    <div class="escape-featured-grid">{['maldives','seychelles'].map(slug => <EscapeCard offer={offerFor(slug)} featured />)}</div>
-    <p class="escape-price-note">{priceNote}</p>
+  <section class="premium-services premium-section" id="what-we-arrange" aria-labelledby="arrange-title">
+    <div class="premium-heading" data-premium-reveal><h2 id="arrange-title">You choose where.<br /><em>We arrange the rest.</em></h2><p>A complete holiday, a business trip or one exceptional experience.</p></div>
+    <div class="premium-service-list">{families.map((family, index) => <article data-premium-reveal><div class="premium-service-top"><span class="premium-index">0{index+1}</span><TravelIcon name={family.icon} /></div><h3>{family.title}</h3><Picture name={family.image} alt="" sizes="(max-width: 760px) 50vw, 25vw" /><ul>{family.items.map(item => <li>{item}</li>)}</ul></article>)}</div>
+    <a class="premium-link" href={path('concierge.html')}>Explore our travel services <Arrow /></a>
   </section>
-  <section class="escape-services escape-section" id="what-we-arrange" aria-labelledby="arrange-title">
-    <div class="escape-heading"><div><p class="eyebrow">What Pardus arranges</p><h2 id="arrange-title">You choose where.<br /><em>We arrange the rest.</em></h2></div><p>A complete holiday, a business trip or one exceptional experience. Tell us what you need.</p></div>
-    <div class="escape-service-groups">{serviceGroups.map(group => <article data-reveal><TravelIcon name={group.icon} /><h3>{group.title}</h3><p>{group.text}</p><ul>{group.items.map(item => <li>{item}</li>)}</ul></article>)}</div>
-    <a class="escape-underlined" href={path('concierge.html')}>Explore our travel services</a>
+  <section class="premium-yacht" aria-labelledby="cruise-title">
+    <div class="premium-yacht-image" data-premium-reveal="media"><Picture name="yacht-dubai-v24" alt="A white motor yacht in Dubai Marina" sizes="(max-width: 760px) 100vw, 56vw" /></div>
+    <div class="premium-yacht-copy"><p class="premium-label">Private boat & yacht experiences</p><h2 id="cruise-title" data-premium-reveal>The best view<br />is <em>from the water.</em></h2><p>Dubai yacht cruises. Island excursions.<br />Sunset moments. Private celebrations.</p><div class="premium-yacht-rate"><strong>{priceText(cruiseTypes[0])}</strong><span>{cruiseTypes[0].basis}</span><span>UGX quote available</span></div><a class="premium-button" href={path('cruises.html')}>Explore private cruises <Arrow /></a></div>
   </section>
-  <section class="escape-cruise" aria-labelledby="cruise-title">
-    <div class="escape-cruise-media"><Picture name="yacht-dubai-v24" alt="A white motor yacht leaving Dubai Marina in warm sunset light" sizes="(max-width: 900px) 100vw, 55vw" /></div>
-    <div class="escape-cruise-copy"><p class="eyebrow">Private boat & yacht experiences</p><h2 id="cruise-title">Your own<br /><em>piece of the ocean.</em></h2><p>Dubai yacht cruises. Island excursions. Sunset moments. Private celebrations, beautifully arranged.</p><div class="escape-cruise-price"><span>Dubai private yacht cruise</span><strong>{priceText(cruiseTypes[0])}</strong><span>{cruiseTypes[0].basis}</span></div><a class="escape-button" href={path('cruises.html')}>Explore private cruises</a></div>
+  <section class="premium-destinations premium-section" aria-labelledby="more-title">
+    <div class="premium-heading" data-premium-reveal><h2 id="more-title">More places.<br /><em>More possibilities.</em></h2><a class="premium-link" href={path('destinations.html')}>All destinations <Arrow /></a></div>
+    <div class="premium-destination-grid">{['dubai', 'africa', 'europe'].map(slug => { const offer = offerFor(slug); const destination = destinationFor(slug); return <article><a class="premium-destination-image" href={path(`destination-${slug}.html`)} data-premium-reveal="media"><Picture name={destination.image} alt={destination.alt} sizes="(max-width: 760px) 100vw, 33vw" /></a><div class="premium-destination-top"><h3><a href={path(`destination-${slug}.html`)}>{offer.label}</a></h3><span>{offer.nights}</span></div><p>{offer.experience}</p><OfferPrice offer={offer} /><a class="premium-link" href={path(`destination-${slug}.html`)}>Discover {offer.label} <Arrow /></a></article>; })}</div>
+    <div class="premium-zanzibar"><span>Safari & Zanzibar</span><p>Start in safari country. Finish on the coast.</p><strong>{priceText(offerFor('zanzibar'))}</strong><a href={path('destination-zanzibar.html')} class="premium-link">Explore the journey <Arrow /></a></div>
   </section>
-  <section class="escape-more escape-section" aria-labelledby="more-title">
-    <div class="escape-heading"><div><p class="eyebrow">More places. More ways to escape.</p><h2 id="more-title">Where will you<br /><em>go next?</em></h2></div><a class="escape-underlined" href={path('destinations.html')}>All destinations</a></div>
-    <div class="escape-city-feature"><EscapeCard offer={offerFor('dubai')} featured /></div>
-    <div class="escape-secondary-grid">{['africa','zanzibar','europe'].map(slug => <EscapeCard offer={offerFor(slug)} />)}</div>
-  </section>
-  <section class="escape-why escape-section" aria-labelledby="why-title"><div class="escape-heading"><div><p class="eyebrow">Why Pardus</p><h2 id="why-title">A beautiful journey.<br /><em>A simpler way to plan.</em></h2></div><Brand mark /></div><div class="escape-why-grid">{[['One conversation','Flights, stays, transfers and experiences brought into one clear plan.'],['Made around you','Your dates, your budget and the people you are travelling with come first.'],['Clear before you book','Review your itinerary, USD price, inclusions and terms before confirming.']].map(([title,text],i) => <div data-reveal><span class="eyebrow">0{i+1}</span><h3>{title}</h3><p>{text}</p></div>)}</div></section>
-  <section class="escape-news escape-section" id="travel-desk" aria-labelledby="desk-title"><div class="escape-heading"><div><p class="eyebrow">Pardus travel desk</p><h2 id="desk-title">Know before<br /><em>you go.</em></h2></div><a class="escape-underlined" href={path('travel-desk.html')}>More travel updates</a></div><TravelDesk limit={3} /></section>
-  <section class="escape-enquiry-section escape-section" id="enquire" aria-labelledby="enquire-title"><div class="escape-enquiry-intro"><p class="eyebrow">Plan your escape</p><h2 id="enquire-title">Tell us where.<br /><em>We’ll take it from here.</em></h2><p>A destination, your dates and a little about your plans. That is all we need to start.</p><a class="escape-underlined" href={path('contact.html')}>Contact Pardus</a></div><SimpleEnquiry /></section>
+  <section class="premium-proof premium-section" aria-labelledby="why-title"><div class="premium-heading" data-premium-reveal><h2 id="why-title">Every detail,<br /><em>considered.</em></h2><Brand mark light /></div><div class="premium-proof-grid">{[['One conversation', 'Flights, stays, transfers and experiences brought into one clear plan.'], ['Made around you', 'Your dates, your budget and the people you are travelling with come first.'], ['Clear before you book', 'Review your itinerary, price, inclusions and terms before confirming.']].map(([title, text], index) => <article data-premium-reveal><span class="premium-index">0{index+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+  <section class="premium-news premium-section" id="travel-desk" aria-labelledby="desk-title"><div class="premium-heading" data-premium-reveal><h2 id="desk-title">Know before<br /><em>you go.</em></h2><a class="premium-link" href={path('travel-desk.html')}>More travel updates <Arrow /></a></div><TravelDesk limit={3} /></section>
+  <section class="premium-enquiry premium-section" id="enquire" aria-labelledby="enquire-title"><div class="premium-enquiry-copy"><p class="premium-label">Plan your escape</p><h2 id="enquire-title" data-premium-reveal>Tell us where.<br /><em>We’ll take it<br />from here.</em></h2><p>A destination, your dates and a little about your plans. That is all we need to start.</p><a class="premium-link" href={path('contact.html')}>Contact Pardus <Arrow /></a></div><SimpleEnquiry /></section>
+  <script>import '../scripts/premium';</script>
 </Layout>

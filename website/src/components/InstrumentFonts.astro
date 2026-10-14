@@ -1,0 +1,13 @@
+---
+import { path } from '../data/site';
+interface Props { hero?: boolean; }
+const { hero = false } = Astro.props;
+const faces = [
+  {family:'Instrument Sans',file:'InstrumentSans-Latin-Variable.woff2',style:'normal',preload:true,weight:'400 700'},
+  {family:'Instrument Serif',file:'InstrumentSerif-Latin-Regular.woff2',style:'normal',preload:true,weight:'400'},
+  {family:'Instrument Serif',file:'InstrumentSerif-Latin-Italic.woff2',style:'italic',preload:hero,weight:'400'},
+];
+const css = faces.map(face => `@font-face{font-family:'${face.family}';src:url('${path('fonts/'+face.file)}') format('woff2');font-style:${face.style};font-weight:${face.weight};font-display:swap;}`).join('\n');
+---
+{faces.filter(face => face.preload).map(face => <link rel="preload" href={path('fonts/'+face.file)} as="font" type="font/woff2" crossorigin="anonymous" />)}
+<style is:inline set:html={css} />

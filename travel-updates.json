@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T11:53:18.027936+00:00",
+  "updatedAt": "2026-10-14T06:46:28.101360+00:00",
   "items": [
     {
       "id": "dubai-winter-2026",
@@ -9,75 +9,30 @@
       "category": "Dubai",
       "url": "https://www.visitdubai.com/articles/events-to-look-forward-to-this-season",
       "publishedAt": "2026-09-16",
-      "checkedAt": "2026-10-04",
+      "checkedAt": "2026-10-14",
       "expiresAt": "2027-01-15"
     },
     {
       "id": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "title": "Jambojet Returns to Uganda: Strengthening Regional Connectivity",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
+      "summary": "Uganda CAA reports the return of Jambojet’s daily direct Nairobi–Entebbe service. Check the airline’s current schedule for your dates.",
       "source": "Uganda CAA",
       "category": "Aviation update",
       "url": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "publishedAt": "2026-10-01",
-      "checkedAt": "2026-10-13"
-    },
-    {
-      "id": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
-      "title": "Principal Engineer, Aerodrome Planning & Development",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
-      "source": "Uganda CAA",
-      "category": "Aviation update",
-      "url": "https://caa.go.ug/principal-engineer-aerodrome-planning-development/",
-      "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-13"
-    },
-    {
-      "id": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
-      "title": "Senior Civil Engineer, Aerodrome Planning & Development",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
-      "source": "Uganda CAA",
-      "category": "Aviation update",
-      "url": "https://caa.go.ug/senior-civil-engineer-aerodrome-planning-development/",
-      "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-13"
-    },
-    {
-      "id": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
-      "title": "Civil Engineer, Aerodrome Planning & Development",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
-      "source": "Uganda CAA",
-      "category": "Aviation update",
-      "url": "https://caa.go.ug/civil-engineer-aerodrome-planning-development/",
-      "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-13"
-    },
-    {
-      "id": "https://caa.go.ug/manager-marketing-and-commercial-services/",
-      "title": "Manager Marketing And Commercial Services",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
-      "source": "Uganda CAA",
-      "category": "Aviation update",
-      "url": "https://caa.go.ug/manager-marketing-and-commercial-services/",
-      "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-13"
-    },
-    {
-      "id": "https://caa.go.ug/senior-flight-operations-inspector/",
-      "title": "Senior Flight Operations Inspector",
-      "summary": "An official aviation update from Uganda Civil Aviation Authority. Read the full notice for dates and travel details.",
-      "source": "Uganda CAA",
-      "category": "Aviation update",
-      "url": "https://caa.go.ug/senior-flight-operations-inspector/",
-      "publishedAt": "2026-09-15",
-      "checkedAt": "2026-10-13"
+      "checkedAt": "2026-10-14",
+      "sourceCategories": [
+        "CAA News",
+        "latest news",
+        "Trending News"
+      ]
     }
   ],
   "sources": [
     {
       "name": "Uganda Civil Aviation Authority",
       "url": "https://caa.go.ug/feed/",
-      "lastSuccessfulCheck": "2026-10-13T11:53:18.027936+00:00"
+      "lastSuccessfulCheck": "2026-10-14T06:46:28.101360+00:00"
     }
   ]
 }

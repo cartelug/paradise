@@ -11,7 +11,7 @@ document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form
   if (chosen && [...destination.options].some(option => option.value === chosen)) destination.value = chosen;
   const draft = () => {
     const fields = new FormData(form);
-    return ['PARDUS TRAVEL ENQUIRY', '', `Destination: ${fields.get('destination')}`, `Departure: ${fields.get('date') || 'Flexible'}`, `Travellers: ${fields.get('travellers')}`, `Budget per person: ${fields.get('budget')}`, `Name: ${fields.get('name') || 'Not specified'}`, `Reply email: ${fields.get('email') || 'Reply to the sending email'}`, '', `Notes: ${fields.get('notes') || 'To discuss'}`, '', 'Please send a proposal in USD with the itinerary, inclusions and terms.'].join('\n');
+    return ['PARDUS TRAVEL ENQUIRY', '', `Destination: ${fields.get('destination')}`, `Departure: ${fields.get('date') || 'Flexible'}`, `Travellers: ${fields.get('travellers')}`, `Budget per person: ${fields.get('budget')}`, `Name: ${fields.get('name') || 'Not specified'}`, `Reply email: ${fields.get('email') || 'Reply to the sending email'}`, '', `Notes: ${fields.get('notes') || 'To discuss'}`, '', 'Please send a proposal in UGX, with a USD reference where useful, and the itinerary, inclusions and terms.'].join('\n');
   };
   form.addEventListener('submit', async event => {
     event.preventDefault();

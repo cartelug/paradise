@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/travel-desk.yml'
       - 'website/scripts/update-travel-desk.py'
+      - 'website/tests/test_travel_desk.py'
   schedule:
     - cron: '17 4 * * *'
   workflow_dispatch:
@@ -22,7 +23,9 @@ jobs:
         with:
           ref: main
       - name: Read official travel updates
-        run: python3 website/scripts/update-travel-desk.py
+        run: |
+          python3 -m unittest discover -s website/tests -p 'test_travel_desk.py'
+          python3 website/scripts/update-travel-desk.py
       - name: Save the latest public feed
         run: |
           git add travel-updates.json website/public/travel-updates.json

@@ -1,7 +1,13 @@
 import { destinations } from './destinations';
-export interface EscapeOffer {
+export interface PriceAmounts {
+  fromUSD: number | null;
+  // Populate only with an explicitly approved UGX starting amount. Never infer an
+  // exchange rate from a visitor's budget, a market rate or the existing USD price.
+  fromUGX?: number | null;
+}
+export interface EscapeOffer extends PriceAmounts {
   slug: string; label: string; nights: string; experience: string; highlights: string[];
-  inclusions: string[]; fromUSD: number | null; priceBasis: string;
+  inclusions: string[]; priceBasis: string;
 }
 // Starting prices retained from the supplied Pardus content. The dated proposal confirms
 // the final itinerary, inclusions, availability and price before any booking.
@@ -16,8 +22,22 @@ export const offers: EscapeOffer[] = [
 export const offerFor = (slug: string) => offers.find(offer => offer.slug === slug)!;
 export const destinationFor = (slug: string) => destinations.find(destination => destination.slug === slug)!;
 export const usd = (amount: number) => `USD ${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(amount)}`;
-export const priceText = (offer: {fromUSD:number|null}) => offer.fromUSD === null ? 'USD quote on request' : `From ${usd(offer.fromUSD)}`;
-export const priceNote = 'Prices are per person, based on two adults sharing. Your dates and chosen itinerary determine the final price. Flights, visas and travel insurance are quoted separately.';
+export const ugx = (amount: number) => `UGX ${new Intl.NumberFormat('en-UG', { maximumFractionDigits: 0 }).format(amount)}`;
+const usableAmount = (amount: number | null | undefined): amount is number => typeof amount === 'number' && Number.isFinite(amount) && amount > 0;
+export const displayPrice = (offer: PriceAmounts) => {
+  if (usableAmount(offer.fromUGX)) {
+    return { amount: ugx(offer.fromUGX), currency: 'UGX' as const, hasStartingPrice: true, secondary: usableAmount(offer.fromUSD) ? usd(offer.fromUSD) : null };
+  }
+  if (usableAmount(offer.fromUSD)) {
+    return { amount: usd(offer.fromUSD), currency: 'USD' as const, hasStartingPrice: true, secondary: null };
+  }
+  return { amount: 'Quote on request', currency: null, hasStartingPrice: false, secondary: null };
+};
+export const priceText = (offer: PriceAmounts) => {
+  const price = displayPrice(offer);
+  return `${price.hasStartingPrice ? 'From ' : ''}${price.amount}`;
+};
+export const priceNote = 'Prices are per person, based on two adults sharing. UGX quote available. Your dates and chosen itinerary determine the final price. Flights, visas and travel insurance are quoted separately.';
 export const services = ['Flights', 'Luxury hotels & resorts', 'Private transfers', 'Visa guidance', 'Boat & yacht cruises', 'Safaris', 'Honeymoons', 'Family holidays', 'Group travel', 'Corporate travel', 'Private tours', 'Activities & experiences', 'Custom itineraries'];
 export const serviceGroups = [
   { icon: 'plane' as const, title: 'The travel essentials', text: 'Every connection, considered.', items: ['Flights', 'Luxury hotels & resorts', 'Private transfers', 'Visa guidance'] },

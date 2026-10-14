@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import { path } from '../data/site';
 ---
-<Layout title="Plan your escape" description="Tell Pardus where you want to travel, your dates and budget. Prepare a simple travel enquiry and request a clear USD proposal." class="escape-inner" simpleFooter>
+<Layout title="Plan your escape" description="Tell Pardus where you want to travel, your dates and budget. Prepare a simple travel enquiry and request a clear travel proposal in UGX." class="escape-inner" simpleFooter>
   <section class="escape-page-intro"><p class="eyebrow">Plan your escape</p><h1>Your next escape.<br /><em>Let’s arrange it.</em></h1><p>A destination, your dates and a little about who is travelling. A simple starting point for a beautiful journey.</p></section>
-  <section class="escape-enquiry-section escape-section"><div class="escape-enquiry-intro"><p class="eyebrow">One clear enquiry</p><h2>You tell us where.<br /><em>We arrange the rest.</em></h2><p>Request flights, stays, transfers, visa guidance and experiences in one proposal, priced in USD.</p><a class="escape-underlined" href={path('planner.html')}>Prefer a detailed journey brief?</a></div><SimpleEnquiry id="journey-enquiry" /></section>
+  <section class="escape-enquiry-section escape-section"><div class="escape-enquiry-intro"><p class="eyebrow">One clear enquiry</p><h2>You tell us where.<br /><em>We arrange the rest.</em></h2><p>Request flights, stays, transfers, visa guidance and experiences in one proposal. Request your quote in UGX, with a USD reference when useful.</p><a class="escape-underlined" href={path('planner.html')}>Prefer a detailed journey brief?</a></div><SimpleEnquiry id="journey-enquiry" /></section>
 </Layout>

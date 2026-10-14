@@ -1,0 +1,97 @@
+/* All copy and images are readable before this progressive enhancement runs. */
+.premium-home {
+  --premium-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+.premium-home .premium-line-mask {
+  display: block;
+  overflow: clip;
+  padding-block: .12em;
+  margin-block: -.12em;
+}
+
+.premium-home .premium-line-content {
+  display: block;
+  transform-origin: 0 100%;
+}
+
+.premium-home [data-premium-leopard] {
+  --premium-leopard-x: 0px;
+  position: absolute;
+  left: clamp(24px, 7vw, 112px);
+  bottom: 0;
+  width: clamp(150px, 17vw, 240px);
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(var(--premium-leopard-x), 0, 0);
+  contain: layout paint;
+}
+
+.premium-home [data-premium-leopard] img {
+  display: block;
+  width: 1600%;
+  max-width: none;
+  height: 100%;
+  object-fit: fill;
+  transform: translate3d(0, 0, 0);
+  user-select: none;
+}
+
+.premium-home [data-premium-leopard][hidden] { display: none; }
+
+.premium-home [data-premium-motion] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+.premium-home [data-premium-motion][hidden] { display: none; }
+.premium-home [data-premium-motion] svg { width: 14px; height: 14px; flex-shrink: 0; }
+.premium-home [data-premium-motion][aria-pressed='true'] .motion-pause-icon { display: none; }
+.premium-home [data-premium-motion]:not([aria-pressed='true']) .motion-play-icon { display: none; }
+.premium-home [data-premium-motion]:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .premium-home.premium-motion-ready[data-premium-motion-state='playing']:not(.premium-motion-dormant) [data-premium-depth] {
+    will-change: transform;
+  }
+
+  .premium-home .premium-image-link img {
+    transition: transform 720ms var(--premium-ease);
+  }
+
+  .premium-home .premium-image-link:hover img { transform: scale(1.025); }
+  .premium-home .premium-image-link:focus-visible img { transform: scale(1.025); }
+}
+
+@media (max-width: 899px), (pointer: coarse) {
+  .premium-home [data-premium-leopard] {
+    left: auto;
+    right: 20px;
+    width: clamp(110px, 27vw, 150px);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-home { scroll-behavior: auto; }
+  .premium-home [data-premium-depth],
+  .premium-home .premium-line-content,
+  .premium-home [data-premium-reveal],
+  .premium-home [data-premium-leopard] { transform: none !important; }
+  .premium-home [data-premium-leopard] img { transform: translate3d(0, 0, 0) !important; }
+  .premium-home [data-premium-motion] { display: none; }
+  .premium-home .premium-image-link img,
+  .premium-home [data-premium-motion] { transition: none; }
+}
+
+@media print {
+  .premium-home [data-premium-leopard], .premium-home [data-premium-motion] { display: none; }
+  .premium-home .premium-line-content, .premium-home [data-premium-reveal] { transform: none !important; }
+}

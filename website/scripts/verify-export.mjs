@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repository = resolve(project, '..');
-if (basename(project) !== 'website' || !(await stat(resolve(repository, '.git')).catch(() => null))?.isDirectory()) {
+const gitEntry = await stat(resolve(repository, '.git')).catch(() => null);
+if (basename(project) !== 'website' || !(gitEntry?.isDirectory() || gitEntry?.isFile())) {
   throw new Error('Unexpected export location: run from website/ inside the git checkout.');
 }
 // Match the base the export was built with (PARDUS_BASE); GitHub Pages uses /paradise/.

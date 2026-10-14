@@ -1,5 +1,11 @@
 # Image sources
 
+## V29 bright coastal campaign and fonts
+
+Generated with the built-in OpenAI image tool on 14 October 2026. `source-assets/v29/hero-desktop.png` and `hero-mobile.png` are separate landscape/portrait compositions of an imagined Indian Ocean coastline with granite, palms, bright turquoise water and small island villas. They do not depict a named bookable property. Prompt direction: photographic premium travel campaign; sunlit clear water; natural textures; negative space for live heading; no text, logos, watermark or leopard. All interface text and brand paths remain separate. `scripts/prepare-v29-assets.mjs` produces responsive AVIF/WebP files.
+
+Instrument Serif and Instrument Sans are delivered locally from their Fontsource packages under the SIL Open Font License; the licences are preserved under `public/fonts/InstrumentSerif-OFL.txt` and `InstrumentSans-OFL.txt`. Production requests only these two families. Existing V24 destination/yacht photography and the documented V23 decorative leopard sprite are reused without changing their provenance.
+
 Approved Pardus logo: user-uploaded JPEG. V24 refreshes the destination and yacht photography with verified, freely licensed Unsplash photographs. Retained legacy assets are documented below. Photography illustrates locations and experiences; it is not evidence of owned properties or supplier partnerships.
 
 The logo in `public/brand/` is a deterministic vector reconstruction of the approved JPEG. It preserves the leopard outline, aircraft, wordmark and tagline. Primary, light and monochrome versions include SVG and real-alpha PNG exports from 512 to 4096 pixels wide. The current header and footer use faithful vector paths from `src/data/logo.json`. V22 traces the 1280 × 720 approved October logo, including its diagonal aircraft; the original is preserved in `source-assets/pardus-approved-logo-2026-10.jpeg`.

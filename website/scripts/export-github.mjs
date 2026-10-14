@@ -1,12 +1,15 @@
 import { cp, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = resolve(project, 'dist');
 const repository = resolve(project, '..');
 // This export is intentionally available only from the checked-in website/ source.
-if (basename(project) !== 'website' || !(await stat(resolve(repository, '.git'))).isDirectory()) {
+const gitEntry = await stat(resolve(repository, '.git'));
+const gitRoot = execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: repository, encoding: 'utf8' }).trim();
+if (basename(project) !== 'website' || !(gitEntry.isDirectory() || gitEntry.isFile()) || resolve(gitRoot).toLowerCase() !== repository.toLowerCase()) {
   throw new Error('Run this script from the website source in the GitHub checkout.');
 }
 const files = await readdir(output);

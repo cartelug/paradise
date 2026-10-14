@@ -1,8 +1,8 @@
 ---
 import Brand from './Brand.astro';
 import { navigation, path } from '../data/site';
-interface Props { dark?: boolean; }
-const { dark = false } = Astro.props;
+interface Props { dark?: boolean; compact?: boolean; }
+const { dark = false, compact = false } = Astro.props;
 const current = Astro.url.pathname.split('/').pop() || '';
 const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
 ---
@@ -12,7 +12,7 @@ const activeHref = current.startsWith('destination-') ? 'destinations.html' : cu
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
-  <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Saved trips</span><small data-folio-count hidden>0</small></button>
+  {!compact && <button type="button" class="header-folio requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><span>Saved trips</span><small data-folio-count hidden>0</small></button>}
   <a class="header-journey" href={path('journey.html')}><span>Plan your escape</span></a>
   <button class="menu-toggle requires-js" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
 </header>

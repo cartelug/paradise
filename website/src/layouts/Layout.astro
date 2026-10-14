@@ -9,15 +9,16 @@ import '../styles/polish.css';
 import '../styles/escapes.css';
 import '../styles/typography.css';
 import '../styles/motion.css';
-import FontFaces from '../components/FontFaces.astro';
+import '../styles/premium.css';
+import FontFaces from '../components/InstrumentFonts.astro';
 import CinematicIntro from '../components/CinematicIntro.astro';
 import BrandSprite from '../components/BrandSprite.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks } from '../data/site';
-interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; intro?: boolean; }
-const { title, description = site.description, image = 'images/hero-v27-desktop-1672.webp', dark = false, simpleFooter = false, class: className, intro = false } = Astro.props;
+interface Props { title?: string; description?: string; image?: string; dark?: boolean; simpleFooter?: boolean; class?: string; intro?: boolean; premium?: boolean; }
+const { title, description = site.description, image = 'images/hero-v27-desktop-1672.webp', dark = false, simpleFooter = false, class: className, intro = false, premium = false } = Astro.props;
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
 const ogImage = absolute(image);
@@ -41,7 +42,7 @@ const organizationSchema = {
     <meta name="theme-color" content="#071426" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <FontFaces hero={intro} />
+    <FontFaces hero={intro || premium} />
     <title>{title ? (`${title} — ${site.name}`.length > 60 ? `${title} — Pardus` : `${title} — ${site.name}`) : site.name}</title>
     <link rel="icon" type="image/svg+xml" href={path('brand/favicon.svg')} />
     <link rel="apple-touch-icon" href={path('brand/apple-touch-icon.png')} />
@@ -63,17 +64,17 @@ const organizationSchema = {
       (()=>{try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('pardus-intro-v28')){document.documentElement.classList.add('intro-active');document.documentElement.dataset.introStarted=String(performance.now());document.documentElement.dataset.introFailsafe=String(setTimeout(()=>{document.documentElement.classList.remove('intro-active','intro-exiting');document.documentElement.classList.add('cinema-arrived');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},2500));}}catch{document.documentElement.classList.add('cinema-arrived');}})();
     </script>}
   </head>
-  <body id="top" class={className} data-pardus-version="28">
+  <body id="top" class={className} data-pardus-version="29">
     <BrandSprite />
     {intro && <CinematicIntro />}
     <div data-pardus-shell>
     <div class="page-progress" aria-hidden="true"><span></span></div>
-    <Header dark={dark} />
+    <Header dark={dark} compact={premium} />
     <Folio />
     <main id="main" tabindex="-1"><slot /></main>
     <Footer simple={simpleFooter} />
     </div>
     <script>import '../scripts/site.ts';</script>
-    <script>import '../scripts/cinematic.ts';</script>
+    {!premium && <script>import '../scripts/cinematic.ts';</script>}
   </body>
 </html>
