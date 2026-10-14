@@ -10,7 +10,7 @@ const readingTime = (entry: typeof featured) => Math.max(1, Math.ceil([entry.int
 const ordered = [journal[3], journal[2], journal[0], journal[4], featured];
 const displayDate = (value: string) => new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`));
 ---
-<Layout title="The Pardus journal" class="inner journal-page" description="Destination notes and considered advice for a more personal way to travel.">
+<Layout label="The Journal" title="The Pardus journal" class="inner journal-page" description="Destination notes and considered advice for a more personal way to travel.">
   <PageHero eyebrow="The Journal" compact>
     <Fragment slot="title">Places worth knowing. <em>Details worth considering.</em></Fragment>
   </PageHero>

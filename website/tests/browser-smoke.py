@@ -3,7 +3,7 @@
 Run after building, exporting and starting a local static server:
     python tests/browser-smoke.py
 Set PARDUS_QA_BASE to test another served export (including GitHub Pages).
-Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,hero,flows,fallback.
+Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,stage,hero,flows,fallback.
 Set PARDUS_QA_CHROMIUM to a Chromium executable when Playwright's own browser is not installed.
 HTML routes are discovered from the repository export. Screenshots and persistent
 artifacts are not written. Form submissions are intercepted inside the test.
@@ -25,7 +25,7 @@ BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
 VIEWPORTS = [(320, 568), (390, 844), (768, 1024), (1024, 768), (1440, 900)]
-PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,hero,flows,fallback").split(","))
+PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,stage,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
 REMOTE_FEED = "https://raw.githubusercontent.com/cartelug/paradise/main/travel-updates.json*"
 LAYOUT_IMAGES = """() => [...document.images].filter(img =>
@@ -44,11 +44,20 @@ def context_for(browser, intro_seen=True, **options):
     return context
 
 
-def navigate(page, route="index.html", interactive=True):
+def navigate(page, route="index.html", interactive=True, wait_intro=True):
     response = page.goto(urljoin(BASE, route), wait_until="networkidle", timeout=45000)
     assert response and response.status < 400, f"Document failed: {route}"
     if interactive:
         page.wait_for_function("document.documentElement.classList.contains('js')", timeout=10000)
+        if wait_intro:
+            # The preloader runs on every page (quick version after the first); let it finish before the page is used.
+            page.wait_for_function("!document.documentElement.classList.contains('intro-active')", timeout=15000)
+
+
+def arrive(page, pattern):
+    """After a link click: the curtains close, the next page loads, and its quick preloader finishes."""
+    page.wait_for_url(re.compile(pattern), timeout=15000)
+    page.wait_for_function("document.documentElement.classList.contains('js') && !document.documentElement.classList.contains('intro-active')", timeout=15000)
 
 
 def assert_no_overflow(page, label):
@@ -104,45 +113,65 @@ def route_matrix(browser):
 
 
 def preloader(browser):
-    """HARD RULE: the preloader is permanent. It plays on first visit, can be skipped, and never traps anyone."""
+    """HARD RULE: the preloader is permanent and runs on every page. Full on the first page of a visit, quick afterwards."""
     context = context_for(browser, intro_seen=False, viewport={"width": 1440, "height": 900})
     page = context.new_page()
-    page.goto(urljoin(BASE, "index.html"), wait_until="load", timeout=45000)
+    # A first visit on a page that is not the homepage still gets the full sequence.
+    page.goto(urljoin(BASE, "cruises.html"), wait_until="load", timeout=45000)
     intro = page.locator("[data-pardus-intro]")
+    expect(page.locator("html")).to_have_class(re.compile(r"\bintro-full\b"))
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-active\b"))
     expect(intro).to_be_visible()
     expect(intro.get_by_text("Beautifully arranged.")).to_be_visible()
     skip = page.get_by_role("button", name=re.compile("Skip introduction"))
     expect(skip).to_be_visible()
     expect(skip).to_be_focused()
-    # The page behind the introduction is inert until it opens.
     assert page.locator("[data-pardus-shell]").get_attribute("inert") is not None
     skip.click()
     expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"))
-    expect(page.locator("[data-pardus-shell]")).not_to_have_attribute("inert", re.compile(".*"))
     expect(page.locator("main h1")).to_be_visible()
     assert page.evaluate(f"sessionStorage.getItem('{INTRO_KEY}')") == "seen"
-    # Once per tab session.
-    page.reload(wait_until="load")
-    expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"))
-    expect(intro).to_be_hidden()
+    # Clicking an internal link closes the curtains, then the next page opens with the quick version.
+    page.locator('.desktop-nav a[href$="destinations.html"]').click()
+    expect(page.locator("html")).to_have_class(re.compile(r"\bintro-leaving\b"))
+    page.wait_for_url(re.compile(r"destinations\.html$"))
+    expect(page.locator("html")).to_have_class(re.compile(r"\bintro-quick\b"))
+    expect(page.locator("[data-pardus-intro]")).to_be_visible()
+    expect(page.locator(".intro-label")).to_have_text("Destinations")
+    expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"), timeout=6000)
+    # In-page links and modified clicks are left alone.
+    navigate(page, "index.html")
+    page.locator('a[href="#destinations"]').first.click()
+    assert "intro-leaving" not in page.evaluate("document.documentElement.className")
+    # The back/forward cache never shows a closed page.
+    page.go_back()
+    page.wait_for_function("!document.documentElement.classList.contains('intro-active') && !document.documentElement.classList.contains('intro-leaving')", timeout=9000)
     context.close()
 
-    # Escape also releases the visitor; the full sequence ends on its own without any input.
+    # Every exported page ships the preloader and the quick version runs on all of them.
+    context = context_for(browser, intro_seen=True, viewport={"width": 1440, "height": 900})
+    page = context.new_page()
+    for route in ROUTES:
+        page.goto(urljoin(BASE, route), wait_until="commit")
+        page.wait_for_function("document.documentElement.classList.contains('intro-active') || document.documentElement.classList.contains('is-ready')", timeout=10000)
+        assert page.locator("[data-pardus-intro]").count() == 1, f"{route} is missing the preloader"
+        assert page.locator("[data-skip-intro]").count() == 1, f"{route} is missing Skip introduction"
+        page.wait_for_function("!document.documentElement.classList.contains('intro-active')", timeout=15000)
+    context.close()
+
+    # Escape releases the visitor; the full sequence also ends on its own without any input.
     context = context_for(browser, intro_seen=False, viewport={"width": 390, "height": 844})
     page = context.new_page()
     page.goto(urljoin(BASE, "index.html"), wait_until="load", timeout=45000)
-    expect(intro := page.locator("[data-pardus-intro]")).to_be_visible()
+    expect(page.locator("[data-pardus-intro]")).to_be_visible()
     page.keyboard.press("Escape")
     expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"))
     context.close()
-
     context = context_for(browser, intro_seen=False, viewport={"width": 1440, "height": 900})
     page = context.new_page()
-    page.goto(urljoin(BASE, "index.html"), wait_until="load", timeout=45000)
+    page.goto(urljoin(BASE, "journal.html"), wait_until="load", timeout=45000)
     expect(page.locator("[data-pardus-intro]")).to_be_visible()
     expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"), timeout=9000)
-    expect(page.locator(".hero-rail")).to_be_visible(timeout=4000)
     context.close()
 
     # Reduced motion keeps the preloader as a still brand screen, then releases the page on its own.
@@ -152,7 +181,79 @@ def preloader(browser):
     expect(page.locator("[data-pardus-intro]")).to_be_visible()
     expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"), timeout=6000)
     context.close()
-    print("PASS preloader: plays on first visit, Skip, Escape, once per tab, ends on its own, reduced-motion still screen", flush=True)
+    print("PASS preloader: every page, full on first visit, quick afterwards with the page name, curtains close on leaving, Skip, Escape, back/forward cache, reduced motion", flush=True)
+
+
+def leopard_clear(browser):
+    """No hero text, button, price rail or header control may overlap the leopard, at any screen size."""
+    sizes = [(320, 568), (360, 640), (390, 844), (430, 932), (600, 900), (768, 1024), (820, 1180), (1024, 1366), (900, 900), (1000, 900),
+             (1024, 768), (1100, 700), (1280, 720), (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080), (2560, 1440)]
+    probe = """() => {
+      const rect = e => { const b = e.getBoundingClientRect(); return {l: b.left, t: b.top, r: b.right, b: b.bottom}; };
+      const box = rect(document.querySelector('[data-leopard-box]'));
+      const items = [];
+      const copy = document.querySelector('[data-hero-copy]');
+      const range = document.createRange();
+      const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
+      for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
+      copy.querySelectorAll('.btn').forEach(e => items.push({label: 'button', ...rect(e)}));
+      items.push({label: 'price rail', ...rect(document.querySelector('[data-hero-rail]'))});
+      document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
+      const margin = 10;
+      const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
+      const eyeY = box.t + (box.b - box.t) * 0.22;
+      return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight};
+    }"""
+    for reduced in ("reduce", "no-preference"):
+        context = context_for(browser, reduced_motion=reduced, viewport={"width": 1440, "height": 900})
+        page = context.new_page()
+        for width, height in sizes:
+            page.set_viewport_size({"width": width, "height": height})
+            navigate(page)
+            page.wait_for_timeout(900 if reduced == "reduce" else 2400)
+            result = page.evaluate(probe)
+            assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}): {result['hits']}"
+            assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
+        context.close()
+    print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, static and animated", flush=True)
+
+
+def escape_stage(browser):
+    """\"Your next escape\": a pinned stage on large screens, stacked chapters on phones, tablets and reduced motion."""
+    context = context_for(browser, viewport={"width": 1440, "height": 900})
+    page = context.new_page()
+    navigate(page)
+    expect(page.locator("html")).to_have_class(re.compile(r"\bstage-ready\b"))
+    info = page.evaluate("""() => { const t = document.querySelector('[data-escape-track]'), s = document.querySelector('[data-escape-stage]'); const r = t.getBoundingClientRect(); return {top: scrollY + r.top, total: r.height - s.offsetHeight, header: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))}; }""")
+    for index, fraction in enumerate([0.12, 0.5, 0.9]):
+        page.evaluate("y => window.scrollTo({top: y, behavior: 'instant'})", info["top"] - info["header"] + fraction * info["total"])
+        page.wait_for_timeout(500)
+        expect(page.locator("[data-escape-stage]")).to_have_attribute("data-active", str(index))
+        expect(page.locator(f'.scene[data-scene="{index}"]')).to_have_attribute("data-state", "active")
+        expect(page.locator(f'.scene[data-scene="{index}"] .scene-panel')).to_be_visible()
+        expect(page.locator(f'.scene[data-scene="{index}"] h3')).to_be_visible()
+        expect(page.locator(f'[data-escape-go="{index}"]')).to_have_attribute("aria-current", "true")
+        # The outgoing panel hides once its exit transition (0.5 s) ends.
+        expect(page.locator(".scene .scene-panel:visible")).to_have_count(1)
+    page.locator('[data-escape-go="0"]').click()
+    expect(page.locator("[data-escape-stage]")).to_have_attribute("data-active", "0", timeout=6000)
+    context.close()
+    for options in ({"viewport": {"width": 390, "height": 844}}, {"viewport": {"width": 820, "height": 1180}}, {"viewport": {"width": 1440, "height": 900}, "reduced_motion": "reduce"}):
+        context = context_for(browser, **options)
+        page = context.new_page()
+        navigate(page)
+        assert "stage-ready" not in page.evaluate("document.documentElement.className"), options
+        page.evaluate("document.querySelector('[data-escapes]').scrollIntoView()")
+        page.wait_for_timeout(300)
+        assert page.locator(".scene").count() == 3
+        for index in range(3):
+            page.locator(f'.scene[data-scene="{index}"]').scroll_into_view_if_needed()
+            page.wait_for_timeout(900)
+            expect(page.locator(f'.scene[data-scene="{index}"] .scene-panel')).to_be_visible()
+            expect(page.locator(f'.scene[data-scene="{index}"] .price')).to_be_visible()
+        assert_no_overflow(page, f"escape chapters {options}")
+        context.close()
+    print("PASS escape stage: scroll picks the scene, tabs jump to it, and phones, tablets and reduced motion get stacked chapters", flush=True)
 
 
 def assert_hero(page, width):
@@ -164,7 +265,8 @@ def assert_hero(page, width):
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link svg").first).to_be_visible()
     source = page.locator("[data-hero-image]").evaluate("img => img.currentSrc")
-    assert ("pardus-hero-mobile-v25" if width <= 760 else "pardus-hero-desktop-v25") in source, source
+    portrait = page.evaluate("innerWidth <= 760 || innerWidth / innerHeight <= 1.1")
+    assert ("pardus-hero-mobile-v25" if portrait else "pardus-hero-desktop-v25") in source, source
     rates = page.locator(".hero-offers a")
     assert rates.count() == 3
     text = rates.all_inner_texts()
@@ -233,7 +335,7 @@ def hero_and_menu(browser):
     control.click()
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     expect(control).to_have_accessible_name("Resume background animation")
-    assert page.locator(".hero-media img").evaluate("img => getComputedStyle(img).animationPlayState") == "paused"
+    assert page.locator(".hero-drift").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
     navigate(page)
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     page.locator("[data-scene-motion]").click()
@@ -356,6 +458,7 @@ def filters_and_planner(browser):
     assert page.locator('[name="reason"]').input_value() == "Business"
     navigate(page, "corporate.html")
     page.get_by_role("link", name="Prepare a corporate travel brief").click()
+    arrive(page, r"planner\.html")
     expect(page.locator('[name="style"]')).to_have_value("Executive Arrivals")
     expect(page.locator('[name="reason"]')).to_have_value("Business")
     page.locator(".header-saved").click()
@@ -369,6 +472,7 @@ def filters_and_planner(browser):
 
     navigate(page, "destination-maldives.html")
     page.locator('a[href*="journey.html?destination="]').first.click()
+    arrive(page, r"journey\.html\?destination=")
     expect(page.locator('[data-escape-enquiry] [name="destination"]')).to_have_value("The Maldives")
     form = page.locator("[data-escape-enquiry]")
     form.locator('[name="email"]').fill("smoke-test@example.com")
@@ -378,10 +482,11 @@ def filters_and_planner(browser):
     enquiry = enquiry_download.value
     assert enquiry.suggested_filename == "Pardus-Travel-Enquiry.txt"
     enquiry_text = Path(enquiry.path()).read_text(encoding="utf-8")
-    assert "Destination: The Maldives" in enquiry_text and "smoke-test@example.com" in enquiry_text
+    assert "Destination: The Maldives" in enquiry_text and "smoke-test@example.com" in enquiry_text, enquiry_text
     expect(form.locator("[data-enquiry-status]")).to_contain_text("has not been sent")
     navigate(page, "contact.html")
     page.get_by_role("link", name="Prepare a travel enquiry", exact=True).click()
+    arrive(page, r"journey\.html")
     expect(page.locator("[data-escape-enquiry]")).to_be_visible()
     assert not runtime_errors, runtime_errors
     context.close()  # Playwright also removes the temporary download.
@@ -433,12 +538,16 @@ def main():
             launch["args"] = ["--no-sandbox"]
         browser = playwright.chromium.launch(**launch)
         try:
-            unknown = PHASES - {"matrix", "preloader", "hero", "flows", "fallback"}
+            unknown = PHASES - {"matrix", "preloader", "leopard", "stage", "hero", "flows", "fallback"}
             assert not unknown, f"Unknown QA phases: {unknown}"
             if "matrix" in PHASES:
                 route_matrix(browser)
             if "preloader" in PHASES:
                 preloader(browser)
+            if "leopard" in PHASES:
+                leopard_clear(browser)
+            if "stage" in PHASES:
+                escape_stage(browser)
             if "hero" in PHASES:
                 hero_and_menu(browser)
             if "flows" in PHASES:

@@ -4,7 +4,7 @@ import { initFolio } from './folio';
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-const desktop = window.matchMedia('(min-width: 1040px)');
+const desktop = window.matchMedia('(min-width: 1200px)');
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
 /* Mobile menu */
@@ -119,6 +119,53 @@ motionButtons.forEach(button => button.addEventListener('click', () => {
 }));
 syncPause();
 
+/* "Your next escape": a pinned stage on large screens. Scroll position chooses the scene; the tabs jump to a scene. */
+const escapes = document.querySelector<HTMLElement>('[data-escapes]');
+const escapeTrack = escapes?.querySelector<HTMLElement>('[data-escape-track]') ?? null;
+const escapeStage = escapes?.querySelector<HTMLElement>('[data-escape-stage]') ?? null;
+const escapeScenes = escapeStage ? [...escapeStage.querySelectorAll<HTMLElement>('[data-scene]')] : [];
+const escapeTabs = escapeStage ? [...escapeStage.querySelectorAll<HTMLButtonElement>('[data-escape-go]')] : [];
+const stageQuery = window.matchMedia('(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)');
+let stageOn = false, stageActive = -1, headerHeight = 78;
+function syncStage() {
+  stageOn = !!escapeStage && escapeScenes.length > 0 && stageQuery.matches;
+  root.classList.toggle('stage-ready', stageOn);
+  headerHeight = parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 78;
+  if (!stageOn && escapeStage) {
+    stageActive = -1;
+    escapeScenes.forEach(scene => { scene.removeAttribute('data-state'); scene.style.removeProperty('--lp'); });
+    escapeTabs.forEach(tab => tab.removeAttribute('aria-current'));
+  }
+}
+function paintStage() {
+  if (!stageOn || !escapeTrack || !escapeStage) return;
+  const box = escapeTrack.getBoundingClientRect();
+  const total = Math.max(1, box.height - escapeStage.offsetHeight);
+  const progress = clamp((headerHeight - box.top) / total, 0, 1);
+  const count = escapeScenes.length;
+  const active = Math.min(count - 1, Math.floor(progress * count));
+  escapeStage.style.setProperty('--sp', progress.toFixed(4));
+  escapeScenes.forEach((scene, i) => {
+    scene.style.setProperty('--lp', clamp(progress * count - i, 0, 1).toFixed(3));
+    if (i === active) scene.dataset.state = 'active'; else scene.dataset.state = i < active ? 'before' : 'after';
+  });
+  if (active !== stageActive) {
+    stageActive = active;
+    escapeStage.dataset.active = String(active);
+    escapeTabs.forEach((tab, i) => { if (i === active) tab.setAttribute('aria-current', 'true'); else tab.removeAttribute('aria-current'); });
+  }
+}
+escapeTabs.forEach((tab, i) => tab.addEventListener('click', () => {
+  if (!escapeTrack || !escapeStage) return;
+  const box = escapeTrack.getBoundingClientRect();
+  const total = Math.max(1, box.height - escapeStage.offsetHeight);
+  const target = window.scrollY + box.top - headerHeight + ((i + 0.5) / escapeScenes.length) * total;
+  window.scrollTo({ top: target, behavior: reduced.matches ? 'auto' : 'smooth' });
+}));
+stageQuery.addEventListener('change', () => { syncStage(); schedule(); });
+window.addEventListener('resize', () => { syncStage(); });
+syncStage();
+
 /* Scroll motion: one frame per scroll event, reads before writes. */
 const header = document.querySelector<HTMLElement>('.site-header');
 const hero = document.querySelector<HTMLElement>('[data-hero]');
@@ -140,6 +187,7 @@ function paint() {
   const max = Math.max(1, document.documentElement.scrollHeight - vh);
   root.style.setProperty('--progress', clamp(y / max, 0, 1).toFixed(4));
   header?.classList.toggle('is-scrolled', y > 40);
+  paintStage();
   const delta = y - lastY;
   if (Math.abs(delta) > 6) {
     const focused = header?.contains(document.activeElement);

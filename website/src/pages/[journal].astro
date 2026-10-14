@@ -17,7 +17,7 @@ const articleSchema = {
   image: absolute(`images/${entry.image}-1920.webp`), mainEntityOfPage: articleUrl,
 };
 ---
-<Layout title={entry.title} class="inner article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
+<Layout label="The Journal" title={entry.title} class="inner article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <PageHero image={entry.image} alt={entry.alt} eyebrow={`${entry.category}, ${readMinutes} min read`}>
     <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journal.html')}><Icon name="arrow-left" /> The Journal</a></nav>

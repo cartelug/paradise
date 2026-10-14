@@ -1,9 +1,12 @@
 ---
 // HARD RULE: this preloader is permanent in every build (see CLAUDE.md and tests/preloader.test.mjs).
-// It is the V25 opening: the approved logo draws itself over a meridian globe, the aircraft arrives,
-// then two curtains part onto the hero. Skip introduction, Escape and a failsafe always release the visitor.
+// It runs on every page: the V25 opening (the approved logo draws itself over a meridian globe, the aircraft arrives, then two
+// curtains part) on the first page of a visit, and a quick version of the same sequence afterwards. Skip introduction, Escape
+// and a failsafe always release the visitor.
 import logo from '../data/logo.json';
 import Icon from './Icon.astro';
+interface Props { label?: string; }
+const { label = 'Welcome' } = Astro.props;
 ---
 <div class="pardus-intro" data-pardus-intro role="dialog" aria-modal="true" aria-label="Pardus Luxury Escapes introduction">
   <div class="intro-curtain intro-curtain-left" aria-hidden="true"></div>
@@ -33,6 +36,7 @@ import Icon from './Icon.astro';
         <g class="intro-tagline" fill="#d7b97d"><path d={logo.tagline} fill-rule="evenodd"/></g>
         <g clip-path="url(#intro-logo-mask)"><rect class="intro-metal-sheen" x="-400" y="-100" width="190" height="650" fill="url(#intro-sheen)" transform="rotate(-18)"/></g>
       </svg>
+      <p class="intro-label" aria-hidden="true">{label}</p>
       <p class="intro-promise"><span>Luxury travel.</span><em>Beautifully arranged.</em></p>
       <div class="intro-progress" aria-hidden="true"><span></span></div>
       <p class="intro-destinations" aria-hidden="true"><span>Islands</span><i></i><span>Safaris</span><i></i><span>City escapes</span></p>

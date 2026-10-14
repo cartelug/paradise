@@ -2,6 +2,14 @@
 
 Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## V30.1 refinements (14 October 2026)
+
+- **Type:** Cormorant Garamond headlines (weight 600, x-height normalised with `font-size-adjust`) with Montserrat for body, labels, prices and buttons. Newsreader and Manrope were removed. See `website/FONT_MOTION_NOTES.md`.
+- **The leopard is never covered.** The hero art box now matches the photograph exactly, and an invisible `[data-leopard-box]` marks the leopard. On wide screens the headline and price rail are held to the left two thirds; on phones and portrait screens the copy sits above the art and the rail below it. The browser smoke `leopard` phase measures the overlap at many window sizes.
+- **Preloader on every page.** The first page of a visit plays the full V25 opening. Later pages show a short version (curtains, logo and the page name), timed to how long the page needs to be ready, and internal links close the curtains before leaving. Skip, Escape, the failsafe timer and the back/forward cache all release the visitor. The layout has no switch to turn it off, and the tests check every built page.
+- **"Your next escape"** is a scroll-driven stage on large screens: the Maldives, Seychelles and Dubai take turns with a photograph wipe, a route line with a plane, tabs, and the place name as an outlined watermark. Smaller screens and reduced motion get stacked chapters. "More places" shows East Africa, Europe and Zanzibar.
+- The desktop navigation now starts at 1200 px; narrower windows use the menu button so the links never wrap.
+
 ## V30 blue-hour redesign (14 October 2026)
 
 The site owner found V29 flat and unattractive: no section gradients, an odd condensed typeface and little scroll motion. V30 restores the V25 hero (leopard, overwater villas, Dubai skyline at sunset, yacht) and rebuilds every page on one design system.
@@ -11,7 +19,7 @@ The site owner found V29 flat and unattractive: no section gradients, an odd con
 What changed:
 
 - Palette from the hero photograph (midnight, lagoon teal, champagne, ember, ivory). Sections carry gradients and share colours at their seams; a soft haze joins dark and light sections.
-- Type: Newsreader for headlines, Manrope for body and controls. The squeezed Instrument Serif and Instrument Sans files were removed.
+- Type: Cormorant Garamond for headlines, Montserrat for body and controls (V30.1). The squeezed Instrument Serif and Instrument Sans files, and the interim Newsreader and Manrope files, were removed.
 - Scroll motion: a header that blurs after 40 px, hides on scroll down and returns on scroll up, with a gold progress line; hero parallax and fade; word-by-word heading reveals; staggered card reveals; photographs that clip in and drift inside their frames; the yacht band scales as it enters. Reduced motion removes all of it, and a Pause scene control stops the hero drift.
 - Mobile menu: a full-height dialog with an SVG symbol for each destination, the current page marked, large tap targets, the main action and email pinned at the foot, scroll lock, Escape, focus return and safe-area spacing. It closes itself if the window grows to the desktop layout.
 - One SVG icon set (`website/src/data/icons.ts`). No emoji and no text glyphs used as icons.

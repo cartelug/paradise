@@ -29,7 +29,7 @@ const schemas = [
   },
 ];
 ---
-<Layout title={journey.name} description={journey.description} image={`images/${journey.image}-1920.webp`} class="inner journey-detail-page">
+<Layout label={journey.name} title={journey.name} description={journey.description} image={`images/${journey.image}-1920.webp`} class="inner journey-detail-page">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
   <PageHero image={journey.image} alt={journey.alt} eyebrow={journey.eyebrow}>
     <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys.html')}>Journeys</a><Icon name="chevron-right" /><span>{journey.name}</span></nav>

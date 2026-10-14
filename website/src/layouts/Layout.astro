@@ -13,8 +13,10 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks } from '../data/site';
-interface Props { title?: string; description?: string; image?: string; simpleFooter?: boolean; class?: string; intro?: boolean; }
-const { title, description = site.description, image = 'images/pardus-hero-desktop-v25-1536.webp', simpleFooter = false, class: className, intro = false } = Astro.props;
+interface Props { title?: string; label?: string; description?: string; image?: string; simpleFooter?: boolean; class?: string; }
+const { title, label, description = site.description, image = 'images/pardus-hero-desktop-v25-1536.webp', simpleFooter = false, class: className } = Astro.props;
+// The preloader names the page that is opening.
+const introLabel = label ?? (title ? title.split(/ [—:] /)[0] : 'Welcome');
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
 const ogImage = absolute(image);
@@ -29,11 +31,10 @@ const organizationSchema = {
   ...(site.email ? { email: site.email } : {}),
   ...(socialLinks.length ? { sameAs: socialLinks.map(link => link.href) } : {}),
 };
-// The preloader plays once per browser tab on the homepage. This inline script only decides whether it is
-// needed before first paint, and carries a failsafe that releases the page even if the main script fails.
-const bootstrap = intro
-  ? `(()=>{const r=document.documentElement;r.classList.add('js');try{if(!sessionStorage.getItem('pardus-intro-v30')){r.classList.add('intro-active');r.dataset.introStarted=String(performance.now());r.dataset.introFailsafe=String(setTimeout(()=>{r.classList.remove('intro-active','intro-exiting');r.classList.add('is-ready');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},7500));}else{r.classList.add('is-ready');}}catch{r.classList.add('is-ready');}})();`
-  : `document.documentElement.classList.add('js','is-ready');`;
+// HARD RULE: the preloader runs on every page (CLAUDE.md). This inline script only decides, before first paint, which version:
+// the full sequence on the first page of a visit, the quick one afterwards. It also carries a failsafe that releases the page
+// even if the main script fails.
+const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');try{const seen=!!sessionStorage.getItem('pardus-intro-v30');r.classList.add('intro-active',seen?'intro-quick':'intro-full');r.dataset.introStarted=String(performance.now());r.dataset.introFailsafe=String(setTimeout(()=>{r.classList.remove('intro-active','intro-exiting');r.classList.add('is-ready');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},seen?4500:7500));}catch{r.classList.add('is-ready');}})();`;
 ---
 <!doctype html>
 <html lang="en">
@@ -44,7 +45,7 @@ const bootstrap = intro
     <meta name="color-scheme" content="dark light" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <FontFaces hero={intro} />
+    <FontFaces hero />
     <slot name="head" />
     <title>{title ? (`${title} — ${site.name}`.length > 60 ? `${title} — Pardus` : `${title} — ${site.name}`) : site.name}</title>
     <link rel="icon" type="image/svg+xml" href={path('brand/favicon.svg')} />
@@ -67,7 +68,7 @@ const bootstrap = intro
   <body id="top" class={className} data-pardus-version="30">
     <IconSprite />
     <BrandSprite />
-    {intro && <CinematicIntro />}
+    <CinematicIntro label={introLabel} />
     <div data-pardus-shell>
       <Header />
       <Folio />
@@ -75,6 +76,6 @@ const bootstrap = intro
       <Footer simple={simpleFooter} />
     </div>
     <script>import '../scripts/site.ts';</script>
-    {intro && <script>import '../scripts/preloader.ts';</script>}
+    <script>import '../scripts/preloader.ts';</script>
   </body>
 </html>

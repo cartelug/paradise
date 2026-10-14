@@ -1,11 +1,7 @@
 /* PARDUS V30: scroll and arrival motion. Everything here is progressive: content is fully visible in the HTML,
    hidden states exist only while the script is running, and reduced motion removes them entirely. */
 
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: vt-out .18s ease both; }
-::view-transition-new(root) { animation: vt-in .4s var(--ease) both; }
-@keyframes vt-out { to { opacity: 0; } }
-@keyframes vt-in { from { opacity: 0; } }
+/* Page changes are carried by the preloader curtains (see preloader.css and preloader.ts). */
 
 .frame img { transition: transform 1.4s var(--ease); }
 
@@ -55,22 +51,18 @@ html.is-ready .page-hero .actions { animation: rise 1.1s var(--ease) .55s both; 
 }
 
 /* A single ambient animation toggle, honoured by every continuous effect. */
-html.motion-paused .hero-media img,
-html.motion-paused .hero-light::before,
-html.motion-paused .hero-light::after { animation-play-state: paused; }
-html.hero-dormant .hero-media img,
-html.hero-dormant .hero-light::before,
-html.hero-dormant .hero-light::after { animation-play-state: paused; }
+html.motion-paused .hero-drift, html.motion-paused .hero-glow, html.motion-paused .hero-media::after,
+html.hero-dormant .hero-drift, html.hero-dormant .hero-glow, html.hero-dormant .hero-media::after { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   html.js .hero .line > span, html.js .hero .eyebrow, html.js .hero-text, html.js .hero .actions, html.js .hero-rail,
   html.js .page-hero .eyebrow, html.js .page-hero h1, html.js .page-hero .lead, html.js .page-hero .actions, html.js .page-hero .breadcrumb { opacity: 1; transform: none; }
-  .hero-media img { transform: scale(1.04); }
+  .hero-drift { animation: none !important; transform: none; }
   .hero-media, .hero-copy, .hero-rail { transform: none !important; }
-  .hero-light::before { opacity: .4; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+  .hero-glow { opacity: .4; animation: none !important; }
+  .hero-media::after { display: none; }
 }
 @media print {
   html.js .hero .line > span, html.js .hero .eyebrow, html.js .hero-text, html.js .hero .actions, html.js .hero-rail { opacity: 1 !important; transform: none !important; }
