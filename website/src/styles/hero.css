@@ -226,17 +226,18 @@ html:not(.js) .hl-spots { display: none; }
   .motion-toggle [data-scene-motion-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   /* The dock: all three destinations and their prices at once, as photograph tiles. No hidden swipe. */
   .hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0; }
-  .hero-offers a { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: clamp(92px, 25vw, 124px); padding: 10px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
-  .hero-offers a:first-child { padding-left: 10px; }
+  .hero-offers a { position: relative; isolation: isolate; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: clamp(92px, 25vw, 124px); padding: 10px 9px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
+  .hero-offers a:first-child { padding-left: 9px; }
   .hero-offers a:active { transform: scale(.97); }
   .hero-offers a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(5 12 26 / .06) 0%, rgb(5 12 26 / .3) 36%, rgb(5 12 26 / .94) 100%); }
   .offer-thumb { display: block; position: absolute; inset: 0; z-index: -2; }
   .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform .9s var(--ease); }
   .hero-offers a:hover .offer-thumb img { transform: scale(1.14); }
-  .hero-offers .name { grid-column: 1; font-size: clamp(.8125rem, .7rem + .5vw, .9375rem); flex-direction: column; align-items: flex-start; gap: 0; }
-  .hero-offers .name small { display: block; font-size: .6875rem; font-weight: 600; color: rgb(255 255 255 / .78); }
-  .hero-offers .amount { grid-column: 1; display: grid; gap: 0; font-size: clamp(.78rem, .66rem + .45vw, .9rem); font-weight: 700; color: #fff; line-height: 1.2; }
-  .hero-offers .amount .from { font-size: .625rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+  /* Tile text is sized from the tile itself, so the longest label ("USD 2,950", 5.6 times its size) always keeps at least 15% spare room. */
+  .hero-offers .name { grid-column: 1; min-width: 0; font-size: clamp(.625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .15), .95rem); font-size: clamp(.625rem, 15cqi, .95rem); flex-direction: column; align-items: flex-start; gap: 0; white-space: nowrap; }
+  .hero-offers .name small { display: block; font-size: clamp(.5625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .115), .75rem); font-size: clamp(.5625rem, 11.5cqi, .75rem); font-weight: 600; color: rgb(255 255 255 / .8); }
+  .hero-offers .amount { grid-column: 1; min-width: 0; display: grid; gap: 0; font-size: clamp(.625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .15), .95rem); font-size: clamp(.625rem, 15cqi, .95rem); font-weight: 700; color: #fff; line-height: 1.2; white-space: nowrap; }
+  .hero-offers .amount .from { font-size: clamp(.5rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .095), .66rem); font-size: clamp(.5rem, 9.5cqi, .66rem); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
   .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }
   .hero-offers .offer-go .icon { width: 14px; height: 14px; }
 }

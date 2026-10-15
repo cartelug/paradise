@@ -364,6 +364,22 @@ def phone_first_screen(browser):
         assert fit["h1"] and all(fit["tiles"]) and all(fit["buttons"]) and fit["leopard"], (width, height, fit)
         assert all(value < 70 for value in fit["wraps"]), (width, height, fit)  # a one-line button, never two
         context.close()
+    # The text on each phone price tile stays inside its card with room to spare (iPhone Safari draws a little wider).
+    for width in [320, 360, 390, 430]:
+        context = context_for(browser, viewport={"width": width, "height": 844}, has_touch=True, is_mobile=True)
+        page = context.new_page()
+        navigate(page)
+        page.wait_for_timeout(2400)
+        tight = page.evaluate("""() => [...document.querySelectorAll('.hero-offers a')].flatMap(card => {
+          const box = card.getBoundingClientRect(), cs = getComputedStyle(card);
+          const left = box.left + parseFloat(cs.paddingLeft), right = box.right - parseFloat(cs.paddingRight);
+          const room = (right - left) * 0.08, out = [], range = document.createRange();
+          const walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT);
+          for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n);
+            for (const b of range.getClientRects()) if (b.right > right - room || b.left < left - 1) out.push(n.textContent.trim()); }
+          return out; })""")
+        assert not tight, f"Price tile text is too tight or escapes its card at {width}px: {tight}"
+        context.close()
     # The floating button: out of the way over the hero, the picker and the enquiry; there in between.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
@@ -383,7 +399,7 @@ def phone_first_screen(browser):
         cta.click()
     assert page.url.endswith("journey.html"), page.url
     context.close()
-    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; the floating button appears only where it helps", flush=True)
+    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; the floating button appears only where it helps", flush=True)
 
 
 def service_picker(browser):
