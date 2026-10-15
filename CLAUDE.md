@@ -28,6 +28,7 @@ Before every release, run `cd website && npm test` after the export. It checks t
 
 - The hero must never be covered by its own content: no text, button, price rail or header control may overlap the leopard at any screen size. `website/tests/browser-smoke.py` (phase `leopard`) measures this.
 - The hero leopard is layered and alive (breathing, eye glow and blink, gaze, light). Keep it so: a complete still picture for reduced motion, stopped by Pause scene, never moved out of its place. `website/tests/browser-smoke.py` phases `leopard` and `life` enforce it; rebuild the layers with `website/scripts/prepare-v30-hero-layers.py`.
+- The hero pins (Dubai, Maldives, private yacht) place themselves and must never touch the copy, chips, buttons, price bar, header, leopard or each other (phase `pins`). Add or move a pin by its picture coordinates in `Hero.astro`; do not hard-code screen positions.
 - Buttons use one system in `base.css` (round arrow on every trailing arrow, press and focus states). The phone first screen must hold the headline, leopard, three priced destinations and both buttons (phase `phone`).
 - Typography is Montserrat only, site-wide (roman and italic). Do not add a second typeface; `--font-display` points at `--font-ui`. See `website/FONT_MOTION_NOTES.md`.
 - No emoji anywhere on the site. Icons are inline SVG symbols (see `website/src/components/Icon.astro`). Do not use text glyphs such as arrows or bullets as icons.

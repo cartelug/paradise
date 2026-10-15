@@ -3,7 +3,7 @@
 Run after building, exporting and starting a local static server:
     python tests/browser-smoke.py
 Set PARDUS_QA_BASE to test another served export (including GitHub Pages).
-Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,life,phone,picker,stage,hero,flows,fallback.
+Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,pins,life,phone,picker,stage,hero,flows,fallback.
 Set PARDUS_QA_CHROMIUM to a Chromium executable when Playwright's own browser is not installed.
 HTML routes are discovered from the repository export. Screenshots and persistent
 artifacts are not written. Form submissions are intercepted inside the test.
@@ -25,7 +25,7 @@ BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
 VIEWPORTS = [(320, 568), (390, 844), (768, 1024), (1024, 768), (1440, 900)]
-PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,life,phone,picker,stage,hero,flows,fallback").split(","))
+PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,pins,life,phone,picker,stage,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
 REMOTE_FEED = "https://raw.githubusercontent.com/cartelug/paradise/main/travel-updates.json*"
 LAYOUT_IMAGES = """() => [...document.images].filter(img =>
@@ -198,6 +198,7 @@ def leopard_clear(browser):
       for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
       copy.querySelectorAll('.btn').forEach(e => items.push({label: 'button', ...rect(e)}));
       items.push({label: 'price rail', ...rect(document.querySelector('[data-hero-rail]'))});
+      document.querySelectorAll('.spot').forEach(spot => { if (getComputedStyle(spot).display !== 'none') { items.push({label: 'pin ' + spot.dataset.spot, ...rect(spot)}); items.push({label: 'pin label ' + spot.dataset.spot, ...rect(spot.querySelector('.spot-label'))}); } });
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
       const margin = 10;
       const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
@@ -224,6 +225,61 @@ def leopard_clear(browser):
                 assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()
     print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, static and animated", flush=True)
+
+
+def hero_pins(browser):
+    """The pins on the picture (Dubai, Maldives, private yacht) never touch the copy, the chips, the buttons, the price bar,
+    the header, the leopard or each other; they step aside when a screen has no room, and link to real pages."""
+    sizes = [(320, 568), (360, 740), (390, 844), (430, 932), (768, 1024), (820, 1180), (1024, 768), (1100, 700), (1280, 720),
+             (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080)]
+    probe = """() => {
+      const hero = document.querySelector('[data-hero]');
+      const rect = e => { const b = e.getBoundingClientRect(); return {l: b.left, t: b.top, r: b.right, b: b.bottom}; };
+      const items = [];
+      const copy = hero.querySelector('[data-hero-copy]');
+      const range = document.createRange();
+      const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
+      for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
+      copy.querySelectorAll('.btn, .hero-services li').forEach(e => items.push({label: 'control', ...rect(e)}));
+      items.push({label: 'price bar', ...rect(hero.querySelector('[data-hero-rail]'))});
+      items.push({label: 'leopard', ...rect(hero.querySelector('[data-leopard-box]'))});
+      document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
+      const meets = (a, b) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
+      const shown = [...hero.querySelectorAll('.spot')].filter(s => getComputedStyle(s).display !== 'none');
+      const hits = [];
+      const placed = [];
+      for (const spot of shown) {
+        const label = spot.querySelector('.spot-label');
+        label.style.transition = 'none';
+        for (const [name, box] of [['pin', rect(spot)], ['label', rect(label)]]) {
+          for (const item of items) if (meets(box, item)) hits.push(`${spot.dataset.spot} ${name} meets ${item.label}`);
+          for (const other of placed) if (meets(box, other.box)) hits.push(`${spot.dataset.spot} ${name} meets ${other.name}`);
+          if (box.l < 0 || box.r > innerWidth) hits.push(`${spot.dataset.spot} ${name} leaves the screen`);
+        }
+        placed.push({name: spot.dataset.spot + ' pin', box: rect(spot)}, {name: spot.dataset.spot + ' label', box: rect(label)});
+      }
+      return {hits, shown: shown.map(s => s.dataset.spot), links: shown.map(s => s.getAttribute('href'))};
+    }"""
+    results = {}
+    for reduced in ("no-preference", "reduce"):
+        context = context_for(browser, reduced_motion=reduced, viewport={"width": 1440, "height": 900})
+        page = context.new_page()
+        for width, height in sizes:
+            page.set_viewport_size({"width": width, "height": height})
+            navigate(page)
+            page.wait_for_function("document.querySelector('[data-hero]').dataset.spots === 'ready'", timeout=10000)
+            page.evaluate("document.documentElement.classList.add('motion-paused')")
+            page.wait_for_timeout(200)
+            result = page.evaluate(probe)
+            assert not result["hits"], f"Hero pins collide at {width}x{height} ({reduced}): {result['hits']}"
+            assert all(re.search(r"(destination-[a-z]+|cruises)\.html$", link) for link in result["links"]), result["links"]
+            results[(width, height)] = result["shown"]
+        context.close()
+    # Where there is room, the pins are there: all three on common desktops, the Maldives flagship on phones.
+    assert results[(1440, 900)] == ["maldives", "dubai", "yacht"], results[(1440, 900)]
+    assert results[(1920, 1080)] == ["maldives", "dubai", "yacht"], results[(1920, 1080)]
+    assert "maldives" in results[(390, 844)], results[(390, 844)]
+    print(f"PASS hero pins at {len(sizes)} screen sizes: never touch the copy, buttons, price bar, header, leopard or each other; all three on desktops, Maldives on phones", flush=True)
 
 
 def leopard_alive(browser):
@@ -702,7 +758,7 @@ def main():
             launch["args"] = ["--no-sandbox"]
         browser = playwright.chromium.launch(**launch)
         try:
-            unknown = PHASES - {"matrix", "preloader", "leopard", "life", "phone", "picker", "stage", "hero", "flows", "fallback"}
+            unknown = PHASES - {"matrix", "preloader", "leopard", "pins", "life", "phone", "picker", "stage", "hero", "flows", "fallback"}
             assert not unknown, f"Unknown QA phases: {unknown}"
             if "matrix" in PHASES:
                 route_matrix(browser)
@@ -710,6 +766,8 @@ def main():
                 preloader(browser)
             if "leopard" in PHASES:
                 leopard_clear(browser)
+            if "pins" in PHASES:
+                hero_pins(browser)
             if "life" in PHASES:
                 leopard_alive(browser)
             if "phone" in PHASES:

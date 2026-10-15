@@ -45,7 +45,7 @@ test('the generated layer geometry puts the leopard on the right and the blink p
 
 test('the hero keeps every part of the animated leopard and honours pause and reduced motion', async () => {
   const markup = await read('src/components/Hero.astro');
-  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'hl-world', 'hl-breath', 'hl-glow--l', 'hl-glow--r', 'hl-rim', 'data-hero-motes', 'hero-life.ts']) {
+  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'hl-world', 'hl-breath', 'hl-glow--l', 'hl-glow--r', 'hl-rim', 'data-hero-motes', 'hero-life.ts', 'data-hero-spots', 'hero-services']) {
     assert.ok(markup.includes(hook), `Hero.astro lost "${hook}"`);
   }
   const script = await read('src/scripts/hero-life.ts');
@@ -99,3 +99,14 @@ test('buttons share one system: a round arrow on every trailing arrow, press and
   assert.match(css, /\.btn:focus-visible/);
   assert.match(css, /min-height: 54px/);
 });
+
+test('the hero pins place themselves and the "what we arrange" chips sit under the line', async () => {
+  const script = await read('src/scripts/hero-life.ts');
+  for (const behaviour of ['layoutSpots', "dataset.off = 'true'", 'is-measuring', "dataset.spots = 'ready'"]) assert.ok(script.includes(behaviour), `hero-life.ts lost "${behaviour}"`);
+  const markup = await read('src/components/Hero.astro');
+  assert.match(markup, /key: 'maldives'[\s\S]*key: 'dubai'[\s\S]*key: 'yacht'/, 'Maldives must keep first claim on space');
+  assert.match(markup, /href="#what-we-arrange"/);
+  const html = await readFile(resolve(repo, 'index.html'), 'utf8');
+  assert.equal((html.match(/class="spot"/g) || []).length, 3, 'the homepage must carry three pins');
+});
+

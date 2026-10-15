@@ -51,7 +51,7 @@ html.is-ready .page-hero .actions { animation: rise 1.1s var(--ease) .55s both; 
 }
 
 /* A single ambient animation toggle, honoured by every continuous effect. */
-html.motion-paused .hero h1 em, html.motion-paused .hero-drift, html.motion-paused .hero-glow, html.motion-paused .hero-media::after, html.motion-paused .hl-breath, html.motion-paused .hl-rim::before, html.motion-paused .hl-glow,
+html.motion-paused .spot-dot::after, html.motion-paused .spot-label, html.motion-paused .hero h1 em, html.motion-paused .hero-drift, html.motion-paused .hero-glow, html.motion-paused .hero-media::after, html.motion-paused .hl-breath, html.motion-paused .hl-rim::before, html.motion-paused .hl-glow,
 html.hero-dormant .hero-drift, html.hero-dormant .hero-glow, html.hero-dormant .hero-media::after, html.hero-dormant .hl-breath, html.hero-dormant .hl-rim::before, html.hero-dormant .hl-glow { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -67,6 +67,10 @@ html.hero-dormant .hero-drift, html.hero-dormant .hero-glow, html.hero-dormant .
   .hl-breath, .hl-rim::before, .hero h1 em { animation: none !important; }
   .hl-glow { opacity: .34 !important; animation: none !important; }
   .hl-rim, .hl-motes, .hl-eyes { display: none !important; }
+  .spot-dot::after { display: none; }
+  .spot-label { animation: none !important; opacity: 0; }
+  .spot:is(:hover, :focus-visible) .spot-label { opacity: 1; }
+  .hl-spots { transform: none !important; }
 }
 @media print {
   html.js .hero .line > span, html.js .hero .eyebrow, html.js .hero-text, html.js .hero .actions, html.js .hero-rail { opacity: 1 !important; transform: none !important; }

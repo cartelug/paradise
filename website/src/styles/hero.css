@@ -68,6 +68,57 @@ html:not(.js) .hl-glow { opacity: .3; }
 .hero[data-quality='lite'] .hl-rim, .hero[data-quality='lite'] .hl-motes { display: none; }
 .hero[data-quality='lite'] .hero-media::after { display: none; }
 
+.hero-text strong { font-weight: 700; color: #fff; }
+
+/* What Pardus arranges, at a glance: icon chips under the line. */
+.hero-services { display: flex; flex-wrap: wrap; gap: 6px; margin: clamp(14px, 1.8vw, 20px) 0 0; padding: 0; list-style: none; }
+.hero-services li { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 5px 12px 5px 9px; border: 1px solid rgb(236 215 168 / .26); border-radius: 999px; background: rgb(6 14 30 / .46); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-size: .78rem; font-weight: 600; letter-spacing: .01em; color: #eef2f8; white-space: nowrap; }
+.hero-services .icon { width: 16px; height: 16px; color: var(--gold); }
+.hero-services-more { padding: 0 !important; border-color: rgb(236 215 168 / .5) !important; }
+.hero-services-more a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 999px; color: var(--gold-soft); text-decoration: none; }
+.hero-services-more a:hover { color: #fff; }
+html.is-ready .hero-services li { animation: rise .8s var(--ease) calc(.62s + var(--c, 0) * 60ms) both; }
+.hero-services li:nth-child(2) { --c: 1; } .hero-services li:nth-child(3) { --c: 2; } .hero-services li:nth-child(4) { --c: 3; } .hero-services li:nth-child(5) { --c: 4; } .hero-services li:nth-child(6) { --c: 5; } .hero-services li:nth-child(7) { --c: 6; }
+html.js .hero-services li { opacity: 0; }
+html.is-ready .hero-services li { opacity: 1; }
+
+/* The picture as a map of the offer: gold pins on the places Pardus sells. Pins live in picture coordinates, so they move
+   with the artwork; their labels take turns opening, and open on hover or focus. They never sit on the leopard. */
+.hero-inner, .hero-copy { pointer-events: none; }
+.hero-copy a, .hero-copy button, .hero-rail, .hero-services { pointer-events: auto; }
+.hl-spots { position: absolute; inset: 0; transform: translate3d(calc(var(--gx, 0) * -5px), calc(var(--gy, 0) * -3px), 0) scale(1.014); transition: transform .12s linear; }
+.spot { position: absolute; left: var(--dx); top: var(--dy); display: grid; place-items: center; width: 44px; height: 44px; translate: -50% -50%; text-decoration: none; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
+.spot-dot { position: relative; width: 14px; height: 14px; border: 2px solid #fff7e4; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff3cf, var(--gold) 60%, #a77d34); box-shadow: 0 0 0 4px rgb(217 188 130 / .28), 0 4px 14px rgb(2 8 18 / .6); transition: transform .35s var(--ease); }
+.spot-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgb(255 236 190 / .85); animation: spot-ping 2.8s cubic-bezier(.2, .7, .3, 1) calc(var(--k, 0) * .9s) infinite; }
+@keyframes spot-ping { 0% { transform: scale(1); opacity: .9; } 70%, 100% { transform: scale(3.2); opacity: 0; } }
+.spot:hover .spot-dot, .spot:focus-visible .spot-dot { transform: scale(1.25); }
+.spot:focus-visible { outline: none; }
+.spot:focus-visible .spot-dot { outline: 2px solid var(--focus); outline-offset: 6px; }
+.spot-label { position: absolute; display: grid; gap: 1px; width: max-content; max-width: 210px; padding: 8px 13px 9px; border: 1px solid rgb(236 215 168 / .45); border-radius: 14px; background: linear-gradient(180deg, rgb(14 30 54 / .9), rgb(5 12 26 / .92)); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 14px 34px rgb(2 8 18 / .5); color: #fff; text-align: left; pointer-events: none; opacity: 0; transition: opacity .35s ease, transform .45s var(--ease); }
+.spot-label strong { font-size: .875rem; font-weight: 700; letter-spacing: -.005em; }
+.spot-meta { display: block; font-size: .75rem; font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.spot-meta span + span::before { content: ' · '; }
+.spot[data-place='right'] .spot-label { left: 36px; top: 50%; transform: translate(-6px, -50%); }
+.spot[data-place='left'] .spot-label { right: 36px; top: 50%; transform: translate(6px, -50%); }
+.spot[data-place='above'] .spot-label { bottom: 38px; left: 50%; transform: translate(-50%, 6px); }
+.spot[data-place='below'] .spot-label { top: 38px; left: 50%; transform: translate(-50%, -6px); }
+.spot[data-off='true'] { display: none; }
+.hl-spots.is-measuring .spot-label { transition: none !important; }
+/* Labels take turns, one at a time; the cycle length follows how many pins have room at this screen size. */
+.hl-spots[data-count='1'] .spot-label { animation: spot-show-1 9s var(--ease) 1s infinite; }
+.hl-spots[data-count='2'] .spot-label { animation: spot-show-2 10s var(--ease) calc(.6s + var(--k, 0) * 5s) infinite; }
+.hl-spots[data-count='3'] .spot-label { animation: spot-show-3 15s var(--ease) calc(.6s + var(--k, 0) * 5s) infinite; }
+@keyframes spot-show-1 { 0% { opacity: 0; } 6%, 52% { opacity: 1; } 60%, 100% { opacity: 0; } }
+@keyframes spot-show-2 { 0% { opacity: 0; } 5%, 40% { opacity: 1; } 47%, 100% { opacity: 0; } }
+@keyframes spot-show-3 { 0% { opacity: 0; } 4%, 26% { opacity: 1; } 31%, 100% { opacity: 0; } }
+.hl-spots .spot:hover .spot-label, .hl-spots .spot:focus-visible .spot-label { animation: none; opacity: 1; }
+.spot[data-place='right']:is(:hover, :focus-visible) .spot-label, .spot[data-place='left']:is(:hover, :focus-visible) .spot-label { transform: translate(0, -50%); }
+.spot[data-place='above']:is(:hover, :focus-visible) .spot-label, .spot[data-place='below']:is(:hover, :focus-visible) .spot-label { transform: translate(-50%, 0); }
+html:not(.js) .hl-spots { display: none; }
+.hl-spots { opacity: 0; visibility: hidden; }
+.hero[data-spots='ready'] .hl-spots { opacity: 1; visibility: visible; transition: opacity 1s ease, transform .12s linear; }
+.hero[data-quality='lite'] .spot-dot::after { animation: none; }
+
 .hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
   linear-gradient(90deg, rgb(5 12 26 / .86) 0%, rgb(5 12 26 / .5) 36%, rgb(5 12 26 / 0) 60%),
   linear-gradient(0deg, var(--midnight) 0%, rgb(5 12 26 / .8) 8%, rgb(5 12 26 / 0) 34%),
@@ -80,7 +131,7 @@ html:not(.js) .hl-glow { opacity: .3; }
 @media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
 .hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
 .hero .line > span { display: block; }
-.hero-text { max-width: 46ch; margin-top: clamp(18px, 2.2vw, 28px); font-size: var(--fs-lead); line-height: 1.6; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
+.hero-text { max-width: 46ch; margin-top: clamp(16px, 2vw, 26px); font-size: clamp(1.0625rem, .98rem + .4vw, 1.3125rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
 .hero .actions { margin-top: clamp(24px, 3vw, 38px); }
 .hero .eyebrow { margin-bottom: clamp(16px, 2vw, 26px); text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
 
@@ -104,6 +155,15 @@ html:not(.js) .hl-glow { opacity: .3; }
 .hero-offers .offer-go { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; color: var(--gold); }
 .hero-offers .offer-go .icon { width: 18px; height: 18px; transition: transform .35s var(--ease); }
 .hero-offers a:hover .offer-go .icon { transform: translateX(4px); }
+/* Wide screens: each price in the bar gets its photograph. */
+@media (min-width: 1280px) and (min-aspect-ratio: 11/10) {
+  .hero-offers a { grid-template-columns: 50px minmax(0, 1fr) auto; column-gap: 14px; }
+  .hero-offers .offer-thumb { display: block; grid-column: 1; grid-row: 1 / span 2; width: 50px; height: 50px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgb(236 215 168 / .3), 0 6px 16px rgb(2 8 18 / .35); }
+  .hero-offers .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .hero-offers a:hover .offer-thumb img { transform: scale(1.1); }
+  .hero-offers .name, .hero-offers .amount { grid-column: 2; }
+  .hero-offers .offer-go { grid-column: 3; }
+}
 @media (min-width: 761px) and (min-aspect-ratio: 11/10) and (max-height: 820px) {
   .hero-rail { position: relative; padding-top: 4px; }
   .hero-rail-head { position: absolute; top: -48px; right: 0; z-index: 1; margin: 0; }
@@ -122,7 +182,12 @@ html:not(.js) .hl-glow { opacity: .3; }
   .hero .eyebrow, .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
   .hero .eyebrow { order: 10; margin-bottom: 12px; }
   .hero h1 { order: 20; font-size: clamp(2rem, 10.4vw, 3.4rem); }
-  .hero-text { order: 30; font-size: .9375rem; max-width: 34ch; margin-top: 14px; }
+  .hero-text { order: 30; font-size: 1.0625rem; max-width: 34ch; margin-top: 12px; }
+  .hero-text strong { display: block; }
+  ul.hero-services { order: 32; flex-wrap: nowrap; overflow-x: auto; gap: 6px; margin: 12px 0 0; padding: 0 var(--gutter); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+  .hero-services::-webkit-scrollbar { display: none; }
+  .hero-services li { min-height: 32px; padding: 4px 11px 4px 9px; font-size: .78rem; }
+  .hero-services .icon { width: 15px; height: 15px; }
   /* Two equal buttons. The primary keeps its round arrow, sitting inside the pill; the secondary is a solid glass pill so
      it reads over the bright sunset sky. Labels are sized so neither ever touches its edge. */
   .hero .actions { order: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
@@ -142,6 +207,14 @@ html:not(.js) .hl-glow { opacity: .3; }
   .hero-drift { transform-origin: 100% 0; animation-name: hero-drift-stacked; }
   @keyframes hero-drift-stacked { from { transform: scale(1); } to { transform: scale(1.04); } }
   .hl-world { inset: 7% 0 -7% 0; }
+  .hl-spots { inset: 7% 0 -7% 0; }
+  .spot { left: var(--mx); top: var(--my); }
+  .spot[data-stacked='false'] { display: none; }
+  .spot-label { max-width: 132px; padding: 7px 12px 8px; border-radius: 12px; text-align: center; }
+  .spot-meta span { display: block; line-height: 1.35; }
+  .spot-meta span + span::before { content: none; }
+  .spot-label strong { font-size: .8125rem; }
+  .spot-meta { font-size: .6875rem; }
   .hero-glow { background: radial-gradient(20% 13% at 91.8% 48.4%, rgb(255 190 110 / .6), rgb(255 150 70 / .14) 58%, transparent 80%); }
   .hero-shade { background:
     linear-gradient(180deg, rgb(5 12 26 / .7) 0%, rgb(5 12 26 / .25) 30%, rgb(5 12 26 / 0) 46%),
@@ -161,7 +234,7 @@ html:not(.js) .hl-glow { opacity: .3; }
   .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform .9s var(--ease); }
   .hero-offers a:hover .offer-thumb img { transform: scale(1.14); }
   .hero-offers .name { grid-column: 1; font-size: clamp(.8125rem, .7rem + .5vw, .9375rem); flex-direction: column; align-items: flex-start; gap: 0; }
-  .hero-offers .name small { display: none; }
+  .hero-offers .name small { display: block; font-size: .6875rem; font-weight: 600; color: rgb(255 255 255 / .78); }
   .hero-offers .amount { grid-column: 1; display: grid; gap: 0; font-size: clamp(.78rem, .66rem + .45vw, .9rem); font-weight: 700; color: #fff; line-height: 1.2; }
   .hero-offers .amount .from { font-size: .625rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
   .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }

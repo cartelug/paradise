@@ -2,6 +2,13 @@
 
 Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## V30.3: the hero as a map of the offer (15 October 2026)
+
+- **Pins on the picture.** Gold pins sit on the Dubai skyline, the overwater villas (Maldives) and the yacht (private yacht cruises). Their labels take turns opening with nights and the starting price, open on hover or focus, and link to the destination or cruise page. The pins place themselves: after the page settles, `hero-life.ts` measures the headline, chips, buttons, price bar, header and leopard (with room for its head turns), opens each label on a side with room, and hides any pin that has none. Maldives has first claim on space. All three show on common desktops; the Maldives pin shows on phones.
+- **What Pardus arranges, at a glance.** The hero line is now "You choose where. We arrange everything." with a row of icon chips (Flights, Hotels, Transfers, Visas, Yachts, Safaris, +7 more to the full list).
+- **Prices.** Phone tiles show the nights; the desktop price bar shows a photograph beside each price on wide screens.
+- **Tests.** New browser phase `pins` (14 screen sizes, motion and reduced motion); the `leopard` phase now counts the pins too.
+
 ## V30.2: the living leopard, a new phone hero and a service picker (14 October 2026)
 
 - **The leopard is alive.** The hero is built in layers (a clean world plate, the leopard, a closed-eye patch, glows, a light band and a few drifting motes). It breathes; its eyes ignite after the opening and blink at random; its head turns toward the pointer, a finger, or how a phone is tilted (Android), and wanders by itself when left alone; a warm light follows the pointer across its fur; tapping it makes its eyes flare; scrolling pushes it toward you. A speed check drops the light effects on slow phones. Reduced motion gives a complete still picture, Pause scene stops everything, and the animal never leaves its place so nothing ever covers it (`browser-smoke.py` phases `leopard` and `life` measure both).
