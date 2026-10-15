@@ -544,7 +544,9 @@ def hero_and_menu(browser):
     expect(page.locator("html")).to_have_class(re.compile(r"\bmenu-open\b"))
     assert page.evaluate("getComputedStyle(document.documentElement).overflow") == "hidden"
     links = menu.locator(".menu-nav a")
-    assert links.count() == 4
+    # The same five labels as the header on every page (site.ts navigation).
+    assert [" ".join(text.split()[:2]) for text in menu.locator(".menu-nav a strong").all_inner_texts()] == ["Destinations", "Signature journeys", "Our difference", "Corporate travel", "Journal"]
+    assert links.count() == 5
     expect(menu.locator('.menu-nav a[aria-current="page"]')).to_contain_text("Destinations")
     assert menu.locator(".menu-nav .icon-pin, .menu-nav svg").count() >= 4  # symbols, not emoji
     for box in links.all():
@@ -558,7 +560,8 @@ def hero_and_menu(browser):
     menu.locator(".menu-close").tap()
     expect(menu).to_have_js_property("open", False)
     toggle.tap()
-    menu.locator('.menu-nav a[href$="cruises.html"]').tap()
+    # Private cruises lives in the menu's "More" list since the navigation was standardised.
+    menu.locator('.menu-more a[href$="cruises.html"]').tap()
     page.wait_for_url(re.compile(r"cruises\.html$"))
     context.close()
 
