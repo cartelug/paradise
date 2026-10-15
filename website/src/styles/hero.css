@@ -123,9 +123,13 @@ html:not(.js) .hl-glow { opacity: .3; }
   .hero .eyebrow { order: 10; margin-bottom: 12px; }
   .hero h1 { order: 20; font-size: clamp(2rem, 10.4vw, 3.4rem); }
   .hero-text { order: 30; font-size: .9375rem; max-width: 34ch; margin-top: 14px; }
-  .hero .actions { order: 60; flex-wrap: nowrap; gap: 8px; margin-top: 14px; }
-  .hero .actions .btn { flex: 1 1 auto; min-height: 56px; padding: 8px 14px; gap: 8px; font-size: .9375rem; white-space: nowrap; }
-  .hero .actions .btn:has(> .icon-arrow-down) { padding-left: 24px; }
+  /* Two equal buttons. The primary keeps its round arrow, sitting inside the pill; the secondary is a solid glass pill so
+     it reads over the bright sunset sky. Labels are sized so neither ever touches its edge. */
+  .hero .actions { order: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .hero .actions .btn { min-width: 0; min-height: 54px; padding: 6px 12px; gap: 10px; font-size: .9375rem; white-space: nowrap; }
+  .hero .actions .btn--gold { justify-content: space-between; padding: 6px 6px 6px 22px; }
+  .hero .actions .btn--gold > .icon { width: 18px; height: 18px; padding: 10px; }
+  .hero .actions .btn--ghost { justify-content: center; border-color: rgb(236 215 168 / .6); background: rgb(6 14 30 / .66); -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2); box-shadow: 0 10px 26px rgb(2 8 18 / .35); }
   .hero .actions .btn--ghost > .icon { display: none; }
   .hero-zone { order: 40; display: block; position: relative; flex: 1 1 auto; width: 100vw; margin-inline: calc(50% - 50vw); min-height: clamp(240px, 68vw, 450px); container-type: size; }
   .hero-media { inset: 0; overflow: visible; container-type: normal; transform: none; -webkit-mask-image: none; mask-image: none; }
@@ -163,9 +167,10 @@ html:not(.js) .hl-glow { opacity: .3; }
   .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }
   .hero-offers .offer-go .icon { width: 14px; height: 14px; }
 }
-@media (max-height: 740px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
-@media (max-width: 420px) { .hero .actions .btn .btn-long { display: none; } }
-@media (max-width: 340px) { .hero .actions .btn { white-space: normal; } }
+@media (max-height: 860px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
+@media (max-width: 760px) { .hero .actions .btn .btn-long { display: none; } }
+@media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } .hero .actions .btn--gold { padding-left: 18px; } }
+@media (max-width: 350px) { .hero .actions .btn .btn-mid { display: none; } }
 @media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
 @media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.8rem, 7.2vw, 4.8rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }
