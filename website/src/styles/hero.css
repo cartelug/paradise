@@ -72,10 +72,10 @@ html:not(.js) .hl-glow { opacity: .3; }
 
 /* What Pardus arranges, at a glance: icon chips under the line. */
 .hero-services { display: flex; flex-wrap: wrap; gap: 6px; margin: clamp(14px, 1.8vw, 20px) 0 0; padding: 0; list-style: none; }
-.hero-services li { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 5px 12px 5px 9px; border: 1px solid rgb(236 215 168 / .26); border-radius: 999px; background: rgb(6 14 30 / .46); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-size: .78rem; font-weight: 600; letter-spacing: .01em; color: #eef2f8; white-space: nowrap; }
+.hero-services li { flex: 0 0 auto; min-width: max-content; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 5px 16px 5px 11px; border: 1px solid rgb(236 215 168 / .26); border-radius: 999px; background: rgb(6 14 30 / .46); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-size: .78rem; font-weight: 600; letter-spacing: .01em; color: #eef2f8; white-space: nowrap; }
 .hero-services .icon { width: 16px; height: 16px; color: var(--gold); }
 .hero-services-more { padding: 0 !important; border-color: rgb(236 215 168 / .5) !important; }
-.hero-services-more a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 999px; color: var(--gold-soft); text-decoration: none; }
+.hero-services-more a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 16px; border-radius: 999px; color: var(--gold-soft); text-decoration: none; }
 .hero-services-more a:hover { color: #fff; }
 html.is-ready .hero-services li { animation: rise .8s var(--ease) calc(.62s + var(--c, 0) * 60ms) both; }
 .hero-services li:nth-child(2) { --c: 1; } .hero-services li:nth-child(3) { --c: 2; } .hero-services li:nth-child(4) { --c: 3; } .hero-services li:nth-child(5) { --c: 4; } .hero-services li:nth-child(6) { --c: 5; } .hero-services li:nth-child(7) { --c: 6; }
@@ -186,7 +186,9 @@ html:not(.js) .hl-spots { display: none; }
   .hero-text strong { display: block; }
   ul.hero-services { order: 32; flex-wrap: nowrap; overflow-x: auto; gap: 6px; margin: 12px 0 0; padding: 0 var(--gutter); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
   .hero-services::-webkit-scrollbar { display: none; }
-  .hero-services li { min-height: 32px; padding: 4px 11px 4px 9px; font-size: .78rem; }
+  .hero-services li { min-height: 34px; padding: 4px 15px 4px 10px; font-size: .78rem; }
+  .hero-services .hero-services-more a { min-height: 32px; padding: 0 15px; }
+  ul.hero-services::after { content: ''; flex: 0 0 var(--gutter); }
   .hero-services .icon { width: 15px; height: 15px; }
   /* Two equal buttons. The primary keeps its round arrow, sitting inside the pill; the secondary is a solid glass pill so
      it reads over the bright sunset sky. Labels are sized so neither ever touches its edge. */

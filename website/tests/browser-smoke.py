@@ -380,6 +380,22 @@ def phone_first_screen(browser):
           return out; })""")
         assert not tight, f"Price tile text is too tight or escapes its card at {width}px: {tight}"
         context.close()
+    # The "what we arrange" chips never squeeze their labels: every label keeps at least 8 px inside its pill, scrolled or not.
+    for width in [320, 390, 430]:
+        context = context_for(browser, viewport={"width": width, "height": 844}, has_touch=True, is_mobile=True)
+        page = context.new_page()
+        navigate(page)
+        page.wait_for_timeout(2400)
+        cramped = page.evaluate("""() => [...document.querySelectorAll('.hero-services li')].flatMap(li => {
+          const pill = li.getBoundingClientRect(), range = document.createRange(), out = [];
+          const walker = document.createTreeWalker(li, NodeFilter.SHOW_TEXT);
+          for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n);
+            const b = range.getBoundingClientRect(); if (b.left - pill.left < 8 || pill.right - b.right < 8) out.push(n.textContent.trim()); }
+          return out; })""")
+        assert not cramped, f"Chip labels touch the edge of their pill at {width}px: {cramped}"
+        shrink = page.evaluate("[...document.querySelectorAll('.hero-services li')].map(li => getComputedStyle(li).flexShrink)")
+        assert set(shrink) == {"0"}, shrink
+        context.close()
     # The floating button: out of the way over the hero, the picker and the enquiry; there in between.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
@@ -399,7 +415,7 @@ def phone_first_screen(browser):
         cta.click()
     assert page.url.endswith("journey.html"), page.url
     context.close()
-    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; the floating button appears only where it helps", flush=True)
+    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; chip labels keep 8 px inside their pills; the floating button appears only where it helps", flush=True)
 
 
 def service_picker(browser):
