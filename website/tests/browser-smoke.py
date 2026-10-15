@@ -202,8 +202,10 @@ def leopard_clear(browser):
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
       const margin = 10;
       const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
-      const eyes = document.querySelector('[data-leopard-eyes]').getBoundingClientRect();
-      const eyeY = eyes.top + eyes.height / 2;
+      // The eyes, from the leopard layer and the eye positions the layer generator writes (hero-layers.css). The blink patch
+      // is not used: reduced motion hides it.
+      const leopard = document.querySelector('.hl-leopard'), lb = leopard.getBoundingClientRect(), lcs = getComputedStyle(leopard);
+      const eyeY = lb.top + lb.height * (parseFloat(lcs.getPropertyValue('--eye-ly')) + parseFloat(lcs.getPropertyValue('--eye-ry'))) / 200;
       return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight};
     }"""
     for reduced in ("reduce", "no-preference"):
