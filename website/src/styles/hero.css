@@ -214,8 +214,9 @@ html:not(.js) .hl-spots { display: none; }
 @media (max-height: 860px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
 @media (max-width: 760px) { .hero .actions .btn .btn-long { display: none; } }
 @media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } .hero .actions .btn--gold { padding-left: 18px; } }
-/* The narrowest phones (320 px): the two buttons stack, so each label and its arrow keep their room. */
-@media (max-width: 350px) { .hero .actions { grid-template-columns: minmax(0, 1fr); } .hero .actions .btn--gold { padding-left: 22px; } }
+/* The narrowest phones (320 px): the buttons stay side by side so the leopard keeps its place on the first screen; the main
+   button drops "your" and its arrow so its label keeps its room. */
+@media (max-width: 350px) { .hero .actions .btn .btn-mid { display: none; } .hero .actions .btn--gold { justify-content: center; padding-inline: 12px; } .hero .actions .btn--gold > .icon { display: none; } }
 @media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
 @media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.4rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }
