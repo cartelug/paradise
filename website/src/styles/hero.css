@@ -100,13 +100,16 @@ html:not(.js) .hl-spots { display: none; }
   linear-gradient(180deg, rgb(5 12 26 / .62), rgb(5 12 26 / 0) 20%); }
 .hero-inner { display: grid; grid-template-rows: 1fr auto; min-height: inherit; padding-top: calc(var(--header-h) + 1vh); padding-bottom: clamp(18px, 2.6vw, 34px); }
 .hero-copy { align-self: center; max-width: var(--copy-max); padding-block: clamp(14px, 3.4vh, 64px); transform: translate3d(0, var(--copy-shift, 0px), 0); opacity: var(--copy-fade, 1); }
-.hero h1 { font-size: clamp(2.2rem, min(.6rem + 3.9vw, 7.6vh), 4.25rem); line-height: 1.08; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
+/* "Personally curated." is the longest line and sits at the yacht's height, so the size is capped to end it before the yacht
+   pin on desktops (about 9.75 em wide; checked by the browser smoke phase "pins"). */
+.hero h1 { font-size: clamp(2.2rem, min(4vw, 7.6vh), 3.4rem); line-height: 1.08; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
 .hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
 @keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
 @media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
 .hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
 .hero .line > span { display: block; }
-.hero-text { max-width: 46ch; margin-top: clamp(16px, 2vw, 26px); font-size: clamp(1.0625rem, .98rem + .4vw, 1.3125rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
+/* Held to about the headline's width, so on desktops it wraps before the yacht pin in the picture. */
+.hero-text { max-width: 26em; margin-top: clamp(16px, 2vw, 26px); font-size: clamp(1.0625rem, .98rem + .4vw, 1.3125rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
 .hero .actions { margin-top: clamp(24px, 3vw, 38px); }
 .hero .eyebrow { margin-bottom: clamp(16px, 2vw, 26px); text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
 
