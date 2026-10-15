@@ -122,7 +122,7 @@ def preloader(browser):
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-full\b"))
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-active\b"))
     expect(intro).to_be_visible()
-    expect(intro.get_by_text("Beautifully arranged.")).to_be_visible()
+    expect(intro.get_by_text("Personally curated.")).to_be_visible()
     skip = page.get_by_role("button", name=re.compile("Skip introduction"))
     expect(skip).to_be_visible()
     expect(skip).to_be_focused()
@@ -504,7 +504,7 @@ def assert_hero(page, width):
     hero = page.locator("[data-hero]")
     expect(hero).to_be_visible()
     expect(page.locator("body")).to_have_attribute("data-pardus-version", "30")
-    assert " ".join(hero.locator("h1").inner_text().split()) == "Luxury travel, beautifully arranged."
+    assert " ".join(hero.locator("h1").inner_text().split()) == "Extraordinary journeys. Personally curated."
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link svg").first).to_be_visible()
