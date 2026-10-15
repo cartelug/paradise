@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { site } from '../data/site';
+import { site, path } from '../data/site';
 ---
-<Layout label="Website terms" title="Website information and terms" description="Information about your Pardus travel proposal, journey brief, travel requirements, bookings and cancellations." simpleFooter class="inner">
+<Layout label="Terms" title="Booking, cancellations and terms" description="How a Pardus booking works, what to expect from your travel proposal, how cancellations and changes are handled, and the scope of this website." simpleFooter class="inner">
   <PageHero eyebrow="Before you travel" compact>
     <Fragment slot="title">A little <em>clarity.</em></Fragment>
-    <p class="lead">These notes explain the scope of this website. They are not booking terms or a travel contract.</p>
+    <p class="lead">How a booking works, where cancellation and change conditions come from, and the scope of this website. This page is not a travel contract.</p>
   </PageHero>
   <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="Terms details">
     <div class="wrap">
@@ -15,7 +15,10 @@ import { site } from '../data/site';
     <h2>Your itinerary and proposal</h2><p>Explore destinations, stays and experiences, then discuss the journey you have in mind. Your accommodation, itinerary, inclusions, availability and final price are confirmed in your proposal before booking.</p>
     <h2>Your journey brief</h2><p>The planner produces a file for you to keep. {site.enquiryEndpoint ? 'Downloading it, and sending your brief to Pardus, does not reserve a service, take payment or create a contract with Pardus.' : 'Downloading it does not send an enquiry, reserve a service, take payment or create a contract with Pardus.'}</p>
     <h2>Travel requirements</h2><p>Entry, visa, health and documentation requirements depend on your circumstances and can change. Verify applicable requirements with official authorities before arranging travel. Guidance cannot guarantee a visa decision or permission to enter a destination.</p>
-    <h2>Bookings and cancellations</h2><p>Before any booking or payment, request the confirmed itinerary, price, applicable supplier terms, payment schedule and cancellation conditions. Those details are not established by this website.</p>
+    <h2>How a booking works</h2><p>An enquiry on this website books nothing and charges nothing. A Pardus adviser replies with a written proposal; you review it, ask for any change, and confirm only when you are happy. The steps are set out on <a href={path('about.html') + '#how-booking-works'}>Our difference</a>.</p>
+    <h2>Cancellations and changes</h2>
+    <p>Cancellation and change conditions are set by the airlines, hotels, yacht operators and other suppliers involved in your journey, so they differ from trip to trip. Pardus states them in your written proposal, together with the price, the payment schedule and what is included, before you pay anything.</p>
+    <p>Before you confirm, ask for the cancellation and change conditions that apply to your journey, and for anything that is unclear. To cancel or change a confirmed booking, write to your adviser or to <a href={`mailto:${site.bookingsEmail}`}>{site.bookingsEmail}</a> as early as you can. Those conditions are not established by this website.</p>
     <h2>Destination photography</h2><p>Photography introduces the destinations and experiences you can discuss with Pardus. Your proposal identifies the accommodation and services selected for your trip.</p>
       </article>
     </div>

@@ -45,16 +45,33 @@ test('the generated layer geometry puts the leopard on the right and the blink p
 
 test('the hero keeps every part of the animated leopard and honours pause and reduced motion', async () => {
   const markup = await read('src/components/Hero.astro');
-  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'hl-world', 'hl-breath', 'hl-glow--l', 'hl-glow--r', 'hl-rim', 'data-hero-motes', 'hero-life.ts', 'data-hero-spots', 'hero-services']) {
+  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'hl-world', 'hl-breath', 'hl-rim', 'data-hero-motes', 'hero-life.ts', 'data-hero-spots']) {
     assert.ok(markup.includes(hook), `Hero.astro lost "${hook}"`);
   }
   const script = await read('src/scripts/hero-life.ts');
-  for (const behaviour of ['pointermove', 'touchmove', 'deviceorientation', 'prefers-reduced-motion', 'motion-paused', 'visibilitychange', "dataset.quality = 'lite'"]) {
+  for (const behaviour of ['prefers-reduced-motion', 'motion-paused', 'visibilitychange', "dataset.quality = 'lite'", 'slowBlink']) {
     assert.ok(script.includes(behaviour), `hero-life.ts lost "${behaviour}"`);
   }
   const motion = await read('src/styles/motion.css');
   assert.match(motion, /html\.motion-paused[^{]*\.hl-breath/, 'Pause scene must stop the breathing');
   assert.match(motion, /prefers-reduced-motion: reduce[\s\S]*\.hl-breath/, 'reduced motion must stop the breathing');
+});
+
+// The owner found the earlier leopard unsettling for some clients (15 October 2026): glowing eyes, a head that followed the
+// pointer, finger or tilted phone, a flare and a buzz when touched. It must stay warm and regal: alive, never watching the visitor.
+test('the hero leopard is calm: no glowing eyes, no following the visitor, no reaction to a touch', async () => {
+  const markup = await read('src/components/Hero.astro');
+  assert.doesNotMatch(markup, /hl-glow/, 'the leopard must not have glowing eyes');
+  const script = await read('src/scripts/hero-life.ts');
+  for (const forbidden of ['pointermove', 'pointerdown', 'touchmove', 'deviceorientation', 'vibrate', 'startle', 'glint', 'scrollY']) {
+    assert.ok(!script.includes(forbidden), `hero-life.ts must not use "${forbidden}": the leopard never reacts to the visitor`);
+  }
+  const css = await read('src/styles/hero.css');
+  assert.doesNotMatch(css, /hl-glow|hl-ignite|--spot|--push/, 'hero.css must not carry glow, ignite, pointer-light or scroll-push rules');
+  assert.match(script, /slowBlink/, 'the leopard keeps a slow, relaxed blink');
+  assert.match(css, /hl-breathe/, 'the leopard keeps breathing');
+  // The animal sways slowly (more than ten seconds a turn would be too still; faster than about six would look restless).
+  assert.match(script, /Math\.sin\(now \/ 6900\)/);
 });
 
 test('the phone dock shows all three destinations and prices at once, with no hidden swipe', async () => {
@@ -100,12 +117,12 @@ test('buttons share one system: a round arrow on every trailing arrow, press and
   assert.match(css, /min-height: 54px/);
 });
 
-test('the hero pins place themselves and the "what we arrange" chips sit under the line', async () => {
+test('the hero pins place themselves', async () => {
   const script = await read('src/scripts/hero-life.ts');
   for (const behaviour of ['layoutSpots', "dataset.off = 'true'", 'is-measuring', "dataset.spots = 'ready'"]) assert.ok(script.includes(behaviour), `hero-life.ts lost "${behaviour}"`);
   const markup = await read('src/components/Hero.astro');
   assert.match(markup, /key: 'maldives'[\s\S]*key: 'dubai'[\s\S]*key: 'yacht'/, 'Maldives must keep first claim on space');
-  assert.match(markup, /href="#what-we-arrange"/);
+  assert.doesNotMatch(markup, /hero-services/, 'the first screen stays uncluttered: the services are listed lower down, in "What we arrange"');
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   assert.equal((html.match(/class="spot"/g) || []).length, 3, 'the homepage must carry three pins');
 });

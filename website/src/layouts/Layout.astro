@@ -13,7 +13,7 @@ import BrandSprite from '../components/BrandSprite.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
-import { site, path, absolute, socialLinks } from '../data/site';
+import { site, path, absolute, socialLinks, phoneUrl } from '../data/site';
 interface Props { title?: string; label?: string; description?: string; image?: string; simpleFooter?: boolean; class?: string; }
 const { title, label, description = site.description, image = 'images/pardus-hero-desktop-v25-1536.webp', simpleFooter = false, class: className } = Astro.props;
 // The preloader names the page that is opening.
@@ -27,9 +27,11 @@ const organizationSchema = {
   '@id': `${canonical.origin}${path()}#organization`,
   name: site.name,
   description: site.description,
+  slogan: site.tagline,
   url: `${canonical.origin}${path()}`,
   logo: absolute('brand/pardus-primary-512.png'),
   ...(site.email ? { email: site.email } : {}),
+  ...(phoneUrl ? { telephone: site.phone } : {}),
   ...(socialLinks.length ? { sameAs: socialLinks.map(link => link.href) } : {}),
 };
 // HARD RULE: the preloader runs on every page (CLAUDE.md). This inline script only decides, before first paint, which version:

@@ -202,8 +202,8 @@ def leopard_clear(browser):
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
       const margin = 10;
       const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
-      const glow = document.querySelector('.hl-glow--l').getBoundingClientRect();
-      const eyeY = glow.top + glow.height / 2;
+      const eyes = document.querySelector('[data-leopard-eyes]').getBoundingClientRect();
+      const eyeY = eyes.top + eyes.height / 2;
       return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight};
     }"""
     for reduced in ("reduce", "no-preference"):
@@ -240,7 +240,7 @@ def hero_pins(browser):
       const range = document.createRange();
       const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
       for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
-      copy.querySelectorAll('.btn, .hero-services li').forEach(e => items.push({label: 'control', ...rect(e)}));
+      copy.querySelectorAll('.btn').forEach(e => items.push({label: 'control', ...rect(e)}));
       items.push({label: 'price bar', ...rect(hero.querySelector('[data-hero-rail]'))});
       items.push({label: 'leopard', ...rect(hero.querySelector('[data-leopard-box]'))});
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
@@ -283,7 +283,8 @@ def hero_pins(browser):
 
 
 def leopard_alive(browser):
-    """The leopard is animated: it breathes, its eyes glow, it turns toward the pointer and a finger, and it stills for reduced motion."""
+    """The leopard is gently alive and calm: it breathes, sways a little, blinks slowly and stills for reduced motion. It never
+    glows, never follows the pointer or a finger, and does not react to a touch (the owner found that unsettling)."""
     context = context_for(browser, viewport={"width": 1440, "height": 900})
     page = context.new_page()
     errors = []
@@ -292,24 +293,35 @@ def leopard_alive(browser):
     page.wait_for_timeout(2600)
     expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "running")
     assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationName") == "hl-breathe"
-    assert page.locator(".hl-glow--l").evaluate("el => parseFloat(getComputedStyle(el).opacity)") > 0.1
+    assert page.locator(".hl-glow, .hl-glows").count() == 0, "the leopard must not have glowing eyes"
     assert page.locator(".hl-eyes img").evaluate("img => img.complete && img.naturalWidth > 0")
     # The blink patch sits over the eyes, not over the whole face.
     box = page.evaluate("() => { const e = document.querySelector('.hl-eyes').getBoundingClientRect(), l = document.querySelector('.hl-leopard').getBoundingClientRect(); return {w: e.width / l.width, h: e.height / l.height}; }")
     assert 0.3 < box["w"] < 0.6 and 0.05 < box["h"] < 0.2, box
-    # Gaze follows the pointer in both directions.
-    page.mouse.move(120, 450)
-    for step in range(12):
-        page.mouse.move(120 + step, 450)
-        page.wait_for_timeout(40)
-    page.wait_for_timeout(700)
-    left = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
-    for step in range(12):
-        page.mouse.move(1380 - step, 450)
-        page.wait_for_timeout(40)
-    page.wait_for_timeout(700)
-    right = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
-    assert left < -0.3 and right > 0.3, (left, right)
+    # It blinks, slowly (the closed patch is shown for most of a second), and sways a little by itself.
+    page.wait_for_function("document.querySelector('.hl-eyes').getAnimations().length > 0", timeout=16000)
+    duration = page.evaluate("document.querySelector('.hl-eyes').getAnimations()[0].effect.getTiming().duration")
+    assert duration >= 900, f"the blink must be slow and relaxed, not a flicker ({duration} ms)"
+    sway = []
+    for _ in range(10):
+        sway.append(float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0")))
+        page.wait_for_timeout(700)
+    assert max(sway) - min(sway) > 0.01, f"the head should sway a little on its own: {sway}"
+    # The visitor does not steer it: a pointer sent hard left and hard right leaves the head inside its small idle sway.
+    for x in (60, 1380):
+        for step in range(14):
+            page.mouse.move(x + step, 450)
+            page.wait_for_timeout(40)
+        page.wait_for_timeout(500)
+        gx = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
+        assert abs(gx) <= 0.5, f"the leopard must not follow the pointer (gaze {gx} with the pointer at {x})"
+    # Touching the animal does nothing: no flare, no extra animation on the eyes.
+    box = page.locator("[data-leopard-box]").bounding_box()
+    before = page.evaluate("document.querySelector('.hl-eyes').getAnimations().length")
+    page.mouse.click(box["x"] + box["width"] * 0.5, box["y"] + box["height"] * 0.5)
+    page.wait_for_timeout(200)
+    after = page.evaluate("document.querySelector('.hl-eyes').getAnimations().length")
+    assert after <= before, "tapping the leopard must not trigger anything"
     # Pausing stops every continuous effect and the script loop.
     page.locator("[data-scene-motion]").click()
     page.wait_for_timeout(300)
@@ -329,19 +341,18 @@ def leopard_alive(browser):
     expect(page.locator(".hl-body img")).to_be_visible()
     context.close()
 
-    # A finger turns the head too, and tapping the animal wakes it.
+    # A finger does not turn the head either.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
     navigate(page)
     page.wait_for_timeout(2400)
-    before = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
     page.evaluate("""() => { const hero = document.querySelector('[data-hero-life]'); const point = (x, y) => new Touch({identifier: 1, target: hero, clientX: x, clientY: y});
         for (const x of [60, 70, 80, 90]) hero.dispatchEvent(new TouchEvent('touchmove', {touches: [point(x, 400)], bubbles: true})); }""")
     page.wait_for_timeout(900)
-    after = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx')"))
-    assert after < before - 0.2, (before, after)
+    gx = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
+    assert abs(gx) <= 0.5, f"a finger must not steer the leopard ({gx})"
     context.close()
-    print("PASS the leopard is alive: it breathes, its eyes glow, it follows the pointer and a finger, pauses on request and is a still picture for reduced motion", flush=True)
+    print("PASS the leopard is calm and gently alive: it breathes, sways a little and blinks slowly; it never glows, never follows the pointer or a finger and ignores a tap; it pauses on request and is a still picture for reduced motion", flush=True)
 
 
 def phone_first_screen(browser):
@@ -380,22 +391,6 @@ def phone_first_screen(browser):
           return out; })""")
         assert not tight, f"Price tile text is too tight or escapes its card at {width}px: {tight}"
         context.close()
-    # The "what we arrange" chips never squeeze their labels: every label keeps at least 8 px inside its pill, scrolled or not.
-    for width in [320, 390, 430]:
-        context = context_for(browser, viewport={"width": width, "height": 844}, has_touch=True, is_mobile=True)
-        page = context.new_page()
-        navigate(page)
-        page.wait_for_timeout(2400)
-        cramped = page.evaluate("""() => [...document.querySelectorAll('.hero-services li')].flatMap(li => {
-          const pill = li.getBoundingClientRect(), range = document.createRange(), out = [];
-          const walker = document.createTreeWalker(li, NodeFilter.SHOW_TEXT);
-          for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n);
-            const b = range.getBoundingClientRect(); if (b.left - pill.left < 8 || pill.right - b.right < 8) out.push(n.textContent.trim()); }
-          return out; })""")
-        assert not cramped, f"Chip labels touch the edge of their pill at {width}px: {cramped}"
-        shrink = page.evaluate("[...document.querySelectorAll('.hero-services li')].map(li => getComputedStyle(li).flexShrink)")
-        assert set(shrink) == {"0"}, shrink
-        context.close()
     # The floating button: out of the way over the hero, the picker and the enquiry; there in between.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
@@ -415,7 +410,7 @@ def phone_first_screen(browser):
         cta.click()
     assert page.url.endswith("journey.html"), page.url
     context.close()
-    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; chip labels keep 8 px inside their pills; the floating button appears only where it helps", flush=True)
+    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; the floating button appears only where it helps", flush=True)
 
 
 def service_picker(browser):
@@ -727,14 +722,24 @@ def filters_and_planner(browser):
     arrive(page, r"journey\.html\?destination=")
     expect(page.locator('[data-escape-enquiry] [name="destination"]')).to_have_value("The Maldives")
     form = page.locator("[data-escape-enquiry]")
+    # Name and email are required: an empty form cannot be saved or sent.
+    assert form.locator('[name="name"]').get_attribute("required") is not None and form.locator('[name="email"]').get_attribute("required") is not None
+    form.locator("[data-download-enquiry]").first.click()
+    assert form.locator('[name="name"]').evaluate("el => el.matches(':invalid')"), "an empty name must be invalid"
+    form.locator('[name="name"]').fill("Smoke test traveller")
+    form.locator('[name="email"]').fill("invalid-address")
+    form.locator("button[type='submit']").click()
+    assert form.locator('[name="email"]').evaluate("el => el.matches(':invalid')"), "a malformed email must be invalid"
     form.locator('[name="email"]').fill("smoke-test@example.com")
+    form.locator('[name="phone"]').fill("+256 700 000 000")
     form.locator('[name="notes"]').fill("A quiet anniversary with time on the water.")
     with page.expect_download() as enquiry_download:
-        form.locator("[data-download-enquiry]").click()
+        form.locator("[data-download-enquiry]").first.click()
     enquiry = enquiry_download.value
     assert enquiry.suggested_filename == "Pardus-Travel-Enquiry.txt"
     enquiry_text = Path(enquiry.path()).read_text(encoding="utf-8")
     assert "Destination: The Maldives" in enquiry_text and "smoke-test@example.com" in enquiry_text, enquiry_text
+    assert "Name: Smoke test traveller" in enquiry_text and "Phone or WhatsApp: +256 700 000 000" in enquiry_text, enquiry_text
     expect(form.locator("[data-enquiry-status]")).to_contain_text("has not been sent")
     navigate(page, "contact.html")
     page.get_by_role("link", name="Prepare a travel enquiry", exact=True).click()

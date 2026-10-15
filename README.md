@@ -1,6 +1,6 @@
 # Pardus Luxury Escapes: V30.3
 
-V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is alive: it breathes, its eyes glow and blink, it follows your pointer, finger or tilted phone; gold pins on the skyline, villas and yacht show what each costs) and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
+V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is gently alive and, since V30.4, calm: it breathes, sways a little and blinks slowly, and never glows, follows the visitor or reacts to a touch; gold pins on the skyline, villas and yacht show what each costs) and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
 
 **The preloader is permanent.** It must be present in every build. See [CLAUDE.md](CLAUDE.md) and `website/tests/preloader.test.mjs`, which fails the release if it is removed.
 
@@ -37,11 +37,11 @@ Optional browser check (Python Playwright, any Chromium): serve the repository r
 - `website/src/styles/preloader.css`, `website/src/components/CinematicIntro.astro`, `website/src/scripts/preloader.ts`: the preloader. Do not remove.
 - `website/src/scripts/ui.ts`: header behaviour, mobile menu, scroll motion, pause control. `site.ts` holds the filters, journal and planner logic.
 - `website/src/data/icons.ts` with `Icon.astro` and `IconSprite.astro`: the SVG icon set.
-- `website/src/components/Hero.astro` and `website/src/scripts/hero-life.ts`: the homepage hero and what makes the leopard move. The layers (`pardus-world-*-v30-*`, `pardus-leopard-v30*`, `pardus-thumb-*`) come from `website/scripts/prepare-v30-hero-layers.py`, which derives them from the V25 hero and the V26 layer set and writes `src/data/hero-layers.json` and `src/styles/hero-layers.css`. Run it again if the artwork changes.
+- `website/src/components/Hero.astro` and `website/src/scripts/hero-life.ts`: the homepage hero and what makes the leopard move (a calm sway and a slow blink; nothing responds to the visitor). The layers (`pardus-world-*-v30-*`, `pardus-leopard-v30*`, `pardus-thumb-*`) come from `website/scripts/prepare-v30-hero-layers.py`, which derives them from the V25 hero and the V26 layer set and writes `src/data/hero-layers.json` and `src/styles/hero-layers.css`. Run it again if the artwork changes.
 - `website/src/components/ServicePicker.astro` with `scripts/picker.ts`: the "What should we arrange?" picker (a plain GET form that sends `?services=` to the enquiry). `StickyCta.astro` is the floating "Plan your escape" button on phones.
 - `website/src/components/FontFaces.astro`: local variable font declarations and preloads.
 - `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases. Regenerate the concept note after a change.
-- `website/src/data/site.ts`: contacts and optional delivery and analytics settings.
+- `website/src/data/site.ts`: the primary tagline, the five navigation labels, contacts (email, phone, WhatsApp), verified company details (`credentials`), and optional delivery (`enquiryEndpoint`, or `PUBLIC_PARDUS_ENQUIRY_ENDPOINT` at build) and analytics settings.
 - `website/src/pages/`: page content and layouts.
 - `website/source-assets/v25/ARTWORK.md`: prompts and provenance of the hero artwork.
 - `website/source-assets/v24-photography/credits.json`: verified photo locations, sources and licences.
@@ -51,7 +51,7 @@ Optional browser check (Python Playwright, any Chromium): serve the repository r
 
 The destination presentation keeps the supplied starting USD prices. Availability, the itinerary and the final price are confirmed for the traveller's dates before booking. Rate changes belong in `website/src/data/offers.ts`.
 
-Enquiries prepare an email draft for the visitor to send, or download a text brief. Direct server delivery stays disabled until a real endpoint is connected and tested. Saved trips, the detailed planner, journey ideas and the Journal remain available.
+The enquiry form requires a name and an email and offers phone or WhatsApp. Until a real endpoint is connected it prepares an email draft for the visitor to send; once `enquiryEndpoint` is set it sends the enquiry straight to Pardus and shows a confirmation (`website/tests/online-enquiry.py` checks that flow against a scratch build). Saving a copy of the enquiry is optional. Saved trips, the detailed planner, journey ideas and the Journal remain available.
 
 ## V30.2 validation
 

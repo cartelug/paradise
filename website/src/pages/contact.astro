@@ -2,9 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import { site, path, whatsappUrl } from '../data/site';
+import { site, path, whatsappUrl, phoneUrl } from '../data/site';
 ---
-<Layout label="Contact" title="Contact Pardus" description="Contact Pardus Luxury Escapes about a holiday, booking, private yacht experience or travel support." class="inner" simpleFooter>
+<Layout label="Contact" title="Contact Pardus" description="Contact Pardus Luxury Escapes to plan a luxury holiday, safari, island escape or private yacht experience, or for help with a booking. Email, phone and WhatsApp." class="inner" simpleFooter>
   <PageHero eyebrow="Contact Pardus" compact>
     <Fragment slot="title">One conversation. <em>A beautiful journey.</em></Fragment>
     <p class="lead">Tell us the destination and what you have in mind. We’ll bring the travel arrangements into one clear plan.</p>
@@ -16,7 +16,8 @@ import { site, path, whatsappUrl } from '../data/site';
         <div class="contact-card" data-reveal><span class="badge"><Icon name="chat" /></span><h2>General enquiries</h2><p>Company information and general questions.</p><a class="mail" href={'mailto:' + site.email}><Icon name="mail" /><span>{site.email}</span></a></div>
         <div class="contact-card" data-reveal><span class="badge"><Icon name="shield" /></span><h2>Support &amp; feedback</h2><p>Post-booking help, reviews and service feedback.</p><a class="mail" href={'mailto:' + site.supportEmail}><Icon name="mail" /><span>{site.supportEmail}</span></a></div>
       </div>
-      {whatsappUrl && <p style="margin-top:32px"><a class="btn btn--ink" href={whatsappUrl}>Message Pardus on WhatsApp</a></p>}
+      {(phoneUrl || whatsappUrl) && <p style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">{phoneUrl && <a class="btn btn--ink" href={phoneUrl}><Icon name="phone" /> Call {site.phone}</a>}{whatsappUrl && <a class="btn btn--ink" href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Icon name="chat" /> Message Pardus on WhatsApp</a>}</p>}
+      {site.credentials.length > 0 && <div style="margin-top:48px"><h2 style="font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem)">Company details</h2><dl class="credentials" style="margin-top:14px">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div>}
     </div>
   </section>
 </Layout>

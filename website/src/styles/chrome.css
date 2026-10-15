@@ -51,6 +51,8 @@ html.js .menu-toggle { display: inline-grid; }
 }
 @media (max-width: 359px) { .brand-link { width: 98px; } }
 @media (max-width: 1199px) { .header-saved { display: none !important; } }
+/* Five navigation labels plus the main action need the room: saved trips stay available as an icon until the window is wide. */
+@media (min-width: 1200px) and (max-width: 1439px) { .header-saved { padding: 8px 12px; } .header-saved span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 
 /* Mobile menu */
 html.menu-open { overflow: hidden; }
@@ -146,6 +148,7 @@ html.menu-open { overflow: hidden; }
 .footer-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: clamp(32px, 5vw, 72px); padding-block: clamp(52px, 6vw, 88px) clamp(36px, 4vw, 56px); }
 .footer-brand .brand-link { width: 168px; margin-bottom: 22px; }
 .footer-brand p { max-width: 34ch; color: var(--mist); }
+.footer-brand .footer-tagline { margin-top: 18px; color: var(--gold-soft); font-weight: 600; font-size: 1rem; letter-spacing: -.005em; }
 .footer-contact { display: grid; gap: 4px; margin-top: 20px; }
 .footer-contact a { display: inline-flex; align-items: center; gap: 12px; min-height: 40px; color: var(--gold-soft); text-decoration: none; font-weight: 600; }
 .footer-contact a:hover { text-decoration: underline; }

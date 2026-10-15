@@ -48,8 +48,8 @@ def price(o):
 # 01 - brand and proposition
 c.setFillColor(HexColor(navy));c.rect(0,0,W,H,fill=1,stroke=0)
 c.drawImage(str(project/'public/brand/pardus-light-2048.png'),42,H-113,width=200,height=81,mask='auto')
-text('LUXURY TRAVEL, BEAUTIFULLY ARRANGED.',42,H-138,510,9,gold)
-text('Your next escape.<br/>Beautifully arranged.',42,H-173,510,39,'#ffffff','PardusSerif',47)
+text('EXTRAORDINARY JOURNEYS. PERSONALLY CURATED.',42,H-138,510,9,gold)
+text('Your next escape.<br/>Personally curated.',42,H-173,510,39,'#ffffff','PardusSerif',47)
 photo(project/'public/images/hero-maldives-v24-1920.webp',0,260,W,305)
 text('You tell us where you want to go. We arrange the flights,<br/>stays, transfers and experiences around you.',42,231,510,13,'#edf1f5',leading=20)
 text('MALDIVES  /  SEYCHELLES  /  DUBAI  /  SAFARIS  /  PRIVATE CRUISES',42,148,510,9,gold)

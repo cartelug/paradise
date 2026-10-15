@@ -1,20 +1,19 @@
-// Brings the hero leopard to life. The artwork is layered (see Hero.astro): this script moves the layers.
-//   - gaze: the animal turns toward the pointer or a finger, and looks around by itself when left alone
-//   - blinks and glints at random intervals, a startled glow when the animal is touched
-//   - a slow push toward the viewer as the page scrolls
-//   - on phones, the animal follows how the phone is tilted
+// Keeps the hero leopard gently alive, and calm. The artwork is layered (see Hero.astro): this script moves the layers.
+//   - the head sways a little by itself, slowly, and never follows the visitor's pointer, finger or phone
+//   - a slow, relaxed blink every so often (the way a contented cat slow-blinks), no glowing eyes, no flaring, no vibration
 //   - drifting golden motes in the light, with a speed check that drops the extras on slow devices
-// Breathing, the eye ignition and the light sweep are pure CSS. Everything here stops for reduced motion, for the Pause
-// scene button, in hidden tabs and when the hero is off screen. Without this script the hero is a complete still picture.
+//   - the hero pins place themselves so nothing in the hero ever overlaps
+// Breathing and the light band are pure CSS. Everything here stops for reduced motion, for the Pause scene button, in
+// hidden tabs and when the hero is off screen. Without this script the hero is a complete still picture.
+// Owner's note (15 October 2026): the earlier glowing, pointer-following, startling leopard unsettled some clients, so
+// none of that behaviour is wanted. The animal is there to feel warm and regal, not to watch the visitor.
 export {};
 const root = document.documentElement;
 const hero = document.querySelector<HTMLElement>('[data-hero-life]');
 
 if (hero) {
   const picture = hero.querySelector<HTMLElement>('.hero-picture');
-  const leopard = hero.querySelector<HTMLElement>('[data-leopard]');
   const eyes = hero.querySelector<HTMLElement>('[data-leopard-eyes]');
-  const glows = hero.querySelector<HTMLElement>('.hl-glows');
   const canvas = hero.querySelector<HTMLCanvasElement>('[data-hero-motes]');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
@@ -23,13 +22,10 @@ if (hero) {
   let visible = true;
   let raf = 0;
   let last = 0;
-  let lastInput = -1e9;
   let nextBlink = 0;
-  let nextGlint = 0;
   const target = { x: 0, y: 0 };
   const current = { x: 0, y: 0 };
-  let shown = { x: 99, y: 99, push: -1 };
-  let scrollProgress = 0;
+  let shown = { x: 99, y: 99 };
   let sampled = 0;
   let sampleTime = 0;
 
@@ -58,11 +54,11 @@ if (hero) {
         range.selectNodeContents(node);
         for (const rect of range.getClientRects()) if (rect.width > 1) list.push(boxOf(rect));
       }
-      copy.querySelectorAll('.btn, .hero-services li').forEach(element => list.push(boxOf(element.getBoundingClientRect())));
+      copy.querySelectorAll('.btn').forEach(element => list.push(boxOf(element.getBoundingClientRect())));
     }
     const rail = hero!.querySelector('[data-hero-rail]');
     if (rail) list.push(boxOf(rail.getBoundingClientRect()));
-    // The leopard turns its head and leans in, so it is given extra room beyond where it rests.
+    // The head sways a little, so the animal is given a little room beyond where it rests.
     const box = hero!.querySelector('[data-leopard-box]');
     if (box) { const rest = boxOf(box.getBoundingClientRect()); list.push({ l: rest.l - 14, t: rest.t - 10, r: rest.r + 14, b: rest.b + 10 }); }
     document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(element => {
@@ -129,100 +125,23 @@ if (hero) {
     measure();
   }
 
-  /* ---------- gaze and scroll push ---------- */
-  function light(clientX: number, clientY: number, on: boolean) {
-    if (!leopard || !picture) return;
-    const box = leopard.getBoundingClientRect();
-    if (!box.width) return;
-    picture.style.setProperty('--sx', `${clamp(((clientX - box.left) / box.width) * 100, -20, 120).toFixed(1)}%`);
-    picture.style.setProperty('--sy', `${clamp(((clientY - box.top) / box.height) * 100, -20, 120).toFixed(1)}%`);
-    picture.style.setProperty('--spot', on ? '1' : '0');
-  }
-  function aim(clientX: number, clientY: number) {
-    const box = hero!.getBoundingClientRect();
-    if (!box.width || !box.height) return;
-    light(clientX, clientY, active());
-    target.x = clamp(((clientX - box.left) / box.width - 0.5) * 2.1, -1, 1);
-    target.y = clamp(((clientY - box.top) / box.height - 0.5) * 2.1, -1, 1);
-    lastInput = performance.now();
-    wake();
-  }
-  hero.addEventListener('pointermove', event => { if (event.pointerType !== 'touch') aim(event.clientX, event.clientY); }, { passive: true });
-  hero.addEventListener('touchmove', event => { const touch = event.touches[0]; if (touch) aim(touch.clientX, touch.clientY); }, { passive: true });
-  hero.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') lastInput = performance.now() - 1500; picture?.style.setProperty('--spot', '0'); }, { passive: true });
-  hero.addEventListener('touchend', () => picture?.style.setProperty('--spot', '0'), { passive: true });
-  hero.addEventListener('touchcancel', () => picture?.style.setProperty('--spot', '0'), { passive: true });
-
-  /* ---------- phone tilt ----------
-     Android delivers orientation without asking; iPhones need a permission prompt, so they simply keep the touch gaze. The
-     reference angle drifts toward wherever the phone is held, so only a deliberate tilt moves the animal. */
-  let tiltBase: { gamma: number; beta: number } | null = null;
-  let tiltSeen = 0;
-  function onTilt(event: DeviceOrientationEvent) {
-    if (event.gamma === null || event.beta === null || reduced.matches || paused()) return;
-    const now = performance.now();
-    if (!tiltBase) tiltBase = { gamma: event.gamma, beta: event.beta };
-    tiltBase.gamma += (event.gamma - tiltBase.gamma) * 0.012;
-    tiltBase.beta += (event.beta - tiltBase.beta) * 0.012;
-    // A finger on the screen wins for a moment.
-    if (now - lastInput < 1200 && now - tiltSeen > 60) { tiltSeen = now; return; }
-    target.x = clamp((event.gamma - tiltBase.gamma) / 16, -1, 1);
-    target.y = clamp((event.beta - tiltBase.beta) / 20, -1, 1);
-    tiltSeen = now;
-    lastInput = now - 2200; // keeps the idle look-around quiet while the phone is being tilted
-    wake();
-  }
-  if (touchLike.matches && 'DeviceOrientationEvent' in window && typeof (DeviceOrientationEvent as unknown as { requestPermission?: unknown }).requestPermission !== 'function') {
-    window.addEventListener('deviceorientation', onTilt, { passive: true });
-  }
-
-  function readScroll() {
-    const height = hero!.offsetHeight || 1;
-    scrollProgress = clamp(window.scrollY / height, 0, 1);
-    // Scrolling down, the animal looks down after the visitor; this overrides the idle look-around for a moment.
-    if (scrollProgress > 0.02 && scrollProgress < 1) { target.y = clamp(scrollProgress * 1.6, 0, 1); lastInput = performance.now() - 1000; }
-    wake();
-  }
-  window.addEventListener('scroll', readScroll, { passive: true });
-
+  /* ---------- the pose ----------
+     --gx and --gy are a tiny sway of the head (and the matching counter-drift of the world behind it). They come only from
+     the slow idle motion in the loop below; nothing the visitor does (pointer, touch, tilt, scroll) changes them. */
   function paintPose() {
     if (!picture) return;
-    const push = 1 + scrollProgress * 0.09;
     if (Math.abs(shown.x - current.x) > 0.002 || Math.abs(shown.y - current.y) > 0.002) {
       picture.style.setProperty('--gx', current.x.toFixed(3));
       picture.style.setProperty('--gy', current.y.toFixed(3));
       shown.x = current.x; shown.y = current.y;
     }
-    if (Math.abs(shown.push - push) > 0.0005) {
-      picture.style.setProperty('--push', push.toFixed(4));
-      picture.style.setProperty('--push-y', `${(-scrollProgress * 26).toFixed(1)}px`);
-      shown.push = push;
-    }
   }
 
-  /* ---------- eyes: blink, glint, startle ---------- */
-  function blink() {
+  /* ---------- eyes: one slow, relaxed blink ---------- */
+  function slowBlink() {
     if (!eyes) return;
-    eyes.animate([{ opacity: 0 }, { opacity: 1, offset: 0.3 }, { opacity: 1, offset: 0.58 }, { opacity: 0 }], { duration: 280, easing: 'ease-in-out' });
-    glows?.animate([{ opacity: 1 }, { opacity: 0, offset: 0.3 }, { opacity: 0, offset: 0.6 }, { opacity: 1 }], { duration: 280, easing: 'ease-in-out' });
+    eyes.animate([{ opacity: 0 }, { opacity: 1, offset: 0.34 }, { opacity: 1, offset: 0.62 }, { opacity: 0 }], { duration: 1000, easing: 'ease-in-out' });
   }
-  function glint() {
-    glows?.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.9)', offset: 0.35 }, { filter: 'brightness(1)' }], { duration: 900, easing: 'ease-in-out' });
-  }
-  function startle() {
-    // Each glow grows around its own centre (the individual `scale` property composes with the glow's own translate).
-    glows?.animate([{ filter: 'brightness(1)' }, { filter: 'brightness(2.4)', offset: 0.25 }, { filter: 'brightness(1)' }], { duration: 1100, easing: 'cubic-bezier(.2,.7,.2,1)' });
-    hero!.querySelectorAll<HTMLElement>('.hl-glow').forEach(glow => glow.animate([{ scale: '1' }, { scale: '1.45', offset: 0.25 }, { scale: '1' }], { duration: 1100, easing: 'cubic-bezier(.2,.7,.2,1)' }));
-    window.setTimeout(blink, 380);
-    try { if (touchLike.matches && navigator.vibrate) navigator.vibrate(8); } catch { /* Haptics are optional. */ }
-  }
-  hero.addEventListener('pointerdown', event => {
-    if (!active() || !leopard || (event.target as Element).closest('a, button')) return;
-    const box = leopard.getBoundingClientRect();
-    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) return;
-    aim(event.clientX, event.clientY);
-    startle();
-  }, { passive: true });
 
   /* ---------- drifting motes ---------- */
   type Mote = { x: number; y: number; size: number; rise: number; sway: number; phase: number; tw: number };
@@ -288,21 +207,14 @@ if (hero) {
     // Speed check: if the first two seconds of frames average slower than about 33 fps, keep the animal and drop the extras.
     if (last && sampled < 120) { sampleTime += (now - last) / 1000; sampled++; if (sampled === 120 && sampleTime / 120 > 0.03) hero!.dataset.quality = 'lite'; }
     last = now;
-    if (now - lastInput > 2600) {
-      // Left alone, the animal slowly looks around.
-      target.x = Math.sin(now / 3300) * 0.42 + Math.sin(now / 5200) * 0.16;
-      target.y = Math.sin(now / 4400 + 1) * 0.22;
-    }
-    const ease = 1 - Math.exp(-dt * 4.2);
+    // A slow, small sway of the head: about one gentle turn every ten seconds, never toward the visitor.
+    target.x = Math.sin(now / 6900) * 0.3 + Math.sin(now / 11300) * 0.12;
+    target.y = Math.sin(now / 8300 + 1) * 0.14;
+    const ease = 1 - Math.exp(-dt * 2.2);
     current.x += (target.x - current.x) * ease;
     current.y += (target.y - current.y) * ease;
     paintPose();
-    if (now >= nextBlink) {
-      blink();
-      nextBlink = now + 2600 + Math.random() * 4600;
-      if (Math.random() < 0.18) window.setTimeout(blink, 330);
-    }
-    if (now >= nextGlint) { glint(); nextGlint = now + 6500 + Math.random() * 6000; }
+    if (now >= nextBlink) { slowBlink(); nextBlink = now + 7000 + Math.random() * 6000; }
     if (hero!.dataset.quality !== 'lite') drawMotes(now, dt);
     raf = requestAnimationFrame(frame);
   }
@@ -316,7 +228,7 @@ if (hero) {
       raf = 0;
       return;
     }
-    if (active()) { sizeCanvas(); if (nextBlink === 0) { nextBlink = performance.now() + 3200; nextGlint = performance.now() + 5200; } wake(); }
+    if (active()) { sizeCanvas(); if (nextBlink === 0) nextBlink = performance.now() + 6500; wake(); }
     else hero!.dataset.life = 'paused';
   }
 
@@ -330,6 +242,5 @@ if (hero) {
   reduced.addEventListener('change', sync);
   // The opening hands over to the hero when the page becomes ready.
   new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['class'] });
-  readScroll();
   sync();
 }

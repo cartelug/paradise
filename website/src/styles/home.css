@@ -222,3 +222,6 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
   .sticky-cta:active { transform: translate3d(-50%, 0, 0) scale(.97); }
 }
 @media (prefers-reduced-motion: reduce) { .sticky-cta, .sticky-cta[data-on='true'] { transition: none; } }
+
+/* Signature journeys and how booking works sit inside existing sections, below their first block. */
+.signature, .booking { margin-top: clamp(64px, 8vw, 116px); }

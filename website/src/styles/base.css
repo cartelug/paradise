@@ -256,6 +256,15 @@ p { text-wrap: pretty; }
 .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--gold); background: rgb(5 12 26 / .8); box-shadow: 0 0 0 3px rgb(217 188 130 / .25); }
 .form input[type='date'] { color-scheme: dark; }
 .form input[aria-invalid='true'] { border-color: #ff9a8a; }
+.field--wide { grid-column: 1 / -1; }
+.field-hint { font-size: .75rem; line-height: 1.5; color: var(--mist-2); }
+.light .field-hint { color: #4b5b70; }
+.form[hidden], [data-enquiry-fields][hidden], .form-thanks[hidden] { display: none; }
+.form-thanks { display: grid; gap: 14px; justify-items: start; padding: clamp(6px, 1vw, 12px) 0; outline: none; }
+.form-thanks .badge { width: 52px; height: 52px; }
+.form-thanks h3 { font-size: var(--fs-h3); line-height: 1.2; color: #fff; }
+.form-thanks p { max-width: 52ch; color: var(--mist); }
+.form-thanks strong { color: var(--gold-soft); font-weight: 600; word-break: break-word; }
 .form-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 4px; }
 .form-note { font-size: .8125rem; line-height: 1.6; color: var(--mist-2); max-width: 62ch; }
 .form-note a { color: var(--gold-soft); }

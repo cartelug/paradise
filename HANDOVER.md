@@ -2,6 +2,27 @@
 
 Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
 
+## V30.4: a calmer leopard and the website review (15 October 2026)
+
+The owner loved the leopard but worried it could unsettle some clients, and shared an independent review of the live site. This release acts on both.
+
+- **A calm leopard.** The picture stares straight at the visitor from close up, and the V30.2 behaviour made that stronger: eyes that ignited and glowed, a head that followed the pointer, a finger or a tilted phone, a flare and a phone buzz when touched, and a push toward the visitor on scroll. All of that is gone. The leopard still breathes, sways a little on its own, blinks slowly (about a second, every 7 to 13 seconds, the way a contented cat slow-blinks) and has the slow band of warm light across its fur; the eyes are the approved artwork's own. Reduced motion, Pause scene and the "never covered" clearance rules are unchanged. `CLAUDE.md` and the tests now forbid glow, following and touch reactions.
+- **First screen.** Headline "Extraordinary journeys. *Personally curated.*", supporting line "Bespoke luxury travel from Africa to the world, thoughtfully arranged around you.", and **Plan your escape** as the main button (Explore destinations is the quiet second). The icon chips row was removed to leave the first screen uncluttered; the full list of services is in "What we arrange" below. The pins, price bar and phone dock are unchanged.
+- **One tagline.** "Extraordinary journeys. Personally curated." (`site.tagline`) is used in the hero, the opening, the footer, the search description, the structured data and the concept note (PDF regenerated). The old "Luxury travel, beautifully arranged." and "Your next escape. Beautifully arranged." are retired.
+- **One navigation.** Destinations, Signature journeys, Our difference, Corporate travel, Journal, with Plan your escape beside them on every page; saved trips are a compact secondary control. Private cruises, What we arrange, the Travel desk and Contact moved to the menu's "more" list and the footer. Page titles follow (Signature journeys, Our difference, Corporate travel).
+- **The enquiry.** Name and email are required; there is a phone or WhatsApp field; saving a copy is optional ("Save a copy"). Once `enquiryEndpoint` is set in `website/src/data/site.ts` (or `PUBLIC_PARDUS_ENQUIRY_ENDPOINT` when building) the button reads "Send my enquiry", the request goes straight to Pardus, and the visitor sees a confirmation that names them and their email; if delivery fails they are told so and the email draft opens instead. **Until you connect an endpoint, enquiries still open an email draft.** Create a Formspree (or compatible) form that delivers to bookings@pardusescapes.com, paste its URL, rebuild, and run `website/tests/online-enquiry.py` against a scratch build (instructions at the top of that file).
+- **Trust.** "About Pardus" and a four-step "How booking works" on Our difference and the homepage; a "Cancellations and changes" section on the terms page (footer link "Booking, cancellations & terms"); a "Signature journeys" strip on the homepage; the primary promises renamed Personal attention, Thoughtful details, Seamless service. Nothing is invented: the cancellation text says conditions come from the suppliers and are written into each proposal, and there are **no** credentials, badges, testimonials, phone number or WhatsApp number until you supply real ones (see below).
+- **Search.** Page-specific titles and descriptions, with Uganda and East Africa terms on the homepage, destinations and enquiry pages; the homepage title is "Luxury travel from Uganda and East Africa". Every image carries its alt text (empty only for decoration).
+
+### What only the business can supply
+
+- **A verified phone and WhatsApp number**: set `phone` and `whatsapp` in `website/src/data/site.ts`; they appear in the footer, on Contact and in the structured data.
+- **Company details** (registered name, registration number, tourism licence, trade-body membership), only when verified: add them to `credentials` in the same file; they appear on Our difference and Contact.
+- **The real cancellation and payment terms** (deposit, deadlines, refund rules): the website only says they are written into each proposal. Replace the wording in `website/src/pages/terms.astro` and `website/src/components/BookingSteps.astro` once they are set.
+- **A branded domain** (for example pardusescapes.com): host the export there and set `PARDUS_SITE` and `PARDUS_BASE=/` when building. The email addresses already use pardusescapes.com.
+- **Confirmation that Uganda and East Africa is the right audience wording** for the search description.
+- **Real-device checks**: the site was tested in a desktop Chromium at many widths, not on iPhones or Android phones.
+
 ## V30.3: the hero as a map of the offer (15 October 2026)
 
 - **Pins on the picture.** Gold pins sit on the Dubai skyline, the overwater villas (Maldives) and the yacht (private yacht cruises). Their labels take turns opening with nights and the starting price, open on hover or focus, and link to the destination or cruise page. The pins place themselves: after the page settles, `hero-life.ts` measures the headline, chips, buttons, price bar, header and leopard (with room for its head turns), opens each label on a side with room, and hides any pin that has none. Maldives has first claim on space. All three show on common desktops; the Maldives pin shows on phones.

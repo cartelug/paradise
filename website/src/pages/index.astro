@@ -10,18 +10,20 @@ import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import ServicePicker from '../components/ServicePicker.astro';
 import StickyCta from '../components/StickyCta.astro';
 import TravelDesk from '../components/TravelDesk.astro';
-import { path } from '../data/site';
+import BookingSteps from '../components/BookingSteps.astro';
+import { journeys } from '../data/journeys';
+import { path, site } from '../data/site';
 import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
 const promises = [
-  { icon: 'chat' as const, title: 'One conversation', text: 'Flights, stays, transfers and experiences brought into one clear plan.' },
-  { icon: 'heart' as const, title: 'Made around you', text: 'Your dates, your budget and the people you are travelling with come first.' },
-  { icon: 'shield' as const, title: 'Clear before you book', text: 'Review your itinerary, price, inclusions and terms before confirming.' },
+  { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
+  { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, your budget and the people you are travelling with come first.' },
+  { icon: 'shield' as const, title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
 ];
 const asset = (name: string) => path(`images/${name}`);
 const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
 const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFor(slug), place: destinationFor(slug) }));
 ---
-<Layout class="home" simpleFooter image="images/pardus-hero-desktop-v25-1536.webp">
+<Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image="images/pardus-hero-desktop-v25-1536.webp">
   <Fragment slot="head">
     <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'avif')} imagesizes="100vw" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'avif')} imagesizes="100vw" />
@@ -107,12 +109,29 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
         ); })}
       </div>
     </div>
+    <div class="wrap signature">
+      <div class="sec-head"><div><p class="eyebrow" data-reveal>Signature journeys</p><h2 id="journeys-title" data-split>Journeys with a <em>point of view.</em></h2></div><p class="end" data-reveal><a class="link" href={path('journeys.html')}>All signature journeys <Icon name="arrow-right" /></a></p></div>
+      <div class="dest-grid" data-stagger="130">
+        {journeys.slice(0, 3).map(journey => (
+          <article class="dest" data-reveal>
+            <a class="frame" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
+            <div class="dest-top"><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><span>{journey.eyebrow}</span></div>
+            <p>{journey.description}</p>
+            <a class="link" href={path(`journey-${journey.slug}.html`)}>Explore the idea <Icon name="arrow-right" /></a>
+          </article>
+        ))}
+      </div>
+    </div>
   </section>
 
   <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="why-title">
     <div class="wrap">
       <div class="promise-head"><h2 id="why-title" data-split>Every detail, <em>considered.</em></h2><Brand mark light /></div>
       <div class="promises" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+    </div>
+    <div class="wrap booking" id="how-booking-works">
+      <div class="sec-head"><div><p class="eyebrow" data-reveal>How booking works</p><h2 id="booking-title" data-split>Four steps. <em>One clear plan.</em></h2></div><p data-reveal>From your first message to the journey itself, with the terms in front of you before you commit.</p></div>
+      <BookingSteps more />
     </div>
   </section>
 

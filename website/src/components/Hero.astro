@@ -3,9 +3,10 @@ import Icon from './Icon.astro';
 import { path } from '../data/site';
 import { offerFor, displayPrice, priceText, cruiseTypes } from '../data/offers';
 import layers from '../data/hero-layers.json';
-// The V25 hero, rebuilt in layers so the leopard can move on its own: a clean world plate, the animal, a blink patch
-// for the eyes, glow and light effects, and a small canvas of drifting motes. Everything is positioned in image
-// coordinates, so the artwork looks exactly as approved at rest and the animal never moves out of its place.
+// The V25 hero, rebuilt in layers so the leopard can be gently alive: a clean world plate, the animal, a blink patch
+// for the eyes, a slow band of light and a small canvas of drifting motes. The animal is calm by design (it breathes,
+// blinks slowly and sways a little; it never glows, never follows the visitor and never reacts to a touch), and everything
+// is positioned in image coordinates, so the artwork looks exactly as approved at rest and the animal never leaves its place.
 const rail = ['maldives', 'seychelles', 'dubai'].map(slug => offerFor(slug));
 const asset = (name: string) => path(`images/${name}`);
 const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
@@ -13,11 +14,6 @@ const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${
 const stacked = '(max-width: 760px), (max-aspect-ratio: 11/10)';
 const { leopard } = layers;
 const nightsOf = (text: string) => { const n = text.match(/(\d+)-night/); return n ? `${n[1]} nights` : text; };
-// What Pardus arranges, in one glance (the full list of 13 is in "What we arrange").
-const arranges = [
-  { icon: 'plane', label: 'Flights' }, { icon: 'bed', label: 'Hotels' }, { icon: 'car', label: 'Transfers' },
-  { icon: 'passport', label: 'Visas' }, { icon: 'yacht', label: 'Yachts' }, { icon: 'paw', label: 'Safaris' },
-] as const;
 // Places in the picture, in order of priority when space is short. Coordinates are percentages of the world plate: d = landscape art, m = portrait art.
 // side / mside = where the label opens. `stacked: false` hides a pin on phones and portrait screens, where it would meet
 // the leopard, the buttons or another pin.
@@ -33,14 +29,10 @@ const vars = `--leopard-url:url(${asset('pardus-leopard-v30-mask.webp')})`;
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <div class="hero-copy" data-hero-copy>
-      <p class="eyebrow">From Africa to the world</p>
-      <h1 id="hero-title"><span class="line" style="--n:0"><span>Luxury travel,</span></span><span class="line" style="--n:1"><span><em>beautifully</em></span></span><span class="line" style="--n:2"><span>arranged.</span></span></h1>
-      <p class="hero-text">You choose where. <strong>We arrange everything.</strong></p>
-      <ul class="hero-services" aria-label="What Pardus arranges">
-        {arranges.map(item => <li><Icon name={item.icon} />{item.label}</li>)}
-        <li class="hero-services-more"><a href="#what-we-arrange">+7 more</a></li>
-      </ul>
-      <div class="actions"><a class="btn btn--gold" href="#destinations" aria-label="Explore destinations"><span>Explore<span class="btn-long"> destinations</span></span> <Icon name="arrow-down" /></a><a class="btn btn--ghost" href={path('journey.html')} aria-label="Plan your escape"><span>Plan <span class="btn-mid">your </span>escape</span> <Icon name="arrow-right" /></a></div>
+      <p class="eyebrow">Pardus Luxury Escapes</p>
+      <h1 id="hero-title"><span class="line" style="--n:0"><span>Extraordinary</span></span><span class="line" style="--n:1"><span>journeys.</span></span><span class="line" style="--n:2"><span><em>Personally curated.</em></span></span></h1>
+      <p class="hero-text">Bespoke luxury travel from Africa to the world, thoughtfully arranged around you.</p>
+      <div class="actions"><a class="btn btn--gold" href={path('journey.html')} aria-label="Plan your escape"><span>Plan <span class="btn-mid">your </span>escape</span> <Icon name="arrow-right" /></a><a class="btn btn--ghost" href="#destinations" aria-label="Explore destinations"><span>Explore<span class="btn-long"> destinations</span></span> <Icon name="arrow-down" /></a></div>
     </div>
     <div class="hero-zone">
       <div class="hero-media">
@@ -63,7 +55,6 @@ const vars = `--leopard-url:url(${asset('pardus-leopard-v30-mask.webp')})`;
                   <source type="image/avif" srcset={asset('pardus-leopard-v30-eyes.avif')} />
                   <img src={asset('pardus-leopard-v30-eyes.webp')} width="310" height="105" alt="" decoding="async" />
                 </picture>
-                <span class="hl-glows"><span class="hl-glow hl-glow--l"></span><span class="hl-glow hl-glow--r"></span></span>
                 <span class="hl-rim"></span>
                 <span class="leopard-box" data-leopard-box></span>
               </div>

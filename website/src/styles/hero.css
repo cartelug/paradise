@@ -26,12 +26,12 @@
 @keyframes light-sweep { from { background-position: -80% 0; } to { background-position: 180% 0; } }
 
 /* The leopard. Three nested layers so their motion never fights:
-   .hl-leopard follows the visitor (gaze, tilt, scroll push, set from script),
+   .hl-leopard sways a little on its own (set from script; it never follows the visitor),
    .hl-breath breathes (pure CSS, runs on the compositor) and dissolves into the rock at the bottom,
-   the images, eye patch, glows and rim light sit inside it. */
+   the images, eye patch and rim light sit inside it. The eyes are the approved artwork's own: they never glow. */
 .hl-leopard { position: absolute; left: var(--lx); top: var(--ly); width: var(--lw); height: var(--lh); pointer-events: none; transform-origin: 62% 78%;
-  transform: perspective(1100px) translate3d(calc(var(--gx, 0) * 7px), calc(var(--gy, 0) * 4px + var(--push-y, 0px)), 0) rotateY(calc(var(--gx, 0) * 1.7deg)) rotateX(calc(var(--gy, 0) * -1.1deg)) scale(var(--push, 1));
-  transition: transform .14s linear; will-change: transform; }
+  transform: perspective(1100px) translate3d(calc(var(--gx, 0) * 7px), calc(var(--gy, 0) * 4px), 0) rotateY(calc(var(--gx, 0) * 1.7deg)) rotateX(calc(var(--gy, 0) * -1.1deg));
+  transition: transform .6s ease-out; will-change: transform; }
 .hl-breath { position: absolute; inset: 0; transform-origin: 55% 25%; animation: hl-breathe 6.4s ease-in-out infinite;
   -webkit-mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); }
 /* Inhale for about 2.7 s, exhale for about 3.7 s. The head barely moves; the chest and shoulders do. */
@@ -39,53 +39,28 @@
 .hl-body, .hl-body img { display: block; width: 100%; height: 100%; }
 .hero-drift .hl-eyes { position: absolute; left: var(--bl-x); top: var(--bl-y); width: var(--bl-w); height: var(--bl-h); opacity: 0; }
 .hero-drift .hl-eyes img { display: block; width: 100%; height: 100%; }
-.hl-glows { position: absolute; inset: 0; pointer-events: none; }
-.hl-glow { position: absolute; width: 15%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; mix-blend-mode: screen; pointer-events: none; opacity: 0;
-  background: radial-gradient(circle, rgb(255 228 150 / .9) 0, rgb(255 182 70 / .4) 32%, rgb(255 150 40 / 0) 68%); }
-.hl-glow--l { left: var(--eye-lx); top: var(--eye-ly); }
-.hl-glow--r { left: var(--eye-rx); top: var(--eye-ry); }
-/* A slow band of warm light that crosses the fur. It is masked by the animal's own outline, so it never touches the sky. */
+/* A slow band of warm light that crosses the fur. It is masked by the animal's own outline, so it never touches the sky. It is the only light on the animal, and it never follows the visitor. */
 .hl-rim { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: soft-light; opacity: .9;
   -webkit-mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; }
 .hl-rim::before { content: ''; position: absolute; top: -10%; bottom: -10%; left: 0; width: 70%; transform: translate3d(-110%, 0, 0);
   background: linear-gradient(100deg, transparent 20%, rgb(255 238 196 / .85) 50%, transparent 80%); animation: hl-rim 12s ease-in-out 2s infinite; }
 @keyframes hl-rim { 0% { transform: translate3d(-110%, 0, 0); } 46%, 100% { transform: translate3d(190%, 0, 0); } }
-/* A warm light that follows the pointer or a finger across the fur. Masked by the animal's outline, like the light band above. */
-.hl-rim::after { content: ''; position: absolute; inset: 0; opacity: var(--spot, 0); transition: opacity .7s ease; background: radial-gradient(circle at var(--sx, 50%) var(--sy, 30%), rgb(255 238 196 / .95) 0, rgb(255 214 150 / .45) 16%, transparent 38%); }
 .hl-motes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
 /* Invisible marker for the animal: tests and scripts measure against it. Percentages are of the leopard layer. */
 .leopard-box { position: absolute; left: 19%; top: 3%; width: 83%; height: calc(var(--fade-b, 85.4%) - 3%); pointer-events: none; visibility: hidden; }
 
-/* Entrance: after the opening the animal comes out of the dark and its eyes ignite. */
+/* Entrance: after the opening the animal eases out of the dark. Its eyes stay as painted; nothing ignites or glows. */
 html.js .hl-leopard { opacity: 0; }
 html.is-ready .hl-leopard { opacity: 1; animation: hl-emerge 2.2s var(--ease) .12s both; }
 @keyframes hl-emerge { from { opacity: 0; filter: brightness(.45) saturate(.7); } to { opacity: 1; filter: brightness(1) saturate(1); } }
-html.is-ready .hl-glow { animation: hl-ignite 2.8s var(--ease) 1s both, hl-glow-idle 5.6s ease-in-out 3.8s infinite alternate; }
-@keyframes hl-ignite { 0% { opacity: 0; scale: .35; } 34% { opacity: .95; scale: 1.3; } 100% { opacity: .34; scale: 1; } }
-@keyframes hl-glow-idle { from { opacity: .22; } to { opacity: .46; } }
-html:not(.js) .hl-glow { opacity: .3; }
-/* Slow devices keep the animal, its breath, its eyes and its glow; the blended extras are dropped. */
+/* Slow devices keep the animal, its breath and its slow blink; the blended extras are dropped. */
 .hero[data-quality='lite'] .hl-rim, .hero[data-quality='lite'] .hl-motes { display: none; }
 .hero[data-quality='lite'] .hero-media::after { display: none; }
-
-.hero-text strong { font-weight: 700; color: #fff; }
-
-/* What Pardus arranges, at a glance: icon chips under the line. */
-.hero-services { display: flex; flex-wrap: wrap; gap: 6px; margin: clamp(14px, 1.8vw, 20px) 0 0; padding: 0; list-style: none; }
-.hero-services li { flex: 0 0 auto; min-width: max-content; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 5px 16px 5px 11px; border: 1px solid rgb(236 215 168 / .26); border-radius: 999px; background: rgb(6 14 30 / .46); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-size: .78rem; font-weight: 600; letter-spacing: .01em; color: #eef2f8; white-space: nowrap; }
-.hero-services .icon { width: 16px; height: 16px; color: var(--gold); }
-.hero-services-more { padding: 0 !important; border-color: rgb(236 215 168 / .5) !important; }
-.hero-services-more a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 16px; border-radius: 999px; color: var(--gold-soft); text-decoration: none; }
-.hero-services-more a:hover { color: #fff; }
-html.is-ready .hero-services li { animation: rise .8s var(--ease) calc(.62s + var(--c, 0) * 60ms) both; }
-.hero-services li:nth-child(2) { --c: 1; } .hero-services li:nth-child(3) { --c: 2; } .hero-services li:nth-child(4) { --c: 3; } .hero-services li:nth-child(5) { --c: 4; } .hero-services li:nth-child(6) { --c: 5; } .hero-services li:nth-child(7) { --c: 6; }
-html.js .hero-services li { opacity: 0; }
-html.is-ready .hero-services li { opacity: 1; }
 
 /* The picture as a map of the offer: gold pins on the places Pardus sells. Pins live in picture coordinates, so they move
    with the artwork; their labels take turns opening, and open on hover or focus. They never sit on the leopard. */
 .hero-inner, .hero-copy { pointer-events: none; }
-.hero-copy a, .hero-copy button, .hero-rail, .hero-services { pointer-events: auto; }
+.hero-copy a, .hero-copy button, .hero-rail { pointer-events: auto; }
 .hl-spots { position: absolute; inset: 0; transform: translate3d(calc(var(--gx, 0) * -5px), calc(var(--gy, 0) * -3px), 0) scale(1.014); transition: transform .12s linear; }
 .spot { position: absolute; left: var(--dx); top: var(--dy); display: grid; place-items: center; width: 44px; height: 44px; translate: -50% -50%; text-decoration: none; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
 .spot-dot { position: relative; width: 14px; height: 14px; border: 2px solid #fff7e4; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff3cf, var(--gold) 60%, #a77d34); box-shadow: 0 0 0 4px rgb(217 188 130 / .28), 0 4px 14px rgb(2 8 18 / .6); transition: transform .35s var(--ease); }
@@ -125,7 +100,7 @@ html:not(.js) .hl-spots { display: none; }
   linear-gradient(180deg, rgb(5 12 26 / .62), rgb(5 12 26 / 0) 20%); }
 .hero-inner { display: grid; grid-template-rows: 1fr auto; min-height: inherit; padding-top: calc(var(--header-h) + 1vh); padding-bottom: clamp(18px, 2.6vw, 34px); }
 .hero-copy { align-self: center; max-width: var(--copy-max); padding-block: clamp(14px, 3.4vh, 64px); transform: translate3d(0, var(--copy-shift, 0px), 0); opacity: var(--copy-fade, 1); }
-.hero h1 { font-size: clamp(2.4rem, min(0.85rem + 4.9vw, 9.4vh), 5.6rem); line-height: 1.06; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
+.hero h1 { font-size: clamp(2.2rem, min(.6rem + 3.9vw, 7.6vh), 4.25rem); line-height: 1.08; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
 .hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
 @keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
 @media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
@@ -181,15 +156,8 @@ html:not(.js) .hl-spots { display: none; }
   .hero-copy { display: contents; }
   .hero .eyebrow, .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
   .hero .eyebrow { order: 10; margin-bottom: 12px; }
-  .hero h1 { order: 20; font-size: clamp(2rem, 10.4vw, 3.4rem); }
+  .hero h1 { order: 20; font-size: clamp(1.6rem, 8.4vw, 3.4rem); }
   .hero-text { order: 30; font-size: 1.0625rem; max-width: 34ch; margin-top: 12px; }
-  .hero-text strong { display: block; }
-  ul.hero-services { order: 32; flex-wrap: nowrap; overflow-x: auto; gap: 6px; margin: 12px 0 0; padding: 0 var(--gutter); scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
-  .hero-services::-webkit-scrollbar { display: none; }
-  .hero-services li { min-height: 34px; padding: 4px 15px 4px 10px; font-size: .78rem; }
-  .hero-services .hero-services-more a { min-height: 32px; padding: 0 15px; }
-  ul.hero-services::after { content: ''; flex: 0 0 var(--gutter); }
-  .hero-services .icon { width: 15px; height: 15px; }
   /* Two equal buttons. The primary keeps its round arrow, sitting inside the pill; the secondary is a solid glass pill so
      it reads over the bright sunset sky. Labels are sized so neither ever touches its edge. */
   .hero .actions { order: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
@@ -246,7 +214,8 @@ html:not(.js) .hl-spots { display: none; }
 @media (max-height: 860px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
 @media (max-width: 760px) { .hero .actions .btn .btn-long { display: none; } }
 @media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } .hero .actions .btn--gold { padding-left: 18px; } }
-@media (max-width: 350px) { .hero .actions .btn .btn-mid { display: none; } }
+/* The narrowest phones (320 px): the two buttons stack, so each label and its arrow keep their room. */
+@media (max-width: 350px) { .hero .actions { grid-template-columns: minmax(0, 1fr); } .hero .actions .btn--gold { padding-left: 22px; } }
 @media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
-@media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.8rem, 7.2vw, 4.8rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }
+@media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.4rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }

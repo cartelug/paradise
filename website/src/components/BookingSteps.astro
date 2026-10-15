@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+// How a booking works, in plain words. Only what the website already tells the visitor elsewhere: proposals are quoted in UGX
+// with a USD reference, and the itinerary, inclusions, price, payment schedule, supplier terms and cancellation conditions are
+// confirmed in writing before anything is booked. Add real figures (deposit, deadlines) here only once the business has set them.
+interface Props { more?: boolean; }
+const { more = false } = Astro.props;
+const steps = [
+  { title: 'Tell us what you have in mind', text: 'A destination, rough dates, who is travelling and a budget. Not sure yet? Ask us to help you choose.' },
+  { title: 'Receive your proposal', text: 'A Pardus adviser arranges stays, flights, transfers and experiences into one itinerary, quoted in UGX with a USD reference where useful.' },
+  { title: 'Review it before you commit', text: 'Check the inclusions, price, payment schedule, supplier terms and cancellation conditions. Ask for any change. Your enquiry books and charges nothing.' },
+  { title: 'Confirm, then travel', text: 'Once you confirm, your adviser keeps the arrangements together and stays your one point of contact until you are home.' },
+];
+---
+<ol class="steps">
+  {steps.map((step, i) => <li class="step" data-reveal><span class="step-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}
+</ol>
+<p class="steps-foot" data-reveal>Cancellation and change conditions depend on the airlines, hotels and operators involved, so they are written into your proposal before you pay. <a class="link" href={path('terms.html')}>Booking, cancellations and terms <Icon name="arrow-right" /></a>{more && <> <a class="link" href={path('about.html')}>More about how we work <Icon name="arrow-right" /></a></>}</p>

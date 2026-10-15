@@ -35,6 +35,7 @@ export const icons = {
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
   shield: '<path d="M12 3 5 6v5.5c0 4.4 3 7.8 7 9.5 4-1.7 7-5.1 7-9.5V6z"/><path d="m9 12 2 2 4-4.2"/>',
+  phone: '<path d="M7.2 3.5h2.6l1.4 4-1.8 1.4a11 11 0 0 0 5.7 5.7l1.4-1.8 4 1.4v2.6a2 2 0 0 1-2.1 2A15.5 15.5 0 0 1 5.2 5.6a2 2 0 0 1 2-2.1z"/>',
   chat: '<path d="M4 5h16v11H9.5L5 20v-4H4z"/><path d="M8 9.5h8M8 12.5h5"/>',
   globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9S14.5 18.5 12 21c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/>',
   news: '<path d="M4 5h13v14H6.5A2.5 2.5 0 0 1 4 16.5zM17 9h3v7.5a2.5 2.5 0 0 1-2.5 2.5H17"/><path d="M8 9h5M8 13h5"/>',

@@ -2,21 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import { path } from '../data/site';
+import BookingSteps from '../components/BookingSteps.astro';
+import { path, site } from '../data/site';
 const promises = [
-  { icon: 'chat' as const, title: 'One point of contact', text: 'Keep the itinerary, arrangements and practical questions in one conversation.' },
-  { icon: 'heart' as const, title: 'Made around you', text: 'Your dates, budget, occasion and fellow travellers shape the plan.' },
-  { icon: 'shield' as const, title: 'Clear before you book', text: 'Review your itinerary, USD price, inclusions, payment schedule and supplier terms before confirming.' },
+  { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser, one conversation. The itinerary, the arrangements and every practical question stay in one place.' },
+  { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, budget, occasion and fellow travellers shape the plan, never a standard package.' },
+  { icon: 'shield' as const, title: 'Clear before you book', text: 'Review your itinerary, price, inclusions, payment schedule and supplier terms before confirming.' },
 ];
 ---
-<Layout label="Why Pardus" title="Why Pardus" description="Pardus arranges flights, stays, transfers and experiences around your dates, budget and the people travelling." class="inner" simpleFooter>
-  <PageHero eyebrow="Why Pardus">
+<Layout label="Our difference" title="Our difference" description="About Pardus Luxury Escapes: personal attention, thoughtful details and one clear plan. How a booking works, how we quote in UGX, and what to expect before you confirm." class="inner" simpleFooter>
+  <PageHero eyebrow="Our difference">
     <Fragment slot="title">Luxury travel. <em>Less to think about.</em></Fragment>
     <p class="lead">You tell us where you want to go. We bring the flights, hotels, transfers and experiences into one journey, planned around you.</p>
   </PageHero>
-  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-label="What to expect">
+  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="about-title">
+    <div class="wrap statement">
+      <p class="eyebrow" data-reveal>About Pardus</p>
+      <h2 id="about-title" data-split>Arranged around <em>you.</em></h2>
+      <p data-reveal>Pardus Luxury Escapes arranges bespoke luxury travel from Africa to the world: island escapes in the Maldives and Seychelles, city breaks in Dubai, East African safaris, Europe, and private time on the water. A Pardus adviser brings every part of the trip together, so you do not have to.</p>
+      <p data-reveal>Every proposal is quoted in UGX, with a USD reference where useful, and states what is included before you decide.</p>
+    </div>
+  </section>
+  <section class="sec sec--sand" aria-label="What to expect">
     <div class="wrap"><h2 class="visually-hidden">What to expect</h2><div class="promises promises--light" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div>
   </section>
+  <section class="sec sec--ivory" id="how-booking-works" aria-labelledby="booking-title">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow" data-reveal>How booking works</p><h2 id="booking-title" data-split>Four steps. <em>One clear plan.</em></h2></div><p data-reveal>A simple path from the first message to the journey itself, with the terms in front of you before you commit.</p></div>
+      <BookingSteps />
+    </div>
+  </section>
+  {site.credentials.length > 0 && <section class="sec sec--sand" aria-labelledby="credentials-title"><div class="wrap"><h2 id="credentials-title" style="font-size:clamp(1.4rem,1.1rem + 1vw,2rem);margin-bottom:18px">Company details</h2><dl class="credentials">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div></section>}
   <section class="sec sec--sand" aria-labelledby="places-title">
     <div class="wrap statement">
       <h2 id="places-title" data-split>Beautiful places. <em>Thoughtfully arranged.</em></h2>
