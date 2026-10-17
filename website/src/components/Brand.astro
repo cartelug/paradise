@@ -8,12 +8,12 @@ const { class: className, light = false, mark = false, vector = false } = Astro.
     <use href="#pardus-leopard" />
   </svg>
 ) : vector ? (
-  /* Faithful vector tracing of the approved logo for a crisp lockup on navy; paths live in BrandSprite. */
+  /* Transparent HD Pardus logo, with separate light and primary colourways. */
   <span class:list={['brand-lockup-vector', className, { 'brand-light': light }]} aria-hidden="true">
-    <svg class="brand-svg" viewBox="0 0 920 385" fill="none" focusable="false"><use href="#pardus-lockup" /></svg>
+    <img class="brand-svg" src={path(light ? 'brand/pardus-light.svg' : 'brand/pardus-primary.svg')} width="1942" height="809" alt="" decoding="async" />
   </span>
 ) : (
   <span class:list={['brand-lockup', className, { 'brand-on-dark': light }]} aria-hidden="true">
-    <img src={path('brand/pardus-approved-primary.png')} width="920" height="374" alt="" decoding="async" />
+    <img src={path(light ? 'brand/pardus-light.svg' : 'brand/pardus-primary.svg')} width="1942" height="809" alt="" decoding="async" />
   </span>
 )}
