@@ -510,7 +510,7 @@ def assert_hero(page, width):
     assert " ".join(hero.locator("h1").inner_text().split()) == "Extraordinary journeys. Personally curated."
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
-    expect(page.locator(".site-header .brand-link svg").first).to_be_visible()
+    expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)
     image = page.locator(".hero-picture img")
     source = image.evaluate("img => img.currentSrc")
     portrait = page.evaluate("innerWidth <= 760 || innerWidth / innerHeight <= 1.1")

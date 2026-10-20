@@ -1,6 +1,7 @@
 /* PARDUS V30: header, mobile menu, Folio drawer and footer. */
 
-.brand-svg { width: 100%; height: auto; overflow: visible; }
+.brand-svg { width: 100%; height: auto; }
+svg.brand-svg { overflow: visible; }
 .brand-light { --logo-ink: #faf7ef; --logo-gold: #d9bc82; }
 .brand-lockup-vector { display: block; width: 100%; line-height: 1; }
 .brand-lockup-vector .brand-svg { filter: drop-shadow(0 6px 18px rgb(2 8 18 / .45)); }
