@@ -13,13 +13,13 @@
 @keyframes hint-bob { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(4px); } }
 @media (max-width: 820px) { .escapes-head { grid-template-columns: minmax(0, 1fr); } }
 .escape-glow, .escape-bar { display: none; }
-.escape-body { display: grid; gap: clamp(60px, 9vw, 112px); }
-.scene { display: grid; gap: 26px; }
+.escape-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(60px, 9vw, 112px); }
+.scene { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; }
 .scene-photo { aspect-ratio: 4 / 3.3; border-radius: var(--radius-l); }
 .scene-photo img { transition: transform 1.3s var(--ease); }
 .scene:hover .scene-photo img { transform: scale(1.04); }
 .scene-mark { display: none; }
-.scene-panel { display: grid; align-content: start; gap: 18px; }
+.scene-panel { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 18px; }
 .scene-meta { display: flex; flex-wrap: wrap; gap: 10px; }
 .scene h3 { font-size: clamp(2.204rem, 1.368rem + 3.344vw, 3.99rem); line-height: 1.06; color: #fff; }
 .scene h3 a { text-decoration: none; }

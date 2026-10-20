@@ -36,7 +36,7 @@ Never run `export:github` after `build:domain`; the export refuses a root build.
 
 Node.js 22 or newer is required. Local development uses a `/` base; GitHub Pages uses `/paradise/`. Push `main` after reviewing the export.
 
-Optional browser check (Python Playwright, any Chromium): serve the repository root under `/paradise/` and run `python tests/browser-smoke.py`. It covers the preloader, hero, mobile menu, every route at five widths, filters, saved trips, the planner and the enquiry downloads. Set `PARDUS_QA_CHROMIUM` to use a specific browser.
+Optional browser check (Python Playwright, any Chromium): serve the repository root under `/paradise/` and run `python tests/browser-smoke.py`. It covers the preloader, hero, mobile menu, every route at five widths, filters, saved trips, the planner and the enquiry downloads. Set `PARDUS_QA_CHROMIUM` to use a specific browser. Then run `python tests/mobile-fit.py`: it fails if any text spills out of a button, tile, card or link, if a page scrolls sideways, or if a tap target is under 44 px, on every page at six phone widths and at 200% text size.
 
 ## Editing
 

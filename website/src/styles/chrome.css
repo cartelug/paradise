@@ -50,7 +50,7 @@ html.js .menu-toggle { display: inline-grid; }
   html:not(.js) .desktop-nav { display: flex; order: 3; width: 100%; flex-wrap: wrap; gap: 4px 22px; margin: 0; }
   html:not(.js) .header-cta { display: inline-flex; }
 }
-@media (max-width: 359px) { .brand-link { width: 98px; } }
+@media (max-width: 359px) { .brand-link { width: 98px; padding-block: 2px; } }
 @media (max-width: 1199px) { .header-saved { display: none !important; } }
 /* Five navigation labels plus the main action need the room: saved trips stay available as an icon until the window is wide. */
 @media (min-width: 1200px) and (max-width: 1439px) { .header-saved { padding: 8px 12px; } .header-saved span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
@@ -151,19 +151,19 @@ html.menu-open { overflow: hidden; }
 .footer-brand p { max-width: 34ch; color: var(--mist); }
 .footer-brand .footer-tagline { margin-top: 18px; color: var(--gold-soft); font-weight: 600; font-size: 1rem; letter-spacing: -.005em; }
 .footer-contact { display: grid; gap: 4px; margin-top: 20px; }
-.footer-contact a { display: inline-flex; align-items: center; gap: 12px; min-height: 40px; color: var(--gold-soft); text-decoration: none; font-weight: 600; }
+.footer-contact a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; overflow-wrap: anywhere; color: var(--gold-soft); text-decoration: none; font-weight: 600; }
 .footer-contact a:hover { text-decoration: underline; }
 .footer-contact .icon { width: 20px; height: 20px; color: var(--gold); }
 .footer-column h2 { margin-bottom: 14px; font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
-.footer-links { display: grid; gap: 2px; }
-.footer-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; color: #dce3ee; text-decoration: none; font-weight: 500; transition: color .2s, transform .3s var(--ease); width: fit-content; }
+.footer-links { display: grid; gap: 0; }
+.footer-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #dce3ee; text-decoration: none; font-weight: 500; transition: color .2s, transform .3s var(--ease); width: fit-content; }
 .footer-links a:hover { color: var(--gold-soft); transform: translateX(4px); }
 .footer-links .icon { width: 16px; height: 16px; opacity: .8; }
 .footer-mark { position: relative; z-index: -1; display: grid; justify-items: center; padding-inline: var(--gutter); margin-top: -4vw; margin-bottom: -2vw; color: rgb(217 188 130 / .1); pointer-events: none; }
 .footer-mark .brand-svg { width: min(100%, 980px); }
 .footer-base { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; padding-block: 22px 30px; border-top: 1px solid var(--line-dark); font-size: .8125rem; color: var(--mist-2); }
 .footer-base > div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; }
-.footer-base a { color: var(--mist); text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.footer-base a { color: var(--mist); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .footer-base a:hover { color: var(--gold-soft); text-decoration: underline; }
 .footer-credit { display: inline-flex; align-items: center; gap: 10px; }
 .footer-credit img { width: 18px; height: 18px; border-radius: 4px; }
