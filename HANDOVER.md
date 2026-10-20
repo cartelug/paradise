@@ -1,6 +1,39 @@
 # Pardus Luxury Escapes — Final destination presentation
 
-Release: 7 October 2026. Published from `main` at https://cartelug.github.io/paradise/.
+Release V31: 20 October 2026. Own domain: https://pardusescapes.com (cPanel zip). GitHub Pages copy: published from `main` at https://cartelug.github.io/paradise/.
+
+## V31: launch on pardusescapes.com (20 October 2026)
+
+V31 gets the site ready to run from the root of **https://pardusescapes.com** on Namecheap cPanel. The GitHub Pages copy at https://cartelug.github.io/paradise/ keeps working.
+
+- **New leopard hero.** The owner-approved artwork replaces the V30 layered leopard. It shows a leopard resting in left profile, looking away from the visitor, with travel scenes woven into its coat. Gold flight lines run from its whiskers to a jet, and its paws rest in a blue-hour lagoon. Landscape art is used on landscape screens and portrait art on phones and portrait screens, always at the art's own shape, so the head, ears, whiskers and paws are never cropped. The headline, copy and buttons sit in the open sky and water. Prices sit on a translucent navy bar across the bottom on desktops, and on photo tiles over the dark water on phones. Gold pins on the coat's Maldives, Dubai and yacht scenes show prices and step aside when a screen has no room. The only motion on the picture is a very slow 1.00 to 1.03 scale. There is no glow, nothing follows the visitor and nothing reacts to a touch, and Pause scene and reduced motion show the still picture. The art is AI-generated, and its provenance and prompts are in `website/source-assets/v31-hero/ARTWORK.md`. The unused V25 to V30 hero layers and images were removed.
+- **Live mailboxes.** `website/src/data/site.ts` now lists the four active mailboxes:
+  - info@ handles general enquiries and appears in the footer, on Contact and in the structured data.
+  - bookings@ receives every enquiry form and the planner. When the planner is not sending online, it offers "Email this brief to bookings@pardusescapes.com" after the download.
+  - support@ handles after-booking help and appears on Contact.
+  - director@ appears only under "Partnerships and corporate accounts" on Contact and on Corporate travel.
+- **Own-domain build and zip.** Three commands produce the upload. `npm run build:domain` builds for `https://pardusescapes.com/` into `website/dist`. `PARDUS_BASE=/ npm run verify:export` checks that build: every link and image, the canonical URLs, `og:url`, the sitemap, `robots.txt` and `.htaccess`. `npm run package:cpanel` then writes `website/release/pardus-site-cpanel.zip`, which holds the contents of `dist` and goes straight into `public_html`. The zip is not committed. `public/.htaccess` forces HTTPS, sends www to the bare domain, serves `404.html`, sets caching, turns on gzip or Brotli where available and adds the AVIF and WebP types. It does not touch email, cPanel or `/.well-known`. The travel desk still reads its daily feed from raw.githubusercontent.com, so it keeps updating without a new upload.
+- **Photography swap-in.** Drop new photographs into `website/source-assets/v31-photography/` under the names listed in its `credits.json`. Fill in each entry's alt text and source, using "AI-generated, illustrative" for generated pictures, then run `node scripts/prepare-v31-photography.mjs` from `website/` and rebuild. Each new photo replaces the V24 picture in its slot, and slots without a photo keep the current one. Until the new photos arrive, Family in the Wild uses the acacia sunset and Safari & Shore uses the Zanzibar shore. The elephant photograph now appears twice instead of four times: on East Africa and on the safari journal.
+
+### Uploading to cPanel
+
+Follow the plan in the project notes (Option A): back up `public_html`, upload `pardus-site-cpanel.zip`, and choose **Extract** into `public_html`. Check that `index.html` and `.htaccess` sit directly inside `public_html`, then delete the zip. Make sure AutoSSL covers both pardusescapes.com and www. Leave `.well-known` and `cgi-bin` alone. To update the site later, rebuild the zip and extract it over the old files.
+
+### Connecting online enquiries (Formspree)
+
+Until this is done, every enquiry opens an email draft to bookings@pardusescapes.com, which still works.
+
+1. Create a free account at https://formspree.io. Add a new form and set its email to bookings@pardusescapes.com, then confirm the verification email that Formspree sends to that mailbox.
+2. Copy the form's endpoint. It looks like `https://formspree.io/f/abcdwxyz`.
+3. Paste it into `enquiryEndpoint` in `website/src/data/site.ts`, replacing the empty value, or set `PUBLIC_PARDUS_ENQUIRY_ENDPOINT` when building.
+4. Rebuild both copies (the GitHub Pages steps in README.md, then `build:domain`, `verify:export` and `package:cpanel`), and upload the new zip.
+5. Send a test enquiry from the live site and check that it arrives in bookings@.
+
+Do not paste an endpoint you have not created yourself, and never put passwords, cPanel logins or webmail details in the repository.
+
+### Still to supply
+
+These are unchanged from V30.4: a verified phone or WhatsApp number, company details, Instagram and TikTok links, and the real cancellation and payment terms. Each one stays hidden until it is set in `site.ts`.
 
 ## V30.4: a calmer leopard and the website review (15 October 2026)
 

@@ -59,6 +59,7 @@ const faqs = [
       <p class="form-error" id="planner-error" data-error role="alert"></p>
       <div class="planner-actions"><button type="button" class="planner-back" data-back hidden>Back</button><button type="submit" class="btn btn--gold" data-next><span>Add the details</span><Icon name="arrow-right" /></button></div>
       <p class="form-status" data-form-status role="status"></p>
+      <p class="brief-mail" hidden data-brief-mail><a class="btn btn--ink" href={`mailto:${site.bookingsEmail}`}><Icon name="mail" /> Email this brief to {site.bookingsEmail}</a></p>
       <p class="form-footnote">{site.enquiryEndpoint ? 'Submitting sends your entries to Pardus to begin a conversation.' : 'Your draft stays in this browser tab so you can return to it during this session.'} <a href={path('privacy.html')}>Read our privacy information.</a></p>
       <noscript><p class="no-script-help">This planner needs JavaScript to create a downloadable brief. You can read the questions above and keep your own notes; no information is submitted.</p></noscript>
     </form>

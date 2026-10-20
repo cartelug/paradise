@@ -4,10 +4,12 @@ import PageHero from '../components/PageHero.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import Icon from '../components/Icon.astro';
 import { cruiseTypes, priceText, usd } from '../data/offers';
+import { photo } from '../data/photography.ts';
+const hero = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht leaving Dubai Marina in warm sunset light' });
 const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
 ---
 <Layout label="Private cruises" title="Private boat & yacht experiences" description="Private Dubai yacht cruises, sunset cruises, island excursions and private celebrations, arranged by Pardus Luxury Escapes." class="inner cruise-page" simpleFooter>
-  <PageHero glance image="yacht-dubai-v24" alt="A white motor yacht leaving Dubai Marina in warm sunset light" eyebrow="Private boat & yacht experiences" focusX="60%" focusY="55%">
+  <PageHero glance image={hero.image} alt={hero.alt} eyebrow="Private boat & yacht experiences" focusX="60%" focusY="55%">
     <Fragment slot="title">Out on the water. <em>Entirely your own.</em></Fragment>
     <p class="lead">For a romantic evening, an island adventure or a celebration with your favourite people.</p>
   </PageHero>

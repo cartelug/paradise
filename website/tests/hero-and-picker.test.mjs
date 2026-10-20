@@ -12,66 +12,65 @@ const bundled = await build({
 });
 const { services, serviceGroups } = await import(`data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString('base64')}`);
 
-// The layered, animated leopard hero and the "What should we arrange?" picker (V30.2).
+// The V31 leopard hero and the "What should we arrange?" picker.
 const site = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(site, '..');
 const read = file => readFile(resolve(site, file), 'utf8');
 const exists = async file => { try { await access(file); return true; } catch { return false; } };
 
-test('the hero leopard is built from layers that exist on disk', async () => {
-  for (const name of [
-    'pardus-leopard-v30.avif', 'pardus-leopard-v30.webp', 'pardus-leopard-v30-eyes.avif', 'pardus-leopard-v30-eyes.webp', 'pardus-leopard-v30-mask.webp',
-    'pardus-world-desktop-v30-640.avif', 'pardus-world-desktop-v30-1280.webp', 'pardus-world-desktop-v30-1536.avif',
-    'pardus-world-mobile-v30-480.avif', 'pardus-world-mobile-v30-768.webp', 'pardus-world-mobile-v30-1024.avif',
-    'pardus-thumb-maldives.webp', 'pardus-thumb-seychelles.webp', 'pardus-thumb-dubai.webp',
-  ]) assert.equal(await exists(resolve(site, 'public/images', name)), true, `${name} is missing: run scripts/prepare-v30-hero-layers.py`);
-});
-
-test('the generated layer geometry puts the leopard on the right and the blink patch over its eyes', async () => {
-  const layers = JSON.parse(await read('src/data/hero-layers.json'));
-  const { left, top, width, height } = layers.desktop.leopard;
-  assert.ok(left > 50 && left < 75, `leopard left ${left}`);
-  assert.ok(left + width > 100, 'the cutout must run past the right edge of the picture so its cut edge is never seen');
-  assert.ok(top > 0 && top + height < 105, `leopard top/height ${top}/${height}`);
-  const { eyes, blink } = layers.leopard;
-  for (const eye of Object.values(eyes)) {
-    assert.ok(eye.x > blink.left && eye.x < blink.left + blink.width, 'an eye lies outside the blink patch horizontally');
-    assert.ok(eye.y > blink.top && eye.y < blink.top + blink.height, 'an eye lies outside the blink patch vertically');
+test('the hero artwork exists on disk in every size, as WebP and AVIF', async () => {
+  for (const name of ['pardus-hero-desktop-1536', 'pardus-hero-desktop-960', 'pardus-hero-phone-1024', 'pardus-hero-phone-640']) {
+    for (const ext of ['webp', 'avif']) assert.equal(await exists(resolve(site, 'public/images', `${name}.${ext}`)), true, `${name}.${ext} is missing`);
+    assert.equal(await exists(resolve(site, 'source-assets/v31-hero', `${name}.webp`)), true, `${name}.webp is missing from source-assets/v31-hero`);
   }
-  assert.ok(blink.width < 60 && blink.height < 20, 'the blink patch must stay a small patch over the eyes');
-  const css = await read('src/styles/hero-layers.css');
-  assert.match(css, new RegExp(`--lx: ${left}%`), 'hero-layers.css is out of date with hero-layers.json');
+  for (const name of ['pardus-thumb-maldives.webp', 'pardus-thumb-seychelles.webp', 'pardus-thumb-dubai.webp']) assert.equal(await exists(resolve(site, 'public/images', name)), true, name);
+  const artwork = await read('source-assets/v31-hero/ARTWORK.md');
+  assert.match(artwork, /AI-generated/, 'ARTWORK.md must record that the hero is AI-generated');
 });
 
-test('the hero keeps every part of the animated leopard and honours pause and reduced motion', async () => {
+test('the hero is one art-directed picture: portrait art on phones and portrait screens, landscape art otherwise', async () => {
   const markup = await read('src/components/Hero.astro');
-  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'hl-world', 'hl-breath', 'hl-rim', 'data-hero-motes', 'hero-life.ts', 'data-hero-spots']) {
-    assert.ok(markup.includes(hook), `Hero.astro lost "${hook}"`);
-  }
-  const script = await read('src/scripts/hero-life.ts');
-  for (const behaviour of ['prefers-reduced-motion', 'motion-paused', 'visibilitychange', "dataset.quality = 'lite'", 'slowBlink']) {
-    assert.ok(script.includes(behaviour), `hero-life.ts lost "${behaviour}"`);
-  }
-  const motion = await read('src/styles/motion.css');
-  assert.match(motion, /html\.motion-paused[^{]*\.hl-breath/, 'Pause scene must stop the breathing');
-  assert.match(motion, /prefers-reduced-motion: reduce[\s\S]*\.hl-breath/, 'reduced motion must stop the breathing');
+  assert.match(markup, /const stacked = '\(max-width: 760px\), \(max-aspect-ratio: 11\/10\)'/);
+  assert.equal((markup.match(/<picture/g) || []).length, 1, 'the hero must be a single <picture>');
+  assert.match(markup, /fetchpriority="high"/);
+  assert.match(markup, /sizes="100vw" width="1536" height="1024"/);
+  assert.ok(markup.includes('A resting leopard in left profile, with tiny travel scenes woven into its coat above a blue-hour lagoon.'));
+  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-hero-spots', 'data-hero-copy', 'data-hero-rail', 'hero-life.ts']) assert.ok(markup.includes(hook), `Hero.astro lost "${hook}"`);
+  const index = await read('src/pages/index.astro');
+  assert.match(index, /rel="preload"[^>]*pardus-hero-phone-640\.avif/);
+  assert.match(index, /rel="preload"[^>]*pardus-hero-desktop-1536\.avif/);
+  assert.match(index, /image="images\/pardus-hero-desktop-1536\.webp"/, 'og:image must be the 1536 desktop artwork');
+  // The stage keeps the artwork's native shape, so the head, ears, whiskers and paws are never cropped.
+  const css = await read('src/styles/hero.css');
+  assert.match(css, /\.hero-stage \{[^}]*aspect-ratio: 3 \/ 2/);
+  assert.match(css, /\.hero-art \{[^}]*aspect-ratio: 2 \/ 3/);
+});
+
+test('the leopard outline covers the head, paws, jet and flight lines on both artworks', async () => {
+  const markup = await read('src/components/Hero.astro');
+  for (const part of ['jet', 'flight', 'head', 'chest', 'paw', 'paws', 'back']) assert.match(markup, new RegExp(`part: '${part}', keep: (true|false), d: \\[`), `outline part ${part} is missing`);
+  for (const part of ['jet', 'flight', 'head', 'paw', 'paws']) assert.match(markup, new RegExp(`part: '${part}', keep: true`), `${part} must be protected from pins`);
 });
 
 // The owner found the earlier leopard unsettling for some clients (15 October 2026): glowing eyes, a head that followed the
-// pointer, finger or tilted phone, a flare and a buzz when touched. It must stay warm and regal: alive, never watching the visitor.
-test('the hero leopard is calm: no glowing eyes, no following the visitor, no reaction to a touch', async () => {
+// pointer, finger or tilted phone, a flare and a buzz when touched. It must stay warm and regal, never watching the visitor.
+test('the hero leopard is calm: one slow breath of scale, no glow, no following the visitor, no reaction to a touch', async () => {
   const markup = await read('src/components/Hero.astro');
-  assert.doesNotMatch(markup, /hl-glow/, 'the leopard must not have glowing eyes');
+  assert.doesNotMatch(markup, /hl-glow|hl-eyes|hl-leopard|hl-motes|<canvas/, 'the hero is one still artwork with no extra layers');
   const script = await read('src/scripts/hero-life.ts');
-  for (const forbidden of ['pointermove', 'pointerdown', 'touchmove', 'deviceorientation', 'vibrate', 'startle', 'glint', 'scrollY']) {
+  for (const forbidden of ['pointermove', 'pointerdown', 'touchmove', 'touchstart', 'deviceorientation', 'vibrate', 'startle', 'glint', 'scrollY', 'requestAnimationFrame']) {
     assert.ok(!script.includes(forbidden), `hero-life.ts must not use "${forbidden}": the leopard never reacts to the visitor`);
   }
+  for (const behaviour of ['prefers-reduced-motion', 'motion-paused', 'visibilitychange']) assert.ok(script.includes(behaviour), `hero-life.ts lost "${behaviour}"`);
   const css = await read('src/styles/hero.css');
-  assert.doesNotMatch(css, /hl-glow|hl-ignite|--spot|--push/, 'hero.css must not carry glow, ignite, pointer-light or scroll-push rules');
-  assert.match(script, /slowBlink/, 'the leopard keeps a slow, relaxed blink');
-  assert.match(css, /hl-breathe/, 'the leopard keeps breathing');
-  // The animal sways slowly (more than ten seconds a turn would be too still; faster than about six would look restless).
-  assert.match(script, /Math\.sin\(now \/ 6900\)/);
+  assert.doesNotMatch(css, /hl-glow|hl-ignite|--spot|--push|--gx|--hero-shift/, 'hero.css must not carry glow, pointer, scroll or sway rules');
+  assert.match(css, /@keyframes hero-breathe \{ from \{ transform: scale\(1\); \} to \{ transform: scale\(1\.03\); \} \}/, 'the only motion is a 1.00 to 1.03 scale');
+  assert.match(css, /animation: hero-breathe 20s ease-in-out infinite alternate/);
+  const motion = await read('src/styles/motion.css');
+  assert.match(motion, /html\.motion-paused[^{]*\.hero-picture img/, 'Pause scene must stop the breath');
+  assert.match(motion, /prefers-reduced-motion: reduce[\s\S]*\.hero-picture img \{ animation: none/, 'reduced motion must show the still picture');
+  const ui = await read('src/scripts/ui.ts');
+  assert.doesNotMatch(ui, /hero\.style\.setProperty/, 'the hero must not move with the scroll');
 });
 
 test('the phone dock shows all three destinations and prices at once, with no hidden swipe', async () => {
@@ -93,14 +92,14 @@ test('the service picker offers every service as a tap target and is a plain GET
   assert.deepEqual([...grouped].sort(), [...services].sort());
 });
 
-test('the exported homepage ships the picker, the layered hero and the floating button', async () => {
+test('the exported homepage ships the picker, the leopard hero and the floating button', async () => {
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   assert.equal((html.match(/<input type="checkbox" name="services"/g) || []).length, 13, 'the homepage must carry 13 service checkboxes');
   const escaped = value => value.replace(/&/g, '&amp;');
   for (const service of services) assert.ok(html.includes(`value="${escaped(service)}"`), `missing service ${service}`);
   assert.match(html, /<form[^>]*data-picker[^>]*action="[^"]*journey\.html"/);
-  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-leopard-eyes', 'data-sticky-cta']) assert.ok(html.includes(hook), `index.html lost ${hook}`);
-  assert.ok(html.includes('pardus-world-desktop-v30') && html.includes('pardus-leopard-v30'), 'index.html does not use the layered hero images');
+  for (const hook of ['data-hero-life', 'data-leopard-box', 'data-sticky-cta']) assert.ok(html.includes(hook), `index.html lost ${hook}`);
+  assert.ok(html.includes('pardus-hero-desktop-1536') && html.includes('pardus-hero-phone-640'), 'index.html does not use the V31 hero artwork');
 });
 
 test('the enquiry form turns ?services= into the start of the note', async () => {

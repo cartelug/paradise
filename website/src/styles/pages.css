@@ -10,6 +10,7 @@
 .page-hero-bg { position: absolute; inset: -6% 0 -2%; z-index: -3; transform: translate3d(0, var(--hero-shift, 0px), 0); will-change: transform; }
 .page-hero-bg picture, .page-hero-bg img { width: 100%; height: 100%; }
 .page-hero-bg img { object-fit: cover; object-position: var(--focus-x, 60%) var(--focus-y, 50%); animation: hero-drift 32s ease-in-out infinite alternate; }
+@keyframes hero-drift { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.07) translate3d(-.6%, 0, 0); } }
 .page-hero--image::before { content: ''; position: absolute; inset: 0; z-index: -2; background:
   linear-gradient(90deg, rgb(5 12 26 / .9) 0%, rgb(5 12 26 / .6) 42%, rgb(5 12 26 / .08) 85%),
   linear-gradient(0deg, var(--midnight) 0%, rgb(5 12 26 / 0) 46%),
@@ -107,7 +108,12 @@
 .mail { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none; }
 .mail .icon { color: var(--gold-ink); }
 .mail:hover span { text-decoration: underline; }
-@media (max-width: 900px) { .contact-grid { grid-template-columns: minmax(0, 1fr); } }
+/* Partnerships and corporate accounts: one wide card under the three mailboxes. */
+.contact-partners { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px clamp(18px, 2.4vw, 32px); margin-top: clamp(16px, 2.2vw, 30px); padding: clamp(22px, 2.6vw, 34px) clamp(24px, 3vw, 38px); border: 1px solid var(--line-light); border-radius: var(--radius-l); background: linear-gradient(120deg, rgb(255 255 255 / .82), rgb(236 215 168 / .22)); box-shadow: 0 16px 44px rgb(11 22 38 / .06); }
+.contact-partners h2 { font-size: clamp(1.125rem, .98rem + .5vw, 1.4rem); }
+.contact-partners p { margin-top: 6px; color: var(--ink-2); max-width: 58ch; }
+.contact-partners a { overflow-wrap: anywhere; }
+@media (max-width: 900px) { .contact-grid { grid-template-columns: minmax(0, 1fr); } .contact-partners { grid-template-columns: minmax(0, 1fr); } }
 
 /* Promise block on light backgrounds */
 .promises--light .promise { border-color: var(--line-light); }
@@ -286,3 +292,4 @@
 .credentials dt { font-size: .75rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); }
 .credentials dd { margin: 0; color: var(--ink); font-weight: 500; }
 @media (max-width: 520px) { .credentials div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.brief-mail { margin-top: 12px; }

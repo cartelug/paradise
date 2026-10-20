@@ -21,7 +21,8 @@ const { simple = false } = Astro.props;
       <p class="footer-tagline">{site.tagline}</p>
       <p>Bespoke luxury travel from Africa to the world. You tell us where you want to go; we arrange the rest.</p>
       <div class="footer-contact">
-        <a href={`mailto:${site.bookingsEmail}`}><Icon name="mail" /><span>{site.bookingsEmail}</span></a>
+        <a href={`mailto:${site.bookingsEmail}`} aria-label={`Bookings: ${site.bookingsEmail}`}><Icon name="mail" /><span>{site.bookingsEmail}</span></a>
+        <a href={`mailto:${site.email}`} aria-label={`General enquiries: ${site.email}`}><Icon name="mail" /><span>{site.email}</span></a>
         {phoneUrl && <a href={phoneUrl}><Icon name="phone" /><span>{site.phone}</span></a>}
         {whatsappUrl && <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Icon name="chat" /><span>WhatsApp</span></a>}
         {socialLinks.map(link => <a href={link.href} rel="me noopener" target="_blank"><Icon name={link.label === 'Instagram' ? 'instagram' : 'external'} /><span>{link.label}</span></a>)}

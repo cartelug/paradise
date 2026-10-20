@@ -1,67 +1,88 @@
-@import './hero-layers.css';
-/* PARDUS V30.2: the layered leopard hero.
-   The artwork sits in a box that is exactly the picture, so every layer is positioned in picture coordinates: the world
-   plate, the leopard, its eyes and its glow. On landscape screens the leopard starts at about 70% of the width and copy and
-   the price rail are capped to the left 66%. On phones and portrait screens the copy sits above, the leopard has its own
-   zone, and the destination cards sit below it. Nothing the visitor reads or presses overlaps the animal. */
-.hero { --oy: 50%; --media-top: 56px; --copy-max: min(680px, calc(66vw - var(--gutter) - 12px)); --rail-max: min(860px, calc(66vw - var(--gutter) - 12px)); position: relative; isolation: isolate; display: grid; min-height: max(680px, 100svh); max-height: 1240px; overflow: hidden; background: var(--midnight); }
-@media (min-aspect-ratio: 3/2) and (max-aspect-ratio: 17/10) { .hero { --oy: 34%; } }
-@media (min-aspect-ratio: 17/10) and (max-aspect-ratio: 2/1) { .hero { --oy: 20%; } }
-@media (min-aspect-ratio: 2/1) { .hero { --oy: 8%; } }
-.hero-zone { display: contents; }
-.hero-media { position: absolute; inset: var(--media-top) 0 -2% 0; z-index: -3; overflow: hidden; container-type: size; transform: translate3d(0, var(--hero-shift, 0px), 0); will-change: transform; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 150px); mask-image: linear-gradient(180deg, transparent 0, #000 150px); }
-.hero-picture { --w: max(100cqw, 150cqh); position: absolute; width: var(--w); aspect-ratio: 3 / 2; left: calc((100cqw - var(--w)) * .7); top: calc((100cqh - var(--w) / 1.5) * var(--oy)); }
-.hero-drift { position: absolute; inset: 0; transform-origin: 70% 0; animation: hero-drift 30s ease-in-out infinite alternate; }
-.hero-drift picture, .hero-drift img { display: block; width: 100%; height: 100%; }
-.hero-drift img { object-fit: cover; }
-@keyframes hero-drift { from { transform: scale(1) translate3d(0, 0, 0); } to { transform: scale(1.07) translate3d(-.6%, 0, 0); } }
+/* PARDUS V31: the leopard hero.
+   One owner-approved artwork shown at its native aspect ratio: 3:2 landscape art on landscape screens, 2:3 portrait art on
+   phones and portrait screens. The stage is exactly the picture, so the copy, the price bar, the pins and the leopard's
+   measured outline (.leopard-box, in picture percentages) all stay where they were placed on the artwork at every width.
+   Landscape: copy in the open sky and water on the left, price bar across the bottom 12% on a translucent navy backing.
+   Portrait: headline in the sky above the jet, price tiles on the dark water, buttons and copy directly below the picture.
+   The only motion on the picture is a very slow scale, 1.00 to 1.03 and back; nothing glows, follows or reacts. */
+.hero { --sky: rgb(4 29 60); position: relative; isolation: isolate; overflow: hidden; background: var(--sky); }
+.hero-stage { position: relative; width: 100%; aspect-ratio: 3 / 2; container-type: inline-size; }
+.hero-art { position: absolute; inset: 0; overflow: hidden; }
+.hero-picture, .hero-picture img { display: block; width: 100%; height: 100%; }
+.hero-picture img { object-fit: cover; transform-origin: 32% 58%; animation: hero-breathe 20s ease-in-out infinite alternate; will-change: transform; }
+@keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.03); } }
+/* The leopard's outline, as measured rectangles (see Hero.astro). Invisible; scripts and tests measure against them. */
+.leopard-outline { position: absolute; inset: 0; pointer-events: none; }
+.leopard-box { position: absolute; left: var(--dl); top: var(--dt); width: var(--dw); height: var(--dh); visibility: hidden; }
 
-/* World plate: nudged the opposite way to the animal, which is what makes the animal feel like it is in front. */
-.hl-world { position: absolute; inset: 0; transform: translate3d(calc(var(--gx, 0) * -5px), calc(var(--gy, 0) * -3px), 0) scale(1.014); transition: transform .12s linear; will-change: transform; }
+/* Legibility: a quiet darkening under the header and behind the copy, faded out before it reaches the animal. */
+.hero-shade { position: absolute; inset: 0; pointer-events: none; background:
+  linear-gradient(180deg, rgb(3 14 32 / .5) 0%, rgb(3 14 32 / 0) 11%),
+  linear-gradient(90deg, rgb(3 14 32 / .5) 0%, rgb(3 14 32 / .22) 17%, rgb(3 14 32 / 0) 26%); }
 
-/* The sun glow lives in picture coordinates, so it always sits on the sun. */
-.hero-glow { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(13% 19% at 71.2% 27.8%, rgb(255 190 110 / .6), rgb(255 150 70 / .14) 58%, transparent 80%); opacity: .5; animation: sun-breathe 9s ease-in-out infinite alternate; }
-@keyframes sun-breathe { from { opacity: .3; } to { opacity: .72; } }
-.hero-media::after { content: ''; position: absolute; inset: -20% -50%; pointer-events: none; mix-blend-mode: screen; background: linear-gradient(104deg, transparent 42%, rgb(255 226 170 / .09) 50%, transparent 58%) 0 0 / 60% 100% no-repeat; animation: light-sweep 19s linear infinite; }
-@keyframes light-sweep { from { background-position: -80% 0; } to { background-position: 180% 0; } }
+/* Copy, in picture coordinates: the headline starts at 39% of the picture, below the jet's flight lines, and the column ends
+   before the leopard's chin and chest. Buttons stay left of the paws. */
+.hero-copy { position: absolute; left: var(--gutter); top: 39%; width: 31%; transform: none; pointer-events: none; }
+.hero-copy a, .hero-copy button { pointer-events: auto; }
+.hero .eyebrow { position: absolute; bottom: 100%; left: 0; margin: 0 0 clamp(10px, 1.1cqw, 18px); white-space: nowrap; text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
+.hero h1 { font-size: clamp(1.75rem, 2.9cqw, 4.25rem); line-height: 1.06; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
+.hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
+@keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+@media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
+.hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
+.hero .line > span { display: block; }
+.hero-text { max-width: 30em; margin-top: clamp(10px, 1.1cqw, 20px); font-size: clamp(.9375rem, 1.18cqw, 1.375rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
+.hero .actions { display: grid; justify-items: start; gap: clamp(8px, .8cqw, 12px); width: max-content; margin-top: clamp(14px, 1.7cqw, 30px); }
+/* The buttons stop well short of the paws (which start at 26.5% of the picture). */
+.hero .actions { max-width: calc(26.5cqw - var(--gutter) - 16px); }
+.hero .actions .btn { min-width: 0; width: 100%; justify-content: space-between; gap: clamp(8px, .9cqw, 14px); font-size: clamp(.875rem, 1.05cqw, 1.0625rem); }
+.hero .actions .btn:has(> .icon-arrow-right, > .icon-arrow-down) { padding-left: clamp(16px, 1.8cqw, 28px); }
+.hero .actions .btn--ghost { justify-content: center; border-color: rgb(236 215 168 / .55); background: rgb(6 14 30 / .5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
-/* The leopard. Three nested layers so their motion never fights:
-   .hl-leopard sways a little on its own (set from script; it never follows the visitor),
-   .hl-breath breathes (pure CSS, runs on the compositor) and dissolves into the rock at the bottom,
-   the images, eye patch and rim light sit inside it. The eyes are the approved artwork's own: they never glow. */
-.hl-leopard { position: absolute; left: var(--lx); top: var(--ly); width: var(--lw); height: var(--lh); pointer-events: none; transform-origin: 62% 78%;
-  transform: perspective(1100px) translate3d(calc(var(--gx, 0) * 7px), calc(var(--gy, 0) * 4px), 0) rotateY(calc(var(--gx, 0) * 1.7deg)) rotateX(calc(var(--gy, 0) * -1.1deg));
-  transition: transform .6s ease-out; will-change: transform; }
-.hl-breath { position: absolute; inset: 0; transform-origin: 55% 25%; animation: hl-breathe 6.4s ease-in-out infinite;
-  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); mask-image: linear-gradient(180deg, #000 0, #000 var(--fade-a, 77%), transparent var(--fade-b, 85.4%)); }
-/* Inhale for about 2.7 s, exhale for about 3.7 s. The head barely moves; the chest and shoulders do. */
-@keyframes hl-breathe { 0%, 100% { transform: scale(1, 1) translate3d(0, 0, 0); } 42% { transform: scale(1.006, 1.014) translate3d(0, .1%, 0); } }
-.hl-body, .hl-body img { display: block; width: 100%; height: 100%; }
-.hero-drift .hl-eyes { position: absolute; left: var(--bl-x); top: var(--bl-y); width: var(--bl-w); height: var(--bl-h); opacity: 0; }
-.hero-drift .hl-eyes img { display: block; width: 100%; height: 100%; }
-/* A slow band of warm light that crosses the fur. It is masked by the animal's own outline, so it never touches the sky. It is the only light on the animal, and it never follows the visitor. */
-.hl-rim { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: soft-light; opacity: .9;
-  -webkit-mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; mask: var(--leopard-url) 0 0 / 100% 100% no-repeat; }
-.hl-rim::before { content: ''; position: absolute; top: -10%; bottom: -10%; left: 0; width: 70%; transform: translate3d(-110%, 0, 0);
-  background: linear-gradient(100deg, transparent 20%, rgb(255 238 196 / .85) 50%, transparent 80%); animation: hl-rim 12s ease-in-out 2s infinite; }
-@keyframes hl-rim { 0% { transform: translate3d(-110%, 0, 0); } 46%, 100% { transform: translate3d(190%, 0, 0); } }
-.hl-motes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; }
-/* Invisible marker for the animal: tests and scripts measure against it. Percentages are of the leopard layer. */
-.leopard-box { position: absolute; left: 19%; top: 3%; width: 83%; height: calc(var(--fade-b, 85.4%) - 3%); pointer-events: none; visibility: hidden; }
+/* The price bar: across the bottom of the picture, below the paws, on a translucent navy backing. */
+.hero-rail { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; border-top: 1px solid rgb(236 215 168 / .22);
+  background: linear-gradient(180deg, rgb(4 14 30 / .42), rgb(4 14 30 / .72)); -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15); }
+.hero-rail-inner { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(16px, 2.4cqw, 44px); padding: clamp(8px, .9cqw, 16px) var(--gutter); }
+.hero-rail-head { display: flex; align-items: center; gap: 12px; font-size: .8125rem; line-height: 1.35; color: var(--mist); }
+.hero-rail-head > span { display: grid; max-width: 13em; }
+.hero-rail-head strong { font-weight: 600; color: var(--gold-soft); letter-spacing: .02em; }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--line-dark); border-radius: 999px; background: rgb(5 12 26 / .4); color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
+.motion-toggle:hover { border-color: var(--gold); color: var(--gold-soft); }
+.motion-toggle .icon { width: 16px; height: 16px; }
+.motion-toggle .icon-play { display: none; }
+.motion-toggle[aria-pressed='true'] .icon-play { display: block; }
+.motion-toggle[aria-pressed='true'] .icon-pause { display: none; }
+.hero-rail-head { order: 3; }
+.hero-rail-inner { grid-template-columns: minmax(0, 1fr) auto; }
+.hero-rail-head > span { display: none; }
+.hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hero-offers a { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 10px; padding: 8px clamp(10px, 1.6cqw, 26px); border-left: 1px solid var(--line-dark); border-radius: 4px; text-decoration: none; transition: background-color .3s; }
+.hero-offers a:first-child { border-left: 0; padding-left: 0; }
+.hero-offers a:hover { background: rgb(236 215 168 / .06); }
+.offer-thumb { display: none; }
+.hero-offers .name { grid-column: 1; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px; font-weight: 700; font-size: clamp(.9375rem, 1.15cqw, 1.25rem); line-height: 1.15; color: #fff; }
+.hero-offers .name small { font-size: .75rem; font-weight: 500; color: var(--mist-2); }
+.hero-offers .amount { grid-column: 1; white-space: nowrap; font-size: clamp(.8125rem, .95cqw, 1rem); font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
+.hero-offers .offer-go { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; color: var(--gold); }
+.hero-offers .offer-go .icon { width: 18px; height: 18px; transition: transform .35s var(--ease); }
+.hero-offers a:hover .offer-go .icon { transform: translateX(4px); }
+/* Wide screens: each price in the bar gets its photograph, and the bar says what it is. */
+@media (min-width: 1280px) and (min-aspect-ratio: 11/10) {
+  .hero-rail-head > span { display: grid; }
+  .hero-rail-head { order: 0; }
+  .hero-rail-inner { grid-template-columns: auto minmax(0, 1fr); }
+  .hero-offers a { grid-template-columns: 48px minmax(0, 1fr) auto; column-gap: 14px; }
+  .hero-offers a:first-child { padding-left: clamp(10px, 1.6cqw, 26px); border-left: 1px solid var(--line-dark); }
+  .hero-offers .offer-thumb { display: block; grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgb(236 215 168 / .3), 0 6px 16px rgb(2 8 18 / .35); }
+  .hero-offers .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .hero-offers a:hover .offer-thumb img { transform: scale(1.1); }
+  .hero-offers .name, .hero-offers .amount { grid-column: 2; }
+  .hero-offers .offer-go { grid-column: 3; }
+}
 
-/* Entrance: after the opening the animal eases out of the dark. Its eyes stay as painted; nothing ignites or glows. */
-html.js .hl-leopard { opacity: 0; }
-html.is-ready .hl-leopard { opacity: 1; animation: hl-emerge 2.2s var(--ease) .12s both; }
-@keyframes hl-emerge { from { opacity: 0; filter: brightness(.45) saturate(.7); } to { opacity: 1; filter: brightness(1) saturate(1); } }
-/* Slow devices keep the animal, its breath and its slow blink; the blended extras are dropped. */
-.hero[data-quality='lite'] .hl-rim, .hero[data-quality='lite'] .hl-motes { display: none; }
-.hero[data-quality='lite'] .hero-media::after { display: none; }
-
-/* The picture as a map of the offer: gold pins on the places Pardus sells. Pins live in picture coordinates, so they move
-   with the artwork; their labels take turns opening, and open on hover or focus. They never sit on the leopard. */
-.hero-inner, .hero-copy { pointer-events: none; }
-.hero-copy a, .hero-copy button, .hero-rail { pointer-events: auto; }
-.hl-spots { position: absolute; inset: 0; transform: translate3d(calc(var(--gx, 0) * -5px), calc(var(--gy, 0) * -3px), 0) scale(1.014); transition: transform .12s linear; }
+/* The picture as a map of the offer: gold pins on the travel scenes in the coat. Pins live in picture coordinates; their
+   labels take turns opening, and open on hover or focus. They never touch the head, the paws or the flight lines. */
+.hl-spots { position: absolute; inset: 0; }
 .spot { position: absolute; left: var(--dx); top: var(--dy); display: grid; place-items: center; width: 44px; height: 44px; translate: -50% -50%; text-decoration: none; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
 .spot-dot { position: relative; width: 14px; height: 14px; border: 2px solid #fff7e4; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff3cf, var(--gold) 60%, #a77d34); box-shadow: 0 0 0 4px rgb(217 188 130 / .28), 0 4px 14px rgb(2 8 18 / .6); transition: transform .35s var(--ease); }
 .spot-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgb(255 236 190 / .85); animation: spot-ping 2.8s cubic-bezier(.2, .7, .3, 1) calc(var(--k, 0) * .9s) infinite; }
@@ -91,96 +112,25 @@ html.is-ready .hl-leopard { opacity: 1; animation: hl-emerge 2.2s var(--ease) .1
 .spot[data-place='above']:is(:hover, :focus-visible) .spot-label, .spot[data-place='below']:is(:hover, :focus-visible) .spot-label { transform: translate(-50%, 0); }
 html:not(.js) .hl-spots { display: none; }
 .hl-spots { opacity: 0; visibility: hidden; }
-.hero[data-spots='ready'] .hl-spots { opacity: 1; visibility: visible; transition: opacity 1s ease, transform .12s linear; }
-.hero[data-quality='lite'] .spot-dot::after { animation: none; }
+.hero[data-spots='ready'] .hl-spots { opacity: 1; visibility: visible; transition: opacity 1s ease; }
 
-.hero-shade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background:
-  linear-gradient(90deg, rgb(5 12 26 / .86) 0%, rgb(5 12 26 / .5) 36%, rgb(5 12 26 / 0) 60%),
-  linear-gradient(0deg, var(--midnight) 0%, rgb(5 12 26 / .8) 8%, rgb(5 12 26 / 0) 34%),
-  linear-gradient(180deg, rgb(5 12 26 / .62), rgb(5 12 26 / 0) 20%); }
-.hero-inner { display: grid; grid-template-rows: 1fr auto; min-height: inherit; padding-top: calc(var(--header-h) + 1vh); padding-bottom: clamp(18px, 2.6vw, 34px); }
-.hero-copy { align-self: center; max-width: var(--copy-max); padding-block: clamp(14px, 3.4vh, 64px); transform: translate3d(0, var(--copy-shift, 0px), 0); opacity: var(--copy-fade, 1); }
-/* "Personally curated." is the longest line and sits at the yacht's height, so the size is capped to end it before the yacht
-   pin on desktops (about 9.75 em wide; checked by the browser smoke phase "pins"). */
-.hero h1 { font-size: clamp(2.2rem, min(4vw, 7.6vh), 3.4rem); line-height: 1.08; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
-.hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
-@keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
-@media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
-.hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
-.hero .line > span { display: block; }
-/* Held to about the headline's width, so on desktops it wraps before the yacht pin in the picture. */
-.hero-text { max-width: 26em; margin-top: clamp(16px, 2vw, 26px); font-size: clamp(1.0625rem, .98rem + .4vw, 1.3125rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
-.hero .actions { margin-top: clamp(24px, 3vw, 38px); }
-.hero .eyebrow { margin-bottom: clamp(16px, 2vw, 26px); text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
-
-.hero-rail { max-width: var(--rail-max); padding: clamp(12px, 1.4vw, 18px) clamp(16px, 2vw, 26px) clamp(8px, 1vw, 12px); transform: translate3d(0, var(--rail-shift, 0px), 0); }
-.hero-rail-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 4px; font-size: .8125rem; color: var(--mist); }
-.hero-rail-head strong { font-weight: 600; color: var(--gold-soft); letter-spacing: .02em; }
-.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 12px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
-.motion-toggle:hover { border-color: var(--line-dark); color: var(--gold-soft); }
-.motion-toggle .icon { width: 16px; height: 16px; }
-.motion-toggle .icon-play { display: none; }
-.motion-toggle[aria-pressed='true'] .icon-play { display: block; }
-.motion-toggle[aria-pressed='true'] .icon-pause { display: none; }
-.hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.hero-offers a { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 10px; padding: 10px clamp(10px, 1.6vw, 22px); border-left: 1px solid var(--line-dark); border-radius: 4px; text-decoration: none; transition: background-color .3s; }
-.hero-offers a:first-child { border-left: 0; padding-left: 0; }
-.hero-offers a:hover { background: rgb(236 215 168 / .06); }
-.offer-thumb { display: none; }
-.hero-offers .name { grid-column: 1; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px; font-weight: 700; font-size: clamp(0.874rem, 0.722rem + 0.608vw, 1.216rem); line-height: 1.15; color: #fff; }
-.hero-offers .name small { font-size: .75rem; font-weight: 500; color: var(--mist-2); }
-.hero-offers .amount { grid-column: 1; white-space: nowrap; font-size: clamp(.8125rem, .74rem + .28vw, .9375rem); font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
-.hero-offers .offer-go { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; color: var(--gold); }
-.hero-offers .offer-go .icon { width: 18px; height: 18px; transition: transform .35s var(--ease); }
-.hero-offers a:hover .offer-go .icon { transform: translateX(4px); }
-/* Wide screens: each price in the bar gets its photograph. */
-@media (min-width: 1280px) and (min-aspect-ratio: 11/10) {
-  .hero-offers a { grid-template-columns: 50px minmax(0, 1fr) auto; column-gap: 14px; }
-  .hero-offers .offer-thumb { display: block; grid-column: 1; grid-row: 1 / span 2; width: 50px; height: 50px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgb(236 215 168 / .3), 0 6px 16px rgb(2 8 18 / .35); }
-  .hero-offers .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-  .hero-offers a:hover .offer-thumb img { transform: scale(1.1); }
-  .hero-offers .name, .hero-offers .amount { grid-column: 2; }
-  .hero-offers .offer-go { grid-column: 3; }
-}
-@media (min-width: 761px) and (min-aspect-ratio: 11/10) and (max-height: 820px) {
-  .hero-rail { position: relative; padding-top: 4px; }
-  .hero-rail-head { position: absolute; top: -48px; right: 0; z-index: 1; margin: 0; }
-  .hero-rail-head > span { display: none; }
-  .hero-rail-head .motion-toggle { border-color: var(--line-dark); background: rgb(5 12 26 / .55); backdrop-filter: blur(8px); color: var(--gold-soft); }
-  .hero-text { margin-top: 14px; font-size: 1.0625rem; }
-  .hero .actions { margin-top: 20px; }
-  .hero .eyebrow { margin-bottom: 14px; }
-}
-
-/* Stacked: phones and portrait screens. Copy on top, the leopard in its own zone, destination cards below it. */
+/* Stacked: phones and portrait screens, with the portrait art. The headline sits in the open sky above the jet (the sky
+   continues above the picture in its own colour), the price tiles sit on the dark water below the paws, and the buttons and
+   supporting line follow directly under the picture, so the first screen of a phone holds the whole offer. */
 @media (max-width: 760px), (max-aspect-ratio: 11/10) {
-  .hero { --oy: 50%; --zone-h: clamp(240px, 68vw, 450px); display: flex; flex-direction: column; background: linear-gradient(180deg, #012046 0%, #052a58 52%, #071d3d 100%); }
-  .hero-inner { flex: 1 1 auto; display: flex; flex-direction: column; width: 100%; padding-inline: 0; padding-top: calc(var(--header-h) + 8px); padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .hero { --sky: rgb(2 25 58); }
+  .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 6px); padding-bottom: max(18px, env(safe-area-inset-bottom)); }
   .hero-copy { display: contents; }
-  .hero .eyebrow, .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
-  .hero .eyebrow { order: 10; margin-bottom: 12px; }
-  .hero h1 { order: 20; font-size: clamp(1.6rem, 8.4vw, 3.4rem); }
-  .hero-text { order: 30; font-size: 1.0625rem; max-width: 34ch; margin-top: 12px; }
-  /* Two equal buttons. The primary keeps its round arrow, sitting inside the pill; the secondary is a solid glass pill so
-     it reads over the bright sunset sky. Labels are sized so neither ever touches its edge. */
-  .hero .actions { order: 60; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
-  .hero .actions .btn { min-width: 0; min-height: 54px; padding: 6px 12px; gap: 10px; font-size: .9375rem; white-space: nowrap; }
-  .hero .actions .btn--gold { justify-content: space-between; padding: 6px 6px 6px 22px; }
-  .hero .actions .btn--gold > .icon { width: 18px; height: 18px; padding: 10px; }
-  .hero .actions .btn--ghost { justify-content: center; border-color: rgb(236 215 168 / .6); background: rgb(6 14 30 / .66); -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2); box-shadow: 0 10px 26px rgb(2 8 18 / .35); }
-  .hero .actions .btn--ghost > .icon { display: none; }
-  .hero-zone { order: 40; display: block; position: relative; flex: 1 1 auto; width: 100vw; margin-inline: calc(50% - 50vw); min-height: clamp(240px, 68vw, 450px); container-type: size; }
-  .hero-media { inset: 0; overflow: visible; container-type: normal; transform: none; -webkit-mask-image: none; mask-image: none; }
-  /* The world plate fills the width and sits on the bottom of the zone, so the horizon lands just under the copy. The leopard is
-     sized from the zone instead, so it uses all the room between the copy and the cards however tall the phone is. */
-  .hero-picture { --w: 100cqw; left: auto; top: auto; right: 0; bottom: 0; aspect-ratio: 2 / 3;
-    --lwm: min(94cqw, calc(.938 * (var(--zone-h) - 44px))); --fade-a: 64%; --fade-b: 80%;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 94%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 94%, transparent 100%); }
-  .hl-leopard { left: auto; top: auto; width: var(--lwm); height: calc(var(--lwm) * 1.3851); right: calc(var(--lwm) * -.06); bottom: calc(26px - var(--lwm) * .277); }
-  .hero-drift { transform-origin: 100% 0; animation-name: hero-drift-stacked; }
-  @keyframes hero-drift-stacked { from { transform: scale(1); } to { transform: scale(1.04); } }
-  .hl-world { inset: 7% 0 -7% 0; }
-  .hl-spots { inset: 7% 0 -7% 0; }
+  .hero .eyebrow { display: none; }
+  .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
+  .hero h1 { order: 1; position: relative; z-index: 2; font-size: clamp(1.75rem, 8vw, 4.4rem); }
+  /* The art follows the headline. Its jet sits 21% down the picture (31.5% of the width); the picture is pulled up under the
+     headline so that the jet starts 24px below it, in the same unbroken sky. */
+  .hero-art { order: 2; position: relative; inset: auto; width: 100%; aspect-ratio: 2 / 3; margin-top: calc(24px - 31.5cqw); flex: none;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%); mask-image: linear-gradient(180deg, transparent 0, #000 9%); }
+  .hero-picture img { transform-origin: 40% 58%; }
+  .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
+  .hero-shade { display: none; }
   .spot { left: var(--mx); top: var(--my); }
   .spot[data-stacked='false'] { display: none; }
   .spot-label { max-width: 132px; padding: 7px 12px 8px; border-radius: 12px; text-align: center; }
@@ -188,18 +138,16 @@ html:not(.js) .hl-spots { display: none; }
   .spot-meta span + span::before { content: none; }
   .spot-label strong { font-size: .8125rem; }
   .spot-meta { font-size: .6875rem; }
-  .hero-glow { background: radial-gradient(20% 13% at 91.8% 48.4%, rgb(255 190 110 / .6), rgb(255 150 70 / .14) 58%, transparent 80%); }
-  .hero-shade { background:
-    linear-gradient(180deg, rgb(5 12 26 / .7) 0%, rgb(5 12 26 / .25) 30%, rgb(5 12 26 / 0) 46%),
-    linear-gradient(0deg, rgb(5 12 26 / .9) 0%, rgb(5 12 26 / 0) 18%); }
-  .hero-rail { order: 50; max-width: none; padding: 0 var(--gutter); margin-inline: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
-  .hero-rail-head { margin: 0 0 8px; font-size: .75rem; gap: 10px; }
-  .hero-rail-head > span { display: inline; line-height: 1.35; }
-  .motion-toggle { width: 38px; min-height: 38px; padding: 0; justify-content: center; flex: none; border-color: var(--line-dark); background: rgb(5 12 26 / .5); }
+  /* The dock: the three tiles rise onto the dark water at the foot of the picture; the price note and pause sit below. */
+  .hero-rail { --tile-h: clamp(92px, 25vw, 124px); order: 3; position: relative; inset: auto; z-index: 2; margin-top: calc(-1 * (var(--tile-h) + 14px)); padding: 0 var(--gutter); border: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .hero-rail-inner { display: flex; flex-direction: column-reverse; align-items: stretch; gap: 10px; padding: 0; }
+  .hero-rail-head { order: 0; justify-content: space-between; gap: 10px; font-size: .75rem; }
+  .hero-rail-head > span { display: block; max-width: none; }
+  .hero-rail-head strong { margin-right: .3em; }
+  .motion-toggle { width: 38px; min-height: 38px; padding: 0; justify-content: center; flex: none; background: rgb(5 12 26 / .5); }
   .motion-toggle [data-scene-motion-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  /* The dock: all three destinations and their prices at once, as photograph tiles. No hidden swipe. */
   .hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0; }
-  .hero-offers a { position: relative; isolation: isolate; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: clamp(92px, 25vw, 124px); padding: 10px 9px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
+  .hero-offers a { position: relative; isolation: isolate; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: var(--tile-h); padding: 10px 9px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
   .hero-offers a:first-child { padding-left: 9px; }
   .hero-offers a:active { transform: scale(.97); }
   .hero-offers a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(5 12 26 / .06) 0%, rgb(5 12 26 / .3) 36%, rgb(5 12 26 / .94) 100%); }
@@ -207,19 +155,34 @@ html:not(.js) .hl-spots { display: none; }
   .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform .9s var(--ease); }
   .hero-offers a:hover .offer-thumb img { transform: scale(1.14); }
   /* Tile text is sized from the tile itself, so the longest label ("USD 2,950", 5.6 times its size) always keeps at least 15% spare room. */
-  .hero-offers .name { grid-column: 1; min-width: 0; font-size: clamp(.625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .15), .95rem); font-size: clamp(.625rem, 15cqi, .95rem); flex-direction: column; align-items: flex-start; gap: 0; white-space: nowrap; }
-  .hero-offers .name small { display: block; font-size: clamp(.5625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .115), .75rem); font-size: clamp(.5625rem, 11.5cqi, .75rem); font-weight: 600; color: rgb(255 255 255 / .8); }
-  .hero-offers .amount { grid-column: 1; min-width: 0; display: grid; gap: 0; font-size: clamp(.625rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .15), .95rem); font-size: clamp(.625rem, 15cqi, .95rem); font-weight: 700; color: #fff; line-height: 1.2; white-space: nowrap; }
-  .hero-offers .amount .from { font-size: clamp(.5rem, calc(((100vw - 2 * var(--gutter) - 16px) / 3 - 18px) * .095), .66rem); font-size: clamp(.5rem, 9.5cqi, .66rem); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
+  .hero-offers .name { grid-column: 1; min-width: 0; font-size: clamp(.625rem, 15cqi, .95rem); flex-direction: column; align-items: flex-start; gap: 0; white-space: nowrap; }
+  .hero-offers .name small { display: block; font-size: clamp(.5625rem, 11.5cqi, .75rem); font-weight: 600; color: rgb(255 255 255 / .8); }
+  .hero-offers .amount { grid-column: 1; min-width: 0; display: grid; gap: 0; font-size: clamp(.625rem, 15cqi, .95rem); font-weight: 700; color: #fff; line-height: 1.2; white-space: nowrap; }
+  .hero-offers .amount .from { font-size: clamp(.5rem, 9.5cqi, .66rem); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
   .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }
   .hero-offers .offer-go .icon { width: 14px; height: 14px; }
+  /* Two equal buttons, then the supporting line. */
+  .hero .actions { order: 4; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: auto; max-width: none; margin-top: 14px; }
+  .hero .actions .btn { min-height: 54px; padding: 6px 12px; gap: 10px; font-size: .9375rem; white-space: nowrap; }
+  .hero .actions .btn--gold { justify-content: space-between; padding: 6px 6px 6px 22px; }
+  .hero .actions .btn--gold > .icon { width: 18px; height: 18px; padding: 10px; }
+  .hero .actions .btn--ghost { background: rgb(6 14 30 / .66); box-shadow: 0 10px 26px rgb(2 8 18 / .35); }
+  .hero .actions .btn--ghost > .icon { display: none; }
+  .hero-text { order: 5; max-width: 34ch; margin-top: 16px; font-size: 1.0625rem; }
 }
-@media (max-height: 860px) and (max-aspect-ratio: 11/10) { .hero .actions { order: 35; margin-top: 16px; } .hero-zone { margin-top: 8px; } }
-@media (max-width: 760px) { .hero .actions .btn .btn-long { display: none; } }
+/* Below 1200 px the landscape buttons are held left of the paws, so the second one reads "Explore". */
+@media (max-width: 1199px) { .hero .actions .btn .btn-long { display: none; } }
 @media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } .hero .actions .btn--gold { padding-left: 18px; } }
-/* The narrowest phones (320 px): the buttons stay side by side so the leopard keeps its place on the first screen; the main
-   button drops "your" and its arrow so its label keeps its room. */
 @media (max-width: 350px) { .hero .actions .btn .btn-mid { display: none; } .hero .actions .btn--gold { justify-content: center; padding-inline: 12px; } .hero .actions .btn--gold > .icon { display: none; } }
 @media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
-@media (max-aspect-ratio: 11/10) and (min-width: 761px) { .hero .eyebrow, .hero h1, .hero-text, .hero .actions { max-width: 46rem; } .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.4rem); } .hero .actions .btn { flex: 0 0 auto; padding-inline: 26px; } .hero .actions .btn .icon { display: inline-block; } .hero-text { font-size: 1.0625rem; max-width: 40ch; } .hero-offers .name small { display: inline; } }
+/* Portrait tablets: a larger headline and buttons that size to their labels. */
+@media (max-aspect-ratio: 11/10) and (min-width: 761px) {
+  .hero h1, .hero-text, .hero .actions { max-width: 46rem; }
+  .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.4rem); }
+  .hero .actions { display: flex; }
+  .hero .actions .btn { width: auto; flex: 0 0 auto; padding-inline: 26px; }
+  .hero .actions .btn .icon { display: inline-block; }
+  .hero-text { max-width: 40ch; }
+  .hero-offers .name small { display: inline; }
+}

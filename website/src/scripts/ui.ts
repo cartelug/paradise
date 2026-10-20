@@ -197,13 +197,7 @@ function paint() {
   }
   if (y < 120) header?.classList.remove('is-hidden');
   if (reduced.matches) return;
-  if (hero && y < hero.offsetHeight + 80) {
-    const progress = clamp(y / hero.offsetHeight, 0, 1);
-    hero.style.setProperty('--hero-shift', `${(y * 0.26).toFixed(1)}px`);
-    hero.style.setProperty('--copy-shift', `${(-y * 0.1).toFixed(1)}px`);
-    hero.style.setProperty('--copy-fade', clamp(1 - progress * 1.5, 0, 1).toFixed(3));
-    hero.style.setProperty('--rail-shift', `${(y * 0.05).toFixed(1)}px`);
-  }
+  // The homepage hero does not move with the scroll: the leopard never follows the visitor (CLAUDE.md).
   if (pageHero && y < pageHero.offsetHeight + 80) pageHero.style.setProperty('--hero-shift', `${(y * 0.22).toFixed(1)}px`);
   for (const element of parallax) {
     if (!visible.has(element)) continue;

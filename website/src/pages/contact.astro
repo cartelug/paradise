@@ -16,6 +16,11 @@ import { site, path, whatsappUrl, phoneUrl } from '../data/site';
         <div class="contact-card" data-reveal><span class="badge"><Icon name="chat" /></span><h2>General enquiries</h2><p>Company information and general questions.</p><a class="mail" href={'mailto:' + site.email}><Icon name="mail" /><span>{site.email}</span></a></div>
         <div class="contact-card" data-reveal><span class="badge"><Icon name="shield" /></span><h2>Support &amp; feedback</h2><p>Post-booking help, reviews and service feedback.</p><a class="mail" href={'mailto:' + site.supportEmail}><Icon name="mail" /><span>{site.supportEmail}</span></a></div>
       </div>
+      <div class="contact-partners" data-reveal>
+        <span class="badge"><Icon name="briefcase" /></span>
+        <div><h2>Partnerships and corporate accounts</h2><p>For partnership proposals, supplier introductions and corporate travel accounts, write to the director.</p></div>
+        <a class="mail" href={'mailto:' + site.directorEmail}><Icon name="mail" /><span>{site.directorEmail}</span></a>
+      </div>
       {(phoneUrl || whatsappUrl) && <p style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">{phoneUrl && <a class="btn btn--ink" href={phoneUrl}><Icon name="phone" /> Call {site.phone}</a>}{whatsappUrl && <a class="btn btn--ink" href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Icon name="chat" /> Message Pardus on WhatsApp</a>}</p>}
       {site.credentials.length > 0 && <div style="margin-top:48px"><h2 style="font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem)">Company details</h2><dl class="credentials" style="margin-top:14px">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div>}
     </div>

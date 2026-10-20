@@ -236,6 +236,14 @@ if (planner) {
         : site.enquiryEndpoint
           ? 'Your brief is ready to keep. Automatic delivery failed, so your entries remain here for another attempt.'
           : 'Your brief is ready to keep. It has not been sent to Pardus and is not a booking.';
+      // Not sent online: offer the same brief as an email draft to bookings, so it still reaches Pardus in one tap.
+      const mail = planner.querySelector<HTMLElement>('[data-brief-mail]');
+      const mailLink = mail?.querySelector<HTMLAnchorElement>('a');
+      if (mail && mailLink) {
+        mail.hidden = delivered;
+        const body = content.length > 1800 ? `${content.slice(0, 1800)}\n…\n(The full brief is attached as the downloaded file.)` : content;
+        mailLink.href = `mailto:${site.bookingsEmail}?subject=${encodeURIComponent(`Pardus journey brief — ${data.destination || 'Open to inspiration'}`)}&body=${encodeURIComponent(body)}`;
+      }
       if (delivered) try { sessionStorage.removeItem(DRAFT_KEY); } catch {}
       const printable = document.querySelector('.print-brief'); if (printable) printable.textContent = content;
     } catch {

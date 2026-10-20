@@ -4,10 +4,16 @@ export const site = {
   tagline: 'Extraordinary journeys. Personally curated.',
   description: 'Extraordinary journeys. Personally curated. Bespoke luxury travel for Uganda and East Africa: the Maldives, Seychelles, Dubai, safaris and private yachts, arranged around you.',
   // Only add business-approved contacts. Empty values never render fake links.
+  // The four live mailboxes on pardusescapes.com.
+  // General enquiries: footer, contact page and structured data.
   email: 'info@pardusescapes.com',
+  // Reservations and bookings: every enquiry form and the journey planner send here.
   bookingsEmail: 'bookings@pardusescapes.com',
+  // General support and after-booking help: contact page.
   supportEmail: 'support@pardusescapes.com',
-  // Business-approved launch addresses. Mailbox activation is a separate business setup task.
+  // The director: shown only on the contact page (partnerships and corporate accounts) and on the corporate travel page.
+  // Never in the header or the forms.
+  directorEmail: 'director@pardusescapes.com',
   // International format, e.g. '+256 700 000 000'; spaces and symbols are ignored in the link.
   whatsapp: '',
   // A verified business telephone number, e.g. '+256 700 000 000'. Empty shows nothing; once set it appears in the footer,

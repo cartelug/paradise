@@ -15,7 +15,7 @@ import Footer from '../components/Footer.astro';
 import Folio from '../components/Folio.astro';
 import { site, path, absolute, socialLinks, phoneUrl } from '../data/site';
 interface Props { title?: string; label?: string; description?: string; image?: string; simpleFooter?: boolean; class?: string; }
-const { title, label, description = site.description, image = 'images/pardus-hero-desktop-v25-1536.webp', simpleFooter = false, class: className } = Astro.props;
+const { title, label, description = site.description, image = 'images/pardus-hero-desktop-1536.webp', simpleFooter = false, class: className } = Astro.props;
 // The preloader names the page that is opening.
 const introLabel = label ?? (title ? title.split(/ [—:] /)[0] : 'Welcome');
 // GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
@@ -68,7 +68,7 @@ const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline set:html={bootstrap} />
   </head>
-  <body id="top" class={className} data-pardus-version="30">
+  <body id="top" class={className} data-pardus-version="31">
     <IconSprite />
     <BrandSprite />
     <CinematicIntro label={introLabel} />

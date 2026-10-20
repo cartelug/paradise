@@ -1,0 +1,71 @@
+PARDUS WEBSITE HERO V2
+Created with the built-in image generation tool.
+The original uploaded leopard portrait was the sole animal identity reference. The previously generated campaign art was used for concept continuity.
+
+DESKTOP
+
+Use case: ads-marketing; identity-preserving photographic campaign compositing.
+REGENERATE the supplied landscape artwork into a much more believable, restrained, premium WEBSITE HERO photograph-composite. ONE image, LANDSCAPE 3:2 at maximum native resolution. No text, logo, watermark or visible layout guides.
+
+REFERENCE ROLES:
+Image 1 is the original real leopard portrait: the SOLE animal identity and real fur/eye/nose texture reference. Preserve that specific individual: precise cheek and forehead spot patterns, ear shape, pale muted blue-green iris, black nose, white muzzle, white whiskers, golden-to-cream coat. Reconstruct its powerful adult body naturally, lying at rest with front paws forward. Use no other animal reference.
+Image 2 is the earlier campaign composition: retain its narrative of one leopard becoming the travel world, but substantially refine the photographic rendering, anatomy, compositing, light and website negative space. Do not reproduce its heavily orange grade, crunchy outline sharpening, uniformly brilliant fur, oversized bright destination holes or obvious fantasy-poster finish.
+
+THE PHOTOGRAPHIC UPGRADE is essential:
+Look like a meticulous high-end wildlife photograph developed from a medium-format RAW capture, then invisibly composited by a master retoucher. 85mm lens character, f/8, believable depth and restrained tonal separation. Natural matte fur with irregular overlapping hairs, fine undercoat, nuanced warm and cool color variation, some hairs falling into shadow. Beautiful detail without crunchy edge halos, plastic gloss, painted fur or a gold outline around every hair. Gentle optical falloff in distant miniatures and low-water reflections; the leopard eye, muzzle and whiskers are crisply resolved. The iris is naturally pale and softly reflective, not icy luminous cyan. Soft highlight rolloff, rich open shadows, modest microcontrast, subtle organic fine luminance film grain comparable to a properly exposed ISO 800 medium-format image; nearly imperceptible chroma noise. The grain should be visible only close up and must never become grit. The overall feeling is expensive, quiet, photographic, tactile.
+
+WEBSITE LAYOUT, use the canvas intentionally:
+- Top 14% across the entire width is quiet, very dark midnight-navy sky, reserved for a transparent header. Especially keep x=4–23%, y=3–12% perfectly clean for the actual brand logo, and the remainder of this header dark enough for navigation. Do NOT draw a logo, header, words, menu or placeholder boxes.
+- Left 40% remains a coherent dark navy negative-space field, particularly x=5–37%, y=29–65%, for a white headline and supporting copy. Lower-left x=5–32%, y=66–76% is also quiet for real HTML buttons.
+- Leopard occupies the right 60%, with its nose no further left than approximately x=48%, its entire head at x=48–79%, y=19–51%, ears fully in frame and clear of header.
+- The body curves naturally through the right side below the head; two real forepaws extend toward the lagoon in the lower right-middle, not across the main left text area. Resting, noble anatomy, four legs in total with hind legs naturally tucked, no extra paws.
+- Bottom 14% is calm, dark turquoise lagoon, subdued reflection and a few dim amber glints. Keep it low contrast enough for a real website enquiry/price strip to be overlaid later.
+- The LEFT headline field must NOT contain a big orange horizon, visible sun, mountains, a boat or a bright water reflection. Allow the left navy sky to blend softly down into the dark lagoon, no panel edge or visibly painted rectangle.
+
+IDENTITY AND GAZE: Exactly one leopard. Head in clean LEFT-FACING 85–90 DEGREE PROFILE, not a three-quarter portrait. Only its near eye is visible, softly half-lidded, calmly gazing far LEFT away from the viewer, never making eye contact. Mouth closed. Facial skin, ears, eyes, nose and muzzle remain entirely real, untransformed leopard.
+
+Preserve these subtle, highly integrated ideas:
+1. Three or four long actual white muzzle whiskers extend toward the LEFT, gradually becoming extremely fine champagne-gold flight-route contrails. Their curves sweep through the open sky ABOVE the main headline area, near y=19–26%, leading to just one very small realistically lit passenger jet around x=26%, y=20%. Keep the header and headline field clear, no thick glowing arcs and no route detached from the muzzle.
+2. The fur contour of the spine/back IS a distant coastline at blue hour. Tiny acacias, savannah grasses and a small procession of elephants emerge along that SAME fur contour. A tiny elegant Dubai-like skyline grows out of the shoulder/back contour; its tallest slender tower sits at the SHOULDER peak, with smaller buildings diminishing along the back. These are minute believable silhouettes, not an enormous city behind the body, and not on the head. The horizon is anatomically fused with the back.
+3. Seven to nine, ideally EIGHT, carefully selected dark rosettes only on shoulder, flank and haunch transform into tiny irregular destination windows: thatched overwater villas in a clear turquoise lagoon; a miniature white superyacht with subtle gold wake; Zanzibar dhow under cream sail; Seychelles granite boulders and palms; Santorini white dome over a subdued violet-blue sea; lantern-lit safari tent; two alternate little lagoon/villa and tent views. Keep scenes smaller and more restrained than in Image 2. They follow the natural shape, curvature, dark pigmentation and fur boundaries of real rosettes. They must blend invisibly into the texture, still reading as spots from far away, rather than circles punched through the animal. No raised borders, fuzzy glowing perimeters, perfect circles or picture frames. Most of the body remains natural opaque fur. Every little world shares the single physically coherent sunset/blue-hour light.
+4. The paws meet a glassy dark turquoise lagoon, with restrained physically plausible ripples at contact and a faint broken reflection. Very low fur tips soften subtly into water/reflection. No bright orange mirror streak through the headline area and no submerged or melted anatomy.
+
+LIGHT AND GRADE: One soft warm light from the LEFT, the sun already well below the horizon and never visible. Restrained champagne rim only on a few left-facing edges, natural soft blue-hour fill elsewhere, midnight navy in the top and left. A narrow subdued apricot band hugs ONLY the leopard's back-horizon on the right. Reduce orange saturation, luminous highlights, dramatic cloud texture and fantasy teal/orange contrast substantially from the previous artwork. Palette midnight navy, muted champagne gold, soft warm amber, realistic clear dark turquoise, natural sand-gold fur. The face is the most believable and subtly detailed part of the whole image.
+
+Avoid all of: viewer eye contact, frontal head, luminous eyes, teeth/open mouth, extra leopard, human faces; scenery anywhere on face; huge destination holes, collage panels, rectangles, cheap double-exposure transparency, hard cutout seams; text, letters, numbers, logos, watermark, signage or placeholder UI; blazing sun disc, giant orange sunset, neon, lens flares, sparkling fur, cartoon, CGI, oily/plastic coat, extreme sharpening halos, oversaturated postcard scenes, warped architecture, distorted boats, extra legs/paws, clutter.
+Make it extraordinary through real photographic material, composition and subtlety.
+
+PHONE
+
+Use case: ads-marketing; photographic website hero adaptation.
+Create ONE much more natural, photographically refined PHONE HERO image, PORTRAIT 2:3 at highest native resolution. Recompose the supplied updated landscape artwork for mobile. It must be the SAME animal and SAME artwork, with matching soft blue-hour light, restrained gold, real fur, small travel scenes and quiet dark sky. Absolutely no text, logo or drawn interface.
+
+REFERENCES:
+Image 1, the original real close-up: sole source for the animal identity and natural photographic material. Retain its distinct precise forehead/cheek markings, true ear shape, pale muted blue-green iris, black nose, white whiskers, golden-to-cream fur and white muzzle. Build the full matching adult leopard body naturally. Do not copy its forward stare, enclosure, background or framing.
+Image 2, the newly refined desktop hero: adapt this exact artwork and its subdued palette, real coat, seven-to-nine organic rosette scenes, flight-route whiskers, back-horizon and water into a tall frame. Do not simply crop away the head or stretch the body. Do not revert to the older brightly orange fantasy-poster treatment.
+
+KEY MOBILE COMPOSITION FOR REAL WEBSITE CONTENT:
+Top 28% should be mostly empty and nearly uniform dark MIDNIGHT NAVY sky.
+Reserve top 3–11% as a quiet header, with a real logo to be overlaid later at x=6–40%, and a menu control at the upper right. Do not actually insert either.
+Reserve x=8–92%, y=14–27% as clear navy for headline copy to be added in HTML. Do not add words or placeholder boxes.
+The whole head begins BELOW this zone: ear tips near y=31–33%, head centered around x=46%, y=43%, muzzle pointing toward LEFT with ample space to the left edge. All ears and the entire muzzle are completely inside the frame. Head, shoulder, body and destination rosettes fill the middle region naturally. Resting forelegs/paws near y=76–83%.
+Bottom 16–17% is dark glassy turquoise water with softly broken reflections and sparse dim amber lights; calm enough for an enquiry or price overlay. No drawn price cards.
+The flight whiskers can sweep left and arc upward mostly along the LEFT EDGE, ending in one tiny realistic jet near x=6%, y=28%. Keep their delicate arcs below the header and out of the large central headline zone. Only a couple of extremely faint stars; no dense starfield.
+
+REAL PHOTOGRAPHIC FINISH IS THE MAIN REQUEST:
+A carefully developed medium-format RAW wildlife photo, convincing 85mm lens rendition, f/8, physically believable softness and depth. Matte tactile layered fur: fine undercoat, irregular separate hairs, small natural imperfections, nuanced sand-gold hues, softly cool shadows. Not a coat made of uniformly glowing spikes. Natural gentle contrast, soft rolled highlights, deep but readable navy shadows. Eye/muzzle/whiskers sharply resolved without clarity halos or brittle edges. Iris naturally pale and non-luminous with one realistic small catchlight. Fine, coherent organic luminance film grain comparable to clean ISO 800 medium-format capture, restrained and most perceptible in midtones; no chroma noise, no gritty overlays. Distant tiny scenery and reflected lights fall naturally out of critical focus. No CGI sheen, plastic coat, extreme edge enhancement, neon eyes or oversaturated teal/orange poster grade.
+
+THE LEOPARD:
+Exactly ONE powerful adult, lying serenely at rest, two front paws extended forward, hind legs tucked naturally, anatomically correct.
+Strict clean LEFT-FACING PROFILE, about 85–90 degrees away from camera; only the near eye visible. Eye slightly half-lidded, soft and calm, gazing far away to the left. Closed mouth, relaxed, noble. Never look toward camera. The face, head, ears, muzzle, eyes and nose stay 100% photographic animal; never put scenery on them.
+
+SAME FIVE TRAVEL TRANSFORMATIONS, all subtle and seamlessly blended:
+1. Real untouched photographic head and face.
+2. Three or four actual white muzzle whiskers grow continuously into very fine champagne-gold flight contrails, sweeping outward left and then upward along the frame edge toward the single tiny jet. They must visibly originate from whiskers, with no disconnected forehead routes, no thick luminous ropes.
+3. The exact upper fur silhouette of the back becomes the blue-hour coastline: tiny acacias, savannah grasses and a small line of elephants on the SAME fur contour. A tiny elegant Dubai-like skyline merges into the spine/shoulder contour, tallest slender tower precisely at the shoulder's peak, smaller buildings tapering along the back toward the right. Do not put an independent city behind the animal. Keep silhouettes miniature and the warm glow behind the back subdued, avoiding broad orange cloud bands.
+4. About eight selectively transformed dark body rosettes, ONLY on shoulder/flank/haunch, reveal little scenes: thatched overwater villas in a turquoise lagoon, tiny white superyacht with quiet golden wake, Zanzibar dhow under cream sail, Seychelles granite rocks and palms, white Santorini dome over subdued violet-blue sea, lantern-lit safari tent, and two alternate little villa/tent views. Same worlds as the new desktop image. Vary shapes and scale according to real rosettes; blend fur boundaries invisibly, with no perfect round holes, border frames, glowing fuzz, rectangles or hard cutout cavities. Keep the scenery restrained and natural fur dominant; most spots remain real fur. Miniature scenes share the same physically coherent light as the animal.
+5. Paws touch the dark turquoise lagoon, just the lowest fur tips softening into ripples, faint fragmented reflection, a few dim gold glints and warm villa lights. Maintain real paw anatomy, no melted/submerged limbs, no blinding orange reflection.
+
+LIGHT/COLOR: Just after sunset with the actual sun already below the LEFT horizon, no sun disc. Soft left warm light and a restrained champagne rim on selected edges, cool navy fill, subtle apricot only near the right-side back-horizon. Same subdued midnight navy, champagne, amber, dark clear turquoise and sand as the updated desktop. Rich but natural, photographic and inviting.
+
+NO eye contact, frontal/three-quarter head, glowing eye, teeth/open mouth, extra animal, human faces, lettering, watermark, signage, logos, UI panels; no cutout frames, cheap double exposure, plastic/CGI anatomy or fur, extra paws or limbs, distorted boats or buildings, lens flare, neon, oversaturation or clutter.

@@ -1,0 +1,17 @@
+{
+  "note": "V31 photography. Drop each photograph into this folder under its file name, add or complete its entry below, then run `node scripts/prepare-v31-photography.mjs` from website/. Entries whose file is not here yet are skipped, and the site keeps the V24 picture for that slot. Landscape 3:2, at least 2400 x 1600, except maldives.jpg (portrait 3:4 is also fine). For AI-generated pictures set \"source\" to \"AI-generated, illustrative\" and never describe them as a named resort, hotel or yacht. `crop` is the sharp crop focus: centre, north, south, east, west, entropy or attention.",
+  "photos": [
+    { "slot": "hero-maldives", "file": "hero-maldives.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "maldives", "file": "maldives.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "zanzibar", "file": "zanzibar.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "seychelles", "file": "seychelles.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "safari-uganda", "file": "safari-uganda.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "safari-family", "file": "safari-family.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "europe", "file": "europe.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "dubai", "file": "dubai.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "yacht", "file": "yacht.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "corporate", "file": "corporate.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "journal-safari", "file": "journal-safari.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" },
+    { "slot": "journal-process", "file": "journal-process.jpg", "alt": "", "source": "", "photographer": "", "sourcePage": "", "license": "", "crop": "centre" }
+  ]
+}

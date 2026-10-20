@@ -1,0 +1,67 @@
+# PARDUS Luxury Escapes: Apache rules for the website on pardusescapes.com (Namecheap cPanel, public_html).
+# These rules cover the website only: HTTPS, the bare domain, the 404 page, caching, compression and image types.
+# They do not touch email, webmail, cPanel, /.well-known (SSL certificate checks) or anything outside the website.
+# Every block is wrapped in <IfModule>, so a server without a module simply skips that block.
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Certificate validation (AutoSSL) must always reach /.well-known untouched.
+  RewriteRule ^\.well-known/ - [L]
+  # www.pardusescapes.com -> https://pardusescapes.com (one redirect, straight to HTTPS).
+  RewriteCond %{HTTP_HOST} ^www\.pardusescapes\.com$ [NC]
+  RewriteRule ^ https://pardusescapes.com%{REQUEST_URI} [R=301,L]
+  # Any plain-HTTP request -> the same address over HTTPS.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# Image and font types (older servers may not know AVIF or WOFF2).
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# Compression: Brotli where the server has it, gzip otherwise.
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Caching. /static holds fingerprinted CSS and JavaScript (a new name on every change), so it is cached for a year.
+# /images, /fonts and /brand keep their names between releases, so they are cached for 30 days.
+# Pages (*.html), the travel desk feed and the sitemap are short, so a new release shows up within minutes.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 5 minutes"
+  ExpiresByType application/json "access plus 5 minutes"
+  ExpiresByType application/xml "access plus 1 hour"
+  ExpiresByType text/xml "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType image/avif "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+  ExpiresByType application/pdf "access plus 1 day"
+</IfModule>
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI "^/static/" PARDUS_HASHED
+  SetEnvIf Request_URI "^/(images|fonts|brand)/" PARDUS_ASSET
+  SetEnvIf Request_URI "(\.html|/)$" PARDUS_PAGE
+</IfModule>
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=PARDUS_HASHED
+  Header set Cache-Control "public, max-age=2592000" env=PARDUS_ASSET
+  Header set Cache-Control "public, max-age=300, must-revalidate" env=PARDUS_PAGE
+</IfModule>

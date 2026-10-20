@@ -14,20 +14,20 @@ import BookingSteps from '../components/BookingSteps.astro';
 import { journeys } from '../data/journeys';
 import { path, site } from '../data/site';
 import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
+import { photo } from '../data/photography.ts';
+const yachtPhoto = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht in Dubai Marina' });
 const promises = [
   { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
   { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, your budget and the people you are travelling with come first.' },
   { icon: 'shield' as const, title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
 ];
 const asset = (name: string) => path(`images/${name}`);
-const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
 const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFor(slug), place: destinationFor(slug) }));
 ---
-<Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image="images/pardus-hero-desktop-v25-1536.webp">
+<Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image="images/pardus-hero-desktop-1536.webp">
   <Fragment slot="head">
-    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'avif')} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'avif')} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" href={asset('pardus-leopard-v30.avif')} />
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={`${asset('pardus-hero-phone-640.avif')} 640w, ${asset('pardus-hero-phone-1024.avif')} 1024w`} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={`${asset('pardus-hero-desktop-960.avif')} 960w, ${asset('pardus-hero-desktop-1536.avif')} 1536w`} imagesizes="100vw" />
   </Fragment>
   <Hero />
 
@@ -67,7 +67,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
   </section>
 
   <section class="yacht" aria-labelledby="cruise-title" data-yacht>
-    <div class="yacht-media"><Picture name="yacht-dubai-v24" alt="A white motor yacht in Dubai Marina" sizes="100vw" /></div>
+    <div class="yacht-media"><Picture name={yachtPhoto.image} alt={yachtPhoto.alt} sizes="100vw" /></div>
     <div class="wrap">
       <p class="eyebrow" data-reveal>Private boat &amp; yacht experiences</p>
       <h2 id="cruise-title" data-split>The best view is <em>from the water.</em></h2>

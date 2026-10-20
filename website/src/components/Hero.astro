@@ -2,91 +2,85 @@
 import Icon from './Icon.astro';
 import { path } from '../data/site';
 import { offerFor, displayPrice, priceText, cruiseTypes } from '../data/offers';
-import layers from '../data/hero-layers.json';
-// The V25 hero, rebuilt in layers so the leopard can be gently alive: a clean world plate, the animal, a blink patch
-// for the eyes, a slow band of light and a small canvas of drifting motes. The animal is calm by design (it breathes,
-// blinks slowly and sways a little; it never glows, never follows the visitor and never reacts to a touch), and everything
-// is positioned in image coordinates, so the artwork looks exactly as approved at rest and the animal never leaves its place.
+// The V31 hero: one owner-approved artwork (a resting leopard in left profile, travel scenes woven into its coat), served
+// as an art-directed picture: portrait art on phones and portrait screens, landscape art otherwise. The stage is exactly
+// the picture, so the copy, the price bar, the pins and the leopard's measured outline all live in picture coordinates and
+// never drift onto the animal. Its only motion is a very slow breath of scale (1.00 to 1.03 and back over about 20 s); it
+// never glows, never follows the visitor and never reacts to a touch.
 const rail = ['maldives', 'seychelles', 'dubai'].map(slug => offerFor(slug));
 const asset = (name: string) => path(`images/${name}`);
-const set = (prefix: string, sizes: number[], ext: string) => sizes.map(w => `${asset(`${prefix}-${w}.${ext}`)} ${w}w`).join(', ');
 // Portrait artwork is used on phones and on any screen that is not clearly landscape, so the copy never sits on the animal.
 const stacked = '(max-width: 760px), (max-aspect-ratio: 11/10)';
-const { leopard } = layers;
+const desktopSet = (ext: string) => `${asset(`pardus-hero-desktop-960.${ext}`)} 960w, ${asset(`pardus-hero-desktop-1536.${ext}`)} 1536w`;
+const phoneSet = (ext: string) => `${asset(`pardus-hero-phone-640.${ext}`)} 640w, ${asset(`pardus-hero-phone-1024.${ext}`)} 1024w`;
 const nightsOf = (text: string) => { const n = text.match(/(\d+)-night/); return n ? `${n[1]} nights` : text; };
-// Places in the picture, in order of priority when space is short. Coordinates are percentages of the world plate: d = landscape art, m = portrait art.
-// side / mside = where the label opens. `stacked: false` hides a pin on phones and portrait screens, where it would meet
-// the leopard, the buttons or another pin.
+// The leopard's outline, measured on each artwork as rectangles in picture percentages [left, top, right, bottom]. Nothing
+// the visitor reads or presses may touch any of them. Pins sit on the travel scenes in the coat, so they may cross the
+// body and chest, but never the head, the paws, the jet or its flight lines from the whiskers to the jet ("keep" zones).
+const outline = [
+  { part: 'jet', keep: true, d: [18, 18, 31, 29], m: [1.5, 21, 16, 31] },
+  { part: 'flight', keep: true, d: [31, 21, 46, 37.5], m: [16, 24, 37, 42.5] },
+  { part: 'head', keep: true, d: [40.5, 12, 68, 48], m: [25.5, 26.5, 60, 47.5] },
+  { part: 'chest', keep: false, d: [42, 45, 72, 66], m: [18, 45, 60, 70] },
+  { part: 'paw', keep: true, d: [26.5, 66, 38, 81.5], m: [6, 65, 25, 74.5] },
+  { part: 'paws', keep: true, d: [38, 62.5, 60, 81.5], m: [25, 63.5, 52, 74.5] },
+  { part: 'back', keep: false, d: [60, 19, 100, 80], m: [55, 30, 100, 74.5] },
+];
+const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t:${r[1]}%;--${prefix}w:${r[2] - r[0]}%;--${prefix}h:${r[3] - r[1]}%`;
+// Places in the picture, in order of priority when space is short. Coordinates are percentages of the artwork: d = landscape
+// art, m = portrait art. side / mside = where the label opens first. `stacked: false` hides a pin on phones and portrait screens.
 const dubai = offerFor('dubai'), maldives = offerFor('maldives'), yacht = cruiseTypes[0];
 const spots = [
-  { key: 'maldives', href: path('destination-maldives.html'), title: 'Maldives', meta: [nightsOf(maldives.nights), priceText(maldives).replace('From', 'from')], d: [58.5, 51.5], m: [28.5, 55], side: 'below', mside: 'below', stacked: true },
-  { key: 'dubai', href: path('destination-dubai.html'), title: 'Dubai', meta: [nightsOf(dubai.nights), priceText(dubai).replace('From', 'from')], d: [58.5, 27.5], m: [80.5, 43], side: 'above', mside: 'above', stacked: false },
-  { key: 'yacht', href: path('cruises.html'), title: 'Private yacht', meta: [yacht.basis.match(/\d+ hours?/)?.[0] ?? 'Private charter', `${priceText(yacht).replace('From', 'from')} per yacht`], d: [47.5, 37.5], m: [23.5, 49.5], side: 'right', mside: 'below', stacked: false },
+  { key: 'maldives', href: path('destination-maldives.html'), title: 'Maldives', meta: [nightsOf(maldives.nights), priceText(maldives).replace('From', 'from')], d: [68, 55], m: [64, 55], side: 'right', mside: 'right', stacked: true },
+  { key: 'dubai', href: path('destination-dubai.html'), title: 'Dubai', meta: [nightsOf(dubai.nights), priceText(dubai).replace('From', 'from')], d: [91.5, 31], m: [91, 38], side: 'above', mside: 'above', stacked: false },
+  { key: 'yacht', href: path('cruises.html'), title: 'Private yacht', meta: [yacht.basis.match(/\d+ hours?/)?.[0] ?? 'Private charter', `${priceText(yacht).replace('From', 'from')} per yacht`], d: [75, 64.5], m: [71, 61.5], side: 'below', mside: 'below', stacked: false },
 ];
-const vars = `--leopard-url:url(${asset('pardus-leopard-v30-mask.webp')})`;
 ---
 <section class="hero" aria-labelledby="hero-title" data-hero data-hero-life>
-  <div class="hero-shade" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
+  <div class="hero-stage" data-hero-stage>
+    <div class="hero-art" data-hero-art>
+      <picture class="hero-picture">
+        <source media={stacked} type="image/avif" srcset={phoneSet('avif')} sizes="100vw" width="1024" height="1536" />
+        <source media={stacked} type="image/webp" srcset={phoneSet('webp')} sizes="100vw" width="1024" height="1536" />
+        <source type="image/avif" srcset={desktopSet('avif')} sizes="100vw" width="1536" height="1024" />
+        <img src={asset('pardus-hero-desktop-1536.webp')} srcset={desktopSet('webp')} sizes="100vw" width="1536" height="1024" alt="A resting leopard in left profile, with tiny travel scenes woven into its coat above a blue-hour lagoon." fetchpriority="high" decoding="async" data-hero-image />
+      </picture>
+      <div class="leopard-outline" aria-hidden="true">
+        {outline.map(part => <span class="leopard-box" data-leopard-box={part.part} data-keep={String(part.keep)} style={`${box(part.d, 'd')};${box(part.m, 'm')}`}></span>)}
+      </div>
+      <nav class="hl-spots" aria-label="Places in the picture" data-hero-spots>
+        {spots.map((spot, k) => (
+          <a class="spot" href={spot.href} data-spot={spot.key} data-side={spot.side} data-mside={spot.mside} data-stacked={String(spot.stacked)} style={`--dx:${spot.d[0]}%;--dy:${spot.d[1]}%;--mx:${spot.m[0]}%;--my:${spot.m[1]}%;--k:${k}`}>
+            <span class="spot-dot" aria-hidden="true"></span>
+            <span class="spot-label"><strong>{spot.title}</strong><span class="spot-meta">{spot.meta.map(part => <span>{part}</span>)}</span></span>
+          </a>
+        ))}
+      </nav>
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-copy" data-hero-copy>
       <p class="eyebrow">Pardus Luxury Escapes</p>
       <h1 id="hero-title"><span class="line" style="--n:0"><span>Extraordinary</span></span><span class="line" style="--n:1"><span>journeys.</span></span><span class="line" style="--n:2"><span><em>Personally curated.</em></span></span></h1>
       <p class="hero-text">Bespoke luxury travel from Africa to the world, thoughtfully arranged around you.</p>
       <div class="actions"><a class="btn btn--gold" href={path('journey.html')} aria-label="Plan your escape"><span>Plan <span class="btn-mid">your </span>escape</span> <Icon name="arrow-right" /></a><a class="btn btn--ghost" href="#destinations" aria-label="Explore destinations"><span>Explore<span class="btn-long"> destinations</span></span> <Icon name="arrow-down" /></a></div>
     </div>
-    <div class="hero-zone">
-      <div class="hero-media">
-        <div class="hero-picture" style={vars}>
-          <div class="hero-drift">
-            <picture class="hl-world">
-              <source media={stacked} type="image/avif" srcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'avif')} sizes="100vw" />
-              <source media={stacked} type="image/webp" srcset={set('pardus-world-mobile-v30', [480, 768, 1024], 'webp')} sizes="100vw" />
-              <source type="image/avif" srcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'avif')} sizes="100vw" />
-              <img src={asset('pardus-world-desktop-v30-1536.webp')} srcset={set('pardus-world-desktop-v30', [640, 1280, 1536], 'webp')} sizes="100vw" width="1536" height="1024" alt="A leopard watching over a turquoise lagoon with overwater villas, a white yacht and a golden city skyline at sunset" fetchpriority="high" decoding="async" data-hero-image />
-            </picture>
-            <span class="hero-glow" aria-hidden="true"></span>
-            <div class="hl-leopard" data-leopard aria-hidden="true">
-              <div class="hl-breath">
-                <picture class="hl-body">
-                  <source type="image/avif" srcset={asset('pardus-leopard-v30.avif')} />
-                  <img src={asset('pardus-leopard-v30.webp')} width={leopard.size.width} height={leopard.size.height} alt="" fetchpriority="high" decoding="async" data-hero-image />
-                </picture>
-                <picture class="hl-eyes" data-leopard-eyes>
-                  <source type="image/avif" srcset={asset('pardus-leopard-v30-eyes.avif')} />
-                  <img src={asset('pardus-leopard-v30-eyes.webp')} width="310" height="105" alt="" decoding="async" />
-                </picture>
-                <span class="hl-rim"></span>
-                <span class="leopard-box" data-leopard-box></span>
-              </div>
-            </div>
-            <canvas class="hl-motes" data-hero-motes aria-hidden="true"></canvas>
-            <nav class="hl-spots" aria-label="Places in the picture" data-hero-spots>
-              {spots.map((spot, k) => (
-                <a class="spot" href={spot.href} data-spot={spot.key} data-side={spot.side} data-mside={spot.mside} data-stacked={String(spot.stacked)} style={`--dx:${spot.d[0]}%;--dy:${spot.d[1]}%;--mx:${spot.m[0]}%;--my:${spot.m[1]}%;--k:${k};--mk:${spots.filter(other => other.stacked).indexOf(spot)}`}>
-                  <span class="spot-dot" aria-hidden="true"></span>
-                  <span class="spot-label"><strong>{spot.title}</strong><span class="spot-meta">{spot.meta.map(part => <span>{part}</span>)}</span></span>
-                </a>
-              ))}
-            </nav>
-          </div>
+    <div class="hero-rail" data-hero-rail>
+      <div class="hero-rail-inner">
+        <div class="hero-rail-head"><span><strong>Three ways to escape.</strong> Per person, two sharing.</span>
+          <button type="button" class="motion-toggle requires-js" data-scene-motion aria-pressed="false" aria-label="Pause background animation"><Icon name="pause" class="icon-pause" /><Icon name="play" class="icon-play" /><span data-scene-motion-label>Pause scene</span></button>
         </div>
+        <nav class="hero-offers" aria-label="Popular escapes and starting prices">
+          {rail.map((offer, index) => {
+            const price = displayPrice(offer);
+            return <a href={path(`destination-${offer.slug}.html`)} style={`--i:${index}`}>
+              <span class="offer-thumb" aria-hidden="true"><img src={asset(`pardus-thumb-${offer.slug}.webp`)} width="256" height="256" alt="" loading="lazy" decoding="async" /></span>
+              <span class="name">{offer.label}<small>{nightsOf(offer.nights)}</small></span>
+              <strong class="amount"><span class="from">From</span> {price.amount}</strong>
+              <span class="offer-go" aria-hidden="true"><Icon name="arrow-right" /></span>
+            </a>;
+          })}
+        </nav>
       </div>
-    </div>
-    <div class="hero-rail glass" data-hero-rail>
-      <div class="hero-rail-head"><span><strong>Three ways to escape.</strong> Per person, two sharing.</span>
-        <button type="button" class="motion-toggle requires-js" data-scene-motion aria-pressed="false" aria-label="Pause background animation"><Icon name="pause" class="icon-pause" /><Icon name="play" class="icon-play" /><span data-scene-motion-label>Pause scene</span></button>
-      </div>
-      <nav class="hero-offers" aria-label="Popular escapes and starting prices">
-        {rail.map((offer, index) => {
-          const price = displayPrice(offer);
-          return <a href={path(`destination-${offer.slug}.html`)} style={`--i:${index}`}>
-            <span class="offer-thumb" aria-hidden="true"><img src={asset(`pardus-thumb-${offer.slug}.webp`)} width="256" height="256" alt="" loading="lazy" decoding="async" /></span>
-            <span class="name">{offer.label}<small>{nightsOf(offer.nights)}</small></span>
-            <strong class="amount"><span class="from">From</span> {price.amount}</strong>
-            <span class="offer-go" aria-hidden="true"><Icon name="arrow-right" /></span>
-          </a>;
-        })}
-      </nav>
     </div>
   </div>
 </section>

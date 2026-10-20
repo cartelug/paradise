@@ -1,3 +1,4 @@
+import { photo } from './photography.ts';
 export interface JournalEntry {
   slug: string; title: string; subtitle: string; description: string;
   image: string; alt: string; category: string;
@@ -9,7 +10,7 @@ export const journal: JournalEntry[] = [
   {
     slug: 'how-a-journey-comes-together', title: 'How a Pardus journey actually comes together', subtitle: 'The process, in plain terms.',
     description: 'What actually happens between your first message and a confirmed itinerary.',
-    image: 'corporate', alt: 'A comfortable aircraft cabin interior', category: 'Process', author: 'Pardus Editorial', publishedAt: '2026-09-06', updatedAt: '2026-09-12', relatedDestination: '',
+    ...photo('journal-process', { image: 'corporate', alt: 'A comfortable aircraft cabin interior' }), category: 'Process', author: 'Pardus Editorial', publishedAt: '2026-09-06', updatedAt: '2026-09-12', relatedDestination: '',
     intro: 'A lot of travel planning happens behind the scenes. Here is what that actually looks like.',
     paragraphs: [
       'It starts with a conversation, not a form. Whether that begins with our journey planner, an email or a message, the first thing we want to understand is you: who is travelling, what the occasion is, and what would make the time genuinely worthwhile.',
@@ -22,7 +23,7 @@ export const journal: JournalEntry[] = [
   {
     slug: 'choosing-your-maldives-island', title: 'Choosing your Maldives island, considered', subtitle: 'One ocean, many very different stays.',
     description: 'The Maldives is not one experience. Here is how the choice of island actually changes your trip.',
-    image: 'maldives-v24', alt: 'Overwater villas and a curved jetty at JOALI Maldives in turquoise water',
+    ...photo('maldives', { image: 'maldives-v24', alt: 'Overwater villas and a curved jetty at JOALI Maldives in turquoise water' }),
     category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-07', updatedAt: '2026-09-12', relatedDestination: 'maldives',
     intro: 'Every Maldives photo looks similar. Every Maldives stay does not.',
     paragraphs: [
@@ -36,7 +37,7 @@ export const journal: JournalEntry[] = [
   {
     slug: 'zanzibar-beyond-the-beach', title: 'Zanzibar beyond the beach', subtitle: 'A shoreline with a lot more behind it.',
     description: 'Stone Town, spice country and the case for spending a little time off the sand.',
-    image: 'zanzibar-v24', alt: 'A palm-lined resort and pale sandy shoreline beside the ocean in Zanzibar', category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-08', updatedAt: '2026-09-12', relatedDestination: 'zanzibar',
+    ...photo('zanzibar', { image: 'zanzibar-v24', alt: 'A palm-lined resort and pale sandy shoreline beside the ocean in Zanzibar' }), category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-08', updatedAt: '2026-09-12', relatedDestination: 'zanzibar',
     intro: 'It is entirely possible to visit Zanzibar and never leave the beach. It is also a bit of a missed opportunity.',
     paragraphs: [
       'Zanzibar\'s coastline is genuinely beautiful — pale sand, warm shallow water and a slower rhythm than most Indian Ocean islands. It would be a completely reasonable trip to arrive, settle in, and not move for a week.',
@@ -49,7 +50,7 @@ export const journal: JournalEntry[] = [
   {
     slug: 'what-a-private-safari-involves', title: 'What a private safari actually involves', subtitle: 'Demystifying the days, the camps and the timing.',
     description: 'What a safari day actually looks like, and the honest realities of wildlife, weather and timing.',
-    image: 'africa-v24', alt: 'An elephant family on the open plains of Amboseli National Park, Kenya', category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-09', updatedAt: '2026-09-12', relatedDestination: 'africa',
+    ...photo('journal-safari', { image: 'africa-v24', alt: 'An elephant family on the open plains of Amboseli National Park, Kenya' }), category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-09', updatedAt: '2026-09-12', relatedDestination: 'africa',
     intro: 'Safari is one of the most talked-about, least-explained kinds of travel. Here is what actually happens.',
     paragraphs: [
       'A typical safari day starts early — often before sunrise, when animals are most active and the light is at its best. A morning game drive, a break through the heat of midday, and an afternoon or evening drive is the usual rhythm, though camps vary in how strictly they hold to it.',
@@ -62,7 +63,7 @@ export const journal: JournalEntry[] = [
   {
     slug: 'questions-before-a-luxury-booking', title: 'Questions worth asking before a luxury booking', subtitle: 'A short, honest checklist — for any operator, not just us.',
     description: 'A few plain questions that make any high-value travel booking clearer, whoever you book it with.',
-    image: 'europe-v24', alt: 'Whitewashed buildings above the volcanic cliffs and Aegean Sea in Santorini', category: 'Before you book', author: 'Pardus Editorial', publishedAt: '2026-09-10', updatedAt: '2026-09-12', relatedDestination: 'europe',
+    ...photo('europe', { image: 'europe-v24', alt: 'Whitewashed buildings above the volcanic cliffs and Aegean Sea in Santorini' }), category: 'Before you book', author: 'Pardus Editorial', publishedAt: '2026-09-10', updatedAt: '2026-09-12', relatedDestination: 'europe',
     intro: 'A significant booking deserves a few plain questions before you commit — of any operator, including us.',
     paragraphs: [
       'What exactly is included, and what is not? Flights, transfers, meals, activities and taxes can be bundled very differently between two proposals that look similar on price. Ask for the full breakdown before comparing numbers.',

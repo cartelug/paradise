@@ -1,3 +1,4 @@
+import { photo } from './photography.ts';
 export type FolioPlace = 'Island' | 'Wild' | 'City' | 'Culture' | 'Open';
 export type FolioPace = 'Still' | 'Balanced' | 'Immersive';
 export type FolioReason = 'Escape' | 'Celebration' | 'Family' | 'Business';
@@ -28,7 +29,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'safari-and-shore', number: '01', name: 'Safari & Shore',
     eyebrow: 'East Africa / Zanzibar', title: 'A wider world, then a quieter one.',
     description: 'A considered safari chapter followed by time on the Indian Ocean, with the change of pace designed into the journey.',
-    image: 'africa-v24', alt: 'An elephant family on the open plains of Amboseli National Park, Kenya', caption: 'The wild, followed by the water',
+    ...photo('zanzibar', { image: 'zanzibar-v24', alt: 'A palm-lined resort and pale sandy shoreline beside the ocean in Zanzibar' }), caption: 'The wild, followed by the water',
     duration: 'Suggested rhythm / 10–14 nights', destinations: ['East Africa', 'Zanzibar'], place: 'Wild', pace: 'Balanced', reason: 'Escape',
     idealFor: ['First or returning safari travellers', 'Couples and celebrations', 'Travellers who value contrast'],
     rhythm: ['Arrive without rushing into the itinerary', 'Two distinct safari settings rather than constant movement', 'A final coastal chapter with genuinely open time'],
@@ -43,7 +44,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'private-island-reset', number: '02', name: 'Private Island Reset',
     eyebrow: 'Maldives / Seychelles', title: 'Less itinerary. More arrival.',
     description: 'A deliberately unhurried island stay selected around privacy, water, atmosphere and the people travelling.',
-    image: 'maldives-v24', alt: 'Overwater villas and a curved jetty at JOALI Maldives in turquoise water', caption: 'An island chosen for this particular escape',
+    ...photo('hero-maldives', { image: 'hero-maldives-v24', alt: 'Overwater villas beside a calm lagoon at dusk in the Maldives' }), caption: 'An island chosen for this particular escape',
     duration: 'Suggested rhythm / 7–10 nights', destinations: ['The Maldives', 'Seychelles'], place: 'Island', pace: 'Still', reason: 'Escape',
     idealFor: ['Couples needing real quiet', 'A restorative solo stay', 'Travellers who prefer one excellent base'],
     rhythm: ['A clean arrival and transfer plan', 'Days with one optional point of focus', 'Enough open time for the setting to do its work'],
@@ -58,7 +59,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'celebration-in-two-acts', number: '03', name: 'Celebration in Two Acts',
     eyebrow: 'City / Indian Ocean', title: 'A little theatre. Then time disappears.',
     description: 'A vibrant opening and a private coastal close, shaped around a honeymoon, anniversary or milestone.',
-    image: 'dubai-v24', alt: 'Dubai Marina towers and city lights beneath a golden dusk sky', caption: 'A celebration with two different energies',
+    ...photo('dubai', { image: 'dubai-v24', alt: 'Dubai Marina towers and city lights beneath a golden dusk sky' }), caption: 'A celebration with two different energies',
     duration: 'Suggested rhythm / 9–12 nights', destinations: ['Dubai', 'The Maldives'], place: 'City', pace: 'Balanced', reason: 'Celebration',
     idealFor: ['Honeymoons and anniversaries', 'Milestone birthdays', 'Travellers who want energy and stillness'],
     rhythm: ['A compact city opening', 'One memorable celebration moment', 'A longer island close with very little agenda'],
@@ -73,7 +74,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'family-in-the-wild', number: '04', name: 'Family in the Wild',
     eyebrow: 'East Africa', title: 'Wonder, with room for everyone.',
     description: 'A family safari paced around attention spans, comfort, shared discovery and the practical shape of travelling together.',
-    image: 'africa-v24', alt: 'An elephant family on the open plains of Amboseli National Park, Kenya', caption: 'A safari planned around the whole family',
+    ...photo('safari-family', { image: 'africa', alt: 'A lone acacia tree silhouetted against a deep red sunset over the savannah' }), caption: 'A safari planned around the whole family',
     duration: 'Suggested rhythm / 8–12 nights', destinations: ['East Africa'], place: 'Wild', pace: 'Immersive', reason: 'Family',
     idealFor: ['Families travelling across generations', 'A first shared safari', 'Parents who want fewer transfers'],
     rhythm: ['A gentle first night after arrival', 'Longer stays in fewer places', 'Flexible activity windows and real downtime'],
@@ -88,7 +89,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'mediterranean-at-human-pace', number: '05', name: 'Mediterranean at Human Pace',
     eyebrow: 'Europe', title: 'The pleasure of leaving space between places.',
     description: 'A European route with fewer moves, better-located stays and time for a neighbourhood, table or shoreline to become familiar.',
-    image: 'europe-v24', alt: 'Whitewashed buildings above the volcanic cliffs and Aegean Sea in Santorini', caption: 'A route with time to become a place',
+    ...photo('europe', { image: 'europe-v24', alt: 'Whitewashed buildings above the volcanic cliffs and Aegean Sea in Santorini' }), caption: 'A route with time to become a place',
     duration: 'Suggested rhythm / 8–14 nights', destinations: ['Europe'], place: 'Culture', pace: 'Immersive', reason: 'Escape',
     idealFor: ['Couples who dislike rushed touring', 'Food and culture-led travellers', 'Returning visitors looking beyond highlights'],
     rhythm: ['One city or cultural base', 'A scenic transfer with purpose', 'A coast or island chapter with unscheduled days'],
@@ -103,7 +104,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'executive-arrivals', number: '06', name: 'Executive Arrivals',
     eyebrow: 'Business / Dubai & Europe', title: 'The agenda stays clear. The journey does too.',
     description: 'A practical travel framework for an executive or small team, arranged around the purpose, approvals and people involved.',
-    image: 'corporate', alt: 'A refined aircraft cabin prepared for travel', caption: 'Business travel considered as one connected plan',
+    ...photo('corporate', { image: 'corporate', alt: 'A refined aircraft cabin prepared for travel' }), caption: 'Business travel considered as one connected plan',
     duration: 'Typical frame / 3–6 nights', destinations: ['Dubai', 'Europe'], place: 'City', pace: 'Balanced', reason: 'Business',
     idealFor: ['Executive assistants', 'Leadership travel', 'Small teams and important guests'],
     rhythm: ['Schedule and approval requirements first', 'Flights, stay and ground movements as one plan', 'Clear handover and traveller-ready details'],

@@ -1,4 +1,4 @@
-"""Smoke-test the exported Pardus V30 website with Python Playwright.
+"""Smoke-test the exported Pardus V31 website with Python Playwright.
 
 Run after building, exporting and starting a local static server:
     python tests/browser-smoke.py
@@ -24,7 +24,7 @@ from playwright.sync_api import expect, sync_playwright
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
-VIEWPORTS = [(320, 568), (390, 844), (768, 1024), (1024, 768), (1440, 900)]
+VIEWPORTS = [(320, 568), (360, 740), (390, 844), (412, 915), (768, 1024), (1024, 768), (1440, 900)]
 PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,pins,life,phone,picker,stage,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
 REMOTE_FEED = "https://raw.githubusercontent.com/cartelug/paradise/main/travel-updates.json*"
@@ -185,28 +185,31 @@ def preloader(browser):
 
 
 def leopard_clear(browser):
-    """No hero text, button, price rail or header control may overlap the leopard, at any screen size."""
+    """No hero text, button, price bar or header control may overlap the leopard, at any screen size. The animal's outline is
+    a set of measured rectangles on the artwork ([data-leopard-box]); pins may sit on the travel scenes in its coat but never
+    on the head, the paws, the jet or its flight lines ([data-keep="true"])."""
     sizes = [(320, 568), (360, 640), (390, 844), (430, 932), (600, 900), (768, 1024), (820, 1180), (1024, 1366), (900, 900), (1000, 900),
              (1024, 768), (1100, 700), (1280, 720), (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080), (2560, 1440)]
     probe = """() => {
       const rect = e => { const b = e.getBoundingClientRect(); return {l: b.left, t: b.top, r: b.right, b: b.bottom}; };
-      const box = rect(document.querySelector('[data-leopard-box]'));
+      const boxes = [...document.querySelectorAll('[data-leopard-box]')].map(e => ({part: e.dataset.leopardBox, keep: e.dataset.keep === 'true', ...rect(e)}));
       const items = [];
       const copy = document.querySelector('[data-hero-copy]');
       const range = document.createRange();
       const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
       for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
       copy.querySelectorAll('.btn').forEach(e => items.push({label: 'button', ...rect(e)}));
-      items.push({label: 'price rail', ...rect(document.querySelector('[data-hero-rail]'))});
-      document.querySelectorAll('.spot').forEach(spot => { if (getComputedStyle(spot).display !== 'none') { items.push({label: 'pin ' + spot.dataset.spot, ...rect(spot)}); items.push({label: 'pin label ' + spot.dataset.spot, ...rect(spot.querySelector('.spot-label'))}); } });
+      items.push({label: 'price bar', ...rect(document.querySelector('[data-hero-rail]'))});
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
+      document.querySelectorAll('.spot').forEach(spot => { if (getComputedStyle(spot).display !== 'none') { items.push({label: 'pin ' + spot.dataset.spot, pin: true, ...rect(spot)}); items.push({label: 'pin label ' + spot.dataset.spot, pin: true, ...rect(spot.querySelector('.spot-label'))}); } });
       const margin = 10;
-      const hits = items.filter(i => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin).map(i => i.label);
-      // The eyes, from the leopard layer and the eye positions the layer generator writes (hero-layers.css). The blink patch
-      // is not used: reduced motion hides it.
-      const leopard = document.querySelector('.hl-leopard'), lb = leopard.getBoundingClientRect(), lcs = getComputedStyle(leopard);
-      const eyeY = lb.top + lb.height * (parseFloat(lcs.getPropertyValue('--eye-ly')) + parseFloat(lcs.getPropertyValue('--eye-ry'))) / 200;
-      return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight};
+      const meets = (i, box) => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin;
+      const hits = [];
+      for (const item of items) for (const box of boxes) if ((!item.pin || box.keep) && meets(item, box)) hits.push(`${item.label} meets ${box.part}`);
+      // The eyes sit inside the head box, about 40% across and 45% down it.
+      const head = boxes.find(b => b.part === 'head');
+      const eyeY = head.t + (head.b - head.t) * 0.45;
+      return {hits, eyesOnScreen: eyeY > 0 && eyeY < innerHeight, parts: boxes.length};
     }"""
     for reduced in ("reduce", "no-preference"):
         context = context_for(browser, reduced_motion=reduced, viewport={"width": 1440, "height": 900})
@@ -215,23 +218,24 @@ def leopard_clear(browser):
             page.set_viewport_size({"width": width, "height": height})
             navigate(page)
             page.wait_for_timeout(900 if reduced == "reduce" else 2400)
-            # The animal turns its head and breathes: also test it at the extremes of its gaze, with the animation held still.
-            poses = [(0, 0)] if reduced == "reduce" else [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1), (1, -1), (-1, 1)]
-            if reduced != "reduce":
-                page.evaluate("document.documentElement.classList.add('motion-paused')")
-            for gx, gy in poses:
-                page.evaluate("([gx, gy]) => { const p = document.querySelector('.hero-picture'); p.style.setProperty('--gx', gx); p.style.setProperty('--gy', gy); }", [gx, gy])
-                page.wait_for_timeout(0 if reduced == "reduce" else 260)
+            # The picture breathes between 1.00 and 1.03: test it at rest and at its fullest, with the animation held still.
+            scales = ["none"] if reduced == "reduce" else ["scale(1)", "scale(1.03)"]
+            for scale in scales:
+                if reduced != "reduce":
+                    page.evaluate("(s) => { const img = document.querySelector('.hero-picture img'); img.style.animation = 'none'; img.style.transform = s; }", scale)
+                    page.evaluate("document.querySelectorAll('.spot-label').forEach(l => l.style.transition = 'none')")
+                    page.wait_for_timeout(60)
                 result = page.evaluate(probe)
-                assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, gaze {gx},{gy}): {result['hits']}"
+                assert result["parts"] >= 5, result
+                assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, {scale}): {result['hits']}"
                 assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()
-    print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, static and animated", flush=True)
+    print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, at rest and at its fullest breath", flush=True)
 
 
 def hero_pins(browser):
-    """The pins on the picture (Dubai, Maldives, private yacht) never touch the copy, the chips, the buttons, the price bar,
-    the header, the leopard or each other; they step aside when a screen has no room, and link to real pages."""
+    """The pins on the picture (Dubai, Maldives, private yacht) never touch the copy, the buttons, the price bar, the header,
+    the leopard's head, paws, jet or flight lines, or each other; they step aside when a screen has no room, and link to real pages."""
     sizes = [(320, 568), (360, 740), (390, 844), (430, 932), (768, 1024), (820, 1180), (1024, 768), (1100, 700), (1280, 720),
              (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080)]
     probe = """() => {
@@ -244,7 +248,7 @@ def hero_pins(browser):
       for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
       copy.querySelectorAll('.btn').forEach(e => items.push({label: 'control', ...rect(e)}));
       items.push({label: 'price bar', ...rect(hero.querySelector('[data-hero-rail]'))});
-      items.push({label: 'leopard', ...rect(hero.querySelector('[data-leopard-box]'))});
+      hero.querySelectorAll('[data-leopard-box][data-keep="true"]').forEach(e => items.push({label: 'leopard ' + e.dataset.leopardBox, ...rect(e)}));
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
       const meets = (a, b) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
       const shown = [...hero.querySelectorAll('.spot')].filter(s => getComputedStyle(s).display !== 'none');
@@ -281,80 +285,77 @@ def hero_pins(browser):
     assert results[(1440, 900)] == ["maldives", "dubai", "yacht"], results[(1440, 900)]
     assert results[(1920, 1080)] == ["maldives", "dubai", "yacht"], results[(1920, 1080)]
     assert "maldives" in results[(390, 844)], results[(390, 844)]
-    print(f"PASS hero pins at {len(sizes)} screen sizes: never touch the copy, buttons, price bar, header, leopard or each other; all three on desktops, Maldives on phones", flush=True)
+    print(f"PASS hero pins at {len(sizes)} screen sizes: never touch the copy, buttons, price bar, header, the leopard's head, paws or flight lines, or each other; all three on desktops, Maldives on phones", flush=True)
 
 
 def leopard_alive(browser):
-    """The leopard is gently alive and calm: it breathes, sways a little, blinks slowly and stills for reduced motion. It never
-    glows, never follows the pointer or a finger, and does not react to a touch (the owner found that unsettling)."""
+    """The leopard is calm: the picture's only motion is a very slow scale (1.00 to 1.03 and back over about 20 s). It never
+    glows, never follows the pointer, a finger or the scroll, does not react to a touch, pauses on request and is a still
+    picture for reduced motion."""
     context = context_for(browser, viewport={"width": 1440, "height": 900})
     page = context.new_page()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     navigate(page)
-    page.wait_for_timeout(2600)
+    page.wait_for_timeout(1500)
     expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "running")
-    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationName") == "hl-breathe"
-    assert page.locator(".hl-glow, .hl-glows").count() == 0, "the leopard must not have glowing eyes"
-    assert page.locator(".hl-eyes img").evaluate("img => img.complete && img.naturalWidth > 0")
-    # The blink patch sits over the eyes, not over the whole face.
-    box = page.evaluate("() => { const e = document.querySelector('.hl-eyes').getBoundingClientRect(), l = document.querySelector('.hl-leopard').getBoundingClientRect(); return {w: e.width / l.width, h: e.height / l.height}; }")
-    assert 0.3 < box["w"] < 0.6 and 0.05 < box["h"] < 0.2, box
-    # It blinks, slowly (the closed patch is shown for most of a second), and sways a little by itself.
-    page.wait_for_function("document.querySelector('.hl-eyes').getAnimations().length > 0", timeout=16000)
-    duration = page.evaluate("document.querySelector('.hl-eyes').getAnimations()[0].effect.getTiming().duration")
-    assert duration >= 900, f"the blink must be slow and relaxed, not a flicker ({duration} ms)"
-    sway = []
-    for _ in range(10):
-        sway.append(float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0")))
-        page.wait_for_timeout(700)
-    assert max(sway) - min(sway) > 0.01, f"the head should sway a little on its own: {sway}"
-    # The visitor does not steer it: a pointer sent hard left and hard right leaves the head inside its small idle sway.
+    image = page.locator(".hero-picture img")
+    assert image.evaluate("img => img.complete && img.naturalWidth > 0")
+    animation = image.evaluate("""img => { const a = img.getAnimations()[0]; const k = a.effect.getKeyframes(); const t = a.effect.getTiming();
+        return {name: a.animationName, duration: t.duration, direction: t.direction, frames: k.map(f => f.transform)}; }""")
+    assert animation["name"] == "hero-breathe", animation
+    assert 16000 <= animation["duration"] <= 24000 and animation["direction"] == "alternate", animation
+    assert animation["frames"] == ["scale(1)", "scale(1.03)"], animation
+    # Nothing else moves on the artwork: no glow, no eye layers, no light sweep, no motes, no layered animal.
+    assert page.locator(".hl-glow, .hl-glows, .hl-eyes, .hl-rim, .hl-motes, .hl-leopard, .hero-glow").count() == 0
+    animated = page.evaluate("""() => [...document.querySelectorAll('.hero-art *')].filter(e => !e.closest('.hl-spots'))
+        .flatMap(e => e.getAnimations()).map(a => a.animationName)""")
+    assert animated == ["hero-breathe"], animated
+    # The visitor does not steer it: the pointer, a click and the scroll leave the picture's transform to the breath alone.
+    def pose():
+        return page.evaluate("""() => { const art = document.querySelector('.hero-art'); const pic = document.querySelector('.hero-picture');
+            return [getComputedStyle(art).transform, getComputedStyle(pic).transform, art.getBoundingClientRect().top + scrollY]; }""")
+    before = pose()
     for x in (60, 1380):
         for step in range(14):
             page.mouse.move(x + step, 450)
-            page.wait_for_timeout(40)
-        page.wait_for_timeout(500)
-        gx = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
-        assert abs(gx) <= 0.5, f"the leopard must not follow the pointer (gaze {gx} with the pointer at {x})"
-    # Touching the animal does nothing: no flare, no extra animation on the eyes.
-    box = page.locator("[data-leopard-box]").bounding_box()
-    before = page.evaluate("document.querySelector('.hl-eyes').getAnimations().length")
+            page.wait_for_timeout(30)
+    box = page.locator('[data-leopard-box="head"]').bounding_box()
     page.mouse.click(box["x"] + box["width"] * 0.5, box["y"] + box["height"] * 0.5)
-    page.wait_for_timeout(200)
-    after = page.evaluate("document.querySelector('.hl-eyes').getAnimations().length")
-    assert after <= before, "tapping the leopard must not trigger anything"
-    # Pausing stops every continuous effect and the script loop.
+    page.mouse.wheel(0, 400)
+    page.wait_for_timeout(500)
+    assert pose() == before, f"the leopard must not follow the pointer, a click or the scroll: {before} -> {pose()}"
+    page.evaluate("window.scrollTo(0, 0)")
+    # Pausing stops the breath.
     page.locator("[data-scene-motion]").click()
     page.wait_for_timeout(300)
     expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "paused")
-    assert page.locator(".hl-rim").evaluate("el => getComputedStyle(el, '::before').animationPlayState") == "paused"
+    assert image.evaluate("img => getComputedStyle(img).animationPlayState") == "paused"
     assert not errors, errors
     context.close()
 
-    # Reduced motion: a complete, still picture. No loop, no breathing, no extras.
+    # Reduced motion: a complete, still picture.
     context = context_for(browser, viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
     page = context.new_page()
     navigate(page)
     page.wait_for_timeout(700)
     expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "still")
-    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationName") == "none"
-    assert page.locator(".hl-motes").evaluate("el => getComputedStyle(el).display") == "none"
-    expect(page.locator(".hl-body img")).to_be_visible()
+    assert page.locator(".hero-picture img").evaluate("img => getComputedStyle(img).animationName") == "none"
+    expect(page.locator(".hero-picture img")).to_be_visible()
     context.close()
 
-    # A finger does not turn the head either.
+    # A finger does not move it either.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
     navigate(page)
-    page.wait_for_timeout(2400)
+    page.wait_for_timeout(1500)
+    before = page.evaluate("getComputedStyle(document.querySelector('.hero-art')).transform")
     page.evaluate("""() => { const hero = document.querySelector('[data-hero-life]'); const point = (x, y) => new Touch({identifier: 1, target: hero, clientX: x, clientY: y});
         for (const x of [60, 70, 80, 90]) hero.dispatchEvent(new TouchEvent('touchmove', {touches: [point(x, 400)], bubbles: true})); }""")
-    page.wait_for_timeout(900)
-    gx = float(page.evaluate("document.querySelector('.hero-picture').style.getPropertyValue('--gx') || 0"))
-    assert abs(gx) <= 0.5, f"a finger must not steer the leopard ({gx})"
+    page.wait_for_timeout(500)
+    assert page.evaluate("getComputedStyle(document.querySelector('.hero-art')).transform") == before, "a finger must not move the leopard"
     context.close()
-    print("PASS the leopard is calm and gently alive: it breathes, sways a little and blinks slowly; it never glows, never follows the pointer or a finger and ignores a tap; it pauses on request and is a still picture for reduced motion", flush=True)
+    print("PASS the leopard is calm: one slow 1.00-1.03 breath of scale and nothing else; it never glows, never follows the pointer, a finger or the scroll and ignores a tap; it pauses on request and is a still picture for reduced motion", flush=True)
 
 
 def phone_first_screen(browser):
@@ -370,7 +371,7 @@ def phone_first_screen(browser):
             h1: inside(document.querySelector('.hero h1')),
             tiles: [...document.querySelectorAll('.hero-offers a')].map(inside),
             buttons: [...document.querySelectorAll('.hero .actions .btn')].map(inside),
-            leopard: inside(document.querySelector('[data-leopard-box]')) || document.querySelector('[data-leopard-box]').getBoundingClientRect().top < innerHeight - 100,
+            leopard: inside(document.querySelector('[data-leopard-box="head"]')) && document.querySelector('[data-leopard-box="paws"]').getBoundingClientRect().bottom <= innerHeight,
             wraps: [...document.querySelectorAll('.hero .actions .btn')].map(b => b.getBoundingClientRect().height),
           };
         }""")
@@ -505,16 +506,20 @@ def escape_stage(browser):
 def assert_hero(page, width):
     hero = page.locator("[data-hero]")
     expect(hero).to_be_visible()
-    expect(page.locator("body")).to_have_attribute("data-pardus-version", "30")
+    expect(page.locator("body")).to_have_attribute("data-pardus-version", "31")
     assert " ".join(hero.locator("h1").inner_text().split()) == "Extraordinary journeys. Personally curated."
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link svg").first).to_be_visible()
-    source = page.locator(".hl-world img").evaluate("img => img.currentSrc")
+    image = page.locator(".hero-picture img")
+    source = image.evaluate("img => img.currentSrc")
     portrait = page.evaluate("innerWidth <= 760 || innerWidth / innerHeight <= 1.1")
-    assert ("pardus-world-mobile-v30" if portrait else "pardus-world-desktop-v30") in source, source
-    assert "pardus-leopard-v30" in page.locator(".hl-body img").evaluate("img => img.currentSrc")
-    assert page.locator(".hl-body img").evaluate("img => img.complete && img.naturalWidth > 0")
+    assert ("pardus-hero-phone-" if portrait else "pardus-hero-desktop-") in source, source
+    assert image.evaluate("img => img.complete && img.naturalWidth > 0")
+    assert image.get_attribute("alt") == "A resting leopard in left profile, with tiny travel scenes woven into its coat above a blue-hour lagoon."
+    # The artwork keeps its native shape: the stage is the picture, so the head, ears, whiskers and paws are never cropped.
+    ratio = page.evaluate("(() => { const b = document.querySelector('.hero-art').getBoundingClientRect(); return b.width / b.height; })()")
+    assert abs(ratio - (2 / 3 if portrait else 3 / 2)) < 0.01, ratio
     rates = page.locator(".hero-offers a")
     assert rates.count() == 3
     text = rates.all_inner_texts()
@@ -586,8 +591,7 @@ def hero_and_menu(browser):
     control.click()
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     expect(control).to_have_accessible_name("Resume background animation")
-    assert page.locator(".hero-drift").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
-    assert page.locator(".hl-breath").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
+    assert page.locator(".hero-picture img").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
     navigate(page)
     expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
     page.locator("[data-scene-motion]").click()
@@ -603,7 +607,7 @@ def hero_and_menu(browser):
         found = emoji.findall(page.evaluate("document.body.innerText"))
         assert not found, f"Emoji or glyph icons found on {route}: {found}"
     context.close()
-    print("PASS V30 hero (copy, V25 artwork, prices, actions), mobile menu (open, symbols, Escape, close, navigate, desktop resize), pause preference and no emoji on any page", flush=True)
+    print("PASS V31 hero (copy, leopard artwork at its native shape, prices, actions), mobile menu (open, symbols, Escape, close, navigate, desktop resize), pause preference and no emoji on any page", flush=True)
 
 
 def filters_and_planner(browser):
@@ -826,7 +830,7 @@ def main():
                 fallback_states(browser)
         finally:
             browser.close()
-    print(f"Pardus V30 browser smoke passed: {', '.join(sorted(PHASES))}. Matrix scope: {len(ROUTES)} exported routes across {len(VIEWPORTS)} widths; news response uses shipped JSON.", flush=True)
+    print(f"Pardus V31 browser smoke passed: {', '.join(sorted(PHASES))}. Matrix scope: {len(ROUTES)} exported routes across {len(VIEWPORTS)} widths; news response uses shipped JSON.", flush=True)
 
 
 if __name__ == "__main__":

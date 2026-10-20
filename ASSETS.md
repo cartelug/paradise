@@ -1,5 +1,9 @@
 # Image sources
 
+## V31 (20 October 2026)
+
+The homepage hero is the owner-approved, AI-generated leopard artwork in `source-assets/v31-hero/` (provenance and prompts in its `ARTWORK.md`): `pardus-hero-desktop-{960,1536}` and `pardus-hero-phone-{640,1024}`, WebP as supplied plus AVIF copies at the same sizes. The V25 to V30 hero images and layers are no longer used and were removed from `public/images` (their masters stay in `source-assets/`). New photography goes through `source-assets/v31-photography/credits.json` and `scripts/prepare-v31-photography.mjs`.
+
 ## V30 (14 October 2026)
 
 The homepage hero is the V25 campaign composite, rebuilt in layers in V30.2 so the leopard can move on its own. `scripts/prepare-v30-hero-layers.py` derives, from the V25 hero (`pardus-hero-*-v25-*`) and the V26 layer set (`pardus-scene-*-v26-*`, `pardus-leopard-open/blink-v26-*`), a clean world plate per orientation (`pardus-world-{desktop,mobile}-v30-*`, colour-matched to V25), the leopard cutout (`pardus-leopard-v30.{avif,webp}`), a feathered closed-eye patch (`pardus-leopard-v30-eyes.*`), a silhouette mask for the light effects (`pardus-leopard-v30-mask.webp`) and square thumbnails for the phone price tiles (`pardus-thumb-*.webp`). The original V25 files are kept; the prompts and provenance are in `source-assets/v25/ARTWORK.md`. It is an imagined brand montage, not a verified property or a supplier partnership. The V27 and V29 hero families, the V26 scene layers and the V23 walking leopard are no longer used by any page; they remain in `public/images` and in git history. The only active typeface is Montserrat (roman and italic, variable). The Instrument Serif, Instrument Sans, Newsreader, Manrope and Cormorant Garamond files were removed.
