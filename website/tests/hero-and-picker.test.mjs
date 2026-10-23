@@ -28,9 +28,9 @@ test('the hero artwork exists on disk in every size, as WebP and AVIF', async ()
   assert.match(artwork, /AI-generated/, 'ARTWORK.md must record that the hero is AI-generated');
 });
 
-test('the hero is one art-directed picture: portrait art on phones and portrait screens, landscape art otherwise', async () => {
+test('the hero is one art-directed picture: portrait art on phones, landscape art on tablets and desktops', async () => {
   const markup = await read('src/components/Hero.astro');
-  assert.match(markup, /const stacked = '\(max-width: 760px\), \(max-aspect-ratio: 11\/10\)'/);
+  assert.match(markup, /const stacked = '\(max-width: 760px\)'/);
   assert.equal((markup.match(/<picture/g) || []).length, 1, 'the hero must be a single <picture>');
   assert.match(markup, /fetchpriority="high"/);
   assert.match(markup, /sizes="100vw" width="1536" height="1024"/);

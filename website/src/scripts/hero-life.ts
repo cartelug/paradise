@@ -26,7 +26,7 @@ if (hero) {
   const spotLayer = hero.querySelector<HTMLElement>('[data-hero-spots]');
   const spotEls = spotLayer ? [...spotLayer.querySelectorAll<HTMLElement>('.spot')] : [];
   const SIDES = ['above', 'below', 'right', 'left'];
-  const stackedQuery = window.matchMedia('(max-width: 760px), (max-aspect-ratio: 11/10)');
+  const stackedQuery = window.matchMedia('(max-width: 760px)');
   type Box = { l: number; t: number; r: number; b: number };
   const boxOf = (rect: DOMRect): Box => ({ l: rect.left, t: rect.top, r: rect.right, b: rect.bottom });
   const PAD = 12;

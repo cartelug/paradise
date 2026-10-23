@@ -116,7 +116,7 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 .picker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .picker-q { display: flex; align-items: center; gap: 12px; margin: 0; font-size: 1.0625rem; font-weight: 700; letter-spacing: -.005em; color: var(--ink); }
 .picker-step { display: grid; place-items: center; width: 28px; height: 28px; flex: none; border-radius: 50%; background: var(--ink); color: var(--gold-soft); font-size: .8125rem; font-weight: 700; }
-.picker-clear { min-height: 36px; padding: 6px 14px; border: 1px solid rgb(119 87 28 / .35); border-radius: 999px; background: transparent; color: var(--gold-ink); font-size: .8125rem; font-weight: 600; transition: background-color .25s, border-color .25s; }
+.picker-clear { min-height: 44px; padding: 6px 14px; border: 1px solid rgb(119 87 28 / .35); border-radius: 999px; background: transparent; color: var(--gold-ink); font-size: .8125rem; font-weight: 600; transition: background-color .25s, border-color .25s; }
 .picker-clear:hover { background: rgb(217 188 130 / .2); border-color: rgb(119 87 28 / .6); }
 .picker-clear[hidden] { display: none; }
 .picker-groups { display: grid; gap: 26px; }
@@ -225,3 +225,13 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 
 /* Signature journeys and how booking works sit inside existing sections, below their first block. */
 .signature, .booking { margin-top: clamp(64px, 8vw, 116px); }
+
+/* Service selections stay readable when the sticky summary has little room. */
+@media (max-width: 359px) {
+  .picker-bar { grid-template-columns: minmax(0, 1fr); border-radius: 22px; padding: 12px; }
+  .picker-go { width: 100%; }
+  .pick-face { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+}
+@media (hover: none) {
+  .card:hover, .concept:hover, .exp:hover, .tile:hover, .travel-update:hover { transform: none; }
+}

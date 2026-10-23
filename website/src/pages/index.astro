@@ -26,8 +26,8 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
 ---
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image="images/pardus-hero-desktop-1536.webp">
   <Fragment slot="head">
-    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px), (max-aspect-ratio: 11/10)" imagesrcset={`${asset('pardus-hero-phone-640.avif')} 640w, ${asset('pardus-hero-phone-1024.avif')} 1024w`} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px) and (min-aspect-ratio: 11/10)" imagesrcset={`${asset('pardus-hero-desktop-960.avif')} 960w, ${asset('pardus-hero-desktop-1536.avif')} 1536w`} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 760px)" imagesrcset={`${asset('pardus-hero-phone-640.avif')} 640w, ${asset('pardus-hero-phone-1024.avif')} 1024w`} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 761px)" imagesrcset={`${asset('pardus-hero-desktop-960.avif')} 960w, ${asset('pardus-hero-desktop-1536.avif')} 1536w`} imagesizes="100vw" />
   </Fragment>
   <Hero />
 

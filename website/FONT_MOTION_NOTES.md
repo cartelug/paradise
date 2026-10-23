@@ -8,7 +8,7 @@ How it is tuned (all in `src/styles/base.css`):
 
 - Headlines are weight 700 with -.022em tracking and a 1.05 to 1.1 line height. Card and section titles (h3) are weight 600. Existing responsive type sizes and hero clearances are retained; Archivo is the weight-only variable face used by PDM, with no stretching or width-axis changes.
 - Accent words (`em`) use the true Archivo italic in gold at weight 600, never a faked slant.
-- Body text is 15 to 17 px at 1.7 line height; leads are 16 to 20 px. Form fields are 16 px so phones do not zoom.
+- Body text is 16 to 18 px at 1.7 line height; leads are 16 to 20 px. Form fields are 16 px so phones do not zoom.
 - Eyebrows and price labels are 11 px, weight 600, uppercase, tracked .2 to .22em. Buttons and text links are 14 px, weight 600.
 - Prices use Archivo 600 (22 to 30 px) with tabular numerals.
 - Weight 700 is used only for the large headlines; 600 for everything else bold.
@@ -27,3 +27,11 @@ The "Your next escape" stage on large screens is driven by the same scroll frame
 The preloader (`CinematicIntro.astro`, `preloader.css`, `preloader.ts`) is permanent and runs on every page; see CLAUDE.md.
 
 The project skills in `.agents/skills/` (Frontend Design and Web Design Guidelines) guided the pass. Timings are configured values, not real-device measurements.
+
+## Responsive refinement — 23 October 2026
+
+Portrait tablets use the complete landscape hero after the headline and actions; phones retain the complete portrait art. The image preloads and pin coordinates use the same 760 px breakpoint. This keeps the primary action visible early on tablets without placing copy on the leopard.
+
+The page no longer imposes a 320 px body minimum that overflows when a narrow viewport has a visible scrollbar. Featured cards stack their artwork above the copy through 1280 px; metadata wraps, flex text can shrink, and narrow-screen card/form actions fill their column. Footer links and Folio/picker controls have at least 44 px touch targets. The smallest service picker uses a stacked summary. Touch-only devices avoid sticky hover lifts.
+
+The existing geometry checks were run in Chrome through a temporary, same-origin iframe review page: all 33 pages at 320, 390, 768, 1024, 1200, 1440 and 1920 px, plus 390 px with 200% root text size. Extra homepage checks cover 360, 430, 568 (landscape), 820 and 1199 px. These are browser viewport checks, not physical-device or Safari certification.

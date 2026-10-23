@@ -126,7 +126,7 @@ html.menu-open { overflow: hidden; }
 .folio-saved li { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px 16px; border: 1px solid var(--line-dark); border-radius: var(--radius-s); background: rgb(255 255 255 / .03); }
 .folio-saved li small { display: block; font-size: .6875rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 .folio-saved li strong { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; }
-.folio-saved li button, .folio-clear, .folio-status button { min-height: 40px; padding: 8px 14px; border: 1px solid var(--line-dark); border-radius: 999px; background: transparent; color: var(--gold-soft); font-size: .8125rem; font-weight: 600; }
+.folio-saved li button, .folio-clear, .folio-status button { min-height: 44px; padding: 8px 14px; border: 1px solid var(--line-dark); border-radius: 999px; background: transparent; color: var(--gold-soft); font-size: .8125rem; font-weight: 600; }
 .folio-saved li button:hover, .folio-clear:hover { border-color: var(--gold); background: rgb(236 215 168 / .1); }
 .folio-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 26px; border-top: 1px solid var(--line-dark); }
 .folio-privacy { padding: 0 26px 12px; font-size: .75rem; color: var(--mist-2); }
@@ -156,14 +156,14 @@ html.menu-open { overflow: hidden; }
 .footer-contact .icon { width: 20px; height: 20px; color: var(--gold); }
 .footer-column h2 { margin-bottom: 14px; font-family: var(--font-ui); font-size: 0.66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
 .footer-links { display: grid; gap: 0; }
-.footer-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #dce3ee; text-decoration: none; font-weight: 500; transition: color .2s, transform .3s var(--ease); width: fit-content; }
+.footer-links a { min-width: 44px; max-width: 100%; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #dce3ee; text-decoration: none; font-weight: 500; transition: color .2s, transform .3s var(--ease); width: fit-content; }
 .footer-links a:hover { color: var(--gold-soft); transform: translateX(4px); }
 .footer-links .icon { width: 16px; height: 16px; opacity: .8; }
 .footer-mark { position: relative; z-index: -1; display: grid; justify-items: center; padding-inline: var(--gutter); margin-top: -4vw; margin-bottom: -2vw; color: rgb(217 188 130 / .1); pointer-events: none; }
 .footer-mark .brand-svg { width: min(100%, 980px); }
 .footer-base { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 28px; padding-block: 22px 30px; border-top: 1px solid var(--line-dark); font-size: .8125rem; color: var(--mist-2); }
 .footer-base > div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; }
-.footer-base a { color: var(--mist); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.footer-base a { min-width: 44px; color: var(--mist); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .footer-base a:hover { color: var(--gold-soft); text-decoration: underline; }
 .footer-credit { display: inline-flex; align-items: center; gap: 10px; }
 .footer-credit img { width: 18px; height: 18px; border-radius: 4px; }
@@ -172,3 +172,15 @@ html.menu-open { overflow: hidden; }
 .back-top:hover { border-color: var(--gold); background: rgb(236 215 168 / .08); }
 @media (max-width: 960px) { .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .footer-brand { grid-column: 1 / -1; } }
 @media (max-width: 520px) { .footer-grid { grid-template-columns: minmax(0, 1fr) 1fr; gap: 34px 20px; } .footer-base { flex-direction: column; align-items: flex-start; } }
+
+/* Responsive finishing: labels retain their space and touch targets at increased text sizes. */
+.site-header .brand-link { min-height: 44px; display: flex; align-items: center; }
+.folio-signals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.folio-signals div, .folio-saved li > div { min-width: 0; overflow-wrap: anywhere; }
+.folio-saved li { flex-wrap: wrap; }
+@media (max-width: 359px) {
+  .folio-topline, .folio-content { padding-inline: 20px; }
+  .folio-signals { gap: 8px; }
+  .folio-signals div { padding: 10px; }
+  .menu-more { grid-template-columns: minmax(0, 1fr); }
+}

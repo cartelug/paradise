@@ -3,14 +3,14 @@ import Icon from './Icon.astro';
 import { path } from '../data/site';
 import { offerFor, displayPrice, priceText, cruiseTypes } from '../data/offers';
 // The V31 hero: one owner-approved artwork (a resting leopard in left profile, travel scenes woven into its coat), served
-// as an art-directed picture: portrait art on phones and portrait screens, landscape art otherwise. The stage is exactly
+// as an art-directed picture: portrait art on phones, landscape art on tablets and desktops. The stage is exactly
 // the picture, so the copy, the price bar, the pins and the leopard's measured outline all live in picture coordinates and
 // never drift onto the animal. Its only motion is a very slow breath of scale (1.00 to 1.03 and back over about 20 s); it
 // never glows, never follows the visitor and never reacts to a touch.
 const rail = ['maldives', 'seychelles', 'dubai'].map(slug => offerFor(slug));
 const asset = (name: string) => path(`images/${name}`);
 // Portrait artwork is used on phones and on any screen that is not clearly landscape, so the copy never sits on the animal.
-const stacked = '(max-width: 760px), (max-aspect-ratio: 11/10)';
+const stacked = '(max-width: 760px)';
 const desktopSet = (ext: string) => `${asset(`pardus-hero-desktop-960.${ext}`)} 960w, ${asset(`pardus-hero-desktop-1536.${ext}`)} 1536w`;
 const phoneSet = (ext: string) => `${asset(`pardus-hero-phone-640.${ext}`)} 640w, ${asset(`pardus-hero-phone-1024.${ext}`)} 1024w`;
 const nightsOf = (text: string) => { const n = text.match(/(\d+)-night/); return n ? `${n[1]} nights` : text; };

@@ -513,7 +513,7 @@ def assert_hero(page, width):
     expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)
     image = page.locator(".hero-picture img")
     source = image.evaluate("img => img.currentSrc")
-    portrait = page.evaluate("innerWidth <= 760 || innerWidth / innerHeight <= 1.1")
+    portrait = page.evaluate("innerWidth <= 760")
     assert ("pardus-hero-phone-" if portrait else "pardus-hero-desktop-") in source, source
     assert image.evaluate("img => img.complete && img.naturalWidth > 0")
     assert image.get_attribute("alt") == "A resting leopard in left profile, with tiny travel scenes woven into its coat above a blue-hour lagoon."

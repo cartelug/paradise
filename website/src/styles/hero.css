@@ -1,10 +1,10 @@
 /* PARDUS V31: the leopard hero.
    One owner-approved artwork shown at its native aspect ratio: 3:2 landscape art on landscape screens, 2:3 portrait art on
-   phones and portrait screens. The stage is exactly the picture, so the copy, the price bar, the pins and the leopard's
+   phones, and landscape art on tablets and desktops. The stage follows the picture, so the copy, the price bar, the pins and the leopard's
    measured outline (.leopard-box, in picture percentages) all stay where they were placed on the artwork at every width.
    Landscape: copy in the open sky and water on the left, price bar across the bottom 12% on a translucent navy backing.
-   Portrait: headline in the sky above the jet. On phones the buttons stand on the lagoon below the paws and the price tiles
-   follow below the picture, so nothing but the pins sits on the animal; portrait tablets keep the tiles on the dark water.
+   Portrait phones: headline in the sky above the jet, buttons on the lagoon below the paws, and price tiles below the picture.
+   Portrait tablets: headline and actions first, then the full landscape art and prices.
    The only motion on the picture is a very slow scale, 1.00 to 1.03 and back; nothing glows, follows or reacts. */
 .hero { --sky: rgb(4 29 60); position: relative; isolation: isolate; overflow: hidden; background: var(--sky); }
 .hero-stage { position: relative; width: 100%; aspect-ratio: 3 / 2; container-type: inline-size; }
@@ -118,7 +118,7 @@ html:not(.js) .hl-spots { display: none; }
 /* Stacked: phones and portrait screens, with the portrait art. The headline sits in the open sky above the jet (the sky
    continues above the picture in its own colour), the price tiles sit on the dark water below the paws, and the buttons and
    supporting line follow directly under the picture, so the first screen of a phone holds the whole offer. */
-@media (max-width: 760px), (max-aspect-ratio: 11/10) {
+@media (max-width: 760px) {
   .hero { --sky: rgb(2 25 58); }
   .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 6px); padding-bottom: max(18px, env(safe-area-inset-bottom)); }
   .hero-copy { display: contents; }
@@ -187,15 +187,29 @@ html:not(.js) .hl-spots { display: none; }
 /* Below 1200 px the landscape buttons are held left of the paws, so the second one reads "Explore". */
 @media (max-width: 1199px) { .hero .actions .btn .btn-long { display: none; } }
 @media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } }
-@media (max-width: 760px), (max-aspect-ratio: 11/10) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
+@media (max-width: 760px) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
-/* Portrait tablets: a larger headline and buttons that size to their labels. */
-@media (max-aspect-ratio: 11/10) and (min-width: 761px) {
-  .hero h1, .hero-text, .hero .actions { max-width: 46rem; }
-  .hero h1 { font-size: clamp(2.4rem, 6.4vw, 4.4rem); }
-  .hero .actions { display: flex; }
-  .hero .actions .btn { width: auto; flex: 0 0 auto; padding-inline: 26px; }
-  .hero .actions .btn .icon { display: inline-block; }
-  .hero-text { max-width: 40ch; }
-  .hero-offers .name small { display: inline; }
+/* Portrait tablets: an editorial opening with actions visible before the complete landscape artwork. */
+@media (min-width: 761px) and (max-aspect-ratio: 11/10) {
+  .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 30px); }
+  .hero-copy { display: contents; }
+  .hero .eyebrow { display: none; }
+  .hero h1 { order: 1; margin-inline: var(--gutter); max-width: 19ch; font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
+  .hero .actions { order: 2; display: flex; flex-wrap: wrap; width: auto; max-width: none; margin: 24px var(--gutter) 28px; gap: 12px; }
+  .hero .actions .btn { width: auto; padding-inline: 24px 8px; }
+  .hero-art { order: 3; position: relative; inset: auto; aspect-ratio: 3 / 2; width: 100%; }
+  .hero-shade { display: none; }
+  .hero-rail { order: 4; position: relative; inset: auto; background: #07172a; }
+  .hero-rail-inner { gap: 16px; padding-block: 18px; }
+  .hero-rail-head { order: 3; }
+  .hero-rail-head > span { display: none; }
+  .hero-offers a { min-height: 58px; }
+  .hero-text { order: 5; max-width: 56ch; margin: 22px var(--gutter) 30px; font-size: 1.0625rem; }
+}
+
+/* Compact phones: retain the complete artwork and offer dock within a short first screen. */
+@media (max-width: 359px) and (max-height: 640px) {
+  .hero h1 { font-size: clamp(1.375rem, 7vw, 1.625rem); }
+  .hero-art { width: 82%; margin-inline: auto; margin-top: calc(16px - 25.83cqw); }
+  .hero .actions { --lagoon: 8px; }
 }

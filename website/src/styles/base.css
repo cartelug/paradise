@@ -39,7 +39,7 @@
   --focus: #f3d99b;
 
   --fs-small: clamp(.8125rem, .79rem + .1vw, .875rem);
-  --fs-body: clamp(.9375rem, .9rem + .2vw, 1.0625rem);
+  --fs-body: clamp(1rem, .96rem + .2vw, 1.125rem);
   --fs-lead: clamp(1rem, .93rem + .4vw, 1.25rem);
   --fs-h3: clamp(1.14rem, 0.95rem + 0.76vw, 1.615rem);
   --fs-h2: clamp(1.615rem, 0.988rem + 2.508vw, 3.135rem);
@@ -49,7 +49,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); background: var(--midnight); color-scheme: dark light; }
 body {
-  margin: 0; min-width: 320px; background: var(--midnight); color: #e8edf4;
+  margin: 0; min-width: 0; background: var(--midnight); color: #e8edf4;
   font-family: var(--font-ui); font-size: var(--fs-body); line-height: 1.7; font-weight: 400;
   text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   overflow-x: clip; overflow-wrap: break-word;
@@ -150,7 +150,7 @@ p { text-wrap: pretty; }
    sits inside the end of the pill and travels on hover. Pressing it sinks it a little, as a real button would. */
 .btn {
   position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-  min-height: 54px; padding: 8px 28px; border: 1px solid transparent; border-radius: 999px;
+  min-height: 54px; max-width: 100%; padding: 8px 28px; border: 1px solid transparent; border-radius: 999px;
   font-family: var(--font-ui); font-size: .875rem; font-weight: 700; letter-spacing: .02em; line-height: 1.2; text-decoration: none; white-space: nowrap;
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   transition: transform .4s var(--ease), background-color .25s, border-color .25s, color .25s, box-shadow .4s;
@@ -203,12 +203,13 @@ p { text-wrap: pretty; }
 
 /* Inclusion lists carry icons, not bullets. */
 .incl { display: flex; flex-wrap: wrap; gap: 10px 22px; }
-.incl li { display: inline-flex; align-items: center; gap: 9px; font-size: .875rem; line-height: 1.4; color: var(--mist); }
+.incl li { min-width: 0; max-width: 100%; display: inline-flex; align-items: center; gap: 9px; font-size: .875rem; line-height: 1.4; color: var(--mist); }
 .incl .icon { width: 18px; height: 18px; color: var(--gold); }
 .sec--ivory .incl li, .sec--sand .incl li, .light .incl li { color: var(--ink-2); }
 .sec--ivory .incl .icon, .sec--sand .incl .icon, .light .incl .icon { color: var(--gold-ink); }
 .ticks { display: grid; gap: 10px; }
-.ticks li { display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+.ticks li { min-width: 0; display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+.ticks li > span { min-width: 0; }
 .ticks .icon { margin-top: .18em; width: 1.1em; height: 1.1em; color: var(--gold); }
 .sec--ivory .ticks .icon, .sec--sand .ticks .icon, .light .ticks .icon { color: var(--gold-ink); }
 
