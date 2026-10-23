@@ -2,6 +2,20 @@
 
 Release V31: 20 October 2026. Own domain: https://pardusescapes.com (cPanel zip). GitHub Pages copy: published from `main` at https://cartelug.github.io/paradise/.
 
+## Responsive and Dubai imagery refinement — 23 October 2026
+
+Six specialists audited the shared typography, homepage/hero, navigation/footer, inner-page cards, imagery and component plan. The changes make button labels wrap to their actual available width, contain native form controls, reflow the planner by its column width, align card prices/actions, and prevent mobile-menu/email overflow. The tablet hero uses an editorial stack through 1023 px so copy and actions have their own space above the artwork. The small service picker shows its full selection summary above its action.
+
+Eight generated, illustrative Dubai scenes now serve the Dubai destination, city journey, cruise surfaces, photographic experience cards and a four-scene Dubai discovery gallery. The approved leopard, logo, permanent preloader, prices, inclusions and verified travel-desk content are unchanged. All text and prices remain live HTML and interface symbols remain SVG. Archivo remains the sole font.
+
+See `website/VISUAL_GENERATION_PLAN.md` for every destination, journey, card, text and symbol mapping, plus the distinct future asset queue. `website/source-assets/v31-photography/GENERATION_PROMPTS.json` records all eight exact prompts and native 1536 × 1024 dimensions. `credits.json` identifies generated scenes as illustrative; the 1920 px delivery derivatives are interpolated. Verified V24 masters are retained.
+
+The final release passed Astro diagnostics for 90 files with zero errors, warnings or hints; all 47 Node tests after the GitHub Pages export; both production builds; and reference verification for all 33 HTML pages and 40 generated text assets in each publishing version. The domain build also passed canonical, sitemap, robots and `.htaccess` checks. The 276-file, 31.4 MB cPanel archive passed its CRC check and excludes the internal QA fixture. The official travel-desk refresh already present on `main` was preserved.
+
+Browser acceptance recorded 408 unique passing cases: every route at six phone sizes and core tablet/desktop widths, additional homepage breakpoint/hero checks, and every route at 200% root-font size. The normal cases used 100% page zoom. Read `website/RESPONSIVE_QA_2026-10-23.md` and its JSON evidence for the exact coverage and limits; physical devices, Safari and true 200% browser zoom are not certified. Live checks also confirmed the preloader release, hero pause/resume and selected-service enquiry prefill.
+
+The updated own-domain upload still uses `website/release/pardus-site-cpanel.zip`. Publishing the GitHub Pages copy does not upload this package to cPanel.
+
 ## V31: launch on pardusescapes.com (20 October 2026)
 
 V31 gets the site ready to run from the root of **https://pardusescapes.com** on Namecheap cPanel. The GitHub Pages copy at https://cartelug.github.io/paradise/ keeps working.

@@ -151,7 +151,7 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 .picker-bar { position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 9px 9px 9px 20px; border: 1px solid rgb(236 215 168 / .32); border-radius: 999px; background: linear-gradient(180deg, rgb(16 33 58 / .95), rgb(6 15 30 / .97)); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 20px 46px rgb(5 12 26 / .4); color: #f1e7cf; }
 .picker-summary { margin: 0; min-width: 0; font-size: .8125rem; line-height: 1.35; color: #c4cfde; }
 .picker-summary strong { display: block; color: #fff; font-size: .9375rem; font-weight: 700; }
-.picker-summary span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.picker-summary span { display: block; white-space: normal; }
 .picker-go { min-height: 52px; }
 @media (max-width: 980px) { .services { grid-template-columns: minmax(0, 1fr); } .services-intro { position: static; } .services-points { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 480px) {
@@ -165,15 +165,16 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 
 /* More destinations */
 .dest-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 36px); }
-.dest { display: grid; align-content: start; gap: 16px; }
+.dest { display: flex; flex-direction: column; min-width: 0; gap: 16px; }
+.dest > .frame { flex: none; }
 .dest .frame { aspect-ratio: 4 / 3.4; border-radius: var(--radius-l); }
 .dest .frame img { transition: transform 1.2s var(--ease); }
 .dest:hover .frame img { transform: scale(1.06); }
-.dest-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.dest h3 { font-size: clamp(1.33rem, 1.064rem + 0.912vw, 1.805rem); }
+.dest-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.dest h3 { min-width: 0; flex: 1 1 12ch; font-size: clamp(1.33rem, 1.064rem + 0.912vw, 1.805rem); }
 .dest h3 a { text-decoration: none; }
-.dest-top span { font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); }
-.dest p { color: var(--ink-2); }
+.dest-top > span { max-width: 100%; font-size: .75rem; font-weight: 600; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); }
+.dest p { flex: 1; color: var(--ink-2); }
 .dest .price { padding-top: 16px; border-top: 1px solid var(--line-light); }
 @media (max-width: 900px) { .dest-grid { grid-template-columns: minmax(0, 1fr); } .dest .frame { aspect-ratio: 16 / 10; } }
 @media (min-width: 901px) and (max-width: 1100px) { .dest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dest:nth-child(3) { grid-column: 1 / -1; } }
@@ -217,7 +218,7 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 /* Floating action on phones. */
 .sticky-cta { display: none; }
 @media (max-width: 760px) {
-  .sticky-cta { position: fixed; z-index: 45; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: inline-flex; min-width: 220px; justify-content: space-between; opacity: 0; visibility: hidden; transform: translate3d(-50%, 150%, 0); box-shadow: 0 18px 44px rgb(5 12 26 / .5), 0 0 0 1px rgb(236 215 168 / .5), inset 0 1px 0 rgb(255 255 255 / .5); transition: transform .55s var(--ease), opacity .3s, visibility 0s .55s; }
+  .sticky-cta { position: fixed; z-index: 45; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); display: inline-flex; min-width: min(220px, calc(100% - 2 * var(--gutter))); max-width: calc(100% - 2 * var(--gutter)); justify-content: space-between; opacity: 0; visibility: hidden; transform: translate3d(-50%, 150%, 0); box-shadow: 0 18px 44px rgb(5 12 26 / .5), 0 0 0 1px rgb(236 215 168 / .5), inset 0 1px 0 rgb(255 255 255 / .5); transition: transform .55s var(--ease), opacity .3s, visibility 0s .55s; }
   .sticky-cta[data-on='true'] { opacity: 1; visibility: visible; transform: translate3d(-50%, 0, 0); transition: transform .55s var(--ease), opacity .3s, visibility 0s; }
   .sticky-cta:active { transform: translate3d(-50%, 0, 0) scale(.97); }
 }
@@ -226,10 +227,12 @@ ul.services-points { display: grid; gap: 14px; margin: 0 0 28px; padding: 24px 0
 /* Signature journeys and how booking works sit inside existing sections, below their first block. */
 .signature, .booking { margin-top: clamp(64px, 8vw, 116px); }
 
-/* Service selections stay readable when the sticky summary has little room. */
-@media (max-width: 359px) {
+/* The action takes most of a phone-width bar. Give the summary a complete row instead of truncating even its empty hint. */
+@media (max-width: 480px) {
   .picker-bar { grid-template-columns: minmax(0, 1fr); border-radius: 22px; padding: 12px; }
   .picker-go { width: 100%; }
+}
+@media (max-width: 359px) {
   .pick-face { grid-template-columns: minmax(0, 1fr); justify-items: start; }
 }
 @media (hover: none) {

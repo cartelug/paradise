@@ -88,8 +88,8 @@ p { text-wrap: pretty; }
 .sec--ivory .lead, .sec--sand .lead, .light .lead { color: var(--ink-2); }
 .small { font-size: var(--fs-small); color: var(--mist-2); line-height: 1.6; }
 .sec--ivory .small, .sec--sand .small, .light .small { color: #4b5b70; }
-.eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 18px; font-family: var(--font-ui); font-size: .6875rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
-.eyebrow::before { content: ''; width: 30px; height: 1px; background: currentColor; opacity: .7; }
+.eyebrow { display: inline-flex; align-items: center; gap: 12px; min-width: 0; max-width: 100%; margin-bottom: 18px; font-family: var(--font-ui); font-size: .6875rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.eyebrow::before { content: ''; flex: none; width: 30px; height: 1px; background: currentColor; opacity: .7; }
 .sec--ivory .eyebrow, .sec--sand .eyebrow, .light .eyebrow { color: var(--gold-ink); }
 .nowrap { white-space: nowrap; }
 
@@ -139,6 +139,7 @@ p { text-wrap: pretty; }
 .blend-bottom::after { bottom: 0; background: linear-gradient(0deg, var(--blend, var(--midnight)), transparent); }
 
 .sec-head { display: grid; gap: 22px 56px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: end; margin-bottom: clamp(36px, 5vw, 72px); }
+.sec-head > * { min-width: 0; }
 .sec-head > p:not(.eyebrow) { color: var(--mist); font-size: var(--fs-lead); max-width: 40ch; }
 .sec--ivory .sec-head > p:not(.eyebrow), .sec--sand .sec-head > p:not(.eyebrow) { color: var(--ink-2); }
 .sec-head .eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
@@ -150,11 +151,13 @@ p { text-wrap: pretty; }
    sits inside the end of the pill and travels on hover. Pressing it sinks it a little, as a real button would. */
 .btn {
   position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-  min-height: 54px; max-width: 100%; padding: 8px 28px; border: 1px solid transparent; border-radius: 999px;
-  font-family: var(--font-ui); font-size: .875rem; font-weight: 700; letter-spacing: .02em; line-height: 1.2; text-decoration: none; white-space: nowrap;
+  min-width: 0; min-height: 54px; max-width: 100%; padding: 8px 28px; border: 1px solid transparent; border-radius: 999px;
+  font-family: var(--font-ui); font-size: .875rem; font-weight: 700; letter-spacing: .02em; line-height: 1.2; text-decoration: none; white-space: normal; text-align: center; text-wrap: balance;
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   transition: transform .4s var(--ease), background-color .25s, border-color .25s, color .25s, box-shadow .4s;
 }
+/* Buttons also live in narrow cards on wide screens; fit their labels to the actual available space. */
+.btn > span { min-width: 0; }
 .btn:has(> :is(.icon-arrow-right, .icon-arrow-up-right, .icon-arrow-down)) { padding-right: 8px; padding-left: 26px; }
 .btn > .icon { flex: none; width: 1.15em; height: 1.15em; transition: transform .45s var(--ease), background-color .3s, color .3s; }
 .btn > :is(.icon-arrow-right, .icon-arrow-up-right, .icon-arrow-down) { box-sizing: content-box; width: 18px; height: 18px; padding: 8px; border-radius: 50%; background: #0a1628; color: var(--gold-soft); }
@@ -183,10 +186,9 @@ p { text-wrap: pretty; }
 .btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 999px; }
 .sec--ivory .btn:focus-visible, .sec--sand .btn:focus-visible, .light .btn:focus-visible { outline-color: #8a6a22; }
 .actions { display: flex; flex-wrap: wrap; gap: 14px; }
-@media (max-width: 480px) { .btn { white-space: normal; text-align: center; text-wrap: balance; } }
 
 /* Text link */
-.link { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: .875rem; letter-spacing: .02em; text-decoration: none; color: var(--gold-soft); padding-block: 8px; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 5px) / 0 1px no-repeat; transition: background-size .45s var(--ease), color .2s; }
+.link { display: inline-flex; align-items: center; gap: 10px; min-width: 44px; min-height: 44px; max-width: 100%; font-weight: 600; font-size: .875rem; letter-spacing: .02em; text-decoration: none; color: var(--gold-soft); padding-block: 8px; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 5px) / 0 1px no-repeat; transition: background-size .45s var(--ease), color .2s; }
 .link:hover { background-size: 100% 1px; }
 .link .icon { width: 1.1em; height: 1.1em; transition: transform .35s var(--ease); }
 .link:hover .icon-arrow-right { transform: translateX(4px); }
@@ -204,6 +206,7 @@ p { text-wrap: pretty; }
 /* Inclusion lists carry icons, not bullets. */
 .incl { display: flex; flex-wrap: wrap; gap: 10px 22px; }
 .incl li { min-width: 0; max-width: 100%; display: inline-flex; align-items: center; gap: 9px; font-size: .875rem; line-height: 1.4; color: var(--mist); }
+.incl li > span { min-width: 0; }
 .incl .icon { width: 18px; height: 18px; color: var(--gold); }
 .sec--ivory .incl li, .sec--sand .incl li, .light .incl li { color: var(--ink-2); }
 .sec--ivory .incl .icon, .sec--sand .incl .icon, .light .incl .icon { color: var(--gold-ink); }
@@ -230,7 +233,7 @@ p { text-wrap: pretty; }
 
 /* Pills (filters) */
 .pills { display: flex; flex-wrap: wrap; gap: 10px; }
-.pill { min-height: 44px; padding: 10px 20px; border-radius: 999px; border: 1px solid var(--line-dark); background: rgb(255 255 255 / .03); color: var(--mist); font-weight: 600; font-size: .9rem; transition: background-color .25s, color .25s, border-color .25s; }
+.pill { min-width: 0; min-height: 44px; max-width: 100%; padding: 10px 20px; border-radius: 999px; border: 1px solid var(--line-dark); background: rgb(255 255 255 / .03); color: var(--mist); font-weight: 600; font-size: .9rem; white-space: normal; transition: background-color .25s, color .25s, border-color .25s; }
 .pill:hover { border-color: var(--gold); color: #fff; }
 .pill[aria-pressed='true'] { background: var(--gold); border-color: var(--gold); color: #1a1405; }
 .light .pill, .sec--ivory .pill, .sec--sand .pill { border-color: var(--line-light); color: var(--ink-2); background: rgb(255 255 255 / .5); }
@@ -238,14 +241,14 @@ p { text-wrap: pretty; }
 .light .pill[aria-pressed='true'], .sec--ivory .pill[aria-pressed='true'], .sec--sand .pill[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: #f6efdd; }
 
 /* Forms */
-.form { display: grid; gap: 20px; }
+.form { display: grid; min-width: 0; gap: 20px; }
 .form-grid { display: grid; gap: 20px 22px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .form-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .field { display: grid; gap: 8px; align-content: start; min-width: 0; }
 .form label, .field > span { font-size: .8125rem; font-weight: 600; letter-spacing: .04em; color: var(--gold-soft); }
 .form label span, .field label span { font-weight: 500; letter-spacing: 0; color: var(--mist-2); }
 .form input, .form select, .form textarea {
-  width: 100%; min-height: 52px; padding: 13px 16px; border-radius: var(--radius-s);
+  width: 100%; min-width: 0; max-width: 100%; min-height: 52px; padding: 13px 16px; border-radius: var(--radius-s);
   border: 1px solid rgb(236 215 168 / .24); background: rgb(5 12 26 / .55); color: #fff; font-size: 1rem; line-height: 1.4;
   transition: border-color .2s, background-color .2s, box-shadow .2s;
 }
@@ -291,7 +294,7 @@ p { text-wrap: pretty; }
 .faq details { border-bottom: 1px solid var(--line-light); }
 .faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 16px 0; list-style: none; cursor: pointer; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.056rem, 0.924rem + 0.528vw, 1.32rem); line-height: 1.25; }
+.faq summary h3 { min-width: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.056rem, 0.924rem + 0.528vw, 1.32rem); line-height: 1.25; }
 .faq summary .icon { width: 22px; height: 22px; color: var(--gold-ink); transition: transform .35s var(--ease); }
 .faq details[open] summary .icon { transform: rotate(45deg); }
 .faq details > p { padding: 0 0 22px; max-width: 64ch; color: var(--ink-2); }

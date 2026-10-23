@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-10-23",
+  "mode": "built-in image_gen",
+  "note": "Native masters are 1536 x 1024. The 1920-width delivery derivative is interpolated, not native higher detail. Scenes are illustrative, not verified property photographs.",
+  "assets": [
+    {
+      "id": "dubai-marina",
+      "prompt": "Use case: photorealistic-natural. Asset type: luxury travel website Dubai destination photograph, landscape 3:2. Primary request: an elegant Dubai Marina-inspired waterfront skyline at blue hour, seen from the promenade across a calm canal; tall contemporary towers, warm illuminated windows and restrained reflections, small anonymous moored boats. Composition: wide editorial travel photograph, natural coherent architecture, skyline held in the middle 60 percent so both 3:2 and 4:3 crops work, breathing room above the towers. Lighting: realistic deep blue twilight with a soft warm horizon, crisp but natural atmospheric depth and subtle camera grain. Materials: authentic glass, water and stone. No text, no symbols, no logos, no collage, no extreme HDR, no exaggerated neon, no invented labels or hotel claims. This is illustrative destination imagery, never evidence of a particular hotel or supplier.",
+      "slot": "dubai",
+      "file": "dubai.jpg",
+      "alt": "Illustrative Dubai Marina-inspired skyline and moored boats reflected in calm water at blue hour"
+    },
+    {
+      "id": "dubai-desert",
+      "prompt": "Use case: photorealistic-natural. Asset type: luxury Dubai desert experience website card, landscape 3:2. Primary request: a refined Arabian desert evening with sweeping naturally rippled ochre dunes and a small, tastefully arranged private dinner table and two chairs on level sand, a few subtle lanterns, no people. Composition: one uninterrupted cinematic travel photograph from standing eye level, dune ridges leading into the horizon, table framed centrally enough for responsive crops; plausible small-scale furnishing and natural shadows. Lighting: late golden hour, soft peach sky, restrained colours, genuine photographic texture and clean smooth camera noise. No text, logos, collage, giant sun, fantasy architecture, oversaturation, fake plastic sand or luxury-property claims. Illustrative scene for an individually planned desert experience.",
+      "slot": "dubai-desert",
+      "file": "dubai-desert.jpg",
+      "alt": "Illustrative Arabian desert dinner setting with two chairs and lanterns among the dunes"
+    },
+    {
+      "id": "dubai-creek",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai cultural travel website image, landscape 3:2. Primary request: a candid editorial travel photograph inspired by Dubai Creek, a traditional small wooden abra crossing green-blue water with historic sand-coloured waterfront buildings and wind-tower architecture behind it. View from waterside at human eye level, calm morning, realistically proportioned distant passengers only, no identifiable faces. Composition: boat and architecture comfortably inside a central safe crop, subtle wake, authentic materials and restrained warm colours, no crowd or posed tourist scene. Natural camera optics, detailed wood and masonry, gentle atmospheric haze, no aggressive sharpening. No text, no logos, no invented signage, no collage, no fantasy minarets, no precise supplier or service claims. An illustrative destination scene.",
+      "slot": "dubai-creek",
+      "file": "dubai-creek.jpg",
+      "alt": "Illustrative Dubai Creek-inspired scene with a wooden abra beside traditional waterfront buildings"
+    },
+    {
+      "id": "dubai-downtown",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai city experience website photograph, landscape 3:2. Primary request: a beautiful Downtown Dubai-inspired urban evening view, the recognisable slender tiered silhouette of Burj Khalifa in the distance beyond a broad landscaped pedestrian waterfront, clean modern city buildings with warm windows, subtle palms and realistic water reflections. Composition: editorial architectural travel photography, wide natural view from human eye level, full tower top retained with generous sky, primary elements inside crop-safe middle 65 percent, no text overlay. Lighting: refined blue hour just after sunset, natural cream and blue tones, believable scale and urban depth. No logos, no fake signage, no flying cars, no duplicated towers, no unreal giant moon, no overprocessed HDR or promotional brand marks. Illustrative city image, not a verified hotel view.",
+      "slot": "dubai-downtown",
+      "file": "dubai-downtown.jpg",
+      "alt": "Illustrative Downtown Dubai-inspired waterfront with a slender tiered tower at dusk"
+    },
+    {
+      "id": "dubai-yacht",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai private-cruise luxury travel image, landscape 3:2, at least 2400 pixels wide if available. Primary request: a beautiful anonymous mid-size white motor yacht underway slowly on calm water off a Dubai Marina-inspired skyline, shot from a plausible low nearby boat, no aerial impossible perspective. Composition: complete yacht inside central safe crop, natural hull geometry and railings, balanced skyline in soft distance, subtle wake, real water physics. Lighting: golden hour approaching blue evening, restrained champagne reflections and navy shadows, fine natural camera texture and gentle atmosphere. No logos, text, names, prices or watermarks; no giant mega yacht, no invented branded vessel, no crowded faces, no overprocessed HDR. Illustrative cruise scene, never evidence of a particular supplier or available vessel.",
+      "slot": "yacht",
+      "file": "yacht.jpg",
+      "alt": "Illustrative anonymous motor yacht cruising past a Dubai-inspired skyline at sunset"
+    },
+    {
+      "id": "dubai-beach",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai beach travel website image, landscape 3:2, at least 2400 pixels wide if available. Primary request: a quiet Dubai-inspired public coastline with clean pale sand, clear gentle turquoise Gulf water, a few well-spaced palms and a soft distant contemporary skyline, no specific resort and no recognisable hotel. Composition: one believable editorial photograph from standing eye level, natural shore curve across the lower half, subtle small beach details, horizons level, main details central for responsive cropping. Lighting: soft early morning, clean sky, realistic atmospheric haze, natural warm sand and pale blues. No text, logos, signs, plastic sand, giant waves, fantasy vegetation or oversaturated gradients. Anonymous illustrative coastal setting.",
+      "slot": "dubai-beach",
+      "file": "dubai-beach.jpg",
+      "alt": "Illustrative Dubai-inspired beach with palms, gentle Gulf water and a distant skyline"
+    },
+    {
+      "id": "dubai-dining",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai luxury dining experience website card, landscape 3:2, at least 2400 pixels wide if available. Primary request: an anonymous refined outdoor restaurant terrace overlooking a Dubai-inspired waterfront at dusk, two beautifully set tables in the foreground with understated linen, glassware and contemporary chairs, soft palms at edges, warm city windows and calm water beyond. Composition: plausible editorial hospitality photograph taken by a human from terrace eye level, not a catalog render; natural materials, slight irregularity in linen, restrained setting, no people needed, main table and view central for responsive crops. Lighting: blue hour with warm practical lamps, realistic exposure and soft contrast, subtle fine texture and smooth noise handling. No text, menus, logos, named property, branded decor, collage, fake glowing edges or extreme bokeh. Illustrative travel setting.",
+      "slot": "dubai-dining",
+      "file": "dubai-dining.jpg",
+      "alt": "Illustrative anonymous waterfront dining terrace overlooking a Dubai-inspired skyline at dusk"
+    },
+    {
+      "id": "dubai-skyline",
+      "prompt": "Use case: photorealistic-natural. Asset type: Dubai architecture and city discovery website image, landscape 3:2, at least 2400 pixels wide if available. Primary request: a natural travel photograph of a modern Dubai-inspired boulevard with a striking contemporary oval torus-shaped museum building in the midground, silver patterned surface with abstract nonreadable cutout decoration, modern glass towers and date palms behind, plausible urban scale. Composition: architectural street-level editorial photograph, complete curved building inside safe crop, clear pedestrian setting, no identifiable close-up people. Lighting: gentle late afternoon with clean blue sky, authentic steel reflections, soft realistic shadows, finely detailed but not sharpened. No readable text or invented signage, no logos, watermarks, giant cars, duplicate landmarks, no claims of admission or museum partnership. Illustrative city architecture scene.",
+      "slot": "dubai-skyline",
+      "file": "dubai-skyline.jpg",
+      "alt": "Illustrative Dubai-inspired architectural scene with a silver curved museum form and modern towers"
+    }
+  ]
+}

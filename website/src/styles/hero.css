@@ -36,7 +36,7 @@
 .hero .actions { display: grid; justify-items: start; gap: clamp(8px, .8cqw, 12px); width: max-content; margin-top: clamp(14px, 1.7cqw, 30px); }
 /* The buttons stop well short of the paws (which start at 26.5% of the picture). */
 .hero .actions { max-width: calc(26.5cqw - var(--gutter) - 16px); }
-.hero .actions .btn { min-width: 0; width: 100%; justify-content: space-between; gap: clamp(8px, .9cqw, 14px); font-size: clamp(.875rem, 1.05cqw, 1.0625rem); }
+.hero .actions .btn { min-width: 0; width: 100%; justify-content: space-between; gap: clamp(8px, .9cqw, 14px); font-size: clamp(.875rem, 1.05cqw, 1.0625rem); white-space: normal; text-align: center; text-wrap: balance; }
 .hero .actions .btn:has(> .icon-arrow-right, > .icon-arrow-down) { padding-left: clamp(16px, 1.8cqw, 28px); }
 .hero .actions .btn--ghost { justify-content: center; border-color: rgb(236 215 168 / .55); background: rgb(6 14 30 / .5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
@@ -189,8 +189,9 @@ html:not(.js) .hl-spots { display: none; }
 @media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } }
 @media (max-width: 760px) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
 @keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
-/* Portrait tablets: an editorial opening with actions visible before the complete landscape artwork. */
-@media (min-width: 761px) and (max-aspect-ratio: 11/10) {
+/* Tablets and small landscape windows: copy and actions have their own rows before the complete landscape artwork.
+   At 761–1023 px an overlaid copy column cannot hold the headline, supporting text and two controls above the price bar. */
+@media (min-width: 761px) and (max-aspect-ratio: 11/10), (min-width: 761px) and (max-width: 1023px) {
   .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 30px); }
   .hero-copy { display: contents; }
   .hero .eyebrow { display: none; }

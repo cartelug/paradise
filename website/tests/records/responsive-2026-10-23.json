@@ -1,0 +1,7833 @@
+{
+  "date": "2026-10-23",
+  "mode": "Settled layout through the supported cloud-browser interface; CSS iframe viewports at 100% page zoom; 200% root font is a separate text-size check, not true browser zoom.",
+  "caseCount": 408,
+  "casesWithFindings": 0,
+  "cases": [
+    {
+      "route": "404.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 36,
+        "targets": 28,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 36,
+        "targets": 28,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 41,
+        "targets": 33,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 41,
+        "targets": 33,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 41,
+        "targets": 33,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 76,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 76,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 81,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 81,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 81,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 191,
+        "targets": 34,
+        "images": 10,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 191,
+        "targets": 34,
+        "images": 10,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 196,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 196,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 196,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 79,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 79,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 84,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 84,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 84,
+        "targets": 32,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 50,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 50,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 55,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 55,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 55,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 87,
+        "targets": 28,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 87,
+        "targets": 28,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 33,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 33,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 33,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 120,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 120,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 136,
+        "targets": 37,
+        "images": 12,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 136,
+        "targets": 37,
+        "images": 12,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 141,
+        "targets": 42,
+        "images": 12,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 141,
+        "targets": 42,
+        "images": 12,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 141,
+        "targets": 42,
+        "images": 12,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 120,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 120,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 125,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 123,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 123,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 123,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 37,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 124,
+        "targets": 42,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 131,
+        "targets": 36,
+        "images": 10,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 131,
+        "targets": 36,
+        "images": 10,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 136,
+        "targets": 41,
+        "images": 10,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 136,
+        "targets": 41,
+        "images": 10,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 136,
+        "targets": 41,
+        "images": 10,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 267,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 320,
+          "width": 305,
+          "height": 640,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 267,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 360,
+          "width": 345,
+          "height": 740,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 360,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 267,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 360,
+          "width": 345,
+          "height": 844,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": true,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 267,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 375,
+          "width": 360,
+          "height": 667,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 390,
+          "width": 375,
+          "height": 844,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": true,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 412,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 412,
+          "width": 397,
+          "height": 844,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": true,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 412,
+          "width": 397,
+          "height": 915,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": true,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 430,
+          "width": 415,
+          "height": 932,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 14,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": true,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 640,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 269,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 625,
+        "scrollWidth": 625,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 640,
+          "width": 625,
+          "height": 1180,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 760,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 269,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 745,
+        "scrollWidth": 745,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 760,
+          "width": 745,
+          "height": 1180,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 1
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 761,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 746,
+        "scrollWidth": 746,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 761,
+          "width": 746,
+          "height": 1180,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 768,
+          "width": 753,
+          "height": 1180,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 820,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 268,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 805,
+        "scrollWidth": 805,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 820,
+          "width": 805,
+          "height": 1180,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 960,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 270,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 945,
+        "scrollWidth": 945,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 960,
+          "width": 945,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 2
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1023,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 270,
+        "targets": 44,
+        "images": 18,
+        "viewportWidth": 1008,
+        "scrollWidth": 1008,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1023,
+          "width": 1008,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 15,
+          "visiblePins": 2
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": false,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 247,
+        "targets": 45,
+        "images": 18,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1024,
+          "width": 1009,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 16,
+          "visiblePins": 2
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1199,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 245,
+        "targets": 45,
+        "images": 18,
+        "viewportWidth": 1184,
+        "scrollWidth": 1184,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1199,
+          "width": 1184,
+          "height": 768,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 16,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 250,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1200,
+          "width": 1185,
+          "height": 768,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1280,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 250,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1265,
+        "scrollWidth": 1265,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1280,
+          "width": 1265,
+          "height": 768,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1366,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 250,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1351,
+        "scrollWidth": 1351,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1366,
+          "width": 1351,
+          "height": 768,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1440,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 253,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1440,
+          "width": 1425,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 253,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1440,
+          "width": 1425,
+          "height": 1080,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 253,
+        "targets": 50,
+        "images": 18,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 1920,
+          "width": 1905,
+          "height": 1080,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 16
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 22,
+          "visiblePins": 3
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 54
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore destinations\"",
+              "fits": true,
+              "height": 54
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights From USD 2,950\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Seychelles 7 nights From USD 2,450\"",
+              "fits": false
+            },
+            {
+              "label": "a \"Dubai 4 nights From USD 1,250\"",
+              "fits": false
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": [
+            "maldives",
+            "dubai",
+            "yacht"
+          ]
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 62,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 62,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 62,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 58,
+        "targets": 29,
+        "images": 6,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 63,
+        "targets": 34,
+        "images": 6,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 83,
+        "targets": 34,
+        "images": 10,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 83,
+        "targets": 34,
+        "images": 10,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 88,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 88,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 88,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 99,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 99,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 99,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 101,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 101,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 101,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 98,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 97,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 97,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 97,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 30,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 100,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 68,
+        "targets": 36,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 68,
+        "targets": 36,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 73,
+        "targets": 41,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 73,
+        "targets": 41,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 73,
+        "targets": 41,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 97,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 97,
+        "targets": 39,
+        "images": 10,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 102,
+        "targets": 44,
+        "images": 10,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 102,
+        "targets": 44,
+        "images": 10,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 102,
+        "targets": 44,
+        "images": 10,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 65,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 65,
+        "targets": 35,
+        "images": 5,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 70,
+        "targets": 40,
+        "images": 5,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 70,
+        "targets": 40,
+        "images": 5,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 70,
+        "targets": 40,
+        "images": 5,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 53,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 53,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 53,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 54,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 54,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 54,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 320,
+      "height": 640,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 305,
+        "scrollWidth": 305,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 360,
+      "height": 740,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 345,
+        "scrollWidth": 345,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 375,
+      "height": 667,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 360,
+        "scrollWidth": 360,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 412,
+      "height": 915,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 397,
+        "scrollWidth": 397,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 430,
+      "height": 932,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 415,
+        "scrollWidth": 415,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 768,
+      "height": 1180,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 45,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 753,
+        "scrollWidth": 753,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 1024,
+      "height": 900,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 45,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 1009,
+        "scrollWidth": 1009,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 1200,
+      "height": 768,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 50,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1185,
+        "scrollWidth": 1185,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 1440,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 50,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1425,
+        "scrollWidth": 1425,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 1920,
+      "height": 1080,
+      "textScale": 1,
+      "issues": [],
+      "stats": {
+        "textBoxes": 50,
+        "targets": 31,
+        "images": 4,
+        "viewportWidth": 1905,
+        "scrollWidth": 1905,
+        "rootFont": "16px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "404.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 35,
+        "targets": 27,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "about.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 75,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concept-note.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 190,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "concierge.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 78,
+        "targets": 26,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "contact.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 49,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "corporate.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 86,
+        "targets": 27,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "cruises.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-africa.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-dubai.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 135,
+        "targets": 36,
+        "images": 12,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-europe.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 119,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-maldives.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 117,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-seychelles.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destination-zanzibar.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 118,
+        "targets": 36,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "destinations.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 130,
+        "targets": 35,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "index.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 267,
+        "targets": 43,
+        "images": 18,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "hero": {
+        "viewport": {
+          "cssWidth": 390,
+          "width": 375,
+          "height": 844,
+          "scrollX": 0,
+          "scrollY": 0,
+          "rootFont": 32
+        },
+        "counts": {
+          "outlineParts": 7,
+          "contentRects": 18,
+          "visiblePins": 0
+        },
+        "firstScreen": {
+          "checked": false,
+          "headline": true,
+          "buttons": [
+            {
+              "label": "a.btn.btn--gold \"Plan your escape\"",
+              "fits": true,
+              "height": 83
+            },
+            {
+              "label": "a.btn.btn--ghost \"Explore\"",
+              "fits": true,
+              "height": 83
+            }
+          ],
+          "tiles": [
+            {
+              "label": "a \"Maldives 7 nights FROM USD 2,950\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Seychelles 7 nights FROM USD 2,450\"",
+              "fits": true
+            },
+            {
+              "label": "a \"Dubai 4 nights FROM USD 1,250\"",
+              "fits": true
+            }
+          ],
+          "leopardHead": true,
+          "leopardPaws": true,
+          "eyeOnScreen": true
+        },
+        "pins": {
+          "ready": true,
+          "shown": []
+        }
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-choosing-your-maldives-island.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-how-a-journey-comes-together.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 56,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-questions-before-a-luxury-booking.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-what-a-private-safari-involves.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal-zanzibar-beyond-the-beach.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 57,
+        "targets": 28,
+        "images": 6,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journal.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 82,
+        "targets": 33,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-celebration-in-two-acts.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 93,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-executive-arrivals.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 95,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-family-in-the-wild.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 92,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-mediterranean-at-human-pace.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-private-island-reset.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 91,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey-safari-and-shore.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 94,
+        "targets": 29,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journey.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 67,
+        "targets": 35,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "journeys.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 96,
+        "targets": 38,
+        "images": 10,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "planner.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 64,
+        "targets": 34,
+        "images": 5,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "privacy.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 47,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "terms.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 48,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    },
+    {
+      "route": "travel-desk.html",
+      "width": 390,
+      "height": 844,
+      "textScale": 2,
+      "issues": [],
+      "stats": {
+        "textBoxes": 44,
+        "targets": 25,
+        "images": 4,
+        "viewportWidth": 375,
+        "scrollWidth": 375,
+        "rootFont": "32px"
+      },
+      "mode": "settled-layout"
+    }
+  ]
+}

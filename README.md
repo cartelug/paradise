@@ -2,7 +2,11 @@
 
 V31 is the launch release for **https://pardusescapes.com**: a new owner-approved leopard hero (a resting leopard in left profile with travel scenes woven into its coat), the four live mailboxes, an own-domain build and a ready-to-upload cPanel zip. See the V31 section at the top of [HANDOVER.md](HANDOVER.md).
 
-V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is gently alive and, since V30.4, calm: it breathes, sways a little and blinks slowly, and never glows, follows the visitor or reacts to a touch; gold pins on the skyline, villas and yacht show what each costs) and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
+The 23 October refinement fixes wrapping and card alignment across phones, tablets and desktops, and adds eight illustrative Dubai scenes. The complete card, live-text, SVG-symbol and asset plan is in [website/VISUAL_GENERATION_PLAN.md](website/VISUAL_GENERATION_PLAN.md); exact generation prompts and source dimensions accompany the photography masters. Current typography is **Archivo only**, as recorded in `CLAUDE.md`.
+
+The [23 October responsive QA report](website/RESPONSIVE_QA_2026-10-23.md) records 408 passing browser layout cases across all 33 routes, all six standard phone sizes, tablet/desktop widths, homepage breakpoints and doubled root-font size. These are CSS-viewport checks, not physical-device certification.
+
+V30 is the blue-hour redesign. It restored the V25 leopard hero and preloader and established the shared gradients, scroll-linked motion, full-screen mobile menu and SVG icon set. V31 replaced the layered hero with the approved single artwork; its only continuous motion is a calm, slow scale. Typography changed to Archivo on 23 October. There are no emoji anywhere on the site.
 
 **The preloader is permanent.** It must be present in every build. See [CLAUDE.md](CLAUDE.md) and `website/tests/preloader.test.mjs`, which fails the release if it is removed.
 

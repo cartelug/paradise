@@ -5,6 +5,9 @@ import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import OfferPrice from '../components/OfferPrice.astro';
 import OfferInclusions from '../components/OfferInclusions.astro';
 import Icon from '../components/Icon.astro';
+import Picture from '../components/Picture.astro';
+import DubaiDiscoveries from '../components/DubaiDiscoveries.astro';
+import { dubaiExperiencePhotos } from '../data/dubai-gallery';
 import { destinations } from '../data/destinations';
 import { offerFor, priceNote } from '../data/offers';
 import { path, absolute } from '../data/site';
@@ -52,10 +55,12 @@ const [fx, fy] = focus[d.slug] || ['55%', '50%'];
     <div class="wrap">
       <p class="eyebrow" data-reveal>The experiences</p>
       <h2 id="experiences-title" data-split>A stay worth <em>looking forward to.</em></h2>
-      <div class="exp-grid" data-stagger="120">{ideas[d.slug].map(idea => <article class="exp" data-reveal><span class="badge"><Icon name={idea.icon} /></span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}</div>
+      <div class:list={['exp-grid', { 'exp-grid--photographic': d.slug === 'dubai' }]} data-stagger="120">{ideas[d.slug].map((idea, i) => <article class="exp" data-reveal>{d.slug === 'dubai' && <div class="frame dubai-experience-image"><Picture name={dubaiExperiencePhotos[i].image} alt={dubaiExperiencePhotos[i].alt} sizes="(max-width: 900px) 100vw, 33vw" /></div>}<span class="badge"><Icon name={idea.icon} /></span><h3>{idea.title}</h3><p>{idea.text}</p></article>)}</div>
       {d.slug === 'dubai' && <p class="note">Planning around an event? <a href="https://www.visitdubai.com/articles/events-to-look-forward-to-this-season" target="_blank" rel="noopener noreferrer">See the current winter calendar at Visit Dubai</a></p>}
     </div>
   </section>
+
+  {d.slug === 'dubai' && <DubaiDiscoveries />}
 
   <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="details-title">
     <div class="wrap">
@@ -76,3 +81,7 @@ const [fx, fy] = focus[d.slug] || ['55%', '50%'];
     </div>
   </section>
 </Layout>
+<style>
+  .exp-grid--photographic .exp { min-width: 0; }
+  .dubai-experience-image { aspect-ratio: 3 / 2; margin-bottom: 24px; }
+</style>

@@ -1,0 +1,292 @@
+<!-- Internal QA fixture: temporarily copy to website/public/__qa/responsive.html to use through the managed preview. Remove public/__qa before every build. Normal zoom checks use actual iframe CSS viewports; root-font200% is not true browser zoom. -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Pardus internal responsive QA</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf1f5;color:#172536;font:14px/1.45 system-ui,sans-serif}header{padding:14px 20px;background:#102139;color:#fff}h1{font-size:20px;margin:0 0 4px}p{margin:4px 0}form{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding:14px 20px;background:#fff;border-bottom:1px solid #ccd5df}label{display:grid;gap:4px}select,button{font:inherit;min-height:36px;border:1px solid #aab9ca;border-radius:5px;padding:6px 10px;background:#fff;color:#12243b}button{cursor:pointer;background:#183e65;color:#fff}button:disabled{opacity:.45;cursor:default}.check{display:flex;align-items:center;gap:6px;min-height:36px}.check input{width:18px;height:18px}#qa-status,#qa-summary{padding:8px 20px;background:#fff;border-bottom:1px solid #ccd5df;overflow-wrap:anywhere}#qa-summary{font-weight:600}main{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,36%);gap:14px;padding:14px}#qa-preview{overflow:auto;min-width:0;background:#c9d3df;padding:8px}#qa-stage{position:relative;margin:0 auto}iframe{display:block;border:0;background:#fff;transform-origin:top left}#qa-report{max-height:76vh;overflow:auto;background:#fff;border:1px solid #c4d0dd;padding:10px}details{padding:6px 2px;border-bottom:1px solid #e1e6ec}summary{cursor:pointer;overflow-wrap:anywhere}.pass{color:#215835}.fail{color:#9a2632}pre{white-space:pre-wrap;word-break:break-word;font:12px/1.5 ui-monospace,monospace}#qa-data{display:none}#qa-scale-label{padding:5px 0;font-size:12px}@media(max-width:800px){main{grid-template-columns:1fr}#qa-report{max-height:55vh}}
+</style>
+</head>
+<body>
+<header><h1>Pardus internal responsive QA</h1><p>Settled-layout geometry at 100% page zoom: reveals and arrivals are held at their final visible state. Animation behavior needs a separate check. Preview fitting changes only the outer display, never the iframe layout. These are browser checks, not real-device certification.</p></header>
+<form id="qa-controls">
+<label>Route<select id="qa-route"></select></label>
+<label>CSS width<select id="qa-width"></select></label>
+<label>CSS height<select id="qa-height"><option>568</option><option>640</option><option>667</option><option>740</option><option selected>844</option><option>900</option><option>932</option><option>1024</option><option>1180</option><option>1366</option></select></label>
+<label>Matrix widths<input id="qa-widths" value="320,390,768,1024,1200,1440,1920" aria-label="Matrix widths" style="font:inherit;padding:8px;width:290px"></label>
+<label>Text size<select id="qa-text"><option value="1">100%</option><option value="2">200% root font (not true zoom)</option></select></label>
+<label class="check"><input type="checkbox" id="qa-all-routes">Matrix: all routes</label>
+<label class="check"><input type="checkbox" id="qa-overlays" checked>Check menu and saved trips</label>
+<button id="qa-check" type="button">Check current</button><button id="qa-matrix" type="button">Run matrix</button><button id="qa-stop" type="button" disabled>Stop</button><button id="qa-clear" type="button">Clear report</button>
+</form>
+<div id="qa-status" role="status">Ready. Run matrix checks the selected route at every listed width; select “all routes” for the full route matrix.</div>
+<div id="qa-summary">0 runs completed.</div>
+<main><section id="qa-preview"><p id="qa-scale-label"></p><div id="qa-stage"><iframe id="qa-frame" title="Pardus test viewport"></iframe></div></section><section id="qa-report" aria-label="QA results"></section></main>
+<script type="application/json" id="qa-data">[]</script>
+<script>
+/**
+ * Read-only hero geometry probe for a same-origin Document. No styles, state,
+ * animation data, focus, scroll or DOM content are changed. Call after fonts,
+ * arrival motion and data-spots="ready" have settled; animation/interaction
+ * behavior still requires separate temporal checks.
+ *
+ * Usage: pardusHeroGeometry(iframe.contentDocument)
+ * Options: outlineClearance (10px), pinClearance (0px), breathEnvelope (true),
+ * phoneFirstScreen ("standard" | true | false), expectedPins (true),
+ * verifyMotion (false; useful on the unmodified, live page only).
+ * A non-home page returns applicable:false, not a false pass.
+ */
+function pardusHeroGeometry(doc = document, options = {}) {
+  const hero = doc.querySelector('[data-hero]');
+  if (!hero) return { applicable: false, issues: [], notes: ['No homepage hero on this route.'] };
+  const win = doc.defaultView;
+  if (!win) return { applicable: true, issues: [{ type: 'document', note: 'No document window.' }], notes: [] };
+  const opts = { outlineClearance: 10, pinClearance: 0, breathEnvelope: true, phoneFirstScreen: 'standard', expectedPins: true, verifyMotion: false, ...options };
+  const issues = [], notes = [], seen = new Set();
+  // CSS media queries use innerWidth, including a classic scrollbar; content
+  // bounds use clientWidth. Keep them separate at narrow breakpoint edges.
+  const viewport = { cssWidth: win.innerWidth, width: doc.documentElement.clientWidth, height: win.innerHeight, scrollX: win.scrollX, scrollY: win.scrollY, rootFont: parseFloat(win.getComputedStyle(doc.documentElement).fontSize) };
+  const readRect = node => {
+    const r = node.getBoundingClientRect();
+    return { l: r.left, t: r.top, r: r.right, b: r.bottom, width: r.width, height: r.height };
+  };
+  const add = (type, element, note, extra = {}) => {
+    const key = type + '|' + element + '|' + note;
+    if (!seen.has(key)) { seen.add(key); issues.push({ type, element, note, ...extra }); }
+  };
+  const name = el => el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (el.classList.length ? '.' + [...el.classList].slice(0, 2).join('.') : '') + ' ' + JSON.stringify((el.innerText || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 60));
+  const visible = (el, ignoreOpacity = false) => {
+    if (!el || el.closest('[hidden],.visually-hidden,.sr-only,dialog:not([open])')) return false;
+    for (let p = el; p && p !== doc.documentElement; p = p.parentElement) {
+      const s = win.getComputedStyle(p);
+      if (s.display === 'none' || s.visibility === 'hidden' || (!ignoreOpacity && Number(s.opacity) === 0)) return false;
+    }
+    const r = el.getBoundingClientRect();
+    return r.width > 1 && r.height > 1;
+  };
+  const meets = (a, b, pad = 0) => a.l < b.r + pad && a.r > b.l - pad && a.t < b.b + pad && a.b > b.t - pad;
+  const inside = (a, b, tolerance = 1) => a.l >= b.l - tolerance && a.r <= b.r + tolerance && a.t >= b.t - tolerance && a.b <= b.b + tolerance;
+  const onScreen = r => inside(r, { l: 0, t: 0, r: viewport.width, b: viewport.height });
+  const picture = hero.querySelector('.hero-picture');
+  const art = hero.querySelector('[data-hero-art]');
+  const image = hero.querySelector('[data-hero-image]');
+  const copy = hero.querySelector('[data-hero-copy]');
+  const rail = hero.querySelector('[data-hero-rail]');
+  const missing = [['art', art], ['picture', picture], ['image', image], ['copy', copy], ['rail', rail]].filter(([, element]) => !element).map(([label]) => label);
+  if (missing.length) return { applicable: true, viewport, issues: [{ type: 'missing-hero-markup', element: '[data-hero]', note: missing.join(', ') }], notes };
+
+  // Outline elements are intentionally visibility:hidden; their geometry is the
+  // approved measurement data, and must not be filtered like visible content.
+  const parts = [...hero.querySelectorAll('[data-leopard-box]')].map(el => ({ part: el.dataset.leopardBox, keep: el.dataset.keep === 'true', rect: readRect(el) }));
+  const requiredParts = ['jet', 'flight', 'head', 'chest', 'paw', 'paws', 'back'];
+  for (const part of requiredParts) if (!parts.some(p => p.part === part)) add('missing-outline', part, 'Approved outline rectangle is absent.');
+
+  const artRect = readRect(art), imageRect = readRect(image), pictureRect = readRect(picture);
+  const style = win.getComputedStyle(image);
+  const nativeRatio = image.naturalHeight ? image.naturalWidth / image.naturalHeight : null;
+  const frameRatio = artRect.height ? artRect.width / artRect.height : null;
+  const expectedRatio = viewport.cssWidth <= 760 ? 2 / 3 : 3 / 2;
+  const ratioTolerance = 0.006;
+  if (!image.complete || !image.naturalWidth) add('hero-image', '[data-hero-image]', 'Approved artwork is not decoded and loaded.');
+  if (nativeRatio && Math.abs(nativeRatio - expectedRatio) > ratioTolerance) add('art-direction', '[data-hero-image]', `Source ratio ${nativeRatio.toFixed(4)} differs from expected ${expectedRatio.toFixed(4)}.`, { currentSrc: image.currentSrc });
+  if (frameRatio && nativeRatio && Math.abs(frameRatio - nativeRatio) > ratioTolerance) add('artwork-crop', '[data-hero-art]', `Frame ratio ${frameRatio.toFixed(4)} differs from native ratio ${nativeRatio.toFixed(4)}.`);
+  if (!inside(pictureRect, artRect, 2) || Math.abs(pictureRect.width - artRect.width) > 2 || Math.abs(pictureRect.height - artRect.height) > 2) add('picture-frame', '.hero-picture', 'Picture layout box does not match its artwork frame.');
+  for (const part of parts) if (!inside(part.rect, artRect, 2)) add('outline-frame', part.part, 'Approved outline rectangle leaves the artwork frame.');
+
+  // Map measured, resting outline coordinates onto the currently transformed
+  // image. The allowed motion is scale only; no animation state is mutated.
+  const scalePart = (part, imageBox) => {
+    const sx = imageBox.width / artRect.width, sy = imageBox.height / artRect.height;
+    return { l: imageBox.l + (part.rect.l - artRect.l) * sx, t: imageBox.t + (part.rect.t - artRect.t) * sy,
+      r: imageBox.l + (part.rect.r - artRect.l) * sx, b: imageBox.t + (part.rect.b - artRect.t) * sy };
+  };
+  const origin = style.transformOrigin.split(/\s+/).map(parseFloat);
+  const ox = Number.isFinite(origin[0]) ? origin[0] : artRect.width * .5;
+  const oy = Number.isFinite(origin[1]) ? origin[1] : artRect.height * .5;
+  const fullBreath = { l: artRect.l - ox * .03, t: artRect.t - oy * .03, r: artRect.r + (artRect.width - ox) * .03, b: artRect.b + (artRect.height - oy) * .03, width: artRect.width * 1.03, height: artRect.height * 1.03 };
+  const poses = [
+    { name: 'rest', parts: parts.map(part => ({ ...part, rect: part.rect })) },
+    { name: 'current-image', parts: parts.map(part => ({ ...part, rect: scalePart(part, imageRect) })) },
+    ...(opts.breathEnvelope ? [{ name: 'maximum-1.03-breath', parts: parts.map(part => ({ ...part, rect: scalePart(part, fullBreath) })) }] : []),
+  ];
+  for (const pose of poses) for (const part of pose.parts.filter(p => p.keep)) {
+    if (!inside(part.rect, artRect, 1.5)) add('protected-artwork-crop', part.part, `Protected artwork leaves its frame at ${pose.name}.`);
+  }
+
+  const content = [];
+  const range = doc.createRange(), walker = doc.createTreeWalker(copy, win.NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.textContent.trim() || !visible(node.parentElement)) continue;
+    range.selectNodeContents(node);
+    for (const r of range.getClientRects()) if (r.width > 1) content.push({ label: 'hero text ' + JSON.stringify(node.textContent.trim().slice(0, 45)), kind: 'text', rect: { l: r.left, t: r.top, r: r.right, b: r.bottom } });
+  }
+  for (const el of copy.querySelectorAll('.btn,button')) if (visible(el)) content.push({ label: name(el), kind: 'button', rect: readRect(el) });
+  if (visible(rail)) content.push({ label: 'hero price rail', kind: 'rail', rect: readRect(rail) });
+  for (const el of doc.querySelectorAll('.site-header .brand-link,.site-header .desktop-nav a,.site-header .header-tools > *')) if (visible(el)) content.push({ label: name(el), kind: 'header', rect: readRect(el) });
+  for (const item of content) for (const pose of poses) for (const part of pose.parts) {
+    if (meets(item.rect, part.rect, opts.outlineClearance)) add('content-leopard-collision', item.label, `${pose.name}: within ${opts.outlineClearance}px of ${part.part}.`, { part: part.part, pose: pose.name });
+  }
+
+  const pinsReady = hero.dataset.spots === 'ready';
+  const spots = [...hero.querySelectorAll('.spot')].filter(el => visible(el, true)).map(el => ({ key: el.dataset.spot, href: el.getAttribute('href') || '', side: el.dataset.place || null, rect: readRect(el), label: el.querySelector('.spot-label') ? readRect(el.querySelector('.spot-label')) : null }));
+  if (!pinsReady) notes.push('Pin placement has not reached data-spots="ready"; wait before treating pin results as final.');
+  const placed = [], heroRect = readRect(hero);
+  for (const spot of spots) {
+    if (!spot.label) add('missing-pin-label', spot.key, 'Pin has no label.');
+    const boxes = [{ label: spot.key + ' pin', rect: spot.rect }, ...(spot.label ? [{ label: spot.key + ' label', rect: spot.label }] : [])];
+    for (const box of boxes) {
+      for (const item of content) if (meets(box.rect, item.rect, opts.pinClearance)) add('pin-content-collision', box.label, `Touches ${item.label}.`);
+      for (const pose of poses) for (const part of pose.parts.filter(p => p.keep)) if (meets(box.rect, part.rect, opts.outlineClearance)) add('pin-protected-collision', box.label, `${pose.name}: within ${opts.outlineClearance}px of ${part.part}.`, { part: part.part, pose: pose.name });
+      for (const other of placed) if (meets(box.rect, other.rect, opts.pinClearance)) add('pin-pin-collision', box.label, 'Touches ' + other.label + '.');
+      if (box.rect.l < -1 || box.rect.r > viewport.width + 1) add('pin-viewport', box.label, 'Leaves the screen horizontally.');
+      if (!inside(box.rect, heroRect)) add('pin-hero-frame', box.label, 'Leaves the hero frame.');
+    }
+    placed.push(...boxes);
+    const expected = { maldives: 'destination-maldives.html', dubai: 'destination-dubai.html', yacht: 'cruises.html' }[spot.key];
+    const actual = spot.href.split(/[?#]/)[0].split('/').pop();
+    if (!expected || actual !== expected) add('pin-link', spot.key, 'Unexpected destination: ' + spot.href);
+    if (spot.rect.width < 43.5 || spot.rect.height < 43.5) add('pin-target', spot.key, 'Pin target is smaller than 44 × 44px.');
+  }
+  if (opts.expectedPins && pinsReady && viewport.rootFont <= 16.1) {
+    if ((viewport.cssWidth === 1440 && viewport.height === 900) || (viewport.cssWidth === 1920 && viewport.height === 1080)) {
+      for (const key of ['maldives', 'dubai', 'yacht']) if (!spots.some(s => s.key === key)) add('expected-pin', key, 'Common desktop viewport should show this pin.');
+    }
+    if (viewport.cssWidth === 390 && viewport.height === 844 && !spots.some(s => s.key === 'maldives')) add('expected-pin', 'maldives', 'Flagship phone viewport should show the Maldives pin.');
+  }
+
+  const h1 = hero.querySelector('h1');
+  const buttons = [...hero.querySelectorAll('.actions .btn')].filter(el => visible(el));
+  const tiles = [...hero.querySelectorAll('.hero-offers a')].filter(el => visible(el));
+  const head = poses[1].parts.find(p => p.part === 'head');
+  const paws = poses[1].parts.find(p => p.part === 'paws');
+  const firstScreen = {
+    headline: h1 ? onScreen(readRect(h1)) : false,
+    buttons: buttons.map(el => ({ label: name(el), fits: onScreen(readRect(el)), height: readRect(el).height })),
+    tiles: tiles.map(el => ({ label: name(el), fits: onScreen(readRect(el)) })),
+    leopardHead: head ? onScreen(head.rect) : false,
+    leopardPaws: paws ? paws.rect.b <= viewport.height + 1 : false,
+    eyeOnScreen: head ? head.rect.t + (head.rect.b - head.rect.t) * .45 > 0 && head.rect.t + (head.rect.b - head.rect.t) * .45 < viewport.height : false,
+  };
+  const standardPhone = viewport.cssWidth <= 430 && viewport.height >= 800 && viewport.rootFont <= 16.1;
+  const checkPhone = opts.phoneFirstScreen === true ? viewport.cssWidth <= 760 : opts.phoneFirstScreen === 'standard' && standardPhone;
+  if (checkPhone) {
+    if (!firstScreen.headline) add('phone-first-screen', 'headline', 'Headline is not entirely on the first screen.');
+    if (!firstScreen.leopardHead || !firstScreen.leopardPaws) add('phone-first-screen', 'leopard', 'Head and paws are not entirely on the first screen.');
+    if (tiles.length !== 3) add('phone-first-screen', 'price tiles', `Expected three visible tiles; found ${tiles.length}.`);
+    if (buttons.length !== 2) add('phone-first-screen', 'hero actions', `Expected two visible actions; found ${buttons.length}.`);
+    for (const item of [...firstScreen.buttons, ...firstScreen.tiles]) if (!item.fits) add('phone-first-screen', item.label, 'Control is not entirely on the first screen.');
+    for (const item of firstScreen.buttons) if (item.height >= 70) add('phone-action-height', item.label, 'Action is at least 70px high.');
+  }
+
+  const animations = typeof image.getAnimations === 'function' ? image.getAnimations().map(animation => ({ name: animation.animationName || null, playState: animation.playState, duration: animation.effect?.getTiming().duration, direction: animation.effect?.getTiming().direction, frames: animation.effect?.getKeyframes().map(frame => frame.transform) })) : [];
+  const life = { state: hero.dataset.life || null, imageTransform: style.transform, artworkTransform: win.getComputedStyle(art).transform, pictureTransform: win.getComputedStyle(picture).transform, animationName: style.animationName, animationPlayState: style.animationPlayState, animations, qaMotionOverride: !!doc.querySelector('style[data-qa-freeze]') };
+  const forbidden = [...hero.querySelectorAll('.hl-glow,.hl-glows,.hl-eyes,.hl-rim,.hl-motes,.hl-leopard,.hero-glow')].map(name);
+  if (forbidden.length) add('forbidden-hero-layers', '[data-hero]', forbidden.join(', '));
+  if (opts.verifyMotion && !life.qaMotionOverride) {
+    if (life.artworkTransform !== 'none' || life.pictureTransform !== 'none') add('unexpected-artwork-transform', '[data-hero-art]', 'Only the image itself may carry the calm breathing scale.');
+    if (life.state === 'running') {
+      const breath = animations.find(a => a.name === 'hero-breathe');
+      if (!breath) add('breathing-animation', '[data-hero-image]', 'Running hero has no hero-breathe animation.');
+      else if (breath.duration < 16000 || breath.duration > 24000 || breath.direction !== 'alternate' || JSON.stringify(breath.frames) !== JSON.stringify(['scale(1)', 'scale(1.03)'])) add('breathing-animation', '[data-hero-image]', 'Breath does not match the approved slow 1.00–1.03 alternate scale.');
+    }
+    if (life.state === 'still' && life.animationName !== 'none') add('still-animation', '[data-hero-image]', 'Still/reduced-motion hero retains an animation.');
+  } else if (opts.verifyMotion && life.qaMotionOverride) notes.push('Motion assertions skipped: settled-layout QA overrides are installed.');
+  notes.push('Single read-only snapshot: pointer, touch, Pause scene, visibility changes and reduced-motion transitions are not exercised.');
+  return { applicable: true, viewport, issues, notes, artwork: { currentSrc: image.currentSrc, nativeWidth: image.naturalWidth, nativeHeight: image.naturalHeight, nativeRatio, frameRatio, expectedRatio, frame: artRect, picture: pictureRect, image: imageRect, parts, poses: poses.map(pose => pose.name) }, pins: { ready: pinsReady, shown: spots.map(spot => spot.key), spots }, firstScreen: { checked: checkPhone, ...firstScreen }, life, counts: { outlineParts: parts.length, contentRects: content.length, visiblePins: spots.length } };
+}
+
+const ROUTES = ["404.html","about.html","concept-note.html","concierge.html","contact.html","corporate.html","cruises.html","destination-africa.html","destination-dubai.html","destination-europe.html","destination-maldives.html","destination-seychelles.html","destination-zanzibar.html","destinations.html","index.html","journal-choosing-your-maldives-island.html","journal-how-a-journey-comes-together.html","journal-questions-before-a-luxury-booking.html","journal-what-a-private-safari-involves.html","journal-zanzibar-beyond-the-beach.html","journal.html","journey-celebration-in-two-acts.html","journey-executive-arrivals.html","journey-family-in-the-wild.html","journey-mediterranean-at-human-pace.html","journey-private-island-reset.html","journey-safari-and-shore.html","journey.html","journeys.html","planner.html","privacy.html","terms.html","travel-desk.html"];
+const WIDTHS=[320,360,375,390,412,430,640,760,761,768,820,960,1023,1024,1199,1200,1280,1366,1440,1920];
+const $=id=>document.getElementById(id),frame=$('qa-frame');
+window.qaResults=[];let busy=false,stopped=false;
+for(const route of ROUTES)$('qa-route').add(new Option(route,route,route==='index.html',route==='index.html'));
+for(const width of WIDTHS)$('qa-width').add(new Option(String(width),String(width),width===390,width===390));
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+const heightFor=w=>w<=430?(w===320?640:w===360?740:w===375?667:w===412?915:w===430?932:844):w<=820?1180:w<=1024?900:w<=1366?768:1080;
+function syncData(){const data=JSON.stringify(window.qaResults);$('qa-data').textContent=data;document.body.dataset.qaRuns=String(window.qaResults.length);document.body.dataset.qaFailures=String(window.qaResults.filter(r=>r.issues.length).length);const issues=window.qaResults.reduce((n,r)=>n+r.issues.length,0);$('qa-summary').textContent=`${window.qaResults.length} runs completed; ${window.qaResults.filter(r=>r.issues.length).length} runs with findings; ${issues} findings. Results: #qa-data JSON and window.qaResults.`;}
+function fitPreview(width,height){const scale=Math.min(1,Math.max(250,$('qa-preview').clientWidth-16)/width);frame.style.width=width+'px';frame.style.height=height+'px';frame.style.transform=`scale(${scale})`;$('qa-stage').style.width=(width*scale)+'px';$('qa-stage').style.height=(height*scale)+'px';$('qa-scale-label').textContent=`Actual layout: ${width} × ${height} CSS px; page zoom 100%; outer preview display ${(scale*100).toFixed(1)}%.`;}
+async function waitUntil(test,timeout,description){const start=performance.now();while(performance.now()-start<timeout){if(test())return;await delay(60);}throw Error(description+' timed out');}
+async function load(route,width,height,textScale){
+  fitPreview(width,height);sessionStorage.setItem('pardus-intro-v30','seen');
+  const loaded=new Promise((resolve,reject)=>{const timeout=setTimeout(()=>reject(Error('Iframe navigation timed out')),20000);frame.onload=()=>{clearTimeout(timeout);resolve();};});
+  frame.src=new URL('../../'+route,location.href).href;await loaded;
+  const win=frame.contentWindow,doc=frame.contentDocument;if(!doc?.querySelector('body[data-pardus-version] main')){stopped=true;throw Error('Preview project mismatch: stopped to avoid testing another website. '+frame.src);}
+  doc.documentElement.style.fontSize=(textScale*100)+'%';
+  // No CSS zoom is applied inside the test page.
+  await Promise.race([doc.fonts?.ready||Promise.resolve(),delay(6000)]);
+  await waitUntil(()=>!doc.documentElement.classList.contains('intro-active'),10000,'Preloader');
+  const liveHero=doc.querySelector('[data-hero-life]');if(liveHero)await waitUntil(()=>liveHero.dataset.spots==='ready',7000,'Hero pin placement');
+  // Traverse the real scrollable page to let its existing reveal logic run.
+  let y=0;for(let i=0;i<90;i++){win.scrollTo({top:y,behavior:'instant'});await delay(45);const end=Math.max(0,doc.documentElement.scrollHeight-height);if(y>=end)break;y=Math.min(end,y+Math.max(240,height*.8));}
+  await delay(180);win.scrollTo({top:0,behavior:'instant'});await delay(450);
+  // This harness measures final layout, not animation frames. A paused animation
+  // can leave an unseen reveal at its starting transform and create false clips.
+  // Override only motion/visibility on known arrivals, without changing layout.
+  const style=doc.createElement('style');style.dataset.qaFreeze='true';style.textContent=`
+    html{scroll-behavior:auto!important}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    [data-reveal]{opacity:1!important;transform:none!important}
+    [data-split] .w>span,.hero .line>span{transform:none!important;animation:none!important}
+    html.js .hero .eyebrow,html.js .hero-text,html.js .hero .actions,html.js .hero-rail,
+    html.js .page-hero .eyebrow,html.js .page-hero h1,html.js .page-hero .lead,
+    html.js .page-hero .actions,html.js .page-hero .breadcrumb,
+    .menu[open] .menu-nav a,.menu[open] .menu-more,.menu[open] .menu-foot,
+    .menu[open] .menu-kicker,.folio-panel[open],
+    .scene[data-state='active'] .scene-panel>*{opacity:1!important;transform:none!important}
+  `;doc.head.append(style);
+  win.scrollTo({top:0,behavior:'instant'});
+  await new Promise(resolve=>win.requestAnimationFrame(()=>win.requestAnimationFrame(resolve)));
+  return{win,doc};
+}
+function measure(win,doc,scope=doc,state='page'){
+  const issues=[],seen=new Set(),vw=doc.documentElement.clientWidth;
+  const add=(type,el,note)=>{const label=typeof el==='string'?el:describe(el);const key=state+'|'+type+'|'+label+'|'+note;if(!seen.has(key)){seen.add(key);issues.push({state,type,element:label,note});}};
+  const describe=el=>el.tagName.toLowerCase()+(el.id?'#'+el.id:'')+(el.classList.length?'.'+[...el.classList].slice(0,3).join('.'):'')+' '+JSON.stringify((el.innerText||el.value||el.getAttribute('aria-label')||'').trim().replace(/\s+/g,' ').slice(0,72));
+  function visible(el){if(!el||el.closest('[hidden],.visually-hidden,.sr-only,.skip-link,.intro,dialog:not([open])'))return false;for(let p=el;p&&p!==doc.documentElement;p=p.parentElement){const s=win.getComputedStyle(p);if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return false;}const r=el.getBoundingClientRect();return r.width>1&&r.height>1;}
+  const selector='h1,h2,h3,h4,h5,h6,p,li,dt,dd,.btn,button,a,label,.w,input,select,textarea,summary,[class*="tile"],[class*="card"],[class*="chip"],.spot-label,.price';
+  const elements=[...scope.querySelectorAll(selector)].filter(visible);
+  for(const el of elements){const box=el.getBoundingClientRect(),cs=win.getComputedStyle(el);
+    if(box.left < -2||box.right>vw+2){let scrollAncestor=false;for(let p=el.parentElement;p&&p!==doc.body;p=p.parentElement){const s=win.getComputedStyle(p);if(['auto','scroll'].includes(s.overflowX)&&p.scrollWidth>p.clientWidth+1){scrollAncestor=true;break;}}if(!scrollAncestor)add('outside-viewport',el,`${Math.round(box.left)}…${Math.round(box.right)} of ${vw}px`);}
+    if(el.matches('.btn,button'))for(const icon of el.querySelectorAll('svg')){if(!visible(icon))continue;const r=icon.getBoundingClientRect();if(r.left<box.left-2||r.right>box.right+2||r.top<box.top-2||r.bottom>box.bottom+2)add('arrow-outside-action',el,'SVG extends beyond action bounds');}
+    if(el.matches('input,select,textarea')){if(el.scrollWidth>el.clientWidth+3&&!el.matches('input,textarea'))add('control-overflow',el,'Native control content exceeds its width');continue;}
+    const walker=doc.createTreeWalker(el,win.NodeFilter.SHOW_TEXT);
+    for(let text=walker.nextNode();text;text=walker.nextNode()){
+      if(!text.textContent.trim()||!visible(text.parentElement))continue;
+      // Each text node belongs to its closest meaningful text/action box.
+      if(text.parentElement.closest(selector)!==el)continue;
+      const range=doc.createRange();range.selectNodeContents(text);
+      for(const r of range.getClientRects()){
+        if(r.width<1)continue;
+        if(r.left<box.left-3||r.right>box.right+3||r.top<box.top-4||r.bottom>box.bottom+4)add('text-outside-local-box',el,`text ${Math.round(r.left)}…${Math.round(r.right)} × ${Math.round(r.top)}…${Math.round(r.bottom)}; box ${Math.round(box.left)}…${Math.round(box.right)} × ${Math.round(box.top)}…${Math.round(box.bottom)}`);
+        // Hidden/clip ancestors are not an excuse. Detect masked text against local frames.
+        let scrollY=false;for(let p=text.parentElement;p&&p!==doc.documentElement;p=p.parentElement){const s=win.getComputedStyle(p),b=p.getBoundingClientRect(),isBody=p===doc.body;if(['auto','scroll'].includes(s.overflowY)&&p.scrollHeight>p.clientHeight+1)scrollY=true;
+          const clipX=['hidden','clip'].includes(s.overflowX),clipY=['hidden','clip'].includes(s.overflowY);
+          if(clipX&&(r.left<(isBody?0:b.left)-3||r.right>(isBody?vw:b.right)+3))add('clipped-text-x',el,'Text exceeds '+(isBody?'viewport':describe(p)));
+          if(!isBody&&!scrollY&&clipY&&(r.top<b.top-4||r.bottom>b.bottom+4))add('clipped-text-y',el,'Text exceeds '+describe(p));
+        }
+      }
+    }
+    // A min-width:0 failure can clip nested text even when its own child range fits.
+    if(!el.querySelector('img,picture,svg')&&cs.overflowX==='hidden'&&el.scrollWidth>el.clientWidth+3&&el.textContent.trim())add('hidden-local-overflow',el,`${el.scrollWidth}px content in ${el.clientWidth}px box`);
+  }
+  const targets=[...scope.querySelectorAll('button,.btn,input:not([type="hidden"]),select,textarea,summary,[role="tab"],.site-header a,.menu a,.site-footer a,.folio-panel a')].filter(visible);
+  for(const el of targets){if(el.matches('input[type="checkbox"],input[type="radio"]'))continue;const r=el.getBoundingClientRect();if(r.width<43.5||r.height<43.5)add('small-target',el,`${Math.round(r.width)} × ${Math.round(r.height)}px`);}
+  if(state==='page'&&doc.documentElement.scrollWidth>vw+1)add('page-width','document',`${doc.documentElement.scrollWidth}px > ${vw}px`);
+  for(const img of scope.querySelectorAll('img'))if(visible(img)&&img.complete&&!img.naturalWidth)add('broken-image',img,img.currentSrc||img.src);
+  return{issues,stats:{textBoxes:elements.length,targets:targets.length,images:scope.querySelectorAll('img').length,viewportWidth:vw,scrollWidth:doc.documentElement.scrollWidth,rootFont:win.getComputedStyle(doc.documentElement).fontSize}};
+}
+async function overlays(win,doc){const results=[];for(const item of[{name:'menu',trigger:'.menu-toggle',dialog:'#mobile-menu',close:'.menu-close'},{name:'saved-trips',trigger:'.header-saved',dialog:'#pardus-folio',close:'[data-folio-close]'}]){const trigger=doc.querySelector(item.trigger),panel=doc.querySelector(item.dialog);if(!trigger||!panel||trigger.getBoundingClientRect().width<1)continue;
+    trigger.click();await waitUntil(()=>panel.open,1500,item.name+' open');await delay(350);const out=measure(win,doc,panel,item.name);results.push(...out.issues);
+    // Include content near the end of a legitimately scrollable overlay too.
+    const scrollers=[panel,...panel.querySelectorAll('*')].filter(el=>el.scrollHeight>el.clientHeight+5&&['auto','scroll'].includes(win.getComputedStyle(el).overflowY));for(const el of scrollers)el.scrollTop=el.scrollHeight;await delay(50);results.push(...measure(win,doc,panel,item.name+'-scrolled').issues);
+    const close=panel.querySelector(item.close);if(!close)throw Error(item.name+' has no real close button');close.click();await waitUntil(()=>!panel.open,1500,item.name+' close');
+  }return results;}
+function record(result){result.mode='settled-layout';window.qaResults.push(result);const details=document.createElement('details'),summary=document.createElement('summary');summary.className=result.issues.length?'fail':'pass';summary.textContent=`${result.issues.length?'FINDINGS':'PASS'} ${result.route} · ${result.width} × ${result.height} · text ${result.textScale*100}% · settled layout · ${result.issues.length} findings`;details.append(summary);if(result.issues.length){const pre=document.createElement('pre');pre.textContent=result.issues.map(i=>`[${i.state}] ${i.type}: ${i.element}\n${i.note}`).join('\n\n');details.append(pre);}details.dataset.route=result.route;details.dataset.width=String(result.width);details.dataset.findings=String(result.issues.length);$('qa-report').append(details);syncData();}
+async function run(matrix){if(busy)return;busy=true;stopped=false;for(const id of['qa-check','qa-matrix','qa-clear'])$(id).disabled=true;$('qa-stop').disabled=false;const route=$('qa-route').value,textScale=Number($('qa-text').value),routes=matrix&&$('qa-all-routes').checked?ROUTES:[route],widths=matrix?$('qa-widths').value.split(',').map(Number).filter(w=>w>=240&&w<=2560):[Number($('qa-width').value)];let index=0;try{for(const r of routes){for(const width of widths){if(stopped)break;const height=matrix?heightFor(width):Number($('qa-height').value);$('qa-status').textContent=`Running ${++index}/${routes.length*widths.length}: ${r} at ${width} × ${height}, ${textScale*100}% root font`;const result={route:r,width,height,textScale,issues:[],stats:{}};try{const{win,doc}=await load(r,width,height,textScale);Object.assign(result,measure(win,doc));const hg=pardusHeroGeometry(doc);if(hg.applicable){result.hero={viewport:hg.viewport,counts:hg.counts,firstScreen:hg.firstScreen,pins:{ready:hg.pins?.ready,shown:hg.pins?.shown}};result.issues.push(...hg.issues.map(i=>({state:'hero',...i})));}if($('qa-overlays').checked&&(!matrix||r==='index.html'))result.issues.push(...await overlays(win,doc));}catch(error){result.issues.push({state:'harness',type:'error',element:r,note:String(error)});}result.issues=result.issues.filter((issue,i,all)=>all.findIndex(j=>JSON.stringify(j)===JSON.stringify(issue))===i);record(result);}if(stopped)break;}}finally{busy=false;for(const id of['qa-check','qa-matrix','qa-clear'])$(id).disabled=false;$('qa-stop').disabled=true;$('qa-status').textContent=stopped?'Stopped after current run. Partial results retained.':'Completed. Inspect findings and confirm any geometry finding visually before treating it as a defect.';}}
+$('qa-check').onclick=()=>run(false);$('qa-matrix').onclick=()=>run(true);$('qa-stop').onclick=()=>{stopped=true;$('qa-status').textContent='Stopping after current run…';};$('qa-clear').onclick=()=>{window.qaResults=[];$('qa-report').replaceChildren();syncData();};window.qaRun=run;window.qaMeasure=()=>measure(frame.contentWindow,frame.contentDocument);window.addEventListener('resize',()=>fitPreview(Number($('qa-width').value),Number($('qa-height').value)));
+</script>
+</body>
+</html>

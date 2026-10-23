@@ -114,7 +114,7 @@ export const destinations: Destination[] = [
     title: 'A city of possibilities.', subtitle: 'A different view of Dubai.',
     description: 'Distinctive stays, late dinners and a little space beyond the skyline.',
     ...photo('dubai', { image: 'dubai-v24', alt: 'Dubai Marina towers and city lights beneath a golden dusk sky' }),
-    caption: 'Golden hour / Dubai Marina', mood: 'A city break with your name on it.',
+    caption: 'Blue hour / An illustrative Dubai waterfront', mood: 'A city break with your name on it.',
     place: 'City', pace: 'Balanced', reasons: ['Escape', 'Celebration', 'Family', 'Business'],
     seasonNote: 'Heat changes how the city is experienced. Travel dates, outdoor plans, arrival time and the purpose of the stay guide the neighbourhood and daily rhythm.',
     suggestedStay: 'Usually 3–6 nights',
