@@ -1,6 +1,6 @@
 # Pardus Luxury Escapes: V30.3
 
-V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is gently alive and, since V30.4, calm: it breathes, sways a little and blinks slowly, and never glows, follows the visitor or reacts to a touch; gold pins on the skyline, villas and yacht show what each costs) and the V25 preloader, and rebuilds every page on one design system: Montserrat throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
+V30 is the blue-hour redesign. It restores the V25 leopard hero (rebuilt in layers in V30.2 so the leopard is gently alive and, since V30.4, calm: it breathes, sways a little and blinks slowly, and never glows, follows the visitor or reacts to a touch; gold pins on the skyline, villas and yacht show what each costs) and the V25 preloader, and rebuilds every page on one design system: Archivo throughout (bold headlines, true italic accents), gradient sections that share colours at their seams, scroll-linked motion, a full-screen mobile menu and one SVG icon set. There are no emoji anywhere on the site.
 
 **The preloader is permanent.** It must be present in every build. See [CLAUDE.md](../CLAUDE.md) and `website/tests/preloader.test.mjs`, which fails the release if it is removed.
 

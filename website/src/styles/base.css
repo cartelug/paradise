@@ -24,8 +24,8 @@
   --line-dark: rgb(236 215 168 / .2);
   --line-light: rgb(11 22 38 / .14);
 
-  /* One family for everything: Montserrat. Headlines use it bold and tightly spaced; accents use its true italic. */
-  --font-ui: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* One family for everything: Archivo. Headlines use it bold and tightly spaced; accents use its true italic. */
+  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-display: var(--font-ui);
 
   --gutter: clamp(20px, 5.2vw, 76px);

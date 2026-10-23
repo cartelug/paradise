@@ -47,7 +47,7 @@
 .hero-rail-head { display: flex; align-items: center; gap: 12px; font-size: .8125rem; line-height: 1.35; color: var(--mist); }
 .hero-rail-head > span { display: grid; max-width: 13em; }
 .hero-rail-head strong { font-weight: 600; color: var(--gold-soft); letter-spacing: .02em; }
-.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 12px; border: 1px solid var(--line-dark); border-radius: 999px; background: rgb(5 12 26 / .4); color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--line-dark); border-radius: 999px; background: rgb(5 12 26 / .4); color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
 .motion-toggle:hover { border-color: var(--gold); color: var(--gold-soft); }
 .motion-toggle .icon { width: 16px; height: 16px; }
 .motion-toggle .icon-play { display: none; }

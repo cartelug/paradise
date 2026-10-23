@@ -2,19 +2,19 @@
 
 ## Type
 
-**Montserrat only.** One typeface is used everywhere on the site: headlines, body text, labels, prices, buttons and the preloader. It is delivered locally as Latin-subset variable WOFF2 files from the pinned `@fontsource-variable/montserrat` package (roman and italic), with the licence in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the two faces and preloads the roman and, on pages whose hero uses it, the italic.
+**Archivo only.** One typeface is used everywhere on the site: headlines, body text, labels, prices, buttons and the preloader. It is delivered locally as Latin-subset variable WOFF2 files from the pinned `@fontsource-variable/archivo` package (roman and italic), with the licence in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the two faces and preloads the roman and, on pages whose hero uses it, the italic.
 
 How it is tuned (all in `src/styles/base.css`):
 
-- Headlines are weight 700 with -.022em tracking and a 1.05 to 1.1 line height. Card and section titles (h3) are weight 600. Montserrat is much wider than the serif it replaced, so every headline size was reduced by about a quarter; the hero keeps its measured clearance from the leopard.
-- Accent words (`em`) use the true Montserrat italic in gold at weight 600, never a faked slant.
+- Headlines are weight 700 with -.022em tracking and a 1.05 to 1.1 line height. Card and section titles (h3) are weight 600. Existing responsive type sizes and hero clearances are retained; Archivo is the weight-only variable face used by PDM, with no stretching or width-axis changes.
+- Accent words (`em`) use the true Archivo italic in gold at weight 600, never a faked slant.
 - Body text is 15 to 17 px at 1.7 line height; leads are 16 to 20 px. Form fields are 16 px so phones do not zoom.
 - Eyebrows and price labels are 11 px, weight 600, uppercase, tracked .2 to .22em. Buttons and text links are 14 px, weight 600.
-- Prices use Montserrat 600 (22 to 30 px) with tabular numerals.
+- Prices use Archivo 600 (22 to 30 px) with tabular numerals.
 - Weight 700 is used only for the large headlines; 600 for everything else bold.
 - `--font-display` still exists but now points at `--font-ui`, so a single change would switch the whole site.
 
-Satoshi and the full Montserrat file remain in `public/fonts/` because the content tests reference them; they are not loaded.
+Legacy font assets remain for historical compatibility; only the two Archivo faces are loaded. Archivo is selected from PDM’s current Archivo/Lexend system at the owner’s request on 23 October 2026.
 
 ## Motion
 
