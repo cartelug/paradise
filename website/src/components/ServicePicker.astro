@@ -1,8 +1,12 @@
 ---
 import Icon from './Icon.astro';
+import HomeEmblem from './HomeEmblem.astro';
 import { path } from '../data/site';
 import { serviceGroups } from '../data/offers';
 import { serviceIcons } from '../data/icons';
+import { serviceArt } from '../data/home-illustrations';
+interface Props { illustrated?: boolean; }
+const { illustrated = false } = Astro.props;
 // "You choose where. We arrange the rest." as something you can use: every one of the 13 services is a tile you can tap.
 // It is a real GET form, so it works without JavaScript; the choices travel to the enquiry as ?services=...
 const groupTitles = ['The essentials', 'Experiences', 'Occasions', 'Made for you'];
@@ -14,7 +18,7 @@ const groups = serviceGroups.map((group, index) => ({
 }));
 const total = position;
 ---
-<form class="picker" data-picker action={path('journey.html')} method="get" aria-labelledby="picker-title">
+<form class:list={['picker', { 'picker--illustrated': illustrated }]} data-picker action={path('journey.html')} method="get" aria-labelledby="picker-title">
   <div class="picker-head">
     <p class="picker-q" id="picker-title"><span class="picker-step">1</span> What should we arrange?</p>
     <button type="button" class="picker-clear requires-js" data-picker-clear hidden>Clear</button>
@@ -28,7 +32,7 @@ const total = position;
             <label class="pick" style={`--i:${item.index}`}>
               <input type="checkbox" name="services" value={item.label} />
               <span class="pick-face">
-                <span class="pick-icon"><Icon name={item.icon} /><span class="pick-check" aria-hidden="true"><Icon name="check" /></span></span>
+                <span class="pick-icon">{illustrated ? <HomeEmblem name={serviceArt[item.label]} size={64} /> : <Icon name={item.icon} />}<span class="pick-check" aria-hidden="true"><Icon name="check" /></span></span>
                 <span class="pick-label">{item.label}</span>
               </span>
             </label>

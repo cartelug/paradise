@@ -1,0 +1,10 @@
+---
+import { path } from '../data/site';
+import artwork from '../data/illustrated-home-artwork.json';
+interface Props { name: string; size?: number; class?: string; eager?: boolean; }
+const { name, size = 64, class: className, eager = false } = Astro.props;
+const symbols = artwork.symbols as Record<string, { width: number; height: number; widths: number[] }>;
+const art = symbols[name];
+const asset = (width: number) => path(`images/pardus-v34-${name}-${width}.webp`);
+---
+{art && <img class:list={['travel-emblem', className]} data-art-symbol={name} src={asset(192)} srcset={art.widths.map(width => `${asset(width)} ${width}w`).join(', ')} sizes={`${size}px`} width={art.width} height={art.height} style={`--emblem-size:${size}px`} alt="" aria-hidden="true" loading={eager ? 'eager' : 'lazy'} decoding="async" />}

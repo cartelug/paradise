@@ -1,0 +1,15 @@
+{
+  "tool": "Built-in image_gen",
+  "assets": [
+    {
+      "id": "hero-lettering-refined",
+      "source": "hero-lettering.png",
+      "prompt": "Use case: precise-object-edit. Edit this transparent headline lettering asset. Make a precise typography correction ONLY: the final line must clearly read “Personally curated.” with a normal visible word space between “Personally” and “curated.”. Currently the two words visually run together. Add a clear gap approximately 0.35 of the final line's letter height; do not join the y to c. Preserve the exact three lines “Extraordinary” / “journeys.” / “Personally curated.”, the navy Archivo-inspired sans-serif letterforms, spelling, periods, left alignment, relative sizes and the understated brass route flourish. Preserve generous clear separation between all words and lines. Keep every complete letter inside the canvas. Retain the genuinely transparent alpha background. No backdrop, rectangle, new wording, logo or new decoration. The result is a crisp, smooth, professional transparent headline image for a mobile travel homepage."
+    },
+    {
+      "id": "escape-lettering-refined",
+      "source": "escape-lettering.png",
+      "prompt": "Use case: precise-object-edit. Correct word spacing only in this transparent headline graphic. Keep the exact one-line text “Your next escape.”. Give “Your”, “next” and “escape.” distinct normal word spaces, approximately 0.3 of the letter height, so no words run together at phone size. Preserve the navy upright Archivo-inspired “Your next”, dark antique brass matching italic “escape.”, final period and fine brass route underline. Keep the full line within the canvas. Smooth clean professional editorial lettering, identical understated brand character. Genuinely transparent alpha background, no rectangle, no new words, no extra artwork or UI."
+    }
+  ]
+}

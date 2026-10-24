@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import ArtHeading from '../components/ArtHeading.astro';
+import HomeEmblem from '../components/HomeEmblem.astro';
 import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import Brand from '../components/Brand.astro';
@@ -16,15 +18,19 @@ import { path, site } from '../data/site';
 import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
 import { photo } from '../data/photography.ts';
 import heroArtwork from '../data/photographic-coast-artwork.json';
+import illustrated from '../data/illustrated-home-artwork.json';
+import { destinationArt } from '../data/home-illustrations';
 const yachtPhoto = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht in Dubai Marina' });
 const promises = [
-  { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
-  { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, your budget and the people you are travelling with come first.' },
-  { icon: 'shield' as const, title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
+  { art: 'personal-attention', title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
+  { art: 'thoughtful-details', title: 'Thoughtful details', text: 'Your dates, your budget and the people you are travelling with come first.' },
+  { art: 'seamless-service', title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
 ];
 const asset = (name: string) => path(`images/${name}`);
-const heroSet = (scene: 'desktop' | 'mobile') => heroArtwork[scene].widths.map(width => `${asset(`pardus-coastal-${scene}-${width}.avif`)} ${width}w`).join(', ');
+const heroSet = (scene: 'desktop' | 'mobile') => (scene === 'mobile' ? illustrated.backgrounds['mobile-hero'] : heroArtwork.desktop).widths.map(width => `${asset(`${scene === 'mobile' ? 'pardus-v34-mobile-hero' : 'pardus-coastal-desktop'}-${width}.avif`)} ${width}w`).join(', ');
 const coastSet = (ext: string) => heroArtwork.coast.widths.map(width => `${asset(`pardus-coastal-coast-${width}.${ext}`)} ${width}w`).join(', ');
+const mobileCoast = illustrated.backgrounds['mobile-coast'];
+const mobileCoastSet = (ext: string) => mobileCoast.widths.map(width => `${asset(`pardus-v34-mobile-coast-${width}.${ext}`)} ${width}w`).join(', ');
 const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFor(slug), place: destinationFor(slug) }));
 ---
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image={`images/pardus-coastal-desktop-${heroArtwork.desktop.width}.webp`}>
@@ -37,12 +43,14 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
   <section class="sec escapes" id="destinations" aria-labelledby="featured-title" data-escapes>
     <div class="escapes-intro">
       <picture class="escapes-backdrop" aria-hidden="true">
+        <source media="(max-width: 767px)" type="image/avif" srcset={mobileCoastSet('avif')} sizes="100vw" width={mobileCoast.width} height={mobileCoast.height} />
+        <source media="(max-width: 767px)" type="image/webp" srcset={mobileCoastSet('webp')} sizes="100vw" width={mobileCoast.width} height={mobileCoast.height} />
         <source type="image/avif" srcset={coastSet('avif')} sizes="100vw" />
         <img src={asset(`pardus-coastal-coast-${heroArtwork.coast.width}.webp`)} srcset={coastSet('webp')} sizes="100vw" width={heroArtwork.coast.width} height={heroArtwork.coast.height} alt="" loading="lazy" decoding="async" />
       </picture>
       <div class="wrap escapes-head">
         <p class="eyebrow" data-reveal>Signature escapes</p>
-        <h2 id="featured-title" data-reveal>Your next <em>escape.</em></h2>
+        <ArtHeading as="h2" id="featured-title" art="escape-lettering" reveal>Your next <em>escape.</em></ArtHeading>
         <p class="lead" data-reveal>Three settings, one way of travelling. Choose yours. We arrange the journey.</p>
         <p class="escapes-hint" aria-hidden="true">Scroll to travel <Icon name="arrow-down" /></p>
       </div>
@@ -60,7 +68,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
             <a class="scene-photo frame" href={path(`destination-${scene.offer.slug}.html`)} tabindex="-1" aria-hidden="true"><Picture name={scene.place.image} alt="" sizes="(max-width: 1023px) 100vw, 56vw" /></a>
             <div class="scene-panel">
               <div class="scene-meta"><span class="chip"><Icon name="pin" />{scene.place.country}</span><span class="chip"><Icon name="clock" />{scene.offer.nights}</span></div>
-              <h3 id={`scene-title-${scene.offer.slug}`}><a href={path(`destination-${scene.offer.slug}.html`)}>{scene.offer.label}</a></h3>
+              <div class="scene-title"><HomeEmblem name={destinationArt[scene.offer.slug]} size={72} /><h3 id={`scene-title-${scene.offer.slug}`}><a href={path(`destination-${scene.offer.slug}.html`)}>{scene.offer.label}</a></h3></div>
               <p class="scene-lead">{scene.offer.experience}</p>
               <ul class="ticks" aria-label={`${scene.offer.label} highlights`}>{scene.offer.highlights.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul>
               <OfferInclusions items={scene.offer.inclusions} />
@@ -97,7 +105,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
         </ul>
         <a class="link services-more" href={path('concierge.html')} data-reveal>See everything we arrange <Icon name="arrow-right" /></a>
       </div>
-      <ServicePicker />
+      <ServicePicker illustrated />
     </div>
   </section>
 
@@ -108,7 +116,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
         {['africa', 'europe', 'zanzibar'].map(slug => { const offer = offerFor(slug); const place = destinationFor(slug); return (
           <article class="dest" data-reveal>
             <a class="frame" href={path(`destination-${slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={place.image} alt={place.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
-            <div class="dest-top"><h3><a href={path(`destination-${slug}.html`)}>{offer.label}</a></h3><span>{offer.nights}</span></div>
+            <div class="dest-top dest-top--illustrated"><HomeEmblem name={destinationArt[slug]} size={64} /><div><h3><a href={path(`destination-${slug}.html`)}>{offer.label}</a></h3><span class="dest-duration">{offer.nights}</span></div></div>
             <p>{offer.experience}</p>
             <OfferPrice offer={offer} />
             <a class="link" href={path(`destination-${slug}.html`)}>Discover {offer.label} <Icon name="arrow-right" /></a>
@@ -134,7 +142,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
   <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="why-title">
     <div class="wrap">
       <div class="promise-head"><h2 id="why-title" data-split>Every detail, <em>considered.</em></h2><Brand mark light /></div>
-      <div class="promises" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+      <div class="promises" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><HomeEmblem name={item.art} size={88} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
     </div>
     <div class="wrap booking" id="how-booking-works">
       <div class="sec-head"><div><p class="eyebrow" data-reveal>How booking works</p><h2 id="booking-title" data-split>Four steps. <em>One clear plan.</em></h2></div><p data-reveal>From your first message to the journey itself, with the terms in front of you before you commit.</p></div>
@@ -152,6 +160,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
   <section class="sec sec--dusk" id="enquire" aria-labelledby="enquire-title">
     <div class="wrap enquiry">
       <div class="enquiry-copy">
+        <HomeEmblem name="travel-journal" size={112} />
         <p class="eyebrow" data-reveal>Plan your escape</p>
         <h2 id="enquire-title" data-split>Tell us where. <em>We’ll take it from here.</em></h2>
         <p class="lead" data-reveal>A destination, your dates and a little about your plans. That is all we need to start.</p>

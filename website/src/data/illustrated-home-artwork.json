@@ -1,0 +1,312 @@
+{
+  "symbols": {
+    "flights": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "resort": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "transfers": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "visas": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "yacht": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "safari": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "private-tours": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "activities": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "honeymoon": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "family": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "groups": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "corporate": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "bespoke": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "maldives": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "seychelles": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "dubai": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "east-africa": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "europe": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "zanzibar": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "personal-attention": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "thoughtful-details": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "seamless-service": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "world": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    },
+    "travel-journal": {
+      "width": 384,
+      "height": 384,
+      "widths": [
+        96,
+        192,
+        384
+      ],
+      "originalWidth": 1254,
+      "originalHeight": 1254
+    }
+  },
+  "lettering": {
+    "hero-lettering": {
+      "source": "hero-lettering-refined.png",
+      "width": 1960,
+      "height": 681,
+      "widths": [
+        480,
+        960,
+        1440,
+        1960
+      ]
+    },
+    "escape-lettering": {
+      "source": "escape-lettering-refined.png",
+      "width": 2122,
+      "height": 246,
+      "widths": [
+        480,
+        960,
+        1440,
+        2122
+      ]
+    }
+  },
+  "backgrounds": {
+    "mobile-hero": {
+      "width": 941,
+      "height": 1672,
+      "widths": [
+        480,
+        768,
+        941
+      ]
+    },
+    "mobile-coast": {
+      "width": 1122,
+      "height": 1402,
+      "widths": [
+        480,
+        768,
+        1122
+      ]
+    }
+  }
+}

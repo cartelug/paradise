@@ -1,5 +1,13 @@
 # Pardus Luxury Escapes — Final destination presentation
 
+## Illustrated mobile homepage — 24 October 2026
+
+The owner requested more than 20 generated symbols, transparent designed headline images, new phone hero backgrounds and animation. V34 adds 24 distinct transparent travel illustrations, two designed Archivo-inspired headline lockups, a refined pale-sky leopard portrait and a separate phone coastal continuation. All originals and exact prompts are in `website/source-assets/v34-mobile-illustrated/`; `ARTWORK.md` maps every illustration to its live homepage placement.
+
+The hero tagline and “Your next escape.” retain their real heading text beneath decorative art. Lettering becomes visible after decoding and falls back to the actual text on image failure, with scripting disabled or when actual text is enlarged. The illustrated service choices retain all 13 native checkboxes and pass their GET values to the planning form. Prices, business details, the real logo, shared navigation and permanent preloader remain. The leopard stays still; lettering/card entry and selection use restrained motion with a reduced-motion fallback.
+
+Phone content is kept in normal flow; the complete portrait's empty sky sits behind the copy and its animal remains below it. The generated coast joins the same ivory seam and deepens into the destination stage. Current browser evidence and responsive checks are in `website/source-assets/v34-mobile-illustrated/QA_RESULTS.json`. Source, original assets and GitHub export are released together. The earlier cPanel ZIP is an older deliverable; updating main does not upload the own-domain archive.
+
 ## Photographic homepage and coastal section two — 24 October 2026
 
 Following the Unfolding Earth rebuild, the owner requested more photographic imagery and a less compact 100% zoom view, then approved the matching desktop and phone images and requested a new section-two background. The current static art shows a complete right-facing leopard on pale limestone above a coast/Dubai/savannah travel composite. The primary Pardus logo, five shared navigation labels, exact headline and supporting copy, flat gold planning action and outlined destinations action are live page elements. Desktop typography and brand/action sizes are capped; phones use the complete portrait with only its empty sky behind normal-flow copy.

@@ -21,7 +21,7 @@ const plain = markup => markup.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').tri
 // The owner approved the photographic desktop/portrait pair and a coastal
 // continuation on 24 October. Earlier masters remain available in source-assets.
 test('every responsive artwork has a valid, undistorted WebP and AVIF export', async () => {
-  for (const scene of ['desktop', 'mobile', 'coast']) {
+  for (const scene of ['desktop', 'coast']) {
     const master = await sharp(resolve(site, 'source-assets/v33-photographic-coast', `${scene}-master.png`)).metadata();
     assert.equal(master.width, metadata[scene].width);
     assert.equal(master.height, metadata[scene].height);
@@ -47,7 +47,8 @@ test('the hero preloads only the artwork used by its responsive picture', async 
   assert.match(hero, /media="\(max-width: 767px\)"/);
   const preloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
   assert.equal(preloads.length, 2, 'one mutually exclusive preload for each art direction');
-  for (const preload of preloads) assert.match(preload, /pardus-coastal-/);
+  assert.match(preloads[0], /pardus-v34-mobile-hero-/);
+  assert.match(preloads[1], /pardus-coastal-desktop-/);
   assert.match(preloads[0], /max-width: 767px/);
   assert.match(preloads[1], /min-width: 768px/);
   assert.match(html, new RegExp('property="og:image" content="[^"]*pardus-coastal-desktop-' + metadata.desktop.width + '\\.webp'));
