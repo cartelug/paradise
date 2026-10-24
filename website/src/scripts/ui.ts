@@ -3,7 +3,7 @@ import { initFolio } from './folio';
 // Header, mobile menu and scroll motion for every page. Content is complete in the HTML without this script.
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-const desktop = window.matchMedia(document.body.classList.contains('home') ? '(min-width: 1000px)' : '(min-width: 1200px)');
+const desktop = window.matchMedia('(min-width: 1200px)');
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
 /* Mobile menu */
@@ -128,9 +128,9 @@ const escapeTabs = escapeStage ? [...escapeStage.querySelectorAll<HTMLButtonElem
 const stageQuery = window.matchMedia('(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)');
 let stageOn = false, stageActive = -1, headerHeight = 78;
 function syncStage() {
-  stageOn = !!escapeStage && escapeScenes.length > 0 && stageQuery.matches;
+  stageOn = !!escapeStage && escapeScenes.length > 0 && stageQuery.matches && !document.body.hasAttribute('data-expanded-hero');
   root.classList.toggle('stage-ready', stageOn);
-  headerHeight = parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 78;
+  headerHeight = parseFloat(getComputedStyle(document.body).getPropertyValue('--header-h')) || 78;
   if (!stageOn && escapeStage) {
     stageActive = -1;
     escapeScenes.forEach(scene => { scene.removeAttribute('data-state'); scene.style.removeProperty('--lp'); });
@@ -164,6 +164,7 @@ escapeTabs.forEach((tab, i) => tab.addEventListener('click', () => {
 }));
 stageQuery.addEventListener('change', () => { syncStage(); schedule(); });
 window.addEventListener('resize', () => { syncStage(); });
+window.addEventListener('pardus:hero-layout', () => { syncStage(); schedule(); });
 syncStage();
 
 /* Scroll motion: one frame per scroll event, reads before writes. */

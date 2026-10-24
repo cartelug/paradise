@@ -15,19 +15,19 @@ const site = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(site, '..');
 const read = file => readFile(resolve(site, file), 'utf8');
 const exists = async file => { try { await access(file); return true; } catch { return false; } };
-const metadata = JSON.parse(await read('src/data/unfolding-earth-artwork.json'));
+const metadata = JSON.parse(await read('src/data/photographic-coast-artwork.json'));
 const plain = markup => markup.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
-// The owner selected Unfolding Earth on 24 October. Retired V31 coat pins and the
-// price dock are not part of this first section; the services below remain.
+// The owner approved the photographic desktop/portrait pair and a coastal
+// continuation on 24 October. Earlier masters remain available in source-assets.
 test('every responsive artwork has a valid, undistorted WebP and AVIF export', async () => {
-  for (const scene of ['desktop', 'mobile']) {
-    const master = await sharp(resolve(site, 'source-assets/v32-unfolding-earth', `${scene}-master.png`)).metadata();
+  for (const scene of ['desktop', 'mobile', 'coast']) {
+    const master = await sharp(resolve(site, 'source-assets/v33-photographic-coast', `${scene}-master.png`)).metadata();
     assert.equal(master.width, metadata[scene].width);
     assert.equal(master.height, metadata[scene].height);
     for (const width of metadata[scene].widths) {
       for (const ext of ['webp', 'avif']) {
-        const file = resolve(site, 'public/images', `pardus-unfolding-${scene}-${width}.${ext}`);
+        const file = resolve(site, 'public/images', `pardus-coastal-${scene}-${width}.${ext}`);
         assert.ok(await exists(file), file);
         const image = await sharp(file).metadata();
         assert.equal(image.width, width);
@@ -35,7 +35,7 @@ test('every responsive artwork has a valid, undistorted WebP and AVIF export', a
       }
     }
   }
-  assert.match(await read('source-assets/v32-unfolding-earth/ARTWORK.md'), /AI-generated/);
+  assert.match(await read('source-assets/v33-photographic-coast/ARTWORK.md'), /AI-generated/);
 });
 
 test('the hero preloads only the artwork used by its responsive picture', async () => {
@@ -44,13 +44,13 @@ test('the hero preloads only the artwork used by its responsive picture', async 
   assert.ok(hero);
   assert.equal((hero.match(/<picture/g) || []).length, 1);
   assert.match(hero, /fetchpriority="high"/);
-  assert.match(hero, /media="\(max-width: 600px\)"/);
+  assert.match(hero, /media="\(max-width: 767px\)"/);
   const preloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
   assert.equal(preloads.length, 2, 'one mutually exclusive preload for each art direction');
-  for (const preload of preloads) assert.match(preload, /pardus-unfolding-/);
-  assert.match(preloads[0], /max-width: 600px/);
-  assert.match(preloads[1], /min-width: 601px/);
-  assert.match(html, new RegExp('property="og:image" content="[^"]*pardus-unfolding-desktop-' + metadata.desktop.width + '\\.webp'));
+  for (const preload of preloads) assert.match(preload, /pardus-coastal-/);
+  assert.match(preloads[0], /max-width: 767px/);
+  assert.match(preloads[1], /min-width: 768px/);
+  assert.match(html, new RegExp('property="og:image" content="[^"]*pardus-coastal-desktop-' + metadata.desktop.width + '\\.webp'));
   assert.doesNotMatch(hero, /pardus-hero-desktop|pardus-hero-phone/);
 });
 
@@ -62,7 +62,7 @@ test('the selected headline, service sentence and both live actions are present'
   assert.match(hero, /href="[^"]*journey\.html"[^>]*><span>Plan your escape<\/span>/);
   assert.match(hero, /href="#destinations"[^>]*><span>Explore destinations<\/span><\/a>/);
   assert.ok(html.includes('id="destinations"'), 'secondary action has a real target');
-  assert.match(hero, /alt="A leopard walks across an unfolding atlas/);
+  assert.match(hero, /alt="A leopard walks across a pale stone ledge/);
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
 });
 
@@ -74,7 +74,8 @@ test('the complete walking leopard has measured head, body, tail and paw regions
   assert.match(markup, /data-leopard-box/);
   const css = await read('src/styles/hero.css');
   assert.match(css, /object-fit: contain/);
-  assert.match(css, /\.hero-stage \{[^}]*aspect-ratio: 1663 \/ 946/);
+  assert.ok(metadata.desktop.width / metadata.desktop.height > 2.3, 'the desktop art has the approved spacious wide framing');
+  assert.ok(metadata.mobile.height / metadata.mobile.width > 1.7, 'the phone art is a separate portrait, not a crop of the desktop');
   assert.match(css, /\.hero-art \{[^}]*position: relative;[^}]*grid-row: 2/);
   assert.doesNotMatch(css, /min-height: 100(?:s|d)?vh/);
 });
@@ -96,9 +97,19 @@ test('homepage header colours are scoped, with the existing approved vector logo
   const css = await read('src/styles/hero.css');
   assert.match(css, /\.home \.site-header/);
   assert.match(css, /\.home \.desktop-nav a/);
-  assert.match(css, /@media \(min-width: 1000px\)/);
+  assert.match(css, /@media \(min-width: 1200px\)/);
   const ui = await read('src/scripts/ui.ts');
-  assert.match(ui, /document\.body\.classList\.contains\('home'\) \? '\(min-width: 1000px\)'/);
+  assert.match(ui, /const desktop = window\.matchMedia\('\(min-width: 1200px\)'\)/);
+});
+
+test('the second section continues the scenery with decorative lazy-loaded art and verified escapes', async () => {
+  const html = await readFile(resolve(repo, 'index.html'), 'utf8');
+  const section = html.match(/<section class="sec escapes"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(section);
+  assert.match(section, /class="escapes-backdrop" aria-hidden="true"/);
+  assert.match(section, /pardus-coastal-coast-/);
+  assert.match(section, /alt="" loading="lazy" decoding="async"/);
+  for (const destination of ['maldives', 'seychelles', 'dubai']) assert.match(section, new RegExp(`destination-${destination}\\.html`));
 });
 
 test('the service picker retains every service as a tap target and a plain GET form', async () => {

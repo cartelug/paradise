@@ -10,10 +10,11 @@ function fitReference() {
   const width = hero.clientWidth;
   const alreadyExpanded = body.hasAttribute('data-expanded-hero');
   const expected = alreadyExpanded
-    ? Math.min(62, Math.max(34, window.innerWidth * .063))
-    : Math.min(100, Math.max(42, width * .048));
+    ? Math.min(64, Math.max(36, window.innerWidth * .06))
+    : Math.min(76, Math.max(46, width * .0415));
   const enlarged = wide.matches && parseFloat(getComputedStyle(title).fontSize) > expected * 1.2;
   body.toggleAttribute('data-expanded-hero', enlarged);
+  if (enlarged !== alreadyExpanded) window.dispatchEvent(new Event('pardus:hero-layout'));
 }
 
 if (hero && title) {

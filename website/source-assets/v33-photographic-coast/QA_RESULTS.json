@@ -1,0 +1,926 @@
+{
+  "date": "2026-10-24",
+  "environment": "Simulated Chrome CSS viewports at 100% browser zoom; not physical-device certification",
+  "normal": [
+    {
+      "viewport": "320x568",
+      "art": {
+        "bottom": 611.59375,
+        "height": 541.921875,
+        "left": 0,
+        "right": 305,
+        "top": 69.671875,
+        "width": 305
+      },
+      "expanded": false,
+      "h1Font": "30px",
+      "heroHeight": 637.59375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 305
+    },
+    {
+      "viewport": "360x800",
+      "art": {
+        "bottom": 617.375,
+        "height": 613,
+        "left": 0,
+        "right": 345,
+        "top": 4.375,
+        "width": 345
+      },
+      "expanded": false,
+      "h1Font": "30px",
+      "heroHeight": 643.375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 345
+    },
+    {
+      "viewport": "375x812",
+      "art": {
+        "bottom": 633.171875,
+        "height": 639.65625,
+        "left": 0,
+        "right": 360,
+        "top": -6.484375,
+        "width": 360
+      },
+      "expanded": false,
+      "h1Font": "30.9375px",
+      "heroHeight": 659.171875,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 360
+    },
+    {
+      "viewport": "390x844",
+      "art": {
+        "bottom": 649.859375,
+        "height": 666.296875,
+        "left": 0,
+        "right": 375,
+        "top": -16.4375,
+        "width": 375
+      },
+      "expanded": false,
+      "h1Font": "32.175px",
+      "heroHeight": 675.859375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 375
+    },
+    {
+      "viewport": "414x896",
+      "art": {
+        "bottom": 676.625,
+        "height": 708.953125,
+        "left": 0,
+        "right": 399,
+        "top": -32.328125,
+        "width": 399
+      },
+      "expanded": false,
+      "h1Font": "34.155px",
+      "heroHeight": 702.625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 399
+    },
+    {
+      "viewport": "430x932",
+      "art": {
+        "bottom": 694.40625,
+        "height": 737.375,
+        "left": 0,
+        "right": 415,
+        "top": -42.96875,
+        "width": 415
+      },
+      "expanded": false,
+      "h1Font": "35.475px",
+      "heroHeight": 720.40625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 415
+    },
+    {
+      "viewport": "600x960",
+      "art": {
+        "bottom": 883.84375,
+        "height": 1039.4375,
+        "left": 0,
+        "right": 585,
+        "top": -155.59375,
+        "width": 585
+      },
+      "expanded": false,
+      "h1Font": "49.5px",
+      "heroHeight": 909.84375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 585
+    },
+    {
+      "viewport": "601x960",
+      "art": {
+        "bottom": 884.953125,
+        "height": 1041.21875,
+        "left": 0,
+        "right": 586,
+        "top": -156.265625,
+        "width": 586
+      },
+      "expanded": false,
+      "h1Font": "49.5825px",
+      "heroHeight": 910.953125,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 586
+    },
+    {
+      "viewport": "767x1024",
+      "art": {
+        "bottom": 1041.015625,
+        "height": 1336.171875,
+        "left": 0,
+        "right": 752,
+        "top": -295.15625,
+        "width": 752
+      },
+      "expanded": false,
+      "h1Font": "54px",
+      "heroHeight": 1067.015625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 752
+    },
+    {
+      "viewport": "768x1024",
+      "art": {
+        "bottom": 705.734375,
+        "height": 313.671875,
+        "left": 0,
+        "right": 753,
+        "top": 392.0625,
+        "width": 753
+      },
+      "expanded": false,
+      "h1Font": "46.08px",
+      "heroHeight": 750.734375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 753
+    },
+    {
+      "viewport": "820x1180",
+      "art": {
+        "bottom": 734,
+        "height": 335.34375,
+        "left": 0,
+        "right": 805,
+        "top": 398.65625,
+        "width": 805
+      },
+      "expanded": false,
+      "h1Font": "49.2px",
+      "heroHeight": 779,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 805
+    },
+    {
+      "viewport": "999x900",
+      "art": {
+        "bottom": 831.140625,
+        "height": 409.90625,
+        "left": 0,
+        "right": 984,
+        "top": 421.234375,
+        "width": 984
+      },
+      "expanded": false,
+      "h1Font": "59.94px",
+      "heroHeight": 876.140625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 984
+    },
+    {
+      "viewport": "1000x768",
+      "art": {
+        "bottom": 595,
+        "height": 410.328125,
+        "left": 0,
+        "right": 985,
+        "top": 184.671875,
+        "width": 985
+      },
+      "expanded": false,
+      "h1Font": "46px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 985
+    },
+    {
+      "viewport": "1024x768",
+      "art": {
+        "bottom": 595,
+        "height": 420.328125,
+        "left": 0,
+        "right": 1009,
+        "top": 174.671875,
+        "width": 1009
+      },
+      "expanded": false,
+      "h1Font": "46px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1009
+    },
+    {
+      "viewport": "1199x900",
+      "art": {
+        "bottom": 595,
+        "height": 493.21875,
+        "left": 0,
+        "right": 1184,
+        "top": 101.78125,
+        "width": 1184
+      },
+      "expanded": false,
+      "h1Font": "49.136px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1184
+    },
+    {
+      "viewport": "1200x900",
+      "art": {
+        "bottom": 595,
+        "height": 493.640625,
+        "left": 0,
+        "right": 1185,
+        "top": 101.359375,
+        "width": 1185
+      },
+      "expanded": false,
+      "h1Font": "49.1775px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1185
+    },
+    {
+      "viewport": "1280x800",
+      "art": {
+        "bottom": 595,
+        "height": 526.96875,
+        "left": 0,
+        "right": 1265,
+        "top": 68.03125,
+        "width": 1265
+      },
+      "expanded": false,
+      "h1Font": "52.4975px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1265
+    },
+    {
+      "viewport": "1440x900",
+      "art": {
+        "bottom": 595,
+        "height": 593.625,
+        "left": 0,
+        "right": 1425,
+        "top": 1.375,
+        "width": 1425
+      },
+      "expanded": false,
+      "h1Font": "59.1375px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1425
+    },
+    {
+      "viewport": "1536x864",
+      "art": {
+        "bottom": 595,
+        "height": 633.609375,
+        "left": 0,
+        "right": 1521,
+        "top": -38.609375,
+        "width": 1521
+      },
+      "expanded": false,
+      "h1Font": "63.1215px",
+      "heroHeight": 640,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1521
+    },
+    {
+      "viewport": "1920x1080",
+      "art": {
+        "bottom": 748.578125,
+        "height": 793.578125,
+        "left": 0,
+        "right": 1905,
+        "top": -45,
+        "width": 1905
+      },
+      "expanded": false,
+      "h1Font": "76px",
+      "heroHeight": 793.578125,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1905
+    },
+    {
+      "viewport": "2560x1440",
+      "art": {
+        "bottom": 1015.1875,
+        "height": 1060.1875,
+        "left": 0,
+        "right": 2545,
+        "top": -45,
+        "width": 2545
+      },
+      "expanded": false,
+      "h1Font": "76px",
+      "heroHeight": 1060.1875,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 2545
+    }
+  ],
+  "enlargedText": [
+    {
+      "viewport": "320x568",
+      "art": {
+        "bottom": 1115.484375,
+        "height": 541.921875,
+        "left": 0,
+        "right": 305,
+        "top": 573.5625,
+        "width": 305
+      },
+      "expanded": false,
+      "h1Font": "60px",
+      "heroHeight": 1160.484375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 305
+    },
+    {
+      "viewport": "360x800",
+      "art": {
+        "bottom": 1104.765625,
+        "height": 613,
+        "left": 0,
+        "right": 345,
+        "top": 491.765625,
+        "width": 345
+      },
+      "expanded": false,
+      "h1Font": "60px",
+      "heroHeight": 1149.765625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 345
+    },
+    {
+      "viewport": "375x812",
+      "art": {
+        "bottom": 1082.375,
+        "height": 639.65625,
+        "left": 0,
+        "right": 360,
+        "top": 442.71875,
+        "width": 360
+      },
+      "expanded": false,
+      "h1Font": "61.875px",
+      "heroHeight": 1127.375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 360
+    },
+    {
+      "viewport": "390x844",
+      "art": {
+        "bottom": 1078.03125,
+        "height": 666.296875,
+        "left": 0,
+        "right": 375,
+        "top": 411.734375,
+        "width": 375
+      },
+      "expanded": false,
+      "h1Font": "64.35px",
+      "heroHeight": 1123.03125,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 375
+    },
+    {
+      "viewport": "414x896",
+      "art": {
+        "bottom": 1119.234375,
+        "height": 708.953125,
+        "left": 0,
+        "right": 399,
+        "top": 410.28125,
+        "width": 399
+      },
+      "expanded": false,
+      "h1Font": "68.31px",
+      "heroHeight": 1164.234375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 399
+    },
+    {
+      "viewport": "430x932",
+      "art": {
+        "bottom": 1118.6875,
+        "height": 737.375,
+        "left": 0,
+        "right": 415,
+        "top": 381.3125,
+        "width": 415
+      },
+      "expanded": false,
+      "h1Font": "70.95px",
+      "heroHeight": 1163.6875,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-mobile-480.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 415
+    },
+    {
+      "viewport": "768x1024",
+      "art": {
+        "bottom": 1027.265625,
+        "height": 313.671875,
+        "left": 0,
+        "right": 753,
+        "top": 713.59375,
+        "width": 753
+      },
+      "expanded": false,
+      "h1Font": "92.16px",
+      "heroHeight": 1072.265625,
+      "image": {
+        "complete": false,
+        "src": ""
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 753
+    },
+    {
+      "viewport": "1024x768",
+      "art": {
+        "bottom": 1016.53125,
+        "height": 420.328125,
+        "left": 0,
+        "right": 1009,
+        "top": 596.203125,
+        "width": 1009
+      },
+      "expanded": true,
+      "h1Font": "92px",
+      "heroHeight": 1061.53125,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1009
+    },
+    {
+      "viewport": "1200x900",
+      "art": {
+        "bottom": 1093.015625,
+        "height": 493.640625,
+        "left": 0,
+        "right": 1185,
+        "top": 599.375,
+        "width": 1185
+      },
+      "expanded": true,
+      "h1Font": "98.355px",
+      "heroHeight": 1138.015625,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1185
+    },
+    {
+      "viewport": "1440x900",
+      "art": {
+        "bottom": 1242.84375,
+        "height": 593.625,
+        "left": 0,
+        "right": 1425,
+        "top": 649.21875,
+        "width": 1425
+      },
+      "expanded": true,
+      "h1Font": "118.275px",
+      "heroHeight": 1287.84375,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1440.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1425
+    },
+    {
+      "viewport": "1920x1080",
+      "art": {
+        "bottom": 1528.71875,
+        "height": 793.578125,
+        "left": 0,
+        "right": 1905,
+        "top": 735.140625,
+        "width": 1905
+      },
+      "expanded": true,
+      "h1Font": "152px",
+      "heroHeight": 1573.71875,
+      "image": {
+        "complete": true,
+        "src": "http://terminal.local:4173/images/pardus-coastal-desktop-1942.avif"
+      },
+      "introPaper": "rgb(244, 241, 233)",
+      "leopardInsideArt": true,
+      "leopardOverlap": [],
+      "outsideText": [],
+      "overflows": [],
+      "pageOverflow": 0,
+      "paper": "#f4f1e9",
+      "seamGap": 0,
+      "smallTargets": [],
+      "width": 1905
+    }
+  ],
+  "interactions": {
+    "menuOpen": "",
+    "menuClosed": {
+      "expanded": "false",
+      "focus": "Open menu",
+      "locked": false,
+      "open": false
+    },
+    "destinationTabs": {
+      "active": "2",
+      "current": "Dubai4-night escape",
+      "panelVisibility": "visible",
+      "title": "Dubai"
+    },
+    "planningRoute": "Your next escape. Let’s arrange it.",
+    "returnHome": {
+      "heading": "Extraordinary\njourneys.\nPersonally curated.",
+      "preloaderPresent": true,
+      "ready": true,
+      "url": "http://terminal.local:4173/"
+    }
+  }
+}

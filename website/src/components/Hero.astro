@@ -1,21 +1,21 @@
 ---
 import Icon from './Icon.astro';
 import { path } from '../data/site';
-import artwork from '../data/unfolding-earth-artwork.json';
+import artwork from '../data/photographic-coast-artwork.json';
 
 const asset = (name: string) => path(`images/${name}`);
-const imageSet = (scene: 'desktop' | 'mobile', ext: string) => artwork[scene].widths.map(width => `${asset(`pardus-unfolding-${scene}-${width}.${ext}`)} ${width}w`).join(', ');
+const imageSet = (scene: 'desktop' | 'mobile', ext: string) => artwork[scene].widths.map(width => `${asset(`pardus-coastal-${scene}-${width}.${ext}`)} ${width}w`).join(', ');
 // The measured outline stays inside the picture, so QA can check the complete walking leopard.
 const outline = [
-  { part: 'tail', d: [41, 15, 54, 28], m: [19, 12, 37, 28] },
-  { part: 'body', d: [48, 9, 75, 37], m: [31, 7, 72, 35] },
-  { part: 'head', d: [72, 11, 84, 30], m: [67, 9, 81, 31] },
-  { part: 'paws', d: [48, 34, 82, 44], m: [30, 32, 78, 44] },
+  { part: 'tail', d: [63, 59, 72, 66.5], m: [11, 73, 31, 78] },
+  { part: 'body', d: [69, 44.8, 89, 66], m: [29, 64.2, 86, 78.5] },
+  { part: 'head', d: [87, 45, 92.5, 57], m: [82, 64, 93, 72.5] },
+  { part: 'paws', d: [68.5, 64, 91.5, 71.8], m: [25.5, 76.5, 90, 81] },
 ];
 const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t:${r[1]}%;--${prefix}w:${r[2] - r[0]}%;--${prefix}h:${r[3] - r[1]}%`;
 ---
 <section class="hero hero--atlas" aria-labelledby="hero-title" data-hero data-hero-life data-life="still">
-  <div class="hero-stage" data-hero-stage>
+  <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${artwork.desktop.width}/${artwork.desktop.height};--hero-portrait-ratio:${artwork.mobile.width}/${artwork.mobile.height}`}>
     <div class="hero-copy" data-hero-copy>
       <p class="eyebrow">Bespoke luxury travel</p>
       <h1 id="hero-title"><span class="line" style="--n:0"><span>Extraordinary</span></span><span class="line" style="--n:1"><span>journeys.</span></span><span class="line" style="--n:2"><span>Personally curated.</span></span></h1>
@@ -27,10 +27,10 @@ const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t
     </div>
     <div class="hero-art" data-hero-art>
       <picture class="hero-picture">
-        <source media="(max-width: 600px)" type="image/avif" srcset={imageSet('mobile', 'avif')} sizes="100vw" width={artwork.mobile.width} height={artwork.mobile.height} />
-        <source media="(max-width: 600px)" type="image/webp" srcset={imageSet('mobile', 'webp')} sizes="100vw" width={artwork.mobile.width} height={artwork.mobile.height} />
+        <source media="(max-width: 767px)" type="image/avif" srcset={imageSet('mobile', 'avif')} sizes="100vw" width={artwork.mobile.width} height={artwork.mobile.height} />
+        <source media="(max-width: 767px)" type="image/webp" srcset={imageSet('mobile', 'webp')} sizes="100vw" width={artwork.mobile.width} height={artwork.mobile.height} />
         <source type="image/avif" srcset={imageSet('desktop', 'avif')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} />
-        <img src={asset(`pardus-unfolding-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('desktop', 'webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across an unfolding atlas revealing Maldives islands, Dubai and an East African safari in the warm sunset light." fetchpriority="high" decoding="async" data-hero-image />
+        <img src={asset(`pardus-coastal-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('desktop', 'webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across a pale stone ledge above an Indian Ocean coast, with Dubai and East African savannah blending into the distance. An illustrative travel composite." fetchpriority="high" decoding="async" data-hero-image />
       </picture>
       <div class="leopard-outline" aria-hidden="true">
         {outline.map(part => <span class="leopard-box" data-leopard-box={part.part} style={`${box(part.d, 'd')};${box(part.m, 'm')}`}></span>)}

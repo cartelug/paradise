@@ -1,12 +1,12 @@
 # Pardus Luxury Escapes — Final destination presentation
 
-## Selected first homepage section — 24 October 2026
+## Photographic homepage and coastal section two — 24 October 2026
 
-The owner selected the Unfolding Earth mockup and requested an accurate implementation of section one. The new static artwork shows a walking leopard over an unfolding atlas containing the Maldives, Dubai and East Africa. The primary Pardus logo, five shared navigation labels, exact headline and supporting copy, flat gold planning action and outlined destinations action are live page elements. The desktop proportions follow the selected image; phones use a compact complete artwork below the copy.
+Following the Unfolding Earth rebuild, the owner requested more photographic imagery and a less compact 100% zoom view, then approved the matching desktop and phone images and requested a new section-two background. The current static art shows a complete right-facing leopard on pale limestone above a coast/Dubai/savannah travel composite. The primary Pardus logo, five shared navigation labels, exact headline and supporting copy, flat gold planning action and outlined destinations action are live page elements. Desktop typography and brand/action sizes are capped; phones use the complete portrait with only its empty sky behind normal-flow copy.
 
-The permanent preloader, verified offer data and later homepage sections remain. Enlarged text can use a stacked layout on wide screens. A small layout observer handles that adaptation without adding animal motion or pointer reactions.
+The hero foreground fades below the paws into shared ivory. Section two reveals a newly generated coastal cove and fades into the existing destination stage. Its heading uses a whole-heading reveal so very large text wraps freely. The permanent preloader, verified offer data and later homepage sections remain. Enlarged text uses a stacked layout on wide screens; the pinned destination stage also yields to normal flow in that layout. The observer adds no animal motion or pointer reactions.
 
-The source masters, feature table, exact built-in image-generation prompts and current QA evidence live in `website/source-assets/v32-unfolding-earth/`. All 18 standard CSS viewport cases (320 through 2560 pixels) and nine enlarged-text cases passed the section-one geometry checks. Browser interaction checks confirmed the planning route, return-home link, mobile-menu Escape dismissal, focus return and scroll-lock reset. These are simulated Chrome checks, not physical-device certification.
+Native masters, exact built-in image-generation prompts and current QA evidence live in `website/source-assets/v33-photographic-coast/`. All 21 standard CSS viewport cases (320 through 2560 pixels) and 11 enlarged-text cases passed the geometry checks. Browser interactions confirmed the planning route, return-home link, mobile-menu Escape dismissal, focus return/scroll-lock reset and Dubai tab selection. These are simulated Chrome checks, not physical-device certification. V32 masters remain available in their original folder.
 
 The GitHub Pages output and source are released together. The own-domain upload uses `website/release/pardus-site-cpanel.zip`; publishing GitHub Pages does not upload this archive to cPanel.
 

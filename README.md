@@ -1,10 +1,10 @@
 # Pardus Luxury Escapes
 
-## Selected homepage section one — 24 October 2026
+## Photographic homepage and coastal continuation — 24 October 2026
 
-The Unfolding Earth design selected by the owner is now the homepage hero: a right-facing walking leopard above an atlas revealing the Maldives, Dubai and East Africa, with a transparent primary-logo header, navy Archivo headline and rectangular gold actions. Copy, navigation and buttons are live HTML. The compact phone artwork keeps the whole animal visible beneath the copy. The permanent preloader remains.
+The owner-approved photographic desktop and portrait backgrounds are now the homepage hero: a complete right-facing walking leopard on pale limestone, with an Indian Ocean coast, Dubai and East African savannah in the distance. Restrained header, headline and action sizes give the 100% desktop view more room. Phone copy stays in normal flow, with the portrait's empty sky behind it and the complete animal below. Copy, navigation and buttons are live HTML. The permanent preloader remains.
 
-Feature extraction, exact image-generation prompts, native PNG masters, browser evidence and responsive exports are documented in [website/source-assets/v32-unfolding-earth/ARTWORK.md](website/source-assets/v32-unfolding-earth/ARTWORK.md). The 24 October checks concern section one; historical V31 hero/pin browser assertions describe the retired composition. The current browser fixture is `website/tests/section-one-qa.html`.
+The new section-two coastal photograph continues the pale stone and fades through turquoise water into the destination stage. Native masters, exact built-in generation prompts, responsive exports and browser evidence are documented in [website/source-assets/v33-photographic-coast/ARTWORK.md](website/source-assets/v33-photographic-coast/ARTWORK.md). All 21 standard viewport checks and 11 enlarged-text checks passed, including text/animal clearance and the shared seam. Menu dismissal/focus return, the destination tabs and planning/home navigation were verified in Chrome. These are simulated viewport checks, not physical-device certification. The browser fixture is `website/tests/section-one-qa.html`; its temporary public copy must not be exported. V32 masters and checks remain historical evidence for the preceding Unfolding Earth composition.
 
 ## Earlier releases
 
@@ -61,7 +61,7 @@ Optional browser check (Python Playwright, any Chromium): serve the repository r
 - `website/src/styles/preloader.css`, `website/src/components/CinematicIntro.astro`, `website/src/scripts/preloader.ts`: the preloader. Do not remove.
 - `website/src/scripts/ui.ts`: header behaviour, mobile menu, scroll motion, pause control. `site.ts` holds the filters, journal and planner logic.
 - `website/src/data/icons.ts` with `Icon.astro` and `IconSprite.astro`: the SVG icon set.
-- `website/src/components/Hero.astro` and `website/src/scripts/hero-life.ts`: the V31 homepage hero. One art-directed picture (`pardus-hero-desktop-*` and `pardus-hero-phone-*`, from `website/source-assets/v31-hero/`, see its `ARTWORK.md`) shown at its native shape; the leopard's outline is a list of measured rectangles in `Hero.astro`; the script only places the pins. The only motion is a slow 1.00 to 1.03 scale (`hero-breathe` in `hero.css`).
+- `website/src/components/Hero.astro` and `website/src/scripts/hero-reference.ts`: the current static photographic hero, using `pardus-coastal-desktop-*` / `pardus-coastal-mobile-*` from `website/source-assets/v33-photographic-coast/`. Native ratios and measured animal bounds are retained. The layout observer adapts enlarged text without moving the leopard. `hero-life.ts` belongs to the historical V31 composition.
 - `website/src/components/ServicePicker.astro` with `scripts/picker.ts`: the "What should we arrange?" picker (a plain GET form that sends `?services=` to the enquiry). `StickyCta.astro` is the floating "Plan your escape" button on phones.
 - `website/src/components/FontFaces.astro`: local variable font declarations and preloads.
 - `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases. Regenerate the concept note after a change.

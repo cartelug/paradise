@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "width": 1942,
+    "height": 809,
+    "widths": [
+      960,
+      1440,
+      1942
+    ]
+  },
+  "mobile": {
+    "width": 941,
+    "height": 1672,
+    "widths": [
+      480,
+      768,
+      941
+    ]
+  },
+  "coast": {
+    "width": 1942,
+    "height": 809,
+    "widths": [
+      960,
+      1440,
+      1942
+    ]
+  }
+}

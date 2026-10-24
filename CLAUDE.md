@@ -1,10 +1,10 @@
 # Pardus Luxury Escapes: project rules
 
-## Current homepage reference — 24 October 2026
+## Current homepage reference — photographic coast, 24 October 2026
 
-The owner selected the Unfolding Earth homepage image and explicitly requested an accurate rebuild of section one. For this section, that instruction supersedes the earlier V31 resting-leopard artwork, coat pins, price dock, pill buttons and phone-first-screen composition below. Use the right-facing walking leopard on an unfolding atlas, warm ivory sky, navy Archivo headline, primary logo and flat rectangular gold actions. The new masters and feature extraction are in `website/source-assets/v32-unfolding-earth/`.
+After the Unfolding Earth rebuild, the owner requested a more photographic background and a less compact 100% zoom layout, approved matching desktop and mobile images, and asked to blend section one into a newly generated section two background and push main. The current art is a calm right-facing leopard walking on a pale stone ledge above an Indian Ocean coast, Dubai and savannah. Masters and exact prompts are in `website/source-assets/v33-photographic-coast/`. V32 masters remain available as history.
 
-The first section has live text and controls over clean art. At narrower widths, the copy and complete compact artwork use normal flow to prevent overlap. The artwork is static, a calmer treatment already allowed below. Keep the preloader, primary tagline, shared navigation, verified offer data and contacts. Later homepage sections retain their current design. Do not apply the retired V31 geometry or pin assertions to the new artwork; validate the current measured outline and responsive flow.
+The first section has live text and controls over clean art. Phones use the complete portrait: only its empty sky overlaps the normal-flow copy, so wrapping and enlarged text push the animal safely lower. Tablet copy also uses normal flow. Desktop typography, logo and actions are capped at restrained sizes. The art is static. Section two continues pale stone into a coastal cove, then deepens into the existing destination stage. Keep the preloader, tagline, shared navigation, verified prices and contacts. Later sections retain their design. These owner instructions supersede the retired V31 atlas/pins/price-dock/pill-button/phone-first-screen geometry; validate the current measured outline and responsive flow instead.
 
 ## HARD RULE: the Pardus preloader is permanent, on every page
 
