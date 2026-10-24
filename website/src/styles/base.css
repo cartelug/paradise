@@ -24,9 +24,9 @@
   --line-dark: rgb(236 215 168 / .2);
   --line-light: rgb(11 22 38 / .14);
 
-  /* One family for everything: Archivo. Headlines use it bold and tightly spaced; accents use its true italic. */
-  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: var(--font-ui);
+  /* Pairing: Playfair Display (headlines, accents, key figures) with Inter (body, labels, buttons, prices). */
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Playfair Display', 'Iowan Old Style', 'Palatino Linotype', Georgia, 'Times New Roman', serif;
 
   --gutter: clamp(20px, 5.2vw, 76px);
   --max: 1280px;
@@ -76,12 +76,12 @@ main { display: block; outline: none; }
 .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* Typography */
-h1, h2, h3, .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -.022em; font-variant-numeric: lining-nums; text-wrap: balance; }
+h1, h2, h3, .display { font-family: var(--font-display); font-weight: 600; letter-spacing: -.012em; font-variant-numeric: lining-nums; text-wrap: balance; }
 h1 { font-size: var(--fs-h1); line-height: 1.05; }
 h2 { font-size: var(--fs-h2); line-height: 1.1; }
-h3 { font-size: var(--fs-h3); line-height: 1.2; font-weight: 600; letter-spacing: -.012em; }
+h3 { font-size: var(--fs-h3); line-height: 1.2; font-weight: 600; letter-spacing: -.005em; }
 h4 { font-family: var(--font-ui); font-size: 1rem; font-weight: 600; letter-spacing: .01em; }
-em { font-style: italic; font-family: var(--font-ui); font-weight: 600; color: var(--gold-soft); }
+em { font-style: italic; font-family: var(--font-display); font-weight: 500; color: var(--gold-soft); }
 .sec--ivory em, .sec--sand em, .light em { color: var(--gold-ink); }
 p { text-wrap: pretty; }
 .lead { font-size: var(--fs-lead); line-height: 1.7; color: var(--mist); max-width: 58ch; }

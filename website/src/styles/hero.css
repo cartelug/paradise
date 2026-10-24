@@ -23,7 +23,7 @@
 .hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: clamp(156px, 11.4vw, 216px); width: 49%; max-width: 860px; }
 .hero--atlas .eyebrow { display: block; margin: 0 0 20px; color: #775e32; font-size: 11px; font-weight: 600; line-height: 1.4; letter-spacing: .28em; text-transform: uppercase; }
 .hero--atlas .eyebrow::before { display: none; }
-.hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(46px, 4.15cqw, 76px); font-weight: 650; line-height: 1.035; letter-spacing: -.045em; text-wrap: initial; }
+.hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(44px, 3.7cqw, 68px); font-weight: 600; line-height: 1.08; letter-spacing: -.018em; text-wrap: initial; }
 .hero--atlas .line { display: block; padding-block: .055em; margin-block: -.055em; }
 .hero--atlas .line > span { display: inline-block; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 .hero-text { margin-top: 23px; max-width: 48ch; color: #294659; font-size: clamp(16px, 1.15cqw, 18px); font-weight: 400; line-height: 1.55; letter-spacing: -.012em; text-wrap: initial; }

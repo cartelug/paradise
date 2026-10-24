@@ -1,6 +1,10 @@
 # V30.1: typography and motion notes
 
-## Type
+## Type (updated 24 October 2026: Playfair Display + Inter)
+
+The site now pairs **Playfair Display** (headlines weight 600, accents in its true italic at 500, key figures) with **Inter** (body, labels, buttons, prices with tabular numerals), both self-hosted from pinned `@fontsource-variable` packages. The notes below describe the earlier Archivo-only setting and remain for history; sizes and tracking for headlines were relaxed (about -.012em) for the serif.
+
+### Previous: Archivo only
 
 **Archivo only.** One typeface is used everywhere on the site: headlines, body text, labels, prices, buttons and the preloader. It is delivered locally as Latin-subset variable WOFF2 files from the pinned `@fontsource-variable/archivo` package (roman and italic), with the licence in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the two faces and preloads the roman and, on pages whose hero uses it, the italic.
 

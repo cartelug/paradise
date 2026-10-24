@@ -66,7 +66,7 @@ test('art-directed scenes have separate responsive desktop and mobile art', asyn
 });
 
 test('production typography is local and does not call Fontshare', async () => {
-  for (const file of ['Archivo-Latin-Variable.woff2', 'Archivo-Latin-Italic-Variable.woff2', 'Archivo-OFL.txt']) {
+  for (const file of ['Inter-Latin-Variable.woff2', 'Inter-Latin-Italic-Variable.woff2', 'Inter-OFL.txt', 'PlayfairDisplay-Latin-Variable.woff2', 'PlayfairDisplay-Latin-Italic-Variable.woff2', 'PlayfairDisplay-OFL.txt']) {
     await access(new URL(`../public/fonts/${file}`, import.meta.url));
   }
   const layout = await readFile(new URL('../src/layouts/Layout.astro', import.meta.url), 'utf8');

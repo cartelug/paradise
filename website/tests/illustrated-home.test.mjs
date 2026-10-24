@@ -60,8 +60,7 @@ test('designed headings retain their exact semantic text and genuine transparent
   assert.ok(h1);
   assert.match(h1, /class="art-heading-copy"/);
   assert.match(h1.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' '), /Extraordinary journeys\. Personally curated\./);
-  assert.match(h1, /class="art-heading-visual" aria-hidden="true"/);
-  assert.match(h1, /data-lettering-image/);
+  assert.doesNotMatch(h1, /art-heading-visual|<img/);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
 });
 

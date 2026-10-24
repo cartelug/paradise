@@ -2,20 +2,9 @@
 .travel-emblem { display: block; flex: none; width: var(--emblem-size, 64px); height: var(--emblem-size, 64px); max-width: 100%; object-fit: contain; transition: transform .45s var(--ease); }
 .art-heading { position: relative; display: grid; align-items: start; min-width: 0; }
 .art-heading-copy { display: block; grid-area: 1 / 1; min-width: 0; max-width: 100%; }
-.art-heading-visual { display: none; grid-area: 1 / 1; width: 100%; max-width: 100%; line-height: 0; pointer-events: none; }
-.art-heading-visual img { display: block; width: 100%; height: auto; object-fit: contain; }
-html.js .art-heading-visual { display: block; visibility: hidden; }
-html.js .art-heading[data-art-ready] > .art-heading-copy { clip-path: inset(50%); }
-html.js .art-heading[data-art-ready] > .art-heading-visual { visibility: visible; }
-.hero--atlas h1.art-heading .art-heading-visual { width: min(100%, 10.4em); }
-.escapes-head .art-heading-visual { width: min(100%, 10em); }
 .hero--atlas .eyebrow:has(.travel-emblem) { display: flex; align-items: center; gap: 9px; }
 .hero--atlas .eyebrow .travel-emblem { width: 28px; height: 28px; }
 
-/* Enlarged actual text uses the real heading and wraps freely. The visible image
-   has empty alt and never duplicates the heading for assistive technology. */
-.home[data-enlarged-lettering] .art-heading-visual { display: none; }
-.home[data-enlarged-lettering] .art-heading[data-art-ready] > .art-heading-copy { clip-path: none; }
 .scene-title { display: flex; gap: 16px; align-items: center; min-width: 0; }
 .scene-title h3 { min-width: 0; overflow-wrap: anywhere; }
 .scene-title h3 a, .dest-top--illustrated h3 a { display: inline-flex; align-items: center; max-width: 100%; min-height: 44px; }
@@ -40,7 +29,6 @@ html.js .art-heading[data-art-ready] > .art-heading-visual { visibility: visible
   .home .dest:hover .dest-top .travel-emblem { transform: translateY(-3px); }
 }
 @media (max-width: 767px) {
-  .hero--atlas h1.art-heading .art-heading-visual { width: 100%; }
   .hero--atlas .eyebrow:has(.travel-emblem) { margin-bottom: 15px; }
   .hero--atlas .eyebrow .travel-emblem { width: 25px; height: 25px; }
   .scene-title { gap: 12px; }
@@ -57,18 +45,11 @@ html.js .art-heading[data-art-ready] > .art-heading-visual { visibility: visible
   .picker--illustrated .pick-face { padding: 10px; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  html.is-ready .hero .art-heading[data-art-ready] > .art-heading-visual,
-  html.motion-ready .escapes-head .art-heading[data-art-ready].is-in > .art-heading-visual { animation: lettering-arrive 1.25s var(--ease) .08s both; }
   html.is-ready .hero .eyebrow .travel-emblem { animation: emblem-arrive .9s var(--ease) .15s both; }
   html.motion-ready .picker-group.is-in .travel-emblem { animation: emblem-arrive .8s var(--ease) calc(var(--i, 0) * 25ms) both; }
   html.motion-ready .promise.is-in > .travel-emblem { animation: emblem-arrive .9s var(--ease) .08s both; }
 }
-@keyframes lettering-arrive { from { opacity: 0; transform: translateY(14px); clip-path: inset(0 100% 0 0); } to { opacity: 1; transform: none; clip-path: inset(0); } }
 @keyframes emblem-arrive { from { opacity: 0; transform: translateY(12px) scale(.94); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
-  .art-heading-visual, .travel-emblem { animation: none !important; transition: none !important; transform: none !important; clip-path: none !important; }
-}
-@media print {
-  .art-heading-visual { display: none !important; }
-  .art-heading > .art-heading-copy { clip-path: none !important; }
+  .travel-emblem { animation: none !important; transition: none !important; transform: none !important; clip-path: none !important; }
 }
