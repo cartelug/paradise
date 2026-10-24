@@ -1,5 +1,15 @@
 # Pardus Luxury Escapes — Final destination presentation
 
+## Selected first homepage section — 24 October 2026
+
+The owner selected the Unfolding Earth mockup and requested an accurate implementation of section one. The new static artwork shows a walking leopard over an unfolding atlas containing the Maldives, Dubai and East Africa. The primary Pardus logo, five shared navigation labels, exact headline and supporting copy, flat gold planning action and outlined destinations action are live page elements. The desktop proportions follow the selected image; phones use a compact complete artwork below the copy.
+
+The permanent preloader, verified offer data and later homepage sections remain. Enlarged text can use a stacked layout on wide screens. A small layout observer handles that adaptation without adding animal motion or pointer reactions.
+
+The source masters, feature table, exact built-in image-generation prompts and current QA evidence live in `website/source-assets/v32-unfolding-earth/`. All 18 standard CSS viewport cases (320 through 2560 pixels) and nine enlarged-text cases passed the section-one geometry checks. Browser interaction checks confirmed the planning route, return-home link, mobile-menu Escape dismissal, focus return and scroll-lock reset. These are simulated Chrome checks, not physical-device certification.
+
+The GitHub Pages output and source are released together. The own-domain upload uses `website/release/pardus-site-cpanel.zip`; publishing GitHub Pages does not upload this archive to cPanel.
+
 Release V31: 20 October 2026. Own domain: https://pardusescapes.com (cPanel zip). GitHub Pages copy: published from `main` at https://cartelug.github.io/paradise/.
 
 ## Responsive and Dubai imagery refinement — 23 October 2026

@@ -1,5 +1,11 @@
 # Pardus Luxury Escapes: project rules
 
+## Current homepage reference — 24 October 2026
+
+The owner selected the Unfolding Earth homepage image and explicitly requested an accurate rebuild of section one. For this section, that instruction supersedes the earlier V31 resting-leopard artwork, coat pins, price dock, pill buttons and phone-first-screen composition below. Use the right-facing walking leopard on an unfolding atlas, warm ivory sky, navy Archivo headline, primary logo and flat rectangular gold actions. The new masters and feature extraction are in `website/source-assets/v32-unfolding-earth/`.
+
+The first section has live text and controls over clean art. At narrower widths, the copy and complete compact artwork use normal flow to prevent overlap. The artwork is static, a calmer treatment already allowed below. Keep the preloader, primary tagline, shared navigation, verified offer data and contacts. Later homepage sections retain their current design. Do not apply the retired V31 geometry or pin assertions to the new artwork; validate the current measured outline and responsive flow.
+
 ## HARD RULE: the Pardus preloader is permanent, on every page
 
 The animated brand opening (the "preloader") must be present on **every page of every build, from now on, with no exceptions**. Never remove it, disable it, make it conditional, replace it with a plain loader, or add an opt-out to `Layout.astro`. This was set by the site owner on 14 October 2026 after the V29 release removed it, and extended the same day to every page.

@@ -2,6 +2,8 @@
 import Brand from './Brand.astro';
 import Icon from './Icon.astro';
 import { navigation, path, site } from '../data/site';
+interface Props { home?: boolean; }
+const { home = false } = Astro.props;
 const current = Astro.url.pathname.split('/').pop() || '';
 const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') && current !== 'journey.html' ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
 const primary = [
@@ -20,13 +22,13 @@ const more = [
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light /></a>
+  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light={!home} /></a>
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
   <div class="header-tools">
     <button type="button" class="header-saved requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /><span>Saved trips</span><small data-folio-count hidden>0</small></button>
-    <a class="btn btn--gold btn--sm header-cta" href={path('journey.html')}>Plan your escape</a>
+    <a class="btn btn--gold btn--sm header-cta" href={path('journey.html')}>Plan your escape{home && <Icon name="arrow-right" />}</a>
     <button type="button" class="menu-toggle requires-js" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog"><Icon name="menu" /></button>
   </div>
   <div class="page-progress" aria-hidden="true"><span></span></div>

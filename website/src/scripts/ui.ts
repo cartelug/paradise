@@ -3,7 +3,7 @@ import { initFolio } from './folio';
 // Header, mobile menu and scroll motion for every page. Content is complete in the HTML without this script.
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-const desktop = window.matchMedia('(min-width: 1200px)');
+const desktop = window.matchMedia(document.body.classList.contains('home') ? '(min-width: 1000px)' : '(min-width: 1200px)');
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
 /* Mobile menu */

@@ -1,4 +1,12 @@
-# Pardus Luxury Escapes: V31
+# Pardus Luxury Escapes
+
+## Selected homepage section one — 24 October 2026
+
+The Unfolding Earth design selected by the owner is now the homepage hero: a right-facing walking leopard above an atlas revealing the Maldives, Dubai and East Africa, with a transparent primary-logo header, navy Archivo headline and rectangular gold actions. Copy, navigation and buttons are live HTML. The compact phone artwork keeps the whole animal visible beneath the copy. The permanent preloader remains.
+
+Feature extraction, exact image-generation prompts, native PNG masters, browser evidence and responsive exports are documented in [website/source-assets/v32-unfolding-earth/ARTWORK.md](website/source-assets/v32-unfolding-earth/ARTWORK.md). The 24 October checks concern section one; historical V31 hero/pin browser assertions describe the retired composition. The current browser fixture is `website/tests/section-one-qa.html`.
+
+## Earlier releases
 
 V31 is the launch release for **https://pardusescapes.com**: a new owner-approved leopard hero (a resting leopard in left profile with travel scenes woven into its coat), the four live mailboxes, an own-domain build and a ready-to-upload cPanel zip. See the V31 section at the top of [HANDOVER.md](HANDOVER.md).
 

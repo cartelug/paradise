@@ -1,0 +1,246 @@
+{
+  "date": "2026-10-24",
+  "method": "Cloud Chrome, same-origin responsive iframe, 100% page zoom. Enlarged-text checks double the actual rendered text sizes in the hero and header. Physical devices and Safari are not certified.",
+  "normal": [
+    {
+      "viewport": "320x568",
+      "clientWidth": 305,
+      "heroHeight": 627.640625,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "360x800",
+      "clientWidth": 345,
+      "heroHeight": 661.5625,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "375x812",
+      "clientWidth": 360,
+      "heroHeight": 677.296875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "390x844",
+      "clientWidth": 375,
+      "heroHeight": 693.03125,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "414x896",
+      "clientWidth": 399,
+      "heroHeight": 718.234375,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "430x932",
+      "clientWidth": 415,
+      "heroHeight": 735,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "600x960",
+      "clientWidth": 585,
+      "heroHeight": 905.921875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "601x960",
+      "clientWidth": 586,
+      "heroHeight": 746.734375,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "768x1024",
+      "clientWidth": 753,
+      "heroHeight": 873.046875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "820x1180",
+      "clientWidth": 805,
+      "heroHeight": 912.28125,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "999x900",
+      "clientWidth": 984,
+      "heroHeight": 1044.84375,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1000x768",
+      "clientWidth": 985,
+      "heroHeight": 560.3125,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1024x768",
+      "clientWidth": 1009,
+      "heroHeight": 573.96875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1280x800",
+      "clientWidth": 1265,
+      "heroHeight": 719.59375,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1440x900",
+      "clientWidth": 1425,
+      "heroHeight": 810.609375,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1536x864",
+      "clientWidth": 1521,
+      "heroHeight": 865.21875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "1920x1080",
+      "clientWidth": 1905,
+      "heroHeight": 1083.65625,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    },
+    {
+      "viewport": "2560x1440",
+      "clientWidth": 2545,
+      "heroHeight": 1447.71875,
+      "pageOverflow": 0,
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": []
+    }
+  ],
+  "enlargedText": [
+    {
+      "viewport": "320x568",
+      "overlap": [],
+      "overflow": [],
+      "pageOverflow": 0,
+      "smallTargets": []
+    },
+    {
+      "viewport": "360x800",
+      "overlap": [],
+      "overflow": [],
+      "pageOverflow": 0,
+      "smallTargets": []
+    },
+    {
+      "viewport": "375x812",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "390x844",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "414x896",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "430x932",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "768x1024",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "1024x768",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    },
+    {
+      "viewport": "1440x900",
+      "overlap": [],
+      "overflow": [],
+      "smallTargets": [],
+      "pageOverflow": 0,
+      "clipped": []
+    }
+  ],
+  "interactions": {
+    "mobileMenu": "Opened; Escape closed it; aria-expanded and scroll lock reset; focus returned to Open menu.",
+    "primaryAction": "Navigated to /journey.html and displayed Your next escape. Let’s arrange it.",
+    "brandLink": "Returned to / and displayed the selected hero.",
+    "preloader": "Retained and released both navigation transitions."
+  }
+}

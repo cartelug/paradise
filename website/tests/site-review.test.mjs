@@ -20,7 +20,7 @@ test('the five navigation labels are the same on every page, with Plan your esca
     assert.ok(nav, `${page} has no main navigation`);
     const found = [...nav[1].matchAll(/<a [^>]*>([^<]+)<\/a>/g)].map(match => match[1]);
     assert.deepEqual(found, labels, `${page} navigation differs`);
-    assert.match(markup, /class="btn btn--gold btn--sm header-cta"[^>]*>Plan your escape</, `${page} lost the header action`);
+    assert.match(markup, /class="btn btn--gold btn--sm header-cta"[^>]*>Plan your escape(?:<svg|<\/a>)/, `${page} lost the header action`);
   }
 });
 
@@ -30,7 +30,7 @@ test('one primary tagline is used with the logo: hero, opening, footer, search d
   assert.ok(config.includes(`tagline: '${tagline}'`), 'site.tagline is the primary tagline');
   const home = html['index.html'];
   assert.match(home, /<h1 id="hero-title">[\s\S]*Extraordinary[\s\S]*journeys\.[\s\S]*Personally curated\./);
-  assert.match(home, /Bespoke luxury travel from Africa to the world, thoughtfully arranged around you\./);
+  assert.match(text(home), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
   assert.ok(home.includes('"slogan":"Extraordinary journeys. Personally curated."'), 'structured data carries the tagline');
   for (const [page, markup] of Object.entries(html)) {
     assert.ok(text(markup).includes(tagline), `${page} (footer or opening) does not carry the primary tagline`);

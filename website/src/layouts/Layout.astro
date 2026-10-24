@@ -73,7 +73,7 @@ const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');
     <BrandSprite />
     <CinematicIntro label={introLabel} />
     <div data-pardus-shell>
-      <Header />
+      <Header home={className?.split(' ').includes('home')} />
       <Folio />
       <main id="main" tabindex="-1"><slot /></main>
       <Footer simple={simpleFooter} />

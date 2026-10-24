@@ -1,216 +1,127 @@
-/* PARDUS V31: the leopard hero.
-   One owner-approved artwork shown at its native aspect ratio: 3:2 landscape art on landscape screens, 2:3 portrait art on
-   phones, and landscape art on tablets and desktops. The stage follows the picture, so the copy, the price bar, the pins and the leopard's
-   measured outline (.leopard-box, in picture percentages) all stay where they were placed on the artwork at every width.
-   Landscape: copy in the open sky and water on the left, price bar across the bottom 12% on a translucent navy backing.
-   Portrait phones: headline in the sky above the jet, buttons on the lagoon below the paws, and price tiles below the picture.
-   Portrait tablets: headline and actions first, then the full landscape art and prices.
-   The only motion on the picture is a very slow scale, 1.00 to 1.03 and back; nothing glows, follows or reacts. */
-.hero { --sky: rgb(4 29 60); position: relative; isolation: isolate; overflow: hidden; background: var(--sky); }
-.hero-stage { position: relative; width: 100%; aspect-ratio: 3 / 2; container-type: inline-size; }
-.hero-art { position: absolute; inset: 0; overflow: hidden; }
+/* V32: the selected Unfolding Earth reference, rebuilt as live HTML over clean artwork.
+   Desktop follows the reference's 1024 x 582 composition. Smaller screens keep the
+   complete artwork below the copy; content height follows the actual text. */
+.hero--atlas {
+  --atlas-ink: #05213e;
+  --atlas-gold: #a08040;
+  --atlas-paper: #f8f4ec;
+  --atlas-gutter: clamp(20px, 4.3vw, 94px);
+  position: relative;
+  isolation: isolate;
+  color: var(--atlas-ink);
+  background: var(--atlas-paper);
+}
+.hero-stage { position: relative; width: 100%; aspect-ratio: 1663 / 946; container-type: inline-size; overflow: clip; background: linear-gradient(90deg, #f1efea, #efeae6 25%, #ecded5 50%, #bbbdc5 75%, #899eb2); }
+.hero-art { position: absolute; inset: 2.2% 0 -2.2%; }
+.hero-art::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgb(248 244 236 / .78), rgb(248 244 236 / .55) 29%, transparent 44%); mask-image: linear-gradient(#000 0%, #000 59%, transparent 82%); }
 .hero-picture, .hero-picture img { display: block; width: 100%; height: 100%; }
-.hero-picture img { object-fit: cover; transform-origin: 32% 58%; animation: hero-breathe 20s ease-in-out infinite alternate; will-change: transform; }
-@keyframes hero-breathe { from { transform: scale(1); } to { transform: scale(1.03); } }
-/* The leopard's outline, as measured rectangles (see Hero.astro). Invisible; scripts and tests measure against them. */
+.hero-picture img { object-fit: contain; }
 .leopard-outline { position: absolute; inset: 0; pointer-events: none; }
 .leopard-box { position: absolute; left: var(--dl); top: var(--dt); width: var(--dw); height: var(--dh); visibility: hidden; }
-
-/* Legibility: a quiet darkening under the header and behind the copy, faded out before it reaches the animal. */
-.hero-shade { position: absolute; inset: 0; pointer-events: none; background:
-  linear-gradient(180deg, rgb(3 14 32 / .5) 0%, rgb(3 14 32 / 0) 11%),
-  linear-gradient(90deg, rgb(3 14 32 / .5) 0%, rgb(3 14 32 / .22) 17%, rgb(3 14 32 / 0) 26%); }
-
-/* Copy, in picture coordinates: the headline starts at 39% of the picture, below the jet's flight lines, and the column ends
-   before the leopard's chin and chest. Buttons stay left of the paws. */
-.hero-copy { position: absolute; left: var(--gutter); top: 39%; width: 31%; transform: none; pointer-events: none; }
-.hero-copy a, .hero-copy button { pointer-events: auto; }
-.hero .eyebrow { position: absolute; bottom: 100%; left: 0; margin: 0 0 clamp(10px, 1.1cqw, 18px); white-space: nowrap; text-shadow: 0 1px 12px rgb(2 8 18 / .7); }
-.hero h1 { font-size: clamp(1.75rem, 2.9cqw, 4.25rem); line-height: 1.06; letter-spacing: -.018em; color: #fff; filter: drop-shadow(0 2px 14px rgb(2 8 18 / .55)); }
-.hero h1 em { color: var(--gold-soft); background: linear-gradient(100deg, #d9bc82 0%, #f3e0b0 34%, #fff6dc 50%, #f3e0b0 66%, #d9bc82 100%) 100% 0 / 260% 100% no-repeat; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; padding-right: .06em; animation: gold-sheen 8s ease-in-out 2.6s infinite; }
-@keyframes gold-sheen { 0%, 55% { background-position: 100% 0; } 100% { background-position: 0 0; } }
-@media (forced-colors: active) { .hero h1 em { -webkit-text-fill-color: currentColor; background: none; } }
-.hero .line { display: block; overflow: hidden; padding: 0 .14em .32em; margin: 0 -.14em -.28em; }
-.hero .line > span { display: block; }
-.hero-text { max-width: 30em; margin-top: clamp(10px, 1.1cqw, 20px); font-size: clamp(.9375rem, 1.18cqw, 1.375rem); line-height: 1.5; color: #e6ecf5; text-shadow: 0 1px 2px rgb(2 8 18 / .8), 0 0 22px rgb(2 8 18 / .85); }
-.hero .actions { display: grid; justify-items: start; gap: clamp(8px, .8cqw, 12px); width: max-content; margin-top: clamp(14px, 1.7cqw, 30px); }
-/* The buttons stop well short of the paws (which start at 26.5% of the picture). */
-.hero .actions { max-width: calc(26.5cqw - var(--gutter) - 16px); }
-.hero .actions .btn { min-width: 0; width: 100%; justify-content: space-between; gap: clamp(8px, .9cqw, 14px); font-size: clamp(.875rem, 1.05cqw, 1.0625rem); white-space: normal; text-align: center; text-wrap: balance; }
-.hero .actions .btn:has(> .icon-arrow-right, > .icon-arrow-down) { padding-left: clamp(16px, 1.8cqw, 28px); }
-.hero .actions .btn--ghost { justify-content: center; border-color: rgb(236 215 168 / .55); background: rgb(6 14 30 / .5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-
-/* The price bar: across the bottom of the picture, below the paws, on a translucent navy backing. */
-.hero-rail { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; border-top: 1px solid rgb(236 215 168 / .22);
-  background: linear-gradient(180deg, rgb(4 14 30 / .42), rgb(4 14 30 / .72)); -webkit-backdrop-filter: blur(14px) saturate(1.15); backdrop-filter: blur(14px) saturate(1.15); }
-.hero-rail-inner { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(16px, 2.4cqw, 44px); padding: clamp(8px, .9cqw, 16px) var(--gutter); }
-.hero-rail-head { display: flex; align-items: center; gap: 12px; font-size: .8125rem; line-height: 1.35; color: var(--mist); }
-.hero-rail-head > span { display: grid; max-width: 13em; }
-.hero-rail-head strong { font-weight: 600; color: var(--gold-soft); letter-spacing: .02em; }
-.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--line-dark); border-radius: 999px; background: rgb(5 12 26 / .4); color: var(--mist); font-size: .8125rem; font-weight: 600; white-space: nowrap; }
-.motion-toggle:hover { border-color: var(--gold); color: var(--gold-soft); }
-.motion-toggle .icon { width: 16px; height: 16px; }
-.motion-toggle .icon-play { display: none; }
-.motion-toggle[aria-pressed='true'] .icon-play { display: block; }
-.motion-toggle[aria-pressed='true'] .icon-pause { display: none; }
-.hero-rail-head { order: 3; }
-.hero-rail-inner { grid-template-columns: minmax(0, 1fr) auto; }
-.hero-rail-head > span { display: none; }
-.hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.hero-offers a { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 10px; padding: 8px clamp(10px, 1.6cqw, 26px); border-left: 1px solid var(--line-dark); border-radius: 4px; text-decoration: none; transition: background-color .3s; }
-.hero-offers a:first-child { border-left: 0; padding-left: 0; }
-.hero-offers a:hover { background: rgb(236 215 168 / .06); }
-.offer-thumb { display: none; }
-.hero-offers .name { grid-column: 1; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px; font-weight: 700; font-size: clamp(.9375rem, 1.15cqw, 1.25rem); line-height: 1.15; color: #fff; }
-.hero-offers .name small { font-size: .75rem; font-weight: 500; color: var(--mist-2); }
-.hero-offers .amount { grid-column: 1; white-space: nowrap; font-size: clamp(.8125rem, .95cqw, 1rem); font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; }
-.hero-offers .offer-go { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; color: var(--gold); }
-.hero-offers .offer-go .icon { width: 18px; height: 18px; transition: transform .35s var(--ease); }
-.hero-offers a:hover .offer-go .icon { transform: translateX(4px); }
-/* Wide screens: each price in the bar gets its photograph, and the bar says what it is. */
-@media (min-width: 1280px) and (min-aspect-ratio: 11/10) {
-  .hero-rail-head > span { display: grid; }
-  .hero-rail-head { order: 0; }
-  .hero-rail-inner { grid-template-columns: auto minmax(0, 1fr); }
-  .hero-offers a { grid-template-columns: 48px minmax(0, 1fr) auto; column-gap: 14px; }
-  .hero-offers a:first-child { padding-left: clamp(10px, 1.6cqw, 26px); border-left: 1px solid var(--line-dark); }
-  .hero-offers .offer-thumb { display: block; grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px rgb(236 215 168 / .3), 0 6px 16px rgb(2 8 18 / .35); }
-  .hero-offers .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-  .hero-offers a:hover .offer-thumb img { transform: scale(1.1); }
-  .hero-offers .name, .hero-offers .amount { grid-column: 2; }
-  .hero-offers .offer-go { grid-column: 3; }
+.hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: 22.3%; width: 46%; }
+.hero--atlas .eyebrow { display: block; margin: 0 0 11px; color: #936e2e; font-size: clamp(10px, 1.17cqw, 20px); font-weight: 500; line-height: 1.4; letter-spacing: .43em; text-transform: uppercase; }
+.hero--atlas .eyebrow::before { display: none; }
+.hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(42px, 4.8cqw, 100px); font-weight: 700; line-height: .965; letter-spacing: -.042em; text-wrap: initial; }
+.hero--atlas .line { display: block; overflow: hidden; padding-block: .055em; margin-block: -.055em; }
+.hero--atlas .line > span { display: inline-block; white-space: nowrap; }
+.hero-text { margin-top: clamp(12px, 1.05cqw, 22px); max-width: 44cqw; color: var(--atlas-ink); font-size: clamp(15px, 1.66cqw, 30px); font-weight: 400; line-height: 1.3; letter-spacing: -.018em; text-wrap: initial; }
+.hero-text > span { display: block; }
+.hero--atlas .actions { gap: clamp(12px, 1.2cqw, 24px); margin-top: clamp(15px, 1.5cqw, 30px); }
+.hero--atlas .btn, .home .header-cta {
+  min-height: 44px; padding: 10px 21px; border-radius: 4px; font-size: clamp(13px, 1.27vw, 22px); font-weight: 600; line-height: 1.15; letter-spacing: -.012em;
+  box-shadow: none; text-wrap: initial;
 }
+.hero--atlas .btn { min-width: 15.9cqw; min-height: max(44px, 4cqw); }
+.hero--atlas .btn > span { min-width: 0; overflow-wrap: anywhere; }
+.hero--atlas .btn--gold { min-width: 16.3cqw; }
+.hero--atlas .btn--gold, .home .header-cta { background: #a08040; border-color: #a08040; color: #fff; }
+.hero--atlas .btn--ghost { background: rgb(255 255 255 / .54); color: var(--atlas-ink); border-color: #a68e64; backdrop-filter: none; }
+.hero--atlas .btn::after, .home .header-cta::after { display: none; }
+.hero--atlas .btn > .icon, .home .header-cta > .icon { box-sizing: border-box; width: 16px; height: 16px; padding: 0; border-radius: 0; background: none; color: currentColor; }
+.hero--atlas .btn--gold:hover, .home .header-cta:hover { background: #896b31; border-color: #896b31; box-shadow: none; }
+.hero--atlas .btn--ghost:hover { background: rgb(255 255 255 / .84); border-color: #6e552a; }
+.hero--atlas .btn:focus-visible, .home .header-cta:focus-visible { outline: 2px solid var(--atlas-ink, #05213e); outline-offset: 4px; border-radius: 4px; }
 
-/* The picture as a map of the offer: gold pins on the travel scenes in the coat. Pins live in picture coordinates; their
-   labels take turns opening, and open on hover or focus. They never touch the head, the paws or the flight lines. */
-.hl-spots { position: absolute; inset: 0; }
-.spot { position: absolute; left: var(--dx); top: var(--dy); display: grid; place-items: center; width: 44px; height: 44px; translate: -50% -50%; text-decoration: none; pointer-events: auto; -webkit-tap-highlight-color: transparent; }
-.spot-dot { position: relative; width: 14px; height: 14px; border: 2px solid #fff7e4; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff3cf, var(--gold) 60%, #a77d34); box-shadow: 0 0 0 4px rgb(217 188 130 / .28), 0 4px 14px rgb(2 8 18 / .6); transition: transform .35s var(--ease); }
-.spot-dot::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgb(255 236 190 / .85); animation: spot-ping 2.8s cubic-bezier(.2, .7, .3, 1) calc(var(--k, 0) * .9s) infinite; }
-@keyframes spot-ping { 0% { transform: scale(1); opacity: .9; } 70%, 100% { transform: scale(3.2); opacity: 0; } }
-.spot:hover .spot-dot, .spot:focus-visible .spot-dot { transform: scale(1.25); }
-.spot:focus-visible { outline: none; }
-.spot:focus-visible .spot-dot { outline: 2px solid var(--focus); outline-offset: 6px; }
-.spot-label { position: absolute; display: grid; gap: 1px; width: max-content; max-width: 210px; padding: 8px 13px 9px; border: 1px solid rgb(236 215 168 / .45); border-radius: 14px; background: linear-gradient(180deg, rgb(14 30 54 / .9), rgb(5 12 26 / .92)); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 14px 34px rgb(2 8 18 / .5); color: #fff; text-align: left; pointer-events: none; opacity: 0; transition: opacity .35s ease, transform .45s var(--ease); }
-.spot-label strong { font-size: .875rem; font-weight: 700; letter-spacing: -.005em; }
-.spot-meta { display: block; font-size: .75rem; font-weight: 600; color: var(--gold-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.spot-meta span + span::before { content: ' · '; }
-.spot[data-place='right'] .spot-label { left: 36px; top: 50%; transform: translate(-6px, -50%); }
-.spot[data-place='left'] .spot-label { right: 36px; top: 50%; transform: translate(6px, -50%); }
-.spot[data-place='above'] .spot-label { bottom: 38px; left: 50%; transform: translate(-50%, 6px); }
-.spot[data-place='below'] .spot-label { top: 38px; left: 50%; transform: translate(-50%, -6px); }
-.spot[data-off='true'] { display: none; }
-.hl-spots.is-measuring .spot-label { transition: none !important; }
-/* Labels take turns, one at a time; the cycle length follows how many pins have room at this screen size. */
-.hl-spots[data-count='1'] .spot-label { animation: spot-show-1 9s var(--ease) 1s infinite; }
-.hl-spots[data-count='2'] .spot-label { animation: spot-show-2 10s var(--ease) calc(.6s + var(--k, 0) * 5s) infinite; }
-.hl-spots[data-count='3'] .spot-label { animation: spot-show-3 15s var(--ease) calc(.6s + var(--k, 0) * 5s) infinite; }
-@keyframes spot-show-1 { 0% { opacity: 0; } 6%, 52% { opacity: 1; } 60%, 100% { opacity: 0; } }
-@keyframes spot-show-2 { 0% { opacity: 0; } 5%, 40% { opacity: 1; } 47%, 100% { opacity: 0; } }
-@keyframes spot-show-3 { 0% { opacity: 0; } 4%, 26% { opacity: 1; } 31%, 100% { opacity: 0; } }
-.hl-spots .spot:hover .spot-label, .hl-spots .spot:focus-visible .spot-label { animation: none; opacity: 1; }
-.spot[data-place='right']:is(:hover, :focus-visible) .spot-label, .spot[data-place='left']:is(:hover, :focus-visible) .spot-label { transform: translate(0, -50%); }
-.spot[data-place='above']:is(:hover, :focus-visible) .spot-label, .spot[data-place='below']:is(:hover, :focus-visible) .spot-label { transform: translate(-50%, 0); }
-html:not(.js) .hl-spots { display: none; }
-.hl-spots { opacity: 0; visibility: hidden; }
-.hero[data-spots='ready'] .hl-spots { opacity: 1; visibility: visible; transition: opacity 1s ease; }
+/* Homepage header only: all five navigation labels and the single gold action. */
+.home .site-header { display: grid; grid-template-columns: 17.2vw minmax(0, 1fr) 16.1vw; gap: 6vw; height: clamp(100px, 10.8vw, 180px); padding: 1.3vw 4.3vw 0; align-items: start; }
+.home .site-header::before { display: none; }
+.home .site-header > .brand-link { width: 100%; max-width: 286px; }
+.home .site-header > .brand-link .brand-svg { filter: none; }
+.home .desktop-nav { gap: 0; justify-content: space-between; margin: 0; padding-top: 1.4vw; }
+.home .desktop-nav a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin-block: -9px; padding: 3px 0 9px; color: #05213e; font-size: clamp(11px, 1.075vw, 19px); font-weight: 400; line-height: 1.3; letter-spacing: -.012em; }
+.home .desktop-nav a:hover, .home .desktop-nav a:focus-visible { color: #805f24; }
+.home .header-tools { width: 100%; margin: .7vw 0 0; gap: 10px; }
+.home .header-saved { display: none; }
+.home .header-cta { display: inline-flex; width: 100%; min-height: max(44px, 4vw); padding-inline: 14px; gap: 12px; white-space: nowrap; }
+.home .site-header.is-scrolled { height: clamp(82px, 8vw, 118px); padding-top: 10px; background: rgb(248 244 236 / .96); box-shadow: 0 1px 0 rgb(5 33 62 / .1); backdrop-filter: blur(16px); }
+.home .site-header.is-scrolled > .brand-link { width: min(100%, 180px); }
+.home .site-header.is-scrolled .desktop-nav { padding-top: 12px; }
+.home .site-header.is-scrolled .header-tools { margin-top: 0; }
 
-/* Stacked: phones and portrait screens, with the portrait art. The headline sits in the open sky above the jet (the sky
-   continues above the picture in its own colour), the price tiles sit on the dark water below the paws, and the buttons and
-   supporting line follow directly under the picture, so the first screen of a phone holds the whole offer. */
-@media (max-width: 760px) {
-  .hero { --sky: rgb(2 25 58); }
-  .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 6px); padding-bottom: max(18px, env(safe-area-inset-bottom)); }
-  .hero-copy { display: contents; }
-  .hero .eyebrow { display: none; }
-  .hero h1, .hero-text, .hero .actions { margin-inline: var(--gutter); }
-  .hero h1 { order: 1; position: relative; z-index: 2; font-size: min(clamp(1.75rem, 8vw, 4.4rem), 10vw); }
-  /* The art follows the headline. Its jet sits 21% down the picture (31.5% of the width); the picture is pulled up under the
-     headline so that the jet starts 24px below it, in the same unbroken sky. */
-  .hero-art { order: 2; position: relative; inset: auto; width: 100%; aspect-ratio: 2 / 3; margin-top: calc(24px - 31.5cqw); flex: none;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%); mask-image: linear-gradient(180deg, transparent 0, #000 9%); }
-  .hero-picture img { transform-origin: 40% 58%; }
+@media (min-width: 1000px) {
+  .home .desktop-nav { display: flex; }
+  .home .menu-toggle { display: none !important; }
+  .home .menu { display: none !important; }
+}
+@media (max-width: 999px) {
+  .home { --header-h: 88px; }
+  .home .site-header { display: flex; align-items: center; height: var(--header-h); padding: 10px var(--gutter); gap: 20px; }
+  .home .site-header > .brand-link { width: 150px; }
+  .home .desktop-nav { display: none; }
+  .home .header-tools { width: auto; margin: 0 0 0 auto; gap: 12px; }
+  .home .header-cta { min-height: 44px; width: auto; padding-inline: 18px; font-size: 13px; }
+  .home .menu-toggle { width: 44px; height: 44px; border-color: rgb(5 33 62 / .25); color: #05213e; background: rgb(255 255 255 / .35); border-radius: 4px; backdrop-filter: none; }
+  .home .site-header.is-scrolled { height: var(--header-h); padding-top: 10px; }
+  .hero-stage { display: grid; aspect-ratio: auto; background: var(--atlas-paper); }
+  .hero-copy { position: relative; grid-row: 1; left: auto; top: auto; width: 100%; padding: calc(var(--header-h) + 28px) var(--atlas-gutter) 24px; }
+  .hero--atlas .eyebrow { margin-bottom: 14px; font-size: 11px; letter-spacing: .34em; }
+  .hero--atlas h1 { font-size: clamp(34px, 6.3vw, 62px); line-height: .99; }
+  .hero--atlas .line > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  .hero-text { margin-top: 16px; max-width: 550px; font-size: 17px; line-height: 1.4; }
+  .hero-text > span { display: inline; }
+  .hero--atlas .actions { margin-top: 22px; gap: 12px; }
+  .hero--atlas .btn { min-height: 46px; min-width: 172px; font-size: 14px; }
+  .hero-art { position: relative; inset: auto; grid-row: 2; width: 100%; aspect-ratio: 1663 / 946; }
+  .hero-art::before { content: ''; position: absolute; z-index: 1; inset: -1px 0 auto; height: 14%; pointer-events: none; background: linear-gradient(var(--atlas-paper), transparent); }
+  .hero-art::after { display: none; }
+}
+@media (min-width: 1000px) {
+  .home[data-expanded-hero] { --header-h: 100px; }
+  .home[data-expanded-hero] .site-header { display: flex; align-items: center; height: var(--header-h); padding: 12px 4.3vw; gap: 20px; }
+  .home[data-expanded-hero] .site-header > .brand-link { width: 180px; }
+  .home[data-expanded-hero] .desktop-nav { display: none; }
+  .home[data-expanded-hero] .header-tools { width: auto; margin: 0 0 0 auto; }
+  .home[data-expanded-hero] .header-cta { width: auto; min-height: 44px; }
+  .home[data-expanded-hero] .menu-toggle { display: inline-grid !important; width: 44px; height: 44px; border-color: rgb(5 33 62 / .25); color: #05213e; background: #f8f4ec; }
+  .home[data-expanded-hero] .menu { display: revert !important; }
+  .home[data-expanded-hero] .hero-stage { display: grid; aspect-ratio: auto; }
+  .home[data-expanded-hero] .hero-copy { position: relative; grid-row: 1; left: auto; top: auto; width: 100%; padding: calc(var(--header-h) + 28px) var(--atlas-gutter) 24px; }
+  .home[data-expanded-hero] .hero--atlas h1 { font-size: clamp(34px, 6.3vw, 62px); }
+  .home[data-expanded-hero] .hero--atlas .line > span { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  .home[data-expanded-hero] .hero-text { max-width: 42ch; }
+  .home[data-expanded-hero] .hero-text > span { display: inline; }
+  .home[data-expanded-hero] .hero-art { position: relative; grid-row: 2; inset: auto; aspect-ratio: 1663 / 946; }
+  .home[data-expanded-hero] .hero-art::after { display: none; }
+}
+@media (max-width: 600px) {
+  .home { --header-h: 82px; }
+  .home .site-header > .brand-link { width: 144px; }
+  .home .header-cta { display: none; }
+  .hero-copy { padding-top: calc(var(--header-h) + 23px); padding-bottom: 23px; }
+  .hero--atlas h1 { font-size: clamp(30px, 8.8vw, 52px); line-height: .995; letter-spacing: -.042em; }
+  .hero--atlas .eyebrow { font-size: clamp(9px, 2.6vw, 12px); letter-spacing: .3em; }
+  .hero-text { max-width: 34ch; font-size: 16px; line-height: 1.4; }
+  .hero--atlas .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .hero--atlas .btn { min-width: 0; width: 100%; min-height: 48px; padding: 10px 12px; font-size: 12px; gap: 8px; }
+  .hero--atlas .btn > .icon { width: 14px; height: 14px; }
+  .hero-art { aspect-ratio: 4 / 3; }
   .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
-  .hero-shade { display: none; }
-  .spot { left: var(--mx); top: var(--my); }
-  .spot[data-stacked='false'] { display: none; }
-  .spot-label { max-width: 132px; padding: 7px 12px 8px; border-radius: 12px; text-align: center; }
-  .spot-meta span { display: block; line-height: 1.35; }
-  .spot-meta span + span::before { content: none; }
-  .spot-label strong { font-size: .8125rem; }
-  .spot-meta { font-size: .6875rem; }
-  /* The dock: the three tiles rise onto the dark water at the foot of the picture; the price note and pause sit below. */
-  .hero-rail { --tile-h: clamp(92px, 25vw, 124px); order: 3; position: relative; inset: auto; z-index: 2; margin-top: calc(-1 * (var(--tile-h) + 14px)); padding: 0 var(--gutter); border: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .hero-rail-inner { display: flex; flex-direction: column-reverse; align-items: stretch; gap: 10px; padding: 0; }
-  .hero-rail-head { order: 0; justify-content: space-between; gap: 10px; font-size: .75rem; }
-  .hero-rail-head > span { display: block; max-width: none; }
-  .hero-rail-head strong { margin-right: .3em; }
-  .motion-toggle { width: 44px; min-height: 44px; padding: 0; justify-content: center; flex: none; background: rgb(5 12 26 / .5); }
-  .motion-toggle [data-scene-motion-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .hero-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0; }
-  .hero-offers a { position: relative; isolation: isolate; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; gap: 2px; min-height: var(--tile-h); padding: 10px 9px; border: 1px solid rgb(236 215 168 / .34); border-radius: 18px; overflow: hidden; background: #0b1b33; box-shadow: 0 14px 30px rgb(2 8 18 / .5); transition: transform .4s var(--ease), border-color .3s; }
-  .hero-offers a:first-child { padding-left: 9px; }
-  .hero-offers a:active { transform: scale(.97); }
-  .hero-offers a::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgb(5 12 26 / .06) 0%, rgb(5 12 26 / .3) 36%, rgb(5 12 26 / .94) 100%); }
-  .offer-thumb { display: block; position: absolute; inset: 0; z-index: -2; }
-  .offer-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform .9s var(--ease); }
-  .hero-offers a:hover .offer-thumb img { transform: scale(1.14); }
-  /* Tile text is sized from the tile itself, so the longest label ("USD 2,950", 5.6 times its size) always keeps at least 15% spare room. */
-  .hero-offers .name { grid-column: 1; min-width: 0; font-size: clamp(10px, 15cqi, .95rem); flex-direction: column; align-items: flex-start; gap: 0; white-space: nowrap; }
-  .hero-offers .name small { display: block; font-size: clamp(9px, 11.5cqi, .75rem); font-weight: 600; color: rgb(255 255 255 / .8); }
-  .hero-offers .amount { grid-column: 1; min-width: 0; display: grid; gap: 0; font-size: clamp(10px, 15cqi, .95rem); font-weight: 700; color: #fff; line-height: 1.2; white-space: nowrap; }
-  .hero-offers .amount .from { font-size: clamp(8px, 9.5cqi, .66rem); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); }
-  .hero-offers .offer-go { position: absolute; top: 8px; right: 8px; grid-area: auto; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #ecd6a0, var(--gold)); color: #1a1405; box-shadow: 0 4px 12px rgb(2 8 18 / .4); }
-  .hero-offers .offer-go .icon { width: 14px; height: 14px; }
-  /* Two equal buttons, then the supporting line. */
-  .hero .actions { order: 4; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: auto; max-width: none; margin-top: 14px; }
-  .hero .actions .btn { min-height: 54px; padding: 6px 12px; gap: 10px; font-size: .9375rem; white-space: nowrap; }
-  .hero .actions .btn--gold { justify-content: space-between; padding: 6px 6px 6px 22px; }
-  .hero .actions .btn--gold > .icon { width: 18px; height: 18px; padding: 10px; }
-  .hero .actions .btn--ghost { background: rgb(6 14 30 / .66); box-shadow: 0 10px 26px rgb(2 8 18 / .35); }
-  .hero .actions .btn--ghost > .icon { display: none; }
-  .hero-text { order: 5; max-width: 34ch; margin-top: 16px; font-size: 1.0625rem; }
 }
-/* Phones (V32): nothing stands on the animal. The buttons stand on the open lagoon below the paws, the picture fades into the
-   sky at its foot, and the three priced tiles follow directly below it, still on the first screen. Button labels may wrap
-   rather than push the arrow out of the pill; the gold button is the wider of the two. */
-@media (max-width: 760px) {
-  .hero-art { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 90%, transparent); mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 90%, transparent); }
-  .hero .actions { --lagoon: clamp(14px, 4.5vw, 24px); order: 3; position: relative; z-index: 2; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); margin-top: calc(-1 * (54px + var(--lagoon))); }
-  .hero .actions .btn { white-space: normal; text-align: center; text-wrap: balance; line-height: 1.15; }
-  .hero .actions .btn--gold { justify-content: center; padding: 6px 16px; }
-  .hero .actions .btn--gold > .icon { display: none; }
-  .hero-rail { order: 4; margin-top: 14px; }
-  .hero-text { order: 5; }
-  html.is-ready .hero .actions { animation: tile-pop .9s var(--ease) 1s both; }
-}
-/* Below 1200 px the landscape buttons are held left of the paws, so the second one reads "Explore". */
-@media (max-width: 1199px) { .hero .actions .btn .btn-long { display: none; } }
-@media (max-width: 380px) { .hero .actions .btn { font-size: .875rem; } }
-@media (max-width: 760px) { html.is-ready .hero-offers a { animation: tile-pop .9s var(--ease) calc(1.15s + var(--i, 0) * .11s) both; } }
-@keyframes tile-pop { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.95); } to { opacity: 1; transform: none; } }
-/* Tablets and small landscape windows: copy and actions have their own rows before the complete landscape artwork.
-   At 761–1023 px an overlaid copy column cannot hold the headline, supporting text and two controls above the price bar. */
-@media (min-width: 761px) and (max-aspect-ratio: 11/10), (min-width: 761px) and (max-width: 1023px) {
-  .hero-stage { display: flex; flex-direction: column; aspect-ratio: auto; padding-top: calc(var(--header-h) + 30px); }
-  .hero-copy { display: contents; }
-  .hero .eyebrow { display: none; }
-  .hero h1 { order: 1; margin-inline: var(--gutter); max-width: 19ch; font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
-  .hero .actions { order: 2; display: flex; flex-wrap: wrap; width: auto; max-width: none; margin: 24px var(--gutter) 28px; gap: 12px; }
-  .hero .actions .btn { width: auto; padding-inline: 24px 8px; }
-  .hero-art { order: 3; position: relative; inset: auto; aspect-ratio: 3 / 2; width: 100%; }
-  .hero-shade { display: none; }
-  .hero-rail { order: 4; position: relative; inset: auto; background: #07172a; }
-  .hero-rail-inner { gap: 16px; padding-block: 18px; }
-  .hero-rail-head { order: 3; }
-  .hero-rail-head > span { display: none; }
-  .hero-offers a { min-height: 58px; }
-  .hero-text { order: 5; max-width: 56ch; margin: 22px var(--gutter) 30px; font-size: 1.0625rem; }
-}
-
-/* Compact phones: retain the complete artwork and offer dock within a short first screen. */
-@media (max-width: 359px) and (max-height: 640px) {
-  .hero h1 { font-size: clamp(1.375rem, 7vw, 1.625rem); }
-  .hero-art { width: 82%; margin-inline: auto; margin-top: calc(16px - 25.83cqw); }
-  .hero .actions { --lagoon: 8px; }
+/* Without scripting, the same five links remain beneath the brand. */
+@media (max-width: 999px) {
+  html:not(.js) .home .site-header { position: absolute; height: auto; flex-wrap: wrap; background: #f8f4ec; }
+  html:not(.js) .home .desktop-nav { display: flex; flex-wrap: wrap; order: 3; gap: 4px 18px; width: 100%; padding-top: 0; }
+  html:not(.js) .home .desktop-nav a { min-height: 44px; display: inline-flex; align-items: center; font-size: 13px; padding: 4px 0; }
+  html:not(.js) .home .hero-copy { padding-top: 220px; }
+  html:not(.js) .home .header-cta { display: none; }
 }
