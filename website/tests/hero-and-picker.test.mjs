@@ -58,7 +58,8 @@ test('the hero preloads only the artwork used by its responsive picture', async 
 test('the selected headline, service sentence and both live actions are present', async () => {
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   const hero = html.match(/<section class="hero hero--atlas"[\s\S]*?<\/section>/)?.[0];
-  assert.match(plain(hero), /Bespoke luxury travel Extraordinary journeys\. Personally curated\./);
+  assert.doesNotMatch(plain(hero), /Personally curated/);
+  assert.match(plain(hero), /Bespoke luxury travel Extraordinary journeys\./);
   assert.match(plain(hero), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
   assert.match(hero, /href="[^"]*journey\.html"[^>]*><span>Plan your escape<\/span>/);
   assert.match(hero, /href="#destinations"[^>]*><span>Explore destinations<\/span><\/a>/);

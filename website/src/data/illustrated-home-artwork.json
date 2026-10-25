@@ -267,15 +267,15 @@
   },
   "lettering": {
     "hero-lettering": {
-      "source": "../v36-immersive-lettering/hero-lettering-master.png",
-      "prefix": "pardus-v36",
-      "width": 2140,
-      "height": 713,
+      "source": "../v37-hd-lettering/hero-lettering-master.png",
+      "prefix": "pardus-v37",
+      "width": 2138,
+      "height": 706,
       "widths": [
         480,
         960,
         1440,
-        2140
+        2138
       ]
     },
     "escape-lettering": {
@@ -288,6 +288,29 @@
         960,
         1440,
         1952
+      ]
+    },
+    "who-lettering": {
+      "source": "../v37-hd-lettering/who-lettering-master.png",
+      "prefix": "pardus-v37",
+      "width": 2053,
+      "height": 603,
+      "widths": [
+        480,
+        960,
+        1440,
+        2053
+      ]
+    },
+    "who-lettering-mobile": {
+      "source": "../v37-hd-lettering/who-lettering-mobile-master.png",
+      "prefix": "pardus-v37",
+      "width": 1020,
+      "height": 1027,
+      "widths": [
+        480,
+        960,
+        1020
       ]
     }
   },

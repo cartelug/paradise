@@ -1,5 +1,19 @@
 # Pardus Luxury Escapes: project rules
 
+## Isolated HD headings and native Section 02 — 25 October 2026
+
+The owner next removed “Personally curated.” from the section-one headline only
+and requested regenerated smooth isolated lettering, a stronger Who We Are
+heading with animation, and the same background. V37 uses separate desktop and
+mobile title art, native Who We Are paragraphs/button/services and localized
+cleanup masks over the original background. Exact prompts and implementation
+notes are in `website/source-assets/v37-hd-lettering/ARTWORK.md`. The hero H1 is
+now “Extraordinary journeys.”; the full `site.tagline` stays in the opening,
+footer, search and structured data. Keep the backgrounds and static leopard.
+Title motion waits for preloader readiness and viewport entry, runs once, and
+is removed for reduced motion. This owner instruction supersedes the earlier
+three-line hero and full-artboard Section 02 implementation.
+
 ## Photographic headline lettering and opening joins — 25 October 2026
 
 The owner next requested regenerated section-one/header lettering with visuals

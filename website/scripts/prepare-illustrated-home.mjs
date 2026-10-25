@@ -8,6 +8,7 @@ const source = resolve(root, 'source-assets/v34-mobile-illustrated');
 const output = resolve(root, 'public/images');
 const partial = process.argv.includes('--partial');
 const letteringOnly = process.argv.includes('--lettering-only');
+const selectedArt = process.argv.find(arg => arg.startsWith('--art='))?.slice(6);
 await mkdir(output, { recursive: true });
 const ids = ['flights', 'resort', 'transfers', 'visas', 'yacht', 'safari', 'private-tours', 'activities', 'honeymoon', 'family', 'groups', 'corporate', 'bespoke', 'maldives', 'seychelles', 'dubai', 'east-africa', 'europe', 'zanzibar', 'personal-attention', 'thoughtful-details', 'seamless-service', 'world', 'travel-journal'];
 const exists = async file => { try { await access(file); return true; } catch { return false; } };
@@ -23,10 +24,13 @@ for (const id of letteringOnly ? [] : ids) {
     await sharp(file).resize({ width, height: width, fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile(resolve(output, `pardus-v34-${id}-${width}.webp`));
   }
 }
-for (const id of ['hero-lettering', 'escape-lettering']) {
+for (const id of ['hero-lettering', 'escape-lettering', 'who-lettering', 'who-lettering-mobile']) {
+  if (selectedArt && id !== selectedArt) continue;
+  const hdMaster = resolve(root, 'source-assets/v37-hd-lettering', `${id}-master.png`);
   const newMaster = resolve(root, 'source-assets/v36-immersive-lettering', `${id}-master.png`);
-  const file = await exists(newMaster) ? newMaster : resolve(source, `${id}-refined.png`);
-  const prefix = file === newMaster ? 'pardus-v36' : 'pardus-v34';
+  if (id.startsWith('who-lettering') && !await exists(hdMaster)) continue;
+  const file = await exists(hdMaster) ? hdMaster : await exists(newMaster) ? newMaster : resolve(source, `${id}-refined.png`);
+  const prefix = file === hdMaster ? 'pardus-v37' : file === newMaster ? 'pardus-v36' : 'pardus-v34';
   const original = await sharp(file).metadata();
   const stats = await sharp(file).stats();
   if (!original.hasAlpha || stats.channels[3].min !== 0) throw new Error(`${id} must have transparent alpha`);

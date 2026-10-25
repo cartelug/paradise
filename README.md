@@ -1,5 +1,16 @@
 # Pardus Luxury Escapes
 
+## Isolated HD headlines and native content — 25 October 2026
+
+The hero now reads “Extraordinary journeys.” without the third line. Who We Are
+uses separate regenerated HD desktop/mobile title artwork, real paragraphs,
+service symbols and an About button over the existing scene. Feathered cleanup
+masks remove only the old baked-in UI regions; the original scene remains the
+base. The heading reveal and brief title-only light sweep wait for the permanent
+opening to finish and for the section to enter view. Enlarged text, image errors,
+no script and reduced motion remain supported. Assets, prompts and background
+preservation details are in `website/source-assets/v37-hd-lettering/ARTWORK.md`.
+
 ## Photographic headline art and blended opening — 25 October 2026
 
 The hero and “Your next escape” headings now use new generated transparent

@@ -46,7 +46,7 @@ test('every generated symbol is actually used on the homepage with decorative im
 });
 
 test('designed headings retain their exact semantic text and genuine transparent lettering', async () => {
-  for (const id of ['hero-lettering', 'escape-lettering']) {
+  for (const id of ['hero-lettering', 'escape-lettering', 'who-lettering']) {
     const master = resolve(root, 'source-assets/v34-mobile-illustrated', meta.lettering[id].source);
     assert.equal((await sharp(master).metadata()).hasAlpha, true);
     assert.equal((await sharp(master).stats()).channels[3].min, 0);
@@ -59,7 +59,7 @@ test('designed headings retain their exact semantic text and genuine transparent
   const h1 = html.match(/<h1\b[^>]*id="hero-title"[\s\S]*?<\/h1>/)?.[0];
   assert.ok(h1);
   assert.match(h1, /class="art-heading-copy"/);
-  assert.match(h1.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' '), /Extraordinary journeys\. Personally curated\./);
+  assert.match(h1.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' '), /Extraordinary journeys\./);
   assert.match(h1, /class="art-heading-visual" aria-hidden="true"/);
   assert.match(h1, /data-lettering-image/);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);

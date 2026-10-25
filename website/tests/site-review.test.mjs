@@ -24,14 +24,15 @@ test('the five navigation labels are the same on every page, with Plan your esca
   }
 });
 
-test('one primary tagline is used with the logo: hero, opening, footer, search description and structured data', async () => {
+test('the shortened hero headline retains the full brand tagline in opening, footer, search and structured data', async () => {
   const { tagline } = { tagline: 'Extraordinary journeys. Personally curated.' };
   const config = await read('src/data/site.ts');
   assert.ok(config.includes(`tagline: '${tagline}'`), 'site.tagline is the primary tagline');
   const home = html['index.html'];
   const headline = home.match(/<h1\b[^>]*id="hero-title"[^>]*>[\s\S]*?<\/h1>/)?.[0];
   assert.ok(headline, 'the homepage has its semantic primary heading');
-  assert.equal(text(headline).trim(), tagline, 'decorative lettering retains the exact real heading text');
+  assert.equal(text(headline).trim(), 'Extraordinary journeys.', 'owner requested the shorter hero heading');
+  assert.doesNotMatch(text(headline), /Personally curated/);
   assert.match(text(home), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
   assert.ok(home.includes('"slogan":"Extraordinary journeys. Personally curated."'), 'structured data carries the tagline');
   for (const [page, markup] of Object.entries(html)) {
