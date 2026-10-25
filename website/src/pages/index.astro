@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import WhoWeAre from '../components/WhoWeAre.astro';
 import ArtHeading from '../components/ArtHeading.astro';
 import HomeEmblem from '../components/HomeEmblem.astro';
 import Picture from '../components/Picture.astro';
@@ -39,6 +40,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
   </Fragment>
   <Hero />
+  <WhoWeAre />
 
   <section class="sec escapes" id="destinations" aria-labelledby="featured-title" data-escapes>
     <div class="escapes-intro">

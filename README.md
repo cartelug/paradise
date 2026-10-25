@@ -1,5 +1,18 @@
 # Pardus Luxury Escapes
 
+## Who we are — 25 October 2026
+
+Section 02 now appears directly after the existing hero using the owner's exact
+gradient-blended desktop and mobile references: background, designed typography,
+destination montage and symbols. A native Discover Pardus link opens the existing
+About page, with visible keyboard focus and a minimum 44-pixel target. The full
+heading, paragraph and services remain semantic HTML, and enlarged text,
+image-failure, no-script, forced-colour and print modes use a normal-flow fallback.
+Native-size lossless WebP exports match every RGB pixel in the approved masters.
+See `website/source-assets/v35-who-we-are/ARTWORK.md`; the browser fixture is
+`website/tests/section-two-qa.html`. The existing hero, permanent preloader,
+navigation, prices, verified contacts and other sections are preserved.
+
 ## Illustrated mobile homepage — 24 October 2026
 
 The mobile homepage now has a refined pale-sky leopard portrait, its own coastal continuation, transparent designed lettering for the first two headings, and 24 custom ivory/navy/brass travel illustrations. All 13 service choices, six destination headings/cards, three promises, the hero eyebrow and enquiry introduction use the new art. The exact tagline remains the semantic H1, while image-error, no-script and enlarged-text states show the real heading. Native checkboxes, prices, navigation, the approved logo and permanent preloader remain.

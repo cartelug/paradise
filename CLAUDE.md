@@ -1,5 +1,17 @@
 # Pardus Luxury Escapes: project rules
 
+## Section 02 approved reference — 25 October 2026
+
+The owner approved the vivid gradient-blended desktop/mobile Who We Are artwork
+and explicitly requested identical background, designed text and symbols directly
+after section one. `WhoWeAre.astro` uses those exact artboards and a real Discover
+Pardus link. Masters, provenance and lossless-pixel checks are documented in
+`website/source-assets/v35-who-we-are/ARTWORK.md`. This owner instruction overrides
+the older visual-heading font restriction for this section only. Semantic copy
+remains native HTML. Enlarged text, no JavaScript, image failure, forced colours
+and print receive readable normal-flow text. Do not remove this fallback or the
+permanent preloader. The existing hero and remaining homepage sections are unchanged.
+
 ## Current homepage reference — photographic coast, 24 October 2026
 
 The owner subsequently requested a more polished mobile homepage, 20+ generated symbols, transparent designed headline images and animation. V34 implements that request with new phone hero/coast artwork, two transparent Archivo-inspired headline lockups, and 24 navy/ivory/brass travel illustrations. These are decorative raster illustrations, explicitly requested by the owner; functional control icons remain SVG. Generated headline art visually replaces the first two headings after decoding, while their exact real text remains the semantic heading, the image-error/no-JavaScript fallback and the enlarged-text version. New sources and exact prompts live in `website/source-assets/v34-mobile-illustrated/`. Keep the real Pardus logo and all business facts. The leopard stays static; animation belongs to lettering and illustrated UI entry/selection, with reduced-motion support.

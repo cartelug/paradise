@@ -1,0 +1,39 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+import '../styles/who-we-are.css';
+
+// Owner-approved, complete artboards. Lossless assets retain the exact designed
+// lettering, gradient composite and symbols; the action is a real HTML link.
+const asset = (name: string) => path(`images/pardus-who-${name}.webp`);
+const mobileSet = [480, 853].map(width => `${asset(`mobile-${width}`)} ${width}w`).join(', ');
+const desktopSet = [960, 1536].map(width => `${asset(`desktop-${width}`)} ${width}w`).join(', ');
+const services = [
+  { name: 'Flights', icon: 'plane' },
+  { name: 'Stays', icon: 'bed' },
+  { name: 'Safaris', icon: 'compass' },
+  { name: 'Private experiences', icon: 'compass' },
+] as const;
+---
+<section class="who-reference" id="who-we-are" aria-labelledby="who-title" data-who-reference>
+  <div class="who-reference-stage">
+    <picture class="who-reference-picture" aria-hidden="true">
+      <source media="(max-width: 999px)" srcset={mobileSet} sizes="100vw" width="853" height="1844" />
+      <img src={asset('desktop-1536')} srcset={desktopSet} sizes="100vw" width="1536" height="1024" alt="" loading="lazy" decoding="async" data-who-image />
+    </picture>
+    <div class="who-reference-copy">
+      <p class="who-reference-label">02 / Who we are</p>
+      <h2 id="who-title">A world of places. <em>A journey of your own.</em></h2>
+      <p class="who-reference-intro">We are Pardus Luxury Escapes.</p>
+      <p class="who-reference-description">We arrange flights, stays, safaris and private experiences across Africa and around the world.</p>
+    </div>
+    <a class="who-reference-action" href={path('about.html')}>
+      <span>Discover Pardus</span><Icon name="arrow-right" />
+    </a>
+    <ul class="who-reference-services" aria-label="What we arrange">
+      {services.map(service => <li><Icon name={service.icon} /><span>{service.name}</span></li>)}
+    </ul>
+    <span class="who-reference-rem" aria-hidden="true"></span>
+  </div>
+</section>
+<script>import '../scripts/who-we-are';</script>

@@ -1,0 +1,99 @@
+/* Section 02: use the approved artwork without cropping, distortion or a
+   second generated interpretation. All native text remains in the document. */
+.who-reference {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  color: #071d2b;
+  background: #faf7ee;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+.who-reference-stage { position: relative; width: 100%; min-width: 0; }
+.who-reference-picture { display: none; }
+.who-reference-picture img { display: block; width: 100%; max-width: 100%; height: auto; }
+.who-reference-copy { padding: clamp(28px, 5vw, 76px) var(--gutter) 24px; max-width: 960px; }
+.who-reference-label { font-size: .75rem; letter-spacing: .16em; margin-bottom: 24px; }
+.who-reference-copy h2 { font-size: clamp(2rem, 4.8vw, 4.5rem); line-height: 1.12; overflow-wrap: anywhere; }
+.who-reference-copy h2 em { display: block; color: #865b16; }
+.who-reference-intro { margin-top: 28px; font-size: 1.25rem; font-weight: 650; }
+.who-reference-description { max-width: 47ch; margin-top: 10px; font-size: 1.125rem; line-height: 1.65; }
+.who-reference-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 44px;
+  min-height: 48px;
+  max-width: calc(100% - var(--gutter) * 2);
+  margin: 0 var(--gutter) 32px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: #fffaf0;
+  background: #071d2b;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.who-reference-action span { min-width: 0; overflow-wrap: anywhere; }
+.who-reference-action:focus-visible { outline: 3px solid #071d2b; outline-offset: 5px; box-shadow: 0 0 0 4px #fffaf0; }
+.who-reference-services { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 24px var(--gutter) 32px; border-top: 1px solid #c9a569; }
+.who-reference .who-reference-services { padding: 24px var(--gutter) 32px; }
+.who-reference-services li { display: flex; align-items: center; gap: 12px; min-width: 0; font-size: .875rem; line-height: 1.4; }
+.who-reference-services li span { min-width: 0; overflow-wrap: anywhere; }
+.who-reference-services .icon { width: 28px; height: 28px; }
+.who-reference-rem { position: absolute; width: 1rem; height: 1rem; visibility: hidden; pointer-events: none; }
+
+/* Image readiness gates the exact-art presentation; failed images and no JS
+   always retain a useful, readable native section and its working action. */
+.js .who-reference:not([data-who-flow]) .who-reference-picture { display: block; }
+.js .who-reference:not([data-who-flow]) .who-reference-picture img { aspect-ratio: 3 / 2; }
+.js .who-reference:not([data-who-ready]):not([data-who-flow]) .who-reference-picture { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.js .who-reference[data-who-ready]:not([data-who-flow]) .who-reference-copy,
+.js .who-reference[data-who-ready]:not([data-who-flow]) .who-reference-services {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.js .who-reference[data-who-ready]:not([data-who-flow]) .who-reference-action {
+  position: absolute;
+  z-index: 1;
+  left: 4.6875%;
+  top: 48.2421875%;
+  width: 18.6848958%;
+  height: 6.15234375%;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+}
+.js .who-reference[data-who-ready]:not([data-who-flow]) .who-reference-action > * { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); }
+.who-reference[data-who-flow] { background: linear-gradient(125deg, #fffaf0, #e3f5f2 70%, #d1eeee); }
+.who-reference[data-who-flow] .who-reference-services { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+@media (max-width: 999px) {
+  .js .who-reference:not([data-who-flow]) .who-reference-picture img { aspect-ratio: 853 / 1844; }
+  .js .who-reference[data-who-ready]:not([data-who-flow]) .who-reference-action {
+    left: 7.5029308%;
+    top: 40.021692%;
+    width: 42.0867526%;
+    height: 4.3383948%;
+    border-radius: 10px;
+  }
+  .who-reference-services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (forced-colors: active), print {
+  .who-reference-picture { display: none !important; }
+  .who-reference-copy, .who-reference-services { position: static !important; width: auto !important; height: auto !important; clip-path: none !important; overflow: visible !important; }
+  .who-reference-copy { padding: 32px var(--gutter) 24px !important; }
+  .who-reference-services { padding: 24px var(--gutter) !important; }
+  .who-reference .who-reference-action { position: static !important; width: auto !important; height: auto !important; padding: 12px 20px !important; margin: 0 var(--gutter) 32px !important; background: #071d2b !important; }
+  .who-reference .who-reference-action > * { position: static !important; width: auto !important; height: auto !important; clip-path: none !important; margin: 0 !important; }
+}

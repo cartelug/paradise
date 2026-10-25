@@ -16,6 +16,10 @@ html.js .art-heading[data-art-ready] > .art-heading-visual { visibility: visible
    has empty alt and never duplicates the heading for assistive technology. */
 .home[data-enlarged-lettering] .art-heading-visual { display: none; }
 .home[data-enlarged-lettering] .art-heading[data-art-ready] > .art-heading-copy { clip-path: none; }
+/* At doubled text size the existing animated word wrapper must allow the
+   longest destination-heading word to wrap on a 320px phone. */
+html.motion-ready .home #more-title .w,
+html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: anywhere; }
 .scene-title { display: flex; gap: 16px; align-items: center; min-width: 0; }
 .scene-title h3 { min-width: 0; overflow-wrap: anywhere; }
 .scene-title h3 a, .dest-top--illustrated h3 a { display: inline-flex; align-items: center; max-width: 100%; min-height: 44px; }
