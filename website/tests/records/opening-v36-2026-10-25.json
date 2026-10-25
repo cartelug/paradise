@@ -1,0 +1,510 @@
+{
+  "passed": 42,
+  "total": 42,
+  "rows": [
+    {
+      "width": 320,
+      "height": 568,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 659,
+      "cta": [
+        128,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1870,
+      "cta": [
+        265,
+        121
+      ],
+      "failures": []
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 746,
+      "cta": [
+        145,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1500,
+      "cta": [
+        305,
+        121
+      ],
+      "failures": []
+    },
+    {
+      "width": 375,
+      "height": 812,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 778,
+      "cta": [
+        152,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 375,
+      "height": 812,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1373,
+      "cta": [
+        320,
+        121
+      ],
+      "failures": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 811,
+      "cta": [
+        158,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1301,
+      "cta": [
+        334,
+        121
+      ],
+      "failures": []
+    },
+    {
+      "width": 414,
+      "height": 896,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 863,
+      "cta": [
+        168,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 414,
+      "height": 896,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1301,
+      "cta": [
+        356,
+        121
+      ],
+      "failures": []
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "text": "100%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 897,
+      "cta": [
+        175,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "text": "200%",
+      "art": "pardus-who-mobile-480.webp",
+      "sectionHeight": 1253,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 600,
+      "height": 960,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1265,
+      "cta": [
+        246,
+        55
+      ],
+      "failures": []
+    },
+    {
+      "width": 600,
+      "height": 960,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1064,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 601,
+      "height": 960,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1267,
+      "cta": [
+        247,
+        55
+      ],
+      "failures": []
+    },
+    {
+      "width": 601,
+      "height": 960,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1064,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 767,
+      "height": 1024,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1626,
+      "cta": [
+        316,
+        71
+      ],
+      "failures": []
+    },
+    {
+      "width": 767,
+      "height": 1024,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 933,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1628,
+      "cta": [
+        317,
+        71
+      ],
+      "failures": []
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 933,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 820,
+      "height": 1180,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 1740,
+      "cta": [
+        339,
+        75
+      ],
+      "failures": []
+    },
+    {
+      "width": 820,
+      "height": 1180,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 936,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 999,
+      "height": 900,
+      "text": "100%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 2127,
+      "cta": [
+        414,
+        92
+      ],
+      "failures": []
+    },
+    {
+      "width": 999,
+      "height": 900,
+      "text": "200%",
+      "art": "pardus-who-mobile-853.webp",
+      "sectionHeight": 767,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1000,
+      "height": 768,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 657,
+      "cta": [
+        184,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 1000,
+      "height": 768,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 767,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 673,
+      "cta": [
+        189,
+        44
+      ],
+      "failures": []
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 768,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1199,
+      "height": 900,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 789,
+      "cta": [
+        221,
+        49
+      ],
+      "failures": []
+    },
+    {
+      "width": 1199,
+      "height": 900,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 777,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1200,
+      "height": 900,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 790,
+      "cta": [
+        221,
+        49
+      ],
+      "failures": []
+    },
+    {
+      "width": 1200,
+      "height": 900,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 777,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 843,
+      "cta": [
+        236,
+        52
+      ],
+      "failures": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 781,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1440,
+      "height": 1024,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 950,
+      "cta": [
+        266,
+        58
+      ],
+      "failures": []
+    },
+    {
+      "width": 1440,
+      "height": 1024,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 800,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1536,
+      "height": 1150,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 1014,
+      "cta": [
+        284,
+        62
+      ],
+      "failures": []
+    },
+    {
+      "width": 1536,
+      "height": 1150,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 815,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 1920,
+      "height": 1200,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 1270,
+      "cta": [
+        356,
+        78
+      ],
+      "failures": []
+    },
+    {
+      "width": 1920,
+      "height": 1200,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 900,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "text": "100%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 1697,
+      "cta": [
+        476,
+        104
+      ],
+      "failures": []
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "text": "200%",
+      "art": "pardus-who-desktop-1536.webp",
+      "sectionHeight": 1141,
+      "cta": [
+        363,
+        73
+      ],
+      "failures": []
+    }
+  ]
+}

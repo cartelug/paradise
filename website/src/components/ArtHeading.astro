@@ -4,7 +4,7 @@ import artwork from '../data/illustrated-home-artwork.json';
 interface Props { as: 'h1' | 'h2'; id: string; art: 'hero-lettering' | 'escape-lettering'; reveal?: boolean; }
 const { as: Tag, id, art, reveal = false } = Astro.props as Props;
 const meta = artwork.lettering[art];
-const asset = (width: number) => path(`images/pardus-v34-${art}-${width}.webp`);
+const asset = (width: number) => path(`images/${'prefix' in meta ? meta.prefix : 'pardus-v34'}-${art}-${width}.webp`);
 ---
 <Tag id={id} class="art-heading" data-art-heading data-art-key={art} data-reveal={reveal ? true : undefined}>
   <span class="art-heading-copy"><slot /></span>

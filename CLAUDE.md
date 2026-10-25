@@ -1,5 +1,19 @@
 # Pardus Luxury Escapes: project rules
 
+## Photographic headline lettering and opening joins — 25 October 2026
+
+The owner next requested regenerated section-one/header lettering with visuals
+inside it and a continuous blend through section two and onward. V36 uses new
+transparent typographic artwork for the exact primary hero tagline and “Your next
+escape.”, with illustrated destination scenes inside the letters. Masters and
+exact prompts are in `website/source-assets/v36-immersive-lettering/`. These
+explicit owner instructions authorize the new visual heading style; semantic
+copy and native Archivo fallbacks remain unchanged. `opening-seams.css` samples
+the actual section-two top edge for the first join and fades its bottom into
+the existing coastal introduction. Keep the real logo, native navigation,
+static leopard, all business data and permanent preloader. Do not replace the
+navigation labels with raster artwork.
+
 ## Section 02 approved reference — 25 October 2026
 
 The owner approved the vivid gradient-blended desktop/mobile Who We Are artwork

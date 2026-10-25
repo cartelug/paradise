@@ -1,5 +1,17 @@
 # Pardus Luxury Escapes
 
+## Photographic headline art and blended opening — 25 October 2026
+
+The hero and “Your next escape” headings now use new generated transparent
+lettering with luminous coastlines, Mediterranean architecture and mountains
+inside selected letterforms. The actual wording stays native HTML, with
+image-error, enlarged-text, no-script and print fallbacks. `opening-seams.css`
+blends the hero into the colour of the real Section 02 artwork, then joins that
+section into the existing coastal intro. The logo, navigation and leopard
+photography retain their approved source. Masters and exact prompts are in
+`website/source-assets/v36-immersive-lettering/`; the 42-case browser review
+is in `website/tests/records/opening-v36-2026-10-25.json`.
+
 ## Who we are — 25 October 2026
 
 Section 02 now appears directly after the existing hero using the owner's exact

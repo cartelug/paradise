@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 import { mkdir, writeFile, readFile, readdir, rm, access } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -24,7 +24,9 @@ for (const id of letteringOnly ? [] : ids) {
   }
 }
 for (const id of ['hero-lettering', 'escape-lettering']) {
-  const file = resolve(source, `${id}-refined.png`);
+  const newMaster = resolve(root, 'source-assets/v36-immersive-lettering', `${id}-master.png`);
+  const file = await exists(newMaster) ? newMaster : resolve(source, `${id}-refined.png`);
+  const prefix = file === newMaster ? 'pardus-v36' : 'pardus-v34';
   const original = await sharp(file).metadata();
   const stats = await sharp(file).stats();
   if (!original.hasAlpha || stats.channels[3].min !== 0) throw new Error(`${id} must have transparent alpha`);
@@ -32,12 +34,12 @@ for (const id of ['hero-lettering', 'escape-lettering']) {
   const { data, info } = await sharp(file).trim({ threshold: 1 }).toBuffer({ resolveWithObject: true });
   const widths = [...new Set([480, 960, 1440, info.width])].filter(w => w <= info.width);
   for (const name of await readdir(output)) {
-    if (!name.startsWith(`pardus-v34-${id}-`) || !name.endsWith('.webp')) continue;
-    const oldWidth = Number(name.slice(`pardus-v34-${id}-`.length, -5));
+    if (!name.startsWith(`${prefix}-${id}-`) || !name.endsWith('.webp')) continue;
+    const oldWidth = Number(name.slice(`${prefix}-${id}-`.length, -5));
     if (!widths.includes(oldWidth)) await rm(resolve(output, name));
   }
-  metadata.lettering[id] = { source: `${id}-refined.png`, width: info.width, height: info.height, widths };
-  for (const width of widths) await sharp(data).resize({ width, withoutEnlargement: true }).webp({ quality: 96, alphaQuality: 100, effort: 6 }).toFile(resolve(output, `pardus-v34-${id}-${width}.webp`));
+  metadata.lettering[id] = { source: relative(source, file), prefix, width: info.width, height: info.height, widths };
+  for (const width of widths) await sharp(data).resize({ width, withoutEnlargement: true }).webp({ quality: 96, alphaQuality: 100, effort: 6 }).toFile(resolve(output, `${prefix}-${id}-${width}.webp`));
 }
 for (const id of letteringOnly ? [] : ['mobile-hero', 'mobile-coast']) {
   const file = resolve(source, `${id}.png`);

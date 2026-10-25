@@ -51,7 +51,7 @@ test('designed headings retain their exact semantic text and genuine transparent
     assert.equal((await sharp(master).metadata()).hasAlpha, true);
     assert.equal((await sharp(master).stats()).channels[3].min, 0);
     for (const width of meta.lettering[id].widths) {
-      const image = await sharp(resolve(root, 'public/images', `pardus-v34-${id}-${width}.webp`)).metadata();
+      const image = await sharp(resolve(root, 'public/images', `${meta.lettering[id].prefix || 'pardus-v34'}-${id}-${width}.webp`)).metadata();
       assert.equal(image.hasAlpha, true);
       assert.ok(Math.abs(image.height - width * meta.lettering[id].height / meta.lettering[id].width) <= 1);
     }

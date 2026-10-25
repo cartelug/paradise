@@ -267,25 +267,27 @@
   },
   "lettering": {
     "hero-lettering": {
-      "source": "hero-lettering-refined.png",
-      "width": 1960,
-      "height": 681,
+      "source": "../v36-immersive-lettering/hero-lettering-master.png",
+      "prefix": "pardus-v36",
+      "width": 2140,
+      "height": 713,
       "widths": [
         480,
         960,
         1440,
-        1960
+        2140
       ]
     },
     "escape-lettering": {
-      "source": "escape-lettering-refined.png",
-      "width": 2122,
-      "height": 246,
+      "source": "../v36-immersive-lettering/escape-lettering-master.png",
+      "prefix": "pardus-v36",
+      "width": 1952,
+      "height": 383,
       "widths": [
         480,
         960,
         1440,
-        2122
+        1952
       ]
     }
   },

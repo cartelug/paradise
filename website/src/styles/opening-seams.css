@@ -1,0 +1,32 @@
+/* V36: colour-matched atmospheric joins between the three opening sections. */
+.home { --who-entry-gradient: linear-gradient(90deg, #fcf5e4 0%, #fdf6e6 10%, #e6ede9 20%, #c6e4ef 30%, #87d0f0 40%, #4abcec 50%, #24a6e0 60%, #2594d2 70%, #0170bd 80%, #005ca8 90%, #0055a0 100%); }
+@media (max-width: 999px) { .home { --who-entry-gradient: linear-gradient(90deg, #eaf0f1 0%, #efefed 10%, #f8f6ef 20%, #e8ebec 30%, #9fd6f7 40%, #58c5fd 50%, #23a8f1 60%, #0195e7 70%, #0185de 80%, #017fd8 90%, #0175d0 100%); } }
+
+.hero-stage::after {
+  content: ''; position: absolute; z-index: 1; pointer-events: none;
+  inset: auto 0 -1px; height: clamp(100px, 12vw, 180px);
+  background: var(--who-entry-gradient);
+  -webkit-mask-image: linear-gradient(transparent, rgb(0 0 0 / .18) 24%, #000);
+  mask-image: linear-gradient(transparent, rgb(0 0 0 / .18) 24%, #000);
+}
+/* Keep the supporting sentence readable over the lagoon without a hard card. */
+@media (min-width: 1000px) {
+  .hero-text { position: relative; isolation: isolate; color: #163449; }
+  .hero-text::before {
+    content: ''; position: absolute; z-index: -1; pointer-events: none;
+    inset: -6px -12px;
+    background: linear-gradient(90deg, rgb(250 249 245 / .86), rgb(250 249 245 / .6) 78%, transparent);
+    filter: blur(10px);
+  }
+}
+.home:has(.who-reference:not([data-who-ready])) .hero-stage::after,
+.home:has(.who-reference[data-who-flow]) .hero-stage::after,
+html:not(.js) .hero-stage::after { background: #faf7ee; }
+.who-reference::after {
+  content: ''; position: absolute; z-index: 2; pointer-events: none;
+  inset: auto 0 -1px; height: clamp(8px, 1.4vw, 24px);
+  background: linear-gradient(transparent, var(--home-paper));
+}
+@media print, (forced-colors: active) {
+  .hero-stage::after, .who-reference::after { display: none; }
+}
