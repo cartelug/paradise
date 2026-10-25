@@ -1,109 +1,91 @@
-# Ten matching photographs, pro version (V38.1)
+# Ten separate photograph prompts (V38.2)
 
-Shaped for the compact V38 layout: cards show a wide 16:10 picture (16:9 on
-phones, 16:11 in the destination grid), so each frame keeps its story in the middle
-60 percent and holds only sky, water or ground in the top and bottom 15 percent.
+Run each prompt on its own, one prompt per image, so the generator produces ONE photograph each.
+Each prompt is self-contained (the style block is repeated inside it). Never paste several together.
+If the first result looks digital, add: "Make it look like an unretouched photograph from a real camera: smoother, softer, more natural."
 
-## Master prompt (all ten, one run)
+Shape: 16:10 landscape, subject in the middle 60 percent, so the site can crop to 16:9 on phones.
 
-You are a world-class travel and architecture photographer shooting a single
-commissioned portfolio for a private luxury travel house. Produce TEN separate,
-photographically real images, not a collage, 16:10 landscape, maximum resolution,
-that read as one collection shot by one photographer on one trip.
+## 1. MALDIVES (save as `maldives.png`)
 
-THE LOOK. Real camera, real light: full-frame mirrorless, RAW-developed, 35 to
-50 mm for environments, 85 to 135 mm for compression, f/5.6 to f/8 for deep
-clarity, f/2.8 only where noted. Natural film-like tonal roll-off, true highlight
-recovery, fine natural grain, subtle lens falloff, micro-contrast in textures
-(stone, water, linen, wood, skin of the sea), physically correct reflections and
-shadows, atmospheric depth with soft haze in the far plane. Colour grade shared by
-all ten: teal-and-midnight shadows, champagne and honey highlights, a thread of
-brass gold in the light, saturation restrained, whites never clipped, blacks never
-crushed. Every image is shot at golden hour, blue hour or soft overcast
-brightness, never harsh midday.
+```
+Maldives. Early morning, 24 mm, f/8. A weathered timber jetty runs low and straight into glassy turquoise shallows toward a short line of thatched overwater villas softened by morning haze. A single pale sandbank on the horizon. The pink-gold sky is mirrored in water so still the jetty posts appear twice. Foreground: wet, grained wood and a coiled rope.
 
-THE CRAFT. Each image has one clear hero subject, a deliberate foreground element
-for depth, leading lines (jetty, shoreline, stairs, road, wake, table), and quiet
-negative space. Use rule of thirds or centred symmetry with intention. Layer
-foreground, middle and far planes. Prefer an unexpected but credible viewpoint
-(low, high, through, reflected) over the postcard centre.
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
 
-THE FEELING. Hushed, private, unhurried, expensive. Evidence of humans only as
-traces (a robe on a chair, footprints, a half-poured glass, a wake), or tiny
-distant figures. No one looks at the camera.
+## 2. SEYCHELLES (save as `seychelles.png`)
 
-STRICTLY AVOID. Text, logos, signage, watermarks, borders, frames, UI, collage,
-split images, illustration, painting, 3D render or CGI look, plastic skin, HDR
-halos, oversaturation, over-sharpened edges, fake bokeh, distorted perspective,
-warped architecture, melted details, extra limbs, tourists crowding, drones or
-cranes in frame, branded products, stock-photo clichés (thumbs-up, posed couples,
-selfies).
+```
+Seychelles. Just after rain, 35 mm, f/8. Enormous smooth rose-grey granite boulders, damp and gleaming, frame a clear emerald lagoon. Palms lean in from the edge, a ribbon of pale sand, soft cumulus lit from the side. Foreground: a still rock pool reflecting the sky.
 
-THE TEN FRAMES, in order:
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
 
-1. MALDIVES, first light. Low, wide view along a weathered timber jetty into
-   glassy turquoise shallows, a line of overwater villas with thatched roofs
-   fading into haze, a single white sandbank on the horizon, pink-gold sky
-   reflected in water so still it shows the jetty posts twice. Foreground: wet
-   wood grain and a coil of rope. 24 mm feel, f/8.
-2. SEYCHELLES, after rain. Giant polished granite boulders in warm
-   rose-grey, wet and glistening, framing an emerald lagoon, palms leaning in,
-   a ribbon of pale sand, towering cumulus lit from the side. Foreground: a rock
-   pool with a perfect mirror of the sky. 35 mm, f/8.
-3. DUBAI, blue hour. A marina promenade at dusk, the skyline across still water,
-   one slim tower rising as the dominant vertical, windows glowing amber against a
-   deep teal sky, a long exposure softening the water into silk, clean reflections.
-   Foreground: polished stone edge and a single lamp. 50 mm, f/8, tripod sharp.
-4. EAST AFRICA, golden dust. A family of elephants walking in a line across open
-   grassland, the calf tucked beside its mother, backlit by a low sun so dust and
-   seed-heads glow, one flat-topped acacia on the horizon, long shadows leading the
-   eye. 200 mm compression, f/5.6, honest wildlife-documentary realism.
-5. EUROPE, late afternoon. A whitewashed cliffside town stepping down to a deep
-   cobalt sea, tight terraces, blue-domed chapel, a single sailboat leaving a thin
-   white wake, bougainvillea in the foreground corner, crisp clear air. Viewed from
-   above and slightly to the side. 70 mm, f/8.
-6. ZANZIBAR, high tide. A pale-sand spit curving into a shallow lagoon that grades
-   from clear to jade to turquoise, a traditional white-sailed dhow drifting
-   through the colour bands, a few palms on the edge, seen from a high angle with
-   graphic, abstract shapes. Natural, not oversaturated.
-7. PRIVATE YACHT, sunset. A sleek white motor yacht at anchor off a rocky coast,
-   perfect warm reflection, teak deck glowing, a soft wake line behind a tender, a
-   thin band of orange cloud above deep blue water. Shot from water level, 85 mm
-   compression, f/5.6. No visible crew faces.
-8. EXECUTIVE ARRIVAL, dawn. A quiet private-terminal apron, a business jet with
-   its door open and a dark limousine waiting at the foot of the stairs, cool blue
-   pre-dawn light with a single band of gold on the horizon, wet tarmac reflecting
-   both, a driver as a distant silhouette. Cinematic, minimal. 35 mm, f/5.6.
-9. PRIVATE ISLAND RESET, morning. A bare sand-floor beachfront villa terrace,
-   white linen daybeds, a woven lantern, a folded robe, soft shadows from a
-   thatched roof, calm sea framed by the open side, absolute stillness. Warm shade
-   against bright sea. 35 mm, f/4, natural-light interior look.
-10. CELEBRATION EVENING, dusk. A long candlelit table on a beach, low flames in
-    glass, linen and brass details, a half-poured glass, empty chairs, the sea
-    glowing blue behind and lanterns strung into the distance, shallow depth near
-    the front, rich but quiet. 50 mm, f/2.8, warm key light with cool ambient.
+## 3. DUBAI (save as `dubai.png`)
 
-CONSISTENCY. Same photographer, same camera character, same grade, same quiet
-mood across all ten. Return the ten images only.
+```
+Dubai. Blue hour, 50 mm, f/8, tripod, a slow exposure that turns the water to silk. Across a still marina, a skyline of glass towers with one slim tower as the dominant vertical, windows glowing amber against a deep teal sky, clean reflections. Foreground: a polished stone edge and one warm lamp.
 
-## One image per run
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
 
-Begin with: "This is image N of a matching set of ten shot by one photographer;
-keep the set's camera look, grade and rules." Then paste THE LOOK, THE CRAFT,
-THE FEELING, STRICTLY AVOID, and only frame N.
+## 4. EAST AFRICA (save as `east-africa.png`)
 
-## Quality boosters (add if the result looks soft or digital)
+```
+East Africa. Late golden hour, 200 mm, f/5.6, documentary realism. A family of elephants walks in a line across open grassland, the calf close beside its mother, backlit by low sun so the dust and seed-heads glow. A single flat-topped acacia on the horizon, long soft shadows.
 
-- "Shot on a full-frame camera, 14-bit RAW, edited in a natural film-influenced
-  workflow; no AI sheen, no smoothing, no oversharpening."
-- "Natural lens imperfections: faint vignette, micro-contrast, slight edge
-  softness, real depth of field."
-- "Reference the discipline of award-winning travel photography and
-  architectural photography: patient, restrained, true."
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 5. EUROPE (save as `europe.png`)
+
+```
+Europe. Late afternoon, 70 mm, f/8, seen from above and slightly to the side. A whitewashed Mediterranean cliffside town steps down to a deep cobalt sea, a blue-domed chapel among terraces, one sailboat leaving a thin white wake. Bougainvillea in a foreground corner, crisp clean air.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 6. ZANZIBAR (save as `zanzibar.png`)
+
+```
+Zanzibar. High tide, high angle. A pale sand spit curves into a shallow lagoon that grades from clear to jade to turquoise. A traditional white-sailed dhow drifts through the colour bands, a few palms on the edge. Natural, soft, not oversaturated, graphic and calm.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 7. PRIVATE YACHT (save as `yacht.png`)
+
+```
+Private Yacht. Sunset, water level, 85 mm, f/5.6. A sleek white motor yacht at anchor off a rocky coast, a perfect warm reflection, glowing teak deck, a thin band of orange cloud above deep blue water. No visible crew faces.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 8. EXECUTIVE ARRIVAL (save as `executive.png`)
+
+```
+Executive Arrival. Dawn, 35 mm, f/5.6, cinematic and minimal. A quiet private-terminal apron: a business jet with its door open and a dark limousine waiting at the foot of the stairs, cool pre-dawn blue with one thin band of gold on the horizon, wet tarmac reflecting both. A driver only as a small distant silhouette.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 9. PRIVATE ISLAND RESET (save as `reset.png`)
+
+```
+Private Island Reset. Morning, 35 mm, f/4. A bare sand-floor beachfront villa terrace: white linen daybeds, a woven lantern, a folded robe, soft shadows from a thatched roof, a calm sea in the open side of the frame. Absolute stillness, warm shade against bright sea.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
+
+## 10. CELEBRATION EVENING (save as `celebration.png`)
+
+```
+Celebration Evening. Dusk, 50 mm, f/2.8. A long candlelit table on a beach: low flames in glass, linen and brass details, a half-poured glass, empty chairs, the sea glowing blue behind, lanterns strung into the distance. Rich but quiet, warm key light with cool ambient.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+```
 
 ## Adding them to the site
 
-Save the masters in `source-assets/v38-photography/` as `maldives.png`,
-`seychelles.png`, `dubai.png`, `africa.png`, `europe.png`, `zanzibar.png`,
-`yacht.png`, `executive.png`, `reset.png`, `celebration.png`; 1 to 6 replace the
-destination pictures, 7 the yacht band, 8 to 10 the corporate and journey cards.
+Save the masters in `source-assets/v38-photography/` with the filenames above. Images 1 to 6 replace the destination pictures, 7 the yacht band, 8 to 10 the corporate and journey cards. Ask me to wire them in and re-run the checks.
