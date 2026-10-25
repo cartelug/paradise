@@ -1,0 +1,134 @@
+/* V38: professional Archivo typography and a tighter page rhythm.
+   Loaded last. Archivo only, weight and tracking only (no width axis, no second face).
+   Owner request, 25 October 2026: bolder and more powerful headings, smaller cards and
+   spacing so the page scrolls faster, and every line of text clear. */
+
+/* Scale: slightly smaller display sizes; the heavier weight carries the presence. */
+:root {
+  --fs-h3: clamp(1.1rem, .98rem + .62vw, 1.45rem);
+  --fs-h2: clamp(1.6rem, 1.08rem + 2.1vw, 2.75rem);
+  --fs-h1: clamp(2.1rem, 1.3rem + 3.6vw, 4.3rem);
+  --track-display: -.034em;
+  --track-title: -.02em;
+}
+
+/* Typesetting details that separate a finished site from a default one. */
+body { font-kerning: normal; font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1; font-synthesis: none; }
+p, li, dd, blockquote { text-wrap: pretty; hyphens: manual; }
+h1, h2, h3, .display { font-kerning: normal; text-wrap: balance; }
+h1, h2, .display { font-weight: 800; letter-spacing: var(--track-display); line-height: 1.02; }
+h2 { line-height: 1.04; }
+h3 { font-weight: 700; letter-spacing: var(--track-title); line-height: 1.16; }
+h4 { font-weight: 700; letter-spacing: -.005em; }
+em { font-weight: 700; letter-spacing: -.012em; }
+/* Light type on dark grounds reads thinner; give it a touch more weight. */
+.escapes, .yacht, .sec--night, .sec--dusk, .sec--lagoon, .page-hero, .footer { font-weight: 450; }
+.lead { font-weight: 450; line-height: 1.6; letter-spacing: -.008em; }
+.sec--ivory .lead, .sec--sand .lead, .light .lead { font-weight: 450; }
+.eyebrow, .card-label, .price-label, .footer-column h2, .menu-kicker { font-weight: 700; letter-spacing: .2em; }
+.eyebrow { font-size: .71875rem; }
+.btn { font-weight: 700; letter-spacing: .012em; }
+.link, .pill, .mail { font-weight: 650; }
+.price strong { font-weight: 700; letter-spacing: -.022em; font-feature-settings: 'tnum' 1, 'lnum' 1, 'kern' 1; }
+.card-meta, .dest-top > span, .dest-duration, .travel-update-meta span { font-weight: 700; }
+.desktop-nav a { font-weight: 600; letter-spacing: -.003em; }
+.field > span, .form label { font-weight: 650; }
+
+/* Page rhythm: less empty space between and inside sections. */
+.sec:not(.escapes) { padding-block: clamp(48px, 6.4vw, 96px); }
+.sec--tight { padding-block: clamp(36px, 4.6vw, 68px); }
+.sec-head { gap: 16px 48px; margin-bottom: clamp(22px, 3.2vw, 46px); }
+.signature, .booking { margin-top: clamp(40px, 5vw, 76px); }
+.escapes-intro { padding-block: clamp(56px, 6vw, 92px) clamp(110px, 13vw, 190px); }
+.escapes-head h2 { font-size: clamp(2.1rem, 3.8vw, 3.4rem); }
+.escape-body { gap: clamp(36px, 5.4vw, 72px); }
+.scene { gap: 18px; }
+.scene-panel { gap: 14px; }
+.scene h3 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.3rem); font-weight: 800; letter-spacing: var(--track-display); line-height: 1.03; }
+.scene-lead { font-size: clamp(1rem, .95rem + .3vw, 1.125rem); line-height: 1.55; }
+.scene-foot { gap: 16px; padding-top: 16px; }
+.yacht { min-height: min(68vh, 620px); padding-block: clamp(48px, 6vw, 92px); }
+.yacht h2 { font-size: clamp(1.8rem, 1rem + 3.4vw, 3.7rem); font-weight: 800; letter-spacing: var(--track-display); }
+.yacht-rate { margin: 20px 0 24px; padding-top: 16px; }
+.closing h2 { font-size: clamp(1.9rem, 1rem + 4vw, 4.2rem); font-weight: 800; letter-spacing: var(--track-display); }
+
+/* Cards: a wider, shorter picture and tighter copy, so three of them no longer fill three screens. */
+.card-grid { gap: clamp(16px, 2vw, 26px); }
+.card { border-radius: var(--radius); box-shadow: 0 14px 38px rgb(11 22 38 / .08); }
+.card-media { aspect-ratio: 16 / 10; }
+.card-body { gap: 10px; padding: clamp(16px, 1.7vw, 22px); }
+.card h3 { font-size: clamp(1.15rem, 1rem + .5vw, 1.5rem); }
+.card-text { font-size: .9688rem; line-height: 1.55; }
+.card-incl { padding-top: 12px; gap: 8px; }
+.card-foot { gap: 12px; padding-top: 14px; }
+.card .ticks { gap: 4px; font-size: .9rem; }
+.dest-grid { gap: clamp(16px, 2.2vw, 30px); }
+.dest { gap: 12px; }
+.dest .frame { aspect-ratio: 16 / 11; border-radius: var(--radius); }
+.dest h3 { font-size: clamp(1.15rem, 1rem + .6vw, 1.55rem); }
+.dest p { font-size: .9688rem; line-height: 1.55; }
+.dest .price { padding-top: 12px; }
+.promise { gap: 10px; padding-top: 20px; }
+.promise h3 { font-size: clamp(1.1rem, .98rem + .5vw, 1.4rem); }
+.promise p { font-size: .9688rem; line-height: 1.55; }
+.promises { gap: clamp(16px, 2.6vw, 40px); }
+.promise-head { margin-bottom: clamp(24px, 3.4vw, 48px); }
+.step { gap: 8px; padding-top: 16px; }
+.step p { line-height: 1.55; }
+.steps { gap: clamp(14px, 2.2vw, 32px); }
+.travel-update { gap: 10px; padding: clamp(16px, 1.8vw, 24px); }
+.travel-update p { line-height: 1.55; }
+.glance-card { padding: clamp(20px, 2.8vw, 36px); }
+.exp { gap: 10px; padding: clamp(18px, 2.2vw, 28px); }
+.tile { min-height: 132px; gap: 14px; padding: clamp(16px, 1.7vw, 22px); }
+.contact-card { gap: 10px; padding: clamp(18px, 2.4vw, 30px); }
+.concept-body { gap: 10px; padding: clamp(18px, 2vw, 26px); }
+.story .frame, .cover-image { aspect-ratio: 16 / 10; }
+.planner-aside .frame { aspect-ratio: 16 / 10; }
+.enquiry { gap: clamp(24px, 5vw, 76px); }
+.enquiry-copy { gap: 16px; }
+.enquiry-card { padding: clamp(18px, 2.6vw, 36px); }
+.page-hero { min-height: clamp(340px, 52vh, 540px); padding-bottom: clamp(36px, 4.6vw, 68px); }
+.page-hero--compact { min-height: clamp(280px, 38vh, 400px); }
+.picker--illustrated .pick-face { min-height: 112px; padding: 12px; gap: 6px; }
+.picker--illustrated .pick-icon { width: 52px; height: 52px; }
+.picker--illustrated .pick-label { font-weight: 650; }
+.faq summary { min-height: 56px; padding-block: 12px; }
+
+@media (max-width: 900px) {
+  .dest .frame { aspect-ratio: 16 / 9; }
+}
+@media (max-width: 719px) {
+  .scene-photo { aspect-ratio: 16 / 10; }
+  .escapes-intro { padding-top: 48px; padding-bottom: 104px; }
+  .escape-body { gap: 40px; }
+  .card-media { aspect-ratio: 16 / 9; }
+  .sec:not(.escapes) { padding-block: 44px; }
+  .yacht { min-height: min(62svh, 480px); }
+  .picker--illustrated .pick-face { min-height: 96px; }
+  .picker--illustrated .pick-icon { width: 46px; height: 46px; }
+  .tile { min-height: 112px; }
+  .promise { padding-block: 18px; }
+}
+@media (max-width: 640px) {
+  .page-hero:not(.page-hero--image) { padding-top: calc(var(--header-h) + 28px); padding-bottom: 32px; }
+}
+
+/* Section 02, Who We Are: heavier, higher-contrast native copy; the soft light halos
+   behind it are lightened so no panel can be seen against the artwork. */
+.who-reference-label { font-weight: 700; letter-spacing: .2em; color: #0a2a3e; }
+.who-reference-intro { font-size: clamp(1.2rem, 1.6vw, 1.65rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.25; color: #051a28; }
+.who-reference-description { font-size: clamp(1rem, 1.12vw, 1.125rem); font-weight: 500; line-height: 1.55; color: #0b2433; letter-spacing: -.006em; }
+.who-reference-action { font-weight: 700; letter-spacing: .01em; }
+.who-reference-services li { font-weight: 700; letter-spacing: .12em; color: #0a2a3e; }
+.who-native-copy::before { background: radial-gradient(120% 130% at 12% 40%, rgb(250 249 242 / .62), rgb(250 249 242 / .3) 62%, transparent 82%); filter: blur(18px); }
+.who-reference-copy h2::before { opacity: .45; }
+.who-reference-copy { padding-bottom: clamp(48px, 8vw, 128px); }
+@media (max-width: 999px) {
+  .who-reference-copy { padding-bottom: 20px; }
+  .who-reference-copy .art-heading-visual { max-width: 700px; }
+}
+@media (max-width: 999px) {
+  .js .who-reference:not([data-who-flow]) .who-backdrop { margin-top: -78vw; }
+  .who-reference .who-reference-description { max-width: 29ch; }
+}

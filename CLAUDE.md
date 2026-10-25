@@ -1,5 +1,19 @@
 # Pardus Luxury Escapes: project rules
 
+## Professional typography, compact rhythm and exact seams — 25 October 2026
+
+The owner asked for bolder, more powerful and less obtrusive section styling, pro-level
+type, smaller cards so pages scroll faster, and a mobile hero→Who We Are join that is
+completely invisible. `website/src/styles/refine.css` (loaded last) carries it:
+Archivo only, heavier display weights (h1/h2 800, h3 700, light-on-dark body 450),
+tighter tracking, `text-wrap: balance/pretty`, tabular prices, shorter card pictures
+(16:10 / 16:9) and smaller section, card and page-hero spacing. This updates the earlier
+“700 only for large headlines” note; the typeface rule (Archivo only) is unchanged.
+The join colours are sampled from the real artwork edge by `website/scripts/sample-seam.mjs`
+into `src/styles/seam-colors.css`; re-run it if the Who We Are art changes. Regeneration
+prompts for the “A world of places.” lettering are in
+`website/source-assets/v38-who-lettering-prompt/PROMPT.md`.
+
 ## Isolated HD headings and native Section 02 — 25 October 2026
 
 The owner next removed “Personally curated.” from the section-one headline only

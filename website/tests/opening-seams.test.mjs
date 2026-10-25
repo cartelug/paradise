@@ -17,7 +17,7 @@ test('the opening keeps the approved exact copy and permanent preloader while jo
  const html=await readFile(new URL('../index.html',root),'utf8');
  assert.match(html,/pardus-v37-hero-lettering-/);assert.match(html,/pardus-v36-escape-lettering-/);
  assert.match(html,/data-pardus-intro/);assert.match(html,/Personally curated\./);
- const css=await readFile(new URL('src/styles/opening-seams.css',root),'utf8');
+ const css=await readFile(new URL('src/styles/opening-seams.css',root),'utf8')+await readFile(new URL('src/styles/seam-colors.css',root),'utf8');
  assert.match(css,/max-width: 999px/);assert.match(css,/--who-entry-gradient/);assert.match(css,/who-reference::after/);
  assert.match(css,/forced-colors/);assert.match(css,/data-who-flow/);
 });

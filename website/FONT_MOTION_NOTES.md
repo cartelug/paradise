@@ -35,3 +35,7 @@ Portrait tablets use the complete landscape hero after the headline and actions;
 The page no longer imposes a 320 px body minimum that overflows when a narrow viewport has a visible scrollbar. Featured cards stack their artwork above the copy through 1280 px; metadata wraps, flex text can shrink, and narrow-screen card/form actions fill their column. Footer links and Folio/picker controls have at least 44 px touch targets. The smallest service picker uses a stacked summary. Touch-only devices avoid sticky hover lifts.
 
 The existing geometry checks were run in Chrome through a temporary, same-origin iframe review page: all 33 pages at 320, 390, 768, 1024, 1200, 1440 and 1920 px, plus 390 px with 200% root text size. Extra homepage checks cover 360, 430, 568 (landscape), 820 and 1199 px. These are browser viewport checks, not physical-device or Safari certification.
+
+## Professional type pass — 25 October 2026 (V38)
+
+`src/styles/refine.css` supersedes the weight notes above: h1/h2 are 800 at -.034em, h3 and card titles 700 at -.02em, eyebrows and price labels 700, buttons 700, prices 700 with tabular lining numerals, and body copy on dark grounds 450 so light-on-dark text does not look thin. Kerning and ligatures are explicit, `font-synthesis` is off (the true italic is always used), headings use `text-wrap: balance` and paragraphs `text-wrap: pretty`. Still Archivo only, weight and tracking only.
