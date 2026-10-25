@@ -1,0 +1,109 @@
+Created with the built-in image generator. Ten separate full-bleed landscape PNG photographs.
+
+=== maldives.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Maldives. Early morning, 24 mm, f/8. A weathered timber jetty runs low and straight into glassy turquoise shallows toward a short line of thatched overwater villas softened by morning haze. A single pale sandbank on the horizon. The pink-gold sky is mirrored in water so still the jetty posts appear twice. Foreground: wet, grained wood and a coiled rope.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+
+Final refinement:
+Preserve the weathered timber jetty, thatched overwater villas, glassy turquoise shallows and mirrored posts. Change the light to very soft early first light: pale pink-gold pastel sky, subtle champagne highlights, teal shadows, no blazing orange sun or intense orange reflection. A single pale bare white sandbank on the horizon, replacing the green island; no trees or foliage on that sandbank. The wet wood grain stays natural and detailed without hard oversharpening. A loose coiled rope on the jetty foreground around 70-78% of image height. Villas stay in the middle 60% of the frame; only open sky in the uppermost 15%, and timber ground and water in the bottom 15%. One single quiet full-bleed landscape 16:10 natural photograph, 24 mm f/8. Smooth natural sky and water, real depth, faint grain, honest muted colour. No people, HDR, glow, text, branding or borders.
+
+=== seychelles.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Seychelles. Just after rain, 35 mm, f/8. Enormous smooth rose-grey granite boulders, damp and gleaming, frame a clear emerald lagoon. Palms lean in from the edge, a ribbon of pale sand, soft cumulus lit from the side. Foreground: a still rock pool reflecting the sky.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+
+Final refinement:
+Preserve this Seychelles beach photograph just after rain: smooth damp rose-grey granite boulders framing a clear emerald lagoon, leaning palms, pale sand ribbon, side-lit soft cumulus, a still foreground rock pool reflecting sky. Widen the view so the entire crowns of the palms and the boulders are inside the middle 60 percent of image height, with uninterrupted clouded sky across the top 15 percent and only pale sand, low ground and shallow rock-pool water across the bottom 15 percent. Place main boulder-and-lagoon grouping in the middle 60 percent of width; provide breathing room around it. Restrained clean natural colour, smooth gentle highlights, damp surfaces reflecting subtle light. Avoid exaggerated orange sunlight, HDR, crunchy sharpening, glow, oversaturation. One single full-bleed 16:10 landscape natural travel photograph, 35 mm f/8. No people, lettering, logos or borders.
+
+=== dubai.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Dubai. Blue hour, 50 mm, f/8, tripod, a slow exposure that turns the water to silk. Across a still marina, a skyline of glass towers with one slim tower as the dominant vertical, windows glowing amber against a deep teal sky, clean reflections. Foreground: a polished stone edge and one warm lamp.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+
+Final refinement:
+Preserve this single natural Dubai blue-hour photograph, its skyline, warm windows, stone edge, one foreground lamp and silky reflected water. Reframe by pulling the camera back enough that the complete tallest tower now begins at roughly 23% of image height, with uninterrupted deep teal sky across the entire uppermost 15%. Keep the whole skyline in the central band, mostly within the middle 60% of image width, with more calm water in the foreground. Keep smooth sky gradients and subtle unprocessed colours; natural restrained contrast, no HDR or oversharpening. Single full-bleed landscape frame, 16:10. No text, branding or borders.
+
+=== east-africa.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+East Africa. Late golden hour, 200 mm, f/5.6, documentary realism. A family of elephants walks in a line across open grassland, the calf close beside its mother, backlit by low sun so the dust and seed-heads glow. A single flat-topped acacia on the horizon, long soft shadows.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+Final refinement:
+Preserve the elephant family, the calf close beside its mother, documentary anatomy and late golden-hour East African grassland, the single flat-topped acacia on the horizon and soft shadows. Pull the camera back so the complete family fits inside the central 60 percent of image width, with generous grassland at both sides. Keep all elephants between 30 and 73 percent of image height. Preserve clear sky across top 15% and only open grassland across bottom 15%. The backlit dust and seed-heads are gently illuminated without artificial bloom. Restrain the orange warmth and exposure for an honest quiet natural travel photograph with subtle tonal transitions, real 200 mm f/5.6 depth of field, faint grain. One full-bleed 16:10 landscape image. No extra trees, text, logos, illustration, HDR or oversharpening.
+
+=== europe.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Europe. Late afternoon, 70 mm, f/8, seen from above and slightly to the side. A whitewashed Mediterranean cliffside town steps down to a deep cobalt sea, a blue-domed chapel among terraces, one sailboat leaving a thin white wake. Bougainvillea in a foreground corner, crisp clean air.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+Final refinement:
+Keep this Mediterranean cliffside town, whitewashed terraces, one blue-domed chapel, deep cobalt sea, one sailboat with a thin white wake, and the above-and-slightly-side camera view, 70 mm f/8, late afternoon. Widen the composition and reduce the bougainvillea to a small foreground corner accent, not a dominant wall of flowers. The chapel, main town and boat must remain in the central 60 percent of the frame with breathing room. Leave uninterrupted sky across the entire top 15 percent and plain pale stone terrace ground across the entire bottom 15 percent, with bougainvillea just above that bottom band at the side. Soft natural Mediterranean daylight, clean air, calm premium mood, smooth gentle tonal transitions. Single full-bleed landscape 16:10 natural photograph. No text, logos, people facing camera, oversaturation, HDR, crunchy sharpening, borders or collage.
+
+=== zanzibar.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Zanzibar. High tide, high angle. A pale sand spit curves into a shallow lagoon that grades from clear to jade to turquoise. A traditional white-sailed dhow drifts through the colour bands, a few palms on the edge. Natural, soft, not oversaturated, graphic and calm.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+=== yacht.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Private yacht. Sunset, water level, 85 mm, f/5.6. A sleek white motor yacht at anchor off a rocky coast, a perfect warm reflection, glowing teak deck, a thin band of orange cloud above deep blue water. No visible crew faces.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+=== executive.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Executive arrival. Dawn, 35 mm, f/5.6, cinematic and minimal. A quiet private-terminal apron: a business jet with its door open and a dark limousine waiting at the foot of the stairs, cool pre-dawn blue with one thin band of gold on the horizon, wet tarmac reflecting both. A driver only as a small distant silhouette.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+=== reset.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Private island reset. Morning, 35 mm, f/4. A bare sand-floor beachfront villa terrace: white linen daybeds, a woven lantern, a folded robe, soft shadows from a thatched roof, a calm sea in the open side of the frame. Absolute stillness, warm shade against bright sea.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+Final refinement:
+Recreate this as the specifically requested sand-floor beachfront villa terrace, morning, 35 mm, f/4. The floor must be fine pale natural beach sand, never wood or tile. Remove the pool completely and remove the mountain island. Calm open turquoise sea and a flat horizon on the open side. Two white linen daybeds, one woven lantern and one neatly folded robe; only these quiet sparse furnishings, soft shadows from a thatched roof. Pull the camera back to show the shaded beachfront pavilion and daybeds within the central 60% of the frame, empty pale sand across the bottom 15%, clear sky across the top 15%, with the thatched eave situated below that sky. Stillness and warm shade against bright sea. One single full-bleed landscape 16:10 natural photograph. Honest subdued colours, smooth natural transitions, gentle highlights, real depth of field, faint natural grain. No pool, timber deck, flooring boards, mountains, text, logos, people, CGI, HDR or glow.
+
+=== celebration.png ===
+Use case: photorealistic-natural
+Generate one standalone high-resolution landscape photograph, aspect ratio exactly 16:10.
+
+Celebration evening. Dusk, 50 mm, f/2.8. A long candlelit table on a beach: low flames in glass, linen and brass details, a half-poured glass, empty chairs, the sea glowing blue behind, lanterns strung into the distance. Rich but quiet, warm key light with cool ambient.
+
+One single photograph, one frame, full-bleed, landscape 16:10, never a collage, grid, diptych or split image. Unretouched natural travel photography shot on a full-frame mirrorless camera, RAW, with soft, smooth, natural tonal transitions: clean gradients in sky and water, gentle highlight roll-off, honest colour, faint natural grain, real depth of field, no crunchy over-sharpening, no hyper-detail, no HDR, no glow, no oversaturation. Calm, quiet, premium mood; subject in the middle 60 percent of the frame, only sky, water or ground in the top and bottom 15 percent. Colour: teal and midnight shadows, champagne highlights, a hint of brass-gold light. No text, logos, watermarks, borders, people facing camera, or illustration/CGI look.
+Composition priority: keep the main subject entirely inside the central 60 percent of image height; preserve open sky, water or ground in the uppermost and lowermost 15 percent. Understated photographic colour and restrained contrast.
+
+Final refinement:
+Keep this single natural photograph of a long candlelit beach table at dusk, glass candle holders, linen and brass, one half-full glass, empty chairs, warm low flames with cool blue sea and hanging lanterns receding into the distance. Pull the camera back into a wider composition and keep the entire long table, chairs and lanterns between 22% and 78% of image height. Clear unobstructed dusk sky across the full top 15%, and only empty natural beach sand across the full bottom 15%. The table remains the main subject in the central 60% of the frame. Subtler floral decoration and a quiet sparse mood. No people, text, borders, collage, HDR, oversharpening or glowing bloom. Maintain full-bleed landscape 16:10, natural photographic colours and soft tonal transitions.

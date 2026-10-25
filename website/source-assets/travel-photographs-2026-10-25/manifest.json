@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "created": "2026-10-25",
+  "asset_type": "AI-generated travel image masters",
+  "generation_tool": "built-in image generator",
+  "files": [
+    {
+      "filename": "maldives.png",
+      "subject": "Maldives",
+      "existing_photo_slot": "maldives",
+      "suggested_alt": "A weathered timber jetty leads toward thatched overwater villas above calm turquoise shallows at first light.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2308864,
+      "sha256": "087cb105216378d3898ae03085f4c2f657cf0974d2d88f7c184e7da46dbdb98d",
+      "git_blob_sha": "7ed4490b61edb71e67da606aad60c1cc8f6bc085"
+    },
+    {
+      "filename": "seychelles.png",
+      "subject": "Seychelles",
+      "existing_photo_slot": "seychelles",
+      "suggested_alt": "Rain-damp granite boulders and leaning palms frame an emerald lagoon, with a reflecting rock pool in the foreground.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 3064199,
+      "sha256": "7822f2be0da3d7c883553a0af4d23feaa3b6e75f43e9527876c6d3b938621e2d",
+      "git_blob_sha": "37eba04a290021aa7ab986b9dc1abe34283f94f8"
+    },
+    {
+      "filename": "dubai.png",
+      "subject": "Dubai",
+      "existing_photo_slot": "dubai",
+      "suggested_alt": "An illuminated Dubai skyline reflects across calm water at blue hour beside a stone promenade and warm lamp.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2125936,
+      "sha256": "ac5141fc86484c613b76e5b6ece2067da91ef45699aff0cfb3cea1d71b24aaf9",
+      "git_blob_sha": "7ebdb787112a393e3cd5150532d9a65fa56f51ca"
+    },
+    {
+      "filename": "east-africa.png",
+      "subject": "East Africa",
+      "existing_photo_slot": "safari-family",
+      "suggested_alt": "A family of elephants, including calves beside their mothers, walks across backlit East African grassland.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2472722,
+      "sha256": "6c481cd7280f557535ffbf0ff2fb8fa43648f8d0c84fe7988f613232b487bae7",
+      "git_blob_sha": "c86cadf8ff30081bd3222afc40d7994ce1c7391b"
+    },
+    {
+      "filename": "europe.png",
+      "subject": "Europe",
+      "existing_photo_slot": "europe",
+      "suggested_alt": "A whitewashed Mediterranean town and blue-domed chapel overlook cobalt water and a small sailing boat.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2886106,
+      "sha256": "518575a8e8618a04d416df34f2dfc737030ac40bd8bdf3d692e433187b9eee67",
+      "git_blob_sha": "e03ffa02696c04c8ebd9b5f02ed570c9c347fb1d"
+    },
+    {
+      "filename": "zanzibar.png",
+      "subject": "Zanzibar",
+      "existing_photo_slot": "zanzibar",
+      "suggested_alt": "A white-sailed dhow drifts past a pale sand spit through shallow turquoise lagoon water.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2776067,
+      "sha256": "d13bb288bf687f256045759045709921242b7253d28896d126dfc337e4810be7",
+      "git_blob_sha": "ca7fb4afea3f22b24c92c69453a59d36da143405"
+    },
+    {
+      "filename": "yacht.png",
+      "subject": "Private yacht",
+      "existing_photo_slot": "yacht",
+      "suggested_alt": "A white motor yacht rests at anchor beside a rocky coast in warm sunset light.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2240931,
+      "sha256": "32ac97dc7d0ea3e6d1107100a998b19d92b72f97a19d83200c7aa14e5516a0f4",
+      "git_blob_sha": "70887ce0db7ac948c4a106fd08187e40f9f44732"
+    },
+    {
+      "filename": "executive.png",
+      "subject": "Executive arrival",
+      "existing_photo_slot": "corporate",
+      "suggested_alt": "A business jet and waiting dark limousine reflect on a wet airport apron at dawn.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2209198,
+      "sha256": "d60b5fb9732c5ca66fdb8e64b838d1f6562cc9840c2f681fc2b9ebd59b42cd0f",
+      "git_blob_sha": "8490a446da757f041c6fcd5d279c8f17852c62c4"
+    },
+    {
+      "filename": "reset.png",
+      "subject": "Private island reset",
+      "existing_photo_slot": null,
+      "suggested_alt": "White linen daybeds, a woven lantern and a folded robe sit on the sand floor of a shaded beachfront terrace.",
+      "width": 1586,
+      "height": 992,
+      "size_bytes": 2529487,
+      "sha256": "eace509b019ab102cd13c08b175ccbd7c7e918f714a2a7525e3c9774d86caeaf",
+      "git_blob_sha": "0295cbe26958782cbde2920dae0d17df3102b489"
+    },
+    {
+      "filename": "celebration.png",
+      "subject": "Celebration evening",
+      "existing_photo_slot": null,
+      "suggested_alt": "A long linen-dressed beach table with empty chairs, candles and hanging lanterns overlooks the sea at dusk.",
+      "width": 1585,
+      "height": 992,
+      "size_bytes": 2477449,
+      "sha256": "9b953ea7065767794bc19ac631b30009030a91ee66999b32768dc40ff6aa7a95",
+      "git_blob_sha": "e5dd010032bbda393268e559150c0172fa255986"
+    }
+  ]
+}
