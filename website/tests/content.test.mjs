@@ -6,6 +6,7 @@ import { journeys } from '../src/data/journeys.ts';
 import { journal } from '../src/data/journal.ts';
 import { dubaiDiscoveries, dubaiExperiencePhotos } from '../src/data/dubai-gallery.ts';
 import { v31Photography } from '../src/data/v31-photography.ts';
+import { travelPhotographs } from '../src/data/travel-photographs.ts';
 
 const unique = values => new Set(values).size === values.length;
 
@@ -30,7 +31,9 @@ test('published content has unique, URL-safe slugs and complete planning fields'
 test('every editorial image has responsive AVIF and WebP derivatives', async () => {
   const names = new Set([...destinations, ...journeys, ...journal, ...dubaiDiscoveries, ...dubaiExperiencePhotos].map(item => item.image));
   for (const name of names) {
-    for (const width of [640, 1280, 1920]) {
+    // V38 travel photographs are published at their native shape and only the widths their master supports.
+    const travel = travelPhotographs.find(entry => entry.asset === name);
+    for (const width of travel ? travel.widths : [640, 1280, 1920]) {
       for (const format of ['avif', 'webp']) await access(new URL(`../public/images/${name}-${width}.${format}`, import.meta.url));
     }
   }

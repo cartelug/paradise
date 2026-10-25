@@ -11,6 +11,7 @@ import { dubaiExperiencePhotos } from '../data/dubai-gallery';
 import { destinations } from '../data/destinations';
 import { offerFor, priceNote } from '../data/offers';
 import { path, absolute } from '../data/site';
+import { largestImage } from '../data/photography.ts';
 export function getStaticPaths() { return destinations.map(destination => ({params:{destination:'destination-'+destination.slug},props:{destination}})); }
 const { destination: d } = Astro.props;
 const offer = offerFor(d.slug);
@@ -27,7 +28,7 @@ const schema = {'@context':'https://schema.org','@type':'TouristDestination',nam
 const focus: Record<string, [string, string]> = { maldives: ['55%', '45%'], seychelles: ['50%', '50%'], dubai: ['50%', '40%'], africa: ['55%', '45%'], zanzibar: ['50%', '50%'], europe: ['50%', '50%'] };
 const [fx, fy] = focus[d.slug] || ['55%', '50%'];
 ---
-<Layout label={offer.label} title={offer.label} description={offer.experience} image={'images/'+d.image+'-1920.webp'} class="inner destination-page" simpleFooter>
+<Layout label={offer.label} title={offer.label} description={offer.experience} image={largestImage(d.image)} class="inner destination-page" simpleFooter>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   <PageHero glance image={d.image} alt={d.alt} eyebrow={d.country} focusX={fx} focusY={fy}>
     <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>Destinations</a><Icon name="chevron-right" /><span>{offer.label}</span></nav>

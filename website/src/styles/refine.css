@@ -132,3 +132,16 @@ em { font-weight: 700; letter-spacing: -.012em; }
   .js .who-reference:not([data-who-flow]) .who-backdrop { margin-top: -78vw; }
   .who-reference .who-reference-description { max-width: 29ch; }
 }
+
+/* V38 photography: the private-yacht band. The new picture is bright, so the copy gets a stronger dark side on desktop,
+   and on phones the picture sits above the copy so the whole boat can be seen. */
+@media (min-width: 761px) {
+  .yacht::before { background:
+    linear-gradient(90deg, rgb(5 12 26 / .94) 0%, rgb(5 12 26 / .78) 36%, rgb(5 12 26 / .16) 74%, rgb(5 12 26 / .02) 100%),
+    linear-gradient(0deg, rgb(5 12 26 / .85) 0%, rgb(5 12 26 / 0) 50%); }
+}
+@media (max-width: 760px) {
+  .yacht { min-height: 0; padding-top: min(66vw, 320px); }
+  .yacht-media { inset: 0 0 auto; height: min(96vw, 460px); }
+  .yacht::before { background: linear-gradient(180deg, rgb(5 12 26 / .1) 0, rgb(5 12 26 / .06) 32%, var(--midnight) min(96vw, 460px)); }
+}

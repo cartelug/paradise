@@ -5,6 +5,7 @@ import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import { journal } from '../data/journal';
 import { path, absolute } from '../data/site';
+import { largestImage } from '../data/photography.ts';
 export function getStaticPaths() { return journal.map((entry, i) => ({ params: { journal: `journal-${entry.slug}` }, props: { entry, next: journal[(i + 1) % journal.length] } })); }
 const { entry, next } = Astro.props;
 const readMinutes = Math.max(1, Math.ceil([entry.intro, ...entry.paragraphs].join(' ').split(/\s+/).length / 200));
@@ -14,10 +15,10 @@ const articleSchema = {
   '@context': 'https://schema.org', '@type': 'Article', headline: entry.title,
   description: entry.description, datePublished: entry.publishedAt, dateModified: entry.updatedAt,
   author: { '@type': 'Organization', name: entry.author }, publisher: { '@type': 'Organization', name: 'Pardus Luxury Escapes' },
-  image: absolute(`images/${entry.image}-1920.webp`), mainEntityOfPage: articleUrl,
+  image: absolute(largestImage(entry.image)), mainEntityOfPage: articleUrl,
 };
 ---
-<Layout label="The Journal" title={entry.title} class="inner article-page" description={entry.description} image={`images/${entry.image}-1920.webp`}>
+<Layout label="The Journal" title={entry.title} class="inner article-page" description={entry.description} image={largestImage(entry.image)}>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <PageHero image={entry.image} alt={entry.alt} eyebrow={`${entry.category}, ${readMinutes} min read`}>
     <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journal.html')}><Icon name="arrow-left" /> The Journal</a></nav>

@@ -3,6 +3,7 @@ import { deliverEnquiry } from './deliver';
 import { readFolio } from './folio';
 import { site, path } from '../data/site';
 import { destinations } from '../data/destinations';
+import { travelPhotographs } from '../data/travel-photographs';
 import './ui';
 
 // Interactive features: destination filters, journey and journal libraries, and the detailed planner.
@@ -131,7 +132,8 @@ if (planner) {
   const webpSource = asidePicture?.querySelector<HTMLSourceElement>('source[type="image/webp"]');
   const asideImg = asidePicture?.querySelector<HTMLImageElement>('img');
   if (asidePicture && asideImg) {
-    const srcset = (slug: string, format: string) => [640, 1280, 1920].map(w => `${path(`images/${slug}-${w}.${format}`)} ${w}w`).join(', ');
+    const widthsFor = (slug: string) => travelPhotographs.find(entry => entry.asset === slug)?.widths ?? [640, 1280, 1920];
+    const srcset = (slug: string, format: string) => widthsFor(slug).map(w => `${path(`images/${slug}-${w}.${format}`)} ${w}w`).join(', ');
     destination.addEventListener('change', () => {
       const slug = destination.selectedOptions[0]?.dataset.slug;
       const match = slug ? destinations.find(d => d.slug === slug) : undefined;
@@ -139,6 +141,7 @@ if (planner) {
       if (avifSource) avifSource.srcset = srcset(image, 'avif');
       if (webpSource) webpSource.srcset = srcset(image, 'webp');
       asideImg.src = path(`images/${image}-1280.webp`);
+      asideImg.style.objectPosition = travelPhotographs.find(entry => entry.asset === image)?.position ?? '';
       asideImg.alt = match ? `An escape in ${match.name}` : 'An overwater escape in the Maldives';
     });
     destination.dispatchEvent(new Event('change'));

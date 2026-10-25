@@ -1,5 +1,20 @@
 # Pardus Luxury Escapes: project rules
 
+## Ten travel photographs — 25 October 2026
+
+The ten masters in `website/source-assets/travel-photographs-2026-10-25/` (README, manifest,
+prompts) now fill the destination and experience pictures. `scripts/prepare-travel-photographs.mjs`
+writes native 16:10 AVIF/WebP at 640/960/1280/native width (never enlarged, no 1920 px file) as
+`<name>-v38-<width>` and generates `src/data/travel-photographs.ts` (slots, alt text from the manifest,
+focal point). `photo()` consults it before the V31 and V24 registries; `Picture.astro` reads the widths,
+intrinsic size and focal point, and `largestImage()` gives social previews the right file. Slot map:
+maldives, seychelles, dubai, europe, zanzibar, yacht, corporate (executive), `safari-uganda` +
+`safari-family` + `journal-safari` (East Africa), `reset` + `hero-maldives` (Private Island Reset
+journey), `celebration` (Celebration in Two Acts journey). The pictures are illustrative AI
+photographs: alt text describes the scene and never names a resort, hotel or yacht. The PNG
+masters stay untouched (`tests/travel-photographs.test.mjs` checks their SHA-256). Re-run the script
+(add `--force` to re-encode) if a master or focal point changes.
+
 ## Professional typography, compact rhythm and exact seams — 25 October 2026
 
 The owner asked for bolder, more powerful and less obtrusive section styling, pro-level

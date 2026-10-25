@@ -59,7 +59,7 @@ export const journeys: JourneyConcept[] = [
     slug: 'celebration-in-two-acts', number: '03', name: 'Celebration in Two Acts',
     eyebrow: 'City / Indian Ocean', title: 'A little theatre. Then time disappears.',
     description: 'A vibrant opening and a private coastal close, shaped around a honeymoon, anniversary or milestone.',
-    ...photo('dubai', { image: 'dubai-v24', alt: 'Dubai Marina towers and city lights beneath a golden dusk sky' }), caption: 'A celebration with two different energies',
+    ...photo('celebration', { image: 'dubai-v24', alt: 'Dubai Marina towers and city lights beneath a golden dusk sky' }), caption: 'A celebration with two different energies',
     duration: 'Suggested rhythm / 9–12 nights', destinations: ['Dubai', 'The Maldives'], place: 'City', pace: 'Balanced', reason: 'Celebration',
     idealFor: ['Honeymoons and anniversaries', 'Milestone birthdays', 'Travellers who want energy and stillness'],
     rhythm: ['A compact city opening', 'One memorable celebration moment', 'A longer island close with very little agenda'],

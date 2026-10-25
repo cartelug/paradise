@@ -6,6 +6,8 @@ import Icon from '../components/Icon.astro';
 import { destinations } from '../data/destinations';
 import { journeys } from '../data/journeys';
 import { site, path } from '../data/site';
+import { photo } from '../data/photography.ts';
+const asidePhoto = photo('maldives', { image: 'maldives-v24', alt: 'An overwater escape in the Maldives' });
 const faqs = [
   { q: 'Do I need to know where I want to go?', a: 'No. Choose “Open to inspiration” and share the occasion, atmosphere or travel style you have in mind.' },
   { q: 'Does downloading the brief make a booking?', a: (site.enquiryEndpoint ? 'No. Downloading the brief, and sending it to Pardus, does not reserve anything.' : 'No. The brief is saved on your device and is not sent automatically.') + ' Any arrangements, costs and availability must be discussed and confirmed separately.' },
@@ -19,7 +21,7 @@ const faqs = [
   </PageHero>
   <section class="sec sec--night" aria-label="Journey planner">
     <div class="wrap planner-layout">
-      <div class="planner-aside"><div class="frame planner-aside-picture-frame"><Picture name="maldives-v24" alt="An overwater escape in the Maldives" class="planner-aside-picture" /></div><p class="planner-note">{site.enquiryEndpoint ? 'This planner creates a brief you can keep, and sends your enquiry to Pardus. It does not confirm a booking.' : 'This planner creates a brief you can keep. It does not send an enquiry or confirm a booking.'}</p></div>
+      <div class="planner-aside"><div class="frame planner-aside-picture-frame"><Picture name={asidePhoto.image} alt="An overwater escape in the Maldives" class="planner-aside-picture" /></div><p class="planner-note">{site.enquiryEndpoint ? 'This planner creates a brief you can keep, and sends your enquiry to Pardus. It does not confirm a booking.' : 'This planner creates a brief you can keep. It does not send an enquiry or confirm a booking.'}</p></div>
       <form id="journey-planner" class="planner glass" novalidate action={site.enquiryEndpoint || undefined} method={site.enquiryEndpoint ? 'POST' : undefined}>
       <input type="hidden" name="_subject" value="Pardus journey brief" />
       <input type="hidden" name="saved" value="" />
