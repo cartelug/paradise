@@ -145,3 +145,13 @@ em { font-weight: 700; letter-spacing: -.012em; }
   .yacht-media { inset: 0 0 auto; height: min(96vw, 460px); }
   .yacht::before { background: linear-gradient(180deg, rgb(5 12 26 / .1) 0, rgb(5 12 26 / .06) 32%, var(--midnight) min(96vw, 460px)); }
 }
+
+/* Promise cards on phones: the illustrated emblem spans the heading and text, which share the wide column.
+   (The old rule reserved a 52 px column for a small badge, which squeezed the paragraph into it.) Homepage only;
+   the About page keeps its badge layout. */
+@media (max-width: 820px) {
+  .home .promise:has(> .travel-emblem) { grid-template-columns: 72px minmax(0, 1fr); column-gap: 16px; row-gap: 6px; align-items: start; }
+  .home .promise > .travel-emblem { grid-row: 1 / span 2; width: 72px; height: 72px; }
+  .home .promise:has(> .travel-emblem) h3 { grid-column: 2; align-self: end; }
+  .home .promise:has(> .travel-emblem) p { grid-column: 2; max-width: none; }
+}
