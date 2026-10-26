@@ -167,3 +167,10 @@ em { font-weight: 700; letter-spacing: -.012em; }
 .escapes-head .lead { color: #0b2536; font-weight: 500; text-shadow: 0 0 10px rgb(244 241 233 / .95), 0 0 2px rgb(244 241 233 / .9); }
 .escapes-head .eyebrow { color: #5e4719; }
 .escapes-head h2, .escapes-head h2 em { text-shadow: 0 0 14px rgb(244 241 233 / .75); }
+
+/* Sections that open with a colour blend (dark hero into ivory, ivory into night) must keep their first line clear of the
+   blend. The compact section padding above must not pull copy up into it. */
+.sec.blend-top:not(.escapes) { padding-top: calc(var(--blend-h) + clamp(20px, 3.2vw, 48px)); }
+.escapes-hint { color: #0b2536; font-weight: 700; text-shadow: 0 0 10px rgb(244 241 233 / .95), 0 0 2px rgb(244 241 233 / .9); }
+.yacht .eyebrow { color: var(--gold-soft); }
+.concept-number { background: rgb(5 12 26 / .88); }
