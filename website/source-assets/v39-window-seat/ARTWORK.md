@@ -1,0 +1,5 @@
+# Selected Window Seat reference — 26 October 2026
+
+The owner explicitly selected the navy Leave ordinary. concept and asked for this part of the website to match it. These AI-generated photographs and the alpha leopard were generated using selected-reference.jpeg, with specifications preserved in asset-specifications.json. They are reference-matched reconstructions, not pixel-identical crops. PNG masters stay unchanged. The isolated lettering was rebuilt from the existing Archivo font outlines; its SVGs are crisp at all sizes and have accessible live-text counterparts. The actual Pardus logo is reused unchanged.
+
+Run node scripts/prepare-window-seat.mjs to encode the portrait 224/448/887 AVIF and WebP derivatives, alpha leopard exports and vector artwork. manifest.json records master checksums. WindowSeat.astro replaces the retired WhoWeAre + tall escape stage on the homepage only; all later homepage content, preloader, hero, prices and real destination pages remain. Category links navigate to meaningful destination filters; the first link has the outlined visual emphasis from the reference without falsely claiming all three destinations are islands.

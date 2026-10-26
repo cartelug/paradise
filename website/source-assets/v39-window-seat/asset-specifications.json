@@ -1,0 +1,19 @@
+{
+  "reference": "reference/selected-master.jpeg",
+  "method": "Built-in image generation with selected screenshot as reference; PNG sources preserved unchanged.",
+  "photos": {
+    "maldives-window.png": "Portrait 1:2. Wet timber jetty from foreground centre to overwater thatched villas, rope-bound mooring posts, amber lamps, turquoise lagoon, peach-pink and lavender dusk. No text, borders, UI or people.",
+    "seychelles-window.png": "Portrait 1:2. Rose-grey granite boulders, palms, blue tropical sky, ivory shore at right, crystal turquoise shallows with submerged stones. No text, borders or UI.",
+    "dubai-window.png": "Portrait 1:2. Marina highrises and architectural crowns, warm window lights, blue-lilac dusk, white yachts and amber/cobalt reflections. No inserted landmarks, text, borders or UI."
+  },
+  "leopard": "Same upper-right reference pose: calm left-facing three-quarter head and upper chest, golden/amber eye, black nose, golden rosettes, ivory muzzle, fine whiskers, warm upper-left light. Transparent alpha, soft lower and shadow-side edges. Identity/reference reconstruction rather than a guaranteed exact rosette duplicate.",
+  "lettering": "Clean Archivo font outlines, normal wght 800, italic wght 750, white #ffffff and gold #e4c58d. Leave ordinary. includes an editable native ellipse. Other final SVGs use exact supplied phrases.",
+  "native_elements": [
+    "Official existing logo",
+    "Vector compass rose",
+    "CSS capsule borders",
+    "CSS gradients and masks",
+    "Live UI text and prices",
+    "Native arrows, rules and controls"
+  ]
+}

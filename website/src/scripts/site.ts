@@ -21,6 +21,10 @@ filters.forEach(button => button.addEventListener('click', () => {
   if (label) label.textContent = `${count} destination${count === 1 ? '' : 's'} to discover`;
 }));
 
+// Homepage collection links open the matching destination filter.
+const initialCategory = new URLSearchParams(location.search).get('category');
+if (initialCategory) filters.find(button => button.dataset.filter === initialCategory)?.click();
+
 document.querySelectorAll<HTMLElement>('[data-journey-library]').forEach(library => {
   const buttons = [...library.querySelectorAll<HTMLButtonElement>('[data-journey-filter]')];
   const cards = [...library.querySelectorAll<HTMLElement>('[data-journey-card]')];

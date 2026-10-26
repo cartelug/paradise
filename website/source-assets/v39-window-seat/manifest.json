@@ -1,0 +1,30 @@
+[
+  {
+    "file": "maldives-window.png",
+    "sha256": "9d8d97e21dd04dada50a9e0fc851e6594602578c5aa2c250059f11f280a8b449",
+    "width": 887,
+    "height": 1774,
+    "hasAlpha": false
+  },
+  {
+    "file": "seychelles-window.png",
+    "sha256": "679f1855e0cbd7217dbf323f37cff314301869c1faa5cf4aaa95669fb317135b",
+    "width": 887,
+    "height": 1774,
+    "hasAlpha": false
+  },
+  {
+    "file": "dubai-window.png",
+    "sha256": "ea86bfc3472a111f3c8de3de197d488835452c06d88928393e9c9c62a2a87a4c",
+    "width": 887,
+    "height": 1774,
+    "hasAlpha": false
+  },
+  {
+    "file": "leopard-portrait.png",
+    "sha256": "89ffc176def3871b86f24727fc491d43d9b261e4185084a19c375d0dd415b338",
+    "width": 1024,
+    "height": 1536,
+    "hasAlpha": true
+  }
+]

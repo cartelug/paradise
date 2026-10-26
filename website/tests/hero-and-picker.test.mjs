@@ -104,14 +104,14 @@ test('homepage header colours are scoped, with the existing approved vector logo
   assert.match(ui, /const desktop = window\.matchMedia\('\(min-width: 1200px\)'\)/);
 });
 
-test('the second section continues the scenery with decorative lazy-loaded art and verified escapes', async () => {
+test('selected compact collection has portrait photographs and real destination pages', async () => {
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
-  const section = html.match(/<section class="sec escapes"[\s\S]*?<\/section>/)?.[0];
+  const section = html.match(/<section class="ws-destinations"[\s\S]*?<\/section>/)?.[0];
   assert.ok(section);
-  assert.match(section, /class="escapes-backdrop" aria-hidden="true"/);
-  assert.match(section, /pardus-coastal-coast-/);
-  assert.match(section, /alt="" loading="lazy" decoding="async"/);
-  for (const destination of ['maldives', 'seychelles', 'dubai']) assert.match(section, new RegExp(`destination-${destination}\\.html`));
+  assert.match(section, /pardus-window-maldives-/);
+  assert.match(section, /loading="lazy" decoding="async"/);
+  assert.doesNotMatch(section, /data-escape-track|escapes-backdrop/);
+  for (const destination of ['maldives', 'seychelles', 'dubai']) assert.ok(section.includes(`destination-${destination}.html`));
 });
 
 test('the service picker retains every service as a tap target and a plain GET form', async () => {

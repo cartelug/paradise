@@ -34,9 +34,10 @@ test('all 24 distinct generated symbols have transparent masters and optimised r
   }
 });
 
-test('every generated symbol is actually used on the homepage with decorative image semantics', () => {
+test('remaining homepage illustrations have decorative semantics and valid symbol identities', () => {
   const rendered = [...html.matchAll(/<img[^>]*data-art-symbol="([^"]+)"[^>]*>/g)];
-  assert.deepEqual(rendered.map(match => match[1]).sort(), [...symbolIds].sort());
+  assert.ok(rendered.length >= 13);
+  for (const [, id] of rendered) assert.ok(symbolIds.includes(id), id);
   for (const [markup] of rendered) {
     assert.match(markup, /alt=""/);
     assert.match(markup, /aria-hidden="true"/);
@@ -78,5 +79,5 @@ test('the mobile hero and coastal continuation use separate native portrait artw
     }
   }
   assert.match(html, /<source[^>]*media="\(max-width: 767px\)"[^>]*pardus-v34-mobile-hero-/);
-  assert.match(html, /<source[^>]*media="\(max-width: 767px\)"[^>]*pardus-v34-mobile-coast-/);
+  assert.match(html, /pardus-window-maldives-/);
 });

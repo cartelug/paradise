@@ -47,7 +47,7 @@ test('the exported pages use the matching photograph in each destination and exp
   };
   for (const [name, asset] of Object.entries(expect)) assert.match(await page(name), new RegExp(`${asset}-(640|960|1280|1586)`), `${name} should use ${asset}`);
   const home = await page('index.html');
-  for (const asset of ['maldives-v38', 'east-africa-v38', 'europe-v38', 'zanzibar-v38', 'reset-v38', 'celebration-v38']) assert.match(home, new RegExp(asset));
+  for (const asset of ['pardus-window-maldives', 'east-africa-v38', 'europe-v38', 'zanzibar-v38', 'reset-v38', 'celebration-v38']) assert.match(home, new RegExp(asset));
 });
 
 test('V38 pictures keep intrinsic dimensions, lazy loading, a focal point and non-empty alt on content images', async () => {

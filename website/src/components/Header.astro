@@ -22,14 +22,14 @@ const more = [
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light={!home} /></a>
+  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light={!home} />{home && <span class="window-seat-header-brand"><Brand vector light /></span>}</a>
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
   <div class="header-tools">
     <button type="button" class="header-saved requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /><span>Saved trips</span><small data-folio-count hidden>0</small></button>
     <a class="btn btn--gold btn--sm header-cta" href={path('journey.html')}>Plan your escape{home && <Icon name="arrow-right" />}</a>
-    <button type="button" class="menu-toggle requires-js" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog"><Icon name="menu" /></button>
+    <button type="button" class="menu-toggle requires-js" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog"><Icon name="menu" />{home && <svg class="window-seat-menu-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18" /></svg>}</button>
   </div>
   <div class="page-progress" aria-hidden="true"><span></span></div>
 </header>

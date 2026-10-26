@@ -1,14 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import WhoWeAre from '../components/WhoWeAre.astro';
-import ArtHeading from '../components/ArtHeading.astro';
+import WindowSeat from '../components/WindowSeat.astro';
 import HomeEmblem from '../components/HomeEmblem.astro';
 import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import Brand from '../components/Brand.astro';
 import OfferPrice from '../components/OfferPrice.astro';
-import OfferInclusions from '../components/OfferInclusions.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import ServicePicker from '../components/ServicePicker.astro';
 import StickyCta from '../components/StickyCta.astro';
@@ -16,12 +14,10 @@ import TravelDesk from '../components/TravelDesk.astro';
 import BookingSteps from '../components/BookingSteps.astro';
 import { journeys } from '../data/journeys';
 import { path, site } from '../data/site';
-import { offerFor, destinationFor, priceText, priceNote, cruiseTypes } from '../data/offers';
+import { offerFor, destinationFor, priceText, cruiseTypes } from '../data/offers';
 import { photo } from '../data/photography.ts';
 import heroArtwork from '../data/photographic-coast-artwork.json';
 import illustrated from '../data/illustrated-home-artwork.json';
-import '../styles/opening-seams.css';
-import '../styles/seam-colors.css';
 import { destinationArt } from '../data/home-illustrations';
 const yachtPhoto = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht in Dubai Marina' });
 const promises = [
@@ -31,10 +27,6 @@ const promises = [
 ];
 const asset = (name: string) => path(`images/${name}`);
 const heroSet = (scene: 'desktop' | 'mobile') => (scene === 'mobile' ? illustrated.backgrounds['mobile-hero'] : heroArtwork.desktop).widths.map(width => `${asset(`${scene === 'mobile' ? 'pardus-v34-mobile-hero' : 'pardus-coastal-desktop'}-${width}.avif`)} ${width}w`).join(', ');
-const coastSet = (ext: string) => heroArtwork.coast.widths.map(width => `${asset(`pardus-coastal-coast-${width}.${ext}`)} ${width}w`).join(', ');
-const mobileCoast = illustrated.backgrounds['mobile-coast'];
-const mobileCoastSet = (ext: string) => mobileCoast.widths.map(width => `${asset(`pardus-v34-mobile-coast-${width}.${ext}`)} ${width}w`).join(', ');
-const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFor(slug), place: destinationFor(slug) }));
 ---
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image={`images/pardus-coastal-desktop-${heroArtwork.desktop.width}.webp`}>
   <Fragment slot="head">
@@ -42,48 +34,7 @@ const scenes = ['maldives', 'seychelles', 'dubai'].map(slug => ({ offer: offerFo
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
   </Fragment>
   <Hero />
-  <WhoWeAre />
-
-  <section class="sec escapes" id="destinations" aria-labelledby="featured-title" data-escapes>
-    <div class="escapes-intro">
-      <picture class="escapes-backdrop" aria-hidden="true">
-        <source media="(max-width: 767px)" type="image/avif" srcset={mobileCoastSet('avif')} sizes="100vw" width={mobileCoast.width} height={mobileCoast.height} />
-        <source media="(max-width: 767px)" type="image/webp" srcset={mobileCoastSet('webp')} sizes="100vw" width={mobileCoast.width} height={mobileCoast.height} />
-        <source type="image/avif" srcset={coastSet('avif')} sizes="100vw" />
-        <img src={asset(`pardus-coastal-coast-${heroArtwork.coast.width}.webp`)} srcset={coastSet('webp')} sizes="100vw" width={heroArtwork.coast.width} height={heroArtwork.coast.height} alt="" loading="lazy" decoding="async" />
-      </picture>
-      <div class="wrap escapes-head">
-        <p class="eyebrow" data-reveal>Signature escapes</p>
-        <ArtHeading as="h2" id="featured-title" art="escape-lettering" reveal>Your next <em>escape.</em></ArtHeading>
-        <p class="lead" data-reveal>Three settings, one way of travelling. Choose yours. We arrange the journey.</p>
-        <p class="escapes-hint" aria-hidden="true">Scroll to travel <Icon name="arrow-down" /></p>
-      </div>
-    </div>
-    <div class="escape-track" data-escape-track style={`--count:${scenes.length}`}>
-      <div class="escape-stage" data-escape-stage data-active="0" style="--sp:0">
-        <div class="escape-glow" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div class="wrap escape-bar" role="group" aria-label="Choose an escape">
-          <div class="escape-tabs">{scenes.map((scene, i) => <button type="button" class="escape-tab" data-escape-go={i} aria-current={i === 0 ? 'true' : undefined}><span>{scene.offer.label}</span><small>{scene.offer.nights}</small></button>)}</div>
-          <div class="escape-line" aria-hidden="true"><span class="escape-fill"></span>{scenes.map((_, i) => <i style={`--at:${((i + 0.5) / scenes.length) * 100}%`}></i>)}<span class="escape-plane"><Icon name="plane" /></span></div>
-        </div>
-        <div class="wrap escape-body">
-          {scenes.map((scene, i) => <article class="scene" data-scene={i} style={`--i:${i}`} data-reveal aria-labelledby={`scene-title-${scene.offer.slug}`}>
-            <span class="scene-mark" aria-hidden="true">{scene.offer.label}</span>
-            <a class="scene-photo frame" href={path(`destination-${scene.offer.slug}.html`)} tabindex="-1" aria-hidden="true"><Picture name={scene.place.image} alt="" sizes="(max-width: 1023px) 100vw, 56vw" /></a>
-            <div class="scene-panel">
-              <div class="scene-meta"><span class="chip"><Icon name="pin" />{scene.place.country}</span><span class="chip"><Icon name="clock" />{scene.offer.nights}</span></div>
-              <div class="scene-title"><HomeEmblem name={destinationArt[scene.offer.slug]} size={72} /><h3 id={`scene-title-${scene.offer.slug}`}><a href={path(`destination-${scene.offer.slug}.html`)}>{scene.offer.label}</a></h3></div>
-              <p class="scene-lead">{scene.offer.experience}</p>
-              <ul class="ticks" aria-label={`${scene.offer.label} highlights`}>{scene.offer.highlights.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul>
-              <OfferInclusions items={scene.offer.inclusions} />
-              <div class="scene-foot"><OfferPrice offer={scene.offer} /><div class="scene-actions"><a class="btn btn--gold" href={path(`destination-${scene.offer.slug}.html`)}>Explore the escape <Icon name="arrow-right" /></a><a class="link" href={`${path('journey.html')}?destination=${encodeURIComponent(scene.place.name)}`} aria-label={`Enquire about ${scene.offer.label}`}>Enquire <Icon name="arrow-right" /></a></div></div>
-            </div>
-          </article>)}
-        </div>
-      </div>
-    </div>
-    <div class="wrap"><p class="price-note" data-reveal="fade">{priceNote}</p></div>
-  </section>
+  <WindowSeat />
 
   <section class="yacht" aria-labelledby="cruise-title" data-yacht>
     <div class="yacht-media"><Picture name={yachtPhoto.image} alt={yachtPhoto.alt} sizes="100vw" /></div>

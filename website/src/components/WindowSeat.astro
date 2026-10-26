@@ -1,0 +1,66 @@
+---
+import Icon from './Icon.astro';
+import { path } from '../data/site';
+import { offerFor, displayPrice } from '../data/offers';
+import '../styles/window-seat.css';
+const images = (name: string, ext: string) => [224, 448, 887].map(w => `${path(`images/pardus-window-${name}-${w}.${ext}`)} ${w}w`).join(', ');
+const cards = [
+  { slug: 'maldives', alt: 'An illustrative sunset over thatched overwater villas and a wooden jetty in a turquoise lagoon.' },
+  { slug: 'seychelles', alt: 'An illustrative Seychelles shore with sculpted granite boulders, palms and clear turquoise shallows.' },
+  { slug: 'dubai', alt: 'An illustrative blue-hour Dubai Marina skyline with white yachts and golden reflections.' },
+].map(card => ({ ...card, offer: offerFor(card.slug), price: displayPrice(offerFor(card.slug)) }));
+const categories = [
+  { label: 'Islands', filter: 'islands' },
+  { label: 'Cities', filter: 'culture' },
+  { label: 'Safaris', filter: 'wild' },
+];
+---
+<div class="window-seat" data-window-seat data-sticky-quiet>
+  <div class="ws-wrap">
+    <section class="ws-intro" id="who-we-are" aria-labelledby="who-title">
+      <picture class="ws-leopard" aria-hidden="true">
+        <source srcset={[320, 640, 1024].map(w => `${path(`images/pardus-window-leopard-${w}.webp`)} ${w}w`).join(', ')} sizes="(max-width: 760px) 31vw, 300px" type="image/webp" />
+        <img src={path('images/pardus-window-leopard-640.webp')} alt="" width="1024" height="1536" loading="lazy" decoding="async" />
+      </picture>
+      <p class="ws-eyebrow">02 / Who we are<span aria-hidden="true"></span></p>
+      <h2 class="ws-heading ws-heading--intro" id="who-title" data-ws-heading>
+        <span class="ws-heading-copy">Leave <em>ordinary.</em></span>
+        <img class="ws-heading-art" src={path('images/pardus-window-leave-ordinary.svg')} width="619" height="128" alt="" aria-hidden="true" loading="eager" decoding="async" data-ws-lettering />
+      </h2>
+      <p class="ws-description">Flights, stays, safaris and private escapes,<br class="ws-copy-break" /> planned around you.</p>
+      <a class="ws-difference" href={path('about.html')}><span>Our difference</span><Icon name="arrow-right" /></a>
+    </section>
+
+    <section class="ws-destinations" id="destinations" aria-labelledby="featured-title">
+      <div class="ws-collection-head">
+        <h2 class="ws-heading ws-heading--collection" id="featured-title" data-ws-heading>
+          <span class="ws-heading-copy">Choose <em>your view.</em></span>
+          <img class="ws-heading-art" src={path('images/pardus-window-choose-your-view.svg')} width="385" height="60" alt="" aria-hidden="true" loading="eager" decoding="async" data-ws-lettering />
+        </h2>
+        <nav class="ws-categories" aria-label="Browse destination collections">
+          {categories.map((category, i) => <a class:list={['ws-category', { 'ws-category--featured': i === 0 }]} href={`${path('destinations.html')}?category=${category.filter}`}>{category.label}</a>)}
+        </nav>
+      </div>
+      <div class="ws-cards">
+        {cards.map(({ slug, alt, offer, price }) => <article class="ws-card" aria-labelledby={`ws-title-${slug}`} aria-describedby="ws-rate-terms">
+          <a class="ws-window" href={path(`destination-${slug}.html`)} aria-label={`Explore ${offer.label}`}>
+            <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>
+          </a>
+          <h3 id={`ws-title-${slug}`}>{offer.label}</h3>
+          <p class="ws-nights">{offer.nights.replace(/-night.*$/, ' nights')}</p>
+          <div class="ws-price"><span class="ws-from">{price.hasStartingPrice ? 'From' : ''}</span><strong>{price.amount}{price.hasStartingPrice && <><span aria-hidden="true"> pp</span><span class="visually-hidden"> per person</span></>}</strong>{price.hasStartingPrice && <span class="ws-basis">Two sharing</span>}</div>
+          <a class="ws-trip" href={path(`destination-${slug}.html`)} aria-label={`View ${offer.label} trip`}><Icon name="arrow-right" /></a>
+        </article>)}
+      </div>
+      <p class="visually-hidden" id="ws-rate-terms">Prices are per person, based on two adults sharing. UGX quote available. Your dates and chosen itinerary determine the final price. Flights, visas and travel insurance are quoted separately. Full inclusions are available on each trip page.</p>
+    </section>
+
+    <section class="ws-bespoke" aria-labelledby="ws-bespoke-title">
+      <img class="ws-compass" src={path('images/pardus-window-compass.svg')} alt="" width="160" height="160" aria-hidden="true" loading="lazy" />
+      <div class="ws-bespoke-copy"><h2 id="ws-bespoke-title">Your world, <em>your way.</em></h2><p>Bespoke travel planning<br />from Uganda to everywhere.</p></div>
+      <a class="ws-plan" href={path('journey.html')}><span>Plan your escape</span><Icon name="arrow-right" /></a>
+    </section>
+    <nav class="ws-services" aria-label="What Pardus arranges"><a href={path('concierge.html')}>Flights</a><a href={path('destinations.html')}>Stays</a><a href={path('destination-africa.html')}>Safaris</a><a href={path('concierge.html')}>Private escapes</a></nav>
+  </div>
+</div>
+<script>import '../scripts/window-seat';</script>

@@ -6,7 +6,7 @@ const cta = document.querySelector<HTMLElement>('[data-sticky-cta]');
 const root = document.documentElement;
 if (cta && 'IntersectionObserver' in window) {
   const hero = document.querySelector('[data-hero]');
-  const quiet = [...document.querySelectorAll('[data-picker], #enquire, .site-footer')];
+  const quiet = [...document.querySelectorAll('[data-picker], [data-sticky-quiet], #enquire, .site-footer')];
   let heroGone = false;
   const covering = new Set<Element>();
   function update() {
