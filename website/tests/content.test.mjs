@@ -69,9 +69,17 @@ test('art-directed scenes have separate responsive desktop and mobile art', asyn
 });
 
 test('production typography is local and does not call Fontshare', async () => {
-  for (const file of ['Archivo-Latin-Variable.woff2', 'Archivo-Latin-Italic-Variable.woff2', 'Archivo-OFL.txt']) {
+  for (const file of ['SkyText-Light.woff2', 'SkyText-Regular.woff2', 'SkyText-Bold.woff2', 'MTNBrighterSans-Bold.woff2', 'FONT-LICENSES.txt']) {
     await access(new URL(`../public/fonts/${file}`, import.meta.url));
   }
   const layout = await readFile(new URL('../src/layouts/Layout.astro', import.meta.url), 'utf8');
   assert.equal(layout.includes('api.fontshare.com'), false);
+  const faces = await readFile(new URL('../src/components/FontFaces.astro', import.meta.url), 'utf8');
+  assert.equal(faces.includes('Archivo'), false, 'Archivo is retired');
+});
+
+test('the footer credits the licensed fonts and icons on every page', async () => {
+  const footer = await readFile(new URL('../src/components/Footer.astro', import.meta.url), 'utf8');
+  assert.match(footer, /Fonts made from <a href="https:\/\/www\.onlinewebfonts\.com"[^>]*>Web Fonts<\/a> is licensed by CC BY 4\.0/);
+  assert.match(footer, /Icons made from <a href="https:\/\/www\.onlinewebfonts\.com\/icon"[^>]*>svg icons<\/a> is licensed by CC BY 4\.0/);
 });

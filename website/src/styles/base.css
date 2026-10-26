@@ -24,9 +24,12 @@
   --line-dark: rgb(236 215 168 / .2);
   --line-light: rgb(11 22 38 / .14);
 
-  /* One family for everything: Archivo. Headlines use it bold and tightly spaced; accents use its true italic. */
-  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: var(--font-ui);
+  /* Type roles (26 October 2026). Sky Text reads and operates; MTN Brighter Sans is the display voice and sets every figure.
+     Add a face in FontFaces.astro, then point a role here; nothing else needs to change. */
+  --font-ui: 'Sky Text', 'Sky Text Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'MTN Brighter Sans', 'MTN Brighter Sans Fallback', 'Sky Text', 'Sky Text Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-title: var(--font-ui);
+  --font-figure: var(--font-display);
 
   --gutter: clamp(20px, 5.2vw, 76px);
   --max: 1280px;
@@ -81,7 +84,7 @@ h1 { font-size: var(--fs-h1); line-height: 1.05; }
 h2 { font-size: var(--fs-h2); line-height: 1.1; }
 h3 { font-size: var(--fs-h3); line-height: 1.2; font-weight: 600; letter-spacing: -.012em; }
 h4 { font-family: var(--font-ui); font-size: 1rem; font-weight: 600; letter-spacing: .01em; }
-em { font-style: italic; font-family: var(--font-ui); font-weight: 600; color: var(--gold-soft); }
+em { font-style: normal; font-weight: 700; color: var(--gold-soft); }
 .sec--ivory em, .sec--sand em, .light em { color: var(--gold-ink); }
 p { text-wrap: pretty; }
 .lead { font-size: var(--fs-lead); line-height: 1.7; color: var(--mist); max-width: 58ch; }

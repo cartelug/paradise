@@ -1,5 +1,7 @@
 # V30.1: typography and motion notes
 
+> **Update, 26 October 2026:** the type sections below describe the retired Archivo setup. The site now uses Sky Text (Light, Regular, Bold) and MTN Brighter Sans Bold. Roles, weight resolution, fallbacks and the footer licence credits are documented in CLAUDE.md (“Type system”), `src/components/FontFaces.astro`, `src/styles/type.css` and `public/fonts/FONT-LICENSES.txt`. Motion notes remain current.
+
 ## Type
 
 **Archivo only.** One typeface is used everywhere on the site: headlines, body text, labels, prices, buttons and the preloader. It is delivered locally as Latin-subset variable WOFF2 files from the pinned `@fontsource-variable/archivo` package (roman and italic), with the licence in `public/fonts/`. There are no requests to a font API or CDN. `src/components/FontFaces.astro` declares the two faces and preloads the roman and, on pages whose hero uses it, the italic.

@@ -1,0 +1,83 @@
+/* Type system, 26 October 2026. Loaded last.
+   Owner-licensed families, self-hosted (see FontFaces.astro and public/fonts/FONT-LICENSES.txt):
+     MTN Brighter Sans Bold  display voice: h1, h2, scene titles, prices and every figure
+     Sky Text Bold           title voice: h3, h4, card and tile titles, buttons, navigation, labels
+     Sky Text Regular/Light  reading voice: paragraphs, leads, forms, captions
+   Neither family has an italic or a 500/600/800 weight, so emphasis is upright and colour-led, and
+   weights resolve to the nearest real face (500 -> 400, 600 and up -> 700): no faked bold or slant. */
+
+:root {
+  /* Sky Text has a smaller x-height than the previous face; nudge reading sizes up a touch. */
+  --fs-body: clamp(1.0313rem, .99rem + .2vw, 1.1563rem);
+  --fs-lead: clamp(1.0313rem, .95rem + .4vw, 1.2813rem);
+  --fs-small: clamp(.8438rem, .81rem + .1vw, .9063rem);
+  /* MTN Brighter Sans is a wide, heavy display face: slightly smaller maxima, tighter tracking than before is not needed. */
+  --fs-h1: clamp(2rem, 1.25rem + 3.35vw, 4rem);
+  --fs-h2: clamp(1.55rem, 1.06rem + 2vw, 2.6rem);
+  --track-display: -.02em;
+  --track-title: -.012em;
+}
+
+html { font-synthesis: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { font-family: var(--font-ui); font-weight: 400; font-kerning: normal; font-feature-settings: 'kern' 1, 'liga' 1; letter-spacing: .002em; }
+
+/* Display voice. */
+h1, h2, .display,
+.scene h3, .yacht h2, .closing h2, .escapes-head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--track-display);
+  line-height: 1.08;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+h1 { line-height: 1.06; }
+.scene h3 { font-size: clamp(1.8rem, 1.15rem + 2.45vw, 3.1rem); }
+.yacht h2 { font-size: clamp(1.7rem, 1rem + 3.1vw, 3.4rem); }
+.closing h2 { font-size: clamp(1.8rem, 1rem + 3.7vw, 3.9rem); }
+.escapes-head h2 { font-size: clamp(2rem, 3.5vw, 3.15rem); }
+
+/* Title voice. */
+h3, h4, .faq summary h3, .menu-kicker, .card-label {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: var(--track-title);
+  line-height: 1.2;
+}
+h4 { letter-spacing: 0; }
+.eyebrow, .price-label, .footer-column h2, .menu-kicker, .card-label, .card-meta, .dest-top > span, .dest-duration, .travel-update-meta span {
+  font-family: var(--font-ui); font-weight: 700; letter-spacing: .18em;
+}
+
+.btn, .link, .pill, .mail, .field > span, .form label, .picker--illustrated .pick-label { font-family: var(--font-ui); font-weight: 700; }
+/* Navigation reads best in Regular; the single Plan your escape action carries the bold. */
+.desktop-nav a, .home .desktop-nav a { font-family: var(--font-ui); font-weight: 400; font-size: .9375rem; letter-spacing: .004em; }
+/* Sky Text is already open-spaced: undo the negative tracking the previous face needed on running text. */
+.hero-text, .footer-brand .footer-tagline, .picker-q, .who-reference-description, .menu-nav strong { letter-spacing: 0; }
+.hero-text { color: #173449; line-height: 1.6; }
+.who-reference-intro { letter-spacing: -.008em; }
+
+/* Accents inside headlines and copy: same face, upright, gold. */
+em { font-style: normal; letter-spacing: inherit; }
+h1 em, h2 em, h3 em, .display em { font-weight: inherit; }
+
+/* Reading voice. Light for generous leads on pale grounds, Regular everywhere else (dark grounds never go thinner). */
+.lead { font-weight: 400; letter-spacing: 0; line-height: 1.62; }
+@media (min-width: 720px) {
+  .sec--ivory .lead, .sec--sand .lead, .light .lead { font-weight: 300; color: var(--ink); }
+}
+.escapes, .yacht, .sec--night, .sec--dusk, .sec--lagoon, .page-hero, .footer { font-weight: 400; }
+p, li, dd { line-height: 1.66; }
+
+/* Figures: MTN Brighter Sans digits are all one width, so prices and counters line up. */
+.price strong, .exp-price strong, .yacht-rate strong, .process .num, .acts .num, .overview-list dd, .tile strong {
+  font-family: var(--font-figure); font-weight: 700; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.012em;
+}
+.price strong { letter-spacing: -.016em; }
+.price small, .price-label { font-family: var(--font-ui); }
+
+/* Footer credits for the licensed fonts and icons (CC BY 4.0 attribution). */
+.footer-licences { display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding-block: 0 26px; font-size: .8125rem; line-height: 1.5; color: var(--mist); }
+.footer-licences p { margin: 0; }
+.footer-licences a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--mist); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(236 215 168 / .4); }
+.footer-licences a:hover { color: var(--gold-soft); text-decoration-color: currentColor; }
+.hero--atlas h1 { letter-spacing: var(--track-display); }

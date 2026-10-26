@@ -1,14 +1,35 @@
 ---
 import { path } from '../data/site';
 interface Props { hero?: boolean; }
+// `hero` is kept so existing callers still compile; every face the first screen needs is preloaded.
 const { hero = true } = Astro.props;
-// Archivo only: one family for headlines, body text, prices and controls, with its true italic for accent words.
-// All files are self-hosted Latin subsets; nothing is requested from a font service.
+void hero;
+
+// Type system, 26 October 2026. Two licensed families, self-hosted, nothing requested from a font service.
+//   Sky Text (Light 300, Regular 400, Bold 700): reading and interface voice.
+//   MTN Brighter Sans (Bold 700): display voice, headlines and every figure (its digits are tabular).
+// Neither family has an italic, so accents are upright and colour-led (`font-synthesis: none` in type.css).
+// To add a family: copy the files to public/fonts, add rows to `faces`, add a role token in base.css.
+// Any weight the CSS asks for resolves to the nearest face below (500 -> 400, 600/800 -> 700).
 const faces = [
-  { family: 'Archivo', file: 'Archivo-Latin-Variable.woff2', style: 'normal', weight: '100 900', preload: true },
-  { family: 'Archivo', file: 'Archivo-Latin-Italic-Variable.woff2', style: 'italic', weight: '100 900', preload: hero },
+  { family: 'Sky Text', file: 'SkyText-Light.woff2', weight: '300', preload: false },
+  { family: 'Sky Text', file: 'SkyText-Regular.woff2', weight: '400', preload: true },
+  { family: 'Sky Text', file: 'SkyText-Bold.woff2', weight: '700', preload: true },
+  { family: 'MTN Brighter Sans', file: 'MTNBrighterSans-Bold.woff2', weight: '700', preload: true },
 ];
-const css = faces.map(face => `@font-face{font-family:'${face.family}';src:url('${path('fonts/'+face.file)}') format('woff2');font-style:${face.style};font-weight:${face.weight};font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}`).join('\n');
+
+// Metric-matched system fallbacks, so text keeps its line breaks and the page does not jump
+// when the real faces replace them (values measured against Arial / Liberation Sans).
+const fallbacks = [
+  { family: 'Sky Text Fallback', src: "local('Arial'), local('Liberation Sans'), local('Helvetica Neue'), local('Helvetica')", weight: '300 500', adjust: '92%', ascent: '95.5%', descent: '22.8%', gap: '2.7%' },
+  { family: 'Sky Text Fallback', src: "local('Arial Bold'), local('Liberation Sans Bold'), local('Helvetica Neue Bold'), local('Helvetica Bold')", weight: '600 900', adjust: '91.8%', ascent: '97.7%', descent: '24.3%', gap: '2.8%' },
+  { family: 'MTN Brighter Sans Fallback', src: "local('Arial Bold'), local('Liberation Sans Bold'), local('Helvetica Neue Bold'), local('Helvetica Bold')", weight: '600 900', adjust: '103.5%', ascent: '94.3%', descent: '31.3%', gap: '0%' },
+];
+
+const css = [
+  ...faces.map(face => `@font-face{font-family:'${face.family}';src:url('${path('fonts/' + face.file)}') format('woff2');font-style:normal;font-weight:${face.weight};font-display:swap;}`),
+  ...fallbacks.map(face => `@font-face{font-family:'${face.family}';src:${face.src};font-style:normal;font-weight:${face.weight};size-adjust:${face.adjust};ascent-override:${face.ascent};descent-override:${face.descent};line-gap-override:${face.gap};}`),
+].join('\n');
 ---
-{faces.filter(face => face.preload).map(face => <link rel="preload" href={path('fonts/'+face.file)} as="font" type="font/woff2" crossorigin="anonymous" />)}
+{faces.filter(face => face.preload).map(face => <link rel="preload" href={path('fonts/' + face.file)} as="font" type="font/woff2" crossorigin="anonymous" />)}
 <style is:inline set:html={css} />

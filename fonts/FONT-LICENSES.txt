@@ -1,0 +1,20 @@
+Pardus Luxury Escapes: fonts in use (from 26 October 2026)
+
+Supplied by the site owner, who confirms a full licence for web use. Delivered as the
+unmodified WOFF2 web-font files from the OnlineWebFonts.Com kits.
+
+SkyText-Light.woff2          Sky Text Light, weight 300
+SkyText-Regular.woff2        Sky Text Regular, weight 400
+SkyText-Bold.woff2           Sky Text Bold, weight 700
+                             Copyright (c) 2009 BSkyB Ltd. Copyright 2017 Dalton Maag Ltd.
+                             Designers: Miles Newlyn; Dalton Maag Ltd. EULA: http://www.daltonmaag.com/eula
+MTNBrighterSans-Bold.woff2   MTN Brighter Sans Bold, weight 700
+                             Copyright (c) 2017 Newlyn Works Limited. All rights reserved.
+                             Licensing: www.newlyn.com/licensing
+
+Credit required by the OnlineWebFonts.Com licence (CC BY 4.0), shown in the site footer:
+  Fonts made from Web Fonts (http://www.onlinewebfonts.com) is licensed by CC BY 4.0
+  Icons made from svg icons (https://www.onlinewebfonts.com/icon) is licensed by CC BY 4.0
+
+Do not modify, subset or re-encode these files without the foundries' permission.
+Legacy files in this folder (Montserrat, Satoshi) are not loaded by any page.

@@ -39,7 +39,7 @@ Optional browser check (Python Playwright, any Chromium): serve the repository r
 - `website/src/data/icons.ts` with `Icon.astro` and `IconSprite.astro`: the SVG icon set.
 - `website/src/components/Hero.astro` and `website/src/scripts/hero-life.ts`: the V31 homepage hero. One art-directed picture (`pardus-hero-desktop-*` and `pardus-hero-phone-*`, from `website/source-assets/v31-hero/`, see its `ARTWORK.md`) shown at its native shape; the leopard's outline is a list of measured rectangles in `Hero.astro`; the script only places the pins. The only motion is a slow 1.00 to 1.03 scale (`hero-breathe` in `hero.css`).
 - `website/src/components/ServicePicker.astro` with `scripts/picker.ts`: the "What should we arrange?" picker (a plain GET form that sends `?services=` to the enquiry). `StickyCta.astro` is the floating "Plan your escape" button on phones.
-- `website/src/components/FontFaces.astro`: local variable font declarations and preloads.
+- `website/src/components/FontFaces.astro`: the font registry (Sky Text and MTN Brighter Sans, self-hosted), metric-matched fallbacks and preloads; `website/src/styles/type.css` applies the type roles.
 - `website/src/data/offers.ts`: destination stays, experiences, starting USD prices, inclusions and price bases. Regenerate the concept note after a change.
 - `website/src/data/site.ts`: the primary tagline, the five navigation labels, contacts (info@, bookings@, support@ and director@pardusescapes.com, phone, WhatsApp), verified company details (`credentials`), and optional delivery (`enquiryEndpoint`, or `PUBLIC_PARDUS_ENQUIRY_ENDPOINT` at build) and analytics settings.
 - `website/src/pages/`: page content and layouts.

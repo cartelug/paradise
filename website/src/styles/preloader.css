@@ -85,7 +85,7 @@ html.intro-quick .intro-word-fill { animation-duration: .5s; animation-delay: .1
 html.intro-quick .intro-aircraft { animation-duration: .4s; animation-delay: .25s; }
 html.intro-quick .intro-tagline { animation-duration: .35s; animation-delay: .36s; }
 html.intro-quick .intro-metal-sheen { animation-duration: .7s; animation-delay: .36s; }
-html.intro-quick .intro-label { display: block; margin-top: 22px; font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(15.2px, 3.8vw, 19.76px); color: #e3c995; animation: intro-soft-in .4s ease .36s both; }
+html.intro-quick .intro-label { display: block; margin-top: 22px; font-family: var(--font-display); font-weight: 700; font-style: normal; font-size: clamp(15.2px, 3.8vw, 19.76px); color: #e3c995; animation: intro-soft-in .4s ease .36s both; }
 html.intro-quick .intro-progress { width: 110px; margin-top: 24px; }
 html.intro-quick .intro-progress span { animation-duration: .75s; }
 

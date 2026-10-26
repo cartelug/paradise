@@ -4,6 +4,10 @@ The owner selected the navy "Leave ordinary." reference and explicitly requested
 
 # Pardus Luxury Escapes: project rules
 
+## Type system: Sky Text and MTN Brighter Sans — 26 October 2026
+
+The owner (who confirms a full licence) replaced Archivo site-wide with two supplied families, self-hosted from `website/public/fonts/` (unmodified WOFF2 kits; provenance in `FONT-LICENSES.txt`). This supersedes every “Archivo only” and “true italic” note below and in `website/FONT_MOTION_NOTES.md`. Roles are tokens in `base.css`: `--font-display` and `--font-figure` = **MTN Brighter Sans Bold** (h1, h2, scene titles, prices and all figures; its digits are tabular), `--font-title` and `--font-ui` = **Sky Text** (Light 300, Regular 400, Bold 700: h3/h4, card titles, buttons, labels, navigation, paragraphs). `src/components/FontFaces.astro` is the registry (faces, preloads, metric-matched Arial fallbacks) and `src/styles/type.css`, loaded last, applies the roles. Neither family has an italic or a 500/600/800 weight, so `em` accents are upright and gold, `font-synthesis` is off, and any requested weight resolves to the nearest real face (500 to 400, 600 and up to 700). Do not fake an italic or add a bold. More fonts are coming: add the files and a row in `FontFaces.astro`, then point a role token at the family. The footer carries the required CC BY 4.0 credits for the fonts and icons (checked by `tests/content.test.mjs`); keep them on every page. The raster headline lettering artwork is unchanged.
+
 ## Ten travel photographs — 25 October 2026
 
 The ten masters in `website/source-assets/travel-photographs-2026-10-25/` (README, manifest,
@@ -116,7 +120,7 @@ Before every release, run `cd website && npm test` after the export. It checks t
 - The hero pins (Dubai, Maldives, private yacht) sit on the travel scenes in the leopard's coat and place themselves. They must never touch the copy, buttons, price bar, header, each other, or the leopard's head, paws, jet or flight lines (the `keep: true` parts of the outline; phase `pins`). Add or move a pin by its picture coordinates in `Hero.astro`; do not hard-code screen positions.
 - Buttons use one system in `base.css` (round arrow on every trailing arrow, press and focus states). The phone first screen must hold the headline, leopard, three priced destinations and both buttons (phase `phone`); on phones the buttons stand on the lagoon below the paws and the price tiles sit below the picture, never on the animal.
 - No text may spill out of a button, tile, card, pin label, chip or link, nothing may scroll a page sideways, and tap targets are at least 44 by 44 px. `website/tests/mobile-fit.py` checks all pages at six phone widths (320 to 430 px) and at 200% text size; run it with the browser smoke test before every release. A label that does not fit wraps; it never pushes a button's arrow out of the pill.
-- Typography is Archivo only (updated at the site owner’s request on 23 October 2026 to match one of PDM’s current fonts), site-wide (roman and italic). Do not add a second typeface; `--font-display` points at `--font-ui`. See `website/FONT_MOTION_NOTES.md`.
+- Typography is Sky Text (reading and interface) with MTN Brighter Sans Bold (display and figures), set by the owner on 26 October 2026; see the Type system section above. Further families are added only on the owner’s instruction, through the role tokens in `base.css`. See `website/FONT_MOTION_NOTES.md`.
 - No emoji anywhere on the site. Icons are inline SVG symbols (see `website/src/components/Icon.astro`). Do not use text glyphs such as arrows or bullets as icons.
 - Edit the Astro source in `website/`. The HTML and assets at the repository root are generated GitHub Pages output; commit source and generated output together (see README.md).
 - Keep the approved logo, offer data (`website/src/data/offers.ts`) and verified travel-desk content unchanged unless asked.

@@ -87,3 +87,7 @@ Masters, download URLs, alt text and SHA-256 checksums are in `website/source-as
 ## V25 campaign artwork
 
 Generated with the built-in image-generation tool on 5 October 2026. A realistic leopard is combined with island villas, a yacht and Dubai-inspired city lights in a deliberate campaign composite. The scenes do not coexist geographically; the artwork does not show a specific bookable property. Desktop master: `website/source-assets/v25/pardus-hero-desktop.png` (1536 × 1024). Portrait master: `website/source-assets/v25/pardus-hero-mobile.png` (1024 × 1536). Full prompts are in `website/source-assets/v25/ARTWORK.md`. Responsive AVIF/WebP versions are produced by `website/scripts/prepare-v25-assets.mjs`. Portrait art is selected below 900 px; the logo still uses the approved vector paths. The V24 real destination and Dubai yacht photographs remain active throughout the rest of the website. The earlier walking sprite is retained as an archive; the new hero makes the large leopard the central subject of the animated background.
+
+## Fonts, 26 October 2026
+
+Sky Text (Light, Regular, Bold) and MTN Brighter Sans Bold were supplied by the site owner, who confirms a full licence, as OnlineWebFonts.Com kits. The unmodified WOFF2 files are in `public/fonts/` with `FONT-LICENSES.txt`. Archivo is retired. The footer carries the CC BY 4.0 credits for fonts and icons.
