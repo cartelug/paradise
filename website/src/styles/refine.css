@@ -155,3 +155,15 @@ em { font-weight: 700; letter-spacing: -.012em; }
   .home .promise:has(> .travel-emblem) h3 { grid-column: 2; align-self: end; }
   .home .promise:has(> .travel-emblem) p { grid-column: 2; max-width: none; }
 }
+
+/* Legibility over photography (owner report, 26 October 2026): text on a photograph gets its own soft scrim plus a light halo,
+   so it stays readable wherever the picture's rocks, surf or sky fall under it. */
+.escapes-head { isolation: isolate; }
+.escapes-head::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none; inset: -36px -5vw -26px;
+  background: radial-gradient(ellipse 78% 92% at 30% 52%, rgb(244 241 233 / .94), rgb(244 241 233 / .8) 52%, rgb(244 241 233 / .0) 100%);
+  filter: blur(8px);
+}
+.escapes-head .lead { color: #0b2536; font-weight: 500; text-shadow: 0 0 10px rgb(244 241 233 / .95), 0 0 2px rgb(244 241 233 / .9); }
+.escapes-head .eyebrow { color: #5e4719; }
+.escapes-head h2, .escapes-head h2 em { text-shadow: 0 0 14px rgb(244 241 233 / .75); }
