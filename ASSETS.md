@@ -92,4 +92,3 @@ Generated on 6 October 2026 with the built-in OpenAI image tool: one landscape m
 # Ocean cruise feature — 27 October 2026
 
 The full-size cruise ship replaces the homepage yacht photo. Source: [Alonso Reyes / Unsplash](https://unsplash.com/photos/white-cruise-ship-under-cloudy-sky-LWFdBz4d6nE), under the [Unsplash Licence](https://unsplash.com/license). Original, provenance and derivative notes: `website/source-assets/cruise-2026-10-27/`. The responsive `ocean-cruise-v40` AVIF/WebP files are self-hosted. This image is illustrative and does not imply a partnership with the pictured operator. Original yacht photographs remain available for the private-yacht offers.
-
