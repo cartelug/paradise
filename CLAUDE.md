@@ -6,6 +6,17 @@ The primary tagline is now **Travel Curated, Around You** (`site.tagline`). This
 
 The homepage's former yacht feature now shows a **full-size ocean cruise ship**. Its photograph is a licensed Alonso Reyes image from Unsplash; source and licence are recorded in `website/source-assets/cruise-2026-10-27/README.md`. Preserve the whole vessel on mobile with a normal-flow picture rather than the old cropped/parallax yacht background. The cruises page introduces ocean voyages with tailored proposals and no invented prices. The approved private-yacht prices remain in a separately labelled yacht section with its yacht image. The enquiry supports both Ocean cruise and Private boat & yacht experience. Keep this distinction when editing.
 
+# Browser checks match the current design — 27 October 2026
+
+`website/tests/browser-smoke.py` was brought up to date with the owner-approved homepage. Phases now: `matrix`, `preloader`
+(expects the shared `site.tagline`), `leopard` (hero copy never touches the four measured leopard boxes, 19 sizes), `life`
+(the leopard is static: no animation, no pointer/scroll/touch response), `phone` (first screen plus the floating button, which
+stays quiet over the hero, the Window Seat band, the picker and the enquiry), `picker`, `windowseat` (replaces `stage`: three
+priced windows, real collection links, no sideways scroll, and on phones the headline and sentence stay off the leopard's face),
+`hero`, `flows`, `fallback`. The `pins` phase is retired (the hero has no pins). The Window Seat intro keeps its leopard at zero
+top/right offsets on phones by narrowing the lettering and sentence, never by moving the animal. Run the phases with
+`PARDUS_QA_PHASES=<name>`; `mobile-fit.py` is unchanged.
+
 # Selected Window Seat band — 26 October 2026
 
 The owner selected the navy "Leave ordinary." reference and explicitly requested a faithful implementation of that part of the homepage. `WindowSeat.astro`, `window-seat.css` and `window-seat.ts` replace the previous WhoWeAre artwork and tall scroll-pinned destination stage, using source assets in `website/source-assets/v39-window-seat/`. This owner instruction supersedes the previous section-two and coastal destination-introduction artwork requirements for this band only. Preserve the hero, permanent preloader, approved official logo, shared navigation, later homepage sections and business data. Headings keep semantic native text with a readable image-failure/no-JS/enlarged-text fallback. The portrait leopard is static. Category links open the real collection filters. The header changes to its existing white/gold logo over this dark band, and the floating CTA stays quiet over it.

@@ -25,7 +25,7 @@ BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
 VIEWPORTS = [(320, 568), (360, 740), (390, 844), (412, 915), (768, 1024), (1024, 768), (1440, 900)]
-PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,pins,life,phone,picker,stage,hero,flows,fallback").split(","))
+PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,life,phone,picker,windowseat,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
 REMOTE_FEED = "https://raw.githubusercontent.com/cartelug/paradise/main/travel-updates.json*"
 LAYOUT_IMAGES = """() => [...document.images].filter(img =>
@@ -33,6 +33,7 @@ LAYOUT_IMAGES = """() => [...document.images].filter(img =>
 
 
 INTRO_KEY = "pardus-intro-v30"
+TAGLINE = re.search(r"tagline:\s*'([^']+)'", (Path(__file__).resolve().parents[1] / "src/data/site.ts").read_text(encoding="utf8")).group(1)
 
 
 def context_for(browser, intro_seen=True, **options):
@@ -80,6 +81,14 @@ def scroll_and_check_images(page, label):
         position = min(end, position + max(240, int(height * .85)))
     else:
         raise AssertionError(f"Page never reached its end: {label}")
+    # A fast scroll can fly past a lazy image before the browser starts it (it then loads when the visitor reaches it). Visit each
+    # image that is still pending, one at a time, so the check measures loading and not scroll speed.
+    for _ in range(60):
+        pending = page.evaluate(f"() => ({LAYOUT_IMAGES})().filter(img => !img.complete).length")
+        if not pending:
+            break
+        page.evaluate(f"() => ({LAYOUT_IMAGES})().find(img => !img.complete).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        page.wait_for_timeout(250)
     # Hidden tabs are checked when activated in the keyboard interaction test.
     page.wait_for_function(
         f"() => ({LAYOUT_IMAGES})().every(img => img.complete)", timeout=12000
@@ -122,7 +131,7 @@ def preloader(browser):
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-full\b"))
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-active\b"))
     expect(intro).to_be_visible()
-    expect(intro.get_by_text("Personally curated.")).to_be_visible()
+    expect(intro.get_by_text(TAGLINE).first).to_be_visible()
     skip = page.get_by_role("button", name=re.compile("Skip introduction"))
     expect(skip).to_be_visible()
     expect(skip).to_be_focused()
@@ -186,8 +195,7 @@ def preloader(browser):
 
 def leopard_clear(browser):
     """No hero text, button, price bar or header control may overlap the leopard, at any screen size. The animal's outline is
-    a set of measured rectangles on the artwork ([data-leopard-box]); pins may sit on the travel scenes in its coat but never
-    on the head, the paws, the jet or its flight lines ([data-keep="true"])."""
+    a set of measured rectangles on the artwork ([data-leopard-box]). The artwork is static."""
     sizes = [(320, 568), (360, 640), (390, 844), (430, 932), (600, 900), (768, 1024), (820, 1180), (1024, 1366), (900, 900), (1000, 900),
              (1024, 768), (1100, 700), (1280, 720), (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080), (2560, 1440)]
     probe = """() => {
@@ -199,13 +207,11 @@ def leopard_clear(browser):
       const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
       for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
       copy.querySelectorAll('.btn').forEach(e => items.push({label: 'button', ...rect(e)}));
-      items.push({label: 'price bar', ...rect(document.querySelector('[data-hero-rail]'))});
       document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
-      document.querySelectorAll('.spot').forEach(spot => { if (getComputedStyle(spot).display !== 'none') { items.push({label: 'pin ' + spot.dataset.spot, pin: true, ...rect(spot)}); items.push({label: 'pin label ' + spot.dataset.spot, pin: true, ...rect(spot.querySelector('.spot-label'))}); } });
       const margin = 10;
       const meets = (i, box) => i.l < box.r + margin && i.r > box.l - margin && i.t < box.b + margin && i.b > box.t - margin;
       const hits = [];
-      for (const item of items) for (const box of boxes) if ((!item.pin || box.keep) && meets(item, box)) hits.push(`${item.label} meets ${box.part}`);
+      for (const item of items) for (const box of boxes) if (meets(item, box)) hits.push(`${item.label} meets ${box.part}`);
       // The eyes sit inside the head box, about 40% across and 45% down it.
       const head = boxes.find(b => b.part === 'head');
       const eyeY = head.t + (head.b - head.t) * 0.45;
@@ -219,130 +225,49 @@ def leopard_clear(browser):
             navigate(page)
             page.wait_for_timeout(900 if reduced == "reduce" else 2400)
             # The picture breathes between 1.00 and 1.03: test it at rest and at its fullest, with the animation held still.
-            scales = ["none"] if reduced == "reduce" else ["scale(1)", "scale(1.03)"]
-            for scale in scales:
-                if reduced != "reduce":
-                    page.evaluate("(s) => { const img = document.querySelector('.hero-picture img'); img.style.animation = 'none'; img.style.transform = s; }", scale)
-                    page.evaluate("document.querySelectorAll('.spot-label').forEach(l => l.style.transition = 'none')")
-                    page.wait_for_timeout(60)
+            # The leopard is static, so one measurement per size is the whole picture.
+            for scale in ["static"]:
                 result = page.evaluate(probe)
-                assert result["parts"] >= 5, result
+                assert result["parts"] == 4, result
                 assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, {scale}): {result['hits']}"
                 assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()
-    print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes, at rest and at its fullest breath", flush=True)
-
-
-def hero_pins(browser):
-    """The pins on the picture (Dubai, Maldives, private yacht) never touch the copy, the buttons, the price bar, the header,
-    the leopard's head, paws, jet or flight lines, or each other; they step aside when a screen has no room, and link to real pages."""
-    sizes = [(320, 568), (360, 740), (390, 844), (430, 932), (768, 1024), (820, 1180), (1024, 768), (1100, 700), (1280, 720),
-             (1366, 768), (1440, 900), (1536, 864), (1920, 1080), (2560, 1080)]
-    probe = """() => {
-      const hero = document.querySelector('[data-hero]');
-      const rect = e => { const b = e.getBoundingClientRect(); return {l: b.left, t: b.top, r: b.right, b: b.bottom}; };
-      const items = [];
-      const copy = hero.querySelector('[data-hero-copy]');
-      const range = document.createRange();
-      const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
-      for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n); for (const b of range.getClientRects()) if (b.width > 1) items.push({label: 'text', l: b.left, t: b.top, r: b.right, b: b.bottom}); }
-      copy.querySelectorAll('.btn').forEach(e => items.push({label: 'control', ...rect(e)}));
-      items.push({label: 'price bar', ...rect(hero.querySelector('[data-hero-rail]'))});
-      hero.querySelectorAll('[data-leopard-box][data-keep="true"]').forEach(e => items.push({label: 'leopard ' + e.dataset.leopardBox, ...rect(e)}));
-      document.querySelectorAll('.site-header .brand-link, .site-header .desktop-nav a, .site-header .header-tools > *').forEach(e => { if (e.offsetParent !== null) items.push({label: 'header', ...rect(e)}); });
-      const meets = (a, b) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
-      const shown = [...hero.querySelectorAll('.spot')].filter(s => getComputedStyle(s).display !== 'none');
-      const hits = [];
-      const placed = [];
-      for (const spot of shown) {
-        const label = spot.querySelector('.spot-label');
-        label.style.transition = 'none';
-        for (const [name, box] of [['pin', rect(spot)], ['label', rect(label)]]) {
-          for (const item of items) if (meets(box, item)) hits.push(`${spot.dataset.spot} ${name} meets ${item.label}`);
-          for (const other of placed) if (meets(box, other.box)) hits.push(`${spot.dataset.spot} ${name} meets ${other.name}`);
-          if (box.l < 0 || box.r > innerWidth) hits.push(`${spot.dataset.spot} ${name} leaves the screen`);
-        }
-        placed.push({name: spot.dataset.spot + ' pin', box: rect(spot)}, {name: spot.dataset.spot + ' label', box: rect(label)});
-      }
-      return {hits, shown: shown.map(s => s.dataset.spot), links: shown.map(s => s.getAttribute('href'))};
-    }"""
-    results = {}
-    for reduced in ("no-preference", "reduce"):
-        context = context_for(browser, reduced_motion=reduced, viewport={"width": 1440, "height": 900})
-        page = context.new_page()
-        for width, height in sizes:
-            page.set_viewport_size({"width": width, "height": height})
-            navigate(page)
-            page.wait_for_function("document.querySelector('[data-hero]').dataset.spots === 'ready'", timeout=10000)
-            page.evaluate("document.documentElement.classList.add('motion-paused')")
-            page.wait_for_timeout(200)
-            result = page.evaluate(probe)
-            assert not result["hits"], f"Hero pins collide at {width}x{height} ({reduced}): {result['hits']}"
-            assert all(re.search(r"(destination-[a-z]+|cruises)\.html$", link) for link in result["links"]), result["links"]
-            results[(width, height)] = result["shown"]
-        context.close()
-    # Where there is room, the pins are there: all three on common desktops, the Maldives flagship on phones.
-    assert results[(1440, 900)] == ["maldives", "dubai", "yacht"], results[(1440, 900)]
-    assert results[(1920, 1080)] == ["maldives", "dubai", "yacht"], results[(1920, 1080)]
-    assert "maldives" in results[(390, 844)], results[(390, 844)]
-    print(f"PASS hero pins at {len(sizes)} screen sizes: never touch the copy, buttons, price bar, header, the leopard's head, paws or flight lines, or each other; all three on desktops, Maldives on phones", flush=True)
+    print(f"PASS the leopard is clear of every hero element at {len(sizes)} screen sizes", flush=True)
 
 
 def leopard_alive(browser):
-    """The leopard is calm: the picture's only motion is a very slow scale (1.00 to 1.03 and back over about 20 s). It never
-    glows, never follows the pointer, a finger or the scroll, does not react to a touch, pauses on request and is a still
-    picture for reduced motion."""
-    context = context_for(browser, viewport={"width": 1440, "height": 900})
-    page = context.new_page()
-    errors = []
-    page.on("pageerror", lambda error: errors.append(str(error)))
-    navigate(page)
-    page.wait_for_timeout(1500)
-    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "running")
-    image = page.locator(".hero-picture img")
-    assert image.evaluate("img => img.complete && img.naturalWidth > 0")
-    animation = image.evaluate("""img => { const a = img.getAnimations()[0]; const k = a.effect.getKeyframes(); const t = a.effect.getTiming();
-        return {name: a.animationName, duration: t.duration, direction: t.direction, frames: k.map(f => f.transform)}; }""")
-    assert animation["name"] == "hero-breathe", animation
-    assert 16000 <= animation["duration"] <= 24000 and animation["direction"] == "alternate", animation
-    assert animation["frames"] == ["scale(1)", "scale(1.03)"], animation
-    # Nothing else moves on the artwork: no glow, no eye layers, no light sweep, no motes, no layered animal.
-    assert page.locator(".hl-glow, .hl-glows, .hl-eyes, .hl-rim, .hl-motes, .hl-leopard, .hero-glow").count() == 0
-    animated = page.evaluate("""() => [...document.querySelectorAll('.hero-art *')].filter(e => !e.closest('.hl-spots'))
-        .flatMap(e => e.getAnimations()).map(a => a.animationName)""")
-    assert animated == ["hero-breathe"], animated
-    # The visitor does not steer it: the pointer, a click and the scroll leave the picture's transform to the breath alone.
-    def pose():
-        return page.evaluate("""() => { const art = document.querySelector('.hero-art'); const pic = document.querySelector('.hero-picture');
-            return [getComputedStyle(art).transform, getComputedStyle(pic).transform, art.getBoundingClientRect().top + scrollY]; }""")
-    before = pose()
-    for x in (60, 1380):
-        for step in range(14):
-            page.mouse.move(x + step, 450)
-            page.wait_for_timeout(30)
-    box = page.locator('[data-leopard-box="head"]').bounding_box()
-    page.mouse.click(box["x"] + box["width"] * 0.5, box["y"] + box["height"] * 0.5)
-    page.mouse.wheel(0, 400)
-    page.wait_for_timeout(500)
-    assert pose() == before, f"the leopard must not follow the pointer, a click or the scroll: {before} -> {pose()}"
-    page.evaluate("window.scrollTo(0, 0)")
-    # Pausing stops the breath.
-    page.locator("[data-scene-motion]").click()
-    page.wait_for_timeout(300)
-    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "paused")
-    assert image.evaluate("img => getComputedStyle(img).animationPlayState") == "paused"
-    assert not errors, errors
-    context.close()
-
-    # Reduced motion: a complete, still picture.
-    context = context_for(browser, viewport={"width": 1440, "height": 900}, reduced_motion="reduce")
-    page = context.new_page()
-    navigate(page)
-    page.wait_for_timeout(700)
-    expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "still")
-    assert page.locator(".hero-picture img").evaluate("img => getComputedStyle(img).animationName") == "none"
-    expect(page.locator(".hero-picture img")).to_be_visible()
-    context.close()
+    """The leopard is static and calm. Nothing on the artwork animates, and it never glows, follows the pointer, a finger or the
+    scroll, or reacts to a touch. Reduced motion shows the same complete picture."""
+    for options in ({"viewport": {"width": 1440, "height": 900}}, {"viewport": {"width": 1440, "height": 900}, "reduced_motion": "reduce"}):
+        context = context_for(browser, **options)
+        page = context.new_page()
+        errors = []
+        page.on("pageerror", lambda error: errors.append(str(error)))
+        navigate(page)
+        page.wait_for_timeout(1500)
+        expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "still")
+        image = page.locator(".hero-picture img")
+        expect(image).to_be_visible()
+        assert image.evaluate("img => img.complete && img.naturalWidth > 0")
+        assert image.evaluate("img => getComputedStyle(img).animationName") == "none"
+        assert page.locator(".hl-glow, .hl-glows, .hl-eyes, .hl-rim, .hl-motes, .hl-leopard, .hero-glow").count() == 0
+        animated = page.evaluate("() => [...document.querySelectorAll('.hero-art *')].flatMap(e => e.getAnimations()).map(a => a.animationName)")
+        assert animated == [], animated
+        def pose():
+            return page.evaluate("""() => { const art = document.querySelector('.hero-art'); const pic = document.querySelector('.hero-picture');
+                return [getComputedStyle(art).transform, getComputedStyle(pic).transform, art.getBoundingClientRect().top + scrollY]; }""")
+        before = pose()
+        for x in (60, 1380):
+            for step in range(14):
+                page.mouse.move(x + step, 450)
+                page.wait_for_timeout(30)
+        box = page.locator('[data-leopard-box="head"]').bounding_box()
+        page.mouse.click(box["x"] + box["width"] * 0.5, box["y"] + box["height"] * 0.5)
+        page.mouse.wheel(0, 400)
+        page.wait_for_timeout(500)
+        assert pose() == before, f"the leopard must not follow the pointer, a click or the scroll: {before} -> {pose()}"
+        assert not errors, errors
+        context.close()
 
     # A finger does not move it either.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
@@ -355,11 +280,11 @@ def leopard_alive(browser):
     page.wait_for_timeout(500)
     assert page.evaluate("getComputedStyle(document.querySelector('.hero-art')).transform") == before, "a finger must not move the leopard"
     context.close()
-    print("PASS the leopard is calm: one slow 1.00-1.03 breath of scale and nothing else; it never glows, never follows the pointer, a finger or the scroll and ignores a tap; it pauses on request and is a still picture for reduced motion", flush=True)
+    print("PASS the leopard is static: no animation on the artwork; it never glows, never follows the pointer, a finger or the scroll and ignores a tap; reduced motion shows the same picture", flush=True)
 
 
 def phone_first_screen(browser):
-    """On phones the first screen holds the whole offer: headline, leopard, three priced destinations and both buttons."""
+    """On phones the first screen holds the headline, the whole leopard and both buttons; the priced destinations follow in the next band."""
     for width, height in [(390, 844), (412, 915), (430, 932), (360, 800)]:
         context = context_for(browser, viewport={"width": width, "height": height}, has_touch=True, is_mobile=True)
         page = context.new_page()
@@ -369,30 +294,13 @@ def phone_first_screen(browser):
           const inside = e => { const b = e.getBoundingClientRect(); return b.top >= 0 && b.bottom <= innerHeight + 1 && b.left >= -1 && b.right <= innerWidth + 1; };
           return {
             h1: inside(document.querySelector('.hero h1')),
-            tiles: [...document.querySelectorAll('.hero-offers a')].map(inside),
             buttons: [...document.querySelectorAll('.hero .actions .btn')].map(inside),
             leopard: inside(document.querySelector('[data-leopard-box="head"]')) && document.querySelector('[data-leopard-box="paws"]').getBoundingClientRect().bottom <= innerHeight,
             wraps: [...document.querySelectorAll('.hero .actions .btn')].map(b => b.getBoundingClientRect().height),
           };
         }""")
-        assert fit["h1"] and all(fit["tiles"]) and all(fit["buttons"]) and fit["leopard"], (width, height, fit)
+        assert fit["h1"] and all(fit["buttons"]) and fit["leopard"], (width, height, fit)
         assert all(value < 70 for value in fit["wraps"]), (width, height, fit)  # a one-line button, never two
-        context.close()
-    # The text on each phone price tile stays inside its card with room to spare (iPhone Safari draws a little wider).
-    for width in [320, 360, 390, 430]:
-        context = context_for(browser, viewport={"width": width, "height": 844}, has_touch=True, is_mobile=True)
-        page = context.new_page()
-        navigate(page)
-        page.wait_for_timeout(2400)
-        tight = page.evaluate("""() => [...document.querySelectorAll('.hero-offers a')].flatMap(card => {
-          const box = card.getBoundingClientRect(), cs = getComputedStyle(card);
-          const left = box.left + parseFloat(cs.paddingLeft), right = box.right - parseFloat(cs.paddingRight);
-          const room = (right - left) * 0.08, out = [], range = document.createRange();
-          const walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT);
-          for (let n; (n = walker.nextNode());) { if (!n.textContent.trim()) continue; range.selectNodeContents(n);
-            for (const b of range.getClientRects()) if (b.right > right - room || b.left < left - 1) out.push(n.textContent.trim()); }
-          return out; })""")
-        assert not tight, f"Price tile text is too tight or escapes its card at {width}px: {tight}"
         context.close()
     # The floating button: out of the way over the hero, the picker and the enquiry; there in between.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
@@ -401,19 +309,21 @@ def phone_first_screen(browser):
     page.wait_for_timeout(1500)
     cta = page.locator("[data-sticky-cta]")
     expect(cta).to_have_attribute("data-on", "false")
-    page.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})")
+    page.evaluate("document.querySelector('.yacht--ocean .btn').scrollIntoView({block: 'center'})")
     expect(cta).to_have_attribute("data-on", "true")
+    page.evaluate("document.querySelector('[data-window-seat]').scrollIntoView({block: 'center'})")
+    expect(cta).to_have_attribute("data-on", "false")
     page.evaluate("document.querySelector('.picker').scrollIntoView({block: 'center'})")
     expect(cta).to_have_attribute("data-on", "false")
     page.evaluate("document.querySelector('#enquire').scrollIntoView()")
     expect(cta).to_have_attribute("data-on", "false")
-    page.evaluate("window.scrollTo({top: 1100, behavior: 'instant'})")
+    page.evaluate("document.querySelector('.yacht--ocean .btn').scrollIntoView({block: 'center'})")
     expect(cta).to_have_attribute("data-on", "true")
     with page.expect_navigation():
         cta.click()
     assert page.url.endswith("journey.html"), page.url
     context.close()
-    print("PASS phone first screen holds the headline, leopard, three prices and both buttons on four phone sizes; tile text keeps 8% spare room in its card; the floating button appears only where it helps", flush=True)
+    print("PASS phone first screen holds the headline, leopard and both buttons on four phone sizes; the floating button appears only where it helps (quiet over the hero, the Window Seat band, the picker and the enquiry)", flush=True)
 
 
 def service_picker(browser):
@@ -465,65 +375,63 @@ def service_picker(browser):
 
 
 
-def escape_stage(browser):
-    """\"Your next escape\": a pinned stage on large screens, stacked chapters on phones, tablets and reduced motion."""
-    context = context_for(browser, viewport={"width": 1440, "height": 900})
-    page = context.new_page()
-    navigate(page)
-    expect(page.locator("html")).to_have_class(re.compile(r"\bstage-ready\b"))
-    info = page.evaluate("""() => { const t = document.querySelector('[data-escape-track]'), s = document.querySelector('[data-escape-stage]'); const r = t.getBoundingClientRect(); return {top: scrollY + r.top, total: r.height - s.offsetHeight, header: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))}; }""")
-    for index, fraction in enumerate([0.12, 0.5, 0.9]):
-        page.evaluate("y => window.scrollTo({top: y, behavior: 'instant'})", info["top"] - info["header"] + fraction * info["total"])
-        page.wait_for_timeout(500)
-        expect(page.locator("[data-escape-stage]")).to_have_attribute("data-active", str(index))
-        expect(page.locator(f'.scene[data-scene="{index}"]')).to_have_attribute("data-state", "active")
-        expect(page.locator(f'.scene[data-scene="{index}"] .scene-panel')).to_be_visible()
-        expect(page.locator(f'.scene[data-scene="{index}"] h3')).to_be_visible()
-        expect(page.locator(f'[data-escape-go="{index}"]')).to_have_attribute("aria-current", "true")
-        # The outgoing panel hides once its exit transition (0.5 s) ends.
-        expect(page.locator(".scene .scene-panel:visible")).to_have_count(1)
-    page.locator('[data-escape-go="0"]').click()
-    expect(page.locator("[data-escape-stage]")).to_have_attribute("data-active", "0", timeout=6000)
-    context.close()
-    for options in ({"viewport": {"width": 390, "height": 844}}, {"viewport": {"width": 820, "height": 1180}}, {"viewport": {"width": 1440, "height": 900}, "reduced_motion": "reduce"}):
-        context = context_for(browser, **options)
+def window_seat(browser):
+    """The Window Seat band (it replaced the scroll-pinned stage): three priced destination windows, real collection links, no
+    sideways scroll, and on phones neither the headline nor the sentence may sit on the leopard's face."""
+    sizes = [(320, 640), (360, 740), (390, 844), (430, 932), (600, 900), (768, 1024), (1024, 768), (1440, 900)]
+    for width, height in sizes:
+        phone = width <= 430
+        context = context_for(browser, viewport={"width": width, "height": height}, has_touch=phone, is_mobile=phone)
         page = context.new_page()
         navigate(page)
-        assert "stage-ready" not in page.evaluate("document.documentElement.className"), options
-        page.evaluate("document.querySelector('[data-escapes]').scrollIntoView()")
-        page.wait_for_timeout(300)
-        assert page.locator(".scene").count() == 3
+        expect(page.locator("html")).not_to_have_class(re.compile(r"\bstage-ready\b"))
+        page.locator("[data-window-seat]").scroll_into_view_if_needed()
+        page.wait_for_timeout(1600)
+        cards = page.locator(".ws-card")
+        expect(cards).to_have_count(3)
         for index in range(3):
-            page.locator(f'.scene[data-scene="{index}"]').scroll_into_view_if_needed()
-            page.wait_for_timeout(900)
-            expect(page.locator(f'.scene[data-scene="{index}"] .scene-panel')).to_be_visible()
-            expect(page.locator(f'.scene[data-scene="{index}"] .price')).to_be_visible()
-        assert_no_overflow(page, f"escape chapters {options}")
+            expect(cards.nth(index).locator(".ws-price strong")).to_contain_text("USD")
+            expect(cards.nth(index).locator("h3")).to_be_visible()
+            assert re.search(r"destination-[a-z]+\.html$", cards.nth(index).locator(".ws-window").get_attribute("href"))
+        categories = page.locator(".ws-category")
+        assert categories.count() == 3
+        for link in categories.all():
+            assert re.search(r"destinations\.html\?category=(islands|culture|wild)$", link.get_attribute("href")), link.get_attribute("href")
+        clear = page.evaluate("""() => {
+          const r = e => e.getBoundingClientRect();
+          const leopard = r(document.querySelector('.ws-leopard img'));
+          // Share of the leopard picture covered by a box. The picture has transparent margins, so a sliver is not a face.
+          const covered = a => { const x = Math.max(0, Math.min(a.right, leopard.right) - Math.max(a.left, leopard.left)), y = Math.max(0, Math.min(a.bottom, leopard.bottom) - Math.max(a.top, leopard.top)); return x * y / (leopard.width * leopard.height); };
+          return {leopardInside: leopard.right <= innerWidth + 1 && leopard.top >= r(document.querySelector('.ws-intro')).top - 1,
+                  heading: covered(r(document.querySelector('.ws-heading--intro .ws-heading-art'))),
+                  sentence: covered(r(document.querySelector('.ws-description')))}; }""")
+        assert clear["leopardInside"], (width, clear)
+        if width <= 760:
+            assert clear["heading"] < 0.02 and clear["sentence"] < 0.01, f"Window Seat copy sits on the leopard at {width}px: {clear}"
+        assert_no_overflow(page, f"window seat at {width}")
         context.close()
-    print("PASS escape stage: scroll picks the scene, tabs jump to it, and phones, tablets and reduced motion get stacked chapters", flush=True)
+    print(f"PASS window seat at {len(sizes)} sizes: three priced destination windows, real collection links, a complete static leopard kept clear of the headline and sentence on phones, no sideways scroll", flush=True)
 
 
 def assert_hero(page, width):
     hero = page.locator("[data-hero]")
     expect(hero).to_be_visible()
     expect(page.locator("body")).to_have_attribute("data-pardus-version", "31")
-    assert " ".join(hero.locator("h1").inner_text().split()) == "Extraordinary journeys. Personally curated."
+    assert " ".join(hero.locator("h1").text_content().split()) == "Extraordinary journeys."
+    expect(hero.locator(".hero-tagline")).to_contain_text(TAGLINE)
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)
     image = page.locator(".hero-picture img")
     source = image.evaluate("img => img.currentSrc")
-    portrait = page.evaluate("innerWidth <= 760")
-    assert ("pardus-hero-phone-" if portrait else "pardus-hero-desktop-") in source, source
+    portrait = page.evaluate("innerWidth <= 767")
+    assert ("pardus-v34-mobile-hero-" if portrait else "pardus-coastal-desktop-") in source, source
     assert image.evaluate("img => img.complete && img.naturalWidth > 0")
-    assert image.get_attribute("alt") == "A resting leopard in left profile, with tiny travel scenes woven into its coat above a blue-hour lagoon."
+    assert image.get_attribute("alt").startswith("A leopard walks across a pale stone ledge above an Indian Ocean coast")
     # The artwork keeps its native shape: the stage is the picture, so the head, ears, whiskers and paws are never cropped.
-    ratio = page.evaluate("(() => { const b = document.querySelector('.hero-art').getBoundingClientRect(); return b.width / b.height; })()")
-    assert abs(ratio - (2 / 3 if portrait else 3 / 2)) < 0.01, ratio
-    rates = page.locator(".hero-offers a")
-    assert rates.count() == 3
-    text = rates.all_inner_texts()
-    assert all("USD" in item for item in text), text
+    ratio = page.evaluate("""(() => { const b = document.querySelector('.hero-art').getBoundingClientRect(); const i = document.querySelector('.hero-picture img');
+        return [b.width / b.height, i.naturalWidth / i.naturalHeight]; })()""")
+    assert abs(ratio[0] - ratio[1]) < 0.01, ratio
     assert_no_overflow(page, f"hero at {width}")
 
 
@@ -581,21 +489,14 @@ def hero_and_menu(browser):
     expect(page.locator(".desktop-nav")).to_be_visible()
     context.close()
 
-    # Saved motion preference and the pause control.
+    # The hero artwork is static and the site has no looping background animation, so no pause control is needed (WCAG 2.2.2).
     context = context_for(browser, viewport={"width": 1440, "height": 900})
     page = context.new_page()
     navigate(page)
-    control = page.locator("[data-scene-motion]")
-    expect(control).to_be_visible()
-    expect(control).to_have_attribute("aria-pressed", "false")
-    control.click()
-    expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
-    expect(control).to_have_accessible_name("Resume background animation")
-    assert page.locator(".hero-picture img").evaluate("el => getComputedStyle(el).animationPlayState") == "paused"
-    navigate(page)
-    expect(page.locator("html")).to_have_class(re.compile(r"\bmotion-paused\b"))
-    page.locator("[data-scene-motion]").click()
-    expect(page.locator("html")).not_to_have_class(re.compile(r"\bmotion-paused\b"))
+    page.wait_for_timeout(3000)
+    looping = page.evaluate("() => document.getAnimations().filter(a => a.effect && a.effect.getComputedTiming().iterations === Infinity && a.playState === 'running').map(a => a.animationName || a.constructor.name)")
+    assert not looping, f"Looping animations need a pause control: {looping}"
+    assert page.locator("[data-scene-motion]").count() == 0 or page.locator("[data-scene-motion]").first.is_visible()
     context.close()
 
     # No emoji anywhere in the rendered text of the main pages.
@@ -804,7 +705,7 @@ def main():
             launch["args"] = ["--no-sandbox"]
         browser = playwright.chromium.launch(**launch)
         try:
-            unknown = PHASES - {"matrix", "preloader", "leopard", "pins", "life", "phone", "picker", "stage", "hero", "flows", "fallback"}
+            unknown = PHASES - {"matrix", "preloader", "leopard", "life", "phone", "picker", "windowseat", "hero", "flows", "fallback"}
             assert not unknown, f"Unknown QA phases: {unknown}"
             if "matrix" in PHASES:
                 route_matrix(browser)
@@ -812,16 +713,14 @@ def main():
                 preloader(browser)
             if "leopard" in PHASES:
                 leopard_clear(browser)
-            if "pins" in PHASES:
-                hero_pins(browser)
             if "life" in PHASES:
                 leopard_alive(browser)
             if "phone" in PHASES:
                 phone_first_screen(browser)
             if "picker" in PHASES:
                 service_picker(browser)
-            if "stage" in PHASES:
-                escape_stage(browser)
+            if "windowseat" in PHASES:
+                window_seat(browser)
             if "hero" in PHASES:
                 hero_and_menu(browser)
             if "flows" in PHASES:

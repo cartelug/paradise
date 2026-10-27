@@ -181,3 +181,18 @@
 .ws-categories { max-width: 100%; }
 .window-seat .ws-category, .window-seat .ws-services a { flex-shrink: 0; }
 .window-seat .ws-plan > span { white-space: normal; overflow-wrap: anywhere; }
+
+/* Phones and small tablets: keep the headline and sentence off the leopard's face and muzzle (owner: preserve the complete
+   head on every screen). The leopard keeps its zero top/right offsets; the lettering and copy make room instead. */
+@media (max-width: 760px) {
+  .window-seat .ws-leopard { width: clamp(92px, 24vw, 150px); }
+  .window-seat .ws-heading--intro { width: 74%; }
+  .window-seat .ws-heading--intro[data-ws-ready] { height: calc(10.8vw * .88); }
+  .window-seat .ws-description { max-width: 72%; text-wrap: pretty; }
+  .window-seat .ws-copy-break { display: none; }
+}
+@media (max-width: 380px) {
+  .window-seat .ws-heading--intro { width: 68%; }
+  .window-seat .ws-heading--intro[data-ws-ready] { height: calc(10.8vw * .8); }
+  .window-seat .ws-description { max-width: 66%; }
+}

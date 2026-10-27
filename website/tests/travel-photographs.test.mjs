@@ -62,3 +62,12 @@ test('V38 pictures keep intrinsic dimensions, lazy loading, a focal point and no
   assert.ok(srcsets.every(value => !/1920w/.test(value) && /1586w/.test(value)));
   assert.match(await page('index.html'), /<img[^>]*(?:east-africa|europe|zanzibar)-v38-1280[^>]*loading="lazy"/);
 });
+
+test('the homepage never shows the same picture twice in its destination and journey rows', async () => {
+  const { destinations } = await import('../src/data/destinations.ts');
+  const { journeys } = await import('../src/data/journeys.ts');
+  const more = ['africa', 'europe', 'zanzibar'].map(slug => destinations.find(item => item.slug === slug).image);
+  const signature = journeys.slice(0, 3).map(item => item.image);
+  const all = [...more, ...signature];
+  assert.equal(new Set(all).size, all.length, `repeated picture on the homepage: ${all.join(', ')}`);
+});

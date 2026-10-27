@@ -6,7 +6,7 @@ import { travelPhotographs } from './travel-photographs.ts';
 export type PhotoSlot = 'hero-maldives' | 'maldives' | 'zanzibar' | 'seychelles' | 'safari-uganda' | 'safari-family' | 'europe' | 'dubai'
   | 'yacht' | 'corporate' | 'journal-safari' | 'journal-process'
   | 'dubai-desert' | 'dubai-creek' | 'dubai-downtown' | 'dubai-beach' | 'dubai-dining' | 'dubai-skyline'
-  | 'reset' | 'celebration';
+  | 'reset' | 'celebration' | 'safari-shore';
 type Prepared = { slot: PhotoSlot; asset: string; alt: string };
 const ready = new Map((v31Photography as Prepared[]).map(entry => [entry.slot, entry]));
 
