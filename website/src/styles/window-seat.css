@@ -174,3 +174,10 @@
   .ws-bespoke { grid-template-columns: 44px minmax(0, 1fr) 35%; gap: 6px; }
   .window-seat .ws-bespoke h2 { font-size: clamp(.8125rem, 3.6vw, 1rem); }
 }
+
+/* Labels must retain their natural width when visitors enlarge the text. These
+   flex rows can wrap instead of shrinking their links underneath the lettering. */
+.ws-collection-head, .ws-categories, .ws-services { flex-wrap: wrap; }
+.ws-categories { max-width: 100%; }
+.window-seat .ws-category, .window-seat .ws-services a { flex-shrink: 0; }
+.window-seat .ws-plan > span { white-space: normal; overflow-wrap: anywhere; }

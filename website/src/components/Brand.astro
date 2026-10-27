@@ -1,7 +1,7 @@
 ---
-import { path } from '../data/site';
-interface Props { class?: string; light?: boolean; mark?: boolean; vector?: boolean; }
-const { class: className, light = false, mark = false, vector = false } = Astro.props;
+import { path, site } from '../data/site';
+interface Props { class?: string; light?: boolean; mark?: boolean; vector?: boolean; tagline?: boolean; }
+const { class: className, light = false, mark = false, vector = false, tagline = true } = Astro.props;
 ---
 {mark ? (
   <svg class:list={['brand-svg', className, { 'brand-light': light, 'brand-symbol': mark }]} viewBox="150 0 690 150" fill="none" aria-hidden="true" focusable="false">
@@ -11,9 +11,11 @@ const { class: className, light = false, mark = false, vector = false } = Astro.
   /* Transparent HD Pardus logo, with separate light and primary colourways. */
   <span class:list={['brand-lockup-vector', className, { 'brand-light': light }]} aria-hidden="true">
     <img class="brand-svg" src={path(light ? 'brand/pardus-light.svg' : 'brand/pardus-primary.svg')} width="1942" height="809" alt="" decoding="async" />
+    {tagline && <span class="brand-tagline">{site.tagline}</span>}
   </span>
 ) : (
   <span class:list={['brand-lockup', className, { 'brand-on-dark': light }]} aria-hidden="true">
     <img src={path(light ? 'brand/pardus-light.svg' : 'brand/pardus-primary.svg')} width="1942" height="809" alt="" decoding="async" />
+    {tagline && <span class="brand-tagline">{site.tagline}</span>}
   </span>
 )}

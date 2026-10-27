@@ -23,8 +23,8 @@ test('the preloader markup keeps its full V25 sequence and its safety controls',
     assert.ok(markup.includes(hook), `CinematicIntro.astro lost "${hook}"`);
   }
   assert.match(markup, /Skip introduction/);
-  // The opening carries the site's one primary tagline (site.tagline: "Extraordinary journeys. Personally curated.").
-  assert.match(markup, /Personally curated/);
+  // The opening reads the same owner-approved tagline as the rest of the site.
+  assert.match(markup, /\{site\.tagline\}/);
 });
 
 test('the layout renders the preloader on every page, with no switch to turn it off', async () => {

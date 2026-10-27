@@ -1,8 +1,8 @@
 export const site = {
   name: 'Pardus Luxury Escapes',
   // One primary tagline, used with the logo everywhere (hero, opening, footer, search results and sharing).
-  tagline: 'Extraordinary journeys. Personally curated.',
-  description: 'Extraordinary journeys. Personally curated. Bespoke luxury travel for Uganda and East Africa: the Maldives, Seychelles, Dubai, safaris and private yachts, arranged around you.',
+  tagline: 'Travel Curated, Around You',
+  description: 'Travel Curated, Around You. Bespoke luxury travel from Uganda and East Africa: island escapes, safaris, city stays, ocean cruises and private yachts, personally arranged.',
   // Only add business-approved contacts. Empty values never render fake links.
   // The four live mailboxes on pardusescapes.com.
   // General enquiries: footer, contact page and structured data.

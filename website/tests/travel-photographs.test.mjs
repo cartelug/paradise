@@ -43,7 +43,7 @@ test('the exported pages use the matching photograph in each destination and exp
     'destination-africa.html': 'east-africa-v38', 'destination-europe.html': 'europe-v38', 'destination-zanzibar.html': 'zanzibar-v38',
     'cruises.html': 'yacht-v38', 'corporate.html': 'executive-v38', 'journey-executive-arrivals.html': 'executive-v38',
     'journey-private-island-reset.html': 'reset-v38', 'journey-celebration-in-two-acts.html': 'celebration-v38',
-    'journey-family-in-the-wild.html': 'east-africa-v38', 'index.html': 'yacht-v38',
+    'journey-family-in-the-wild.html': 'east-africa-v38', 'index.html': 'ocean-cruise-v40',
   };
   for (const [name, asset] of Object.entries(expect)) assert.match(await page(name), new RegExp(`${asset}-(640|960|1280|1586)`), `${name} should use ${asset}`);
   const home = await page('index.html');

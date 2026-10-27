@@ -4,6 +4,8 @@
 svg.brand-svg { overflow: visible; }
 .brand-light { --logo-ink: #faf7ef; --logo-gold: #d9bc82; }
 .brand-lockup-vector { display: block; width: 100%; line-height: 1; }
+.brand-tagline { display: block; margin-top: 5px; text-align: center; font-family: var(--font-ui); font-size: 9px; font-weight: 400; line-height: 1.3; letter-spacing: 0; color: #775e32; text-wrap: balance; }
+.brand-light .brand-tagline, .brand-on-dark .brand-tagline { color: #e4c58d; }
 .brand-lockup-vector .brand-svg { filter: drop-shadow(0 6px 18px rgb(2 8 18 / .45)); }
 .brand-symbol { --logo-gold: currentColor; }
 /* Controls that need JavaScript are only hidden when it is unavailable. */

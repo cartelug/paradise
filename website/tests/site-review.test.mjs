@@ -24,8 +24,8 @@ test('the five navigation labels are the same on every page, with Plan your esca
   }
 });
 
-test('the shortened hero headline retains the full brand tagline in opening, footer, search and structured data', async () => {
-  const { tagline } = { tagline: 'Extraordinary journeys. Personally curated.' };
+test('the owner-approved tagline appears in opening, footer, search and structured data while the hero headline is preserved', async () => {
+  const { tagline } = { tagline: 'Travel Curated, Around You' };
   const config = await read('src/data/site.ts');
   assert.ok(config.includes(`tagline: '${tagline}'`), 'site.tagline is the primary tagline');
   const home = html['index.html'];
@@ -34,7 +34,7 @@ test('the shortened hero headline retains the full brand tagline in opening, foo
   assert.equal(text(headline).trim(), 'Extraordinary journeys.', 'owner requested the shorter hero heading');
   assert.doesNotMatch(text(headline), /Personally curated/);
   assert.match(text(home), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
-  assert.ok(home.includes('"slogan":"Extraordinary journeys. Personally curated."'), 'structured data carries the tagline');
+  assert.ok(home.includes(`"slogan":"${tagline}"`), 'structured data carries the tagline');
   for (const [page, markup] of Object.entries(html)) {
     assert.ok(text(markup).includes(tagline), `${page} (footer or opening) does not carry the primary tagline`);
     assert.doesNotMatch(text(markup), /Luxury travel, beautifully arranged/i, `${page} still carries a retired tagline`);

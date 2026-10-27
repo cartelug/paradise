@@ -17,7 +17,7 @@ const { simple = false } = Astro.props;
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-brand">
-      <a class="brand-link" href={path()} aria-label="Pardus Luxury Escapes home"><Brand vector light /></a>
+      <a class="brand-link" href={path()} aria-label="Pardus Luxury Escapes home"><Brand vector light tagline={false} /></a>
       <p class="footer-tagline">{site.tagline}</p>
       <p>Bespoke luxury travel from Africa to the world. You tell us where you want to go; we arrange the rest.</p>
       <div class="footer-contact">
@@ -39,7 +39,7 @@ const { simple = false } = Astro.props;
       <h2 id="footer-travel-title">Ways to travel</h2>
       <div class="footer-links">
         <a href={path('journeys.html')}>Signature journeys</a>
-        <a href={path('cruises.html')}>Private boat &amp; yacht cruises</a>
+        <a href={path('cruises.html')}>Cruises &amp; private yachts</a>
         <a href={path('concierge.html')}>What we arrange</a>
         <a href={path('corporate.html')}>Corporate travel</a>
         <a href={path('journey.html')}>Plan your escape</a>

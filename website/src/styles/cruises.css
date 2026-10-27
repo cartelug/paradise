@@ -1,0 +1,21 @@
+/* Keep the full ocean ship visible; yacht charter prices belong only to yachts. */
+.yacht.yacht--ocean { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: center; gap: clamp(24px, 4vw, 64px); padding: clamp(32px, 5vw, 72px) var(--gutter); min-height: 0; }
+.yacht--ocean::before { display: none; }
+.yacht--ocean > .wrap { grid-column: 1; grid-row: 1; width: 100%; margin: 0; padding: 0; }
+.yacht--ocean .yacht-media { position: relative; grid-column: 2; grid-row: 1; inset: auto; height: auto; z-index: auto; overflow: hidden; border-radius: 6px; aspect-ratio: 3 / 2; }
+.yacht--ocean .yacht-media img { display: block; object-fit: contain; object-position: center; transform: none; will-change: auto; }
+.yacht--ocean h2 { max-width: 14ch; }
+.yacht--ocean .lead { font-size: 1rem; max-width: 43ch; }
+.yacht--ocean .yacht-rate { display: grid; gap: 8px; }
+.yacht--ocean .yacht-rate strong { font-size: 1.125rem; }
+.cruise-yacht-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; margin-bottom: 32px; }
+.cruise-yacht-intro .frame { aspect-ratio: 16 / 10; }
+.cruise-page .glance-card { margin-bottom: 32px; }
+.cruise-ocean-hero .page-hero-bg { inset: 0; }
+.cruise-ocean-hero .page-hero-bg img { animation: none; }
+@media (max-width: 760px) {
+  .yacht.yacht--ocean { display: flex; flex-direction: column; align-items: stretch; padding: 0 0 36px; gap: 24px; }
+  .yacht--ocean .yacht-media { order: 0; width: 100%; border-radius: 0; }
+  .yacht--ocean > .wrap { order: 1; width: auto; margin-inline: var(--gutter); }
+  .cruise-yacht-intro { grid-template-columns: minmax(0, 1fr); }
+}

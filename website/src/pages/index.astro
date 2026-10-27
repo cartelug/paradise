@@ -14,12 +14,11 @@ import TravelDesk from '../components/TravelDesk.astro';
 import BookingSteps from '../components/BookingSteps.astro';
 import { journeys } from '../data/journeys';
 import { path, site } from '../data/site';
-import { offerFor, destinationFor, priceText, cruiseTypes } from '../data/offers';
-import { photo } from '../data/photography.ts';
+import { offerFor, destinationFor } from '../data/offers';
+import { cruisePhoto } from '../data/cruises';
 import heroArtwork from '../data/photographic-coast-artwork.json';
 import illustrated from '../data/illustrated-home-artwork.json';
 import { destinationArt } from '../data/home-illustrations';
-const yachtPhoto = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht in Dubai Marina' });
 const promises = [
   { art: 'personal-attention', title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
   { art: 'thoughtful-details', title: 'Thoughtful details', text: 'Your dates, your budget and the people you are travelling with come first.' },
@@ -36,14 +35,14 @@ const heroSet = (scene: 'desktop' | 'mobile') => (scene === 'mobile' ? illustrat
   <Hero />
   <WindowSeat />
 
-  <section class="yacht" aria-labelledby="cruise-title" data-yacht>
-    <div class="yacht-media"><Picture name={yachtPhoto.image} alt={yachtPhoto.alt} sizes="100vw" /></div>
+  <section class="yacht yacht--ocean" aria-labelledby="cruise-title">
+    <div class="yacht-media"><Picture name={cruisePhoto.image} alt={cruisePhoto.alt} sizes="(max-width: 760px) 100vw, 62vw" /></div>
     <div class="wrap">
-      <p class="eyebrow" data-reveal>Private boat &amp; yacht experiences</p>
+      <p class="eyebrow" data-reveal>Ocean cruises</p>
       <h2 id="cruise-title" data-split>The best view is <em>from the water.</em></h2>
-      <p class="lead" data-reveal>Dubai yacht cruises. Island excursions. Sunset moments. Private celebrations.</p>
-      <div class="yacht-rate" data-reveal><strong>{priceText(cruiseTypes[0])}</strong><span>{cruiseTypes[0].basis}</span><span>UGX quote available</span></div>
-      <a class="btn btn--gold" href={path('cruises.html')} data-reveal>Explore private cruises <Icon name="arrow-right" /></a>
+      <p class="lead" data-reveal>Unpack once. Wake up somewhere new. Find a sailing shaped around your dates, your pace and the people you travel with.</p>
+      <div class="yacht-rate" data-reveal><strong>Your voyage, personally planned.</strong><span>Ask for a tailored cruise proposal</span></div>
+      <a class="btn btn--gold" href={path('cruises.html')} data-reveal>Explore cruises <Icon name="arrow-right" /></a>
     </div>
   </section>
 

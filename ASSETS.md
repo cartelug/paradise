@@ -89,3 +89,7 @@ The V25 campaign composite was separated with the built-in image-generation tool
 ## V27 continuous island campaign
 
 Generated on 6 October 2026 with the built-in OpenAI image tool: one landscape master, its closed-eyelid edit, a separate portrait composition and its closed-eyelid edit. The animal, terrace, contact shadow and island setting form a single opaque image; no cutout or animal alpha texture is used. Native pixels are 1672 × 941 for landscape and 1024 × 1536 for portrait. The imagined blue-hour island, villas and yacht do not identify a verified property or operator. Exact generation and edit prompts, master paths and rendering provenance are in `website/source-assets/v27/ARTWORK.md`. `website/scripts/prepare-v27-assets.mjs` creates responsive AVIF/WebP derivatives. The shader samples matching eye regions for blinks and makes small bounded movements within the full image. The approved vector logo and verified V24 destination photographs remain active.
+# Ocean cruise feature — 27 October 2026
+
+The full-size cruise ship replaces the homepage yacht photo. Source: [Alonso Reyes / Unsplash](https://unsplash.com/photos/white-cruise-ship-under-cloudy-sky-LWFdBz4d6nE), under the [Unsplash Licence](https://unsplash.com/license). Original, provenance and derivative notes: `website/source-assets/cruise-2026-10-27/`. The responsive `ocean-cruise-v40` AVIF/WebP files are self-hosted. This image is illustrative and does not imply a partnership with the pictured operator. Original yacht photographs remain available for the private-yacht offers.
+

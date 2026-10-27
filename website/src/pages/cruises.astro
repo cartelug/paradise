@@ -3,28 +3,45 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import Icon from '../components/Icon.astro';
+import Picture from '../components/Picture.astro';
 import { cruiseTypes, priceText, usd } from '../data/offers';
 import { photo } from '../data/photography.ts';
-const hero = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht leaving Dubai Marina in warm sunset light' });
+import { cruisePhoto } from '../data/cruises';
+import { path } from '../data/site';
+const yacht = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht leaving Dubai Marina in warm sunset light' });
 const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
 ---
-<Layout label="Private cruises" title="Private boat & yacht experiences" description="Private Dubai yacht cruises, sunset cruises, island excursions and private celebrations, arranged by Pardus Luxury Escapes." class="inner cruise-page" simpleFooter>
-  <PageHero glance image={hero.image} alt={hero.alt} eyebrow="Private boat & yacht experiences" focusX="60%" focusY="55%">
-    <Fragment slot="title">Out on the water. <em>Entirely your own.</em></Fragment>
-    <p class="lead">For a romantic evening, an island adventure or a celebration with your favourite people.</p>
+<Layout label="Cruises & private yachts" title="Ocean cruises & private yacht experiences" description="Ocean cruise holidays, private Dubai yacht charters, island excursions and sunset celebrations. Tell Pardus your dates and preferences for a tailored proposal." class="inner cruise-page" image="images/ocean-cruise-v40-1920.webp" simpleFooter>
+  <PageHero image={cruisePhoto.image} alt={cruisePhoto.alt} eyebrow="Ocean cruises & private yachts" class="cruise-ocean-hero">
+    <Fragment slot="title">A new horizon. <em>Every morning.</em></Fragment>
+    <p class="lead">An ocean voyage or a private afternoon on the water. Start with your dates, your destination and the people coming with you.</p>
+    <div class="actions"><a class="btn btn--gold" href="#cruise-enquiry">Plan your cruise <Icon name="arrow-down" /></a><a class="btn btn--ghost" href="#private-yachts">Private yacht experiences <Icon name="arrow-down" /></a></div>
   </PageHero>
 
-  <section class="sec sec--ivory glance-sec" aria-label="Dubai private yacht cruise">
-    <div class="wrap glance">
+  <section class="sec sec--ivory" aria-labelledby="ocean-planning-title">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Ocean cruise planning</p>
+      <h2 id="ocean-planning-title" data-split>Your route. <em>Your rhythm.</em></h2>
+      <p class="lead" data-reveal>Tell us where you would like to sail, your preferred dates, cabin choice and budget. Your proposal sets out the ship, ports, nights on board, inclusions and total price before you decide.</p>
+      <p class="note">Cruise fares depend on the sailing, cabin and availability. Flights, visas, transfers and insurance are confirmed separately in your proposal.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--sand" id="private-yachts" aria-labelledby="private-yacht-title">
+    <div class="wrap cruise-yacht-intro">
+      <div><p class="eyebrow" data-reveal>Private yacht experiences</p><h2 id="private-yacht-title" data-split>A few hours. <em>Entirely yours.</em></h2><p class="lead" data-reveal>Dubai yacht charters, island excursions and sunset celebrations for your own group.</p></div>
+      <div class="frame"><Picture name={yacht.image} alt={yacht.alt} sizes="(max-width: 760px) 100vw, 45vw" /></div>
+    </div>
+    <div class="wrap">
       <div class="glance-card on-dark" data-reveal>
         <div><span class="card-label">Dubai private yacht cruise</span>
           <ul class="incl"><li><Icon name="yacht" /><span>Your own yacht</span></li><li><Icon name="clock" /><span>3 hours on the water</span></li><li><Icon name="users" /><span>Up to 6 guests</span></li></ul></div>
-        <div class="glance-booking"><div class="price"><span class="price-label">From</span><strong>{usd(cruiseTypes[0].fromUSD)}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href="#cruise-enquiry">Plan your cruise <Icon name="arrow-down" /></a></div>
+        <div class="glance-booking"><div class="price"><span class="price-label">From</span><strong>{usd(cruiseTypes[0].fromUSD)}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises.html?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
       </div>
     </div>
     <div class="wrap">
       <p class="eyebrow" data-reveal>Choose your experience</p>
-      <h2 data-split>More than a boat trip. <em>A moment to keep.</em></h2>
+      <h3>Private charters &amp; excursions</h3>
       <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp" data-reveal><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></article>)}</div>
       <p class="note">Choose your destination, date, group size and occasion. Your proposal confirms the vessel, route, duration, inclusions and total USD price. Sailings depend on local conditions and availability.</p>
     </div>
@@ -32,8 +49,8 @@ const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
 
   <section class="sec sec--dusk" id="cruise-enquiry" aria-labelledby="cruise-enquiry-title">
     <div class="wrap enquiry">
-      <div class="enquiry-copy"><p class="eyebrow" data-reveal>Your private cruise</p><h2 id="cruise-enquiry-title" data-split>Pick the occasion. <em>We’ll plan the water.</em></h2><p class="lead" data-reveal>Dubai, the Maldives, Seychelles or an island excursion. Tell us what you have in mind.</p></div>
-      <div class="enquiry-card glass" data-reveal><SimpleEnquiry id="cruise-enquiry-form" defaultDestination="Private boat & yacht experience" /></div>
+      <div class="enquiry-copy"><p class="eyebrow" data-reveal>Your time on the water</p><h2 id="cruise-enquiry-title" data-split>Pick the occasion. <em>We’ll plan the water.</em></h2><p class="lead" data-reveal>An ocean voyage, a private yacht charter or an island excursion. Tell us what you have in mind.</p></div>
+      <div class="enquiry-card glass" data-reveal><SimpleEnquiry id="cruise-enquiry-form" defaultDestination="Ocean cruise" /></div>
     </div>
   </section>
 </Layout>
