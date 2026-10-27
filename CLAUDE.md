@@ -1,5 +1,7 @@
 # Owner requests — 27 October 2026
 
+Section two now uses the regenerated square transparent leopard in `website/source-assets/v41-section-two-leopard/`. Preserve the complete ears, head and muzzle on every screen. Its responsive WebP files are `pardus-window-leopard-soft-*`; the picture stays inside the introduction with zero top/right offsets. Separate horizontal and vertical CSS masks feather the outer edges and lower neck into navy. Do not restore the old negative offsets or tightly cropped portrait.
+
 The primary tagline is now **Travel Curated, Around You** (`site.tagline`). This supersedes the old primary tagline rules below. Use the shared value in the header/menu brand lockups, animated opening, footer, search description and structured data. The approved Pardus / Luxury Escapes artwork and the hero's “Extraordinary journeys.” heading remain intact.
 
 The homepage's former yacht feature now shows a **full-size ocean cruise ship**. Its photograph is a licensed Alonso Reyes image from Unsplash; source and licence are recorded in `website/source-assets/cruise-2026-10-27/README.md`. Preserve the whole vessel on mobile with a normal-flow picture rather than the old cropped/parallax yacht background. The cruises page introduces ocean voyages with tailored proposals and no invented prices. The approved private-yacht prices remain in a separately labelled yacht section with its yacht image. The enquiry supports both Ocean cruise and Private boat & yacht experience. Keep this distinction when editing.
