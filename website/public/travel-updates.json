@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T09:52:31.742606+00:00",
+  "updatedAt": "2026-10-28T10:39:15.207327+00:00",
   "items": [
     {
       "id": "dubai-winter-2026",
@@ -20,7 +20,7 @@
       "category": "Aviation update",
       "url": "https://caa.go.ug/jambojet-returns-to-uganda-strengthening-regional-connectivity/",
       "publishedAt": "2026-10-01",
-      "checkedAt": "2026-10-27",
+      "checkedAt": "2026-10-28",
       "sourceCategories": [
         "CAA News",
         "latest news",
@@ -32,7 +32,7 @@
     {
       "name": "Uganda Civil Aviation Authority",
       "url": "https://caa.go.ug/feed/",
-      "lastSuccessfulCheck": "2026-10-27T09:52:31.742606+00:00"
+      "lastSuccessfulCheck": "2026-10-28T10:39:15.207327+00:00"
     }
   ]
 }
