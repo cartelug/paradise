@@ -81,3 +81,8 @@ p, li, dd { line-height: 1.66; }
 .footer-licences a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--mist); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(236 215 168 / .4); }
 .footer-licences a:hover { color: var(--gold-soft); text-decoration-color: currentColor; }
 .hero--atlas h1 { letter-spacing: var(--track-display); }
+
+/* Readability floor for the smallest type (28 October 2026). Uppercase labels never drop below 11.5 px, and the tagline
+   under the header logo is set at a legible size with a touch of tracking so it still fits the lockup's width. */
+.footer-column h2 { font-size: .75rem; letter-spacing: .16em; }
+.brand-tagline { font-size: 10.5px; letter-spacing: .01em; }
