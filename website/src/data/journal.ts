@@ -31,7 +31,7 @@ export const journal: JournalEntry[] = [
       'A shorter transfer means more time on the island but often a busier surrounding atoll. A longer speedboat or seaplane transfer usually trades travel time for a quieter, more remote setting — sometimes worth it, sometimes not, depending on how precious the first and last day of your trip are to you.',
       'Overwater villas are the image everyone has in mind, and for good reason. But a beach villa with direct lagoon access can suit families, longer stays or anyone who prefers solid ground more than the postcard implies.',
       'The house reef is the detail most easily overlooked and most likely to define your days. Some islands have exceptional snorkelling steps from your villa; others need a boat excursion to reach the best of the marine life. If time in the water matters to you, this is worth asking about specifically.',
-      'There is rarely a single "best" island — there is a best island for this particular trip, with these travellers, at this pace. That is the question we start with, rather than working backwards from a list of resort names.'
+      'There is rarely a single “best” island — there is a best island for this particular trip, with these travellers, at this pace. That is the question we start with, rather than working backwards from a list of resort names.'
     ]
   },
   {
@@ -40,9 +40,9 @@ export const journal: JournalEntry[] = [
     ...photo('zanzibar', { image: 'zanzibar-v24', alt: 'A palm-lined resort and pale sandy shoreline beside the ocean in Zanzibar' }), category: 'Destination notes', author: 'Pardus Editorial', publishedAt: '2026-09-08', updatedAt: '2026-09-12', relatedDestination: 'zanzibar',
     intro: 'It is entirely possible to visit Zanzibar and never leave the beach. It is also a bit of a missed opportunity.',
     paragraphs: [
-      'Zanzibar\'s coastline is genuinely beautiful — pale sand, warm shallow water and a slower rhythm than most Indian Ocean islands. It would be a completely reasonable trip to arrive, settle in, and not move for a week.',
+      'Zanzibar’s coastline is genuinely beautiful — pale sand, warm shallow water and a slower rhythm than most Indian Ocean islands. It would be a completely reasonable trip to arrive, settle in, and not move for a week.',
       'But Stone Town, a short transfer away, is a UNESCO World Heritage old quarter with a distinct character: narrow lanes, carved wooden doors, rooftop views and a food scene shaped by centuries of trade between Africa, the Arabian peninsula and South Asia. An afternoon there changes the texture of the trip.',
-      'The island is also one of the world\'s notable spice producers, and a well-run spice tour is less a tourist formality and more a genuinely interesting couple of hours — cloves, nutmeg, cardamom and vanilla growing in ways that rarely make it onto a supermarket shelf.',
+      'The island is also one of the world’s notable spice producers, and a well-run spice tour is less a tourist formality and more a genuinely interesting couple of hours — cloves, nutmeg, cardamom and vanilla growing in ways that rarely make it onto a supermarket shelf.',
       'The practical question is balance: how much beach time against how much culture, and on what schedule. Stone Town is warm and busy during the day and considerably more pleasant in the early morning or evening — worth building the itinerary around rather than squeezing in as an afterthought.',
       'Zanzibar also pairs naturally with an East African safari, either before or after — a coastal close to a wilder itinerary, or a wilder opening before slowing down by the water. Neither order is objectively better; it depends what note you want the trip to end on.'
     ]
@@ -57,7 +57,7 @@ export const journal: JournalEntry[] = [
       'Camps range enormously: a permanent lodge with a pool and full service, a tented camp with canvas walls and paraffin lanterns, or a fully mobile camp that moves with the seasons. None is objectively better — the right one depends on how much comfort matters against how immersive you want the setting to feel.',
       'Wildlife sightings are never guaranteed, and we would rather say that plainly than imply otherwise. Guides read tracks, radio calls and seasonal patterns to maximise the odds, but the wild does not run on a schedule. The privilege is being a guest in it, not a customer owed a checklist.',
       'Timing shapes the experience more than most first-time safari travellers expect. Dry season generally means easier wildlife viewing as animals gather near water; green season brings dramatic landscapes, fewer crowds and newborn animals, at some cost to visibility. Neither is wrong — they are simply different trips.',
-      'Between drives, the pace is genuinely slow: reading, resting, watching the camp\'s waterhole or simply sitting with the quiet. A good safari itinerary leaves room for that stillness rather than filling every hour, because a lot of what people remember afterwards happens in the gaps.'
+      'Between drives, the pace is genuinely slow: reading, resting, watching the camp’s waterhole or simply sitting with the quiet. A good safari itinerary leaves room for that stillness rather than filling every hour, because a lot of what people remember afterwards happens in the gaps.'
     ]
   },
   {

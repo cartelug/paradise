@@ -1,3 +1,13 @@
+# Type system rebuild — 28 October 2026
+
+The owner asked for professional, intuitive font sizes and usage on desktop and every other view. `website/src/styles/type.css` (loaded last) is the single source of truth for text. Components pick **role tokens**; they never invent a size, weight, tracking or leading. Add a size to `type.css`, not to a component.
+
+- **Scale.** Fifteen fluid sizes, `--fs-label` (12 to 13 px) up to `--fs-number` (29 to 46 px), interpolated between a 360 px phone and a 1440 px desktop with `clamp()` (no jumps, no per-breakpoint sizes), plus the fixed `--fs-nav` (15 px). Matching `--lh-*` leading, `--ls-*` tracking, `--fw-light/regular/bold` weights and `--measure-*` line lengths.
+- **Voices.** MTN Brighter Sans Bold only for h1, h2, display type and every price or figure (19 px and up). Sky Text Bold for h3/h4 and for every card, tile, panel, FAQ and sub-head title whatever its heading level, plus buttons, navigation and labels. Sky Text Regular for reading. Sky Text Light only for large leads on solid pale grounds at 1100 px and up. Only 300, 400 and 700 exist; there is no italic, so accents are upright and gold.
+- **Limits.** Nothing under 12 px. The one exception is the logo lockup caption, which belongs to the logo and scales with it (10 px under the phone logo, up to 12.5 px under the desktop ones, one line, no link underline). Paragraphs stay near 60 to 72 characters a line even in one wide tablet column (`--measure-*`). Light-on-dark text gets a little tracking. All copy uses curly quotes and apostrophes.
+- **Window Seat** keeps its viewport-based phone-fit sizes, but their maximums are the shared tokens.
+- `website/tests/typography.test.mjs` enforces the token set, the three weights, no italics and the 12 px floor. `refine.css` now holds spacing, layout and scrims only; it carries no typography.
+
 # Owner requests — 27 October 2026
 
 Section two now uses the regenerated square transparent leopard in `website/source-assets/v41-section-two-leopard/`. Preserve the complete ears, head and muzzle on every screen. Its responsive WebP files are `pardus-window-leopard-soft-*`; the picture stays inside the introduction with zero top/right offsets. Separate horizontal and vertical CSS masks feather the outer edges and lower neck into navy. Do not restore the old negative offsets or tightly cropped portrait.
@@ -25,6 +35,8 @@ The owner selected the navy "Leave ordinary." reference and explicitly requested
 
 ## Type system: Sky Text and MTN Brighter Sans — 26 October 2026
 
+(Sizes, leading, tracking and measure were rebuilt as tokens on 28 October 2026; see the section at the top of this file.)
+
 The owner (who confirms a full licence) replaced Archivo site-wide with two supplied families, self-hosted from `website/public/fonts/` (unmodified WOFF2 kits; provenance in `FONT-LICENSES.txt`). This supersedes every “Archivo only” and “true italic” note below and in `website/FONT_MOTION_NOTES.md`. Roles are tokens in `base.css`: `--font-display` and `--font-figure` = **MTN Brighter Sans Bold** (h1, h2, scene titles, prices and all figures; its digits are tabular), `--font-title` and `--font-ui` = **Sky Text** (Light 300, Regular 400, Bold 700: h3/h4, card titles, buttons, labels, navigation, paragraphs). `src/components/FontFaces.astro` is the registry (faces, preloads, metric-matched Arial fallbacks) and `src/styles/type.css`, loaded last, applies the roles. Neither family has an italic or a 500/600/800 weight, so `em` accents are upright and gold, `font-synthesis` is off, and any requested weight resolves to the nearest real face (500 to 400, 600 and up to 700). Do not fake an italic or add a bold. More fonts are coming: add the files and a row in `FontFaces.astro`, then point a role token at the family. The footer carries the required CC BY 4.0 credits for the fonts and icons (checked by `tests/content.test.mjs`); keep them on every page. The raster headline lettering artwork is unchanged.
 
 ## Ten travel photographs — 25 October 2026
@@ -46,7 +58,7 @@ masters stay untouched (`tests/travel-photographs.test.mjs` checks their SHA-256
 
 The owner asked for bolder, more powerful and less obtrusive section styling, pro-level
 type, smaller cards so pages scroll faster, and a mobile hero→Who We Are join that is
-completely invisible. `website/src/styles/refine.css` (loaded last) carries it:
+completely invisible. `website/src/styles/refine.css` carried it (its typography moved to `type.css` on 28 October 2026; it now holds spacing and layout only):
 Archivo only, heavier display weights (h1/h2 800, h3 700, light-on-dark body 450),
 tighter tracking, `text-wrap: balance/pretty`, tabular prices, shorter card pictures
 (16:10 / 16:9) and smaller section, card and page-hero spacing. This updates the earlier

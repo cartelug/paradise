@@ -32,7 +32,7 @@ const promises = [
       <BookingSteps />
     </div>
   </section>
-  {site.credentials.length > 0 && <section class="sec sec--sand" aria-labelledby="credentials-title"><div class="wrap"><h2 id="credentials-title" style="font-size:clamp(1.4rem,1.1rem + 1vw,2rem);margin-bottom:18px">Company details</h2><dl class="credentials">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div></section>}
+  {site.credentials.length > 0 && <section class="sec sec--sand" aria-labelledby="credentials-title"><div class="wrap"><h2 id="credentials-title" style="font-size:var(--fs-h2-s);margin-bottom:18px">Company details</h2><dl class="credentials">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div></section>}
   <section class="sec sec--sand" aria-labelledby="places-title">
     <div class="wrap statement">
       <h2 id="places-title" data-split>Beautiful places. <em>Thoughtfully arranged.</em></h2>

@@ -1,5 +1,7 @@
 # V30.1: typography and motion notes
 
+> **Update, 28 October 2026:** all sizes, leading, tracking, weights and measures are now role tokens in `src/styles/type.css` (fifteen fluid sizes between a 360 px phone and a 1440 px desktop, only weights 300/400/700, a 12 px floor, 60 to 72 characters a line). `refine.css` carries no typography any more, and `tests/typography.test.mjs` guards the system. The notes below that quote pixel sizes or weights describe earlier passes.
+>
 > **Update, 26 October 2026:** the type sections below describe the retired Archivo setup. The site now uses Sky Text (Light, Regular, Bold) and MTN Brighter Sans Bold. Roles, weight resolution, fallbacks and the footer licence credits are documented in CLAUDE.md (“Type system”), `src/components/FontFaces.astro`, `src/styles/type.css` and `public/fonts/FONT-LICENSES.txt`. Motion notes remain current.
 
 ## Type

@@ -21,16 +21,16 @@
 .leopard-outline { position: absolute; inset: 0; pointer-events: none; }
 .leopard-box { position: absolute; left: var(--dl); top: var(--dt); width: var(--dw); height: var(--dh); visibility: hidden; }
 .hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: clamp(156px, 11.4vw, 216px); width: 49%; max-width: 860px; }
-.hero--atlas .eyebrow { display: block; margin: 0 0 20px; color: #775e32; font-size: 11px; font-weight: 600; line-height: 1.4; letter-spacing: .28em; text-transform: uppercase; }
+.hero--atlas .eyebrow { display: block; margin: 0 0 20px; color: #775e32; font-weight: 700; line-height: 1.4; text-transform: uppercase; }
 .hero--atlas .eyebrow::before { display: none; }
-.hero--atlas .hero-tagline { text-transform: none; letter-spacing: .04em; font-size: 13px; }
-.hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(46px, 4.15cqw, 76px); font-weight: 650; line-height: 1.035; letter-spacing: -.045em; text-wrap: initial; }
+.hero--atlas .hero-tagline { text-transform: none; }
+.hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(46px, 4.15cqw, 76px); font-weight: 700; line-height: 1.035; letter-spacing: -.045em; text-wrap: initial; }
 .hero--atlas .line { display: block; padding-block: .055em; margin-block: -.055em; }
 .hero--atlas .line > span { display: inline-block; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
-.hero-text { margin-top: 23px; max-width: 48ch; color: #294659; font-size: clamp(16px, 1.15cqw, 18px); font-weight: 400; line-height: 1.55; letter-spacing: -.012em; text-wrap: initial; }
+.hero-text { margin-top: 23px; max-width: 48ch; color: #294659; font-size: var(--fs-body-s); font-weight: 400; line-height: var(--lh-body-s); letter-spacing: var(--ls-body); text-wrap: initial; }
 .hero-text > span { display: block; }
 .hero--atlas .actions { gap: 12px; margin-top: 25px; }
-.hero--atlas .btn, .home .header-cta { min-height: 48px; padding: 13px 22px; border-radius: 4px; font-size: 14px; font-weight: 600; line-height: 1.25; letter-spacing: 0; box-shadow: none; text-wrap: initial; }
+.hero--atlas .btn, .home .header-cta { min-height: 48px; padding: 13px 22px; border-radius: 4px; font-size: var(--fs-small); font-weight: 700; line-height: var(--lh-ui); letter-spacing: var(--ls-ui); box-shadow: none; text-wrap: initial; }
 .hero--atlas .btn { min-width: 174px; }
 .hero--atlas .btn > span { min-width: 0; overflow-wrap: anywhere; }
 .hero--atlas .btn--gold, .home .header-cta { background: #8b6b32; border-color: #8b6b32; color: #fff; }
@@ -47,7 +47,7 @@
 .home .site-header > .brand-link { width: 176px; }
 .home .site-header > .brand-link .brand-svg { filter: none; }
 .home .desktop-nav { gap: clamp(20px, 2.1vw, 40px); justify-content: flex-end; margin: 0; }
-.home .desktop-nav a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 10px 0; color: #09283f; font-size: 14px; font-weight: 500; line-height: 1.3; letter-spacing: -.012em; }
+.home .desktop-nav a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 10px 0; color: #09283f; font-size: var(--fs-nav); font-weight: 400; line-height: var(--lh-ui); letter-spacing: var(--ls-ui); }
 .home .desktop-nav a:hover, .home .desktop-nav a:focus-visible { color: #775e32; }
 .home .header-tools { margin: 0; gap: 12px; }
 .home .header-saved { display: none; }
@@ -65,7 +65,7 @@
   .home .site-header > .brand-link { width: 148px; }
   .home .desktop-nav { display: none; }
   .home .header-tools { margin-left: auto; }
-  .home .header-cta { min-width: 0; min-height: 44px; padding-inline: 18px; font-size: 13px; }
+  .home .header-cta { min-width: 0; min-height: 44px; padding-inline: 18px; font-size: var(--fs-small); }
   .home .menu-toggle { width: 44px; height: 44px; border-color: rgb(9 40 63 / .25); color: #09283f; background: rgb(250 249 245 / .75); border-radius: 4px; backdrop-filter: none; }
   .home .site-header.is-scrolled { height: var(--header-h); }
 }
@@ -73,7 +73,7 @@
   .hero-stage { display: grid; aspect-ratio: auto; min-height: 0; background: linear-gradient(90deg, #eeefeb, #dbe2e6); }
   .hero-copy { position: relative; grid-row: 1; left: auto; top: auto; width: 100%; max-width: none; padding: calc(var(--header-h) + 38px) var(--atlas-gutter) 30px; }
   .hero--atlas h1 { font-size: clamp(36px, 6vw, 64px); }
-  .hero-text { max-width: 48ch; font-size: 17px; }
+  .hero-text { max-width: 48ch; font-size: var(--fs-body-s); }
   .hero-text > span { display: inline; }
   .hero-art { position: relative; inset: auto; grid-row: 2; margin-top: -6vw; }
   .hero-art::before { background: linear-gradient(90deg, #eeefeb, #dbe2e6); }
@@ -85,11 +85,11 @@
   .home .header-cta { display: none; }
   .hero-stage { background: #e9eae6; }
   .hero-copy { padding-top: calc(var(--header-h) + 27px); padding-bottom: 0; }
-  .hero--atlas .eyebrow { margin-bottom: 16px; font-size: 10px; letter-spacing: .24em; }
+  .hero--atlas .eyebrow { margin-bottom: 16px; }
   .hero--atlas h1 { font-size: clamp(30px, 8.25vw, 54px); line-height: 1.04; }
-  .hero-text { margin-top: 18px; max-width: 35ch; font-size: 15px; line-height: 1.5; }
+  .hero-text { margin-top: 18px; max-width: 35ch; font-size: var(--fs-body-s); line-height: var(--lh-body-s); }
   .hero--atlas .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
-  .hero--atlas .btn { min-width: 0; width: 100%; min-height: 48px; padding: 11px 10px; font-size: 12px; gap: 8px; }
+  .hero--atlas .btn { min-width: 0; width: 100%; min-height: 48px; padding: 11px 10px; font-size: var(--fs-small); gap: 8px; }
   .hero--atlas .btn > .icon { width: 14px; height: 14px; }
   /* The empty top 52% of the portrait sits behind the copy. Its animal begins
      another 20vw below the copy, regardless of line wrapping or enlarged text. */
@@ -116,7 +116,7 @@
 @media (max-width: 1199px) {
   html:not(.js) .home .site-header { position: absolute; height: auto; flex-wrap: wrap; background: #eeefeb; }
   html:not(.js) .home .desktop-nav { display: flex; flex-wrap: wrap; order: 3; justify-content: flex-start; gap: 4px 18px; width: 100%; }
-  html:not(.js) .home .desktop-nav a { font-size: 13px; }
+  html:not(.js) .home .desktop-nav a { font-size: var(--fs-nav); }
   html:not(.js) .home .hero-copy { padding-top: 230px; }
   html:not(.js) .home .header-cta { display: none; }
 }

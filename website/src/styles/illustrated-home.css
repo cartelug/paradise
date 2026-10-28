@@ -26,7 +26,7 @@ html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: 
 .dest-top--illustrated { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; align-items: center; }
 .dest-top--illustrated > div { min-width: 0; }
 .dest-top--illustrated h3 { margin-bottom: 5px; }
-.dest-duration { display: block; color: var(--gold-ink); font-size: .75rem; font-weight: 600; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
+.dest-duration { display: block; color: var(--gold-ink); font-size: var(--fs-label); font-weight: 700; line-height: var(--lh-label); letter-spacing: var(--ls-caps-s); text-transform: uppercase; }
 .home .promise > .travel-emblem { margin-bottom: 2px; }
 .home .enquiry-copy > .travel-emblem { margin-bottom: -4px; }
 
@@ -34,7 +34,7 @@ html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: 
 .picker--illustrated .pick { min-width: 0; }
 .picker--illustrated .pick-face { grid-template-columns: minmax(0, 1fr); justify-items: start; align-content: start; gap: 9px; min-width: 0; max-width: 100%; min-height: 132px; padding: 14px; border-radius: 16px; background: #fcfaf6; }
 .picker--illustrated .pick-icon { width: 64px; height: 64px; border-radius: 0; background: none; }
-.picker--illustrated .pick-label { width: 100%; max-width: 100%; font-size: .875rem; line-height: 1.3; overflow-wrap: anywhere; }
+.picker--illustrated .pick-label { width: 100%; max-width: 100%; font-size: var(--fs-small); line-height: var(--lh-ui); overflow-wrap: anywhere; }
 .home[data-enlarged-lettering] .picker--illustrated .picker-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .picker--illustrated .pick input:checked + .pick-face .pick-icon { background: none; transform: scale(1.04); }
 .picker--illustrated .pick input:checked + .pick-face { box-shadow: 0 0 0 1px rgb(184 146 70 / .5), 0 10px 24px rgb(119 87 28 / .12); }
@@ -57,7 +57,7 @@ html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: 
   .escapes-backdrop img { object-position: 50% 50%; }
 }
 @media (max-width: 359px) {
-  .picker--illustrated .pick-label { font-size: .8125rem; }
+  .picker--illustrated .pick-label { font-size: var(--fs-small); }
   .picker--illustrated .pick-face { padding: 10px; }
 }
 @media (prefers-reduced-motion: no-preference) {

@@ -1,105 +1,155 @@
-/* Type system, 26 October 2026. Loaded last.
-   Owner-licensed families, self-hosted (see FontFaces.astro and public/fonts/FONT-LICENSES.txt):
-     MTN Brighter Sans Bold  display voice: h1, h2, scene titles, prices and every figure
-     Sky Text Bold           title voice: h3, h4, card and tile titles, buttons, navigation, labels
-     Sky Text Regular/Light  reading voice: paragraphs, leads, forms, captions
-   Neither family has an italic or a 500/600/800 weight, so emphasis is upright and colour-led, and
-   weights resolve to the nearest real face (500 -> 400, 600 and up -> 700): no faked bold or slant. */
+/* PARDUS TYPE SYSTEM, 28 October 2026. Loaded last; the single source of truth for text.
+
+   Three voices, all owner-licensed and self-hosted (FontFaces.astro, public/fonts/FONT-LICENSES.txt):
+     Display  MTN Brighter Sans Bold   h1, h2, large titles and every price or figure. Used at 19 px and above, never smaller.
+     Title    Sky Text Bold            h3, h4, card and tile titles, buttons, navigation, labels.
+     Reading  Sky Text Regular / Light paragraphs, leads, forms, captions.
+   Neither family has an italic, or a 500, 600 or 800 weight, so the only weights are 300, 400 and 700 and emphasis is upright
+   and colour-led (font-synthesis is off). Sky Text has small x-height, kerning only, and proportional digits; MTN's digits are
+   tabular, which is why every price and figure uses MTN.
+
+   Every size is fluid between a 360 px phone and a 1440 px desktop, so there are no jumps and no arbitrary breakpoints.
+   Components pick a ROLE token; they do not invent sizes. Add a size here, not in a component. */
 
 :root {
-  /* Sky Text has a smaller x-height than the previous face; nudge reading sizes up a touch. */
-  --fs-body: clamp(1.0313rem, .99rem + .2vw, 1.1563rem);
-  --fs-lead: clamp(1.0313rem, .95rem + .4vw, 1.2813rem);
-  --fs-small: clamp(.8438rem, .81rem + .1vw, .9063rem);
-  /* MTN Brighter Sans is a wide, heavy display face: slightly smaller maxima, tighter tracking than before is not needed. */
-  --fs-h1: clamp(2rem, 1.25rem + 3.35vw, 4rem);
-  --fs-h2: clamp(1.55rem, 1.06rem + 2vw, 2.6rem);
-  --track-display: -.02em;
-  --track-title: -.012em;
+  /* Size scale: 15 steps. */
+  --fs-label: clamp(0.75rem, 0.7292rem + 0.0926vw, 0.8125rem);  /* 12 to 13 px: caps labels, eyebrows, chips, badges (never below 12 px) */
+  --fs-small: clamp(0.875rem, 0.8542rem + 0.0926vw, 0.9375rem);  /* 14 to 15 px: captions, notes, meta, list detail, form labels */
+  --fs-body-s: clamp(0.9688rem, 0.9479rem + 0.0926vw, 1.0312rem);  /* 15.5 to 16.5 px: compact body in cards and panels, buttons, links */
+  --fs-body: clamp(1.0312rem, 0.9896rem + 0.1852vw, 1.1562rem);  /* 16.5 to 18.5 px: running text and long-form reading */
+  --fs-lead: clamp(1.1875rem, 1.1146rem + 0.3241vw, 1.4062rem);  /* 19 to 22.5 px: introductions under headings */
+  --fs-h4: clamp(1.125rem, 1.0625rem + 0.2778vw, 1.3125rem);  /* 18 to 21 px: minor titles: promises, steps, tiles, FAQ */
+  --fs-h3: clamp(1.3125rem, 1.1875rem + 0.5556vw, 1.6875rem);  /* 21 to 27 px: card and panel titles */
+  --fs-h2-s: clamp(1.5625rem, 1.3542rem + 0.9259vw, 2.1875rem);  /* 25 to 35 px: compact section titles */
+  --fs-h2: clamp(1.8125rem, 1.4792rem + 1.4815vw, 2.8125rem);  /* 29 to 45 px: section titles */
+  --fs-title-l: clamp(1.8125rem, 1.5208rem + 1.2963vw, 2.6875rem);  /* 29 to 43 px: large feature titles */
+  --fs-h1: clamp(2.1875rem, 1.625rem + 2.5vw, 3.875rem);  /* 35 to 62 px: page headlines */
+  --fs-display: clamp(2.375rem, 1.5833rem + 3.5185vw, 4.75rem);  /* 38 to 76 px: closing statements, 404 */
+  --fs-figure-s: clamp(1.1875rem, 1.1042rem + 0.3704vw, 1.4375rem);  /* 19 to 23 px: small prices and figures */
+  --fs-figure: clamp(1.4375rem, 1.2292rem + 0.9259vw, 2.0625rem);  /* 23 to 33 px: prices */
+  --fs-number: clamp(1.8125rem, 1.4583rem + 1.5741vw, 2.875rem);  /* 29 to 46 px: large step numerals */
+  --fs-nav: .9375rem;  /* 15 px: header and footer navigation, fixed so the five labels and the action always fit */
+
+  /* Leading: tighter as type grows, looser for long reading. */
+  --lh-display: 1.04;
+  --lh-h1: 1.06;
+  --lh-h2: 1.1;
+  --lh-title: 1.22;
+  --lh-h4: 1.3;
+  --lh-lead: 1.5;
+  --lh-body: 1.66;
+  --lh-long: 1.75;
+  --lh-body-s: 1.58;
+  --lh-small: 1.55;
+  --lh-ui: 1.3;
+  --lh-label: 1.4;
+  --lh-figure: 1.12;
+
+  /* Tracking: heavy wide display type tightens as it grows; small caps open up; body stays natural. */
+  --ls-display: -.02em;
+  --ls-heading: -.014em;
+  --ls-title: -.008em;
+  --ls-body: 0;
+  --ls-small: .004em;
+  --ls-ui: .008em;
+  --ls-caps: .15em;
+  --ls-caps-s: .1em;
+  --ls-figure: -.012em;
+
+  /* Weights: the only three that exist. */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  /* Measure, in ch of the reading face (1 ch is about 1.4 characters of running Sky Text): about 60 to 72 characters a line. */
+  --measure-narrow: 38ch;
+  --measure-lead: 46ch;
+  --measure-body: 50ch;
+  --measure-long: 52ch;
 }
 
 html { font-synthesis: none; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body { font-family: var(--font-ui); font-weight: 400; font-kerning: normal; font-feature-settings: 'kern' 1, 'liga' 1; letter-spacing: .002em; }
-
-/* Display voice. */
-h1, h2, .display,
-.scene h3, .yacht h2, .closing h2, .escapes-head h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: var(--track-display);
-  line-height: 1.08;
-  font-variant-numeric: lining-nums tabular-nums;
+body {
+  font-family: var(--font-ui); font-size: var(--fs-body); font-weight: var(--fw-regular); line-height: var(--lh-body); letter-spacing: var(--ls-body);
+  font-kerning: normal; font-feature-settings: 'kern' 1, 'liga' 1; font-optical-sizing: auto; hyphens: manual;
 }
-h1 { line-height: 1.06; }
-.scene h3 { font-size: clamp(1.8rem, 1.15rem + 2.45vw, 3.1rem); }
-.yacht h2 { font-size: clamp(1.7rem, 1rem + 3.1vw, 3.4rem); }
-.closing h2 { font-size: clamp(1.8rem, 1rem + 3.7vw, 3.9rem); }
-.escapes-head h2 { font-size: clamp(2rem, 3.5vw, 3.15rem); }
-
-/* Title voice. */
-h3, h4, .faq summary h3, .menu-kicker, .card-label {
-  font-family: var(--font-title);
-  font-weight: 700;
-  letter-spacing: var(--track-title);
-  line-height: 1.2;
-}
-h4 { letter-spacing: 0; }
-.eyebrow, .price-label, .footer-column h2, .menu-kicker, .card-label, .card-meta, .dest-top > span, .dest-duration, .travel-update-meta span {
-  font-family: var(--font-ui); font-weight: 700; letter-spacing: .18em;
-}
-
-.btn, .link, .pill, .mail, .field > span, .form label, .picker--illustrated .pick-label { font-family: var(--font-ui); font-weight: 700; }
-/* Navigation reads best in Regular; the single Plan your escape action carries the bold. */
-.desktop-nav a, .home .desktop-nav a { font-family: var(--font-ui); font-weight: 400; font-size: .9375rem; letter-spacing: .004em; }
-/* Sky Text is already open-spaced: undo the negative tracking the previous face needed on running text. */
-.hero-text, .footer-brand .footer-tagline, .picker-q, .who-reference-description, .menu-nav strong { letter-spacing: 0; }
-.hero-text { color: #173449; line-height: 1.6; }
-.who-reference-intro { letter-spacing: -.008em; }
-
-/* Accents inside headlines and copy: same face, upright, gold. */
+p, li, dd, blockquote, figcaption { text-wrap: pretty; }
+h1, h2, h3, h4, .display { font-kerning: normal; }
 em { font-style: normal; letter-spacing: inherit; }
-h1 em, h2 em, h3 em, .display em { font-weight: inherit; }
+h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 
-/* Reading voice. Light for generous leads on pale grounds, Regular everywhere else (dark grounds never go thinner). */
-.lead { font-weight: 400; letter-spacing: 0; line-height: 1.62; }
-@media (min-width: 720px) {
-  .sec--ivory .lead, .sec--sand .lead, .light .lead { font-weight: 300; color: var(--ink); }
+/* Reading weight. Regular is the reading weight everywhere. Light is reserved for large introductions on solid pale grounds
+   (never over photographs, never small), where its thin strokes stay crisp. */
+.lead { font-weight: var(--fw-regular); }
+@media (min-width: 1100px) {
+  .sec--ivory .lead, .sec--sand .lead, .light .lead { font-weight: var(--fw-light); color: var(--ink); }
 }
-.escapes, .yacht, .sec--night, .sec--dusk, .sec--lagoon, .page-hero, .footer { font-weight: 400; }
-p, li, dd { line-height: 1.66; }
 
-/* Figures: MTN Brighter Sans digits are all one width, so prices and counters line up. */
-.price strong, .exp-price strong, .yacht-rate strong, .process .num, .acts .num, .overview-list dd, .tile strong {
-  font-family: var(--font-figure); font-weight: 700; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.012em;
+/* Reverse type (light on dark) glows and closes up, so it gets a hair more tracking. */
+:where(.sec--night, .sec--dusk, .sec--lagoon, .page-hero, .site-footer, .on-dark, .yacht, .menu) :where(p, li, dd) { letter-spacing: .01em; }
+
+/* Figures: MTN's digits are one width, so prices and counters line up; Sky's are proportional. */
+.price strong, .exp-price strong, .yacht-rate strong, .process .num, .acts .num, .overview-list dd, .ws-price strong {
+  font-family: var(--font-figure); font-weight: var(--fw-bold); font-variant-numeric: lining-nums tabular-nums;
 }
-.price strong { letter-spacing: -.016em; }
+.price strong, .exp-price strong, .yacht-rate strong { white-space: nowrap; }
 .price small, .price-label { font-family: var(--font-ui); }
 
-/* Footer credits for the licensed fonts and icons (CC BY 4.0 attribution). */
-.footer-licences { display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding-block: 0 26px; font-size: .8125rem; line-height: 1.5; color: var(--mist); }
-.footer-licences p { margin: 0; }
-.footer-licences a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--mist); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(236 215 168 / .4); }
-.footer-licences a:hover { color: var(--gold-soft); text-decoration-color: currentColor; }
-.hero--atlas h1 { letter-spacing: var(--track-display); }
+/* Hero headline text (its artwork replaces it visually; this is the no-script and image-failure fallback) keeps display tracking. */
+.hero--atlas h1 { letter-spacing: var(--ls-display); }
 
-/* Readability floor for the smallest type (28 October 2026). Uppercase labels never drop below 11.5 px, and the tagline
-   under the header logo is set at a legible size with a touch of tracking so it still fits the lockup's width. */
-.footer-column h2 { font-size: .75rem; letter-spacing: .16em; }
-@media (min-width: 1000px) { .brand-tagline { font-size: 10.5px; letter-spacing: .01em; } }
+/* Hero tagline above the headline: sentence case, bold, small. */
+.hero--atlas .hero-tagline { font-size: var(--fs-small); font-weight: var(--fw-bold); letter-spacing: .02em; text-transform: none; }
 
-/* Contrast (28 October 2026). Measured with a full-site audit of the pixels behind every text box:
-   - the dark gold used for labels and links on pale grounds is deepened so it holds at least 5:1 on every ivory/sand tone;
-   - the muted grey used for dates, notes and "(optional)" is lifted inside dark sections, where it fell to 3.4–4.2:1. */
-:root { --gold-ink: #6b4d16; }
-.sec--night, .sec--dusk, .sec--lagoon, .page-hero, .site-footer, .on-dark, .glance-card, .escapes, .yacht, .window-seat, .enquiry-card, .menu { --mist-2: #aebbcc; }
-/* The yacht glance card casts a deep shadow; keep the next label clear of it. */
-.cruise-page .glance-card { margin-bottom: clamp(48px, 6vw, 72px); box-shadow: 0 22px 44px rgb(5 12 26 / .2); }
+/* Measure: no paragraph runs past about 72 characters, even in a single wide column on a tablet. */
+.lead, .page-hero .lead, .sec-head > p:not(.eyebrow), .statement p { max-width: var(--measure-lead); }
+.prose, .faq details > p, .process p, .acts p, .frame-list dd, .exp p, .dest p, .cover-copy p, .practical p, .contact-partners p,
+.contact-card p, .concept-body p, .card-body p, .travel-update p, .planner-note { max-width: var(--measure-body); }
+.article-body, .legal { max-width: var(--measure-long); }
+.note, .glance-note, .price-note, .form-note, .travel-desk-note, .steps-foot, .local-notice, .form-footnote { max-width: var(--measure-long); }
 
-/* Hero sentence over the lagoon and villas (owner report, 28 October 2026): dark type on a photograph needs its own backing at every
-   width, not only on desktop. A soft pale scrim and a light halo keep it readable wherever the villas, surf or reef fall behind it. */
-.hero-text { position: relative; isolation: isolate; color: #0b2536; font-weight: 400; text-shadow: 0 0 10px rgb(250 249 245 / .95), 0 0 3px rgb(250 249 245 / .9); }
+/* Reading rhythm: a heading binds to the paragraph it introduces (more space above than below). */
+.article-body > h2 { margin-top: .6em; }
+.article-body > h2 + p { margin-top: -.55em; }
+.legal h2 { margin: 2.2em 0 .45em; }
+.legal h2:first-child { margin-top: 0; }
+
+/* Titles of cards, panels and in-text subheads use the title voice (Sky Text Bold) whatever their heading level: MTN is for
+   section-level display only, so it never drops below the section-title size. */
+.contact-card h2, .contact-partners h2, .concept-body h2, .article-body > h2, .legal h2, .folio-topline h2, .planner legend,
+.form-thanks h3, .menu-nav strong, .faq summary h3, .tile strong, .article-margin p:not(.eyebrow) { font-family: var(--font-title); }
+
+/* Articles: the reading column is centred with its margin note, so the narrower measure does not leave a hole on the right. */
+.article-layout { grid-template-columns: minmax(0, 240px) minmax(0, var(--measure-long)); justify-content: center; }
+@media (max-width: 900px) { .article-layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* Hero sentence over the lagoon and villas (owner report, 28 October 2026): dark type on a photograph needs its own backing at
+   every width. A soft pale scrim and a light halo keep it readable wherever the villas, surf or reef fall behind it. */
+.hero-text { position: relative; isolation: isolate; color: #0b2536; text-shadow: 0 0 10px rgb(250 249 245 / .95), 0 0 3px rgb(250 249 245 / .9); }
 .hero-text::before {
   content: ''; position: absolute; z-index: -1; pointer-events: none; inset: -14px -22px -12px -18px; display: block;
   background: radial-gradient(ellipse 100% 100% at 38% 50%, rgb(250 249 245 / .9), rgb(250 249 245 / .74) 58%, rgb(250 249 245 / 0) 100%);
   filter: blur(7px);
 }
+
+/* Contrast (28 October 2026), measured against the pixels behind every text box:
+   - the dark gold used for labels and links on pale grounds holds at least 5:1 on every ivory and sand tone;
+   - the muted grey for dates, notes and "(optional)" is lifted inside dark sections, where it fell to 3.4 to 4.2:1. */
+:root { --gold-ink: #6b4d16; }
+.sec--night, .sec--dusk, .sec--lagoon, .page-hero, .site-footer, .on-dark, .glance-card, .escapes, .yacht, .window-seat, .enquiry-card, .menu { --mist-2: #aebbcc; }
+.cruise-page .glance-card { margin-bottom: clamp(48px, 6vw, 72px); box-shadow: 0 22px 44px rgb(5 12 26 / .2); }
+
+/* Logo lockup caption. It belongs to the logo, so it is sized from the lockup, not the page scale: about as wide as the wordmark
+   (10 px under the 112 px phone logo, 12 to 12.5 px under the wider desktop ones), on one line, with no link underline under it. */
+.brand-lockup-vector { container-type: inline-size; }
+.brand-tagline { font-size: 10px; font-size: clamp(10px, 8.9cqw, 12.5px); letter-spacing: .01em; white-space: nowrap; }
+
+/* Footer: compact reading size (the body size is too large for link lists). */
+.footer-brand p, .footer-links a, .footer-contact a { font-size: var(--fs-body-s); }
+.footer-brand p { line-height: var(--lh-body-s); }
+
+/* Footer credits for the licensed fonts and icons (CC BY 4.0 attribution). */
+.footer-licences { font-size: var(--fs-small); display: flex; flex-wrap: wrap; align-items: center; gap: 0 28px; padding-block: 0 26px; line-height: 1.5; color: var(--mist); }
+.footer-licences p { margin: 0; }
+.footer-licences a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--mist); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(236 215 168 / .4); }
+.footer-licences a:hover { color: var(--gold-soft); text-decoration-color: currentColor; }

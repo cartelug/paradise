@@ -14,7 +14,7 @@ import { path } from '../data/site';
   <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="journey-index-title" data-journey-library>
     <div class="wrap">
       <div class="collection-bar">
-        <h2 id="journey-index-title" style="font-size:clamp(1.75rem,1.3rem+1.8vw,2.75rem)">Six ways into the world.</h2>
+        <h2 id="journey-index-title">Six ways into the world.</h2>
         <div class="pills requires-js" role="group" aria-label="Filter journey concepts">
           {['All', 'Escape', 'Celebration', 'Family', 'Business'].map((reason, index) => <button type="button" class="pill" data-journey-filter={reason.toLowerCase()} aria-pressed={index === 0 ? 'true' : 'false'}>{reason}</button>)}
         </div>
