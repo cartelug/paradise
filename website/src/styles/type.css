@@ -94,3 +94,12 @@ p, li, dd { line-height: 1.66; }
 .sec--night, .sec--dusk, .sec--lagoon, .page-hero, .site-footer, .on-dark, .glance-card, .escapes, .yacht, .window-seat, .enquiry-card, .menu { --mist-2: #aebbcc; }
 /* The yacht glance card casts a deep shadow; keep the next label clear of it. */
 .cruise-page .glance-card { margin-bottom: clamp(48px, 6vw, 72px); box-shadow: 0 22px 44px rgb(5 12 26 / .2); }
+
+/* Hero sentence over the lagoon and villas (owner report, 28 October 2026): dark type on a photograph needs its own backing at every
+   width, not only on desktop. A soft pale scrim and a light halo keep it readable wherever the villas, surf or reef fall behind it. */
+.hero-text { position: relative; isolation: isolate; color: #0b2536; font-weight: 400; text-shadow: 0 0 10px rgb(250 249 245 / .95), 0 0 3px rgb(250 249 245 / .9); }
+.hero-text::before {
+  content: ''; position: absolute; z-index: -1; pointer-events: none; inset: -14px -22px -12px -18px; display: block;
+  background: radial-gradient(ellipse 100% 100% at 38% 50%, rgb(250 249 245 / .9), rgb(250 249 245 / .74) 58%, rgb(250 249 245 / 0) 100%);
+  filter: blur(7px);
+}
