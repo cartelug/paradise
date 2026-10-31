@@ -78,6 +78,7 @@ test('the mobile hero and coastal continuation use separate native portrait artw
       assert.ok(Math.abs(image.height - width * master.height / master.width) <= 1);
     }
   }
-  assert.match(html, /<source[^>]*media="\(max-width: 767px\)"[^>]*pardus-v34-mobile-hero-/);
+  // Since 31 October 2026 the phone hero is the five-photograph rotation (V42); the V34 portrait stays in the repository as history.
+  assert.match(html, /<source[^>]*type="image\/avif"[^>]*pardus-v42-mobile-hero-1-/);
   assert.match(html, /pardus-window-maldives-/);
 });

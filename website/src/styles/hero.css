@@ -20,6 +20,17 @@
 .hero-picture img { object-fit: contain; }
 .leopard-outline { position: absolute; inset: 0; pointer-events: none; }
 .leopard-box { position: absolute; left: var(--dl); top: var(--dt); width: var(--dw); height: var(--dh); visibility: hidden; }
+.hero-rotator, .hero-pause { display: none; }
+/* V42: the phone hero. Five portrait photographs stack in one box; exactly one is current, and the next one dissolves in
+   on top of it (hero-rotation.ts), so the picture underneath never dips. Its own stacking context keeps the slides below the copy. */
+.hero-rotator { position: absolute; inset: 0; z-index: 0; isolation: isolate; overflow: hidden; }
+.hero-slide { position: absolute; inset: 0; z-index: 0; opacity: 0; }
+.hero-slide[data-state='current'] { z-index: 1; opacity: 1; }
+.hero-slide[data-state='entering'] { z-index: 2; opacity: 1; animation: hero-slide-in var(--hero-fade, 1400ms) cubic-bezier(.45, .05, .35, 1) both; }
+.hero-slide-picture, .hero-slide-picture img { display: block; width: 100%; height: 100%; }
+.hero-slide-picture img { object-fit: cover; }
+.hero-slide .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
+@keyframes hero-slide-in { from { opacity: 0; } to { opacity: 1; } }
 .hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: clamp(156px, 11.4vw, 216px); width: 49%; max-width: 860px; }
 .hero--atlas .eyebrow { display: block; margin: 0 0 20px; color: #775e32; font-weight: 700; line-height: 1.4; text-transform: uppercase; }
 .hero--atlas .eyebrow::before { display: none; }
@@ -91,11 +102,37 @@
   .hero--atlas .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
   .hero--atlas .btn { min-width: 0; width: 100%; min-height: 48px; padding: 11px 10px; font-size: var(--fs-small); gap: 8px; }
   .hero--atlas .btn > .icon { width: 14px; height: 14px; }
-  /* The empty top 52% of the portrait sits behind the copy. Its animal begins
-     another 20vw below the copy, regardless of line wrapping or enlarged text. */
-  .hero-art { aspect-ratio: var(--hero-portrait-ratio); margin-top: -92vw; }
+  /* V42: the top 44% of each portrait photograph (sky, aircraft, horizon) sits behind the copy. Every animal begins at
+     53% or lower, about 17vw below the copy, regardless of line wrapping or enlarged text. A pale veil, strongest at the
+     top and gone by the buttons, keeps the navy lettering and sentence readable over any of the five skies. */
+  .hero-art { aspect-ratio: var(--hero-portrait-ratio); margin-top: -78vw; }
   .hero-art::before { height: 16%; background: #e9eae6; }
-  .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
+  .hero-picture, .leopard-outline { display: none; }
+  .hero-rotator { display: block; }
+  .hero-copy::before {
+    content: ''; position: absolute; z-index: -1; inset: 0 0 -34px; pointer-events: none;
+    background: linear-gradient(#e9eae6, rgb(233 234 230 / .96) 16%, rgb(233 234 230 / .76) 34%, rgb(233 234 230 / .58) 58%, rgb(233 234 230 / .32) 82%, rgb(233 234 230 / 0));
+  }
+  /* A soft pale cloud behind the sentence alone, so the veil above it can stay light enough for the sky to show. */
+  .hero-text { position: relative; isolation: isolate; }
+  .hero-text::before {
+    content: ''; position: absolute; z-index: -1; inset: -8px -12px; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 50%, rgb(244 241 233 / .82), rgb(244 241 233 / .66) 55%, transparent 100%);
+    filter: blur(8px);
+  }
+  .hero-pause {
+    position: absolute; z-index: 3; right: 14px; bottom: 21%; display: inline-grid; place-items: center;
+    width: 44px; height: 44px; padding: 0; border: 1px solid rgb(255 255 255 / .6); border-radius: 50%;
+    background: rgb(9 40 63 / .55); color: #fff; cursor: pointer; backdrop-filter: blur(6px);
+  }
+  .hero-pause .icon { width: 20px; height: 20px; }
+  .hero-pause .icon-play, html.motion-paused .hero-pause .icon-pause { display: none; }
+  html.motion-paused .hero-pause .icon-play { display: block; }
+  .hero-pause:focus-visible { outline: 2px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px #09283f; }
+  html:not(.js) .hero-pause { display: none; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .hero-pause { display: none; }
 }
 @media (min-width: 1000px) {
   .home[data-expanded-hero] .site-header { display: flex; gap: 20px; }

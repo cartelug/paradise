@@ -17,7 +17,7 @@ import { path, site } from '../data/site';
 import { offerFor, destinationFor } from '../data/offers';
 import { cruisePhoto } from '../data/cruises';
 import heroArtwork from '../data/photographic-coast-artwork.json';
-import illustrated from '../data/illustrated-home-artwork.json';
+import mobileHero from '../data/mobile-hero-rotation.json';
 import { destinationArt } from '../data/home-illustrations';
 const promises = [
   { art: 'personal-attention', title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
@@ -25,7 +25,10 @@ const promises = [
   { art: 'seamless-service', title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
 ];
 const asset = (name: string) => path(`images/${name}`);
-const heroSet = (scene: 'desktop' | 'mobile') => (scene === 'mobile' ? illustrated.backgrounds['mobile-hero'] : heroArtwork.desktop).widths.map(width => `${asset(`${scene === 'mobile' ? 'pardus-v34-mobile-hero' : 'pardus-coastal-desktop'}-${width}.avif`)} ${width}w`).join(', ');
+// Phones preload the first of the five rotating hero photographs; wider screens preload the single desktop artwork.
+const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
+  ? mobileHero.widths.map(width => `${asset(`${mobileHero.prefix}-1-${width}.avif`)} ${width}w`).join(', ')
+  : heroArtwork.desktop.widths.map(width => `${asset(`pardus-coastal-desktop-${width}.avif`)} ${width}w`).join(', ');
 ---
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image={`images/pardus-coastal-desktop-${heroArtwork.desktop.width}.webp`}>
   <Fragment slot="head">

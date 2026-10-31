@@ -1,5 +1,9 @@
 # Image sources
 
+## V42 phone hero rotation (31 October 2026)
+
+Five owner-supplied portrait photographs (illustrative AI travel composites) in `source-assets/v42-mobile-hero-rotation/`, exported by `scripts/prepare-mobile-hero-rotation.mjs` as `pardus-v42-mobile-hero-<n>-{480,768,941}.{webp,avif}` (never enlarged). They replace the single V34 phone portrait on phones only; the V34 files remain in the repository as history.
+
 ## V31 (20 October 2026)
 
 The homepage hero is the owner-approved, AI-generated leopard artwork in `source-assets/v31-hero/` (provenance and prompts in its `ARTWORK.md`): `pardus-hero-desktop-{960,1536}` and `pardus-hero-phone-{640,1024}`, WebP as supplied plus AVIF copies at the same sizes. The V25 to V30 hero images and layers are no longer used and were removed from `public/images` (their masters stay in `source-assets/`). New photography goes through `source-assets/v31-photography/credits.json` and `scripts/prepare-v31-photography.mjs`.

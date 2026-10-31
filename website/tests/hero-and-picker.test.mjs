@@ -42,17 +42,19 @@ test('the hero preloads only the artwork used by its responsive picture', async 
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   const hero = html.match(/<section class="hero hero--atlas"[\s\S]*?<\/section>/)?.[0];
   assert.ok(hero);
-  assert.equal((hero.match(/<picture/g) || []).length, 1);
+  // One wide picture for tablets and desktops, plus the five rotating phone photographs (V42).
+  assert.equal((hero.match(/<picture/g) || []).length, 6);
   assert.match(hero, /fetchpriority="high"/);
   assert.match(hero, /media="\(max-width: 767px\)"/);
+  assert.match(hero, /media="\(min-width: 768px\)"/);
   const preloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
   assert.equal(preloads.length, 2, 'one mutually exclusive preload for each art direction');
-  assert.match(preloads[0], /pardus-v34-mobile-hero-/);
+  assert.match(preloads[0], /pardus-v42-mobile-hero-1-/);
   assert.match(preloads[1], /pardus-coastal-desktop-/);
   assert.match(preloads[0], /max-width: 767px/);
   assert.match(preloads[1], /min-width: 768px/);
   assert.match(html, new RegExp('property="og:image" content="[^"]*pardus-coastal-desktop-' + metadata.desktop.width + '\\.webp'));
-  assert.doesNotMatch(hero, /pardus-hero-desktop|pardus-hero-phone/);
+  assert.doesNotMatch(hero, /pardus-hero-desktop|pardus-hero-phone|pardus-v34-mobile-hero/);
 });
 
 test('the selected headline, service sentence and both live actions are present', async () => {

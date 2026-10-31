@@ -4,22 +4,40 @@ import ArtHeading from './ArtHeading.astro';
 import HomeEmblem from './HomeEmblem.astro';
 import { path, site } from '../data/site';
 import artwork from '../data/photographic-coast-artwork.json';
-import illustrated from '../data/illustrated-home-artwork.json';
+import rotation from '../data/mobile-hero-rotation.json';
 
 const asset = (name: string) => path(`images/${name}`);
-const variants = { desktop: artwork.desktop, mobile: illustrated.backgrounds['mobile-hero'] };
-const imageSet = (scene: 'desktop' | 'mobile', ext: string) => variants[scene].widths.map(width => `${asset(`${scene === 'mobile' ? 'pardus-v34-mobile-hero' : 'pardus-coastal-desktop'}-${width}.${ext}`)} ${width}w`).join(', ');
+const imageSet = (ext: string) => artwork.desktop.widths.map(width => `${asset(`pardus-coastal-desktop-${width}.${ext}`)} ${width}w`).join(', ');
+const slideSet = (number: number, ext: string) => rotation.widths.map(width => `${asset(`${rotation.prefix}-${number}-${width}.${ext}`)} ${width}w`).join(', ');
+// A one-pixel placeholder. Each art direction resolves the other direction's picture to this, so a phone never
+// downloads the wide artwork and a desktop never downloads the five portrait photographs.
+const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 // The measured outline stays inside the picture, so QA can check the complete walking leopard.
 const outline = [
-  { part: 'tail', d: [63, 59, 72, 66.5], m: [11, 71.8, 33, 76.5] },
-  { part: 'body', d: [69, 44.8, 89, 66], m: [30, 63, 86, 77.5] },
-  { part: 'head', d: [87, 45, 92.5, 57], m: [82, 63, 92, 70.5] },
-  { part: 'paws', d: [68.5, 64, 91.5, 71.8], m: [26, 75.5, 90, 80] },
+  { part: 'tail', d: [63, 59, 72, 66.5] },
+  { part: 'body', d: [69, 44.8, 89, 66] },
+  { part: 'head', d: [87, 45, 92.5, 57] },
+  { part: 'paws', d: [68.5, 64, 91.5, 71.8] },
+];
+// Phones: five owner-supplied portrait photographs (V42) cross-fade behind the copy, about three seconds each.
+// The first is the still picture for no-JavaScript, reduced motion and Pause scene. Three of them hold a leopard; its
+// outline is measured in picture percentages (left, top, right, bottom) exactly like the desktop one. Order is the owner's.
+const slides = [
+  { alt: 'A leopard stands on a stone ledge at sunset, looking out over a turquoise bay, beside a navy suitcase and a leather travel bag, while an airliner climbs overhead. An illustrative travel composite.',
+    outline: [{ part: 'tail', m: [88, 72, 99.5, 80] }, { part: 'body', m: [68.5, 57, 92, 74] }, { part: 'head', m: [70, 53.4, 80.5, 60] }, { part: 'paws', m: [68, 70, 90, 80] }] },
+  { alt: 'A bright lounge opens onto an East African coast at sunset, with an elephant and a safari vehicle in the golden grass, a champagne suitcase and a navy travel bag on the marble floor, and an airliner climbing overhead. An illustrative travel composite.',
+    outline: [] },
+  { alt: 'A small safari aircraft waits on a red-earth airstrip beside a safari vehicle and elephants, above a golden-hour coast, with a navy suitcase and a leather travel bag in the foreground. An illustrative travel composite.',
+    outline: [] },
+  { alt: 'A safari vehicle loaded with luggage on a coastal track at sunset, a leopard resting on the rock beside it, a turquoise bay beyond and an airliner overhead. An illustrative travel composite.',
+    outline: [{ part: 'tail', m: [90, 70, 100, 78.5] }, { part: 'body', m: [70, 62, 100, 73] }, { part: 'head', m: [78, 58.5, 90, 65] }, { part: 'paws', m: [70.5, 65, 86, 71] }] },
+  { alt: 'A leopard walks across a rocky ledge above overwater villas and a turquoise lagoon, beside a champagne suitcase and a leather travel bag on a pale stone terrace, with an airliner overhead. An illustrative travel composite.',
+    outline: [{ part: 'tail', m: [55.5, 63, 65, 71] }, { part: 'body', m: [63, 58, 92, 69] }, { part: 'head', m: [89, 59, 97.5, 65.5] }, { part: 'paws', m: [63, 67.5, 94, 72.5] }] },
 ];
 const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t:${r[1]}%;--${prefix}w:${r[2] - r[0]}%;--${prefix}h:${r[3] - r[1]}%`;
 ---
 <section class="hero hero--atlas" aria-labelledby="hero-title" data-hero data-hero-life data-life="still">
-  <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${variants.desktop.width}/${variants.desktop.height};--hero-portrait-ratio:${variants.mobile.width}/${variants.mobile.height}`}>
+  <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${artwork.desktop.width}/${artwork.desktop.height};--hero-portrait-ratio:${rotation.width}/${rotation.height}`}>
     <div class="hero-copy" data-hero-copy>
       <p class="eyebrow hero-tagline"><HomeEmblem name="world" size={28} eager />{site.tagline}</p>
       <ArtHeading as="h1" id="hero-title" art="hero-lettering"><span class="line" style="--n:0"><span>Extraordinary</span></span>{' '}<span class="line" style="--n:1"><span>journeys.</span></span></ArtHeading>
@@ -31,15 +49,30 @@ const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t
     </div>
     <div class="hero-art" data-hero-art>
       <picture class="hero-picture">
-        <source media="(max-width: 767px)" type="image/avif" srcset={imageSet('mobile', 'avif')} sizes="100vw" width={variants.mobile.width} height={variants.mobile.height} />
-        <source media="(max-width: 767px)" type="image/webp" srcset={imageSet('mobile', 'webp')} sizes="100vw" width={variants.mobile.width} height={variants.mobile.height} />
-        <source type="image/avif" srcset={imageSet('desktop', 'avif')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} />
-        <img src={asset(`pardus-coastal-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('desktop', 'webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across a pale stone ledge above an Indian Ocean coast, with Dubai and East African savannah blending into the distance. An illustrative travel composite." fetchpriority="high" decoding="async" data-hero-image />
+        <source media="(max-width: 767px)" srcset={blank} />
+        <source type="image/avif" srcset={imageSet('avif')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} />
+        <img src={asset(`pardus-coastal-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across a pale stone ledge above an Indian Ocean coast, with Dubai and East African savannah blending into the distance. An illustrative travel composite." fetchpriority="high" decoding="async" data-hero-image />
       </picture>
-      <div class="leopard-outline" aria-hidden="true">
-        {outline.map(part => <span class="leopard-box" data-leopard-box={part.part} style={`${box(part.d, 'd')};${box(part.m, 'm')}`}></span>)}
+      <div class="hero-rotator" data-hero-rotator data-hold="3000" data-fade="1400">
+        {slides.map((slide, index) => (
+          <div class="hero-slide" data-hero-slide data-state={index === 0 ? 'current' : 'idle'} aria-hidden={index === 0 ? undefined : 'true'}>
+            <picture class="hero-slide-picture">
+              <source media="(min-width: 768px)" srcset={blank} />
+              <source type="image/avif" srcset={slideSet(index + 1, 'avif')} sizes="100vw" width={rotation.width} height={rotation.height} />
+              <img src={asset(`${rotation.prefix}-${index + 1}-${rotation.width}.webp`)} srcset={slideSet(index + 1, 'webp')} sizes="100vw" width={rotation.width} height={rotation.height} alt={slide.alt} decoding="async" {...(index === 0 ? { fetchpriority: 'high' } : { loading: 'lazy' })} />
+            </picture>
+            {slide.outline.map(part => <span class="leopard-box" data-leopard-box={part.part} aria-hidden="true" style={box(part.m, 'm')}></span>)}
+          </div>
+        ))}
       </div>
+      <div class="leopard-outline" aria-hidden="true">
+        {outline.map(part => <span class="leopard-box" data-leopard-box={part.part} style={box(part.d, 'd')}></span>)}
+      </div>
+      <button class="hero-pause" type="button" data-scene-motion aria-pressed="false" aria-label="Pause background animation">
+        <Icon name="pause" /><Icon name="play" /><span class="visually-hidden" data-scene-motion-label>Pause scene</span>
+      </button>
     </div>
   </div>
 </section>
 <script>import '../scripts/hero-reference';</script>
+<script>import '../scripts/hero-rotation';</script>

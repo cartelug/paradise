@@ -1,5 +1,9 @@
 # Pardus Luxury Escapes
 
+## Phone hero rotation — 31 October 2026
+
+On phones the first section now cross-fades five owner-supplied portrait photographs (a leopard on a sunset ledge, a lounge above an East African coast, a safari aircraft on an airstrip, a safari vehicle and resting leopard, and a leopard above overwater villas). Each is held for about three seconds and dissolves into the next over 1.4 seconds, driven by time alone; the first photograph is the still picture without JavaScript, with reduced motion and after the new Pause scene button. Tablets and desktops keep the single coastal artwork and never download the five. Sources, order, leopard outlines and behaviour: `website/source-assets/v42-mobile-hero-rotation/README.md`. Derivatives come from `website/scripts/prepare-mobile-hero-rotation.mjs`; the browser check is `PARDUS_QA_PHASES=rotation`.
+
 ## Isolated HD headlines and native content — 25 October 2026
 
 The hero now reads “Extraordinary journeys.” without the third line. Who We Are
