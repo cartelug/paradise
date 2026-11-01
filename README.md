@@ -1,8 +1,12 @@
 # Pardus Luxury Escapes
 
+## Zanzibar and Maldives pictures — 1 November 2026
+
+Zanzibar now shows the real Zanzibar photograph (the aerial resort, `zanzibar-v24`); the dhow-on-turquoise picture that used to stand in for Zanzibar is now the Maldives picture. The "Safari & Shore" journey uses the Amboseli elephant photograph so the homepage never repeats a picture. Details in `CLAUDE.md`.
+
 ## Animation pack and homepage polish — 1 November 2026
 
-A documented motion layer (`website/src/styles/animations.css`, `website/src/scripts/animations.ts`): two new reveal styles (`zoom`, `blur`), drawing eyebrow rules, a gold scroll-progress hairline, a soft press ripple on buttons and choice tiles, a slow drift on the phone hero photograph, and a hover lift for promise emblems. Everything is switched off by reduced motion, nothing ever animates a price, and nothing loops. The same pass fixed the header logo link's accessible name and gave four inline links 44 px tap targets; axe-core now finds no violations on the homepage. Browser check: `PARDUS_QA_PHASES=animations`.
+A documented motion layer (`website/src/styles/animations.css`, `website/src/scripts/animations.ts`): two new reveal styles (`zoom`, `blur`), drawing eyebrow rules, a soft press ripple on buttons and choice tiles, a slow drift on the phone hero photograph, and a hover lift for promise emblems. Everything is switched off by reduced motion, nothing ever animates a price, and nothing loops. The same pass fixed the header logo link's accessible name and gave four inline links 44 px tap targets; axe-core now finds no violations on the homepage. Browser check: `PARDUS_QA_PHASES=animations`.
 
 ## Phone hero rotation — 31 October 2026
 

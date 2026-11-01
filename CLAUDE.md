@@ -1,10 +1,13 @@
+# Zanzibar and Maldives pictures — 1 November 2026
+
+The owner asked that Zanzibar use the real Zanzibar photograph and that the dhow-on-turquoise picture, which reads as the Maldives, become the Maldives picture. In `scripts/prepare-travel-photographs.mjs` the `zanzibar.png` master (asset `zanzibar-v38`) now fills the **`maldives`** slot (destination, destination page and the Maldives journal article), and **no AI master fills the `zanzibar` slot**, so `photo()` falls back to the licensed Unsplash photograph `zanzibar-v24` (credit in `source-assets/v24-photography/credits.json`; alt text names no resort). The old pier master `maldives.png` is retired: it keeps its registry entry and files but fills no slot. The `safari-shore` journey, which used `zanzibar-v24`, now uses `africa-v24` (a real elephant-herd photograph from Amboseli), because the homepage may never show the same picture twice in its destination and journey rows (`tests/travel-photographs.test.mjs`). The homepage Window Seat keeps its own Maldives portrait (`pardus-window-maldives`).
+
 # Animation pack and homepage polish — 1 November 2026
 
 The owner asked for the homepage to be perfected and for an animations pack. `website/src/styles/animations.css` and `website/src/scripts/animations.ts` extend `motion.css` and `hero.css`; they never replace them. Everything new sits inside `prefers-reduced-motion: no-preference` (or is hidden for print and forced colours), and `tests/animations-pack.test.mjs` plus `browser-smoke.py` phase `animations` enforce it.
 
-- **Tokens** `--anim-quick/base/slow/ease`; **reveal styles** `data-reveal="zoom"` and `"blur"` (joining fade, left, right, clip) on the existing observer; **eyebrow rules** draw in; a **gold scroll-progress hairline** on the homepage from a CSS scroll timeline; a soft **press ripple** on `.btn` and choice tiles (a tile's real hit target is its invisible checkbox, so the script finds the tile through its label); promise emblems lift on hover; the **phone hero photograph drifts** 1.00 to 1.045 over about six seconds while shown.
+- **Tokens** `--anim-quick/base/slow/ease`; **reveal styles** `data-reveal="zoom"` and `"blur"` (joining fade, left, right, clip) on the existing observer; **eyebrow rules** draw in; a soft **press ripple** on `.btn` and choice tiles (a tile's real hit target is its invisible checkbox, so the script finds the tile through its label); promise emblems lift on hover; the **phone hero photograph drifts** 1.00 to 1.045 over about six seconds while shown. There is deliberately **no second progress bar**: the header already carries the page-progress line (`.page-progress` in `chrome.css`).
 - **Never animate** a price, a fact or business data, and never a leopard in response to the visitor. No flashing, nothing loops, and content is complete without script.
-- **Minifier trap.** The scroll-progress rule uses animation longhands on purpose: the build folds `animation-timeline` into the `animation` shorthand, which some browsers drop whole. Do not rewrite it as a shorthand.
 - **Accessibility fixes.** Header and menu logo links are named `Pardus Luxury Escapes, <tagline>. Home`, so the visible caption is part of the accessible name (WCAG 2.5.3). Text links that sit inside a line (journey titles, “Read at …” source links, the privacy note) reach 44 px with padding cancelled by an equal negative margin in `refine.css`. An axe-core run (WCAG 2.0 to 2.2 A/AA plus best practice) now reports no violations on the homepage at 390 and 1440 px.
 
 # Phone hero rotation — 31 October 2026
@@ -66,7 +69,7 @@ writes native 16:10 AVIF/WebP at 640/960/1280/native width (never enlarged, no 1
 `<name>-v38-<width>` and generates `src/data/travel-photographs.ts` (slots, alt text from the manifest,
 focal point). `photo()` consults it before the V31 and V24 registries; `Picture.astro` reads the widths,
 intrinsic size and focal point, and `largestImage()` gives social previews the right file. Slot map:
-maldives, seychelles, dubai, europe, zanzibar, yacht, corporate (executive), `safari-uganda` +
+maldives (the dhow master, since 1 Nov 2026; the old pier master is retired), seychelles, dubai, europe, yacht, corporate (executive), `safari-uganda` +
 `safari-family` + `journal-safari` (East Africa), `reset` + `hero-maldives` (Private Island Reset
 journey), `celebration` (Celebration in Two Acts journey). The pictures are illustrative AI
 photographs: alt text describes the scene and never names a resort, hotel or yacht. The PNG

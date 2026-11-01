@@ -4,9 +4,7 @@ export type TravelPhotograph = { asset: string; slots: string[]; alt: string; wi
 export const travelPhotographs: TravelPhotograph[] = [
   {
     "asset": "maldives-v38",
-    "slots": [
-      "maldives"
-    ],
+    "slots": [],
     "alt": "A weathered timber jetty leads toward thatched overwater villas above calm turquoise shallows at first light.",
     "widths": [
       640,
@@ -92,7 +90,7 @@ export const travelPhotographs: TravelPhotograph[] = [
   {
     "asset": "zanzibar-v38",
     "slots": [
-      "zanzibar"
+      "maldives"
     ],
     "alt": "A white-sailed dhow drifts past a pale sand spit through shallow turquoise lagoon water.",
     "widths": [

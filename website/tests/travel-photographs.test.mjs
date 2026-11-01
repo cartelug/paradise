@@ -18,7 +18,8 @@ test('the ten original PNG masters are intact and each has a prepared entry with
     assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256, `${file.filename} changed`);
     const entry = entries.find(item => item.asset === `${file.filename.replace('.png', '')}-v38`);
     assert.ok(entry, `${file.filename} has no registry entry`);
-    assert.ok(entry.alt.length > 30 && entry.slots.length >= 1);
+    // A retired master (the Maldives pier, since 1 Nov 2026) keeps its entry and files but fills no slot.
+    assert.ok(entry.alt.length > 30 && Array.isArray(entry.slots));
     assert.equal(entry.width, file.width);
   }
 });
@@ -39,28 +40,28 @@ test('responsive AVIF and WebP exist at native shape, never enlarged, with no 19
 
 test('the exported pages use the matching photograph in each destination and experience', async () => {
   const expect = {
-    'destination-maldives.html': 'maldives-v38', 'destination-seychelles.html': 'seychelles-v38', 'destination-dubai.html': 'dubai-v38',
-    'destination-africa.html': 'east-africa-v38', 'destination-europe.html': 'europe-v38', 'destination-zanzibar.html': 'zanzibar-v38',
+    'destination-maldives.html': 'zanzibar-v38', 'destination-seychelles.html': 'seychelles-v38', 'destination-dubai.html': 'dubai-v38',
+    'destination-africa.html': 'east-africa-v38', 'destination-europe.html': 'europe-v38', 'destination-zanzibar.html': 'zanzibar-v24',
     'cruises.html': 'yacht-v38', 'corporate.html': 'executive-v38', 'journey-executive-arrivals.html': 'executive-v38',
     'journey-private-island-reset.html': 'reset-v38', 'journey-celebration-in-two-acts.html': 'celebration-v38',
     'journey-family-in-the-wild.html': 'east-africa-v38', 'index.html': 'ocean-cruise-v40',
   };
   for (const [name, asset] of Object.entries(expect)) assert.match(await page(name), new RegExp(`${asset}-(640|960|1280|1586)`), `${name} should use ${asset}`);
   const home = await page('index.html');
-  for (const asset of ['pardus-window-maldives', 'east-africa-v38', 'europe-v38', 'zanzibar-v38', 'reset-v38', 'celebration-v38']) assert.match(home, new RegExp(asset));
+  for (const asset of ['pardus-window-maldives', 'east-africa-v38', 'europe-v38', 'zanzibar-v24', 'africa-v24', 'reset-v38', 'celebration-v38']) assert.match(home, new RegExp(asset));
 });
 
 test('V38 pictures keep intrinsic dimensions, lazy loading, a focal point and non-empty alt on content images', async () => {
   const html = await page('destination-maldives.html');
-  const imgs = [...html.matchAll(/<img[^>]*maldives-v38[^>]*>/g)].map(match => match[0]);
+  const imgs = [...html.matchAll(/<img[^>]*zanzibar-v38[^>]*>/g)].map(match => match[0]);
   assert.ok(imgs.length >= 1);
   for (const tag of imgs) {
     assert.match(tag, /width="1280"/); assert.match(tag, /height="801"/); assert.match(tag, /object-position:/);
     assert.match(tag, /alt="[^"]{20,}"/);
   }
-  const srcsets = [...html.matchAll(/srcset="[^"]*maldives-v38[^"]*"/g)].map(match => match[0]);
+  const srcsets = [...html.matchAll(/srcset="[^"]*zanzibar-v38[^"]*"/g)].map(match => match[0]);
   assert.ok(srcsets.every(value => !/1920w/.test(value) && /1586w/.test(value)));
-  assert.match(await page('index.html'), /<img[^>]*(?:east-africa|europe|zanzibar)-v38-1280[^>]*loading="lazy"/);
+  assert.match(await page('index.html'), /<img[^>]*(?:east-africa|europe)-v38-1280[^>]*loading="lazy"/);
 });
 
 test('the homepage never shows the same picture twice in its destination and journey rows', async () => {
@@ -70,4 +71,17 @@ test('the homepage never shows the same picture twice in its destination and jou
   const signature = journeys.slice(0, 3).map(item => item.image);
   const all = [...more, ...signature];
   assert.equal(new Set(all).size, all.length, `repeated picture on the homepage: ${all.join(', ')}`);
+});
+
+test('Zanzibar shows the real Zanzibar photograph and the Maldives show the dhow-on-turquoise picture (1 Nov 2026)', async () => {
+  const slotsOf = asset => entries.find(item => item.asset === asset).slots;
+  assert.deepEqual(slotsOf('zanzibar-v38'), ['maldives'], 'the picture that reads as the Maldives fills the maldives slot');
+  assert.deepEqual(slotsOf('maldives-v38'), [], 'the old pier master is retired');
+  assert.ok(entries.every(item => !item.slots.includes('zanzibar')), 'no AI picture may take the zanzibar slot: it falls back to the real photograph');
+  const { destinations } = await import('../src/data/destinations.ts');
+  const { journeys } = await import('../src/data/journeys.ts');
+  assert.equal(destinations.find(item => item.slug === 'zanzibar').image, 'zanzibar-v24');
+  assert.equal(destinations.find(item => item.slug === 'maldives').image, 'zanzibar-v38');
+  assert.doesNotMatch(destinations.find(item => item.slug === 'maldives').alt, /Zanzibar/i);
+  assert.equal(journeys.find(item => item.slug === 'safari-and-shore')?.image, 'africa-v24', 'the journey gives the real Zanzibar photograph back to Zanzibar');
 });

@@ -497,7 +497,7 @@ def hero_rotation(browser):
 
 
 def animation_pack(browser):
-    """The animation pack of 1 November 2026: a scroll-progress hairline, reveal styles that always end fully visible, a ripple
+    """The animation pack of 1 November 2026: reveal styles that always end fully visible, drawing eyebrow rules, a ripple
     on a press that removes itself, a slow hero drift and 44 px text links; all of it switched off by reduced motion."""
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
@@ -505,15 +505,7 @@ def animation_pack(browser):
     page.on("pageerror", lambda error: errors.append(str(error)))
     navigate(page)
     page.evaluate("document.documentElement.style.scrollBehavior = 'auto'")
-    progress = "() => new DOMMatrix(getComputedStyle(document.body, '::after').transform).a"
-    assert page.evaluate(progress) == 0
     span = page.evaluate("document.documentElement.scrollHeight - innerHeight")
-    page.evaluate(f"window.scrollTo(0, {int(span * 0.5)})")
-    page.wait_for_timeout(500)
-    assert 0.4 < page.evaluate(progress) < 0.6, page.evaluate(progress)  # the hairline follows the scroll
-    page.evaluate(f"window.scrollTo(0, {span})")
-    page.wait_for_timeout(500)
-    assert page.evaluate(progress) > 0.97
     # Walk the page so every reveal fires, then each zoom/blur target must have settled completely.
     for y in range(0, span, 450):
         page.evaluate(f"window.scrollTo(0, {y})")
@@ -547,11 +539,10 @@ def animation_pack(browser):
     assert not errors, errors
     context.close()
 
-    # Reduced motion: no hairline, no drift, no ripple, rules and reveals simply there.
+    # Reduced motion: no drift, no ripple, rules and reveals simply there.
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True, reduced_motion="reduce")
     page = context.new_page()
     navigate(page)
-    assert page.evaluate("getComputedStyle(document.body, '::after').content") == "none"
     assert page.evaluate("[...document.querySelectorAll('.hero-slide')].flatMap(e => e.getAnimations()).length") == 0
     page.evaluate("document.querySelectorAll('.pick-face')[2].scrollIntoView({block: 'center'})")
     page.wait_for_timeout(500)
@@ -560,7 +551,7 @@ def animation_pack(browser):
     page.wait_for_timeout(150)
     assert page.evaluate("document.querySelectorAll('.anim-ripple').length") == 0
     context.close()
-    print("PASS animation pack: the progress hairline follows the scroll, zoom/blur reveals and eyebrow rules settle fully, a press ripples and cleans up, the hero drifts slowly, inline links give 44 px targets, and reduced motion switches all of it off", flush=True)
+    print("PASS animation pack: zoom/blur reveals and eyebrow rules settle fully, a press ripples and cleans up, the hero drifts slowly, inline links give 44 px targets, and reduced motion switches all of it off", flush=True)
 
 
 def assert_hero(page, width):

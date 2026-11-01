@@ -30,7 +30,7 @@ export const journeys: JourneyConcept[] = [
     eyebrow: 'East Africa / Zanzibar', title: 'A wider world, then a quieter one.',
     description: 'A considered safari chapter followed by time on the Indian Ocean, with the change of pace designed into the journey.',
     // Its own slot: the Zanzibar destination card shows the new V38 photograph, so this journey keeps the earlier, different Zanzibar picture.
-    ...photo('safari-shore', { image: 'zanzibar-v24', alt: 'A palm-lined resort and pale sandy shoreline beside the ocean in Zanzibar' }), caption: 'The wild, followed by the water',
+    ...photo('safari-shore', { image: 'africa-v24', alt: 'An elephant family on the open plains of Amboseli National Park, Kenya' }), caption: 'The wild, followed by the water',
     duration: 'Suggested rhythm / 10–14 nights', destinations: ['East Africa', 'Zanzibar'], place: 'Wild', pace: 'Balanced', reason: 'Escape',
     idealFor: ['First or returning safari travellers', 'Couples and celebrations', 'Travellers who value contrast'],
     rhythm: ['Arrive without rushing into the itinerary', 'Two distinct safari settings rather than constant movement', 'A final coastal chapter with genuinely open time'],

@@ -4,7 +4,6 @@
    - Two more reveal styles for the existing [data-reveal] observer in ui.ts: "zoom" (settles from 94%) and "blur"
      (clears from a soft blur). The existing fade, left, right and clip styles are unchanged.
    - Eyebrow rules draw themselves in when their section arrives.
-   - Home only: a gold scroll-progress hairline, from a CSS scroll timeline (nothing is shown where unsupported).
    - Promise emblems lift on hover, like the destination and picker emblems already do.
    - Phone hero: the photograph on screen drifts very slowly (1.00 to 1.045) while it is shown (the slides are in hero.css).
    - A soft ripple on buttons and choice tiles when they are pressed (animations.ts).
@@ -33,17 +32,5 @@
   .pick-face { overflow: hidden; }
 }
 
-/* Scroll progress on the homepage: scaleX follows the page scroll, with no script. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    body.home::after {
-      content: ''; position: fixed; inset: 0 0 auto; z-index: 101; height: 3px; pointer-events: none;
-      background: linear-gradient(90deg, #d9bc82, #8b6b32); transform-origin: 0 50%; transform: scaleX(0);
-      /* Longhands on purpose: the minifier folds a timeline into the animation shorthand, which some browsers reject whole. */
-      animation-name: anim-progress; animation-duration: 1ms; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: scroll(root block);
-    }
-  }
-}
 @keyframes anim-ripple { to { transform: scale(1); opacity: 0; } }
-@keyframes anim-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media print, (forced-colors: active) { body.home::after, .anim-ripple { display: none; } }
+@media print, (forced-colors: active) { .anim-ripple { display: none; } }

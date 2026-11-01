@@ -33,13 +33,9 @@ test('every new effect is inside prefers-reduced-motion: no-preference or is a p
   assert.doesNotMatch(body, /infinite/, 'nothing in the pack loops');
 });
 
-test('the scroll-progress animation is written as longhands so the minifier cannot fold the timeline into the shorthand', async () => {
-  assert.match(css, /animation-name: anim-progress; animation-duration: 1ms;[\s\S]*?animation-timeline: scroll\(root block\)/);
-  const files = (await readdir(resolve(repo, 'static'))).filter(name => name.endsWith('.css'));
-  const built = (await Promise.all(files.map(name => readFile(resolve(repo, 'static', name), 'utf8')))).join('\n');
-  assert.match(built, /animation-name:anim-progress/);
-  assert.match(built, /animation-timeline:scroll\(root\)/);
-  assert.doesNotMatch(built, /animation:[^;}]*anim-progress/, 'a shorthand with a timeline is dropped whole by some browsers');
+test('the pack adds no second progress bar: the header already carries the page-progress line', async () => {
+  assert.doesNotMatch(css, /progress|animation-timeline|scroll\(/, 'the header page-progress line in chrome.css is the only one');
+  assert.match(await read('src/styles/chrome.css'), /\.page-progress/);
 });
 
 test('the new reveal styles are used on the homepage and never on a price or a leopard', async () => {
