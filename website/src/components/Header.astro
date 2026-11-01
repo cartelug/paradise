@@ -22,7 +22,7 @@ const more = [
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <a href={path()} class="brand-link" aria-label="Pardus Luxury Escapes home"><Brand vector light={!home} />{home && <span class="window-seat-header-brand"><Brand vector light /></span>}</a>
+  <a href={path()} class="brand-link" aria-label={`Pardus Luxury Escapes, ${site.tagline}. Home`}><Brand vector light={!home} />{home && <span class="window-seat-header-brand"><Brand vector light /></span>}</a>
   <nav class="desktop-nav" aria-label="Main navigation">
     {navigation.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
@@ -35,7 +35,7 @@ const more = [
 </header>
 <dialog id="mobile-menu" class="menu" aria-label="Menu">
   <div class="menu-panel">
-    <div class="menu-top"><a class="brand-link" href={path()} aria-label="Pardus Luxury Escapes home"><Brand vector light /></a><button type="button" class="menu-close" aria-label="Close menu" autofocus><Icon name="close" /></button></div>
+    <div class="menu-top"><a class="brand-link" href={path()} aria-label={`Pardus Luxury Escapes, ${site.tagline}. Home`}><Brand vector light /></a><button type="button" class="menu-close" aria-label="Close menu" autofocus><Icon name="close" /></button></div>
     <p class="menu-kicker" style="--i:0">Where to?</p>
     <nav class="menu-nav" aria-label="Mobile navigation">
       {primary.map((item, i) => <a style={`--i:${i + 1}`} href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><span class="badge"><Icon name={item.icon} /></span><span><strong>{item.label}</strong><small>{item.note}</small></span><Icon name="chevron-right" /></a>)}

@@ -54,7 +54,7 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
       <div class="services-intro">
         <p class="eyebrow" data-reveal>What we arrange</p>
         <h2 id="arrange-title" data-split>You choose where. <em>We arrange the rest.</em></h2>
-        <p class="lead" data-reveal>Flights, stays, transfers, visas, cruises and more. Tap what you want and we bring it together in one clear proposal.</p>
+        <p class="lead" data-reveal="blur">Flights, stays, transfers, visas, cruises and more. Tap what you want and we bring it together in one clear proposal.</p>
         <ul class="services-points" data-reveal>
           <li><Icon name="chat" /><span><strong>One conversation</strong>for the whole trip</span></li>
           <li><Icon name="shield" /><span><strong>Price and inclusions</strong>before you decide</span></li>
@@ -99,7 +99,7 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
   <section class="sec sec--night blend-top" style="--blend:#ebe2cf" aria-labelledby="why-title">
     <div class="wrap">
       <div class="promise-head"><h2 id="why-title" data-split>Every detail, <em>considered.</em></h2><Brand mark light /></div>
-      <div class="promises" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><HomeEmblem name={item.art} size={88} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+      <div class="promises" data-stagger="130">{promises.map(item => <article class="promise" data-reveal="zoom"><HomeEmblem name={item.art} size={88} /><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
     </div>
     <div class="wrap booking" id="how-booking-works">
       <div class="sec-head"><div><p class="eyebrow" data-reveal>How booking works</p><h2 id="booking-title" data-split>Four steps. <em>One clear plan.</em></h2></div><p data-reveal>From your first message to the journey itself, with the terms in front of you before you commit.</p></div>
@@ -120,10 +120,10 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
         <HomeEmblem name="travel-journal" size={112} />
         <p class="eyebrow" data-reveal>Plan your escape</p>
         <h2 id="enquire-title" data-split>Tell us where. <em>We’ll take it from here.</em></h2>
-        <p class="lead" data-reveal>A destination, your dates and a little about your plans. That is all we need to start.</p>
+        <p class="lead" data-reveal="blur">A destination, your dates and a little about your plans. That is all we need to start.</p>
         <a class="link" href={path('contact.html')} data-reveal>Contact Pardus <Icon name="arrow-right" /></a>
       </div>
-      <div class="enquiry-card glass" data-reveal><SimpleEnquiry /></div>
+      <div class="enquiry-card glass" data-reveal="zoom"><SimpleEnquiry /></div>
     </div>
   </section>
   <StickyCta />

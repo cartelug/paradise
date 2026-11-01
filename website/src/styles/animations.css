@@ -1,0 +1,49 @@
+/* PARDUS animation pack, 1 November 2026. It extends motion.css and hero.css and never replaces them.
+   The pack, in one place:
+   - Tokens: --anim-quick, --anim-base, --anim-slow and --anim-ease, for any new motion.
+   - Two more reveal styles for the existing [data-reveal] observer in ui.ts: "zoom" (settles from 94%) and "blur"
+     (clears from a soft blur). The existing fade, left, right and clip styles are unchanged.
+   - Eyebrow rules draw themselves in when their section arrives.
+   - Home only: a gold scroll-progress hairline, from a CSS scroll timeline (nothing is shown where unsupported).
+   - Promise emblems lift on hover, like the destination and picker emblems already do.
+   - Phone hero: the photograph on screen drifts very slowly (1.00 to 1.045) while it is shown (the slides are in hero.css).
+   - A soft ripple on buttons and choice tiles when they are pressed (animations.ts).
+   Rules: content is complete without script; everything below is inside prefers-reduced-motion: no-preference;
+   nothing here ever animates a price, a fact or a leopard in response to the visitor; no flashing, no looping. */
+:root { --anim-quick: .22s; --anim-base: .6s; --anim-slow: 1.1s; --anim-ease: var(--ease); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Reveal styles. Same specificity as the base rules in motion.css, and loaded after it, so they win. */
+  html.motion-ready [data-reveal='zoom']:not(.is-in) { transform: scale(.94); }
+  html.motion-ready [data-reveal='blur']:not(.is-in) { transform: translate3d(0, 18px, 0); filter: blur(10px); }
+  html.motion-ready [data-reveal='blur'].is-in { transition: opacity .9s var(--anim-ease) var(--d, 0ms), transform 1.1s var(--anim-ease) var(--d, 0ms), filter 1s var(--anim-ease) var(--d, 0ms); }
+
+  /* The short rule before an eyebrow draws left to right once the eyebrow is revealed. */
+  html.motion-ready .eyebrow[data-reveal]::before { transform: scaleX(0); transform-origin: left center; transition: transform var(--anim-slow) var(--anim-ease) calc(var(--d, 0ms) + .25s); }
+  html.motion-ready .eyebrow[data-reveal].is-in::before { transform: scaleX(1); }
+
+  /* Promise emblems lift a little on hover, using the individual transform properties so the arrival animation is untouched. */
+  @media (hover: hover) {
+    .home .promise > .travel-emblem { transition: translate var(--anim-base) var(--anim-ease), rotate var(--anim-base) var(--anim-ease); }
+    .home .promise:hover > .travel-emblem { translate: 0 -4px; rotate: -3deg; }
+  }
+
+  /* Press feedback: a soft circle grows from the touch point and fades (see animations.ts). */
+  .anim-ripple { position: absolute; z-index: 0; left: var(--x); top: var(--y); width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border-radius: 50%; background: currentColor; opacity: .2; pointer-events: none; transform: scale(0); animation: anim-ripple .7s var(--anim-ease) forwards; }
+  .pick-face { overflow: hidden; }
+}
+
+/* Scroll progress on the homepage: scaleX follows the page scroll, with no script. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    body.home::after {
+      content: ''; position: fixed; inset: 0 0 auto; z-index: 101; height: 3px; pointer-events: none;
+      background: linear-gradient(90deg, #d9bc82, #8b6b32); transform-origin: 0 50%; transform: scaleX(0);
+      /* Longhands on purpose: the minifier folds a timeline into the animation shorthand, which some browsers reject whole. */
+      animation-name: anim-progress; animation-duration: 1ms; animation-timing-function: linear; animation-fill-mode: both; animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes anim-ripple { to { transform: scale(1); opacity: 0; } }
+@keyframes anim-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media print, (forced-colors: active) { body.home::after, .anim-ripple { display: none; } }

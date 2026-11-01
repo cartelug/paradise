@@ -27,6 +27,15 @@
 .hero-slide { position: absolute; inset: 0; z-index: 0; opacity: 0; }
 .hero-slide[data-state='current'] { z-index: 1; opacity: 1; }
 .hero-slide[data-state='entering'] { z-index: 2; opacity: 1; animation: hero-slide-in var(--hero-fade, 1400ms) cubic-bezier(.45, .05, .35, 1) both; }
+/* The photograph on screen drifts very slowly (1.00 to 1.045, about six seconds) once the opening has released the page.
+   It is a plain scale of the whole picture, never a reaction to the visitor, and it stays out of reduced motion entirely. */
+@media (prefers-reduced-motion: no-preference) {
+  html.is-ready .hero-slide[data-state='current'] { animation: hero-slide-drift 6s linear both; }
+  html.is-ready .hero-slide[data-state='entering'] { animation: hero-slide-drift 6s linear both, hero-slide-in var(--hero-fade, 1400ms) cubic-bezier(.45, .05, .35, 1) both; }
+  html.motion-paused .hero-slide[data-state='current'] { animation-play-state: paused; }
+  html.motion-paused .hero-slide[data-state='entering'] { animation-play-state: paused, running; }
+}
+@keyframes hero-slide-drift { from { transform: scale(1); } to { transform: scale(1.045); } }
 .hero-slide-picture, .hero-slide-picture img { display: block; width: 100%; height: 100%; }
 .hero-slide-picture img { object-fit: cover; }
 .hero-slide .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }

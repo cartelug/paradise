@@ -1,3 +1,12 @@
+# Animation pack and homepage polish — 1 November 2026
+
+The owner asked for the homepage to be perfected and for an animations pack. `website/src/styles/animations.css` and `website/src/scripts/animations.ts` extend `motion.css` and `hero.css`; they never replace them. Everything new sits inside `prefers-reduced-motion: no-preference` (or is hidden for print and forced colours), and `tests/animations-pack.test.mjs` plus `browser-smoke.py` phase `animations` enforce it.
+
+- **Tokens** `--anim-quick/base/slow/ease`; **reveal styles** `data-reveal="zoom"` and `"blur"` (joining fade, left, right, clip) on the existing observer; **eyebrow rules** draw in; a **gold scroll-progress hairline** on the homepage from a CSS scroll timeline; a soft **press ripple** on `.btn` and choice tiles (a tile's real hit target is its invisible checkbox, so the script finds the tile through its label); promise emblems lift on hover; the **phone hero photograph drifts** 1.00 to 1.045 over about six seconds while shown.
+- **Never animate** a price, a fact or business data, and never a leopard in response to the visitor. No flashing, nothing loops, and content is complete without script.
+- **Minifier trap.** The scroll-progress rule uses animation longhands on purpose: the build folds `animation-timeline` into the `animation` shorthand, which some browsers drop whole. Do not rewrite it as a shorthand.
+- **Accessibility fixes.** Header and menu logo links are named `Pardus Luxury Escapes, <tagline>. Home`, so the visible caption is part of the accessible name (WCAG 2.5.3). Text links that sit inside a line (journey titles, “Read at …” source links, the privacy note) reach 44 px with padding cancelled by an equal negative margin in `refine.css`. An axe-core run (WCAG 2.0 to 2.2 A/AA plus best practice) now reports no violations on the homepage at 390 and 1440 px.
+
 # Phone hero rotation — 31 October 2026
 
 The owner supplied five new portrait photographs for the phone hero (Section 1) and asked that they fade naturally into one another, about three seconds each. They are `website/source-assets/v42-mobile-hero-rotation/hero-1..5.webp` (provenance, order, leopard outlines and behaviour in its `README.md`), exported by `scripts/prepare-mobile-hero-rotation.mjs` as `pardus-v42-mobile-hero-<n>-<width>`. This **supersedes the single V34 phone portrait** and, **on phones only (max-width 767px)**, the “one still picture” rule for the hero. Tablets and desktops keep the single V33 artwork and never download these pictures.

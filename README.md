@@ -1,5 +1,9 @@
 # Pardus Luxury Escapes
 
+## Animation pack and homepage polish — 1 November 2026
+
+A documented motion layer (`website/src/styles/animations.css`, `website/src/scripts/animations.ts`): two new reveal styles (`zoom`, `blur`), drawing eyebrow rules, a gold scroll-progress hairline, a soft press ripple on buttons and choice tiles, a slow drift on the phone hero photograph, and a hover lift for promise emblems. Everything is switched off by reduced motion, nothing ever animates a price, and nothing loops. The same pass fixed the header logo link's accessible name and gave four inline links 44 px tap targets; axe-core now finds no violations on the homepage. Browser check: `PARDUS_QA_PHASES=animations`.
+
 ## Phone hero rotation — 31 October 2026
 
 On phones the first section now cross-fades five owner-supplied portrait photographs (a leopard on a sunset ledge, a lounge above an East African coast, a safari aircraft on an airstrip, a safari vehicle and resting leopard, and a leopard above overwater villas). Each is held for about three seconds and dissolves into the next over 1.4 seconds, driven by time alone; the first photograph is the still picture without JavaScript, with reduced motion and after the new Pause scene button. Tablets and desktops keep the single coastal artwork and never download the five. Sources, order, leopard outlines and behaviour: `website/source-assets/v42-mobile-hero-rotation/README.md`. Derivatives come from `website/scripts/prepare-mobile-hero-rotation.mjs`; the browser check is `PARDUS_QA_PHASES=rotation`.

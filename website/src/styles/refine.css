@@ -119,3 +119,9 @@
 .sec.blend-top:not(.escapes) { padding-top: calc(var(--blend-h) + clamp(20px, 3.2vw, 48px)); }
 .yacht .eyebrow { color: var(--gold-soft); }
 .concept-number { background: rgb(5 12 26 / .88); }
+
+/* Tap targets: text links that sit inside a line (card titles, source links, the privacy note) reach 44 px with padding that an
+   equal negative margin cancels, so no layout moves. */
+.dest-top h3 a { display: inline-block; padding-block: 10px; margin-block: -10px; }
+.travel-update > a { padding-block: 11px; margin-block: -11px; }
+.form-note a { display: inline-block; padding: 14px 10px; margin: -14px -10px; }
