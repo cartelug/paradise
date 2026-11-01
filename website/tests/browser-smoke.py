@@ -501,7 +501,7 @@ def assert_hero(page, width):
     expect(hero).to_be_visible()
     expect(page.locator("body")).to_have_attribute("data-pardus-version", "31")
     assert " ".join(hero.locator("h1").text_content().split()) == "Extraordinary journeys."
-    expect(hero.locator(".hero-tagline")).to_contain_text(TAGLINE)
+    expect(hero.locator(".hero-tagline")).to_have_count(0)  # no repeated tagline in the hero: the logo lockup above already carries it
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)

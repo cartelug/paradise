@@ -9,8 +9,6 @@ html.js .art-heading[data-art-ready] > .art-heading-copy { clip-path: inset(50%)
 html.js .art-heading[data-art-ready] > .art-heading-visual { visibility: visible; }
 .hero--atlas h1.art-heading .art-heading-visual { width: min(100%, 10.4em); }
 .escapes-head .art-heading-visual { width: min(100%, 10em); }
-.hero--atlas .eyebrow:has(.travel-emblem) { display: flex; align-items: center; gap: 9px; }
-.hero--atlas .eyebrow .travel-emblem { width: 28px; height: 28px; }
 
 /* Enlarged actual text uses the real heading and wraps freely. The visible image
    has empty alt and never duplicates the heading for assistive technology. */
@@ -45,8 +43,6 @@ html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: 
 }
 @media (max-width: 767px) {
   .hero--atlas h1.art-heading .art-heading-visual { width: 100%; }
-  .hero--atlas .eyebrow:has(.travel-emblem) { margin-bottom: 15px; }
-  .hero--atlas .eyebrow .travel-emblem { width: 25px; height: 25px; }
   .scene-title { gap: 12px; }
   .scene-title .travel-emblem { width: 56px; height: 56px; }
   .picker--illustrated .pick-face { min-height: 128px; padding: 12px; }
@@ -63,7 +59,6 @@ html.motion-ready .home #more-title .w > span { max-width: 100%; overflow-wrap: 
 @media (prefers-reduced-motion: no-preference) {
   html.is-ready .hero .art-heading[data-art-ready] > .art-heading-visual,
   html.motion-ready .escapes-head .art-heading[data-art-ready].is-in > .art-heading-visual { animation: lettering-arrive 1.25s var(--ease) .08s both; }
-  html.is-ready .hero .eyebrow .travel-emblem { animation: emblem-arrive .9s var(--ease) .15s both; }
   html.motion-ready .picker-group.is-in .travel-emblem { animation: emblem-arrive .8s var(--ease) calc(var(--i, 0) * 25ms) both; }
   html.motion-ready .promise.is-in > .travel-emblem { animation: emblem-arrive .9s var(--ease) .08s both; }
 }

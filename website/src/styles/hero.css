@@ -31,10 +31,7 @@
 .hero-slide-picture img { object-fit: cover; }
 .hero-slide .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
 @keyframes hero-slide-in { from { opacity: 0; } to { opacity: 1; } }
-.hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: clamp(156px, 11.4vw, 216px); width: 49%; max-width: 860px; }
-.hero--atlas .eyebrow { display: block; margin: 0 0 20px; color: #775e32; font-weight: 700; line-height: 1.4; text-transform: uppercase; }
-.hero--atlas .eyebrow::before { display: none; }
-.hero--atlas .hero-tagline { text-transform: none; }
+.hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: calc(clamp(156px, 11.4vw, 216px) + 48px); width: 49%; max-width: 860px; }
 .hero--atlas h1 { display: grid; margin: 0; color: var(--atlas-ink); font-size: clamp(46px, 4.15cqw, 76px); font-weight: 700; line-height: 1.035; letter-spacing: -.045em; text-wrap: initial; }
 .hero--atlas .line { display: block; padding-block: .055em; margin-block: -.055em; }
 .hero--atlas .line > span { display: inline-block; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
@@ -96,7 +93,6 @@
   .home .header-cta { display: none; }
   .hero-stage { background: #e9eae6; }
   .hero-copy { padding-top: calc(var(--header-h) + 27px); padding-bottom: 0; }
-  .hero--atlas .eyebrow { margin-bottom: 16px; }
   .hero--atlas h1 { font-size: clamp(30px, 8.25vw, 54px); line-height: 1.04; }
   .hero-text { margin-top: 18px; max-width: 35ch; font-size: var(--fs-body-s); line-height: var(--lh-body-s); }
   .hero--atlas .actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }

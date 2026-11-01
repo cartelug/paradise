@@ -61,7 +61,9 @@ test('the selected headline, service sentence and both live actions are present'
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   const hero = html.match(/<section class="hero hero--atlas"[\s\S]*?<\/section>/)?.[0];
   assert.doesNotMatch(plain(hero), /Personally curated/);
-  assert.match(plain(hero), /Travel Curated, Around You Extraordinary journeys\./);
+  // The globe-and-tagline eyebrow was removed on 1 November 2026: the tagline already sits in the logo lockup directly above.
+  assert.doesNotMatch(hero, /hero-tagline|Travel Curated, Around You/);
+  assert.match(plain(hero), /^Extraordinary journeys\./);
   assert.match(plain(hero), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
   assert.match(hero, /href="[^"]*journey\.html"[^>]*><span>Plan your escape<\/span>/);
   assert.match(hero, /href="#destinations"[^>]*><span>Explore destinations<\/span><\/a>/);

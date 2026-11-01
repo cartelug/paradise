@@ -98,9 +98,6 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 /* Hero headline text (its artwork replaces it visually; this is the no-script and image-failure fallback) keeps display tracking. */
 .hero--atlas h1 { letter-spacing: var(--ls-display); }
 
-/* Hero tagline above the headline: sentence case, bold, small. */
-.hero--atlas .hero-tagline { font-size: var(--fs-small); font-weight: var(--fw-bold); letter-spacing: .02em; text-transform: none; }
-
 /* Measure: no paragraph runs past about 72 characters, even in a single wide column on a tablet. */
 .lead, .page-hero .lead, .sec-head > p:not(.eyebrow), .statement p { max-width: var(--measure-lead); }
 .prose, .faq details > p, .process p, .acts p, .frame-list dd, .exp p, .dest p, .cover-copy p, .practical p, .contact-partners p,
