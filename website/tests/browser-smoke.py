@@ -228,7 +228,7 @@ def leopard_clear(browser):
             # The leopard is static, so one measurement per size is the whole picture.
             for scale in ["static"]:
                 result = page.evaluate(probe)
-                assert result["parts"] == (12 if width <= 767 else 4), result  # phones: three leopards x four parts; wider: one
+                assert result["parts"] == (12 if width <= 767 or width >= 1000 else 4), result  # phones and PCs: three photographed leopards x four parts; tablets: the one walking leopard
                 assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, {scale}): {result['hits']}"
                 assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()
@@ -247,13 +247,13 @@ def leopard_alive(browser):
         navigate(page)
         page.wait_for_timeout(1500)
         expect(page.locator("[data-hero-life]")).to_have_attribute("data-life", "still")
-        image = page.locator(".hero-picture img")
+        image = page.locator('.hero-slide[data-state="current"] img')  # the PC panel photograph (the wide artwork is tablet-only now)
         expect(image).to_be_visible()
         assert image.evaluate("img => img.complete && img.naturalWidth > 0")
         assert image.evaluate("img => getComputedStyle(img).animationName") == "none"
         assert page.locator(".hl-glow, .hl-glows, .hl-eyes, .hl-rim, .hl-motes, .hl-leopard, .hero-glow").count() == 0
         animated = page.evaluate("() => [...document.querySelectorAll('.hero-art *')].flatMap(e => e.getAnimations()).map(a => a.animationName)")
-        assert animated == [], animated
+        assert all(name == "hero-slide-in" for name in animated), animated  # on PCs only the dissolve between photographs may run; no drift, no glow
         def pose():
             return page.evaluate("""() => { const art = document.querySelector('.hero-art'); const pic = document.querySelector('.hero-picture');
                 return [getComputedStyle(art).transform, getComputedStyle(pic).transform, art.getBoundingClientRect().top + scrollY]; }""")
@@ -262,7 +262,9 @@ def leopard_alive(browser):
             for step in range(14):
                 page.mouse.move(x + step, 450)
                 page.wait_for_timeout(30)
-        box = page.locator('.leopard-outline [data-leopard-box="head"]').bounding_box()  # the desktop leopard; phones carry theirs inside each photograph
+        box = page.evaluate("""() => { const r = [...document.querySelectorAll('[data-leopard-box="head"]')].map(e => e.getBoundingClientRect()).find(b => b.width > 0 && b.top >= 0 && b.bottom <= innerHeight);
+            return r ? {x: r.left, y: r.top, width: r.width, height: r.height} : null; }""")
+        assert box, "a leopard head must be on the first screen"
         page.mouse.click(box["x"] + box["width"] * 0.5, box["y"] + box["height"] * 0.5)
         page.mouse.wheel(0, 400)
         page.wait_for_timeout(500)
@@ -418,7 +420,7 @@ def window_seat(browser):
 
 def hero_rotation(browser):
     """V42: on phones five photographs dissolve one into the next, about three seconds each, driven by time alone. The first is the
-    still picture without JavaScript, with reduced motion and after Pause scene. Wider screens never load the phone photographs."""
+    still picture without JavaScript, with reduced motion and after Pause scene. Tablets keep the wide artwork and never load the photographs; PCs (1000px and wider) show them in a tall panel on the right."""
     states = "() => [...document.querySelectorAll('[data-hero-slide]')].map(s => s.dataset.state[0]).join('')"
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
@@ -482,8 +484,8 @@ def hero_rotation(browser):
     expect(page.locator(".hero-pause")).to_be_hidden()
     context.close()
 
-    # Tablets and desktops keep the single artwork and never request a phone photograph.
-    context = context_for(browser, viewport={"width": 1440, "height": 900})
+    # Tablets keep the single wide artwork and never request a phone photograph.
+    context = context_for(browser, viewport={"width": 900, "height": 1000})
     page = context.new_page()
     requested = []
     page.on("request", lambda request: requested.append(request.url) if "pardus-v42-mobile-hero" in request.url else None)
@@ -493,7 +495,47 @@ def hero_rotation(browser):
     assert page.evaluate("getComputedStyle(document.querySelector('[data-hero-rotator]')).display") == "none"
     expect(page.locator(".hero-pause")).to_be_hidden()
     context.close()
-    print("PASS hero rotation: five photographs dissolve in turn (about 3 s each), the loop closes, one is exposed to assistive technology, Pause/Resume work, reduced motion and no JavaScript show the first, wider screens never load them", flush=True)
+
+    # PCs (1000px and wider): the same five photographs dissolve in a tall panel on the right, the copy stays on the left, and the wide
+    # artwork is never fetched.
+    context = context_for(browser, viewport={"width": 1440, "height": 900})
+    page = context.new_page()
+    requested = []
+    page.on("request", lambda request: requested.append(request.url) if ("pardus-v42-mobile-hero" in request.url or "pardus-coastal-desktop" in request.url) else None)
+    errors = []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    navigate(page)
+    rotator = page.locator("[data-hero-rotator]")
+    geometry = page.evaluate("""() => { const r = document.querySelector('[data-hero-rotator]').getBoundingClientRect(); const s = document.querySelector('[data-hero-stage]').getBoundingClientRect();
+        const copy = [...document.querySelectorAll('[data-hero-copy] .art-heading-visual, [data-hero-copy] .hero-text, [data-hero-copy] .btn')].map(e => e.getBoundingClientRect().right);
+        return {left: r.left, right: r.right, bottom: r.bottom, width: r.width, height: r.height, stageBottom: s.bottom, stageRight: s.right, copyRight: Math.max(...copy)}; }""")
+    assert abs(geometry["right"] - geometry["stageRight"]) < 1.5, geometry                      # bleeds off the right edge
+    assert geometry["bottom"] >= geometry["stageBottom"] - 1, geometry                         # reaches the hero's floor
+    assert abs(geometry["height"] / geometry["width"] - 1672 / 941) < 0.01, geometry           # the whole portrait, never stretched
+    assert geometry["left"] >= geometry["copyRight"] - 32, geometry                            # never more than 30px into the copy
+    assert page.evaluate("getComputedStyle(document.querySelector('.hero-picture')).display") == "none"
+    seen = []
+    for _ in range(95):  # about 9.5 s: at least the first dissolve
+        value = page.evaluate(states)
+        if not seen or seen[-1] != value:
+            seen.append(value)
+        page.wait_for_timeout(100)
+    assert any(value.startswith("ic") or value.startswith("ce") for value in seen), seen
+    expect(rotator).to_have_attribute("data-rotation", "running")
+    button = page.locator(".hero-pause")
+    expect(button).to_be_visible()
+    box = button.bounding_box()
+    assert box["width"] >= 44 and box["height"] >= 44 and box["x"] + box["width"] <= 1440, box
+    button.click()
+    expect(rotator).to_have_attribute("data-rotation", "paused")
+    frozen = page.evaluate(states)
+    page.wait_for_timeout(4800)
+    assert page.evaluate(states) == frozen, "Pause scene must hold the current photograph on PCs too"
+    assert not any("pardus-coastal-desktop" in url for url in requested), "the wide artwork is not fetched on PCs"
+    assert any("pardus-v42-mobile-hero-1-" in url for url in requested), requested
+    assert not errors, errors
+    context.close()
+    print("PASS hero rotation: five photographs dissolve in turn (about 3 s each), the loop closes, one is exposed to assistive technology, Pause/Resume work, reduced motion and no JavaScript show the first, tablets never load them, and PCs show them in a panel beside the copy", flush=True)
 
 
 def animation_pack(browser):
@@ -563,19 +605,21 @@ def assert_hero(page, width):
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
     expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
     expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)
-    portrait = page.evaluate("innerWidth <= 767")
-    # Phones show the five rotating photographs; the first is the still picture. Wider screens show the one walking leopard.
-    image = page.locator(".hero-slide:first-child img") if portrait else page.locator(".hero-picture img")
+    slides = page.evaluate("innerWidth <= 767 || innerWidth >= 1000")
+    # Phones and PCs show the five rotating photographs (the first is the still picture); tablets show the one walking leopard.
+    image = page.locator(".hero-slide:first-child img") if slides else page.locator(".hero-picture img")
     source = image.evaluate("img => img.currentSrc")
-    assert ("pardus-v42-mobile-hero-1-" if portrait else "pardus-coastal-desktop-") in source, source
+    assert ("pardus-v42-mobile-hero-1-" if slides else "pardus-coastal-desktop-") in source, source
     assert image.evaluate("img => img.complete && img.naturalWidth > 0")
-    assert image.get_attribute("alt").startswith("A leopard stands on a stone ledge at sunset" if portrait else "A leopard walks across a pale stone ledge above an Indian Ocean coast")
-    if portrait:
+    assert image.get_attribute("alt").startswith("A leopard stands on a stone ledge at sunset" if slides else "A leopard walks across a pale stone ledge above an Indian Ocean coast")
+    if slides:
         assert page.locator(".hero-slide").count() == 5
         assert page.locator(".hero-slide img").evaluate_all("images => images.every(img => img.alt.endsWith('An illustrative travel composite.'))")
-        assert page.evaluate("getComputedStyle(document.querySelector('.hero-picture')).display") == "none", "the wide artwork is hidden on phones"
-    # The artwork keeps its native shape: the stage is the picture, so the head, ears, whiskers and paws are never cropped.
-    ratio = page.evaluate("""(() => { const b = document.querySelector('.hero-art').getBoundingClientRect(); const i = document.querySelector(innerWidth <= 767 ? '.hero-slide:first-child img' : '.hero-picture img');
+        assert page.evaluate("getComputedStyle(document.querySelector('.hero-picture')).display") == "none", "the wide artwork is hidden on phones and PCs"
+    # The artwork keeps its native shape: the picture is shown whole (a PC clips it only by the hero's own edges), so the head, ears,
+    # whiskers and paws are never cropped by the picture itself.
+    ratio = page.evaluate("""(() => { const wide = innerWidth <= 767 || innerWidth >= 1000;
+        const b = document.querySelector(wide ? '[data-hero-rotator]' : '.hero-art').getBoundingClientRect(); const i = document.querySelector(wide ? '.hero-slide:first-child img' : '.hero-picture img');
         return [b.width / b.height, i.naturalWidth / i.naturalHeight]; })()""")
     assert abs(ratio[0] - ratio[1]) < 0.01, ratio
     assert_no_overflow(page, f"hero at {width}")
@@ -635,15 +679,15 @@ def hero_and_menu(browser):
     expect(page.locator(".desktop-nav")).to_be_visible()
     context.close()
 
-    # On wide screens the hero artwork is static and nothing loops, so no pause control is needed (WCAG 2.2.2). The phone slideshow
-    # does cycle, so it carries its own visible Pause scene button (checked in phase `rotation`); on wide screens that button is hidden.
+    # Nothing loops (the dissolve between photographs is finite), but the slideshow cycles on phones and PCs (WCAG 2.2.2), so both carry
+    # a visible Pause scene button (checked in phase `rotation`); on tablets, which keep the static wide artwork, it is hidden.
     context = context_for(browser, viewport={"width": 1440, "height": 900})
     page = context.new_page()
     navigate(page)
     page.wait_for_timeout(3000)
     looping = page.evaluate("() => document.getAnimations().filter(a => a.effect && a.effect.getComputedTiming().iterations === Infinity && a.playState === 'running').map(a => a.animationName || a.constructor.name)")
     assert not looping, f"Looping animations need a pause control: {looping}"
-    assert page.locator("[data-scene-motion]").count() == 0 or page.locator("[data-scene-motion]").first.is_hidden()
+    assert page.locator("[data-scene-motion]").first.is_visible()  # PCs cycle too, so the Pause scene button is there
     context.close()
 
     # No emoji anywhere in the rendered text of the main pages.

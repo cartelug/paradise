@@ -1,6 +1,7 @@
 // V42 (31 October 2026): the phone hero cross-fades five photographs, each held for about three seconds with a long,
 // eased dissolve (data-hold / data-fade on the rotator, in milliseconds).
-//   - It only runs on phones (max-width 767px). Wider screens keep the single desktop artwork and never load these pictures.
+//   - It runs wherever the rotator is on screen: phones (up to 767px) and PCs (1000px and wider, in the tall panel on the right).
+//     Tablets and the enlarged-text layout keep the single wide artwork and never load these pictures.
 //   - The first photograph is the still picture: without JavaScript, with reduced motion, and after Pause scene.
 //   - It starts once the opening has released the page, and stops while the tab is hidden, the hero is off screen
 //     or the visitor has paused the scene (the pause button, or the saved preference read by ui.ts).
@@ -14,7 +15,9 @@ const rotator = hero?.querySelector<HTMLElement>('[data-hero-rotator]');
 
 if (hero && rotator) {
   const slides = [...rotator.querySelectorAll<HTMLElement>('[data-hero-slide]')];
-  const phone = window.matchMedia('(max-width: 767px)');
+  // The rotator is display:none on tablets and in the enlarged-text layout, so being displayed is the whole test.
+  const layout = window.matchMedia('(max-width: 767px), (min-width: 1000px)');
+  const displayed = () => rotator.getClientRects().length > 0;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hold = Number(rotator.dataset.hold) || 3000;
   const fade = Number(rotator.dataset.fade) || 1400;
@@ -29,10 +32,10 @@ if (hero && rotator) {
   const pictureOf = (slide: HTMLElement) => slide.querySelector<HTMLImageElement>('img')!;
   const loaded = (image: HTMLImageElement) => image.complete && image.naturalWidth > 1;
   const paused = () => root.classList.contains('motion-paused');
-  const allowed = () => phone.matches && !reduced.matches && !paused() && onScreen && !document.hidden;
+  const allowed = () => displayed() && !reduced.matches && !paused() && onScreen && !document.hidden;
 
   function report() {
-    rotator!.dataset.rotation = reduced.matches || !phone.matches ? 'still' : allowed() && started ? 'running' : 'paused';
+    rotator!.dataset.rotation = reduced.matches || !displayed() ? 'still' : allowed() && started ? 'running' : 'paused';
   }
 
   function schedule() {
@@ -84,7 +87,9 @@ if (hero && rotator) {
   document.addEventListener('visibilitychange', schedule);
   window.addEventListener('pageshow', schedule);
   window.addEventListener('pardus:motion', schedule);
-  phone.addEventListener('change', schedule);
+  layout.addEventListener('change', schedule);
+  window.addEventListener('pardus:hero-layout', schedule);
+  window.addEventListener('resize', schedule, { passive: true });
   reduced.addEventListener('change', schedule);
 
   // The opening releases the page by adding is-ready; the first photograph then gets its full hold.

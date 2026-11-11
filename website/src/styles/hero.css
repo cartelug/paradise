@@ -29,7 +29,7 @@
 .hero-slide[data-state='entering'] { z-index: 2; opacity: 1; animation: hero-slide-in var(--hero-fade, 1400ms) cubic-bezier(.45, .05, .35, 1) both; }
 /* The photograph on screen drifts very slowly (1.00 to 1.045, about six seconds) once the opening has released the page.
    It is a plain scale of the whole picture, never a reaction to the visitor, and it stays out of reduced motion entirely. */
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
   html.is-ready .hero-slide[data-state='current'] { animation: hero-slide-drift 6s linear both; }
   html.is-ready .hero-slide[data-state='entering'] { animation: hero-slide-drift 6s linear both, hero-slide-in var(--hero-fade, 1400ms) cubic-bezier(.45, .05, .35, 1) both; }
   html.motion-paused .hero-slide[data-state='current'] { animation-play-state: paused; }
@@ -125,6 +125,10 @@
     background: radial-gradient(ellipse at 50% 50%, rgb(244 241 233 / .82), rgb(244 241 233 / .66) 55%, transparent 100%);
     filter: blur(8px);
   }
+}
+/* Pause scene: over the photograph on phones and over the panel on PCs. Hidden without script, under reduced motion and
+   in the enlarged-text layout (where the wide artwork is shown instead). */
+@media (max-width: 767px), (min-width: 1000px) {
   .hero-pause {
     position: absolute; z-index: 3; right: 14px; bottom: 21%; display: inline-grid; place-items: center;
     width: 44px; height: 44px; padding: 0; border: 1px solid rgb(255 255 255 / .6); border-radius: 50%;
@@ -136,7 +140,11 @@
   .hero-pause:focus-visible { outline: 2px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px #09283f; }
   html:not(.js) .hero-pause { display: none; }
 }
-@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+@media (min-width: 1000px) {
+  .hero-pause { right: clamp(20px, 3vw, 48px); bottom: 22%; }
+  .home[data-expanded-hero] .hero-pause { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
   .hero-pause { display: none; }
 }
 @media (min-width: 1000px) {
@@ -153,6 +161,30 @@
   .home[data-expanded-hero] .hero-text { max-width: 48ch; }
   .home[data-expanded-hero] .hero-text > span { display: inline; }
   .home[data-expanded-hero] .hero-art { position: relative; inset: auto; grid-row: 2; margin-top: -6vw; }
+}
+/* V43, PC hero (1 November 2026): from 1000px the same five photographs cross-fade in a tall panel on the right while the copy stays
+   on the left. The panel is the whole portrait picture (so every measured leopard box stays exact), bottom-aligned so its 89% line sits
+   on the hero's bottom edge, and the hero clips it: the visible band always runs from the sea (about 35 to 46%) down to the floor
+   (89%), which holds every animal. Its left edge feathers into the pale ground; a pale veil keeps the header clear. Tablets and the
+   enlarged-text layout keep the wide artwork. */
+@media (min-width: 1000px) {
+  .home:not([data-expanded-hero]) .hero-stage { background: linear-gradient(90deg, #eeefeb, #e6eaec 55%, #dde4e9); }
+  .home:not([data-expanded-hero]) .hero-picture,
+  .home:not([data-expanded-hero]) .leopard-outline,
+  .home:not([data-expanded-hero]) .hero-art::before { display: none; }
+  .home:not([data-expanded-hero]) .hero-rotator {
+    /* 54% of the hero, but never reaching more than 30px into the headline (its art is 10.4em wide, as in illustrated-home.css). */
+    --panel-w: min(54cqw, calc(100cqw - var(--atlas-gutter) - 10.4 * clamp(46px, 4.15cqw, 76px) + 30px));
+    display: block; inset: auto; right: 0; width: var(--panel-w); aspect-ratio: var(--hero-portrait-ratio);
+    bottom: calc(-0.11 * var(--panel-w) * var(--hero-portrait-h));
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, rgb(0 0 0 / .3) 8%, rgb(0 0 0 / .78) 17%, #000 27%);
+    mask-image: linear-gradient(90deg, transparent 0, rgb(0 0 0 / .3) 8%, rgb(0 0 0 / .78) 17%, #000 27%);
+  }
+  .home:not([data-expanded-hero]) .hero-text::before { display: none; }
+  .home:not([data-expanded-hero]) .hero-stage::before {
+    content: ''; position: absolute; z-index: 1; inset: 0 0 auto; height: 190px; pointer-events: none;
+    background: linear-gradient(#eeefeb, rgb(238 239 235 / .94) 52%, rgb(238 239 235 / 0));
+  }
 }
 /* All navigation links remain available with scripting disabled. */
 @media (max-width: 1199px) {

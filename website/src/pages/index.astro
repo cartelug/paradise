@@ -33,7 +33,8 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image={`images/pardus-coastal-desktop-${heroArtwork.desktop.width}.webp`}>
   <Fragment slot="head">
     <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)" imagesrcset={heroSet('mobile')} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 999px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 1000px)" imagesrcset={heroSet('mobile')} imagesizes="54vw" />
   </Fragment>
   <Hero />
   <WindowSeat />

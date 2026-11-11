@@ -36,7 +36,7 @@ const slides = [
 const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t:${r[1]}%;--${prefix}w:${r[2] - r[0]}%;--${prefix}h:${r[3] - r[1]}%`;
 ---
 <section class="hero hero--atlas" aria-labelledby="hero-title" data-hero data-hero-life data-life="still">
-  <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${artwork.desktop.width}/${artwork.desktop.height};--hero-portrait-ratio:${rotation.width}/${rotation.height}`}>
+  <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${artwork.desktop.width}/${artwork.desktop.height};--hero-portrait-ratio:${rotation.width}/${rotation.height};--hero-portrait-h:${(rotation.height / rotation.width).toFixed(4)}`}>
     <div class="hero-copy" data-hero-copy>
       <ArtHeading as="h1" id="hero-title" art="hero-lettering"><span class="line" style="--n:0"><span>Extraordinary</span></span>{' '}<span class="line" style="--n:1"><span>journeys.</span></span></ArtHeading>
       <p class="hero-text"><span>Flights, stays, safaris and private experiences,</span> <span>arranged around you. From Africa to the world.</span></p>
@@ -49,15 +49,15 @@ const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t
       <picture class="hero-picture">
         <source media="(max-width: 767px)" srcset={blank} />
         <source type="image/avif" srcset={imageSet('avif')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} />
-        <img src={asset(`pardus-coastal-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across a pale stone ledge above an Indian Ocean coast, with Dubai and East African savannah blending into the distance. An illustrative travel composite." fetchpriority="high" decoding="async" data-hero-image />
+        <img src={asset(`pardus-coastal-desktop-${artwork.desktop.width}.webp`)} srcset={imageSet('webp')} sizes="100vw" width={artwork.desktop.width} height={artwork.desktop.height} alt="A leopard walks across a pale stone ledge above an Indian Ocean coast, with Dubai and East African savannah blending into the distance. An illustrative travel composite." loading="lazy" decoding="async" data-hero-image />
       </picture>
       <div class="hero-rotator" data-hero-rotator data-hold="3000" data-fade="1400">
         {slides.map((slide, index) => (
           <div class="hero-slide" data-hero-slide data-state={index === 0 ? 'current' : 'idle'} aria-hidden={index === 0 ? undefined : 'true'}>
             <picture class="hero-slide-picture">
-              <source media="(min-width: 768px)" srcset={blank} />
-              <source type="image/avif" srcset={slideSet(index + 1, 'avif')} sizes="100vw" width={rotation.width} height={rotation.height} />
-              <img src={asset(`${rotation.prefix}-${index + 1}-${rotation.width}.webp`)} srcset={slideSet(index + 1, 'webp')} sizes="100vw" width={rotation.width} height={rotation.height} alt={slide.alt} decoding="async" {...(index === 0 ? { fetchpriority: 'high' } : { loading: 'lazy' })} />
+              <source media="(min-width: 768px) and (max-width: 999px)" srcset={blank} />
+              <source type="image/avif" srcset={slideSet(index + 1, 'avif')} sizes="(min-width: 1000px) 54vw, 100vw" width={rotation.width} height={rotation.height} />
+              <img src={asset(`${rotation.prefix}-${index + 1}-${rotation.width}.webp`)} srcset={slideSet(index + 1, 'webp')} sizes="(min-width: 1000px) 54vw, 100vw" width={rotation.width} height={rotation.height} alt={slide.alt} decoding="async" {...(index === 0 ? { fetchpriority: 'high' } : { loading: 'lazy' })} />
             </picture>
             {slide.outline.map(part => <span class="leopard-box" data-leopard-box={part.part} aria-hidden="true" style={box(part.m, 'm')}></span>)}
           </div>

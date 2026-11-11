@@ -46,13 +46,15 @@ test('the hero preloads only the artwork used by its responsive picture', async 
   assert.equal((hero.match(/<picture/g) || []).length, 6);
   assert.match(hero, /fetchpriority="high"/);
   assert.match(hero, /media="\(max-width: 767px\)"/);
-  assert.match(hero, /media="\(min-width: 768px\)"/);
+  assert.match(hero, /media="\(min-width: 768px\) and \(max-width: 999px\)"/);
   const preloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
-  assert.equal(preloads.length, 2, 'one mutually exclusive preload for each art direction');
+  assert.equal(preloads.length, 3, 'one mutually exclusive preload for each art direction: phones, tablets and PCs');
   assert.match(preloads[0], /pardus-v42-mobile-hero-1-/);
   assert.match(preloads[1], /pardus-coastal-desktop-/);
   assert.match(preloads[0], /max-width: 767px/);
-  assert.match(preloads[1], /min-width: 768px/);
+  assert.match(preloads[1], /min-width: 768px\) and \(max-width: 999px/);
+  assert.match(preloads[2], /pardus-v42-mobile-hero-1-/);
+  assert.match(preloads[2], /min-width: 1000px/);
   assert.match(html, new RegExp('property="og:image" content="[^"]*pardus-coastal-desktop-' + metadata.desktop.width + '\\.webp'));
   assert.doesNotMatch(hero, /pardus-hero-desktop|pardus-hero-phone|pardus-v34-mobile-hero/);
 });

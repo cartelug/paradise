@@ -1,5 +1,9 @@
 # Pardus Luxury Escapes
 
+## PC hero rotation — 11 November 2026
+
+The five fading hero photographs now also run on PCs (1000px and wider): they dissolve in a tall panel on the right while the headline, sentence and buttons stay on the left. Tablets keep the single wide artwork. A full-width crop was avoided on purpose, because it would cut the leopards' heads and paws and soften the photographs; landscape versions would replace the panel if supplied. Details in `CLAUDE.md`.
+
 ## Zanzibar and Maldives pictures — 1 November 2026
 
 Zanzibar now shows the real Zanzibar photograph (the aerial resort, `zanzibar-v24`); the dhow-on-turquoise picture that used to stand in for Zanzibar is now the Maldives picture. The "Safari & Shore" journey uses the Amboseli elephant photograph so the homepage never repeats a picture. Details in `CLAUDE.md`.

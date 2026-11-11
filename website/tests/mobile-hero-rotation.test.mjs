@@ -49,7 +49,7 @@ test('the exported hero holds the five photographs in the owner’s order, the f
       assert.match(slide, /aria-hidden="true"/);
       assert.match(slide, /loading="lazy"/);
     }
-    assert.match(slide, /<source media="\(min-width: 768px\)" srcset="data:image\/gif/, 'wide screens never download phone photographs');
+    assert.match(slide, /<source media="\(min-width: 768px\) and \(max-width: 999px\)" srcset="data:image\/gif/, 'tablets never download the photographs');
     assert.match(slide, /An illustrative travel composite\./);
     assert.doesNotMatch(slide, /alt=""/);
   });

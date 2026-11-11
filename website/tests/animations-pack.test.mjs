@@ -59,7 +59,8 @@ test('the ripple script reacts only to a press, never to movement, scroll or til
 
 test('the hero drift stays out of reduced motion and the leopards are not animated by it', async () => {
   const hero = await read('src/styles/hero.css');
-  const drift = hero.match(/@media \(prefers-reduced-motion: no-preference\) \{[^@]*hero-slide-drift[^@]*\}/)?.[0] ?? '';
+  // Phones only: the PC panel stays calmer (only the dissolve between photographs runs there).
+  const drift = hero.match(/@media \(prefers-reduced-motion: no-preference\) and \(max-width: 767px\) \{[^@]*hero-slide-drift[^@]*\}/)?.[0] ?? '';
   assert.match(drift, /html\.is-ready \.hero-slide\[data-state='current'\]/);
   assert.match(drift, /html\.motion-paused/);
   assert.match(hero, /@keyframes hero-slide-drift \{ from \{ transform: scale\(1\); \} to \{ transform: scale\(1\.045\); \} \}/);

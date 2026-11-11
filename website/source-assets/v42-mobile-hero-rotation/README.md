@@ -20,11 +20,11 @@ and `src/data/mobile-hero-rotation.json`. Run it again only if a master changes.
 
 ## Behaviour
 
-- Phones only (`max-width: 767px`). Tablets and desktops keep the single V33 artwork and are given a one-pixel placeholder for these pictures, so they never download them.
+- Phones (`max-width: 767px`) and, since 11 November 2026, PCs (1000px and wider, in a tall panel on the right of the hero). Tablets (768 to 999px) keep the single V33 artwork and are given a one-pixel placeholder for these pictures, so they never download them.
 - Each photograph is held for 3000 ms and dissolves into the next over 1400 ms (`data-hold` / `data-fade` on `[data-hero-rotator]` in `Hero.astro`). The next photograph stays opaque underneath, so the dissolve never dips; the loop closes from the fifth back to the first.
 - The sequence starts when the opening releases the page. A photograph is only faded in after it has downloaded and decoded.
 - The first photograph is the still picture without JavaScript, with reduced motion and after Pause scene. The sequence also stops while the tab is hidden or the hero is off screen.
-- A 44 × 44 px Pause scene button (phones only, hidden under reduced motion) uses the existing `data-scene-motion` preference, which is saved between pages.
+- A 44 × 44 px Pause scene button (phones and PCs, hidden under reduced motion and on tablets) uses the existing `data-scene-motion` preference, which is saved between pages.
 - Nothing reacts to a pointer, finger, tilt or scroll. The leopards are never animated, only dissolved in and out.
 
 ## Layout and legibility
