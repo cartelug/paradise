@@ -39,7 +39,7 @@ const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t
   <div class="hero-stage" data-hero-stage style={`--hero-landscape-ratio:${artwork.desktop.width}/${artwork.desktop.height};--hero-portrait-ratio:${rotation.width}/${rotation.height};--hero-portrait-h:${(rotation.height / rotation.width).toFixed(4)}`}>
     <div class="hero-copy" data-hero-copy>
       <ArtHeading as="h1" id="hero-title" art="hero-lettering"><span class="line" style="--n:0"><span>Extraordinary</span></span>{' '}<span class="line" style="--n:1"><span>journeys.</span></span></ArtHeading>
-      <p class="hero-text"><span>Flights, stays, safaris and private experiences,</span> <span>arranged around you. From Africa to the world.</span></p>
+      <p class="hero-text"><strong class="hero-personal">Personally curated.</strong><span>Flights, stays, safaris and private experiences,</span> <span>arranged around you. From Africa to the world.</span></p>
       <div class="actions">
         <a class="btn btn--gold" href={path('journey.html')}><span>Plan your escape</span><Icon name="arrow-right" /></a>
         <a class="btn btn--ghost" href="#destinations"><span>Explore destinations</span></a>

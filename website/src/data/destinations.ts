@@ -6,6 +6,7 @@ export interface Destination {
   place: 'Island' | 'Wild' | 'City' | 'Culture'; pace: 'Still' | 'Balanced' | 'Immersive'; reasons: string[];
   seasonNote: string; suggestedStay: string; idealFor: string[]; routePairs: string[]; considerations: string[];
   highlights: { name: string; text: string }[];
+  collection?: boolean;
 }
 
 export const destinations: Destination[] = [
@@ -130,3 +131,53 @@ export const destinations: Destination[] = [
     ]
   }
 ];
+
+destinations.push(
+  {
+    slug: 'maasai-mara', name: 'Maasai Mara', country: 'Kenya', category: 'wild', number: '05',
+    title: 'Let the wild set the pace.', subtitle: 'Open plains. A considered safari.',
+    description: 'A personally planned journey through Kenya’s Maasai Mara, with safari stays and a route shaped around your group.',
+    image: 'maasai-mara-v44', alt: 'An antelope in the open grasslands of the Maasai Mara, Kenya',
+    caption: 'Open grasslands / Maasai Mara, Kenya', mood: 'Space to watch, listen and discover.',
+    place: 'Wild', pace: 'Immersive', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'Weather, access, camp availability and wildlife movement are considered for your exact dates. Wildlife sightings and migration encounters are never guaranteed.',
+    suggestedStay: 'A suggested 3 days / 2 nights, tailored to your route',
+    idealFor: ['A first safari conversation', 'Couples seeking time in the wild', 'Families planning a guided journey'],
+    routePairs: ['A longer Kenya safari', 'Zanzibar and the coast', 'A multi-country East Africa collection'],
+    considerations: ['Realistic arrival and transfer times', 'Park and conservancy arrangements', 'Camp atmosphere and guiding', 'Wildlife is never guaranteed'],
+    intro: 'Make room for the landscape.',
+    paragraphs: ['The Maasai Mara invites you to slow down and look closely. Open grasslands, changing light and unhurried time outdoors shape the experience more than a list of promised sightings.', 'We discuss your dates, travel companions and preferred comfort before proposing camps, transfers and guided activities. Every inclusion, park fee and restriction is confirmed in the written proposal.'],
+    highlights: [
+      { name: 'The right base', text: 'Discuss a camp or lodge location and atmosphere around your interests and travel dates.' },
+      { name: 'Time in the wild', text: 'Consider guided game drives and a comfortable daily rhythm, subject to the chosen itinerary.' },
+      { name: 'A connected journey', text: 'Plan the arrival, transfers and any coastal extension together.' },
+    ],
+  },
+  {
+    slug: 'uganda-gorillas', name: 'Uganda gorillas', country: 'Uganda', category: 'wild', number: '06',
+    title: 'A quieter kind of extraordinary.', subtitle: 'Bwindi forest. A personal journey.',
+    description: 'Discuss a gorilla journey in Uganda, with permit availability, forest accommodation and practical travel details considered together.',
+    image: 'uganda-gorillas-v44', alt: 'A female mountain gorilla in Bwindi Impenetrable National Park, Uganda',
+    caption: 'Mountain gorilla / Bwindi, Uganda', mood: 'A forest journey, thoughtfully planned.',
+    place: 'Wild', pace: 'Immersive', reasons: ['Escape', 'Celebration', 'Family'],
+    seasonNote: 'Permits, park rules, forest conditions and accommodation availability must be checked for your exact dates. An enquiry does not reserve a permit or guarantee an encounter.',
+    suggestedStay: 'A suggested 3 days / 2 nights, subject to the arrival route',
+    idealFor: ['Travellers interested in forest wildlife', 'Couples planning a nature-led journey', 'An extension to a longer Uganda itinerary'],
+    routePairs: ['A longer Uganda journey', 'A broader East Africa collection', 'A quiet coastal close'],
+    considerations: ['Permit availability and confirmation', 'Trekking fitness and park requirements', 'Travel time to the forest', 'Accommodation near the agreed route'],
+    intro: 'Begin with the forest, and plan every connection.',
+    paragraphs: ['A gorilla journey in Uganda begins well before the forest. Your route, permit availability, accommodation and time to settle in need to work together.', 'Share your dates and practical considerations with Pardus. We confirm the proposed route, permit arrangements, transfers and all inclusions in writing before you decide. No permit is reserved by submitting an enquiry.'],
+    highlights: [
+      { name: 'The permit first', text: 'Availability and applicable park requirements are checked before the journey is confirmed.' },
+      { name: 'A comfortable approach', text: 'Choose a practical route and accommodation in relation to the agreed forest visit.' },
+      { name: 'Your wider Uganda journey', text: 'Discuss a standalone forest chapter or a longer itinerary with a thoughtful pace.' },
+    ],
+  },
+);
+
+const priorityOrder = ['zanzibar', 'seychelles', 'maldives', 'dubai', 'maasai-mara', 'uganda-gorillas', 'africa', 'europe'];
+destinations.sort((a, b) => priorityOrder.indexOf(a.slug) - priorityOrder.indexOf(b.slug));
+destinations.forEach((destination, index) => {
+  destination.number = String(index + 1).padStart(2, '0');
+  if (destination.slug === 'africa' || destination.slug === 'europe') destination.collection = true;
+});

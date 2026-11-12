@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
+import FareNotice from '../components/FareNotice.astro';
 import { destinations } from '../data/destinations';
 import { journeys } from '../data/journeys';
 import { site, path } from '../data/site';
@@ -24,6 +25,7 @@ const faqs = [
       <div class="planner-aside"><div class="frame planner-aside-picture-frame"><Picture name={asidePhoto.image} alt="An overwater escape in the Maldives" class="planner-aside-picture" /></div><p class="planner-note">{site.enquiryEndpoint ? 'This planner creates a brief you can keep, and sends your enquiry to Pardus. It does not confirm a booking.' : 'This planner creates a brief you can keep. It does not send an enquiry or confirm a booking.'}</p></div>
       <form id="journey-planner" class="planner glass" novalidate action={site.enquiryEndpoint || undefined} method={site.enquiryEndpoint ? 'POST' : undefined}>
       <input type="hidden" name="_subject" value="Pardus journey brief" />
+      <input type="hidden" name="fare_notice" value={site.fareNotice} />
       <input type="hidden" name="saved" value="" />
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="visually-hidden" />
       <div class="planner-progress"><span data-step-label>01 / 04 — The shape</span><div class="step-indicators" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i></div></div>
@@ -57,6 +59,7 @@ const faqs = [
         <label for="contact-preference">Preferred reply</label><select id="contact-preference" name="contactPreference"><option>Email</option><option>Telephone</option><option>WhatsApp</option><option>No preference</option></select>
         {site.enquiryEndpoint && <label class="consent-row"><input type="checkbox" name="serviceConsent" required /><span>I understand that Pardus will use these details to respond to this travel enquiry. <a href={path('privacy.html')}>Privacy information</a>.</span></label>}
         <dl class="brief-summary"></dl><p class="local-notice">{site.enquiryEndpoint ? 'Submitting sends this planning brief to Pardus and creates no booking or payment.' : 'Downloading creates a personal planning brief on your device. Nothing is sent to Pardus and no booking is created.'}</p>
+        <FareNotice />
       </fieldset>
       <p class="form-error" id="planner-error" data-error role="alert"></p>
       <div class="planner-actions"><button type="button" class="planner-back" data-back hidden>Back</button><button type="submit" class="btn btn--gold" data-next><span>Add the details</span><Icon name="arrow-right" /></button></div>

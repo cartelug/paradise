@@ -1,3 +1,49 @@
+# Owner requests — 11 November 2026
+
+Implemented from the supplied Pardus handover pack on 12 November 2026. These
+requirements supersede the older rules below only where explicitly stated:
+
+- The hero is still raster lettering, now the aircraft-free V44 artwork. Preserve
+  V37 as history. “Personally curated.” returns as separate live supporting text,
+  outside the exact “Extraordinary journeys.” H1. No new font family. Existing
+  scene photographs, their aircraft, leopard boxes, timing, Pause and permanent
+  preloader remain; aircraft removal applies to the lettering, not the approved
+  source scenes. The V44 master and provenance live in `website/source-assets/v44-hero-lettering/`.
+- Who We Are has a 16–18px body role, generous leading/padding and a short About
+  introduction on solid navy. The leopard keeps its approved zero top/right offsets.
+- Navigation keeps exactly five primary labels and renames Our difference to About.
+  About presents Story, Founder, Vision & Mission, Values, Promise, What We Do,
+  Begin Your Journey in that order. Existing promises and four booking steps live
+  in What We Do. Supplied copy is in `src/data/brand.ts`; independent acceptance
+  wording is in `tests/fixtures/owner-approved-copy.json`.
+- `site.about.storyVoice` selects only the supplied first/third-person narratives;
+  first-person is the requested default. `site.about.showFounder` controls both
+  the section and founder structured data. `site.founder.portrait = null` produces
+  no image or placeholder; only the exact approved natural photo may replace it.
+  The user approved the portrait shown in chat for Saidah Namusoke on 12 November;
+  its original downloadable file is still needed to integrate it without recreating her likeness.
+- Six destinations lead the homepage, listing and enquiry options: Zanzibar,
+  Seychelles, Maldives, Dubai, Maasai Mara, Uganda gorillas. East Africa and Europe
+  follow as broader collections. The first homepage window uses the existing real
+  Zanzibar photograph; the new wildlife photos have visible author/licence credits
+  and provenance in `source-assets/v44-destinations/`. No named property is implied.
+- Package prices require `priceApproved === true`; the default is false. The six
+  previously supplied offer prices and four approved yacht rates remain unchanged.
+  New wildlife offers have no price. Never copy the PDF's research/target prices.
+  `defineOffer` supplies duration/dates/departure/occupancy/currency/taxes, component
+  inclusions/exclusions and restrictions. Unknown details remain for the proposal.
+  A previous price needs a verified higher Pardus price, matching currency and an
+  active valid promotion window. Never animate prices or their containing cards.
+- `site.fareNotice` is the single source of the exact notice. Reuse FareNotice in
+  Terms, enquiries and the planner, and include it at the end of every generated
+  email/brief and in online form data. Flight-inclusive cards link to `terms.html#fares`.
+- This is a review-branch delivery. Do not merge, deploy GitHub Pages or upload the
+  cPanel archive until the owner approves the brand copy, founder details, service
+  collections and commercial data. Do not send the client PDF/invoice as part of
+  implementation. Rebuild source and generated root output together.
+
+Validation commands are documented in the new top section of HANDOVER.md.
+
 # PC hero rotation — 11 November 2026
 
 The owner asked for the five fading hero photographs on PC too. From **1000px up** the same five portrait photographs (`v42-mobile-hero-rotation`) cross-fade in a **tall panel on the right** of the hero while the copy stays on the left. A full-width landscape crop was rejected: the leopards are 26% of a portrait's height, so any wide band cuts their heads or paws (never allowed) and would upscale a 941px master two to four times. If landscape versions are ever supplied, they replace the panel.

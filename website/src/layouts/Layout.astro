@@ -9,6 +9,7 @@ import '../styles/motion.css';
 import '../styles/animations.css';
 import '../styles/preloader.css';
 import '../styles/refine.css';
+import '../styles/owner-updates.css';
 import '../styles/type.css';
 import '../styles/cruises.css';
 import FontFaces from '../components/FontFaces.astro';
@@ -33,6 +34,7 @@ const organizationSchema = {
   name: site.name,
   description: site.description,
   slogan: site.tagline,
+  ...(site.about.showFounder ? { founder: { '@type': 'Person', name: site.founder.name } } : {}),
   url: `${canonical.origin}${path()}`,
   logo: absolute('brand/pardus-primary-512.png'),
   ...(site.email ? { email: site.email } : {}),

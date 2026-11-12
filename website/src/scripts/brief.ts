@@ -1,3 +1,5 @@
+import { site } from '../data/site.ts';
+
 export interface JourneyBrief {
   place: string; pace: string; reason: string; destination: string; style: string; saved: string;
   adults: string; children: string; budget: string; date: string; dateFlexibility: string;
@@ -89,6 +91,6 @@ export function briefText(d: JourneyBrief, delivered = false): string {
     delivered
       ? 'A copy of this brief was submitted to Pardus as an online enquiry when you downloaded it.'
       : 'This brief has not been sent to Pardus and does not confirm a booking.',
-    'No payment, reservation or availability guarantee is created by this document.', ''
+    'No payment, reservation or availability guarantee is created by this document.', '', site.fareNotice, ''
   ].join('\n');
 }

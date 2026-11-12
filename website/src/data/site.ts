@@ -3,6 +3,17 @@ export const site = {
   // One primary tagline, used with the logo everywhere (hero, opening, footer, search results and sharing).
   tagline: 'Travel Curated, Around You',
   description: 'Travel Curated, Around You. Bespoke luxury travel from Uganda and East Africa: island escapes, safaris, city stays, ocean cruises and private yachts, personally arranged.',
+  about: {
+    storyVoice: 'first-person' as 'first-person' | 'third-person',
+    showFounder: true,
+  },
+  founder: {
+    name: 'Saidah Namusoke',
+    // Only an approved, natural photograph. Null renders no image or placeholder.
+    portrait: null as { src: string; alt: string; width: number; height: number } | null,
+  },
+  // Supplied wording: preserve exactly and reuse in terms, forms and briefs.
+  fareNotice: 'IMPORTANT FARE NOTICE\nPlease note that all quoted airfares are subject to change without prior notice, depending on airline availability and fare conditions. The quoted fare is not guaranteed until the booking is confirmed and the ticket is fully issued.\nPARDUS LUXURY ESCAPES shall not be held responsible for any fare increases arising from airline pricing adjustments or changes in availability.\nThank you for choosing PARDUS LUXURY ESCAPES.',
   // Only add business-approved contacts. Empty values never render fake links.
   // The four live mailboxes on pardusescapes.com.
   // General enquiries: footer, contact page and structured data.
@@ -27,7 +38,7 @@ export const site = {
   // planner brief straight into the Pardus inbox. Empty keeps the email-draft fallback (nothing is sent by the website).
   // Paste it here, or set PUBLIC_PARDUS_ENQUIRY_ENDPOINT when building; no other code changes are needed. Once it is set the
   // enquiry button reads "Send my enquiry", the visitor sees a confirmation, and the privacy page describes the delivery.
-  enquiryEndpoint: (import.meta.env.PUBLIC_PARDUS_ENQUIRY_ENDPOINT as string | undefined) || '',
+  enquiryEndpoint: (import.meta.env?.PUBLIC_PARDUS_ENQUIRY_ENDPOINT as string | undefined) || '',
   // Cloudflare Web Analytics beacon token. Empty disables all analytics script injection.
   analyticsId: '',
   // Full profile URLs, e.g. https://www.instagram.com/yourhandle/ and https://www.tiktok.com/@yourhandle.
@@ -58,7 +69,7 @@ export const socialLinks = [
 export const navigation = [
   { label: 'Destinations', href: 'destinations.html' },
   { label: 'Signature journeys', href: 'journeys.html' },
-  { label: 'Our difference', href: 'about.html' },
+  { label: 'About', href: 'about.html' },
   { label: 'Corporate travel', href: 'corporate.html' },
   { label: 'Journal', href: 'journal.html' },
 ];

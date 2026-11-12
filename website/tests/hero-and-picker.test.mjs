@@ -47,7 +47,11 @@ test('the hero preloads only the artwork used by its responsive picture', async 
   assert.match(hero, /fetchpriority="high"/);
   assert.match(hero, /media="\(max-width: 767px\)"/);
   assert.match(hero, /media="\(min-width: 768px\) and \(max-width: 999px\)"/);
-  const preloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
+  const allPreloads = html.match(/<link[^>]*rel="preload"[^>]*as="image"[^>]*>/g) || [];
+  const preloads = allPreloads.filter(link => link.includes('image/avif'));
+  const letteringPreloads = allPreloads.filter(link => link.includes('pardus-v44-hero-lettering'));
+  assert.equal(letteringPreloads.length, 1, 'the separately rendered V44 lettering is preloaded once');
+  assert.match(letteringPreloads[0], /imagesizes="\(max-width: 767px\) 90vw, 46vw"/);
   assert.equal(preloads.length, 3, 'one mutually exclusive preload for each art direction: phones, tablets and PCs');
   assert.match(preloads[0], /pardus-v42-mobile-hero-1-/);
   assert.match(preloads[1], /pardus-coastal-desktop-/);
@@ -62,7 +66,8 @@ test('the hero preloads only the artwork used by its responsive picture', async 
 test('the selected headline, service sentence and both live actions are present', async () => {
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   const hero = html.match(/<section class="hero hero--atlas"[\s\S]*?<\/section>/)?.[0];
-  assert.doesNotMatch(plain(hero), /Personally curated/);
+  assert.match(hero, /<strong class="hero-personal">Personally curated\.<\/strong>/);
+  assert.doesNotMatch(plain(hero.match(/<h1\b[\s\S]*?<\/h1>/)[0]), /Personally curated/, 'the supporting line is live text outside the headline');
   // The globe-and-tagline eyebrow was removed on 1 November 2026: the tagline already sits in the logo lockup directly above.
   assert.doesNotMatch(hero, /hero-tagline|Travel Curated, Around You/);
   assert.match(plain(hero), /^Extraordinary journeys\./);
@@ -117,7 +122,7 @@ test('selected compact collection has portrait photographs and real destination 
   assert.match(section, /pardus-window-maldives-/);
   assert.match(section, /loading="lazy" decoding="async"/);
   assert.doesNotMatch(section, /data-escape-track|escapes-backdrop/);
-  for (const destination of ['maldives', 'seychelles', 'dubai']) assert.ok(section.includes(`destination-${destination}.html`));
+  for (const destination of ['zanzibar', 'seychelles', 'maldives']) assert.ok(section.includes(`destination-${destination}.html`));
 });
 
 test('the service picker retains every service as a tap target and a plain GET form', async () => {

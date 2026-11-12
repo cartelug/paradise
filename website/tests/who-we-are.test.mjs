@@ -55,7 +55,7 @@ test('decorative headlines retain image-error and enlarged-text fallbacks, visib
   assert.match(html, /class="window-seat" data-window-seat data-sticky-quiet/);
   const cards = [...html.matchAll(/<article class="ws-card"[\s\S]*?<\/article>/g)].map(m => m[0]);
   assert.equal(cards.length, 3);
-  for (const [i, amount] of ['2,950', '2,450', '1,250'].entries()) {
+  for (const [i, amount] of ['3,950', '2,450', '2,950'].entries()) {
     assert.ok(cards[i].includes('USD ' + amount));
     assert.match(cards[i], /per person/); assert.match(cards[i], /Two sharing/);
     assert.match(cards[i], /aria-describedby="ws-rate-terms"/);

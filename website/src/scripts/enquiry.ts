@@ -1,5 +1,6 @@
 import { deliverEnquiry } from './deliver';
 import { site } from '../data/site';
+import { enquiryText } from './enquiry-message';
 
 document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form => {
   const status = form.querySelector<HTMLElement>('[data-enquiry-status]')!;
@@ -22,10 +23,7 @@ document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form
   // Native constraint validation runs before submit. Release a whitespace-only name's
   // custom error as soon as it is edited, so the corrected form can submit again.
   name.addEventListener('input', () => name.setCustomValidity(''));
-  const draft = () => {
-    const fields = new FormData(form);
-    return ['PARDUS TRAVEL ENQUIRY', '', `Destination: ${fields.get('destination')}`, `Departure: ${fields.get('date') || 'Flexible'}`, `Travellers: ${fields.get('travellers')}`, `Budget per person: ${fields.get('budget')}`, `Name: ${fields.get('name')}`, `Reply email: ${fields.get('email')}`, `Phone or WhatsApp: ${fields.get('phone') || 'Not provided'}`, '', `Notes: ${fields.get('notes') || 'To discuss'}`, '', 'Please send a proposal in UGX, with a USD reference where useful, and the itinerary, inclusions and terms.'].join('\n');
-  };
+  const draft = () => enquiryText(new FormData(form));
   const fields = form.querySelector<HTMLElement>('[data-enquiry-fields]')!;
   // Shows the confirmation in place of the form, and puts focus on it so a screen reader announces it.
   const confirmSent = () => {
@@ -56,7 +54,7 @@ document.querySelectorAll<HTMLFormElement>('[data-escape-enquiry]').forEach(form
     if (site.enquiryEndpoint) {
       const button = form.querySelector<HTMLButtonElement>('[type="submit"]')!;
       button.disabled = true; status.textContent = 'Sending your enquiry…';
-      const data = new FormData(form); data.set('_subject', 'Pardus travel enquiry');
+      const data = new FormData(form); data.set('_subject', 'Pardus travel enquiry'); data.set('message', draft());
       const sent = await deliverEnquiry(site.enquiryEndpoint, data);
       button.disabled = false;
       if (sent) { confirmSent(); return; }

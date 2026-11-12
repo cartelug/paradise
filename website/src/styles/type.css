@@ -29,6 +29,7 @@
   --fs-figure: clamp(1.4375rem, 1.2292rem + 0.9259vw, 2.0625rem);  /* 23 to 33 px: prices */
   --fs-number: clamp(1.8125rem, 1.4583rem + 1.5741vw, 2.875rem);  /* 29 to 46 px: large step numerals */
   --fs-nav: .9375rem;  /* 15 px: header and footer navigation, fixed so the five labels and the action always fit */
+  --fs-who-body: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem); /* Owner: 16–18 px, including narrow phones. */
 
   /* Leading: tighter as type grows, looser for long reading. */
   --lh-display: 1.04;
@@ -150,3 +151,19 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 .footer-licences p { margin: 0; }
 .footer-licences a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; color: var(--mist); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(236 215 168 / .4); }
 .footer-licences a:hover { color: var(--gold-soft); text-decoration-color: currentColor; }
+
+/* Owner update: readable introduction, native copy and package conditions. */
+.window-seat .ws-description, .window-seat .ws-about { font-size: var(--fs-who-body); font-weight: var(--fw-regular); line-height: var(--lh-body); letter-spacing: var(--ls-body); }
+.window-seat .ws-difference { font-size: var(--fs-body); font-weight: var(--fw-bold); line-height: var(--lh-ui); }
+.hero-personal { display: block; font-size: var(--fs-lead); font-weight: var(--fw-bold); line-height: var(--lh-lead); margin-bottom: 8px; }
+.about-story-photo figcaption, .photo-credit, .package-details, .fare-note, .fare-notice { font-size: var(--fs-small); font-weight: var(--fw-regular); line-height: var(--lh-small); letter-spacing: var(--ls-body); }
+.fare-notice-title, .package-label, .package-details dt, .package-details summary { font-family: var(--font-title); font-weight: var(--fw-bold); }
+.about-value-number { font-family: var(--font-figure); font-size: var(--fs-figure); font-weight: var(--fw-bold); }
+.founder-name { font-size: var(--fs-h2-s); line-height: var(--lh-title); }
+.founder-role { font-size: var(--fs-body); line-height: var(--lh-body); }
+.about-collection h3, .about-foundations h3 { font-size: var(--fs-h3); font-weight: var(--fw-bold); line-height: var(--lh-title); }
+.price-promotion { font-family: var(--font-ui); font-size: var(--fs-small); line-height: var(--lh-small); }
+.price strong { white-space: normal; overflow-wrap: anywhere; }
+.price.price--request strong { font-family: var(--font-title); font-size: var(--fs-h4); line-height: var(--lh-title); letter-spacing: var(--ls-ui); }
+.home[data-enlarged-lettering] .hero--atlas h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
+.home .yacht--ocean .yacht-rate strong { font-family: var(--font-title); font-size: var(--fs-h3); line-height: var(--lh-title); }

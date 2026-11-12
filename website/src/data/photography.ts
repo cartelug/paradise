@@ -1,5 +1,6 @@
 import { v31Photography } from './v31-photography.ts';
 import { travelPhotographs } from './travel-photographs.ts';
+import { ownerPhotographs } from './owner-photographs.ts';
 // V31 photography swap-in. Each place on the site that shows a photograph asks for a slot. When the matching photograph has
 // been dropped into source-assets/v31-photography/ and prepared (scripts/prepare-v31-photography.mjs), the slot uses it,
 // with the alt text written in credits.json; until then it keeps the current V24 picture passed as the fallback.
@@ -22,6 +23,6 @@ export function photo(slot: PhotoSlot, fallback: { image: string; alt: string })
 
 // Largest published WebP for a picture, for social previews. Older pictures have a 1920 px file; V38 ones stop at their native width.
 export function largestImage(name: string): string {
-  const prepared = travelPhotographs.find(entry => entry.asset === name);
+  const prepared = travelPhotographs.find(entry => entry.asset === name) || ownerPhotographs.find(entry => entry.asset === name);
   return `images/${name}-${prepared ? Math.max(...prepared.widths) : 1920}.webp`;
 }

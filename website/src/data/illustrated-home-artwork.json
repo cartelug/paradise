@@ -267,15 +267,15 @@
   },
   "lettering": {
     "hero-lettering": {
-      "source": "../v37-hd-lettering/hero-lettering-master.png",
-      "prefix": "pardus-v37",
-      "width": 2138,
-      "height": 706,
+      "source": "../v44-hero-lettering/hero-lettering-master.png",
+      "prefix": "pardus-v44",
+      "width": 1845,
+      "height": 628,
       "widths": [
         480,
         960,
         1440,
-        2138
+        1845
       ]
     },
     "escape-lettering": {

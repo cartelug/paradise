@@ -38,6 +38,7 @@
 @keyframes hero-slide-drift { from { transform: scale(1); } to { transform: scale(1.045); } }
 .hero-slide-picture, .hero-slide-picture img { display: block; width: 100%; height: 100%; }
 .hero-slide-picture img { object-fit: cover; }
+.hero-rotator::after { content: ''; position: absolute; z-index: 3; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 65%, rgb(5 22 42 / .12)); }
 .hero-slide .leopard-box { left: var(--ml); top: var(--mt); width: var(--mw); height: var(--mh); }
 @keyframes hero-slide-in { from { opacity: 0; } to { opacity: 1; } }
 .hero-copy { position: absolute; z-index: 2; left: var(--atlas-gutter); top: calc(clamp(156px, 11.4vw, 216px) + 48px); width: 49%; max-width: 860px; }

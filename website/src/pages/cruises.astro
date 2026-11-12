@@ -4,12 +4,13 @@ import PageHero from '../components/PageHero.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import Icon from '../components/Icon.astro';
 import Picture from '../components/Picture.astro';
-import { cruiseTypes, priceText, usd } from '../data/offers';
+import { cruiseTypes, priceText, displayPrice } from '../data/offers';
 import { photo } from '../data/photography.ts';
 import { cruisePhoto } from '../data/cruises';
 import { path } from '../data/site';
 const yacht = photo('yacht', { image: 'yacht-dubai-v24', alt: 'A white motor yacht leaving Dubai Marina in warm sunset light' });
 const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
+const yachtPrice = displayPrice(cruiseTypes[0]);
 ---
 <Layout label="Cruises & private yachts" title="Ocean cruises & private yacht experiences" description="Ocean cruise holidays, private Dubai yacht charters, island excursions and sunset celebrations. Tell Pardus your dates and preferences for a tailored proposal." class="inner cruise-page" image="images/ocean-cruise-v40-1920.webp" simpleFooter>
   <PageHero image={cruisePhoto.image} alt={cruisePhoto.alt} eyebrow="Ocean cruises & private yachts" class="cruise-ocean-hero">
@@ -33,16 +34,16 @@ const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
       <div class="frame"><Picture name={yacht.image} alt={yacht.alt} sizes="(max-width: 760px) 100vw, 45vw" /></div>
     </div>
     <div class="wrap">
-      <div class="glance-card on-dark" data-reveal>
+      <div class="glance-card on-dark">
         <div><span class="card-label">Dubai private yacht cruise</span>
           <ul class="incl"><li><Icon name="yacht" /><span>Your own yacht</span></li><li><Icon name="clock" /><span>3 hours on the water</span></li><li><Icon name="users" /><span>Up to 6 guests</span></li></ul></div>
-        <div class="glance-booking"><div class="price"><span class="price-label">From</span><strong>{usd(cruiseTypes[0].fromUSD)}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises.html?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
+        <div class="glance-booking"><div class="price">{yachtPrice.hasStartingPrice && <span class="price-label">From</span>}<strong>{yachtPrice.amount}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises.html?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
       </div>
     </div>
     <div class="wrap">
       <p class="eyebrow" data-reveal>Choose your experience</p>
       <h3>Private charters &amp; excursions</h3>
-      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp" data-reveal><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></article>)}</div>
+      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp"><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></article>)}</div>
       <p class="note">Choose your destination, date, group size and occasion. Your proposal confirms the vessel, route, duration, inclusions and total USD price. Sailings depend on local conditions and availability.</p>
     </div>
   </section>

@@ -14,7 +14,7 @@ const html = Object.fromEntries(await Promise.all(pages.map(async page => [page,
 const text = markup => markup.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 
 test('the five navigation labels are the same on every page, with Plan your escape as the one prominent action', () => {
-  const labels = ['Destinations', 'Signature journeys', 'Our difference', 'Corporate travel', 'Journal'];
+  const labels = ['Destinations', 'Signature journeys', 'About', 'Corporate travel', 'Journal'];
   for (const [page, markup] of Object.entries(html)) {
     const nav = markup.match(/<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/);
     assert.ok(nav, `${page} has no main navigation`);
@@ -60,7 +60,7 @@ test('enquiries are delivered by the connected service when one is set, with a c
   assert.match(script, /deliverEnquiry\(site\.enquiryEndpoint/);
   assert.match(script, /confirmSent\(\)/);
   assert.match(script, /mailto:/, 'email draft remains the fallback');
-  assert.match(script, /Phone or WhatsApp/);
+  assert.match(await read('src/scripts/enquiry-message.ts'), /Phone or WhatsApp/);
 });
 
 test('trust: how booking works, cancellations, contact routes and no invented credentials', async () => {

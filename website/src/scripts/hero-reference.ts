@@ -14,7 +14,7 @@ function fitReference() {
     : window.innerWidth < 1000 || alreadyExpanded
       ? Math.min(64, Math.max(36, window.innerWidth * .06))
       : Math.min(76, Math.max(46, width * .0415));
-  const enlargedText = parseFloat(getComputedStyle(title).fontSize) > expected * 1.2;
+  const enlargedText = parseFloat(getComputedStyle(document.documentElement).fontSize) > 20 || parseFloat(getComputedStyle(title).fontSize) > expected * 1.2;
   const enlarged = wide.matches && enlargedText;
   body.toggleAttribute('data-enlarged-lettering', enlargedText);
   body.toggleAttribute('data-expanded-hero', enlarged);

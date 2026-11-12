@@ -12,6 +12,7 @@ Set PARDUS_QA_ENDPOINT to the same endpoint (default https://formspree.io/f/xxxx
 """
 
 from pathlib import Path
+import json
 import os
 from urllib.parse import parse_qs, urljoin
 
@@ -20,11 +21,20 @@ from playwright.sync_api import expect, sync_playwright
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4181/paradise").rstrip("/") + "/"
 ENDPOINT = os.environ.get("PARDUS_QA_ENDPOINT", "https://formspree.io/f/pardusqa")
 INTRO_KEY = "pardus-intro-v30"
+FARE_NOTICE = json.loads((Path(__file__).parent / "fixtures/owner-approved-copy.json").read_text())["fareNotice"]
 
 
 def open_page(browser, route="journey.html"):
     context = browser.new_context(viewport={"width": 1280, "height": 900}, accept_downloads=True)
     context.add_init_script(f"try {{ sessionStorage.setItem('{INTRO_KEY}', 'seen'); }} catch (e) {{}}")
+    # Capture the external email-app boundary; never navigate to a mail client
+    # or send anything during an automated delivery-failure test.
+    context.add_init_script("""window.__qaMailtos=[];
+      const originalClick=HTMLAnchorElement.prototype.click;
+      HTMLAnchorElement.prototype.click=function(){
+        if(this.href.startsWith('mailto:')){window.__qaMailtos.push(this.href);return;}
+        return originalClick.call(this);
+      };""")
     page = context.new_page()
     page.goto(urljoin(BASE, route), wait_until="networkidle")
     page.wait_for_function("document.documentElement.classList.contains('js') && !document.documentElement.classList.contains('intro-active')", timeout=15000)
@@ -56,6 +66,7 @@ def run(browser):
     assert page.evaluate("document.activeElement.hasAttribute('data-enquiry-thanks')"), "focus must move to the confirmation"
     assert len(sent) == 1, sent
     body = sent[0].decode("utf-8", "replace")
+    assert FARE_NOTICE in body.replace("\r\n", "\n"), "the exact fare notice must reach the enquiry inbox"
     for needle in ("Amina Test", "amina@example.com", "+256 700 000 000", "Honeymoon", "Pardus travel enquiry"):
         assert needle in body, f"{needle!r} missing from the delivered enquiry"
     with page.expect_download() as download:
@@ -77,6 +88,9 @@ def run(browser):
     expect(form.locator("[data-enquiry-status]")).to_contain_text("Online delivery is unavailable")
     expect(form.locator("[data-enquiry-thanks]")).to_be_hidden()
     expect(form.locator("[data-enquiry-fields]")).to_be_visible()
+    draft = page.evaluate("window.__qaMailtos[0]")
+    assert draft.startswith("mailto:bookings@pardusescapes.com?"), draft
+    assert parse_qs(draft.split("?", 1)[1])["body"][0].endswith(FARE_NOTICE)
     context.close()
 
     # 3. The homepage form behaves the same.
