@@ -1,0 +1,7 @@
+---
+import { ownerPhotographs } from '../data/owner-photographs';
+interface Props { image: string; }
+const { image } = Astro.props;
+const photo = ownerPhotographs.find(item => item.asset === image);
+---
+{photo && <p class="photo-credit">Photo: <a href={photo.sourcePage} target="_blank" rel="noopener noreferrer">{photo.photographer}</a> / <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer">{photo.license}</a>. Cropped.</p>}

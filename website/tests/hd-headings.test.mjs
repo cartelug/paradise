@@ -1,8 +1,8 @@
 import test from 'node:test';import assert from 'node:assert/strict';import{readFile,access}from'node:fs/promises';
 const root=new URL('../',import.meta.url);
-test('section one omits the removed phrase while Who We Are uses isolated HD art and a real text/button layer',async()=>{
+test('section one uses V44 artwork with Personally curated as live supporting text, while Who We Are stays readable',async()=>{
  const html=await readFile(new URL('../index.html',root),'utf8');const hero=html.match(/<section class="hero hero--atlas"[\s\S]*?<\/section>/)?.[0];
- assert.ok(hero);assert.doesNotMatch(hero,/Personally curated/);assert.match(hero,/pardus-v37-hero-lettering/);
+ assert.ok(hero);assert.match(hero,/class="hero-personal">Personally curated\.<\/strong>/);assert.match(hero,/pardus-v44-hero-lettering/);
  const who=html.match(/<section class="ws-intro"[\s\S]*?<\/section>/)?.[0];assert.ok(who);
  assert.match(who,/pardus-window-leave-ordinary\.svg/);assert.match(who,/data-ws-lettering/);
  assert.match(who,/class="ws-heading-copy"/);assert.match(who,/class="ws-difference" href="\/paradise\/about\.html"/);

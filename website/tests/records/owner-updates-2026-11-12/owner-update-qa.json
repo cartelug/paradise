@@ -1,0 +1,225 @@
+{
+  "axe": [
+    {
+      "route": "index.html",
+      "width": 390,
+      "violations": [],
+      "passedRules": 50,
+      "incompleteRules": 2
+    },
+    {
+      "route": "about.html",
+      "width": 390,
+      "violations": [],
+      "passedRules": 41,
+      "incompleteRules": 2
+    },
+    {
+      "route": "index.html",
+      "width": 1440,
+      "violations": [],
+      "passedRules": 50,
+      "incompleteRules": 1
+    },
+    {
+      "route": "about.html",
+      "width": 1440,
+      "violations": [],
+      "passedRules": 41,
+      "incompleteRules": 2
+    }
+  ],
+  "hero": [
+    {
+      "width": 320,
+      "textScale": 1,
+      "whoSize": 16,
+      "headingVisible": true
+    },
+    {
+      "width": 320,
+      "textScale": 2,
+      "whoSize": 32,
+      "headingVisible": true
+    },
+    {
+      "width": 360,
+      "textScale": 1,
+      "whoSize": 16,
+      "headingVisible": true
+    },
+    {
+      "width": 360,
+      "textScale": 2,
+      "whoSize": 32,
+      "headingVisible": true
+    },
+    {
+      "width": 390,
+      "textScale": 1,
+      "whoSize": 16.0551,
+      "headingVisible": true
+    },
+    {
+      "width": 390,
+      "textScale": 2,
+      "whoSize": 32,
+      "headingVisible": true
+    },
+    {
+      "width": 430,
+      "textScale": 1,
+      "whoSize": 16.1292,
+      "headingVisible": true
+    },
+    {
+      "width": 430,
+      "textScale": 2,
+      "whoSize": 32,
+      "headingVisible": true
+    },
+    {
+      "width": 600,
+      "textScale": 1,
+      "whoSize": 16.444,
+      "headingVisible": true
+    },
+    {
+      "width": 600,
+      "textScale": 2,
+      "whoSize": 32,
+      "headingVisible": true
+    },
+    {
+      "width": 768,
+      "textScale": 1,
+      "whoSize": 16.7551,
+      "headingVisible": true
+    },
+    {
+      "width": 768,
+      "textScale": 2,
+      "whoSize": 32.0879,
+      "headingVisible": true
+    },
+    {
+      "width": 999,
+      "textScale": 1,
+      "whoSize": 17.1829,
+      "headingVisible": true
+    },
+    {
+      "width": 999,
+      "textScale": 2,
+      "whoSize": 32.5157,
+      "headingVisible": true
+    },
+    {
+      "width": 1000,
+      "textScale": 1,
+      "whoSize": 17.1848,
+      "headingVisible": true
+    },
+    {
+      "width": 1000,
+      "textScale": 2,
+      "whoSize": 32.5176,
+      "headingVisible": true
+    },
+    {
+      "width": 1024,
+      "textScale": 1,
+      "whoSize": 17.2292,
+      "headingVisible": true
+    },
+    {
+      "width": 1024,
+      "textScale": 2,
+      "whoSize": 32.562,
+      "headingVisible": true
+    },
+    {
+      "width": 1280,
+      "textScale": 1,
+      "whoSize": 17.7034,
+      "headingVisible": true
+    },
+    {
+      "width": 1280,
+      "textScale": 2,
+      "whoSize": 33.0362,
+      "headingVisible": true
+    },
+    {
+      "width": 1440,
+      "textScale": 1,
+      "whoSize": 17.9997,
+      "headingVisible": true
+    },
+    {
+      "width": 1440,
+      "textScale": 2,
+      "whoSize": 33.3325,
+      "headingVisible": true
+    },
+    {
+      "width": 1600,
+      "textScale": 1,
+      "whoSize": 18,
+      "headingVisible": true
+    },
+    {
+      "width": 1600,
+      "textScale": 2,
+      "whoSize": 33.6288,
+      "headingVisible": true
+    },
+    {
+      "width": 1920,
+      "textScale": 1,
+      "whoSize": 18,
+      "headingVisible": true
+    },
+    {
+      "width": 1920,
+      "textScale": 2,
+      "whoSize": 34.2214,
+      "headingVisible": true
+    }
+  ],
+  "enquiry": {
+    "destination": "Uganda gorillas",
+    "recipient": "bookings@pardusescapes.com",
+    "fareNoticeExact": true,
+    "externalMessagesSent": 0
+  },
+  "screenshots": [
+    "home-390.png",
+    "who-we-are-390.png",
+    "about-390.png",
+    "home-1440.png",
+    "about-1440.png",
+    "package-uganda-gorillas-390.png",
+    "enquiry-fare-notice-390.png"
+  ],
+  "performance": {
+    "profile": "390x844, DPR3, mobile/touch, CPU4x, 1.6Mbps down, 0.8Mbps up, 40ms latency; local static export; repeat visitor; shipped news fixture",
+    "runs": [
+      {
+        "lcp": 5816,
+        "letteringBytes": 190500
+      },
+      {
+        "lcp": 5280,
+        "letteringBytes": 190500
+      },
+      {
+        "lcp": 5572,
+        "letteringBytes": 190500
+      }
+    ],
+    "medianLcpMs": 5572,
+    "baselineMedianLcpMs": 5608,
+    "changePercent": -0.6
+  }
+}

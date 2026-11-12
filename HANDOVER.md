@@ -1,3 +1,97 @@
+# Owner updates — 11 November 2026
+
+Prepared on 12 November 2026 from the supplied handover pack. This branch is for
+review. The live GitHub Pages site and pardusescapes.com have not been deployed.
+
+## What changed
+
+- Home: aircraft-free V44 headline artwork, separate live “Personally curated.”,
+  safer transparent edges and responsive preload. The approved scene rotation,
+  leopard boxes, logo and permanent preloader remain. Who We Are is more readable
+  and links to About. Six priority destinations appear first in the requested order.
+- About: the exact supplied name story, Saidah Namusoke biography, vision/mission,
+  five values, promise and three service collections, then the existing booking
+  explanation and one enquiry route. First/third-person and founder visibility are
+  configurable in `website/src/data/site.ts`. Founder schema and sitemap are updated.
+- Destinations: proper Maasai Mara and Uganda gorillas pages with real, credited
+  licensed photography; no supplier, wildlife sighting or permit is guaranteed.
+  Europe and East Africa remain wider collections. Unknown details stay unconfirmed.
+- Packages: explicit price approval, complete proposal fields and guarded genuine
+  promotions. Retained approved USD prices have not changed. New packages say
+  Request a quote. Price blocks and their containing cards have no entry/hover motion.
+- Terms and enquiries: exact shared fare notice at `terms.html#fares`, a footer
+  link on every page, the full notice before enquiry/planner submission, and the
+  same wording at the end of drafts/downloads and in online form data. Flight-inclusive
+  cards automatically show the short linked warning. No current package invents flights.
+
+## Owner items before merge and launch
+
+1. Confirm the supplied first-person story, founder biography, vision, mission,
+   values, brand promise and the three service collections. The biography is
+   supplied copy, not an independently verified interview.
+2. Portrait: the user approved the photograph shown in chat for Saidah Namusoke.
+   The original JPG/PNG file is still needed by the build environment. Keep the
+   portrait null until that exact photograph is available; do not generate a likeness.
+3. Obtain supplier quotations and explicitly approve new package prices, dates,
+   departure cities, sharing basis, taxes/fees, permits, inclusions and restrictions.
+   Do not publish the research/illustrative target numbers in either PDF.
+4. Provide verified phone/WhatsApp, company registration/licensing details and
+   social profile URLs. Empty config values continue to render no fake contacts.
+5. Confirm payment/cancellation terms with suppliers and have a consumer/travel-law
+   professional review the supplied fare notice. It does not remove statutory rights.
+6. Connect and test the business's enquiry endpoint if direct online delivery is
+   wanted. Currently `site.enquiryEndpoint` is empty: a visitor opens an email draft
+   addressed to `bookings@pardusescapes.com` and sends it from their email app.
+
+## Enquiry follow-up and quotations
+
+The Pardus travel team monitors `bookings@pardusescapes.com` and follows up each
+enquiry with the written proposal. The owner must assign the named member and
+response time; no individual follow-up owner was supplied. A draft is not delivery
+and an enquiry never books or charges anything.
+
+There is no outgoing quotation/confirmation-email template in this repository.
+Staff must append the full, exact `site.fareNotice` to **every airfare quotation
+and confirmation email**, including manually prepared messages. Quote acceptance,
+ticket issuance and legal review take place with the travel team; the website
+does not create a price lock or an acceptance/payment system.
+
+## Validation evidence
+
+See [website/OWNER_UPDATE_QA.md](website/OWNER_UPDATE_QA.md) for page-by-page changes, all seven screenshots, the full results and measured performance. All 99 Node tests, 12 browser phases, 245 route/viewport checks, 245 mobile fit cases, 26 hero cases and four axe scans pass. The final yacht-card detail changes also pass targeted matrix and fit checks; approved rates remain unchanged.
+
+## Reproduce validation and packages
+
+From `website/`, after `npm ci`:
+
+```sh
+npm test
+npm run check
+PARDUS_BASE=/paradise/ npm run build
+npm run export:github
+npm run verify:export
+PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/browser-smoke.py
+PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/mobile-fit.py
+PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/owner-updates-qa.py
+python tests/owner-variants.py
+npm run build:domain
+PARDUS_BASE=/ npm run verify:export
+npm run package:cpanel
+```
+
+Browser scripts require the exported site already served at the configured base.
+They use simulated Chromium viewports, not physical devices. The shared desktop
+preview relay was unavailable in this environment; acceptance runs use the built
+export on localhost. Sample enquiry and online delivery tests intercept messages;
+no real customer or staff email is sent. QA results, screenshots and measured
+performance are recorded with the delivery report. Local lab LCP is not a claim
+about real users on the live domain.
+
+The cPanel ZIP is a build artifact only. Uploading it or merging the GitHub branch
+would publish the owner-review material and must wait for approval.
+
+---
+
 # Pardus Luxury Escapes — Final destination presentation
 
 ## Illustrated mobile homepage — 24 October 2026

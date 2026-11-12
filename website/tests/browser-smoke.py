@@ -5,6 +5,7 @@ Run after building, exporting and starting a local static server:
 Set PARDUS_QA_BASE to test another served export (including GitHub Pages).
 Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,life,phone,picker,windowseat,rotation,animations,hero,flows,fallback.
 Set PARDUS_QA_CHROMIUM to a Chromium executable when Playwright's own browser is not installed.
+Set PARDUS_QA_ROUTES to a comma-separated list for targeted checks after a bounded change; default is every exported page.
 HTML routes are discovered from the repository export. Screenshots and persistent
 artifacts are not written. Form submissions are intercepted inside the test.
 The optional remote news response uses the shipped feed for repeatable checks;
@@ -24,6 +25,10 @@ from playwright.sync_api import expect, sync_playwright
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
+REQUESTED_ROUTES = [route for route in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if route]
+if REQUESTED_ROUTES:
+    assert set(REQUESTED_ROUTES).issubset(ROUTES), f"Unknown QA routes: {set(REQUESTED_ROUTES) - set(ROUTES)}"
+    ROUTES = [route for route in ROUTES if route in REQUESTED_ROUTES]
 VIEWPORTS = [(320, 568), (360, 740), (390, 844), (412, 915), (768, 1024), (1024, 768), (1440, 900)]
 PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,life,phone,picker,windowseat,rotation,animations,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))
@@ -87,7 +92,10 @@ def scroll_and_check_images(page, label):
         pending = page.evaluate(f"() => ({LAYOUT_IMAGES})().filter(img => !img.complete).length")
         if not pending:
             break
-        page.evaluate(f"() => ({LAYOUT_IMAGES})().find(img => !img.complete).scrollIntoView({{block: 'center', behavior: 'instant'}})")
+        # An image can finish between the pending-count read and this evaluation.
+        # Keep the final completion/broken-image assertions below; only the
+        # unnecessary scroll becomes a no-op when nothing is pending anymore.
+        page.evaluate(f"() => ({LAYOUT_IMAGES})().find(img => !img.complete)?.scrollIntoView({{block: 'center', behavior: 'instant'}})")
         page.wait_for_timeout(250)
     # Hidden tabs are checked when activated in the keyboard interaction test.
     page.wait_for_function(
@@ -340,11 +348,15 @@ def service_picker(browser):
     navigate(page)
     picker = page.locator("[data-picker]")
     assert picker.locator('input[name="services"]').count() == 13
-    page.evaluate("document.querySelector('.picker').scrollIntoView()")
+    # CSS smooth scrolling can still be moving when the first synthetic tap is
+    # dispatched. Jump to this fixture; the tap and all selection assertions stay real.
+    page.evaluate("document.querySelector('.picker').scrollIntoView({behavior:'instant',block:'start'})")
     summary = page.locator("[data-picker-summary]")
     expect(summary).to_contain_text("Tap to choose")
     for label in ["Flights", "Luxury hotels & resorts", "Honeymoons"]:
-        picker.locator(".pick", has_text=label).tap()
+        choice = picker.locator(".pick", has_text=label)
+        choice.tap()
+        expect(choice.locator('input[name="services"]')).to_be_checked()
     expect(summary).to_contain_text("3 selected")
     expect(summary).to_contain_text("Flights, Hotels, Honeymoons")
     expect(picker.locator('input[name="services"]:checked')).to_have_count(3)
@@ -648,7 +660,7 @@ def hero_and_menu(browser):
     assert page.evaluate("getComputedStyle(document.documentElement).overflow") == "hidden"
     links = menu.locator(".menu-nav a")
     # The same five labels as the header on every page (site.ts navigation).
-    assert [" ".join(text.split()[:2]) for text in menu.locator(".menu-nav a strong").all_inner_texts()] == ["Destinations", "Signature journeys", "Our difference", "Corporate travel", "Journal"]
+    assert [" ".join(text.split()[:2]) for text in menu.locator(".menu-nav a strong").all_inner_texts()] == ["Destinations", "Signature journeys", "About", "Corporate travel", "Journal"]
     assert links.count() == 5
     expect(menu.locator('.menu-nav a[aria-current="page"]')).to_contain_text("Destinations")
     assert menu.locator(".menu-nav .icon-pin, .menu-nav svg").count() >= 4  # symbols, not emoji

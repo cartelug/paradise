@@ -1,0 +1,32 @@
+{
+  "photos": [
+    {
+      "asset": "maasai-mara-v44",
+      "file": "maasai-mara.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Landscape,_Masai_Mara,_Kenya_(52452028118).jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Landscape%2C_Masai_Mara%2C_Kenya_%2852452028118%29.jpg",
+      "photographer": "flowcomm",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "alt": "An antelope in the open grasslands of the Maasai Mara, Kenya",
+      "position": "50% 55%",
+      "sha256": "182cab74db47db7e38751dc9ef53a0485fd3bba3c7087d1f66c538adf1d81bde",
+      "verifiedOn": "2026-11-12",
+      "changes": "Resized, cropped responsively and encoded as AVIF/WebP. No content retouching."
+    },
+    {
+      "asset": "uganda-gorillas-v44",
+      "file": "uganda-gorillas.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mountain_gorilla_(Gorilla_beringei_beringei)_female_Bwindi_Uganda.jpg",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Mountain_gorilla_%28Gorilla_beringei_beringei%29_female_Bwindi_Uganda.jpg",
+      "photographer": "Charles J. Sharp",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "alt": "A female mountain gorilla in Bwindi Impenetrable National Park, Uganda",
+      "position": "50% 45%",
+      "sha256": "667d516cd84331493a3532e65b11112ea123b65f07a991a087955ec9622e7df3",
+      "verifiedOn": "2026-11-12",
+      "changes": "Resized, cropped responsively and encoded as AVIF/WebP. No content retouching."
+    }
+  ]
+}

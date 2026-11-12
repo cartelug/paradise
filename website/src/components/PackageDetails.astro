@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import FareNotice from './FareNotice.astro';
+import { type EscapeOffer } from '../data/offers';
+interface Props { offer: EscapeOffer; }
+const { offer } = Astro.props;
+const fields = [
+  ['Duration', offer.duration.days && offer.duration.nights ? `${offer.duration.days} days / ${offer.duration.nights} nights` : offer.nights],
+  ['Travel dates', offer.travelDates || 'Tailored to your dates; availability confirmed in your proposal'],
+  ['Departure city', offer.departureCity || 'Tell us where you will depart from'],
+  ['Occupancy', offer.occupancyBasis || 'Room and sharing arrangements confirmed in your proposal'],
+  ['Currency', offer.currency],
+  ['Taxes & fees', offer.taxesFees || 'Itemised in your proposal before you confirm'],
+];
+const status = { included: 'Included', excluded: 'Excluded; quoted separately', 'on-request': 'On request; confirmed in your proposal' };
+---
+<details class="package-details">
+  <summary><span>Dates, inclusions &amp; conditions</span><Icon name="plus" /></summary>
+  <dl>{fields.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+  <dl class="package-components" aria-label="Travel components">
+    {Object.entries(offer.components).map(([label, value]) => <div><dt>{label.charAt(0).toUpperCase() + label.slice(1)}</dt><dd>{status[value]}</dd></div>)}
+  </dl>
+  {offer.exclusions.length > 0 && <div><p class="package-label">Not included</p><ul>{offer.exclusions.map(item => <li>{item}</li>)}</ul></div>}
+  <div><p class="package-label">Before you confirm</p><ul>{offer.restrictions.map(item => <li>{item}</li>)}</ul></div>
+</details>
+{offer.components.flights === 'included' && <FareNotice compact />}

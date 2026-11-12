@@ -1,11 +1,12 @@
 ---
 import { path } from '../data/site';
 import { travelPhotographs } from '../data/travel-photographs.ts';
+import { ownerPhotographs } from '../data/owner-photographs';
 interface Props { name: string; alt: string; class?: string; eager?: boolean; sizes?: string; }
 const { name, alt, class: className, eager = false, sizes = '(max-width: 760px) 100vw, 60vw' } = Astro.props;
 // V38 photographs are published at their native 16:10 shape with only the widths the master supports, and carry a focal point
 // so every container crop keeps the main subject. Every older picture keeps the 640/1280/1920 set and 3:2 shape.
-const prepared = travelPhotographs.find(entry => entry.asset === name);
+const prepared = travelPhotographs.find(entry => entry.asset === name) || ownerPhotographs.find(entry => entry.asset === name);
 const widths = prepared ? prepared.widths : [640, 1280, 1920];
 const srcWidth = prepared ? (widths.includes(1280) ? 1280 : widths[widths.length - 1]) : 1280;
 const srcHeight = prepared ? Math.round(srcWidth * prepared.height / prepared.width) : 853;

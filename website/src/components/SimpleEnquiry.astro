@@ -1,11 +1,13 @@
 ---
 import Icon from './Icon.astro';
+import FareNotice from './FareNotice.astro';
 import { destinations } from '../data/destinations';
 import { site, path } from '../data/site';
 interface Props { id?: string; defaultDestination?: string; }
 const { id = 'escape-enquiry', defaultDestination = '' } = Astro.props;
 ---
 <form class="form" data-escape-enquiry data-recipient={site.bookingsEmail} data-delivery={site.enquiryEndpoint ? 'online' : 'email'}>
+  <input type="hidden" name="fare_notice" value={site.fareNotice} />
   <div class="form" data-enquiry-fields>
   <div class="form-grid">
     <div class="field"><label for={`${id}-destination`}>Where would you like to go?</label><select id={`${id}-destination`} name="destination"><option>Help me choose</option>{destinations.map(d => <option selected={defaultDestination === d.name}>{d.name}</option>)}<option selected={defaultDestination === 'Ocean cruise'}>Ocean cruise</option><option selected={defaultDestination === 'Private boat & yacht experience'}>Private boat & yacht experience</option><option>Somewhere else</option></select></div>
@@ -17,7 +19,8 @@ const { id = 'escape-enquiry', defaultDestination = '' } = Astro.props;
     <div class="field field--wide"><label for={`${id}-phone`}>Phone or WhatsApp <span>(optional)</span></label><input id={`${id}-phone`} name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" placeholder="+256 700 000 000" aria-describedby={`${id}-phone-hint`} /><small class="field-hint" id={`${id}-phone-hint`}>Include the country code if you would like to be reached on WhatsApp.</small></div>
   </div>
   <div class="field"><label for={`${id}-notes`}>Anything you have in mind? <span>(optional)</span></label><textarea id={`${id}-notes`} name="notes" rows="3" maxlength="1500" placeholder="A honeymoon, family holiday, private cruise, or a place you have always wanted to visit…"></textarea></div>
-  <div class="form-actions"><button class="btn btn--gold requires-js" type="submit"><Icon name={site.enquiryEndpoint ? 'arrow-right' : 'mail'} /> {site.enquiryEndpoint ? 'Send my enquiry' : 'Prepare my email enquiry'}</button><button class="btn btn--ghost requires-js" type="button" data-download-enquiry><Icon name="download" /> Save a copy</button><noscript><a class="btn btn--gold" href={`mailto:${site.bookingsEmail}?subject=Pardus%20travel%20enquiry`}>Email your travel enquiry</a></noscript></div>
+  <FareNotice />
+  <div class="form-actions"><button class="btn btn--gold requires-js" type="submit"><Icon name={site.enquiryEndpoint ? 'arrow-right' : 'mail'} /> {site.enquiryEndpoint ? 'Send my enquiry' : 'Prepare my email enquiry'}</button><button class="btn btn--ghost requires-js" type="button" data-download-enquiry><Icon name="download" /> Save a copy</button><noscript><a class="btn btn--gold" href={`mailto:${site.bookingsEmail}?subject=Pardus%20travel%20enquiry&body=${encodeURIComponent(site.fareNotice)}`}>Email your travel enquiry</a></noscript></div>
   <p class="form-note">{site.enquiryEndpoint ? 'Your enquiry goes straight to the Pardus travel team, and we reply by email. Saving a copy is optional and does not send anything. This does not make a booking.' : 'Opens a draft in your email app. Send it there to contact Pardus. This does not make a booking.'} <a href={path('privacy.html')}>Privacy</a></p>
   </div>
   <p class="form-status" data-enquiry-status role="status" aria-live="polite"></p>

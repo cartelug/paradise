@@ -1,13 +1,14 @@
 ---
 import Icon from './Icon.astro';
+import Picture from './Picture.astro';
 import { path } from '../data/site';
-import { offerFor, displayPrice } from '../data/offers';
+import { offerFor, destinationFor, displayPrice } from '../data/offers';
 import '../styles/window-seat.css';
 const images = (name: string, ext: string) => [224, 448, 887].map(w => `${path(`images/pardus-window-${name}-${w}.${ext}`)} ${w}w`).join(', ');
 const cards = [
-  { slug: 'maldives', alt: 'An illustrative sunset over thatched overwater villas and a wooden jetty in a turquoise lagoon.' },
-  { slug: 'seychelles', alt: 'An illustrative Seychelles shore with sculpted granite boulders, palms and clear turquoise shallows.' },
-  { slug: 'dubai', alt: 'An illustrative blue-hour Dubai Marina skyline with white yachts and golden reflections.' },
+  { slug: 'zanzibar', photograph: destinationFor('zanzibar'), alt: destinationFor('zanzibar').alt },
+  { slug: 'seychelles', photograph: null, alt: 'An illustrative Seychelles shore with sculpted granite boulders, palms and clear turquoise shallows.' },
+  { slug: 'maldives', photograph: null, alt: 'An illustrative sunset over thatched overwater villas and a wooden jetty in a turquoise lagoon.' },
 ].map(card => ({ ...card, offer: offerFor(card.slug), price: displayPrice(offerFor(card.slug)) }));
 const categories = [
   { label: 'Islands', filter: 'islands' },
@@ -28,7 +29,8 @@ const categories = [
         <img class="ws-heading-art" src={path('images/pardus-window-leave-ordinary.svg')} width="619" height="128" alt="" aria-hidden="true" loading="eager" decoding="async" data-ws-lettering />
       </h2>
       <p class="ws-description">Flights, stays, safaris and private escapes,<br class="ws-copy-break" /> planned around you.</p>
-      <a class="ws-difference" href={path('about.html')}><span>Our difference</span><Icon name="arrow-right" /></a>
+      <p class="ws-about">The leopard inspires our name. Personal attention shapes every journey.</p>
+      <a class="ws-difference" href={path('about.html')}><span>About Pardus</span><Icon name="arrow-right" /></a>
     </section>
 
     <section class="ws-destinations" id="destinations" aria-labelledby="featured-title">
@@ -42,11 +44,11 @@ const categories = [
         </nav>
       </div>
       <div class="ws-cards">
-        {cards.map(({ slug, alt, offer, price }) => <article class="ws-card" aria-labelledby={`ws-title-${slug}`} aria-describedby="ws-rate-terms">
+        {cards.map(({ slug, photograph, alt, offer, price }) => <article class="ws-card" aria-labelledby={`ws-title-${slug}`} aria-describedby="ws-rate-terms">
           <a class="ws-window" href={path(`destination-${slug}.html`)} aria-label={`Explore ${offer.label}`}>
-            <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>
+            {photograph ? <Picture name={photograph.image} alt={alt} sizes="(max-width: 760px) 28vw, 320px" /> : <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>}
           </a>
-          <h3 id={`ws-title-${slug}`}>{offer.label}</h3>
+          <h3 id={`ws-title-${slug}`}>{slug === 'zanzibar' ? 'Zanzibar' : offer.label}</h3>
           <p class="ws-nights">{offer.nights.replace(/-night.*$/, ' nights')}</p>
           <div class="ws-price"><span class="ws-from">{price.hasStartingPrice ? 'From' : ''}</span><strong>{price.amount}{price.hasStartingPrice && <><span aria-hidden="true"> pp</span><span class="visually-hidden"> per person</span></>}</strong>{price.hasStartingPrice && <span class="ws-basis">Two sharing</span>}</div>
           <a class="ws-trip" href={path(`destination-${slug}.html`)} aria-label={`View ${offer.label} trip`}><Icon name="arrow-right" /></a>

@@ -5,6 +5,8 @@ import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import OfferPrice from '../components/OfferPrice.astro';
 import OfferInclusions from '../components/OfferInclusions.astro';
 import Icon from '../components/Icon.astro';
+import PackageDetails from '../components/PackageDetails.astro';
+import PhotoCredit from '../components/PhotoCredit.astro';
 import Picture from '../components/Picture.astro';
 import DubaiDiscoveries from '../components/DubaiDiscoveries.astro';
 import { dubaiExperiencePhotos } from '../data/dubai-gallery';
@@ -21,6 +23,8 @@ const ideas: Record<string, Idea[]> = {
   seychelles:[{icon:'sun',title:'A beautiful beach base',text:'Choose a beachfront resort or a quieter island stay, with time for the coast and nature.'},{icon:'compass',title:'Island-hopping',text:'Combine Mahé, Praslin or La Digue, with transfers arranged around a comfortable travel pace.'},{icon:'yacht',title:'Private boat days',text:'Add an island excursion, a snorkelling trip or a sunset cruise to your itinerary.'}],
   dubai:[{icon:'city',title:'Hotels, shopping & dining',text:'A luxury city hotel or a beach stay, with time for shopping, restaurants and the attractions you want to see.'},{icon:'sun',title:'Desert experiences',text:'Trade the skyline for the dunes with a desert excursion and an evening dinner arrangement.'},{icon:'yacht',title:'Your private yacht',text:'A skyline cruise, sunset celebration or a private boat experience for your family, partner or group.'}],
   africa:[{icon:'bed',title:'Safari stays',text:'Choose lodges and camps across Uganda, Kenya or Tanzania, matched to your route and preferred comfort.'},{icon:'paw',title:'Private guided experiences',text:'Build your journey around game drives, landscapes and the interests of the people travelling.'},{icon:'waves',title:'Safari & beach',text:'Pair time in the wild with a Zanzibar beach stay or another Indian Ocean escape.'}],
+  'maasai-mara':[{icon:'bed',title:'Your safari base',text:'Discuss camp and lodge options around the route, your dates and the people travelling.'},{icon:'paw',title:'Time on the plains',text:'Consider guided game drives and enough unhurried time to enjoy the landscape. Wildlife is never guaranteed.'},{icon:'compass',title:'A connected route',text:'Confirm arrival, park arrangements and onward transfers together in your proposal.'}],
+  'uganda-gorillas':[{icon:'paw',title:'Gorilla permit planning',text:'Permit availability and park requirements are checked before a forest visit is confirmed.'},{icon:'bed',title:'A thoughtful forest stay',text:'Discuss accommodation in relation to your agreed route and practical needs.'},{icon:'compass',title:'The journey to Bwindi',text:'Allow realistic travel and recovery time, with every transfer and inclusion confirmed in writing.'}],
   zanzibar:[{icon:'paw',title:'Safari first',text:'Begin with a Kenya or Tanzania safari. We arrange the route, lodges and onward connections.'},{icon:'sun',title:'The Zanzibar coast',text:'Finish on the beach with a comfortable resort, private transfers and time to enjoy the island.'},{icon:'yacht',title:'Dhow cruises & culture',text:'Add Stone Town, a spice visit or a sunset dhow cruise. A Zanzibar-only holiday is also available to plan.'}],
   europe:[{icon:'landmark',title:'Beautiful city stays',text:'Start with the city you want to see and a hotel placed for the sights, restaurants and neighbourhoods you enjoy.'},{icon:'compass',title:'Private tours & experiences',text:'Discover culture, food and landmarks with guided experiences and enough space to explore at your own pace.'},{icon:'waves',title:'A Mediterranean finish',text:'Add an island, a coastline or a second city, with flights, rail or transfers brought into one itinerary.'}],
 };
@@ -40,12 +44,14 @@ const [fx, fy] = focus[d.slug] || ['55%', '50%'];
 
   <section class="sec sec--ivory glance-sec" aria-label="Your escape at a glance">
     <div class="wrap glance">
-      <div class="glance-card on-dark" data-reveal>
-        <div><span class="card-label">Your escape includes</span><OfferInclusions items={offer.inclusions} /></div>
+      <div class="glance-card on-dark">
+        <div><span class="card-label">{offer.priceApproved ? 'Your escape includes' : 'Plan your proposal'}</span><OfferInclusions items={offer.inclusions} /></div>
         <div class="glance-booking"><OfferPrice offer={offer} /><a class="btn btn--gold" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <Icon name="arrow-right" /></a></div>
         <p class="glance-note">{priceNote}</p>
+        <PackageDetails offer={offer} />
       </div>
     </div>
+    <div class="wrap"><PhotoCredit image={d.image} /></div>
     <div class="wrap split">
       <div><p class="eyebrow" data-reveal>The destination</p><h2 data-split>{d.title}</h2></div>
       <div class="prose" data-reveal>{d.paragraphs.map(paragraph => <p>{paragraph}</p>)}<p>Flights, stays, transfers and experiences can be brought together in a proposal shaped around your dates and budget.</p><a class="link" href="#enquire">Make it your journey <Icon name="arrow-down" /></a></div>

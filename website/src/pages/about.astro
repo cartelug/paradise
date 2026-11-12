@@ -1,43 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import BookingSteps from '../components/BookingSteps.astro';
 import { path, site } from '../data/site';
+import { brand } from '../data/brand';
 const promises = [
   { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser, one conversation. The itinerary, the arrangements and every practical question stay in one place.' },
   { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, budget, occasion and fellow travellers shape the plan, never a standard package.' },
   { icon: 'shield' as const, title: 'Clear before you book', text: 'Review your itinerary, price, inclusions, payment schedule and supplier terms before confirming.' },
 ];
+const portrait = site.founder.portrait;
 ---
-<Layout label="Our difference" title="Our difference" description="About Pardus Luxury Escapes: personal attention, thoughtful details and one clear plan. How a booking works, how we quote in UGX, and what to expect before you confirm." class="inner" simpleFooter>
-  <PageHero eyebrow="Our difference">
-    <Fragment slot="title">Luxury travel. <em>Less to think about.</em></Fragment>
+<Layout label="About PARDUS" title="About PARDUS — Our story & founder" description="Discover the leopard-inspired story of PARDUS, founder Saidah Namusoke, our vision, mission and values, and travel curated around you." class="inner about-page" simpleFooter>
+  <PageHero eyebrow="About Pardus">
+    <Fragment slot="title">A name. A vision. <em>Your journey.</em></Fragment>
     <p class="lead">You tell us where you want to go. We bring the flights, hotels, transfers and experiences into one journey, planned around you.</p>
   </PageHero>
-  <section class="sec sec--ivory blend-top" style="--blend:#050c1a" aria-labelledby="about-title">
-    <div class="wrap statement">
-      <p class="eyebrow" data-reveal>About Pardus</p>
-      <h2 id="about-title" data-split>Arranged around <em>you.</em></h2>
-      <p data-reveal>Pardus Luxury Escapes arranges bespoke luxury travel from Africa to the world: island escapes in the Maldives and Seychelles, city breaks in Dubai, East African safaris, Europe, and private time on the water. A Pardus adviser brings every part of the trip together, so you do not have to.</p>
-      <p data-reveal>Every proposal is quoted in UGX, with a USD reference where useful, and states what is included before you decide.</p>
-    </div>
-  </section>
-  <section class="sec sec--sand" aria-label="What to expect">
-    <div class="wrap"><h2 class="visually-hidden">What to expect</h2><div class="promises promises--light" data-stagger="130">{promises.map(item => <article class="promise" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div>
-  </section>
-  <section class="sec sec--ivory" id="how-booking-works" aria-labelledby="booking-title">
+
+  <section class="sec sec--ivory blend-top about-section" style="--blend:#050c1a" id="story" aria-labelledby="story-title" data-about-section="story">
     <div class="wrap">
-      <div class="sec-head"><div><p class="eyebrow" data-reveal>How booking works</p><h2 id="booking-title" data-split>Four steps. <em>One clear plan.</em></h2></div><p data-reveal>A simple path from the first message to the journey itself, with the terms in front of you before you commit.</p></div>
-      <BookingSteps />
+      <p class="eyebrow">01 / Our name</p>
+      <h2 id="story-title">The Story Behind the Name</h2>
+      <p class="lead about-story-lead">{brand.storyIntro}</p>
+      <div class="about-story-layout">
+        <figure class="about-story-photo">
+          <Picture name="africa-v24" alt="Elephants crossing the open wilderness of Amboseli National Park, Kenya" sizes="(max-width: 760px) 100vw, 42vw" />
+          <figcaption>Amboseli, Kenya. Photograph by Sweder Breet / Unsplash.</figcaption>
+        </figure>
+        <div class="prose">
+          {brand.story[site.about.storyVoice].map(paragraph => <p>{paragraph}</p>)}
+          <p class="about-philosophy">{brand.philosophy}</p>
+          <a class="link" href={path('journey.html')}>Explore Our Journeys <Icon name="arrow-right" /></a>
+        </div>
+      </div>
     </div>
   </section>
-  {site.credentials.length > 0 && <section class="sec sec--sand" aria-labelledby="credentials-title"><div class="wrap"><h2 id="credentials-title" style="font-size:var(--fs-h2-s);margin-bottom:18px">Company details</h2><dl class="credentials">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div></section>}
-  <section class="sec sec--sand" aria-labelledby="places-title">
-    <div class="wrap statement">
-      <h2 id="places-title" data-split>Beautiful places. <em>Thoughtfully arranged.</em></h2>
-      <p data-reveal>Maldives and Seychelles island escapes. Dubai city breaks. East African safaris. Europe, family journeys and private time on the water.</p>
-      <a class="btn btn--ink" href={path('journey.html')} data-reveal>Plan your escape <Icon name="arrow-right" /></a>
+
+  {site.about.showFounder && <section class="sec sec--night about-section" id="founder" aria-labelledby="founder-title" data-about-section="founder">
+    <div class="wrap">
+      <p class="eyebrow">Meet the Founder &amp; Managing Director</p>
+      <h2 id="founder-title">The Vision Behind PARDUS</h2>
+      <div class:list={['founder-layout', { 'founder-layout--portrait': Boolean(portrait) }]}>
+        <div class="founder-identity">
+          <h3 class="founder-name">{site.founder.name}</h3>
+          <p class="founder-role">Founder &amp; Managing Director | PARDUS LUXURY ESCAPES</p>
+          {portrait && <img class="founder-portrait" data-founder-portrait src={path(portrait.src)} alt={portrait.alt} width={portrait.width} height={portrait.height} loading="lazy" decoding="async" />}
+        </div>
+        <div class="prose">
+          {brand.founder.map(paragraph => <p>{paragraph}</p>)}
+          <div class="founder-signoff"><p>PARDUS LUXURY ESCAPES - Travel Curated Around You!</p><a class="link" href={path('journey.html')}>Every Journey Has a Story. Let Us Curate Yours. <Icon name="arrow-right" /></a></div>
+        </div>
+      </div>
     </div>
+  </section>}
+
+  <section class="sec sec--sand about-section" id="vision-mission" aria-labelledby="vision-mission-title" data-about-section="vision-mission">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Our direction</p><h2 id="vision-mission-title">Our Vision &amp; Mission</h2></div></div>
+      <div class="about-foundations">
+        <article><h3>Our Vision</h3><p>{brand.vision}</p></article>
+        <article><h3>Our Mission</h3><p>{brand.mission}</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--ivory about-section" id="values" aria-labelledby="values-title" data-about-section="values">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">What guides us</p><h2 id="values-title">Our Five Core Values</h2></div></div>
+      <ol class="about-values">{brand.values.map((value, index) => <li><span class="about-value-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><h3>{value.name}</h3><p>{value.text}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="sec sec--night about-section" id="brand-promise" aria-labelledby="brand-promise-title" data-about-section="brand-promise">
+    <div class="wrap about-promise">
+      <p class="eyebrow">Brand Promise</p>
+      <h2 id="brand-promise-title">{brand.promise[0]}</h2>
+      <p class="lead">{brand.promise[1]}</p>
+      <p>{brand.promise[2]}</p>
+    </div>
+  </section>
+
+  <section class="sec sec--ivory about-section" id="what-we-do" aria-labelledby="what-we-do-title" data-about-section="what-we-do">
+    <div class="wrap">
+      <p class="eyebrow">One Pardus. Your possibilities.</p>
+      <h2 id="what-we-do-title">What We Do</h2>
+      <p class="lead">Three service collections, brought together through one personal enquiry.</p>
+      <div class="about-collections">{brand.collections.map(collection => <article class="about-collection"><span class="badge"><Icon name={collection.icon} /></span><h3>{collection.name}</h3><p>{collection.text}</p></article>)}</div>
+      <ul class="about-services">{brand.services.map(service => <li><Icon name="check" /><span>{service}</span></li>)}</ul>
+      <p class="lead">Premium does not mean inaccessible.</p>
+      <div class="about-difference">
+        <h3>Luxury travel. Less to think about.</h3>
+        <div class="prose"><h4>Arranged around you.</h4><p>Pardus Luxury Escapes arranges bespoke luxury travel from Africa to the world: island escapes in the Maldives and Seychelles, city breaks in Dubai, East African safaris, Europe, and private time on the water. A Pardus adviser brings every part of the trip together, so you do not have to.</p><p>Every proposal is quoted in UGX, with a USD reference where useful, and states what is included before you decide.</p></div>
+        <div class="promises promises--light">{promises.map(item => <article class="promise"><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+      </div>
+      <div class="about-booking" id="how-booking-works"><p class="eyebrow">How booking works</p><h3>Four steps. One clear plan.</h3><p>A simple path from the first message to the journey itself, with the terms in front of you before you commit.</p><BookingSteps /></div>
+      {site.credentials.length > 0 && <div class="about-difference"><h3>Company details</h3><dl class="credentials">{site.credentials.map(item => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div>}
+      <div class="about-difference prose"><h3>Beautiful places. Thoughtfully arranged.</h3><p>Maldives and Seychelles island escapes. Dubai city breaks. East African safaris. Europe, family journeys and private time on the water.</p></div>
+    </div>
+  </section>
+
+  <section class="sec sec--sand about-section about-begin" id="begin-your-journey" aria-labelledby="begin-your-journey-title" data-about-section="begin-your-journey">
+    <div class="wrap statement"><p class="eyebrow">A thoughtful beginning</p><h2 id="begin-your-journey-title">Begin Your Journey</h2><div class="actions"><a class="btn btn--ink" href={path('journey.html')}>Plan Your Escape <Icon name="arrow-right" /></a><a class="link" href={path('journey.html')}>Explore Our Journeys <Icon name="arrow-right" /></a></div></div>
   </section>
 </Layout>

@@ -27,15 +27,23 @@ for (const id of letteringOnly ? [] : ids) {
 for (const id of ['hero-lettering', 'escape-lettering', 'who-lettering', 'who-lettering-mobile']) {
   if (selectedArt && id !== selectedArt) continue;
   const hdMaster = resolve(root, 'source-assets/v37-hd-lettering', `${id}-master.png`);
+  const ownerMaster = resolve(root, 'source-assets/v44-hero-lettering', `${id}-master.png`);
   const newMaster = resolve(root, 'source-assets/v36-immersive-lettering', `${id}-master.png`);
   if (id.startsWith('who-lettering') && !await exists(hdMaster)) continue;
-  const file = await exists(hdMaster) ? hdMaster : await exists(newMaster) ? newMaster : resolve(source, `${id}-refined.png`);
-  const prefix = file === hdMaster ? 'pardus-v37' : file === newMaster ? 'pardus-v36' : 'pardus-v34';
+  const file = id === 'hero-lettering' && await exists(ownerMaster) ? ownerMaster : await exists(hdMaster) ? hdMaster : await exists(newMaster) ? newMaster : resolve(source, `${id}-refined.png`);
+  const prefix = file === ownerMaster ? 'pardus-v44' : file === hdMaster ? 'pardus-v37' : file === newMaster ? 'pardus-v36' : 'pardus-v34';
   const original = await sharp(file).metadata();
   const stats = await sharp(file).stats();
   if (!original.hasAlpha || stats.channels[3].min !== 0) throw new Error(`${id} must have transparent alpha`);
   // Remove only empty transparent padding; the generated lettering itself is unchanged.
-  const { data, info } = await sharp(file).trim({ threshold: 1 }).toBuffer({ resolveWithObject: true });
+  const trimmed = await sharp(file).trim({ threshold: 1 }).toBuffer({ resolveWithObject: true });
+  // V44 keeps about 2% transparent safety on every side, within the source's
+  // real dimensions. Padding adds no detail and the letter pixels are never enlarged.
+  const horizontal = Math.min(Math.ceil(trimmed.info.width * .02), Math.floor((original.width - trimmed.info.width) / 2));
+  const vertical = Math.min(Math.ceil(trimmed.info.height * .02), Math.floor((original.height - trimmed.info.height) / 2));
+  const { data, info } = file === ownerMaster
+    ? await sharp(trimmed.data).extend({ left: horizontal, right: horizontal, top: vertical, bottom: vertical, background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer({ resolveWithObject: true })
+    : trimmed;
   const widths = [...new Set([480, 960, 1440, info.width])].filter(w => w <= info.width);
   for (const name of await readdir(output)) {
     if (!name.startsWith(`${prefix}-${id}-`) || !name.endsWith('.webp')) continue;
