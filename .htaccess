@@ -1,14 +1,29 @@
-# PARDUS Luxury Escapes: Apache rules for the website on pardusescapes.com (Namecheap cPanel, public_html).
+# PARDUS Luxury Escapes: Apache rules for the pardusescapes.com document root in Namecheap cPanel.
 # These rules cover the website only: HTTPS, the bare domain, the 404 page, caching, compression and image types.
 # They do not touch email, webmail, cPanel, /.well-known (SSL certificate checks) or anything outside the website.
 # Every block is wrapped in <IfModule>, so a server without a module simply skips that block.
 
 ErrorDocument 404 /404.html
 
+<IfModule mod_dir.c>
+  DirectoryIndex index.html
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Certificate validation (AutoSSL) must always reach /.well-known untouched.
-  RewriteRule ^\.well-known/ - [L]
+  # Leave certificate validation and hosting/mail service paths to cPanel.
+  RewriteRule ^(?:\.well-known|cpanel|webmail|whm|webdisk|autodiscover|autoconfig)(?:/|$) - [L,NC]
+  # Only redirect explicit index.html requests, never Apache's directory-index subrequests.
+  RewriteCond %{THE_REQUEST} \s/+[^\s?]*index\.html[?\s] [NC]
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^(.*\/)?index\.html$ https://pardusescapes.com/$1 [R=301,L,NE]
+  # Old page.html links go directly to the new URL, preserving the query string.
+  # Check for a real generated page so unknown URLs and assets still return their normal status.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^([a-z0-9-]+)\.html$ https://pardusescapes.com/$1/ [R=301,L,NE]
+  # Canonicalize extensionless page links before Apache's own directory redirect.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^([a-z0-9-]+)$ https://pardusescapes.com/$1/ [R=301,L,NE]
   # www.pardusescapes.com -> https://pardusescapes.com (one redirect, straight to HTTPS).
   RewriteCond %{HTTP_HOST} ^www\.pardusescapes\.com$ [NC]
   RewriteRule ^ https://pardusescapes.com%{REQUEST_URI} [R=301,L]

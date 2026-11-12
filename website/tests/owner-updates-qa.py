@@ -64,7 +64,7 @@ def accessibility_and_screenshots(browser):
     for width, height in [(390, 844), (1440, 1000)]:
         context = context_for(browser, width, height)
         page = context.new_page()
-        for route in ["index.html", "about.html"]:
+        for route in ["./", "about/"]:
             navigate(page, route)
             load_photos(page)
             page.add_script_tag(path=str(ROOT / "node_modules/axe-core/axe.min.js"))
@@ -73,8 +73,8 @@ def accessibility_and_screenshots(browser):
             })""")
             violations = [{"id": v["id"], "impact": v["impact"], "nodes": [n["target"] for n in v["nodes"]]} for v in result["violations"]]
             RECORD["axe"].append({"route": route, "width": width, "violations": violations, "passedRules": len(result["passes"]), "incompleteRules": len(result["incomplete"])})
-            screenshot(page, f"{'home' if route == 'index.html' else 'about'}-{width}.png", full=route == "about.html")
-            if width == 390 and route == "index.html":
+            screenshot(page, f"{'home' if route == './' else 'about'}-{width}.png", full=route == "about/")
+            if width == 390 and route == "./":
                 screenshot(page, "who-we-are-390.png", locator=page.locator(".ws-intro"))
             assert not violations, (route, width, violations)
         context.close()
@@ -112,9 +112,9 @@ def sample_enquiry(browser):
     context = context_for(browser)
     context.route("**/*", lambda route: route.abort() if route.request.method not in ("GET", "HEAD", "OPTIONS") else route.continue_())
     page = context.new_page()
-    navigate(page, "destinations.html")
+    navigate(page, "destinations/")
     cards = page.locator(".card-media")
-    slugs = [a.get_attribute("href").split("destination-")[-1].replace(".html", "") for a in cards.all()]
+    slugs = [a.get_attribute("href").split("destination-")[-1].replace("/", "") for a in cards.all()]
     assert slugs[:6] == ["zanzibar", "seychelles", "maldives", "dubai", "maasai-mara", "uganda-gorillas"], slugs
     card = page.locator(".card").filter(has=page.locator('a[aria-label="Explore Uganda gorillas"]'))
     expect(card.locator(".price strong")).to_have_text("Request a quote")
@@ -122,11 +122,11 @@ def sample_enquiry(browser):
     expect(card).to_contain_text("Gorilla permits are subject to availability")
     screenshot(page, "package-uganda-gorillas-390.png", locator=card)
     card.locator('a[aria-label="Explore Uganda gorillas"]').click()
-    page.wait_for_url("**/destination-uganda-gorillas.html")
+    page.wait_for_url("**/destination-uganda-gorillas/")
     page.wait_for_function("!document.documentElement.classList.contains('intro-active')")
     expect(page.locator(".price strong")).to_have_text("Request a quote")
     page.get_by_role("link", name="Plan this escape", exact=True).click()
-    page.wait_for_url("**/journey.html?destination=Uganda%20gorillas")
+    page.wait_for_url("**/journey/?destination=Uganda%20gorillas")
     page.wait_for_function("!document.documentElement.classList.contains('intro-active')")
     form = page.locator("[data-escape-enquiry]")
     expect(form.locator('[name="destination"]')).to_have_value("Uganda gorillas")

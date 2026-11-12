@@ -40,11 +40,11 @@ test('responsive AVIF and WebP exist at native shape, never enlarged, with no 19
 
 test('the exported pages use the matching photograph in each destination and experience', async () => {
   const expect = {
-    'destination-maldives.html': 'zanzibar-v38', 'destination-seychelles.html': 'seychelles-v38', 'destination-dubai.html': 'dubai-v38',
-    'destination-africa.html': 'east-africa-v38', 'destination-europe.html': 'europe-v38', 'destination-zanzibar.html': 'zanzibar-v24',
-    'cruises.html': 'yacht-v38', 'corporate.html': 'executive-v38', 'journey-executive-arrivals.html': 'executive-v38',
-    'journey-private-island-reset.html': 'reset-v38', 'journey-celebration-in-two-acts.html': 'celebration-v38',
-    'journey-family-in-the-wild.html': 'east-africa-v38', 'index.html': 'ocean-cruise-v40',
+    'destination-maldives/index.html': 'zanzibar-v38', 'destination-seychelles/index.html': 'seychelles-v38', 'destination-dubai/index.html': 'dubai-v38',
+    'destination-africa/index.html': 'east-africa-v38', 'destination-europe/index.html': 'europe-v38', 'destination-zanzibar/index.html': 'zanzibar-v24',
+    'cruises/index.html': 'yacht-v38', 'corporate/index.html': 'executive-v38', 'journey-executive-arrivals/index.html': 'executive-v38',
+    'journey-private-island-reset/index.html': 'reset-v38', 'journey-celebration-in-two-acts/index.html': 'celebration-v38',
+    'journey-family-in-the-wild/index.html': 'east-africa-v38', 'index.html': 'ocean-cruise-v40',
   };
   for (const [name, asset] of Object.entries(expect)) assert.match(await page(name), new RegExp(`${asset}-(640|960|1280|1586)`), `${name} should use ${asset}`);
   const home = await page('index.html');
@@ -52,7 +52,7 @@ test('the exported pages use the matching photograph in each destination and exp
 });
 
 test('V38 pictures keep intrinsic dimensions, lazy loading, a focal point and non-empty alt on content images', async () => {
-  const html = await page('destination-maldives.html');
+  const html = await page('destination-maldives/index.html');
   const imgs = [...html.matchAll(/<img[^>]*zanzibar-v38[^>]*>/g)].map(match => match[0]);
   assert.ok(imgs.length >= 1);
   for (const tag of imgs) {

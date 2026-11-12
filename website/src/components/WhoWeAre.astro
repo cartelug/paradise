@@ -26,7 +26,7 @@ const services = [{ name: 'Flights', icon: 'plane' }, { name: 'Stays', icon: 'be
       <div class="who-native-copy">
         <p class="who-reference-intro">We are Pardus Luxury Escapes.</p>
         <p class="who-reference-description">We arrange flights, stays, safaris and private experiences across Africa and around the world.</p>
-        <a class="who-reference-action" href={path('about.html')}><span>Discover Pardus</span><Icon name="arrow-right" /></a>
+        <a class="who-reference-action" href={path('about/')}><span>Discover Pardus</span><Icon name="arrow-right" /></a>
       </div>
     </div>
     <ul class="who-reference-services" aria-label="What we arrange">{services.map(service => <li><Icon name={service.icon} /><span>{service.name}</span></li>)}</ul>

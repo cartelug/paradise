@@ -57,7 +57,7 @@ const faqs = [
         <div class="form-row"><div><label for="name">Your name {site.enquiryEndpoint ? <span>(required)</span> : <span>(optional)</span>}</label><input id="name" name="name" required={Boolean(site.enquiryEndpoint)} autocomplete="name" maxlength="120" placeholder="How should we address you?" /></div><div><label for="country">Country <span>(optional)</span></label><input id="country" name="country" autocomplete="country-name" maxlength="100" /></div></div>
         <div class="form-row"><div><label for="email">Email {site.enquiryEndpoint ? <span>(required)</span> : <span>(optional)</span>}</label><input id="email" name="email" type="email" inputmode="email" required={Boolean(site.enquiryEndpoint)} autocomplete="email" maxlength="200" /></div><div><label for="phone">Telephone / WhatsApp <span>(optional)</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="60" /></div></div>
         <label for="contact-preference">Preferred reply</label><select id="contact-preference" name="contactPreference"><option>Email</option><option>Telephone</option><option>WhatsApp</option><option>No preference</option></select>
-        {site.enquiryEndpoint && <label class="consent-row"><input type="checkbox" name="serviceConsent" required /><span>I understand that Pardus will use these details to respond to this travel enquiry. <a href={path('privacy.html')}>Privacy information</a>.</span></label>}
+        {site.enquiryEndpoint && <label class="consent-row"><input type="checkbox" name="serviceConsent" required /><span>I understand that Pardus will use these details to respond to this travel enquiry. <a href={path('privacy/')}>Privacy information</a>.</span></label>}
         <dl class="brief-summary"></dl><p class="local-notice">{site.enquiryEndpoint ? 'Submitting sends this planning brief to Pardus and creates no booking or payment.' : 'Downloading creates a personal planning brief on your device. Nothing is sent to Pardus and no booking is created.'}</p>
         <FareNotice />
       </fieldset>
@@ -65,7 +65,7 @@ const faqs = [
       <div class="planner-actions"><button type="button" class="planner-back" data-back hidden>Back</button><button type="submit" class="btn btn--gold" data-next><span>Add the details</span><Icon name="arrow-right" /></button></div>
       <p class="form-status" data-form-status role="status"></p>
       <p class="brief-mail" hidden data-brief-mail><a class="btn btn--ink" href={`mailto:${site.bookingsEmail}`}><Icon name="mail" /> Email this brief to {site.bookingsEmail}</a></p>
-      <p class="form-footnote">{site.enquiryEndpoint ? 'Submitting sends your entries to Pardus to begin a conversation.' : 'Your draft stays in this browser tab so you can return to it during this session.'} <a href={path('privacy.html')}>Read our privacy information.</a></p>
+      <p class="form-footnote">{site.enquiryEndpoint ? 'Submitting sends your entries to Pardus to begin a conversation.' : 'Your draft stays in this browser tab so you can return to it during this session.'} <a href={path('privacy/')}>Read our privacy information.</a></p>
       <noscript><p class="no-script-help">This planner needs JavaScript to create a downloadable brief. You can read the questions above and keep your own notes; no information is submitted.</p></noscript>
     </form>
       <pre class="print-brief" aria-hidden="true"></pre>

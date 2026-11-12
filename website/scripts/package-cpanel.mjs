@@ -1,5 +1,5 @@
 // Zips the CONTENTS of website/dist (not the dist folder itself) into website/release/pardus-site-cpanel.zip, ready to
-// upload to public_html in cPanel File Manager and Extract. Run it after `npm run build:domain`; it refuses a build that
+// upload to the Pardus domain's document root in cPanel File Manager and Extract. Run it after `npm run build:domain`; it refuses a build that
 // was made for GitHub Pages. Pure Node (zlib), so it needs no zip program.
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
@@ -14,7 +14,7 @@ const robots = await readFile(resolve(dist, 'robots.txt'), 'utf8').catch(() => '
 if (!robots.includes('https://pardusescapes.com/sitemap-index.xml')) {
   throw new Error('website/dist is not a pardusescapes.com build. Run `npm run build:domain` first.');
 }
-for (const required of ['index.html', '404.html', '.htaccess']) await stat(resolve(dist, required));
+for (const required of ['index.html', 'about/index.html', 'contact/index.html', '404.html', '.htaccess']) await stat(resolve(dist, required));
 
 async function filesBelow(directory) {
   const found = [];
@@ -64,4 +64,4 @@ await mkdir(dirname(output), { recursive: true });
 await writeFile(output, Buffer.concat([...locals, directory, end]));
 const size = (await stat(output)).size;
 console.log(`Packed ${files.length} files from website/dist into website/release/pardus-site-cpanel.zip (${(size / 1048576).toFixed(1)} MB).`);
-console.log('Upload it to public_html in cPanel File Manager and choose Extract. index.html and .htaccess land directly in public_html.');
+console.log('Upload it to the Document Root shown for pardusescapes.com in cPanel > Domains and choose Extract. index.html and .htaccess must be directly inside that folder.');

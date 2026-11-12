@@ -59,7 +59,7 @@ function hasContent(state: FolioState) {
 }
 
 export function buildPlannerUrl(href: string, state: FolioState, baseUrl: string): string {
-  const url = new URL(href || 'planner.html', baseUrl);
+  const url = new URL(href || `${import.meta.env?.BASE_URL || '/'}planner/`, baseUrl);
   // Rendering starts from the current link, which may describe a previous selection.
   // Remove every Folio-owned parameter before writing the current state.
   for (const key of ['place', 'pace', 'reason', 'saved']) url.searchParams.delete(key);
@@ -67,7 +67,7 @@ export function buildPlannerUrl(href: string, state: FolioState, baseUrl: string
     if (state[signal]) url.searchParams.set(signal, state[signal]);
   }
   if (state.items.length) url.searchParams.set('saved', state.items.map(item => item.label).join(', '));
-  return `${url.pathname}${url.search}`;
+  return `${url.pathname}${url.search}${url.hash}`;
 }
 
 export function initFolio() {
@@ -137,7 +137,7 @@ export function initFolio() {
       if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
       trigger.setAttribute('aria-label', count ? `Open saved trips, ${count} saved ${count === 1 ? 'note' : 'notes'}` : 'Open saved trips');
     });
-    plan.href = buildPlannerUrl(plan.getAttribute('href') || 'planner.html', state, window.location.href);
+    plan.href = buildPlannerUrl(plan.getAttribute('href') || '', state, window.location.href);
     window.dispatchEvent(new CustomEvent('pardus:folio', { detail: structuredClone(state) }));
   };
 

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pageFiles } from '../scripts/page-files.mjs';
 
 // HARD RULE (site owner, 14 October 2026): the Pardus preloader is permanent.
 // These checks fail the build if a release removes or disables it. See CLAUDE.md.
@@ -66,7 +67,7 @@ test('every built page ships the preloader', async () => {
   let checked = 0;
   for (const directory of [repo, resolve(site, 'dist')]) {
     if (!(await exists(resolve(directory, 'index.html')))) continue;
-    const pages = (await readdir(directory)).filter(file => file.endsWith('.html'));
+    const pages = await pageFiles(directory);
     for (const page of pages) {
       const html = await readFile(resolve(directory, page), 'utf8');
       checked++;

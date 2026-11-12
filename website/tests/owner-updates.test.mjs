@@ -15,7 +15,7 @@ const root = new URL('../', import.meta.url);
 const read = file => readFile(new URL(file, root), 'utf8');
 const expected = JSON.parse(await read('tests/fixtures/owner-approved-copy.json'));
 const home = await read('../index.html');
-const about = await read('../about.html');
+const about = await read('../about/index.html');
 const normalise = text => text.replace(/&#39;|&#x27;|&apos;/g, "'").replace(/[‘’]/g, "'").replace(/&amp;|&#x26;/g, '&').replace(/\s+/g, ' ').trim();
 const visibleText = markup => normalise(markup.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' '));
 const bundled = await build({ entryPoints: [fileURLToPath(new URL('src/data/offers.ts', root))], bundle: true, write: false, format: 'esm', platform: 'node', logLevel: 'silent' });
@@ -96,15 +96,15 @@ test('the six priority destinations lead the data, listing, form options and sit
   const expectedSlugs = ['zanzibar', 'seychelles', 'maldives', 'dubai', 'maasai-mara', 'uganda-gorillas'];
   assert.deepEqual(destinationOrder.slice(0, 6), expectedSlugs);
   assert.deepEqual(offers.slice(0, 6).map(offer => offer.slug), expectedSlugs);
-  const windows = [...home.matchAll(/class="ws-window" href="[^"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const windows = [...home.matchAll(/class="ws-window" href="[^"]*destination-([a-z-]+)\/"/g)].map(match => match[1]);
   const more = home.slice(home.indexOf('id="more-title"'));
-  const next = [...more.matchAll(/class="frame" data-reveal href="[^"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const next = [...more.matchAll(/class="frame" data-reveal href="[^"]*destination-([a-z-]+)\/"/g)].map(match => match[1]);
   assert.deepEqual([...windows, ...next].slice(0, 6), expectedSlugs, 'homepage destination order');
-  const listing = await read('../destinations.html');
-  const links = [...listing.matchAll(/class="card-media frame" href="[^\"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const listing = await read('../destinations/index.html');
+  const links = [...listing.matchAll(/class="card-media frame" href="[^\"]*destination-([a-z-]+)\/"/g)].map(match => match[1]);
   assert.deepEqual(links.slice(0, 6), expectedSlugs);
   const sitemap = await read('../sitemap-0.xml');
-  for (const slug of [...expectedSlugs, 'europe', 'africa']) assert.ok(sitemap.includes(`destination-${slug}.html`), slug);
+  for (const slug of [...expectedSlugs, 'europe', 'africa']) assert.ok(sitemap.includes(`destination-${slug}/`), slug);
 });
 
 test('new package defaults fail closed even when a numeric price is accidentally supplied', () => {
@@ -145,7 +145,7 @@ test('previous prices require approval, a genuine higher Pardus price and an act
 
 test('the exact fare notice is reused in Terms, enquiry, planner, saved emails and both brief delivery states', async () => {
   assert.equal(site.fareNotice, expected.fareNotice);
-  for (const route of ['terms.html', 'journey.html', 'planner.html']) {
+  for (const route of ['terms/index.html', 'journey/index.html', 'planner/index.html']) {
     const page = await read(`../${route}`);
     const notice = page.match(/<aside class="fare-notice"[\s\S]*?<\/aside>/)?.[0];
     assert.ok(notice, route);
@@ -163,7 +163,7 @@ test('new destination photos have verified sources, hashes, licence links and vi
   for (const photo of ownerPhotographs) {
     const bytes = await readFile(new URL(`source-assets/v44-destinations/${photo.file}`, root));
     assert.equal(createHash('sha256').update(bytes).digest('hex'), photo.sha256);
-    const page = await read(`../destination-${photo.asset.replace('-v44', '')}.html`);
+    const page = await read(`../destination-${photo.asset.replace('-v44', '')}/index.html`);
     assert.ok(page.includes(photo.photographer)); assert.ok(page.includes(photo.licenseUrl));
     for (const width of photo.widths) for (const ext of ['webp', 'avif']) await access(new URL(`public/images/${photo.asset}-${width}.${ext}`, root));
   }

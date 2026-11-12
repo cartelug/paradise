@@ -28,14 +28,14 @@ const ideas: Record<string, Idea[]> = {
   zanzibar:[{icon:'paw',title:'Safari first',text:'Begin with a Kenya or Tanzania safari. We arrange the route, lodges and onward connections.'},{icon:'sun',title:'The Zanzibar coast',text:'Finish on the beach with a comfortable resort, private transfers and time to enjoy the island.'},{icon:'yacht',title:'Dhow cruises & culture',text:'Add Stone Town, a spice visit or a sunset dhow cruise. A Zanzibar-only holiday is also available to plan.'}],
   europe:[{icon:'landmark',title:'Beautiful city stays',text:'Start with the city you want to see and a hotel placed for the sights, restaurants and neighbourhoods you enjoy.'},{icon:'compass',title:'Private tours & experiences',text:'Discover culture, food and landmarks with guided experiences and enough space to explore at your own pace.'},{icon:'waves',title:'A Mediterranean finish',text:'Add an island, a coastline or a second city, with flights, rail or transfers brought into one itinerary.'}],
 };
-const schema = {'@context':'https://schema.org','@type':'TouristDestination',name:d.name,description:offer.experience,url:absolute('destination-'+d.slug+'.html')};
+const schema = {'@context':'https://schema.org','@type':'TouristDestination',name:d.name,description:offer.experience,url:absolute('destination-'+d.slug+'/')};
 const focus: Record<string, [string, string]> = { maldives: ['55%', '45%'], seychelles: ['50%', '50%'], dubai: ['50%', '40%'], africa: ['55%', '45%'], zanzibar: ['50%', '50%'], europe: ['50%', '50%'] };
 const [fx, fy] = focus[d.slug] || ['55%', '50%'];
 ---
 <Layout label={offer.label} title={offer.label} description={offer.experience} image={largestImage(d.image)} class="inner destination-page" simpleFooter>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   <PageHero glance image={d.image} alt={d.alt} eyebrow={d.country} focusX={fx} focusY={fy}>
-    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations.html')}>Destinations</a><Icon name="chevron-right" /><span>{offer.label}</span></nav>
+    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('destinations/')}>Destinations</a><Icon name="chevron-right" /><span>{offer.label}</span></nav>
     <Fragment slot="title">{offer.label}</Fragment>
     <div class="meta"><span class="chip"><Icon name="clock" />{offer.nights}</span></div>
     <p class="lead">{offer.experience}</p>
@@ -46,7 +46,7 @@ const [fx, fy] = focus[d.slug] || ['55%', '50%'];
     <div class="wrap glance">
       <div class="glance-card on-dark">
         <div><span class="card-label">{offer.priceApproved ? 'Your escape includes' : 'Plan your proposal'}</span><OfferInclusions items={offer.inclusions} /></div>
-        <div class="glance-booking"><OfferPrice offer={offer} /><a class="btn btn--gold" href={path('journey.html')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <Icon name="arrow-right" /></a></div>
+        <div class="glance-booking"><OfferPrice offer={offer} /><a class="btn btn--gold" href={path('journey/')+'?destination='+encodeURIComponent(d.name)}>Plan this escape <Icon name="arrow-right" /></a></div>
         <p class="glance-note">{priceNote}</p>
         <PackageDetails offer={offer} />
       </div>
@@ -74,7 +74,7 @@ const [fx, fy] = focus[d.slug] || ['55%', '50%'];
       <p class="eyebrow" data-reveal>The details that matter</p>
       <h2 id="details-title" data-split>Your dates. <em>Your way to travel.</em></h2>
       <div class="practical" data-stagger="120">
-        <div data-reveal><h3>Time to enjoy it</h3><p>{offer.nights}. Extend or shorten your stay to suit your plans.</p><a class="link" href={path('cruises.html')}>Add a private boat experience <Icon name="arrow-right" /></a></div>
+        <div data-reveal><h3>Time to enjoy it</h3><p>{offer.nights}. Extend or shorten your stay to suit your plans.</p><a class="link" href={path('cruises/')}>Add a private boat experience <Icon name="arrow-right" /></a></div>
         <div data-reveal><h3>Made for</h3><ul class="ticks">{d.idealFor.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul></div>
         <div data-reveal><h3>Before you travel</h3><p>{d.seasonNote}</p></div>
       </div>

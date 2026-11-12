@@ -16,4 +16,4 @@ const steps = [
 <ol class="steps">
   {steps.map((step, i) => <li class="step" data-reveal><span class="step-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}
 </ol>
-<p class="steps-foot" data-reveal>Cancellation and change conditions depend on the airlines, hotels and operators involved, so they are written into your proposal before you pay. <a class="link" href={path('terms.html')}>Booking, cancellations and terms <Icon name="arrow-right" /></a>{more && <> <a class="link" href={path('about.html')}>More about how we work <Icon name="arrow-right" /></a></>}</p>
+<p class="steps-foot" data-reveal>Cancellation and change conditions depend on the airlines, hotels and operators involved, so they are written into your proposal before you pay. <a class="link" href={path('terms/')}>Booking, cancellations and terms <Icon name="arrow-right" /></a>{more && <> <a class="link" href={path('about/')}>More about how we work <Icon name="arrow-right" /></a></>}</p>
