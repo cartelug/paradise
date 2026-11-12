@@ -1,0 +1,47 @@
+name: Prepare Namecheap download
+
+on:
+  push:
+    branches: [codex/namecheap-download]
+    paths: ['.github/workflows/namecheap-package.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pardus-namecheap-download
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install the website dependencies
+        run: npm ci
+      - name: Build and verify the own-domain website
+        run: |
+          npm run build:domain
+          PARDUS_BASE=/ npm run verify:export
+          npm run package:cpanel
+      - name: Upload the download package
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PACKAGE_TAG: namecheap-clean-urls-2026-11-13
+        run: |
+          mv release/pardus-site-cpanel.zip release/pardus-namecheap-clean-urls.zip
+          cp NAMECHEAP_UPLOAD.md release/Pardus-Namecheap-upload-guide.md
+          (cd release && sha256sum pardus-namecheap-clean-urls.zip > pardus-namecheap-clean-urls.sha256)
+          gh release upload "$PACKAGE_TAG" release/pardus-namecheap-clean-urls.zip release/pardus-namecheap-clean-urls.sha256 release/Pardus-Namecheap-upload-guide.md --clobber
+          gh release edit "$PACKAGE_TAG" --draft=false --prerelease --latest=false
