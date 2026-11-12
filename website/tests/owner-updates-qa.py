@@ -164,7 +164,7 @@ def performance(browser):
         page.wait_for_timeout(1600)
         runs.append(page.evaluate('({lcp:window.__lcp,letteringBytes:performance.getEntriesByType("resource").filter(x=>x.name.includes("hero-lettering")).reduce((n,x)=>n+x.transferSize,0)})'))
         context.close()
-    result = {"profile": "390x844, DPR3, mobile/touch, CPU4x, 1.6Mbps down, 0.8Mbps up, 40ms latency; local Astro preview; repeat visitor", "runs": runs, "medianLcpMs": statistics.median(item["lcp"] for item in runs)}
+    result = {"profile": "390x844, DPR3, mobile/touch, CPU4x, 1.6Mbps down, 0.8Mbps up, 40ms latency; local static export; repeat visitor; shipped news fixture", "runs": runs, "medianLcpMs": statistics.median(item["lcp"] for item in runs)}
     (OUT / "performance-after.json").write_text(json.dumps(result, indent=2))
     before_file = OUT / "performance-before.json"
     if before_file.exists():

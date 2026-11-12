@@ -3,7 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import EscapeCard from '../components/EscapeCard.astro';
 import Icon from '../components/Icon.astro';
-import { offers, services, cruiseTypes, priceNote, priceText } from '../data/offers';
+import { offers, services, cruiseTypes, priceNote } from '../data/offers';
+import OfferPrice from '../components/OfferPrice.astro';
+import PackageDetails from '../components/PackageDetails.astro';
 import { serviceIcons } from '../data/icons';
 import { path } from '../data/site';
 const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
@@ -38,7 +40,7 @@ const cruiseIcons = ['yacht', 'heart', 'compass', 'sparkle'] as const;
     <div class="wrap">
       <p class="eyebrow" data-reveal>Private boat &amp; yacht experiences</p>
       <h2 id="cruise-title" data-split>Beautiful moments. <em>Out on the water.</em></h2>
-      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp"><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></article>)}</div>
+      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp"><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><OfferPrice offer={type} /></div><PackageDetails offer={type} /></article>)}</div>
       <p class="note">Cruises are quoted in USD for your destination, group size, duration and occasion. Your proposal confirms the boat, route and inclusions.</p>
     </div>
   </section>

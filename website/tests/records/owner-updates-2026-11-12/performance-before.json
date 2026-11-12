@@ -1,0 +1,19 @@
+{
+  "profile": "390x844, DPR3, mobile/touch, CPU4x, 1.6Mbps down, 0.8Mbps up, 40ms latency; local static export; repeat visitor; shipped news fixture",
+  "runs": [
+    {
+      "lcp": 5612,
+      "letteringBytes": 217972
+    },
+    {
+      "lcp": 5608,
+      "letteringBytes": 217972
+    },
+    {
+      "lcp": 5532,
+      "letteringBytes": 217972
+    }
+  ],
+  "medianLcpMs": 5608,
+  "sourceCommit": "0f28852ba4d022887a3e43994cda5aa216f59fee"
+}

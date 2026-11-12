@@ -1,5 +1,9 @@
 # Pardus Luxury Escapes
 
+## Owner updates — 11 November 2026
+
+Review-branch implementation of the supplied owner brief: V44 hero lettering, readable Who We Are, the complete About page, six priority destinations, guarded package prices and the shared fare notice. Source and generated output are included; publication waits for owner review. [QA report and screenshots](website/OWNER_UPDATE_QA.md). See the new top sections of [HANDOVER.md](HANDOVER.md) and [CLAUDE.md](CLAUDE.md) for configuration, validation and remaining owner items.
+
 ## PC hero rotation — 11 November 2026
 
 The five fading hero photographs now also run on PCs (1000px and wider): they dissolve in a tall panel on the right while the headline, sentence and buttons stay on the left. Tablets keep the single wide artwork. A full-width crop was avoided on purpose, because it would cut the leopards' heads and paws and soften the photographs; landscape versions would replace the panel if supplied. Details in `CLAUDE.md`.

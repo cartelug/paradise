@@ -19,7 +19,7 @@ const about = await read('../about.html');
 const normalise = text => text.replace(/&#39;|&#x27;|&apos;/g, "'").replace(/[‘’]/g, "'").replace(/&amp;|&#x26;/g, '&').replace(/\s+/g, ' ').trim();
 const visibleText = markup => normalise(markup.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' '));
 const bundled = await build({ entryPoints: [fileURLToPath(new URL('src/data/offers.ts', root))], bundle: true, write: false, format: 'esm', platform: 'node', logLevel: 'silent' });
-const { offers, defineOffer, displayPrice, promotionPrice, destinationOrder } = await import(`data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString('base64')}`);
+const { offers, cruiseTypes, defineOffer, displayPrice, promotionPrice, destinationOrder } = await import(`data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].text).toString('base64')}`);
 
 test('the About page presents the seven approved sections in exactly the requested order', () => {
   assert.deepEqual([...about.matchAll(/data-about-section="([^"]+)"/g)].map(match => match[1]), ['story', 'founder', 'vision-mission', 'values', 'brand-promise', 'what-we-do', 'begin-your-journey']);
@@ -121,7 +121,7 @@ test('new package defaults fail closed even when a numeric price is accidentally
 });
 
 test('every offer models dates, duration, departure, occupancy, currency, taxes, components and restrictions', () => {
-  for (const offer of offers) {
+  for (const offer of [...offers, ...cruiseTypes]) {
     for (const field of ['duration', 'travelDates', 'departureCity', 'occupancyBasis', 'currency', 'taxesFees', 'components', 'inclusions', 'exclusions', 'restrictions', 'priceApproved']) assert.ok(Object.hasOwn(offer, field), `${offer.slug}: ${field}`);
     assert.deepEqual(Object.keys(offer.components).sort(), ['activities', 'flights', 'meals', 'transfers']);
     assert.ok(offer.restrictions.length > 0);

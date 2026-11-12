@@ -4,7 +4,9 @@ import PageHero from '../components/PageHero.astro';
 import SimpleEnquiry from '../components/SimpleEnquiry.astro';
 import Icon from '../components/Icon.astro';
 import Picture from '../components/Picture.astro';
-import { cruiseTypes, priceText, displayPrice } from '../data/offers';
+import OfferPrice from '../components/OfferPrice.astro';
+import PackageDetails from '../components/PackageDetails.astro';
+import { cruiseTypes, displayPrice } from '../data/offers';
 import { photo } from '../data/photography.ts';
 import { cruisePhoto } from '../data/cruises';
 import { path } from '../data/site';
@@ -43,7 +45,7 @@ const yachtPrice = displayPrice(cruiseTypes[0]);
     <div class="wrap">
       <p class="eyebrow" data-reveal>Choose your experience</p>
       <h3>Private charters &amp; excursions</h3>
-      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp"><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><strong>{priceText(type)}</strong><small>{type.basis}</small></div></article>)}</div>
+      <div class="exp-grid exp-grid--2" data-stagger="110">{cruiseTypes.map((type, i) => <article class="exp"><span class="badge"><Icon name={cruiseIcons[i]} /></span><h3>{type.title}</h3><p>{type.text}</p><div class="exp-price"><OfferPrice offer={type} /></div><PackageDetails offer={type} /></article>)}</div>
       <p class="note">Choose your destination, date, group size and occasion. Your proposal confirms the vessel, route, duration, inclusions and total USD price. Sailings depend on local conditions and availability.</p>
     </div>
   </section>

@@ -5,6 +5,7 @@ Run after building, exporting and starting a local static server:
 Set PARDUS_QA_BASE to test another served export (including GitHub Pages).
 Set PARDUS_QA_PHASES to a comma-separated subset: matrix,preloader,leopard,life,phone,picker,windowseat,rotation,animations,hero,flows,fallback.
 Set PARDUS_QA_CHROMIUM to a Chromium executable when Playwright's own browser is not installed.
+Set PARDUS_QA_ROUTES to a comma-separated list for targeted checks after a bounded change; default is every exported page.
 HTML routes are discovered from the repository export. Screenshots and persistent
 artifacts are not written. Form submissions are intercepted inside the test.
 The optional remote news response uses the shipped feed for repeatable checks;
@@ -24,6 +25,10 @@ from playwright.sync_api import expect, sync_playwright
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
 ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
+REQUESTED_ROUTES = [route for route in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if route]
+if REQUESTED_ROUTES:
+    assert set(REQUESTED_ROUTES).issubset(ROUTES), f"Unknown QA routes: {set(REQUESTED_ROUTES) - set(ROUTES)}"
+    ROUTES = [route for route in ROUTES if route in REQUESTED_ROUTES]
 VIEWPORTS = [(320, 568), (360, 740), (390, 844), (412, 915), (768, 1024), (1024, 768), (1440, 900)]
 PHASES = set(os.environ.get("PARDUS_QA_PHASES", "matrix,preloader,leopard,life,phone,picker,windowseat,rotation,animations,hero,flows,fallback").split(","))
 FEED = json.loads((EXPORT / "website/public/travel-updates.json").read_text(encoding="utf-8"))

@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-11-12T15:57:45.161105+03:00",
+  "pullRequest": "https://github.com/cartelug/paradise/pull/4",
+  "node": {
+    "passed": 99,
+    "failed": 0
+  },
+  "astroCheck": {
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0
+  },
+  "pythonUnitTests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "browserSmoke": {
+    "phasesPassed": 12,
+    "phasesTotal": 12,
+    "routes": 35,
+    "viewports": 7,
+    "routeViewportChecks": 245,
+    "executedInPhaseGroups": true
+  },
+  "mobileFit": {
+    "routes": 35,
+    "phoneWidths": 6,
+    "textScale200Percent": true,
+    "checks": 245,
+    "problems": 0
+  },
+  "finalCharterChange": {
+    "routes": [
+      "cruises.html",
+      "concept-note.html"
+    ],
+    "matrixChecks": 14,
+    "mobileFitChecks": 14,
+    "passed": true
+  },
+  "hero": {
+    "checks": 26,
+    "minimumWidth": 320,
+    "maximumWidth": 1920,
+    "textScales": [
+      1,
+      2
+    ]
+  },
+  "axe": {
+    "scans": 4,
+    "violations": 0
+  },
+  "enquiry": {
+    "destination": "Uganda gorillas",
+    "recipient": "bookings@pardusescapes.com",
+    "fareNoticeExact": true,
+    "externalMessagesSent": 0
+  },
+  "onlineDelivery": "success, confirmation, reset, download and failure fallback intercepted and passed; no messages sent",
+  "variants": {
+    "founderHidden": true,
+    "thirdPersonExact": true,
+    "flightWarningRendered": true,
+    "genuinePromotionRendered": true,
+    "unapprovedNumericPriceHidden": true,
+    "productionSourceChanged": false
+  },
+  "builds": {
+    "github": "35 HTML pages and 43 generated text assets; all /paradise/ references resolve",
+    "domain": "35 HTML pages and 43 generated text assets; all / references resolve"
+  },
+  "performance": {
+    "profile": "390x844, DPR3, mobile/touch, CPU4x, 1.6Mbps down, 0.8Mbps up, 40ms latency; local static export; repeat visitor; shipped news fixture",
+    "runs": [
+      {
+        "lcp": 5816,
+        "letteringBytes": 190500
+      },
+      {
+        "lcp": 5280,
+        "letteringBytes": 190500
+      },
+      {
+        "lcp": 5572,
+        "letteringBytes": 190500
+      }
+    ],
+    "medianLcpMs": 5572,
+    "baselineMedianLcpMs": 5608,
+    "changePercent": -0.6
+  },
+  "letteringBytes": {
+    "before": 217972,
+    "after": 190500,
+    "changePercent": -12.6
+  },
+  "cpanel": {
+    "files": 591,
+    "bytes": 77534243,
+    "sha256": "d83a6b42de185c7a189f09868cc6b22c49a5b1869fcf1476ddcb38e3a000210a",
+    "crc": "passed"
+  },
+  "portrait": "Approved by user for Saidah Namusoke. Original downloadable JPG/PNG not exposed to build tools; portrait remains null.",
+  "deployment": "Review branch and draft PR only; no merge, Pages deployment or cPanel upload.",
+  "scopeNotes": [
+    "The shared browser preview relay was unavailable; automated Chromium used the built static export on localhost.",
+    "Tests use simulated Chromium and text scaling; physical devices and Safari were not certified.",
+    "No live enquiry endpoint or verified phone/WhatsApp is configured; email draft and intercepted endpoint paths were tested."
+  ]
+}

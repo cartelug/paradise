@@ -56,6 +56,10 @@ and confirmation email**, including manually prepared messages. Quote acceptance
 ticket issuance and legal review take place with the travel team; the website
 does not create a price lock or an acceptance/payment system.
 
+## Validation evidence
+
+See [website/OWNER_UPDATE_QA.md](website/OWNER_UPDATE_QA.md) for page-by-page changes, all seven screenshots, the full results and measured performance. All 99 Node tests, 12 browser phases, 245 route/viewport checks, 245 mobile fit cases, 26 hero cases and four axe scans pass. The final yacht-card detail changes also pass targeted matrix and fit checks; approved rates remain unchanged.
+
 ## Reproduce validation and packages
 
 From `website/`, after `npm ci`:
@@ -69,6 +73,7 @@ npm run verify:export
 PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/browser-smoke.py
 PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/mobile-fit.py
 PARDUS_QA_BASE=http://127.0.0.1:4180/paradise PARDUS_QA_CHROMIUM=/usr/bin/chromium python tests/owner-updates-qa.py
+python tests/owner-variants.py
 npm run build:domain
 PARDUS_BASE=/ npm run verify:export
 npm run package:cpanel

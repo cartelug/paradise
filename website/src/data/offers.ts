@@ -118,4 +118,14 @@ export const cruiseTypes = [
   { title: 'Sunset & romantic cruises', text: 'A quiet evening for two, a honeymoon moment or an anniversary on the water.', fromUSD:280, basis:'per boat · 2 hours · 2 guests' },
   { title: 'Island excursions', text: 'Discover coves, snorkelling spots and neighbouring islands with a private boat arrangement.', fromUSD:650, basis:'per boat · 4 hours · up to 4 guests' },
   { title: 'Private celebrations', text: 'Bring friends, family or your team together for a private cruise and a special occasion.', fromUSD:1200, basis:'per charter · 4 hours · up to 10 guests' },
-].map(offer => ({ ...offer, priceApproved: true }));
+].map((offer, index) => ({
+  ...offer,
+  ...defineOffer({
+    slug: `private-charter-${index + 1}`, label: offer.title,
+    nights: offer.basis.split(' · ')[1], duration: { days: null, nights: null },
+    experience: offer.text, highlights: [], inclusions: [],
+    fromUSD: offer.fromUSD, priceBasis: offer.basis, priceApproved: true,
+    occupancyBasis: `Private charter · ${offer.basis.split(' · ')[2]}`,
+    restrictions: ['Vessel, route, weather conditions and all inclusions are confirmed in your written proposal before booking.'],
+  }),
+}));
