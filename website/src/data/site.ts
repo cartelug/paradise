@@ -67,9 +67,9 @@ export const socialLinks = [
 // The same five labels on every page, in the header and the menu. "Plan your escape" is the one prominent action beside them;
 // saved trips stay available but secondary. Cruises, services and the travel desk live under "More" in the menu and the footer.
 export const navigation = [
-  { label: 'Destinations', href: 'destinations.html' },
-  { label: 'Signature journeys', href: 'journeys.html' },
-  { label: 'About', href: 'about.html' },
-  { label: 'Corporate travel', href: 'corporate.html' },
-  { label: 'Journal', href: 'journal.html' },
+  { label: 'Destinations', href: 'destinations/' },
+  { label: 'Signature journeys', href: 'journeys/' },
+  { label: 'About', href: 'about/' },
+  { label: 'Corporate travel', href: 'corporate/' },
+  { label: 'Journal', href: 'journal/' },
 ];

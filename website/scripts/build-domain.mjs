@@ -1,4 +1,4 @@
-// Builds the site for its own domain, https://pardusescapes.com, served from the root of public_html on Namecheap cPanel.
+// Builds the site for https://pardusescapes.com, served from that domain's document root on Namecheap cPanel.
 // Output goes to website/dist (it replaces any GitHub Pages build there). Do not run export:github after this build:
 // the GitHub Pages copy at https://cartelug.github.io/paradise/ needs PARDUS_BASE=/paradise/ (see README.md).
 import { spawnSync } from 'node:child_process';

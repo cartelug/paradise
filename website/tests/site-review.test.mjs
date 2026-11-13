@@ -1,15 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pageFiles } from '../scripts/page-files.mjs';
 
 // The October 2026 website review: one primary tagline, one navigation, a real enquiry, trust, search.
 // These read the exported pages at the repository root (run after `npm run build` and `npm run export:github`).
 const site = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repo = resolve(site, '..');
 const read = file => readFile(resolve(site, file), 'utf8');
-const pages = (await readdir(repo)).filter(file => file.endsWith('.html')).sort();
+const pages = await pageFiles(repo);
 const html = Object.fromEntries(await Promise.all(pages.map(async page => [page, await readFile(resolve(repo, page), 'utf8')])));
 const text = markup => markup.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 
@@ -42,7 +43,7 @@ test('the owner-approved tagline appears in opening, footer, search and structur
 });
 
 test('the enquiry needs a name and an email, offers phone or WhatsApp, confirms when sent and keeps a saved copy optional', () => {
-  for (const page of ['index.html', 'journey.html']) {
+  for (const page of ['index.html', 'journey/index.html']) {
     const form = html[page].match(/<form class="form" data-escape-enquiry[\s\S]*?<\/form>/)?.[0];
     assert.ok(form, `${page} has no enquiry form`);
     assert.match(form, /<input id="[^"]*-name" name="name"[^>]*\brequired\b/, `${page}: name must be required`);
@@ -64,16 +65,16 @@ test('enquiries are delivered by the connected service when one is set, with a c
 });
 
 test('trust: how booking works, cancellations, contact routes and no invented credentials', async () => {
-  const about = html['about.html'];
+  const about = html['about/index.html'];
   assert.equal((about.match(/<li class="step"/g) || []).length, 4, 'four booking steps on Our difference');
   assert.match(text(about), /About Pardus/);
   assert.equal((html['index.html'].match(/<li class="step"/g) || []).length, 4, 'four booking steps on the homepage');
   assert.match(html['index.html'], /id="how-booking-works"/);
-  const terms = text(html['terms.html']);
+  const terms = text(html['terms/index.html']);
   assert.match(terms, /Cancellations and changes/);
   assert.match(terms, /set by the airlines, hotels, yacht operators and other suppliers/);
   for (const [page, markup] of Object.entries(html)) assert.match(text(markup), /Booking, cancellations & terms/, `${page} footer lacks the booking and cancellation terms link`);
-  assert.match(html['contact.html'], /mailto:bookings@pardusescapes\.com/);
+  assert.match(html['contact/index.html'], /mailto:bookings@pardusescapes\.com/);
   // Credentials, a phone number and WhatsApp appear only when the business has supplied verified values.
   const config = await read('src/data/site.ts');
   const credentials = config.match(/credentials: \[([\s\S]*?)\] as/)?.[1].trim();
@@ -99,6 +100,6 @@ test('the homepage follows the review: a small set of signature journeys and the
   const markup = html['index.html'];
   const at = needle => markup.indexOf(needle);
   assert.ok(at('id="journeys-title"') > 0, 'signature journeys on the homepage');
-  assert.equal((markup.match(/href="[^"]*journey-[a-z-]+\.html"[^>]*aria-label="Explore /g) || []).length, 3, 'three signature journeys');
+  assert.equal((markup.match(/href="[^"]*journey-[a-z-]+\/"[^>]*aria-label="Explore /g) || []).length, 3, 'three signature journeys');
   assert.ok(at('id="destinations"') < at('id="journeys-title"') && at('id="journeys-title"') < at('id="how-booking-works"') && at('id="how-booking-works"') < at('id="enquire"'));
 });

@@ -1,5 +1,20 @@
 # Pardus Luxury Escapes
 
+## Clean page URLs — 12 November 2026
+
+Pages now use trailing-slash addresses such as `/about/`, `/journey/` and
+`/destination-uganda-gorillas/`. Astro writes an `index.html` inside each page's
+directory; navigation, forms, canonical/OG URLs, structured data and the sitemap
+all use those public addresses. Assets and the Apache error document retain their
+real filenames. Namecheap's `.htaccess` permanently redirects old `.html`,
+extensionless and explicit `index.html` page links, keeping their query strings.
+The GitHub export supplies static redirects for old `.html` bookmarks as well.
+
+The [Namecheap upload guide](website/NAMECHEAP_UPLOAD.md) explains the prepared
+ZIP and the correct document root when the hosting subscription has a different
+primary domain. Uploading and DNS changes are separate from this code change.
+Validation is recorded in [CLEAN_URLS_QA.md](website/CLEAN_URLS_QA.md).
+
 ## Owner updates — 11 November 2026
 
 Review-branch implementation of the supplied owner brief: V44 hero lettering, readable Who We Are, the complete About page, six priority destinations, guarded package prices and the shared fare notice. Source and generated output are included; publication waits for owner review. [QA report and screenshots](website/OWNER_UPDATE_QA.md). See the new top sections of [HANDOVER.md](HANDOVER.md) and [CLAUDE.md](CLAUDE.md) for configuration, validation and remaining owner items.

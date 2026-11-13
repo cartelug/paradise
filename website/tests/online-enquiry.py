@@ -24,7 +24,7 @@ INTRO_KEY = "pardus-intro-v30"
 FARE_NOTICE = json.loads((Path(__file__).parent / "fixtures/owner-approved-copy.json").read_text())["fareNotice"]
 
 
-def open_page(browser, route="journey.html"):
+def open_page(browser, route="journey/"):
     context = browser.new_context(viewport={"width": 1280, "height": 900}, accept_downloads=True)
     context.add_init_script(f"try {{ sessionStorage.setItem('{INTRO_KEY}', 'seen'); }} catch (e) {{}}")
     # Capture the external email-app boundary; never navigate to a mail client
@@ -94,7 +94,7 @@ def run(browser):
     context.close()
 
     # 3. The homepage form behaves the same.
-    context, page = open_page(browser, "index.html")
+    context, page = open_page(browser, "./")
     page.route(ENDPOINT, lambda route: route.fulfill(status=200, json={"ok": True}))
     form = page.locator("[data-escape-enquiry]")
     form.scroll_into_view_if_needed()

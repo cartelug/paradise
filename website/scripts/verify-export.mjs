@@ -1,6 +1,7 @@
 import { access, readdir, readFile, stat } from 'node:fs/promises';
 import { basename, dirname, extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { pageFiles } from './page-files.mjs';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repository = resolve(project, '..');
@@ -24,6 +25,7 @@ async function filesBelow(directory) {
   const found = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const full = resolve(directory, entry.name);
+    if (target === repository && [project, resolve(repository, '.git')].includes(full)) continue;
     if (entry.isDirectory()) found.push(...await filesBelow(full));
     else found.push(full);
   }
@@ -32,9 +34,11 @@ async function filesBelow(directory) {
 
 const all = await filesBelow(target);
 const publicFiles = target === dist ? all : all.filter(file => !file.startsWith(resolve(repository, '.git')) && !file.startsWith(project));
-const html = publicFiles.filter(file => extname(file) === '.html');
-const generatedPages = (await readdir(resolve(project, 'dist'))).filter(file => file.endsWith('.html')).length;
-if (html.length !== generatedPages) throw new Error(`Expected ${generatedPages} generated HTML pages; found ${html.length}.`);
+const pages = await pageFiles(target);
+const expectedPages = await pageFiles(dist);
+if (JSON.stringify(pages) !== JSON.stringify(expectedPages)) throw new Error('Exported page directories do not match website/dist.');
+const html = pages.map(page => resolve(target, page));
+const generatedPageSet = new Set(html);
 
 const textFiles = publicFiles.filter(file => ['.html', '.css', '.js', '.xml'].includes(extname(file)));
 const missing = new Set();
@@ -45,7 +49,18 @@ for (const file of textFiles) {
   for (const match of source.matchAll(reference)) {
     const relative = decodeURIComponent(match[1]);
     if (!relative) continue;
-    try { await access(resolve(target, relative)); } catch { missing.add(relative); }
+    try {
+      const full = resolve(target, relative);
+      if ((await stat(full)).isDirectory()) await access(resolve(full, 'index.html'));
+    } catch { missing.add(relative); }
+  }
+  if (generatedPageSet.has(file) && basename(file) !== '404.html') {
+    const canonical = source.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+    if (!canonical || !new URL(canonical).pathname.endsWith('/') || canonical.includes('.html')) throw new Error(`${file} has no clean canonical URL.`);
+    for (const match of source.matchAll(/(?:href|action)="([^"]+)"/g)) {
+      if (/^(?:[a-z]+:|\/\/|#)/i.test(match[1])) continue;
+      if (/\.html(?:[?#]|$)/i.test(match[1])) throw new Error(`${file} still links to ${match[1]}.`);
+    }
   }
 }
 
@@ -67,6 +82,7 @@ if (target === dist) {
     const xml = await readFile(resolve(dist, sitemap), 'utf8');
     const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
     if (!urls.length || urls.some(url => !url.startsWith(origin))) throw new Error(`${sitemap} has URLs outside ${origin}.`);
+    if (sitemap === 'sitemap-0.xml' && urls.some(url => !new URL(url).pathname.endsWith('/') || url.includes('.html'))) throw new Error('The sitemap still has non-canonical page URLs.');
   }
   for (const file of html) {
     const page = await readFile(file, 'utf8');

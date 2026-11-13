@@ -5,7 +5,7 @@ test('section one uses V44 artwork with Personally curated as live supporting te
  assert.ok(hero);assert.match(hero,/class="hero-personal">Personally curated\.<\/strong>/);assert.match(hero,/pardus-v44-hero-lettering/);
  const who=html.match(/<section class="ws-intro"[\s\S]*?<\/section>/)?.[0];assert.ok(who);
  assert.match(who,/pardus-window-leave-ordinary\.svg/);assert.match(who,/data-ws-lettering/);
- assert.match(who,/class="ws-heading-copy"/);assert.match(who,/class="ws-difference" href="\/paradise\/about\.html"/);
+ assert.match(who,/class="ws-heading-copy"/);assert.match(who,/class="ws-difference" href="\/paradise\/about\/"/);
  assert.match(who,/pardus-window-leopard/);assert.match(who,/loading="lazy"/);
 });
 test('cleanup masks preserve the original scene outside the old raster text regions',async()=>{

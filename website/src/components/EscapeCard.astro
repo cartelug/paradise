@@ -12,15 +12,15 @@ const { offer, featured = false } = Astro.props;
 const d = destinationFor(offer.slug);
 ---
 <article class:list={['card', { 'card--featured': featured }]} data-category={d.category}>
-  <a class="card-media frame" href={path(`destination-${offer.slug}.html`)} aria-label={`Explore ${offer.label}`} data-reveal><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 33vw'} /></a>
+  <a class="card-media frame" href={path(`destination-${offer.slug}/`)} aria-label={`Explore ${offer.label}`} data-reveal><Picture name={d.image} alt={d.alt} sizes={featured ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 33vw'} /></a>
   <div class="card-body">
     <div class="card-meta"><span class="country">{d.country}</span><span class="stay">{d.collection ? 'A tailored collection' : offer.nights}</span></div>
-    <h3><a href={path(`destination-${offer.slug}.html`)}>{offer.label}</a></h3>
+    <h3><a href={path(`destination-${offer.slug}/`)}>{offer.label}</a></h3>
     <p class="card-text">{offer.experience}</p>
     {featured && <ul class="ticks" aria-label={`${offer.label} highlights`}>{offer.highlights.map(item => <li><Icon name="check" /><span>{item}</span></li>)}</ul>}
     <div class="card-incl"><span class="card-label">{offer.priceApproved ? 'Your escape includes' : 'Plan your proposal'}</span><OfferInclusions items={offer.inclusions} /></div>
     <PackageDetails offer={offer} />
     <PhotoCredit image={d.image} />
-    <div class="card-foot"><OfferPrice offer={offer} /><a class="btn btn--ink btn--sm" href={`${path('journey.html')}?destination=${encodeURIComponent(d.name)}`} aria-label={`Plan ${offer.label}`}>Plan this escape <Icon name="arrow-right" /></a></div>
+    <div class="card-foot"><OfferPrice offer={offer} /><a class="btn btn--ink btn--sm" href={`${path('journey/')}?destination=${encodeURIComponent(d.name)}`} aria-label={`Plan ${offer.label}`}>Plan this escape <Icon name="arrow-right" /></a></div>
   </div>
 </article>

@@ -20,7 +20,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
-ROUTES = [r for r in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if r] or sorted(p.name for p in EXPORT.glob("*.html"))
+ROUTES = [r for r in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if r] or ["./", "404.html"] + sorted(f"{p.name}/" for p in EXPORT.iterdir() if p.is_dir() and p.name != "website" and (p / "index.html").is_file())
 PHONES = [(320, 640), (360, 740), (375, 667), (390, 844), (412, 915), (430, 932)]
 INTRO_KEY = "pardus-intro-v30"
 

@@ -18,7 +18,7 @@ const groups = serviceGroups.map((group, index) => ({
 }));
 const total = position;
 ---
-<form class:list={['picker', { 'picker--illustrated': illustrated }]} data-picker action={path('journey.html')} method="get" aria-labelledby="picker-title">
+<form class:list={['picker', { 'picker--illustrated': illustrated }]} data-picker action={path('journey/')} method="get" aria-labelledby="picker-title">
   <div class="picker-head">
     <p class="picker-q" id="picker-title"><span class="picker-step">1</span> What should we arrange?</p>
     <button type="button" class="picker-clear requires-js" data-picker-clear hidden>Clear</button>

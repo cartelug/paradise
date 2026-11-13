@@ -23,7 +23,7 @@ test('selected Window Seat introduction follows the hero with accessible live co
   assert.match(who, /Leave <em>ordinary\.<\/em>/);
   assert.match(who, /Flights, stays, safaris and private escapes,/);
   assert.match(who, /planned around you\./);
-  assert.match(who, /href="\/paradise\/about\.html"/);
+  assert.match(who, /href="\/paradise\/about\/"/);
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   assert.match(who, /data-ws-lettering/);
   assert.doesNotMatch(who, /pardus-who-mobile|who-backdrop/);

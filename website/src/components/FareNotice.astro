@@ -4,7 +4,7 @@ interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 const [heading, ...paragraphs] = site.fareNotice.split('\n');
 ---
-{compact ? <p class="fare-note"><a href={path('terms.html') + '#fares'}>Airfares may change until the ticket is issued.</a></p> :
+{compact ? <p class="fare-note"><a href={path('terms/') + '#fares'}>Airfares may change until the ticket is issued.</a></p> :
   <aside class="fare-notice" aria-label={heading} data-fare-notice>
     <p class="fare-notice-title"><strong>{heading}</strong></p>
     {paragraphs.map(paragraph => <p>{paragraph}</p>)}

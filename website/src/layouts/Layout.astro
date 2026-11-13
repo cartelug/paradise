@@ -24,8 +24,8 @@ interface Props { title?: string; label?: string; description?: string; image?: 
 const { title, label, description = site.description, image = 'images/pardus-hero-desktop-1536.webp', simpleFooter = false, class: className } = Astro.props;
 // The preloader names the page that is opening.
 const introLabel = label ?? (title ? title.split(/ [—:] /)[0] : 'Welcome');
-// GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
-const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
+// Directory builds use the same trailing-slash URL for navigation, search and sharing.
+const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = absolute(image);
 const organizationSchema = {
   '@context': 'https://schema.org',

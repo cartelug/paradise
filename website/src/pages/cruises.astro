@@ -39,7 +39,7 @@ const yachtPrice = displayPrice(cruiseTypes[0]);
       <div class="glance-card on-dark">
         <div><span class="card-label">Dubai private yacht cruise</span>
           <ul class="incl"><li><Icon name="yacht" /><span>Your own yacht</span></li><li><Icon name="clock" /><span>3 hours on the water</span></li><li><Icon name="users" /><span>Up to 6 guests</span></li></ul></div>
-        <div class="glance-booking"><div class="price">{yachtPrice.hasStartingPrice && <span class="price-label">From</span>}<strong>{yachtPrice.amount}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises.html?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
+        <div class="glance-booking"><div class="price">{yachtPrice.hasStartingPrice && <span class="price-label">From</span>}<strong>{yachtPrice.amount}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises/?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
       </div>
     </div>
     <div class="wrap">
