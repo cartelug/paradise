@@ -1,0 +1,116 @@
+name: Deploy Pardus to Namecheap
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - '.github/workflows/deploy-namecheap.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pardus-namecheap-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci
+      - name: Check source and existing GitHub export
+        working-directory: website
+        run: |
+          npm run check
+          npm test
+      - name: Build and verify own-domain website
+        working-directory: website
+        env:
+          PARDUS_BASE: /
+        run: |
+          npm run build:domain
+          npm run verify:export
+      - name: Upload changed files with encrypted FTP
+        env:
+          FTP_SERVER: ${{ secrets.NAMECHEAP_FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.NAMECHEAP_FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.NAMECHEAP_FTP_PASSWORD }}
+        shell: python
+        run: |
+          import ftplib
+          import hashlib
+          import io
+          import json
+          import os
+          import ssl
+          from pathlib import Path
+
+          keys = ("FTP_SERVER", "FTP_USERNAME", "FTP_PASSWORD")
+          if any(not os.environ.get(key) for key in keys):
+              raise SystemExit("Add the three NAMECHEAP_FTP_* repository secrets first. Use a dedicated FTP account restricted to the Pardus document root.")
+          server = os.environ["FTP_SERVER"].strip()
+          if "://" in server or "/" in server:
+              raise SystemExit("NAMECHEAP_FTP_SERVER must be the hosting server hostname only.")
+          root = Path("website/dist")
+          if not (root / "index.html").is_file() or not (root / ".htaccess").is_file():
+              raise SystemExit("Verified website output is missing.")
+          ftp = ftplib.FTP_TLS(context=ssl.create_default_context(), timeout=90)
+          try:
+              ftp.connect(server, 21)
+              ftp.login(os.environ["FTP_USERNAME"], os.environ["FTP_PASSWORD"])
+              ftp.prot_p()
+              ftp.set_pasv(True)
+              # The dedicated FTP account's / must be Pardus's document root.
+              ftp.cwd("/")
+              state_name = ".pardus-deploy-state.json"
+              previous = io.BytesIO()
+              try:
+                  ftp.retrbinary("RETR " + state_name, previous.write)
+                  old = json.loads(previous.getvalue())
+                  if not isinstance(old, dict):
+                      old = {}
+              except (ftplib.error_perm, ValueError):
+                  old = {}
+              files = sorted(p for p in root.rglob("*") if p.is_file())
+              # Assets first, HTML after its dependencies, home page last.
+              files.sort(key=lambda p: (p == root / "index.html", p.suffix == ".html", str(p)))
+              current = {}
+              directories = {""}
+              uploaded = 0
+              for path in files:
+                  name = path.relative_to(root).as_posix()
+                  data = path.read_bytes()
+                  digest = hashlib.sha256(data).hexdigest()
+                  current[name] = digest
+                  if old.get(name) == digest:
+                      continue
+                  parent = path.relative_to(root).parent
+                  for directory in reversed([parent, *parent.parents]):
+                      part = directory.as_posix()
+                      if part == "." or part in directories:
+                          continue
+                      try:
+                          ftp.mkd(part)
+                      except ftplib.error_perm:
+                          # Verify it is an existing, accessible directory.
+                          ftp.cwd("/" + part)
+                          ftp.cwd("/")
+                      directories.add(part)
+                  temporary = name + ".pardus-upload"
+                  ftp.storbinary("STOR " + temporary, io.BytesIO(data))
+                  ftp.rename(temporary, name)
+                  uploaded += 1
+              ftp.storbinary("STOR " + state_name + ".tmp", io.BytesIO(json.dumps(current).encode()))
+              ftp.rename(state_name + ".tmp", state_name)
+              # No remote deletion: retain old assets, .well-known and hosting files.
+              print(f"Deployed {uploaded} changed files; {len(files) - uploaded} unchanged.")
+          finally:
+              ftp.close()
