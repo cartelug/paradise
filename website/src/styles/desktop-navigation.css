@@ -1,0 +1,56 @@
+/* More room for the five primary labels, with the existing compact dialog below. */
+.desktop-destination-toggle, .desktop-destinations { display: none; }
+.desktop-destinations[hidden] { display: none !important; }
+@media (min-width: 1000px) {
+  .site-header, .home .site-header { display: grid; grid-template-columns: 156px minmax(0, 1fr) auto; align-items: center; gap: 24px; height: 96px; padding-inline: clamp(28px, 3.3vw, 84px); }
+  .home .site-header, .home .site-header.is-scrolled, .home[data-window-seat-header] .site-header { color: #faf8f0; background: rgb(5 18 33 / .93); box-shadow: 0 1px 0 rgb(228 197 141 / .19); backdrop-filter: blur(16px); }
+  .home .site-header > .brand-link > .brand-lockup-vector { display: none; }
+  .home .window-seat-header-brand { display: block; width: 100%; }
+  .site-header > .brand-link, .home .site-header > .brand-link, .home .site-header.is-scrolled > .brand-link { width: 156px; }
+  .desktop-nav, .home .desktop-nav { align-items: center; justify-content: center; gap: clamp(14px, 1.5vw, 30px); margin: 0; }
+  .desktop-nav a, .home .desktop-nav a { display: inline-flex; align-items: center; min-height: 44px; color: #f1eee6; padding-block: 10px; }
+  .desktop-nav a:is(:hover, :focus-visible, [aria-current='page']), .home .desktop-nav a:is(:hover, :focus-visible, [aria-current='page']) { color: #e4c58d; }
+  .header-tools, .home .header-tools { gap: 12px; margin: 0; justify-content: flex-end; }
+  .header-cta, .home .header-cta { min-width: 0; min-height: 48px; padding: 12px 20px; color: #07172a; background: #e4c58d; border-color: #e4c58d; border-radius: 999px; }
+  .header-cta:hover, .home .header-cta:hover { background: #f0d9ad; border-color: #f0d9ad; color: #07172a; }
+  .site-header :is(a, button):focus-visible { outline: 2px solid #e4c58d; outline-offset: 4px; }
+  .desktop-nav-destination { display: inline-flex; align-items: center; gap: 0; }
+  .desktop-destination-toggle { flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; margin-inline: -6px -12px; padding: 10px; border: 0; background: transparent; color: #e4c58d; border-radius: 6px; }
+  .desktop-destination-toggle .icon { width: 14px; height: 14px; transform: rotate(90deg); }
+  .desktop-destination-toggle[aria-expanded='true'] .icon { transform: rotate(-90deg); }
+  .desktop-destinations { display: block; position: absolute; inset: calc(100% + 10px) clamp(28px, 3.3vw, 84px) auto auto; width: min(820px, calc(100vw - 56px)); padding: 28px; border: 1px solid rgb(228 197 141 / .3); border-radius: 14px; background: #071b2d; color: #f8f5ed; box-shadow: 0 24px 60px rgb(0 0 0 / .26); }
+  .desktop-destinations-label { color: #e4c58d; margin: 0 0 18px; }
+  .desktop-destinations-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .desktop-destinations-grid a { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 86px; padding: 14px; border: 1px solid rgb(228 197 141 / .17); border-radius: 8px; color: #f8f5ed; text-decoration: none; }
+  .desktop-destinations-grid a:hover { background: rgb(228 197 141 / .08); border-color: #e4c58d; }
+  .desktop-destinations-grid strong, .desktop-destinations-grid small { display: block; }
+  .desktop-destinations-grid small { color: #c7cdd8; margin-top: 5px; }
+  .desktop-destinations-grid .icon { color: #e4c58d; flex: none; width: 18px; }
+  .desktop-destinations-all { display: inline-flex; gap: 12px; align-items: center; min-height: 44px; margin-top: 18px; color: #e4c58d; text-decoration: none; }
+  .desktop-destinations-all .icon { width: 18px; }
+}
+@media (min-width: 1000px) and (max-width: 1359px) {
+  .desktop-nav, .home .desktop-nav { display: none; }
+  .site-header .menu-toggle, .home .site-header .menu-toggle { display: inline-grid !important; background: transparent; border-color: rgb(228 197 141 / .4); color: #e4c58d; border-radius: 999px; }
+  .site-header .header-tools, .home .site-header .header-tools { grid-column: 3; }
+  .menu, .home .menu { display: revert !important; }
+  .menu:not([open]), .home .menu:not([open]) { display: none !important; }
+}
+@media (min-width: 1360px) {
+  .desktop-nav, .home .desktop-nav { display: flex; }
+  .header-saved, .home .header-saved { display: inline-flex; color: #e8e6df; }
+  .site-header .menu-toggle, .home .site-header .menu-toggle { display: none !important; }
+  .home[data-expanded-hero] .desktop-nav { display: none; }
+  .home[data-expanded-hero] .site-header .menu-toggle { display: inline-grid !important; }
+}
+@media (min-width: 1360px) and (max-width: 1599px) {
+  .header-saved span, .home .header-saved span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .header-saved { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: no-preference) { .desktop-destination-toggle .icon { transition: transform .2s ease; } }
+@media (min-width: 1000px) and (max-width: 1359px) {
+  html:not(.js) .site-header, html:not(.js) .home .site-header { display: flex; flex-wrap: wrap; height: auto; }
+  html:not(.js) .desktop-nav, html:not(.js) .home .desktop-nav { display: flex; order: 3; width: 100%; flex-wrap: wrap; justify-content: flex-start; gap: 4px 18px; }
+  html:not(.js) .desktop-destination-toggle { display: none; }
+  html:not(.js) .header-tools { margin-left: auto; }
+}

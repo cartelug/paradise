@@ -167,3 +167,9 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 .price.price--request strong { font-family: var(--font-title); font-size: var(--fs-h4); line-height: var(--lh-title); letter-spacing: var(--ls-ui); }
 .home[data-enlarged-lettering] .hero--atlas h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); }
 .home .yacht--ocean .yacht-rate strong { font-family: var(--font-title); font-size: var(--fs-h3); line-height: var(--lh-title); }
+
+/* V45 desktop disclosure uses the established roles and installed weights. */
+.desktop-destinations-label { font-size: var(--fs-label); font-weight: var(--fw-bold); line-height: var(--lh-label); letter-spacing: var(--ls-caps-s); text-transform: uppercase; }
+.desktop-destinations-grid strong { font-family: var(--font-title); font-size: var(--fs-body); font-weight: var(--fw-bold); line-height: var(--lh-ui); }
+.desktop-destinations-grid small { font-size: var(--fs-small); font-weight: var(--fw-regular); line-height: var(--lh-small); }
+.desktop-destinations-all { font-size: var(--fs-small); font-weight: var(--fw-bold); line-height: var(--lh-ui); }

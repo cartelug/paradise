@@ -1,3 +1,23 @@
+# Owner release authorisation — 13 November 2026
+
+The user explicitly authorised pushing the completed coastal redesign to `main`
+and requested deployment through the configured Namecheap FTPS workflow. This
+supersedes the review-branch hold and manual-upload instructions for this release.
+
+# Desktop coastal opening — 13 November 2026
+
+The user requested and authorised a desktop-only coastal background spanning the
+first two sections, fresh natural-looking generated Zanzibar imagery and refined
+PC navigation. V45 in `website/source-assets/v45-desktop-coast/` records generation
+provenance and reproduction. `desktop-coast.css` is desktop-only; one background
+is shared by Hero and WindowSeat. The existing portrait hero rotation, complete
+animals, V44 lettering geometry, permanent preloader and mobile layout remain.
+The Zanzibar picture uses new illustrative sources only at 1000px and wider;
+this supersedes the earlier real-photo-only Zanzibar rule for desktop. Mobile
+and tablet keep the licensed original. Five primary navigation labels remain;
+the desktop disclosure is supplementary. Commercial data is unchanged. Keep
+source and generated output together when publishing this authorised release.
+
 # Owner requests — 11 November 2026
 
 Implemented from the supplied Pardus handover pack on 12 November 2026. These

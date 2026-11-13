@@ -1,3 +1,27 @@
+# Owner release authorisation — 13 November 2026
+
+The user explicitly authorised pushing the completed coastal redesign to `main`
+and requested deployment through the configured Namecheap FTPS workflow. This
+supersedes the review-branch hold and manual-upload instructions for this release.
+
+# Desktop coastal redesign — 13 November 2026
+
+The desktop opening shares one generated coastal background across the hero and
+Who We Are. New Zanzibar imagery uses responsive AVIF/WebP sources from 1000px;
+smaller screens retain the existing licensed photograph and portrait sequence.
+Navigation has a destinations disclosure, keyboard dismissal and a compact menu
+below 1360px. The approved logo, content, offers and enquiry behavior are retained.
+
+Final continuation checks: 101 Node tests pass; Astro reports no errors, warnings
+or hints across 130 files; all references in 35 HTML pages and 43 generated text
+assets resolve. The recorded 35 responsive cases have no failures. The finished
+desktop homepage and destination disclosure were also inspected in the preview.
+The header test now expects the current 1360px menu breakpoint.
+
+This release is authorised for main and the configured Namecheap FTPS deployment.
+Generated originals, exact prompts and derivative manifest are in
+`website/source-assets/v45-desktop-coast/`.
+
 # Owner updates — 11 November 2026
 
 Prepared on 12 November 2026 from the supplied handover pack. This branch is for

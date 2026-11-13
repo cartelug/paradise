@@ -22,6 +22,11 @@ import { destinationArt } from '../data/home-illustrations';
 import lettering from '../data/illustrated-home-artwork.json';
 import PhotoCredit from '../components/PhotoCredit.astro';
 import PackageDetails from '../components/PackageDetails.astro';
+import desktopCoast from '../data/desktop-coast.json';
+import '../styles/desktop-coast.css';
+const coast = desktopCoast[0];
+const coastSet = (ext: string) => coast.widths.map(width => `${path(`images/${coast.prefix}-${width}.${ext}`)} ${width}w`).join(', ');
+const blankScene = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const heroLettering = lettering.lettering['hero-lettering'];
 const promises = [
   { art: 'personal-attention', title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
@@ -41,8 +46,16 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 999px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 1000px)" imagesrcset={heroSet('mobile')} imagesizes="54vw" />
   </Fragment>
-  <Hero />
-  <WindowSeat />
+  <div class="coastal-opening">
+    <picture class="coastal-opening-scene" aria-hidden="true">
+      <source media="(max-width: 999px)" srcset={blankScene} />
+      <source type="image/avif" srcset={coastSet('avif')} sizes="100vw" />
+      <source type="image/webp" srcset={coastSet('webp')} sizes="100vw" />
+      <img src={path(`images/${coast.prefix}-${coast.width}.webp`)} width={coast.width} height={coast.height} alt="" fetchpriority="high" decoding="async" />
+    </picture>
+    <Hero />
+    <WindowSeat />
+  </div>
 
   <section class="yacht yacht--ocean" aria-labelledby="cruise-title">
     <div class="yacht-media"><Picture name={cruisePhoto.image} alt={cruisePhoto.alt} sizes="(max-width: 760px) 100vw, 62vw" /></div>

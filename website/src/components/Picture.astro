@@ -2,6 +2,7 @@
 import { path } from '../data/site';
 import { travelPhotographs } from '../data/travel-photographs.ts';
 import { ownerPhotographs } from '../data/owner-photographs';
+import desktopCoast from '../data/desktop-coast.json';
 interface Props { name: string; alt: string; class?: string; eager?: boolean; sizes?: string; }
 const { name, alt, class: className, eager = false, sizes = '(max-width: 760px) 100vw, 60vw' } = Astro.props;
 // V38 photographs are published at their native 16:10 shape with only the widths the master supports, and carry a focal point
@@ -11,9 +12,17 @@ const widths = prepared ? prepared.widths : [640, 1280, 1920];
 const srcWidth = prepared ? (widths.includes(1280) ? 1280 : widths[widths.length - 1]) : 1280;
 const srcHeight = prepared ? Math.round(srcWidth * prepared.height / prepared.width) : 853;
 const srcset = (ext: string) => widths.map(width => `${path(`images/${name}-${width}.${ext}`)} ${width}w`).join(', ');
+// The requested Zanzibar replacement is desktop-only. Keep the licensed mobile
+// photograph and its dimensions; an art-directed source prevents a second fetch.
+const desktop = name === 'zanzibar-v24' ? desktopCoast[1] : null;
+const desktopSet = (ext: string) => desktop?.widths.map(width => `${path(`images/${desktop.prefix}-${width}.${ext}`)} ${width}w`).join(', ');
 ---
 <picture class={className}>
+  {desktop && <>
+    <source media="(min-width: 1000px)" type="image/avif" srcset={desktopSet('avif')} sizes={sizes} />
+    <source media="(min-width: 1000px)" type="image/webp" srcset={desktopSet('webp')} sizes={sizes} />
+  </>}
   <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
   <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
-  <img src={path(`images/${name}-${srcWidth}.webp`)} alt={alt} width={srcWidth} height={srcHeight} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'low'} decoding="async" style={prepared ? `object-position:${prepared.position}` : undefined} />
+  <img src={path(`images/${name}-${srcWidth}.webp`)} alt={desktop ? 'A palm-lined Zanzibar coast with pale sand beside the Indian Ocean' : alt} width={srcWidth} height={srcHeight} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'low'} decoding="async" style={prepared ? `object-position:${prepared.position}` : undefined} />
 </picture>

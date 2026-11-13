@@ -1,0 +1,30 @@
+[
+  {
+    "file": "coastal-continuous-master.png",
+    "prefix": "pardus-v45-coastal-continuous",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      960,
+      1280,
+      1536
+    ],
+    "sha256": "d562dc014480fa6047fe1b9f37025a4e2b4034bddcc8989912c2536ee80eb15d",
+    "source": "AI-generated illustrative travel imagery; not a photograph of an identified property."
+  },
+  {
+    "file": "zanzibar-editorial-master.png",
+    "prefix": "pardus-v45-zanzibar-editorial",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      960,
+      1280,
+      1536
+    ],
+    "sha256": "94fb5f22e0db81511c64920dcb085cd2709c6134ef8157d6443d5022893f4f67",
+    "source": "AI-generated illustrative travel imagery; not a photograph of an identified property."
+  }
+]

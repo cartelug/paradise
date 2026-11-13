@@ -1,0 +1,813 @@
+{
+  "checks": 35,
+  "failures": [],
+  "results": [
+    {
+      "width": 375,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 20,
+          "right": 156
+        },
+        {
+          "class": "header-tools",
+          "left": 311,
+          "right": 355
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 22,
+          "right": 158
+        },
+        {
+          "class": "header-tools",
+          "left": 365,
+          "right": 409
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-coastal-continuous-1280.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 33,
+          "right": 189
+        },
+        {
+          "class": "header-tools",
+          "left": 731,
+          "right": 967
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-coastal-continuous-1280.avif",
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 42,
+          "right": 198
+        },
+        {
+          "class": "header-tools",
+          "left": 998,
+          "right": 1238
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-coastal-continuous-1536.avif",
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 48,
+          "right": 204
+        },
+        {
+          "class": "desktop-nav",
+          "left": 228,
+          "right": 1135
+        },
+        {
+          "class": "header-tools",
+          "left": 1159,
+          "right": 1392
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-coastal-continuous-1536.avif",
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 63,
+          "right": 219
+        },
+        {
+          "class": "desktop-nav",
+          "left": 243,
+          "right": 1503
+        },
+        {
+          "class": "header-tools",
+          "left": 1527,
+          "right": 1857
+        }
+      ]
+    },
+    {
+      "width": 2560,
+      "page": "home",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-coastal-continuous-1536.avif",
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 84,
+          "right": 240
+        },
+        {
+          "class": "desktop-nav",
+          "left": 264,
+          "right": 2122
+        },
+        {
+          "class": "header-tools",
+          "left": 2146,
+          "right": 2476
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 20,
+          "right": 132
+        },
+        {
+          "class": "header-tools",
+          "left": 309,
+          "right": 355
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 22,
+          "right": 134
+        },
+        {
+          "class": "header-tools",
+          "left": 362,
+          "right": 408
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 33,
+          "right": 189
+        },
+        {
+          "class": "header-tools",
+          "left": 757,
+          "right": 967
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 42,
+          "right": 198
+        },
+        {
+          "class": "header-tools",
+          "left": 968,
+          "right": 1238
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 48,
+          "right": 204
+        },
+        {
+          "class": "desktop-nav",
+          "left": 228,
+          "right": 1163
+        },
+        {
+          "class": "header-tools",
+          "left": 1187,
+          "right": 1392
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-640.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 63,
+          "right": 219
+        },
+        {
+          "class": "desktop-nav",
+          "left": 243,
+          "right": 1531
+        },
+        {
+          "class": "header-tools",
+          "left": 1555,
+          "right": 1857
+        }
+      ]
+    },
+    {
+      "width": 2560,
+      "page": "destinations.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 84,
+          "right": 240
+        },
+        {
+          "class": "desktop-nav",
+          "left": 264,
+          "right": 2150
+        },
+        {
+          "class": "header-tools",
+          "left": 2174,
+          "right": 2476
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 20,
+          "right": 132
+        },
+        {
+          "class": "header-tools",
+          "left": 309,
+          "right": 355
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 22,
+          "right": 134
+        },
+        {
+          "class": "header-tools",
+          "left": 362,
+          "right": 408
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-1280.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 33,
+          "right": 189
+        },
+        {
+          "class": "header-tools",
+          "left": 757,
+          "right": 967
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-1280.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 42,
+          "right": 198
+        },
+        {
+          "class": "header-tools",
+          "left": 968,
+          "right": 1238
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-1536.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 48,
+          "right": 204
+        },
+        {
+          "class": "desktop-nav",
+          "left": 228,
+          "right": 1163
+        },
+        {
+          "class": "header-tools",
+          "left": 1187,
+          "right": 1392
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-1536.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 63,
+          "right": 219
+        },
+        {
+          "class": "desktop-nav",
+          "left": 243,
+          "right": 1531
+        },
+        {
+          "class": "header-tools",
+          "left": 1555,
+          "right": 1857
+        }
+      ]
+    },
+    {
+      "width": 2560,
+      "page": "destination-zanzibar.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [
+        "pardus-v45-zanzibar-editorial-1536.avif"
+      ],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 84,
+          "right": 240
+        },
+        {
+          "class": "desktop-nav",
+          "left": 264,
+          "right": 2150
+        },
+        {
+          "class": "header-tools",
+          "left": 2174,
+          "right": 2476
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 20,
+          "right": 132
+        },
+        {
+          "class": "header-tools",
+          "left": 309,
+          "right": 355
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 22,
+          "right": 134
+        },
+        {
+          "class": "header-tools",
+          "left": 362,
+          "right": 408
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 33,
+          "right": 189
+        },
+        {
+          "class": "header-tools",
+          "left": 757,
+          "right": 967
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 42,
+          "right": 198
+        },
+        {
+          "class": "header-tools",
+          "left": 968,
+          "right": 1238
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 48,
+          "right": 204
+        },
+        {
+          "class": "desktop-nav",
+          "left": 228,
+          "right": 1163
+        },
+        {
+          "class": "header-tools",
+          "left": 1187,
+          "right": 1392
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 63,
+          "right": 219
+        },
+        {
+          "class": "desktop-nav",
+          "left": 243,
+          "right": 1531
+        },
+        {
+          "class": "header-tools",
+          "left": 1555,
+          "right": 1857
+        }
+      ]
+    },
+    {
+      "width": 2560,
+      "page": "about.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 84,
+          "right": 240
+        },
+        {
+          "class": "desktop-nav",
+          "left": 264,
+          "right": 2150
+        },
+        {
+          "class": "header-tools",
+          "left": 2174,
+          "right": 2476
+        }
+      ]
+    },
+    {
+      "width": 375,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 20,
+          "right": 132
+        },
+        {
+          "class": "header-tools",
+          "left": 309,
+          "right": 355
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 22,
+          "right": 134
+        },
+        {
+          "class": "header-tools",
+          "left": 362,
+          "right": 408
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 33,
+          "right": 189
+        },
+        {
+          "class": "header-tools",
+          "left": 757,
+          "right": 967
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 42,
+          "right": 198
+        },
+        {
+          "class": "header-tools",
+          "left": 968,
+          "right": 1238
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 48,
+          "right": 204
+        },
+        {
+          "class": "desktop-nav",
+          "left": 228,
+          "right": 1163
+        },
+        {
+          "class": "header-tools",
+          "left": 1187,
+          "right": 1392
+        }
+      ]
+    },
+    {
+      "width": 1920,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 63,
+          "right": 219
+        },
+        {
+          "class": "desktop-nav",
+          "left": 243,
+          "right": 1531
+        },
+        {
+          "class": "header-tools",
+          "left": 1555,
+          "right": 1857
+        }
+      ]
+    },
+    {
+      "width": 2560,
+      "page": "journey.html",
+      "horizontalOverflow": false,
+      "primaryHeadings": 1,
+      "images": [],
+      "desktopImagesRequested": [],
+      "headerItems": [
+        {
+          "class": "brand-link",
+          "left": 84,
+          "right": 240
+        },
+        {
+          "class": "desktop-nav",
+          "left": 264,
+          "right": 2150
+        },
+        {
+          "class": "header-tools",
+          "left": 2174,
+          "right": 2476
+        }
+      ]
+    }
+  ]
+}

@@ -112,7 +112,7 @@ test('homepage header colours are scoped, with the existing approved vector logo
   assert.match(css, /\.home \.desktop-nav a/);
   assert.match(css, /@media \(min-width: 1200px\)/);
   const ui = await read('src/scripts/ui.ts');
-  assert.match(ui, /const desktop = window\.matchMedia\('\(min-width: 1200px\)'\)/);
+  assert.match(ui, /const desktop = window\.matchMedia\('\(min-width: 1360px\)'\)/);
 });
 
 test('selected compact collection has portrait photographs and real destination pages', async () => {
