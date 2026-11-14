@@ -70,3 +70,6 @@
 @media (min-width: 1360px) { .site-header, .home .site-header { gap: 16px; } .header-tools, .home .header-tools { gap: 8px; } }
 @media (max-width: 359px) { .menu-destinations { grid-template-columns: minmax(0, 1fr); } }
 html:not(.js) .home .desktop-nav a { color: #f1eee6; }
+
+/* Without scripting the menu cannot open, so its toggle stays hidden; the header links remain. */
+html:not(.js) .site-header .menu-toggle.requires-js, html:not(.js) .home .site-header .menu-toggle.requires-js { display: none !important; }
