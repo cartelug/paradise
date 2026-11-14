@@ -1,0 +1,2850 @@
+{
+  "sourceRevision": "cda27a4ace9ce22e69b805e5a2842b2e69dce4fe",
+  "method": "Live Chromium at CSS widths controlled by browser zoom; not physical-device or Safari testing.",
+  "results": [
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys.",
+          "visible": true
+        },
+        {
+          "text": "Leave ordinary.",
+          "visible": true
+        },
+        {
+          "text": "Choose your view.",
+          "visible": true
+        },
+        {
+          "text": "Your world, your way.",
+          "visible": true
+        },
+        {
+          "text": "The best view is from the water.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "More places. More possibilities.",
+          "visible": true
+        },
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Every detail, considered.",
+          "visible": true
+        },
+        {
+          "text": "Four steps. One clear plan.",
+          "visible": true
+        },
+        {
+          "text": "Know before you go.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A name. A vision. Your journey.",
+          "visible": true
+        },
+        {
+          "text": "The Story Behind the Name",
+          "visible": true
+        },
+        {
+          "text": "The Vision Behind PARDUS",
+          "visible": true
+        },
+        {
+          "text": "Our Vision & Mission",
+          "visible": true
+        },
+        {
+          "text": "Our Five Core Values",
+          "visible": true
+        },
+        {
+          "text": "Travel Curated Around You!",
+          "visible": true
+        },
+        {
+          "text": "What We Do",
+          "visible": true
+        },
+        {
+          "text": "Begin Your Journey",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/about/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys. Personally curated.",
+          "visible": true
+        },
+        {
+          "text": "Signature escapes",
+          "visible": true
+        },
+        {
+          "text": "More ways to get away.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "Beautiful moments. Out on the water.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concept-note/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "You tell us where. We arrange everything.",
+          "visible": true
+        },
+        {
+          "text": "Services",
+          "visible": true
+        },
+        {
+          "text": "Your holiday. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Start with a place. Leave the details with us.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concierge/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "One conversation. A beautiful journey.",
+          "visible": true
+        },
+        {
+          "text": "Plan a trip",
+          "visible": true
+        },
+        {
+          "text": "General enquiries",
+          "visible": true
+        },
+        {
+          "text": "Support & feedback",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/contact/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Time matters. Travel well.",
+          "visible": true
+        },
+        {
+          "text": "More focus. Fewer moving parts.",
+          "visible": true
+        },
+        {
+          "text": "From the first meeting to the journey home.",
+          "visible": true
+        },
+        {
+          "text": "Built around the agenda.",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/corporate/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A new horizon. Every morning.",
+          "visible": true
+        },
+        {
+          "text": "Your route. Your rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A few hours. Entirely yours.",
+          "visible": true
+        },
+        {
+          "text": "Pick the occasion. We’ll plan the water.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/cruises/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choose your place. We’ll plan your escape.",
+          "visible": true
+        },
+        {
+          "text": "All destinations",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Six ways into the world.",
+          "visible": true
+        },
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "Keep the feeling. Change the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next escape. Let’s arrange it.",
+          "visible": true
+        },
+        {
+          "text": "You tell us where. We arrange the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journey/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next chapter.",
+          "visible": true
+        },
+        {
+          "text": "A little clarity.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/planner/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Places worth knowing. Details worth considering.",
+          "visible": true
+        },
+        {
+          "text": "One ocean. Your own island.",
+          "visible": true
+        },
+        {
+          "text": "The reading room",
+          "visible": true
+        },
+        {
+          "text": "Good travel starts with better questions.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your privacy.",
+          "visible": true
+        },
+        {
+          "text": "Your simple enquiry",
+          "visible": true
+        },
+        {
+          "text": "Your detailed journey brief",
+          "visible": true
+        },
+        {
+          "text": "Your saved preferences",
+          "visible": true
+        },
+        {
+          "text": "Hosting and assets",
+          "visible": true
+        },
+        {
+          "text": "Future enquiry delivery",
+          "visible": true
+        },
+        {
+          "text": "What not to enter",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/privacy/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A little clarity.",
+          "visible": true
+        },
+        {
+          "text": "Your itinerary and proposal",
+          "visible": true
+        },
+        {
+          "text": "Your journey brief",
+          "visible": true
+        },
+        {
+          "text": "Fares and ticketing",
+          "visible": true
+        },
+        {
+          "text": "Travel requirements",
+          "visible": true
+        },
+        {
+          "text": "How a booking works",
+          "visible": true
+        },
+        {
+          "text": "Cancellations and changes",
+          "visible": true
+        },
+        {
+          "text": "Destination photography",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/terms/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Travel with a clearer picture.",
+          "visible": true
+        },
+        {
+          "text": "Latest updates",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/travel-desk/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Zanzibar",
+          "visible": true
+        },
+        {
+          "text": "Let the coast set the rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Zanzibar journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/zanzibar/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Seychelles",
+          "visible": true
+        },
+        {
+          "text": "Where the jungle meets the shore.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Seychelles journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/seychelles/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maldives",
+          "visible": true
+        },
+        {
+          "text": "A little further from everything.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maldives journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maldives/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Dubai",
+          "visible": true
+        },
+        {
+          "text": "A city of possibilities.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "See a little more of Dubai.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Dubai journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/dubai/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maasai Mara",
+          "visible": true
+        },
+        {
+          "text": "Let the wild set the pace.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maasai Mara journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maasai-mara/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Uganda gorillas",
+          "visible": true
+        },
+        {
+          "text": "A quieter kind of extraordinary.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Uganda gorillas journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/uganda-gorillas/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "East Africa",
+          "visible": true
+        },
+        {
+          "text": "Out here, the world feels bigger.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your East Africa journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/africa/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Europe",
+          "visible": true
+        },
+        {
+          "text": "Stay a little. See a little more.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Europe journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/europe/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "A wider world, then a quieter one.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/safari-and-shore/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Less itinerary. More arrival.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/private-island-reset/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Wonder, with room for everyone.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/family-in-the-wild/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "A little theatre. Then time disappears.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/celebration-in-two-acts/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "The agenda stays clear. The journey does too.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/executive-arrivals/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "The pleasure of leaving space between places.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/mediterranean-at-human-pace/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        },
+        {
+          "text": "Every Maldives photo looks similar. Every Maldives stay does not.",
+          "visible": true
+        },
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/choosing-your-maldives-island/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        },
+        {
+          "text": "A lot of travel planning happens behind the scenes. Here is what that actually looks like.",
+          "visible": true
+        },
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/how-a-journey-comes-together/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        },
+        {
+          "text": "A significant booking deserves a few plain questions before you commit — of any operator, including us.",
+          "visible": true
+        },
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/questions-before-a-luxury-booking/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        },
+        {
+          "text": "Safari is one of the most talked-about, least-explained kinds of travel. Here is what actually happens.",
+          "visible": true
+        },
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/what-a-private-safari-involves/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        },
+        {
+          "text": "It is entirely possible to visit Zanzibar and never leave the beach. It is also a bit of a missed opportunity.",
+          "visible": true
+        },
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/zanzibar-beyond-the-beach/",
+      "width": 340
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys.",
+          "visible": true
+        },
+        {
+          "text": "Leave ordinary.",
+          "visible": true
+        },
+        {
+          "text": "Choose your view.",
+          "visible": true
+        },
+        {
+          "text": "Your world, your way.",
+          "visible": true
+        },
+        {
+          "text": "The best view is from the water.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "More places. More possibilities.",
+          "visible": true
+        },
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Every detail, considered.",
+          "visible": true
+        },
+        {
+          "text": "Four steps. One clear plan.",
+          "visible": true
+        },
+        {
+          "text": "Know before you go.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A name. A vision. Your journey.",
+          "visible": true
+        },
+        {
+          "text": "The Story Behind the Name",
+          "visible": true
+        },
+        {
+          "text": "The Vision Behind PARDUS",
+          "visible": true
+        },
+        {
+          "text": "Our Vision & Mission",
+          "visible": true
+        },
+        {
+          "text": "Our Five Core Values",
+          "visible": true
+        },
+        {
+          "text": "Travel Curated Around You!",
+          "visible": true
+        },
+        {
+          "text": "What We Do",
+          "visible": true
+        },
+        {
+          "text": "Begin Your Journey",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/about/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys. Personally curated.",
+          "visible": true
+        },
+        {
+          "text": "Signature escapes",
+          "visible": true
+        },
+        {
+          "text": "More ways to get away.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "Beautiful moments. Out on the water.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concept-note/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "You tell us where. We arrange everything.",
+          "visible": true
+        },
+        {
+          "text": "Services",
+          "visible": true
+        },
+        {
+          "text": "Your holiday. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Start with a place. Leave the details with us.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concierge/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "One conversation. A beautiful journey.",
+          "visible": true
+        },
+        {
+          "text": "Plan a trip",
+          "visible": true
+        },
+        {
+          "text": "General enquiries",
+          "visible": true
+        },
+        {
+          "text": "Support & feedback",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/contact/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Time matters. Travel well.",
+          "visible": true
+        },
+        {
+          "text": "More focus. Fewer moving parts.",
+          "visible": true
+        },
+        {
+          "text": "From the first meeting to the journey home.",
+          "visible": true
+        },
+        {
+          "text": "Built around the agenda.",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/corporate/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A new horizon. Every morning.",
+          "visible": true
+        },
+        {
+          "text": "Your route. Your rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A few hours. Entirely yours.",
+          "visible": true
+        },
+        {
+          "text": "Pick the occasion. We’ll plan the water.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/cruises/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choose your place. We’ll plan your escape.",
+          "visible": true
+        },
+        {
+          "text": "All destinations",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Six ways into the world.",
+          "visible": true
+        },
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "Keep the feeling. Change the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next escape. Let’s arrange it.",
+          "visible": true
+        },
+        {
+          "text": "You tell us where. We arrange the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journey/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next chapter.",
+          "visible": true
+        },
+        {
+          "text": "A little clarity.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/planner/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Places worth knowing. Details worth considering.",
+          "visible": true
+        },
+        {
+          "text": "One ocean. Your own island.",
+          "visible": true
+        },
+        {
+          "text": "The reading room",
+          "visible": true
+        },
+        {
+          "text": "Good travel starts with better questions.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your privacy.",
+          "visible": true
+        },
+        {
+          "text": "Your simple enquiry",
+          "visible": true
+        },
+        {
+          "text": "Your detailed journey brief",
+          "visible": true
+        },
+        {
+          "text": "Your saved preferences",
+          "visible": true
+        },
+        {
+          "text": "Hosting and assets",
+          "visible": true
+        },
+        {
+          "text": "Future enquiry delivery",
+          "visible": true
+        },
+        {
+          "text": "What not to enter",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/privacy/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A little clarity.",
+          "visible": true
+        },
+        {
+          "text": "Your itinerary and proposal",
+          "visible": true
+        },
+        {
+          "text": "Your journey brief",
+          "visible": true
+        },
+        {
+          "text": "Fares and ticketing",
+          "visible": true
+        },
+        {
+          "text": "Travel requirements",
+          "visible": true
+        },
+        {
+          "text": "How a booking works",
+          "visible": true
+        },
+        {
+          "text": "Cancellations and changes",
+          "visible": true
+        },
+        {
+          "text": "Destination photography",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/terms/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Travel with a clearer picture.",
+          "visible": true
+        },
+        {
+          "text": "Latest updates",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/travel-desk/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Zanzibar",
+          "visible": true
+        },
+        {
+          "text": "Let the coast set the rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Zanzibar journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/zanzibar/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Seychelles",
+          "visible": true
+        },
+        {
+          "text": "Where the jungle meets the shore.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Seychelles journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/seychelles/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maldives",
+          "visible": true
+        },
+        {
+          "text": "A little further from everything.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maldives journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maldives/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Dubai",
+          "visible": true
+        },
+        {
+          "text": "A city of possibilities.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "See a little more of Dubai.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Dubai journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/dubai/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maasai Mara",
+          "visible": true
+        },
+        {
+          "text": "Let the wild set the pace.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maasai Mara journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maasai-mara/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Uganda gorillas",
+          "visible": true
+        },
+        {
+          "text": "A quieter kind of extraordinary.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Uganda gorillas journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/uganda-gorillas/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "East Africa",
+          "visible": true
+        },
+        {
+          "text": "Out here, the world feels bigger.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your East Africa journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/africa/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Europe",
+          "visible": true
+        },
+        {
+          "text": "Stay a little. See a little more.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Europe journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/europe/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "A wider world, then a quieter one.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/safari-and-shore/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Less itinerary. More arrival.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/private-island-reset/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Wonder, with room for everyone.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/family-in-the-wild/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "A little theatre. Then time disappears.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/celebration-in-two-acts/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "The agenda stays clear. The journey does too.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/executive-arrivals/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "The pleasure of leaving space between places.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/mediterranean-at-human-pace/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        },
+        {
+          "text": "Every Maldives photo looks similar. Every Maldives stay does not.",
+          "visible": true
+        },
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/choosing-your-maldives-island/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        },
+        {
+          "text": "A lot of travel planning happens behind the scenes. Here is what that actually looks like.",
+          "visible": true
+        },
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/how-a-journey-comes-together/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        },
+        {
+          "text": "A significant booking deserves a few plain questions before you commit — of any operator, including us.",
+          "visible": true
+        },
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/questions-before-a-luxury-booking/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        },
+        {
+          "text": "Safari is one of the most talked-about, least-explained kinds of travel. Here is what actually happens.",
+          "visible": true
+        },
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/what-a-private-safari-involves/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        },
+        {
+          "text": "It is entirely possible to visit Zanzibar and never leave the beach. It is also a bit of a missed opportunity.",
+          "visible": true
+        },
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/zanzibar-beyond-the-beach/",
+      "width": 681
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys.",
+          "visible": true
+        },
+        {
+          "text": "Leave ordinary.",
+          "visible": true
+        },
+        {
+          "text": "Choose your view.",
+          "visible": true
+        },
+        {
+          "text": "Your world, your way.",
+          "visible": true
+        },
+        {
+          "text": "The best view is from the water.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "More places. More possibilities.",
+          "visible": true
+        },
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Every detail, considered.",
+          "visible": true
+        },
+        {
+          "text": "Four steps. One clear plan.",
+          "visible": true
+        },
+        {
+          "text": "Know before you go.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A name. A vision. Your journey.",
+          "visible": true
+        },
+        {
+          "text": "The Story Behind the Name",
+          "visible": true
+        },
+        {
+          "text": "The Vision Behind PARDUS",
+          "visible": true
+        },
+        {
+          "text": "Our Vision & Mission",
+          "visible": true
+        },
+        {
+          "text": "Our Five Core Values",
+          "visible": true
+        },
+        {
+          "text": "Travel Curated Around You!",
+          "visible": true
+        },
+        {
+          "text": "What We Do",
+          "visible": true
+        },
+        {
+          "text": "Begin Your Journey",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/about/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Extraordinary journeys. Personally curated.",
+          "visible": true
+        },
+        {
+          "text": "Signature escapes",
+          "visible": true
+        },
+        {
+          "text": "More ways to get away.",
+          "visible": true
+        },
+        {
+          "text": "You choose where. We arrange the rest.",
+          "visible": true
+        },
+        {
+          "text": "Beautiful moments. Out on the water.",
+          "visible": true
+        },
+        {
+          "text": "Tell us where. We’ll take it from here.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concept-note/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "You tell us where. We arrange everything.",
+          "visible": true
+        },
+        {
+          "text": "Services",
+          "visible": true
+        },
+        {
+          "text": "Your holiday. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Start with a place. Leave the details with us.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/concierge/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "One conversation. A beautiful journey.",
+          "visible": true
+        },
+        {
+          "text": "Plan a trip",
+          "visible": true
+        },
+        {
+          "text": "General enquiries",
+          "visible": true
+        },
+        {
+          "text": "Support & feedback",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/contact/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Time matters. Travel well.",
+          "visible": true
+        },
+        {
+          "text": "More focus. Fewer moving parts.",
+          "visible": true
+        },
+        {
+          "text": "From the first meeting to the journey home.",
+          "visible": true
+        },
+        {
+          "text": "Built around the agenda.",
+          "visible": true
+        },
+        {
+          "text": "Partnerships and corporate accounts",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/corporate/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A new horizon. Every morning.",
+          "visible": true
+        },
+        {
+          "text": "Your route. Your rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A few hours. Entirely yours.",
+          "visible": true
+        },
+        {
+          "text": "Pick the occasion. We’ll plan the water.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/cruises/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choose your place. We’ll plan your escape.",
+          "visible": true
+        },
+        {
+          "text": "All destinations",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Journeys with a point of view.",
+          "visible": true
+        },
+        {
+          "text": "Six ways into the world.",
+          "visible": true
+        },
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "Keep the feeling. Change the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next escape. Let’s arrange it.",
+          "visible": true
+        },
+        {
+          "text": "You tell us where. We arrange the rest.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journey/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your next chapter.",
+          "visible": true
+        },
+        {
+          "text": "A little clarity.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/planner/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Places worth knowing. Details worth considering.",
+          "visible": true
+        },
+        {
+          "text": "One ocean. Your own island.",
+          "visible": true
+        },
+        {
+          "text": "The reading room",
+          "visible": true
+        },
+        {
+          "text": "Good travel starts with better questions.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Your privacy.",
+          "visible": true
+        },
+        {
+          "text": "Your simple enquiry",
+          "visible": true
+        },
+        {
+          "text": "Your detailed journey brief",
+          "visible": true
+        },
+        {
+          "text": "Your saved preferences",
+          "visible": true
+        },
+        {
+          "text": "Hosting and assets",
+          "visible": true
+        },
+        {
+          "text": "Future enquiry delivery",
+          "visible": true
+        },
+        {
+          "text": "What not to enter",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/privacy/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "A little clarity.",
+          "visible": true
+        },
+        {
+          "text": "Your itinerary and proposal",
+          "visible": true
+        },
+        {
+          "text": "Your journey brief",
+          "visible": true
+        },
+        {
+          "text": "Fares and ticketing",
+          "visible": true
+        },
+        {
+          "text": "Travel requirements",
+          "visible": true
+        },
+        {
+          "text": "How a booking works",
+          "visible": true
+        },
+        {
+          "text": "Cancellations and changes",
+          "visible": true
+        },
+        {
+          "text": "Destination photography",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/terms/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Travel with a clearer picture.",
+          "visible": true
+        },
+        {
+          "text": "Latest updates",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/travel-desk/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Zanzibar",
+          "visible": true
+        },
+        {
+          "text": "Let the coast set the rhythm.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Zanzibar journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/zanzibar/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Seychelles",
+          "visible": true
+        },
+        {
+          "text": "Where the jungle meets the shore.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Seychelles journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/seychelles/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maldives",
+          "visible": true
+        },
+        {
+          "text": "A little further from everything.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maldives journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maldives/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Dubai",
+          "visible": true
+        },
+        {
+          "text": "A city of possibilities.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "See a little more of Dubai.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Dubai journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/dubai/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Maasai Mara",
+          "visible": true
+        },
+        {
+          "text": "Let the wild set the pace.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Maasai Mara journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/maasai-mara/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Uganda gorillas",
+          "visible": true
+        },
+        {
+          "text": "A quieter kind of extraordinary.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Uganda gorillas journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/uganda-gorillas/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "East Africa",
+          "visible": true
+        },
+        {
+          "text": "Out here, the world feels bigger.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your East Africa journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/africa/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Europe",
+          "visible": true
+        },
+        {
+          "text": "Stay a little. See a little more.",
+          "visible": true
+        },
+        {
+          "text": "A stay worth looking forward to.",
+          "visible": true
+        },
+        {
+          "text": "Your dates. Your way to travel.",
+          "visible": true
+        },
+        {
+          "text": "Plan your Europe journey.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/destinations/europe/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Safari & Shore",
+          "visible": true
+        },
+        {
+          "text": "A wider world, then a quieter one.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/safari-and-shore/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Private Island Reset",
+          "visible": true
+        },
+        {
+          "text": "Less itinerary. More arrival.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/private-island-reset/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Family in the Wild",
+          "visible": true
+        },
+        {
+          "text": "Wonder, with room for everyone.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/family-in-the-wild/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Celebration in Two Acts",
+          "visible": true
+        },
+        {
+          "text": "A little theatre. Then time disappears.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/celebration-in-two-acts/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Executive Arrivals",
+          "visible": true
+        },
+        {
+          "text": "The agenda stays clear. The journey does too.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/executive-arrivals/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Mediterranean at Human Pace",
+          "visible": true
+        },
+        {
+          "text": "The pleasure of leaving space between places.",
+          "visible": true
+        },
+        {
+          "text": "Three acts. Room to adapt.",
+          "visible": true
+        },
+        {
+          "text": "Make it yours.",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journeys/mediterranean-at-human-pace/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        },
+        {
+          "text": "Every Maldives photo looks similar. Every Maldives stay does not.",
+          "visible": true
+        },
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/choosing-your-maldives-island/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        },
+        {
+          "text": "A lot of travel planning happens behind the scenes. Here is what that actually looks like.",
+          "visible": true
+        },
+        {
+          "text": "Choosing your Maldives island, considered",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/how-a-journey-comes-together/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        },
+        {
+          "text": "A significant booking deserves a few plain questions before you commit — of any operator, including us.",
+          "visible": true
+        },
+        {
+          "text": "How a Pardus journey actually comes together",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/questions-before-a-luxury-booking/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        },
+        {
+          "text": "Safari is one of the most talked-about, least-explained kinds of travel. Here is what actually happens.",
+          "visible": true
+        },
+        {
+          "text": "Questions worth asking before a luxury booking",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/what-a-private-safari-involves/",
+      "width": 1363
+    },
+    {
+      "h1": 1,
+      "headings": [
+        {
+          "text": "Zanzibar beyond the beach",
+          "visible": true
+        },
+        {
+          "text": "It is entirely possible to visit Zanzibar and never leave the beach. It is also a bit of a missed opportunity.",
+          "visible": true
+        },
+        {
+          "text": "What a private safari actually involves",
+          "visible": true
+        }
+      ],
+      "overflow": false,
+      "overflowElements": [],
+      "path": "/journal/zanzibar-beyond-the-beach/",
+      "width": 1363
+    }
+  ],
+  "flows": {
+    "desktopMenu": true,
+    "mobileMenu": true,
+    "mobileDestinationShortcut": true,
+    "zanzibarEnquiryPrefill": true
+  }
+}

@@ -12,7 +12,15 @@ destination shortcuts. The full menu is now available on desktop as well.
 111 Node tests pass, including parity across all 34 canonical pages. Astro
 reports zero errors, warnings or hints; both base-path exports verify all pages,
 aliases and assets. Managed local preview exits before readiness; local visual
-QA is unverified. Verify the live release and responsive rendering after FTP.
+QA is unverified. The published release passed FTPS and live verification.
+Fresh live Chromium checks cover all 34 routes at CSS widths 340, 681 and 1363
+(102 route/width combinations): no page/text overflow and exactly one H1. All
+12 homepage headings remain present and visible in the same order. Both menus,
+the mobile Zanzibar shortcut and destination-prefilled enquiry were exercised.
+These are browser zoom checks, not physical-device or Safari certification.
+The tablet portrait now feathers from its left edge and ends at the viewport
+edge, preventing the observed hard rectangular image seam. Full results and
+a desktop screenshot are in website/qa/v47-*.
 
 # V46 motion, responsiveness and clean URLs — 14 November 2026
 
