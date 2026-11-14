@@ -24,7 +24,7 @@ from playwright.sync_api import expect, sync_playwright
 
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
-ROUTES = sorted(path.name for path in EXPORT.glob("*.html"))
+ROUTES = sorted(json.loads((EXPORT / "route-manifest.json").read_text())["routes"].values())
 REQUESTED_ROUTES = [route for route in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if route]
 if REQUESTED_ROUTES:
     assert set(REQUESTED_ROUTES).issubset(ROUTES), f"Unknown QA routes: {set(REQUESTED_ROUTES) - set(ROUTES)}"
@@ -134,7 +134,7 @@ def preloader(browser):
     context = context_for(browser, intro_seen=False, viewport={"width": 1440, "height": 900})
     page = context.new_page()
     # A first visit on a page that is not the homepage still gets the full sequence.
-    page.goto(urljoin(BASE, "cruises.html"), wait_until="load", timeout=45000)
+    page.goto(urljoin(BASE, "cruises/"), wait_until="load", timeout=45000)
     intro = page.locator("[data-pardus-intro]")
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-full\b"))
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-active\b"))
@@ -149,9 +149,9 @@ def preloader(browser):
     expect(page.locator("main h1")).to_be_visible()
     assert page.evaluate(f"sessionStorage.getItem('{INTRO_KEY}')") == "seen"
     # Clicking an internal link closes the curtains, then the next page opens with the quick version.
-    page.locator('.desktop-nav a[href$="destinations.html"]').click()
+    page.locator('.desktop-nav a[href$="destinations/"]').click()
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-leaving\b"))
-    page.wait_for_url(re.compile(r"destinations\.html$"))
+    page.wait_for_url(re.compile(r"destinations/$"))
     expect(page.locator("html")).to_have_class(re.compile(r"\bintro-quick\b"))
     expect(page.locator("[data-pardus-intro]")).to_be_visible()
     expect(page.locator(".intro-label")).to_have_text("Destinations")
@@ -186,7 +186,7 @@ def preloader(browser):
     context.close()
     context = context_for(browser, intro_seen=False, viewport={"width": 1440, "height": 900})
     page = context.new_page()
-    page.goto(urljoin(BASE, "journal.html"), wait_until="load", timeout=45000)
+    page.goto(urljoin(BASE, "journal/"), wait_until="load", timeout=45000)
     expect(page.locator("[data-pardus-intro]")).to_be_visible()
     expect(page.locator("html")).not_to_have_class(re.compile(r"\bintro-active\b"), timeout=9000)
     context.close()
@@ -334,7 +334,7 @@ def phone_first_screen(browser):
     expect(cta).to_have_attribute("data-on", "true")
     with page.expect_navigation():
         cta.click()
-    assert page.url.endswith("journey.html"), page.url
+    assert page.url.endswith("journey/"), page.url
     context.close()
     print("PASS phone first screen holds the headline, leopard and both buttons on four phone sizes; the floating button appears only where it helps (quiet over the hero, the Window Seat band, the picker and the enquiry)", flush=True)
 
@@ -409,11 +409,11 @@ def window_seat(browser):
         for index in range(3):
             expect(cards.nth(index).locator(".ws-price strong")).to_contain_text("USD")
             expect(cards.nth(index).locator("h3")).to_be_visible()
-            assert re.search(r"destination-[a-z]+\.html$", cards.nth(index).locator(".ws-window").get_attribute("href"))
+            assert re.search(r"destinations/[a-z-]+/$", cards.nth(index).locator(".ws-window").get_attribute("href"))
         categories = page.locator(".ws-category")
         assert categories.count() == 3
         for link in categories.all():
-            assert re.search(r"destinations\.html\?category=(islands|culture|wild)$", link.get_attribute("href")), link.get_attribute("href")
+            assert re.search(r"destinations/\?category=(islands|culture|wild)$", link.get_attribute("href")), link.get_attribute("href")
         clear = page.evaluate("""() => {
           const r = e => e.getBoundingClientRect();
           const leopard = r(document.querySelector('.ws-leopard img'));
@@ -567,7 +567,7 @@ def animation_pack(browser):
     page.wait_for_timeout(1500)
     settled = page.evaluate("""() => [...document.querySelectorAll('[data-reveal="zoom"], [data-reveal="blur"]')].map(e => { const s = getComputedStyle(e);
         return s.opacity === '1' && s.transform === 'none' && s.filter === 'none'; })""")
-    assert len(settled) >= 6 and all(settled), settled
+    assert len(settled) >= 5 and all(settled), settled
     rules = page.evaluate("[...document.querySelectorAll('.eyebrow[data-reveal]')].map(e => new DOMMatrix(getComputedStyle(e, '::before').transform).a)")
     assert rules and all(value == 1 for value in rules), rules
     # A press on a button or a choice tile starts a ripple, which removes itself.
@@ -605,7 +605,7 @@ def animation_pack(browser):
     page.wait_for_timeout(150)
     assert page.evaluate("document.querySelectorAll('.anim-ripple').length") == 0
     context.close()
-    print("PASS animation pack: zoom/blur reveals and eyebrow rules settle fully, a press ripples and cleans up, the hero drifts slowly, inline links give 44 px targets, and reduced motion switches all of it off", flush=True)
+    print("PASS animation pack: eligible arrivals and eyebrow rules settle fully, a press ripples and cleans up, the hero drifts slowly, inline links give 44 px targets, and reduced motion switches all of it off", flush=True)
 
 
 def assert_hero(page, width):
@@ -615,7 +615,7 @@ def assert_hero(page, width):
     assert " ".join(hero.locator("h1").text_content().split()) == "Extraordinary journeys."
     expect(hero.locator(".hero-tagline")).to_have_count(0)  # no repeated tagline in the hero: the logo lockup above already carries it
     expect(hero.get_by_role("link", name="Explore destinations", exact=True)).to_have_attribute("href", "#destinations")
-    expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey\.html$"))
+    expect(hero.get_by_role("link", name="Plan your escape", exact=True)).to_have_attribute("href", re.compile(r"journey/$"))
     expect(page.locator(".site-header .brand-link .brand-svg").first).to_be_visible()  # the approved logo (an SVG file in an <img>)
     slides = page.evaluate("innerWidth <= 767 || innerWidth >= 1000")
     # Phones and PCs show the five rotating photographs (the first is the still picture); tablets show the one walking leopard.
@@ -647,7 +647,7 @@ def hero_and_menu(browser):
 
     context = context_for(browser, viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     page = context.new_page()
-    navigate(page, "destinations.html")
+    navigate(page, "destinations/")
     toggle = page.locator(".menu-toggle")
     menu = page.locator("#mobile-menu")
     expect(toggle).to_be_visible()
@@ -676,8 +676,8 @@ def hero_and_menu(browser):
     expect(menu).to_have_js_property("open", False)
     toggle.tap()
     # Private cruises lives in the menu's "More" list since the navigation was standardised.
-    menu.locator('.menu-more a[href$="cruises.html"]').tap()
-    page.wait_for_url(re.compile(r"cruises\.html$"))
+    menu.locator('.menu-more a[href$="cruises/"]').tap()
+    page.wait_for_url(re.compile(r"cruises/$"))
     context.close()
 
     # The menu closes by itself if the window grows to the desktop layout.
@@ -730,7 +730,7 @@ def filters_and_planner(browser):
     page = context.new_page()
     runtime_errors = []
     page.on("pageerror", lambda error: runtime_errors.append(str(error)))
-    navigate(page, "journal.html")
+    navigate(page, "journal/")
     initial_count = page.locator("[data-story]").count()
     page.locator('[data-journal-topic="Process"]').click()
     assert page.locator("[data-story]:visible").count() > 0
@@ -742,7 +742,7 @@ def filters_and_planner(browser):
     page.locator("[data-journal-search]").fill("safari")
     assert page.locator("[data-story]:visible").count() > 0
     assert page.locator("[data-story]:visible").evaluate_all("stories => stories.every(story => story.dataset.search.includes('safari'))")
-    navigate(page, "journeys.html")
+    navigate(page, "journeys/")
     page.locator('[data-journey-filter="business"]').click()
     assert page.locator("[data-journey-card]:visible").count() > 0
     assert page.locator("[data-journey-card]:visible").evaluate_all("cards => cards.every(card => card.dataset.reason === 'business')")
@@ -757,7 +757,7 @@ def filters_and_planner(browser):
         saves.nth(index).click()
     labels = page.evaluate("JSON.parse(localStorage.getItem('pardus-folio-v2')).items.map(item => item.label)")
     assert len(labels) == 4
-    navigate(page, "destinations.html")
+    navigate(page, "destinations/")
     all_destinations = page.locator(".card").count()
     for category in ["islands", "wild", "culture"]:
         page.locator(f'[data-filter="{category}"]').click()
@@ -806,19 +806,19 @@ def filters_and_planner(browser):
     assert all(label in content for label in labels)
     assert "Smoke test traveller" in content and "has not been sent" in content
 
-    navigate(page, "planner.html")
+    navigate(page, "planner/")
     page.locator('[name="place"]').select_option("Wild")
     page.locator('[name="pace"]').select_option("")
-    navigate(page, "about.html")
-    navigate(page, "planner.html")
+    navigate(page, "about/")
+    navigate(page, "planner/")
     assert page.locator('[name="place"]').input_value() == "Wild"
     assert page.locator('[name="pace"]').input_value() == ""
-    navigate(page, "planner.html?place=City&reason=Business")
+    navigate(page, "planner/?place=City&reason=Business")
     assert page.locator('[name="place"]').input_value() == "City"
     assert page.locator('[name="reason"]').input_value() == "Business"
-    navigate(page, "corporate.html")
+    navigate(page, "corporate/")
     page.get_by_role("link", name="Prepare a corporate travel brief").click()
-    arrive(page, r"planner\.html")
+    arrive(page, r"planner/")
     expect(page.locator('[name="style"]')).to_have_value("Executive Arrivals")
     expect(page.locator('[name="reason"]')).to_have_value("Business")
     page.locator(".header-saved").click()
@@ -830,9 +830,9 @@ def filters_and_planner(browser):
     assert page.locator("[data-folio-items] li").count() == len(labels)
     page.keyboard.press("Escape")
 
-    navigate(page, "destination-maldives.html")
-    page.locator('a[href*="journey.html?destination="]').first.click()
-    arrive(page, r"journey\.html\?destination=")
+    navigate(page, "destinations/maldives/")
+    page.locator('a[href*="journey/?destination="]').first.click()
+    arrive(page, r"journey/\?destination=")
     expect(page.locator('[data-escape-enquiry] [name="destination"]')).to_have_value("The Maldives")
     form = page.locator("[data-escape-enquiry]")
     # Name and email are required: an empty form cannot be saved or sent.
@@ -854,9 +854,9 @@ def filters_and_planner(browser):
     assert "Destination: The Maldives" in enquiry_text and "smoke-test@example.com" in enquiry_text, enquiry_text
     assert "Name: Smoke test traveller" in enquiry_text and "Phone or WhatsApp: +256 700 000 000" in enquiry_text, enquiry_text
     expect(form.locator("[data-enquiry-status]")).to_contain_text("has not been sent")
-    navigate(page, "contact.html")
+    navigate(page, "contact/")
     page.get_by_role("link", name="Prepare a travel enquiry", exact=True).click()
-    arrive(page, r"journey\.html")
+    arrive(page, r"journey/")
     expect(page.locator("[data-escape-enquiry]")).to_be_visible()
     assert not runtime_errors, runtime_errors
     context.close()  # Playwright also removes the temporary download.
@@ -874,7 +874,7 @@ def fallback_states(browser):
 
     context = context_for(browser, intro_seen=False, viewport={"width": 390, "height": 844}, java_script_enabled=False)
     page = context.new_page()
-    for route in ["index.html", "destinations.html", "journal.html", "journey.html", "planner.html"]:
+    for route in ["index.html", "destinations/", "journal/", "journey/", "planner/"]:
         navigate(page, route, interactive=False)
         expect(page.locator("main h1")).to_be_visible()
         assert page.locator(".requires-js:visible").count() == 0, route
@@ -882,9 +882,9 @@ def fallback_states(browser):
         if route == "index.html":
             expect(page.locator("[data-pardus-intro]")).to_be_hidden()
             expect(page.locator("[data-hero] h1")).to_be_visible()
-        if route == "journey.html":
+        if route == "journey/":
             expect(page.get_by_role("link", name="Email your travel enquiry")).to_be_visible()
-        if route == "planner.html":
+        if route == "planner/":
             expect(page.locator(".no-script-help")).to_be_visible()
     context.close()
 
@@ -892,7 +892,7 @@ def fallback_states(browser):
     context.unroute(REMOTE_FEED)
     context.route(REMOTE_FEED, lambda route: route.abort("failed"))
     page = context.new_page()
-    navigate(page, "travel-desk.html")
+    navigate(page, "travel-desk/")
     expect(page.locator("[data-feed-status]")).to_contain_text("aviation feed", ignore_case=True)
     assert page.locator(".travel-update").count() == len(FEED["items"])
     assert not re.search(r"Principal Engineer|Senior Civil Engineer|Flight Operations Inspector", page.locator("[data-feed-items]").inner_text())

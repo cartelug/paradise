@@ -11,22 +11,36 @@ const menu = document.querySelector<HTMLDialogElement>('#mobile-menu');
 const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const panel = menu?.querySelector<HTMLElement>('.menu-panel');
 let closing = 0;
+let endClose: (() => void) | null = null;
 function openMenu() {
-  if (!menu || menu.open) return;
-  window.clearTimeout(closing);
+  if (!menu) return;
+  endClose?.();
+  if (menu.open) return;
+  document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(dialog => dialog.close());
   menu.classList.remove('is-closing');
   menu.showModal();
   root.classList.add('menu-open');
   toggle?.setAttribute('aria-expanded', 'true');
 }
 function closeMenu(immediate = false) {
-  if (!menu?.open || menu.classList.contains('is-closing')) return;
-  if (immediate || reduced.matches) { menu.close(); return; }
+  if (!menu?.open) return;
+  if (immediate || reduced.matches) {
+    if (endClose) endClose(); else menu.close();
+    return;
+  }
+  if (endClose) return;
   menu.classList.add('is-closing');
-  let done = false;
-  const end = () => { if (done) return; done = true; window.clearTimeout(closing); menu.classList.remove('is-closing'); if (menu.open) menu.close(); };
-  panel?.addEventListener('animationend', event => { if (event.target === panel) end(); });
-  closing = window.setTimeout(end, 480);
+  const complete = () => {
+    window.clearTimeout(closing);
+    panel?.removeEventListener('animationend', onEnd);
+    endClose = null;
+    menu.classList.remove('is-closing');
+    if (menu.open) menu.close();
+  };
+  const onEnd = (event: AnimationEvent) => { if (event.target === panel) complete(); };
+  endClose = complete;
+  panel?.addEventListener('animationend', onEnd);
+  closing = window.setTimeout(complete, 400);
 }
 toggle?.addEventListener('click', openMenu);
 menu?.querySelector('.menu-close')?.addEventListener('click', () => closeMenu());
@@ -41,63 +55,7 @@ menu?.querySelectorAll<HTMLElement>('a, [data-folio-trigger]').forEach(item => i
 desktop.addEventListener('change', event => { if (event.matches) closeMenu(true); });
 initFolio();
 
-/* Reveals and word-by-word headings */
-function splitWords(heading: HTMLElement) {
-  let index = 0;
-  const walk = (node: Node): Node[] => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const out: Node[] = [];
-      (node.textContent || '').split(/(\s+)/).forEach(part => {
-        if (!part) return;
-        if (/^\s+$/.test(part)) { out.push(document.createTextNode(' ')); return; }
-        const word = document.createElement('span'); word.className = 'w'; word.style.setProperty('--w', String(index++));
-        const inner = document.createElement('span'); inner.textContent = part; word.append(inner); out.push(word);
-      });
-      return out;
-    }
-    if (node instanceof HTMLElement && node.tagName !== 'BR') {
-      const clone = node.cloneNode(false) as HTMLElement;
-      node.childNodes.forEach(child => walk(child).forEach(piece => clone.append(piece)));
-      return [clone];
-    }
-    return [node.cloneNode(true)];
-  };
-  const pieces: Node[] = [];
-  heading.childNodes.forEach(child => pieces.push(...walk(child)));
-  heading.replaceChildren(...pieces);
-}
-
-if ('IntersectionObserver' in window && !reduced.matches) {
-  const headings = [...document.querySelectorAll<HTMLElement>('[data-split]')];
-  headings.forEach(splitWords);
-  document.querySelectorAll<HTMLElement>('[data-stagger]').forEach(group => {
-    const step = Number(group.dataset.stagger) || 90;
-    [...group.querySelectorAll<HTMLElement>(':scope > [data-reveal]')].forEach((child, i) => child.style.setProperty('--d', `${i * step}ms`));
-  });
-  const targets = [...document.querySelectorAll<HTMLElement>('[data-reveal], [data-split]')];
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-in');
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-  root.classList.add('motion-ready');
-  targets.forEach(target => {
-    const box = target.getBoundingClientRect();
-    if (box.top < window.innerHeight * 0.92 && box.bottom > 0) target.classList.add('is-in');
-    else observer.observe(target);
-  });
-  // If anything goes wrong, the content stays readable.
-  window.addEventListener('error', () => root.classList.remove('motion-ready'), { once: true });
-  reduced.addEventListener('change', () => {
-    if (!reduced.matches) return;
-    observer.disconnect();
-    targets.forEach(target => target.classList.add('is-in'));
-    root.classList.remove('motion-ready');
-  });
-}
-
+// Private View owns eligible arrivals. Content is never hidden while waiting for an observer.
 /* Ambient motion pause (the hero photograph drifts continuously, so it can be paused) */
 let paused = false;
 try { paused = localStorage.getItem('pardus-scene-motion') === 'paused'; } catch { /* Optional preference. */ }
@@ -119,66 +77,12 @@ motionButtons.forEach(button => button.addEventListener('click', () => {
 }));
 syncPause();
 
-/* "Your next escape": a pinned stage on large screens. Scroll position chooses the scene; the tabs jump to a scene. */
-const escapes = document.querySelector<HTMLElement>('[data-escapes]');
-const escapeTrack = escapes?.querySelector<HTMLElement>('[data-escape-track]') ?? null;
-const escapeStage = escapes?.querySelector<HTMLElement>('[data-escape-stage]') ?? null;
-const escapeScenes = escapeStage ? [...escapeStage.querySelectorAll<HTMLElement>('[data-scene]')] : [];
-const escapeTabs = escapeStage ? [...escapeStage.querySelectorAll<HTMLButtonElement>('[data-escape-go]')] : [];
-const stageQuery = window.matchMedia('(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)');
-let stageOn = false, stageActive = -1, headerHeight = 78;
-function syncStage() {
-  stageOn = !!escapeStage && escapeScenes.length > 0 && stageQuery.matches && !document.body.hasAttribute('data-expanded-hero');
-  root.classList.toggle('stage-ready', stageOn);
-  headerHeight = parseFloat(getComputedStyle(document.body).getPropertyValue('--header-h')) || 78;
-  if (!stageOn && escapeStage) {
-    stageActive = -1;
-    escapeScenes.forEach(scene => { scene.removeAttribute('data-state'); scene.style.removeProperty('--lp'); });
-    escapeTabs.forEach(tab => tab.removeAttribute('aria-current'));
-  }
-}
-function paintStage() {
-  if (!stageOn || !escapeTrack || !escapeStage) return;
-  const box = escapeTrack.getBoundingClientRect();
-  const total = Math.max(1, box.height - escapeStage.offsetHeight);
-  const progress = clamp((headerHeight - box.top) / total, 0, 1);
-  const count = escapeScenes.length;
-  const active = Math.min(count - 1, Math.floor(progress * count));
-  escapeStage.style.setProperty('--sp', progress.toFixed(4));
-  escapeScenes.forEach((scene, i) => {
-    scene.style.setProperty('--lp', clamp(progress * count - i, 0, 1).toFixed(3));
-    if (i === active) scene.dataset.state = 'active'; else scene.dataset.state = i < active ? 'before' : 'after';
-  });
-  if (active !== stageActive) {
-    stageActive = active;
-    escapeStage.dataset.active = String(active);
-    escapeTabs.forEach((tab, i) => { if (i === active) tab.setAttribute('aria-current', 'true'); else tab.removeAttribute('aria-current'); });
-  }
-}
-escapeTabs.forEach((tab, i) => tab.addEventListener('click', () => {
-  if (!escapeTrack || !escapeStage) return;
-  const box = escapeTrack.getBoundingClientRect();
-  const total = Math.max(1, box.height - escapeStage.offsetHeight);
-  const target = window.scrollY + box.top - headerHeight + ((i + 0.5) / escapeScenes.length) * total;
-  window.scrollTo({ top: target, behavior: reduced.matches ? 'auto' : 'smooth' });
-}));
-stageQuery.addEventListener('change', () => { syncStage(); schedule(); });
-window.addEventListener('resize', () => { syncStage(); });
-window.addEventListener('pardus:hero-layout', () => { syncStage(); schedule(); });
-syncStage();
-
 /* Scroll motion: one frame per scroll event, reads before writes. */
 const header = document.querySelector<HTMLElement>('.site-header');
 const hero = document.querySelector<HTMLElement>('[data-hero]');
-const pageHero = document.querySelector<HTMLElement>('.page-hero');
-const yacht = document.querySelector<HTMLElement>('[data-yacht]');
-const parallax = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
 let lastY = window.scrollY, frameId = 0;
-const visible = new Set<Element>();
-if ('IntersectionObserver' in window) {
-  const spy = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); }), { rootMargin: '120px 0px' });
-  [...parallax, ...(yacht ? [yacht] : [])].forEach(element => spy.observe(element));
-  if (hero) new IntersectionObserver(entries => root.classList.toggle('hero-dormant', !entries[0].isIntersecting), { threshold: 0 }).observe(hero);
+if ('IntersectionObserver' in window && hero) {
+  new IntersectionObserver(entries => root.classList.toggle('hero-dormant', !entries[0].isIntersecting)).observe(hero);
 }
 
 function paint() {
@@ -188,7 +92,6 @@ function paint() {
   const max = Math.max(1, document.documentElement.scrollHeight - vh);
   root.style.setProperty('--progress', clamp(y / max, 0, 1).toFixed(4));
   header?.classList.toggle('is-scrolled', y > 40);
-  paintStage();
   const delta = y - lastY;
   if (Math.abs(delta) > 6) {
     const focused = header?.contains(document.activeElement);
@@ -197,21 +100,7 @@ function paint() {
     lastY = y;
   }
   if (y < 120) header?.classList.remove('is-hidden');
-  if (reduced.matches) return;
-  // The homepage hero does not move with the scroll: the leopard never follows the visitor (CLAUDE.md).
-  if (pageHero && y < pageHero.offsetHeight + 80) pageHero.style.setProperty('--hero-shift', `${(y * 0.22).toFixed(1)}px`);
-  for (const element of parallax) {
-    if (!visible.has(element)) continue;
-    const box = element.getBoundingClientRect();
-    const factor = Number(element.dataset.parallax) || 0.06;
-    const offset = (box.top + box.height / 2 - vh / 2) * -factor;
-    element.style.setProperty('--par', `${clamp(offset, -box.height * 0.06, box.height * 0.06).toFixed(1)}px`);
-  }
-  if (yacht && visible.has(yacht)) {
-    const box = yacht.getBoundingClientRect();
-    const progress = clamp((vh - box.top) / (vh + box.height * 0.6), 0, 1);
-    yacht.style.setProperty('--yacht-scale', (1.2 - progress * 0.2).toFixed(4));
-  }
+
 }
 const schedule = () => { if (!frameId && !document.hidden) frameId = requestAnimationFrame(paint); };
 window.addEventListener('scroll', schedule, { passive: true });
@@ -219,3 +108,7 @@ window.addEventListener('resize', schedule);
 window.addEventListener('pageshow', schedule);
 header?.addEventListener('focusin', () => header.classList.remove('is-hidden'));
 schedule();
+
+window.addEventListener('pagehide', () => { if (frameId) cancelAnimationFrame(frameId); frameId = 0; closeMenu(true); });
+if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(document.body);
+reduced.addEventListener('change', () => closeMenu(true));

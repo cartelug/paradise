@@ -15,7 +15,7 @@ if (section) {
     const box = section.getBoundingClientRect();
     const header = document.querySelector<HTMLElement>('[data-header]');
     const bottom = header?.getBoundingClientRect().bottom || 80;
-    document.body.toggleAttribute('data-window-seat-header', box.top <= bottom + 20 && box.bottom > bottom);
+    document.body.toggleAttribute('data-window-seat-header', innerWidth < 1000 && box.top <= bottom + 20 && box.bottom > bottom);
     section.toggleAttribute('data-ws-large-text', parseFloat(getComputedStyle(document.documentElement).fontSize) > 20);
   }
   const schedule = () => { if (!pending) { pending = true; requestAnimationFrame(measure); } };

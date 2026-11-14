@@ -1,3 +1,30 @@
+# Owner release authorization — 14 November 2026
+
+The user explicitly requested implementation of the PARDUS motion/responsive/clean-URL
+plan, completion, a push to main and verification of the existing FTP deployment.
+This supersedes earlier review holds for this release. Keep source and generated
+GitHub Pages output together. Preserve the permanent branded opening, approved
+artwork/animal geometry, type roles, commercial facts and exact fare notice.
+
+# V46: Private View motion and canonical URLs
+
+Content routes now use slash-ended directories. Destinations, signature journeys
+and articles live below /destinations/, /journeys/ and /journal/. The simple enquiry
+is /journey/ and the detailed brief is /planner/; both remain. routes.mjs is the
+shared manifest. Old *.html files are compatibility entries (not navigation);
+Apache redirects them directly to canonical paths while Pages retains noindex
+fallbacks. Do not restore *.html internal links or delete required index.html files.
+
+Private View uses native scrolling and cancellable WAAPI arrivals. Pending content
+is never hidden. Prices and their card ancestors stay still, forms stay usable,
+and animals never follow scrolling/pointers. Keep the approved hero timing and
+static first-frame pause/reduced fallback. Opening timing is compact but every
+page still includes the complete approved markup, including when storage fails.
+
+The FTPS deployer verifies transferred bytes, uploads canonical pages before aliases,
+activates .htaccess after pages and writes the release marker last. Live verification
+must confirm the pushed revision, canonical pages, legacy 301s, assets and real 404s.
+
 # Owner release authorisation — 13 November 2026
 
 The user explicitly authorised pushing the completed coastal redesign to `main`

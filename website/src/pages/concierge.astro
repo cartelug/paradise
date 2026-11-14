@@ -28,7 +28,7 @@ const occasions = [
       <div><p class="eyebrow" data-reveal>Travel for every occasion</p><h2 id="occasions-title" data-split>Your holiday. <em>Your way to travel.</em></h2><p class="lead" style="margin-top:22px" data-reveal>Tell us the occasion and the people travelling. We build the plan from there.</p></div>
       <div>
         <div class="occasions" data-stagger="110">{occasions.map(item => <div class="occasion" data-reveal><span class="badge"><Icon name={item.icon} /></span><h3>{item.title}</h3><p>{item.text}</p></div>)}</div>
-        <p style="margin-top:28px"><a class="link" href={path('cruises.html')}>Explore private boat &amp; yacht experiences <Icon name="arrow-right" /></a></p>
+        <p style="margin-top:28px"><a class="link" href={path('cruises/')}>Explore private boat &amp; yacht experiences <Icon name="arrow-right" /></a></p>
       </div>
     </div>
   </section>
@@ -37,7 +37,7 @@ const occasions = [
       <p class="eyebrow" data-reveal>One point of contact</p>
       <h2 id="cta-title" data-split>Start with a place. <em>Leave the details with us.</em></h2>
       <p class="lead" style="color:var(--mist)" data-reveal>Let us know what you need and we’ll put a clear proposal together.</p>
-      <a class="btn btn--gold" href={path('journey.html')} data-reveal>Plan your escape <Icon name="arrow-right" /></a>
+      <a class="btn btn--gold" href={path('journey/')} data-reveal>Plan your escape <Icon name="arrow-right" /></a>
     </div>
   </section>
 </Layout>

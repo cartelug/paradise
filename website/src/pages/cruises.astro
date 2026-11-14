@@ -39,7 +39,7 @@ const yachtPrice = displayPrice(cruiseTypes[0]);
       <div class="glance-card on-dark">
         <div><span class="card-label">Dubai private yacht cruise</span>
           <ul class="incl"><li><Icon name="yacht" /><span>Your own yacht</span></li><li><Icon name="clock" /><span>3 hours on the water</span></li><li><Icon name="users" /><span>Up to 6 guests</span></li></ul></div>
-        <div class="glance-booking"><div class="price">{yachtPrice.hasStartingPrice && <span class="price-label">From</span>}<strong>{yachtPrice.amount}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises.html?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
+        <div class="glance-booking"><div class="price">{yachtPrice.hasStartingPrice && <span class="price-label">From</span>}<strong>{yachtPrice.amount}</strong><small>per yacht, private charter</small></div><a class="btn btn--gold" href={path('cruises/?destination=Private%20boat%20%26%20yacht%20experience#cruise-enquiry')}>Plan your yacht charter <Icon name="arrow-down" /></a></div>
       </div>
     </div>
     <div class="wrap">
@@ -53,7 +53,7 @@ const yachtPrice = displayPrice(cruiseTypes[0]);
   <section class="sec sec--dusk" id="cruise-enquiry" aria-labelledby="cruise-enquiry-title">
     <div class="wrap enquiry">
       <div class="enquiry-copy"><p class="eyebrow" data-reveal>Your time on the water</p><h2 id="cruise-enquiry-title" data-split>Pick the occasion. <em>We’ll plan the water.</em></h2><p class="lead" data-reveal>An ocean voyage, a private yacht charter or an island excursion. Tell us what you have in mind.</p></div>
-      <div class="enquiry-card glass" data-reveal><SimpleEnquiry id="cruise-enquiry-form" defaultDestination="Ocean cruise" /></div>
+      <div class="enquiry-card glass"><SimpleEnquiry id="cruise-enquiry-form" defaultDestination="Ocean cruise" /></div>
     </div>
   </section>
 </Layout>

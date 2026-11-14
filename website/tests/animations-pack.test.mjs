@@ -40,8 +40,9 @@ test('the pack adds no second progress bar: the header already carries the page-
 
 test('the new reveal styles are used on the homepage and never on a price or a leopard', async () => {
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
-  assert.ok((html.match(/data-reveal="zoom"/g) || []).length >= 4, 'promises and the enquiry card settle in with zoom');
-  assert.ok((html.match(/data-reveal="blur"/g) || []).length >= 2, 'two lead sentences clear from a blur');
+  assert.ok((html.match(/data-reveal="zoom"/g) || []).length >= 3, 'the three non-commercial promise panels remain eligible');
+  assert.doesNotMatch(html, /class="enquiry-card[^"]*"[^>]*data-reveal/, 'the form stays still');
+  assert.ok((html.match(/data-reveal="blur"/g) || []).length >= 2, 'legacy lead hooks remain compatible with the new paint-light controller');
   for (const tag of html.match(/<[^>]*data-reveal="(?:zoom|blur)"[^>]*>/g) || []) {
     assert.doesNotMatch(tag, /price|leopard|ws-price|offer-price/i, tag);
   }

@@ -1,3 +1,4 @@
+import { canonicalRoutes } from '../src/data/routes.mjs';
 import { cp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,12 +20,12 @@ const robots = await readFile(resolve(output, 'robots.txt'), 'utf8').catch(() =>
 if (!robots.includes('/paradise/sitemap-index.xml')) throw new Error('website/dist is not a GitHub Pages build. Run PARDUS_BASE=/paradise/ npm run build first.');
 // Remove only known generated output. This prevents stale HTML and hashed assets from
 // surviving a deployment while preserving the source, documentation and git metadata.
-for (const directory of ['brand', 'fonts', 'images', 'static']) {
+for (const directory of ['brand', 'fonts', 'images', 'static', ...new Set(canonicalRoutes.filter(Boolean).map(route => route.split('/')[0]))]) {
   await rm(resolve(repository, directory), { recursive: true, force: true });
 }
 for (const entry of await readdir(repository, { withFileTypes: true })) {
   if (!entry.isFile()) continue;
-  if (/\.(?:html|xml)$/.test(entry.name) || ['robots.txt', 'opening.js', 'app.js', 'styles.css'].includes(entry.name)) {
+  if (/\.(?:html|xml)$/.test(entry.name) || ['robots.txt', 'opening.js', 'app.js', 'styles.css', 'route-manifest.json', 'release.json'].includes(entry.name)) {
     await rm(resolve(repository, entry.name), { force: true });
   }
 }

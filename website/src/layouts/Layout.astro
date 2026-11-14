@@ -10,9 +10,10 @@ import '../styles/animations.css';
 import '../styles/preloader.css';
 import '../styles/refine.css';
 import '../styles/owner-updates.css';
-import '../styles/type.css';
 import '../styles/cruises.css';
 import '../styles/desktop-navigation.css';
+import '../styles/private-view.css';
+import '../styles/type.css';
 import FontFaces from '../components/FontFaces.astro';
 import CinematicIntro from '../components/CinematicIntro.astro';
 import IconSprite from '../components/IconSprite.astro';
@@ -25,7 +26,7 @@ interface Props { title?: string; label?: string; description?: string; image?: 
 const { title, label, description = site.description, image = 'images/pardus-hero-desktop-1536.webp', simpleFooter = false, class: className } = Astro.props;
 // The preloader names the page that is opening.
 const introLabel = label ?? (title ? title.split(/ [—:] /)[0] : 'Welcome');
-// GitHub Pages serves the homepage at the bare base path; every other route keeps its real .html filename.
+// Every content page uses its final directory URL; query variants share the page canonical.
 const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, ''), Astro.site);
 const ogImage = absolute(image);
 const organizationSchema = {
@@ -45,7 +46,8 @@ const organizationSchema = {
 // HARD RULE: the preloader runs on every page (CLAUDE.md). This inline script only decides, before first paint, which version:
 // the full sequence on the first page of a visit, the quick one afterwards. It also carries a failsafe that releases the page
 // even if the main script fails.
-const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');try{const seen=!!sessionStorage.getItem('pardus-intro-v30');r.classList.add('intro-active',seen?'intro-quick':'intro-full');r.dataset.introStarted=String(performance.now());r.dataset.introFailsafe=String(setTimeout(()=>{r.classList.remove('intro-active','intro-exiting');r.classList.add('is-ready');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},seen?4500:7500));}catch{r.classList.add('is-ready');}})();`;
+const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');let seen=false;try{seen=!!sessionStorage.getItem('pardus-intro-v30');}catch{}r.classList.add('intro-active',seen?'intro-quick':'intro-full');r.dataset.introStarted=String(performance.now());r.dataset.introFailsafe=String(setTimeout(()=>{r.classList.remove('intro-active','intro-exiting');r.classList.add('is-ready');document.querySelector('[data-pardus-shell]')?.removeAttribute('inert');},seen?2200:4200));})();`;
+
 ---
 <!doctype html>
 <html lang="en">
@@ -76,7 +78,7 @@ const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');
     {site.analyticsId && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${site.analyticsId}"}`}></script>}
     <script is:inline set:html={bootstrap} />
   </head>
-  <body id="top" class={className} data-pardus-version="31">
+  <body id="top" class={className} data-pardus-version="46">
     <IconSprite />
     <BrandSprite />
     <CinematicIntro label={introLabel} />
@@ -88,6 +90,7 @@ const bootstrap = `(()=>{const r=document.documentElement;r.classList.add('js');
     </div>
     <script>import '../scripts/site.ts';</script>
     <script>import '../scripts/animations.ts';</script>
+    <script>import '../scripts/private-view.ts';</script>
     <script>import '../scripts/preloader.ts';</script>
   </body>
 </html>

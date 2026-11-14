@@ -12,11 +12,7 @@
 :root { --anim-quick: .22s; --anim-base: .6s; --anim-slow: 1.1s; --anim-ease: var(--ease); }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Reveal styles. Same specificity as the base rules in motion.css, and loaded after it, so they win. */
-  html.motion-ready [data-reveal='zoom']:not(.is-in) { transform: scale(.94); }
-  html.motion-ready [data-reveal='blur']:not(.is-in) { transform: translate3d(0, 18px, 0); filter: blur(10px); }
-  html.motion-ready [data-reveal='blur'].is-in { transition: opacity .9s var(--anim-ease) var(--d, 0ms), transform 1.1s var(--anim-ease) var(--d, 0ms), filter 1s var(--anim-ease) var(--d, 0ms); }
-
+  /* Legacy zoom/blur reveals are retired: cancellable, paint-light arrivals live in private-view.ts. */
   /* The short rule before an eyebrow draws left to right once the eyebrow is revealed. */
   html.motion-ready .eyebrow[data-reveal]::before { transform: scaleX(0); transform-origin: left center; transition: transform var(--anim-slow) var(--anim-ease) calc(var(--d, 0ms) + .25s); }
   html.motion-ready .eyebrow[data-reveal].is-in::before { transform: scaleX(1); }

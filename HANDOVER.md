@@ -1,3 +1,33 @@
+# V46 motion, responsiveness and clean URLs — 14 November 2026
+
+The owner authorized implementation, main and the existing Namecheap FTPS deployment.
+The shared route manifest accounts for 34 canonical content pages, 33 legacy
+compatibility entries plus home, and the real 404 artifact. Internal navigation,
+metadata and sitemap use final directory URLs. Source dynamic routes are nested.
+
+Private View adds cancellable media/copy arrivals and booking connectors with native
+scrolling. Pending content is always visible. The opening is compact and remains
+on every page; hero fades are cancelled safely on Pause/reduced/pagehide. Menu
+completion, Folio focus, header contrast, forms and keyboard-safe sticky actions
+are hardened. Approved artwork, animal bounds, rates and copy are unchanged.
+
+Validation: 109 Node tests pass, including late-decode/Pause regressions, route
+coverage and mocked encrypted-upload ordering/corruption checks. Astro reports zero
+errors, warnings and hints. Both exports resolve 34 canonical pages, 33 aliases and
+the error artifact. The cPanel archive builds successfully. Local managed preview
+could not start; fresh local visual/mobile browser coverage is unverified. Do not
+quote the older responsive records below as fresh V46 results.
+
+The deploy workflow now runs website/scripts/deploy-ftps.py and then verify-live.mjs.
+It uploads assets and canonical pages before aliases, activates redirects only after
+pages exist, verifies transferred bytes and writes release.json last. No remote
+deletions. Live verification is retained as a workflow artifact; check the workflow's
+actual result for production status. A ZIP or source build alone does not prove FTP.
+
+Use the build/check/export/domain/package commands in README, in their stated order.
+Never export a domain build into the GitHub root. A routing rollback must restore
+both page files and the matching .htaccess, not just the old stylesheet.
+
 # Owner release authorisation — 13 November 2026
 
 The user explicitly authorised pushing the completed coastal redesign to `main`

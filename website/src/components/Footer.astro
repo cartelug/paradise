@@ -11,7 +11,7 @@ const { simple = false } = Astro.props;
     <p class="eyebrow">The next chapter is yours</p>
     <h2 id="closing-title" data-split>Where <em>next?</em></h2>
     <p>A place you’ve dreamed of. A reason to get away. Let’s begin there.</p>
-    <a class="btn btn--gold" href={path('journey.html')}>Plan your escape <Icon name="arrow-right" /></a>
+    <a class="btn btn--gold" href={path('journey/')}>Plan your escape <Icon name="arrow-right" /></a>
   </div>
 </section>}
 <footer class="site-footer">
@@ -31,35 +31,35 @@ const { simple = false } = Astro.props;
     <nav class="footer-column" aria-labelledby="footer-destinations-title">
       <h2 id="footer-destinations-title">Destinations</h2>
       <div class="footer-links">
-        {destinations.map(destination => <a href={path(`destination-${destination.slug}.html`)}>{destination.name}</a>)}
-        <a href={path('destinations.html')}>View all <Icon name="arrow-right" /></a>
+        {destinations.map(destination => <a href={path(`destinations/${destination.slug}/`)}>{destination.name}</a>)}
+        <a href={path('destinations/')}>View all <Icon name="arrow-right" /></a>
       </div>
     </nav>
     <nav class="footer-column" aria-labelledby="footer-travel-title">
       <h2 id="footer-travel-title">Ways to travel</h2>
       <div class="footer-links">
-        <a href={path('journeys.html')}>Signature journeys</a>
-        <a href={path('cruises.html')}>Cruises &amp; private yachts</a>
-        <a href={path('concierge.html')}>What we arrange</a>
-        <a href={path('corporate.html')}>Corporate travel</a>
-        <a href={path('journey.html')}>Plan your escape</a>
+        <a href={path('journeys/')}>Signature journeys</a>
+        <a href={path('cruises/')}>Cruises &amp; private yachts</a>
+        <a href={path('concierge/')}>What we arrange</a>
+        <a href={path('corporate/')}>Corporate travel</a>
+        <a href={path('journey/')}>Plan your escape</a>
       </div>
     </nav>
     <nav class="footer-column" aria-labelledby="footer-pardus-title">
       <h2 id="footer-pardus-title">Pardus</h2>
       <div class="footer-links">
-        <a href={path('about.html')}>About</a>
-        <a href={path('journal.html')}>Journal</a>
-        <a href={path('travel-desk.html')}>Travel desk</a>
-        <a href={path('concept-note.html')}>Concept note</a>
-        <a href={path('contact.html')}>Contact</a>
+        <a href={path('about/')}>About</a>
+        <a href={path('journal/')}>Journal</a>
+        <a href={path('travel-desk/')}>Travel desk</a>
+        <a href={path('concept-note/')}>Concept note</a>
+        <a href={path('contact/')}>Contact</a>
       </div>
     </nav>
   </div>
   <div class="footer-mark" aria-hidden="true"><Brand light mark /></div>
   <div class="wrap footer-base">
     <div><span>© {new Date().getFullYear()} Pardus Luxury Escapes</span><span class="footer-credit"><img src={path('brand/97-design-logo.png')} alt="" width="18" height="18" loading="lazy" decoding="async" />Made by 97 Design</span></div>
-    <div><a href={path('privacy.html')}>Privacy</a><a href={path('terms.html')}>Booking, cancellations &amp; terms</a><a href={path('terms.html') + '#fares'}>Fares &amp; ticketing</a><a class="back-top" href="#top"><Icon name="arrow-down" /><span>Back to top</span></a></div>
+    <div><a href={path('privacy/')}>Privacy</a><a href={path('terms/')}>Booking, cancellations &amp; terms</a><a href={path('terms/') + '#fares'}>Fares &amp; ticketing</a><a class="back-top" href="#top"><Icon name="arrow-down" /><span>Back to top</span></a></div>
   </div>
   <div class="wrap footer-licences">
     <p>Fonts made from <a href="https://www.onlinewebfonts.com" target="_blank" rel="noopener noreferrer">Web Fonts</a> is licensed by CC BY 4.0</p>

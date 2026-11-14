@@ -4,31 +4,31 @@ import Icon from './Icon.astro';
 import { navigation, path, site } from '../data/site';
 interface Props { home?: boolean; }
 const { home = false } = Astro.props;
-const current = Astro.url.pathname.split('/').pop() || '';
-const activeHref = current.startsWith('destination-') ? 'destinations.html' : current.startsWith('journey-') && current !== 'journey.html' ? 'journeys.html' : current.startsWith('journal-') ? 'journal.html' : current;
+const current = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/$/, '').length).replace(/^\//, '');
+const activeHref = current.startsWith('destinations/') ? 'destinations/' : current.startsWith('journeys/') ? 'journeys/' : current.startsWith('journal/') ? 'journal/' : current;
 const primary = [
-  { label: 'Destinations', href: 'destinations.html', icon: 'pin' as const, note: 'Islands, safaris and cities' },
-  { label: 'Signature journeys', href: 'journeys.html', icon: 'compass' as const, note: 'Ideas to begin a journey with' },
-  { label: 'About', href: 'about.html', icon: 'heart' as const, note: 'Our story, founder and how we plan' },
-  { label: 'Corporate travel', href: 'corporate.html', icon: 'briefcase' as const, note: 'Executives, teams and events' },
-  { label: 'Journal', href: 'journal.html', icon: 'news' as const, note: 'Notes before you book' },
+  { label: 'Destinations', href: 'destinations/', icon: 'pin' as const, note: 'Islands, safaris and cities' },
+  { label: 'Signature journeys', href: 'journeys/', icon: 'compass' as const, note: 'Ideas to begin a journey with' },
+  { label: 'About', href: 'about/', icon: 'heart' as const, note: 'Our story, founder and how we plan' },
+  { label: 'Corporate travel', href: 'corporate/', icon: 'briefcase' as const, note: 'Executives, teams and events' },
+  { label: 'Journal', href: 'journal/', icon: 'news' as const, note: 'Notes before you book' },
 ];
 const more = [
-  { label: 'Cruises & private yachts', href: 'cruises.html', icon: 'anchor' as const },
-  { label: 'What we arrange', href: 'concierge.html', icon: 'sparkle' as const },
-  { label: 'Travel desk', href: 'travel-desk.html', icon: 'globe' as const },
-  { label: 'Contact', href: 'contact.html', icon: 'mail' as const },
+  { label: 'Cruises & private yachts', href: 'cruises/', icon: 'anchor' as const },
+  { label: 'What we arrange', href: 'concierge/', icon: 'sparkle' as const },
+  { label: 'Travel desk', href: 'travel-desk/', icon: 'globe' as const },
+  { label: 'Contact', href: 'contact/', icon: 'mail' as const },
 ];
 ---
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
   <a href={path()} class="brand-link" aria-label={`Pardus Luxury Escapes, ${site.tagline}. Home`}><Brand vector light={!home} />{home && <span class="window-seat-header-brand"><Brand vector light /></span>}</a>
   <nav class="desktop-nav" aria-label="Main navigation">
-    {navigation.map(item => item.href === 'destinations.html' ? <span class="desktop-nav-destination"><a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a><button type="button" class="desktop-destination-toggle requires-js" aria-label="Browse destinations" aria-expanded="false" aria-controls="desktop-destinations" data-destination-toggle><Icon name="chevron-right" /></button></span> : <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
+    {navigation.map(item => item.href === 'destinations/' ? <span class="desktop-nav-destination"><a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a><button type="button" class="desktop-destination-toggle requires-js" aria-label="Browse destinations" aria-expanded="false" aria-controls="desktop-destinations" data-destination-toggle><Icon name="chevron-right" /></button></span> : <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}>{item.label}</a>)}
   </nav>
   <div class="header-tools">
     <button type="button" class="header-saved requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /><span>Saved trips</span><small data-folio-count hidden>0</small></button>
-    <a class="btn btn--gold btn--sm header-cta" href={path('journey.html')}>Plan your escape{home && <Icon name="arrow-right" />}</a>
+    <a class="btn btn--gold btn--sm header-cta" href={path('journey/')}>Plan your escape{home && <Icon name="arrow-right" />}</a>
     <button type="button" class="menu-toggle requires-js" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog"><Icon name="menu" />{home && <svg class="window-seat-menu-art" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18" /></svg>}</button>
   </div>
   <div id="desktop-destinations" class="desktop-destinations" hidden>
@@ -41,9 +41,9 @@ const more = [
         ['dubai', 'Dubai', 'City energy & desert horizons'],
         ['maasai-mara', 'Maasai Mara', 'A safari shaped around you'],
         ['uganda-gorillas', 'Uganda gorillas', 'Forests & considered encounters'],
-      ].map(([slug, label, note]) => <a href={path(`destination-${slug}.html`)}><span><strong>{label}</strong><small>{note}</small></span><Icon name="arrow-right" /></a>)}
+      ].map(([slug, label, note]) => <a href={path(`destinations/${slug}/`)}><span><strong>{label}</strong><small>{note}</small></span><Icon name="arrow-right" /></a>)}
     </div>
-    <a class="desktop-destinations-all" href={path('destinations.html')}>Explore all destinations <Icon name="arrow-right" /></a>
+    <a class="desktop-destinations-all" href={path('destinations/')}>Explore all destinations <Icon name="arrow-right" /></a>
   </div>
   <div class="page-progress" aria-hidden="true"><span></span></div>
 </header>
@@ -58,7 +58,7 @@ const more = [
       {more.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><Icon name={item.icon} /><span>{item.label}</span></a>)}
     </nav>
     <div class="menu-foot" style="--i:6">
-      <a class="btn btn--gold" href={path('journey.html')}>Plan your escape <Icon name="arrow-right" /></a>
+      <a class="btn btn--gold" href={path('journey/')}>Plan your escape <Icon name="arrow-right" /></a>
       <button type="button" class="btn btn--ghost requires-js" data-folio-trigger aria-haspopup="dialog" aria-controls="pardus-folio"><Icon name="bookmark" /> Saved trips</button>
       <a class="menu-contact" href={`mailto:${site.bookingsEmail}`}><Icon name="mail" /><span>{site.bookingsEmail}</span></a>
     </div>

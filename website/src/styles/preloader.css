@@ -111,3 +111,26 @@ html.intro-quick .intro-progress span { animation-duration: .75s; }
   .intro-exiting .pardus-intro { opacity: 0; transition: opacity .35s ease !important; }
 }
 @media print { .pardus-intro { display: none !important; } }
+
+/* V46: overlap the full approved drawing into a compact arrival, with a bounded exit. */
+html.intro-full .intro-world { animation-duration: 1.4s; }
+html.intro-full .intro-route-lines path { animation-duration: 1.2s; animation-delay: .2s; }
+html.intro-full .intro-orbit { animation-duration: 1.6s; }
+html.intro-full .intro-trace path { animation-duration: .9s; }
+html.intro-full .intro-leopard-fill { animation-duration: .45s; animation-delay: .65s; }
+html.intro-full .intro-word-trace path { animation-duration: .9s; animation-delay: .2s; }
+html.intro-full .intro-word-fill { animation-duration: .9s; animation-delay: .4s; }
+html.intro-full .intro-aircraft { animation-duration: .65s; animation-delay: .55s; }
+html.intro-full .intro-tagline { animation-duration: .45s; animation-delay: .9s; }
+html.intro-full .intro-metal-sheen { animation-duration: .65s; animation-delay: 1s; }
+html.intro-full .intro-promise { animation-duration: .45s; animation-delay: .95s; }
+html.intro-full .intro-progress span { animation-duration: 1.6s; }
+html.intro-full .intro-destinations { animation-duration: .4s; animation-delay: 1.15s; }
+html.intro-exiting .intro-curtain { transition-duration: .48s; }
+html.intro-exiting .intro-stage { animation-duration: .3s; }
+html.intro-quick .intro-trace path, html.intro-quick .intro-word-trace path, html.intro-quick .intro-word-fill { animation-duration: .2s; animation-delay: 0s; }
+html.intro-quick .intro-leopard-fill, html.intro-quick .intro-aircraft, html.intro-quick .intro-tagline, html.intro-quick .intro-label { animation-duration: .12s; animation-delay: .1s; }
+html.intro-quick .intro-metal-sheen { animation-duration: .2s; animation-delay: .05s; }
+html.intro-quick.intro-exiting .intro-curtain { transition-duration: .28s; }
+
+html.intro-quick .intro-progress span, html.intro-quick .intro-atmosphere { animation-duration: .24s; }

@@ -58,8 +58,8 @@ function hasContent(state: FolioState) {
   return Boolean(state.place || state.pace || state.reason || state.items.length);
 }
 
-export function buildPlannerUrl(href: string, state: FolioState, baseUrl: string): string {
-  const url = new URL(href || 'planner.html', baseUrl);
+export function buildPlannerUrl(href: string, state: FolioState, baseUrl: string, siteBase = '/'): string {
+  const url = new URL(href || `${new URL(baseUrl).origin}${siteBase.replace(/\/$/, '')}/planner/`, baseUrl);
   // Rendering starts from the current link, which may describe a previous selection.
   // Remove every Folio-owned parameter before writing the current state.
   for (const key of ['place', 'pace', 'reason', 'saved']) url.searchParams.delete(key);
@@ -127,6 +127,7 @@ export function initFolio() {
         state = writeFolio({ ...state, items: state.items.filter(saved => saved.type !== item.type || saved.slug !== item.slug) });
         announce(`${item.label} removed.`);
         render();
+        (items.querySelector<HTMLButtonElement>('button') || plan).focus({ preventScroll: true });
       });
       row.append(copy, remove);
       return row;
@@ -137,12 +138,12 @@ export function initFolio() {
       if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
       trigger.setAttribute('aria-label', count ? `Open saved trips, ${count} saved ${count === 1 ? 'note' : 'notes'}` : 'Open saved trips');
     });
-    plan.href = buildPlannerUrl(plan.getAttribute('href') || 'planner.html', state, window.location.href);
+    plan.href = buildPlannerUrl(plan.getAttribute('href') || '', state, window.location.href, import.meta.env.BASE_URL);
     window.dispatchEvent(new CustomEvent('pardus:folio', { detail: structuredClone(state) }));
   };
 
-  triggers.forEach(trigger => trigger.addEventListener('click', () => { opener = trigger; panel.showModal(); }));
-  panel.addEventListener('close', () => opener?.focus({ preventScroll: true }));
+  triggers.forEach(trigger => trigger.addEventListener('click', () => { opener = trigger; document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(dialog => dialog.close()); panel.showModal(); }));
+  panel.addEventListener('close', () => { if (!document.querySelector('dialog[open]')) opener?.focus({ preventScroll: true }); });
   panel.querySelectorAll<HTMLElement>('[data-folio-close], [data-folio-close-link]').forEach(control => control.addEventListener('click', () => panel.close()));
   panel.addEventListener('click', event => { if (event.target === panel) panel.close(); });
 

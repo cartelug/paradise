@@ -29,7 +29,7 @@ test('the opening has one desktop scene with a phone placeholder, while Zanzibar
   const scene = html.match(/<picture class="coastal-opening-scene"[\s\S]*?<\/picture>/)?.[0];
   assert.match(scene, /<source media="\(max-width: 999px\)" srcset="data:image\/gif/);
   assert.match(scene, /pardus-v45-coastal-continuous/);
-  const zanzibar = html.match(/<a class="ws-window"[^>]*destination-zanzibar\.html[\s\S]*?<\/a>/)?.[0];
+  const zanzibar = html.match(/<a class="ws-window"[^>]*destinations\/zanzibar\/[\s\S]*?<\/a>/)?.[0];
   assert.match(zanzibar, /<source media="\(min-width: 1000px\)" type="image\/avif"[^>]*pardus-v45-zanzibar-editorial/);
   assert.match(zanzibar, /<img[^>]*src="[^"]*zanzibar-v24/);
   assert.doesNotMatch(zanzibar, /alt="[^"]*resort/);

@@ -99,6 +99,6 @@ test('the homepage follows the review: a small set of signature journeys and the
   const markup = html['index.html'];
   const at = needle => markup.indexOf(needle);
   assert.ok(at('id="journeys-title"') > 0, 'signature journeys on the homepage');
-  assert.equal((markup.match(/href="[^"]*journey-[a-z-]+\.html"[^>]*aria-label="Explore /g) || []).length, 3, 'three signature journeys');
+  assert.equal((markup.match(/href="[^"]*journeys\/[a-z-]+\/"[^>]*aria-label="Explore /g) || []).length, 3, 'three signature journeys');
   assert.ok(at('id="destinations"') < at('id="journeys-title"') && at('id="journeys-title"') < at('id="how-booking-works"') && at('id="how-booking-works"') < at('id="enquire"'));
 });

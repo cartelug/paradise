@@ -96,15 +96,15 @@ test('the six priority destinations lead the data, listing, form options and sit
   const expectedSlugs = ['zanzibar', 'seychelles', 'maldives', 'dubai', 'maasai-mara', 'uganda-gorillas'];
   assert.deepEqual(destinationOrder.slice(0, 6), expectedSlugs);
   assert.deepEqual(offers.slice(0, 6).map(offer => offer.slug), expectedSlugs);
-  const windows = [...home.matchAll(/class="ws-window" href="[^"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const windows = [...home.matchAll(/class="ws-window" href="[^"]*destinations\/([a-z-]+)\/"/g)].map(match => match[1]);
   const more = home.slice(home.indexOf('id="more-title"'));
-  const next = [...more.matchAll(/class="frame" data-reveal href="[^"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const next = [...more.matchAll(/class="frame" data-reveal href="[^"]*destinations\/([a-z-]+)\/"/g)].map(match => match[1]);
   assert.deepEqual([...windows, ...next].slice(0, 6), expectedSlugs, 'homepage destination order');
   const listing = await read('../destinations.html');
-  const links = [...listing.matchAll(/class="card-media frame" href="[^\"]*destination-([a-z-]+)\.html"/g)].map(match => match[1]);
+  const links = [...listing.matchAll(/class="card-media frame" href="[^\"]*destinations\/([a-z-]+)\/"/g)].map(match => match[1]);
   assert.deepEqual(links.slice(0, 6), expectedSlugs);
   const sitemap = await read('../sitemap-0.xml');
-  for (const slug of [...expectedSlugs, 'europe', 'africa']) assert.ok(sitemap.includes(`destination-${slug}.html`), slug);
+  for (const slug of [...expectedSlugs, 'europe', 'africa']) assert.ok(sitemap.includes(`destinations/${slug}/`), slug);
 });
 
 test('new package defaults fail closed even when a numeric price is accidentally supplied', () => {

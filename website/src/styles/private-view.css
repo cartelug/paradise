@@ -1,0 +1,35 @@
+/* V46 — The Private View. Composition and feedback; type roles remain in type.css. */
+:root { --motion-press: 120ms; --motion-state: 180ms; --motion-arrive: 480ms; --motion-ease: cubic-bezier(.22, 1, .36, 1); }
+:where(.wrap, .dest, .card, .ws-card, .enquiry-copy, .enquiry-card, .picker, .picker-group, .page-hero-inner) { min-width: 0; }
+:where(input, select, textarea) { max-width: 100%; scroll-margin-block: 110px 140px; }
+:where(.btn, .link, .pick-label, .folio-item, .breadcrumb, .package-details) { overflow-wrap: anywhere; }
+:where(h1, h2, h3, [id]) { scroll-margin-top: calc(var(--header-h, 80px) + 20px); }
+:where(.ws-window, .frame) { isolation: isolate; }
+.steps { position: relative; }
+.steps::before { content: ''; position: absolute; inset: 0 0 auto; height: 1px; background: currentColor; opacity: .24; transform: scaleX(var(--chapter, 1)); transform-origin: left; pointer-events: none; }
+[data-folio-save], [data-folio-choice] { transition: background-color var(--motion-state), border-color var(--motion-state), color var(--motion-state); }
+[data-folio-count] { min-width: 1.4em; text-align: center; font-variant-numeric: tabular-nums; }
+.pick-check { transition: opacity var(--motion-state), scale var(--motion-state); }
+.pick input:not(:checked) + .pick-face .pick-check { scale: .85; }
+.pick input:checked + .pick-face .pick-check { scale: 1; }
+.ws-window:focus-visible, .frame:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+/* Forms and priced cards never arrive by transforming an ancestor. */
+.enquiry-card, .glance-card, .ws-card, [data-motion-still] { animation: none !important; transform: none !important; translate: none !important; opacity: 1 !important; filter: none !important; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ws-window img, .dest > .frame img { transition: transform 380ms var(--motion-ease); }
+  .ws-window:hover img, .dest > .frame:hover img { transform: scale(1.025); }
+  .ws-trip:hover { transform: none; }
+}
+@media (max-width: 767px) {
+  .hero-text, .hero .actions { --motion-arrive: 360ms; }
+  .ws-window img, .dest > .frame img { transform: none !important; }
+  .steps::before { inset: 12px auto 12px 0; width: 1px; height: auto; transform: scaleY(var(--chapter, 1)); transform-origin: top; }
+  .enquiry-card { padding-inline: clamp(16px, 5vw, 24px); }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .menu-panel, .folio-panel { max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain; }
+}
+@media (prefers-reduced-motion: reduce), (forced-colors: active) { .steps::before { transform: none; } }
+@media print { .steps::before { transform: none; } }
+/* A hover may emphasize eligible media, but cannot move a commercial card or its rate. */
+:is(.card, .dest, .exp, .tile, .concept):has(.price), .price, .ws-price, .yacht-rate { transform: none !important; translate: none !important; animation: none !important; filter: none !important; opacity: 1 !important; }

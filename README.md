@@ -1,3 +1,22 @@
+# V46 release: motion and clean URLs
+
+Public page URLs use slash-ended directories, for example `/about/`,
+`/destinations/zanzibar/`, `/journeys/safari-and-shore/` and `/journal/`.
+`/journey/` is the simple enquiry; `/planner/` is the detailed brief. Legacy HTML
+addresses remain compatibility entry points. Apache performs direct permanent
+redirects; GitHub Pages uses generated noindex compatibility documents. Do not
+remove generated directory `index.html` files or edit root output by hand.
+
+The source of truth is `website/src/data/routes.mjs`. The build hook generates
+redirects, compatibility entries and a release marker. See the new top sections
+of CLAUDE.md and HANDOVER.md before working with older instructions below.
+
+Main pushes use the existing encrypted Namecheap FTP workflow. Changed uploads
+are verified before activation; `.htaccess` is activated after canonical pages,
+and `release.json` last. The job then verifies the live source revision, all
+canonical pages, legacy 301s, real 404s and dependencies, and retains its report.
+A successful build or FTP login alone is not a deployment verification.
+
 # Pardus Luxury Escapes
 
 ## Owner updates — 11 November 2026

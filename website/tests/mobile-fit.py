@@ -13,6 +13,7 @@ to a comma-separated list of pages to check only those.
 
 from pathlib import Path
 import os
+import json
 from urllib.parse import urljoin
 
 from playwright.sync_api import sync_playwright
@@ -20,7 +21,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = os.environ.get("PARDUS_QA_BASE", "http://127.0.0.1:4180/paradise").rstrip("/") + "/"
 EXPORT = Path(__file__).resolve().parents[2]
-ROUTES = [r for r in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if r] or sorted(p.name for p in EXPORT.glob("*.html"))
+ROUTES = [r for r in os.environ.get("PARDUS_QA_ROUTES", "").split(",") if r] or sorted(json.loads((EXPORT / "route-manifest.json").read_text())["routes"].values())
 PHONES = [(320, 640), (360, 740), (375, 667), (390, 844), (412, 915), (430, 932)]
 INTRO_KEY = "pardus-intro-v30"
 

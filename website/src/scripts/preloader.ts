@@ -10,12 +10,12 @@ const skip = document.querySelector<HTMLButtonElement>('[data-skip-intro]');
 const quick = root.classList.contains('intro-quick');
 
 // Smart timing: the full sequence is shown in full; the quick one lasts only as long as the page needs to be ready.
-const MIN_MS = () => (reduced.matches ? (quick ? 450 : 1300) : quick ? 650 : 3500);
-const DEADLINE_MS = () => (reduced.matches ? (quick ? 2000 : 2600) : quick ? 2600 : 5600);
-const EXIT_MS = () => (reduced.matches ? 300 : quick ? 650 : 1000);
+const MIN_MS = () => (reduced.matches ? (quick ? 180 : 550) : quick ? 240 : 1750);
+const DEADLINE_MS = () => (reduced.matches ? (quick ? 1200 : 1800) : quick ? 1500 : 3200);
+const EXIT_MS = () => (reduced.matches ? 100 : quick ? 300 : 500);
 const LEAVE_MS = 360;
 
-let minTimer = 0, deadline = 0, exitTimer = 0, readyTimer = 0;
+let minTimer = 0, deadline = 0, exitTimer = 0, readyTimer = 0, leaveTimer = 0, reopenTimer = 0;
 
 if (root.dataset.introFailsafe) window.clearTimeout(Number(root.dataset.introFailsafe));
 
@@ -43,7 +43,7 @@ function finishIntro(immediate = false) {
   root.classList.add('intro-exiting');
   // The page is usable as soon as the curtains begin to part, and begins to arrive just as they open.
   shell?.removeAttribute('inert');
-  readyTimer = window.setTimeout(markReady, reduced.matches ? 0 : quick ? 180 : 380);
+  readyTimer = window.setTimeout(markReady, reduced.matches ? 0 : quick ? 80 : 180);
   exitTimer = window.setTimeout(complete, EXIT_MS());
 }
 
@@ -54,7 +54,8 @@ function beginIntro() {
   const started = Number(root.dataset.introStarted || performance.now());
   const elapsed = () => performance.now() - started;
   // Fonts and the first photograph are awaited so the page opens complete, but never past the deadline.
-  const images = [...document.querySelectorAll<HTMLImageElement>('[data-hero-image], .page-hero-bg img')];
+  const images = [...document.querySelectorAll<HTMLImageElement>('[data-hero-image], [data-hero-slide][data-state="current"] img, .page-hero-bg img, .coastal-opening-scene img')].filter(image => image.getClientRects().length > 0).slice(0, 2);
+  images.forEach(image => { image.loading = 'eager'; });
   const artwork = images.length ? Promise.all(images.map(image => image.decode().catch(() => undefined))) : Promise.resolve();
   Promise.allSettled([artwork, document.fonts?.ready]).then(() => {
     if (!root.classList.contains('intro-active') || root.classList.contains('intro-exiting')) return;
@@ -82,13 +83,14 @@ document.addEventListener('click', event => {
   event.preventDefault();
   root.classList.add('intro-leaving');
   const go = () => location.assign(url.href);
-  if (reduced.matches) go(); else window.setTimeout(go, LEAVE_MS);
+  if (reduced.matches) go(); else leaveTimer = window.setTimeout(go, LEAVE_MS);
   // If the navigation never happens (for example it is cancelled), the page is released again.
-  window.setTimeout(() => root.classList.remove('intro-leaving'), 5000);
+  reopenTimer = window.setTimeout(() => root.classList.remove('intro-leaving'), 5000);
 });
 // Coming back from the back/forward cache must never show a closed page.
 window.addEventListener('pageshow', event => {
   if (!event.persisted) return;
+  [minTimer, deadline, exitTimer, readyTimer, leaveTimer, reopenTimer].forEach(clearTimeout);
   root.classList.remove('intro-leaving', 'intro-active', 'intro-exiting');
   markReady();
   shell?.removeAttribute('inert');
@@ -96,3 +98,6 @@ window.addEventListener('pageshow', event => {
 
 if (root.classList.contains('intro-active')) beginIntro();
 else markReady();
+
+window.addEventListener('pagehide', () => { [minTimer, deadline, exitTimer, readyTimer, leaveTimer, reopenTimer].forEach(clearTimeout); });
+reduced.addEventListener('change', () => { if (reduced.matches && root.classList.contains('intro-exiting')) finishIntro(true); });

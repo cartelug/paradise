@@ -1,3 +1,4 @@
+import { canonicalRoute } from './routes.mjs';
 export const site = {
   name: 'Pardus Luxury Escapes',
   // One primary tagline, used with the logo everywhere (hero, opening, footer, search results and sharing).
@@ -49,7 +50,10 @@ export const site = {
   },
 };
 
-export const path = (route = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${route}`;
+export const assetUrl = (asset = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${asset.replace(/^\//, '')}`;
+export const pageUrl = (route = '') => assetUrl(canonicalRoute(route));
+// Compatibility entry point: only explicitly known page aliases are normalized; assets are untouched.
+export const path = (route = '') => pageUrl(route);
 
 // Absolute URL on the configured site origin (astro.config `site`, set with PARDUS_SITE).
 export const absolute = (route = '') => new URL(path(route), import.meta.env.SITE).toString();
@@ -67,9 +71,9 @@ export const socialLinks = [
 // The same five labels on every page, in the header and the menu. "Plan your escape" is the one prominent action beside them;
 // saved trips stay available but secondary. Cruises, services and the travel desk live under "More" in the menu and the footer.
 export const navigation = [
-  { label: 'Destinations', href: 'destinations.html' },
-  { label: 'Signature journeys', href: 'journeys.html' },
-  { label: 'About', href: 'about.html' },
-  { label: 'Corporate travel', href: 'corporate.html' },
-  { label: 'Journal', href: 'journal.html' },
+  { label: 'Destinations', href: 'destinations/' },
+  { label: 'Signature journeys', href: 'journeys/' },
+  { label: 'About', href: 'about/' },
+  { label: 'Corporate travel', href: 'corporate/' },
+  { label: 'Journal', href: 'journal/' },
 ];

@@ -36,10 +36,10 @@ offers.find(offer => offer.slug === 'maasai-mara')!.fromUSD = 99999;
         result = subprocess.run(["node", str(ROOT / "node_modules/astro/bin/astro.mjs"), "build"], cwd=fixture,
             env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
         assert result.returncode == 0, result.stdout
-        about = (fixture / "dist/about.html").read_text()
-        listing = (fixture / "dist/destinations.html").read_text()
-        flight = (fixture / "dist/destination-seychelles.html").read_text()
-        unapproved = (fixture / "dist/destination-maasai-mara.html").read_text()
+        about = (fixture / "dist/about/").read_text()
+        listing = (fixture / "dist/destinations/").read_text()
+        flight = (fixture / "dist/destinations/seychelles/").read_text()
+        unapproved = (fixture / "dist/destinations/maasai-mara/").read_text()
         assert 'data-about-section="founder"' not in about
         assert '"founder":' not in about
         assert "data-founder-portrait" not in about
@@ -47,7 +47,7 @@ offers.find(offer => offer.slug === 'maasai-mara')!.fromUSD = 99999;
         assert "I wanted a name that was distinctive" not in about
         warning = 'Airfares may change until the ticket is issued.'
         assert warning in listing and warning in flight
-        assert '/acceptance/terms.html#fares' in listing and '/acceptance/terms.html#fares' in flight
+        assert '/acceptance/terms/#fares' in listing and '/acceptance/terms/#fares' in flight
         assert '<del>Was USD 3,000</del>' in listing and '<del>Was USD 3,000</del>' in flight
         assert 'datetime="2000-01-01"' in flight and 'datetime="2099-12-31"' in flight
         assert 'Request a quote' in unapproved and '99,999' not in unapproved and '99999' not in unapproved

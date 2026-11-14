@@ -21,13 +21,13 @@ import { path } from '../data/site';
       </div>
       <div class="concept-grid" data-stagger="100">
         {journeys.map(journey => <article class="concept" data-journey-card data-reason={journey.reason.toLowerCase()} data-reveal>
-          <a class="concept-image" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><span class="frame"><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 820px) 100vw, 50vw" /></span><span class="concept-number">{journey.number}</span></a>
+          <a class="concept-image" href={path(`journeys/${journey.slug}/`)} aria-label={`Explore ${journey.name}`}><span class="frame"><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 820px) 100vw, 50vw" /></span><span class="concept-number">{journey.number}</span></a>
           <div class="concept-body">
             <p class="eyebrow" style="margin-bottom:4px">{journey.eyebrow}</p>
-            <h2><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h2>
+            <h2><a href={path(`journeys/${journey.slug}/`)}>{journey.name}</a></h2>
             <p>{journey.description}</p>
             <div class="concept-meta"><span>{journey.pace} pace</span><span>{journey.duration.replace('Suggested rhythm / ', '').replace('Typical frame / ', '')}</span></div>
-            <div class="concept-actions"><a class="link" href={path(`journey-${journey.slug}.html`)}>Explore the idea <Icon name="arrow-right" /></a><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><Icon name="bookmark" /><span data-save-label>Save this journey</span></button></div>
+            <div class="concept-actions"><a class="link" href={path(`journeys/${journey.slug}/`)}>Explore the idea <Icon name="arrow-right" /></a><button type="button" class="folio-save requires-js" data-folio-save={journey.slug} data-folio-type="journey" data-folio-label={journey.name} aria-pressed="false"><Icon name="bookmark" /><span data-save-label>Save this journey</span></button></div>
           </div>
         </article>)}
       </div>
@@ -38,7 +38,7 @@ import { path } from '../data/site';
     <div class="wrap statement">
       <p class="eyebrow" data-reveal>Nothing needs to fit exactly</p>
       <h2 id="open-brief-title" data-split>Keep the feeling. <em>Change the rest.</em></h2>
-      <a class="btn btn--gold" href={path('journey.html')} data-reveal>Start an open brief <Icon name="arrow-right" /></a>
+      <a class="btn btn--gold" href={path('journey/')} data-reveal>Start an open brief <Icon name="arrow-right" /></a>
     </div>
   </section>
 </Layout>

@@ -1,81 +1,62 @@
-import { access, readdir, readFile, stat } from 'node:fs/promises';
-import { basename, dirname, extname, resolve } from 'node:path';
+import { readdir, readFile, stat } from 'node:fs/promises';
+import { dirname, extname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
+import { legacyRoutes, canonicalRoutes, pageFile } from '../src/data/routes.mjs';
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repository = resolve(project, '..');
-const gitEntry = await stat(resolve(repository, '.git')).catch(() => null);
-if (basename(project) !== 'website' || !(gitEntry?.isDirectory() || gitEntry?.isFile())) {
-  throw new Error('Unexpected export location: run from website/ inside the git checkout.');
-}
-// Match the base the export was built with (PARDUS_BASE); GitHub Pages uses /paradise/.
 const base = process.env.PARDUS_BASE || '/paradise/';
-// The GitHub Pages export lives at the repository root. A root build (PARDUS_BASE=/, `npm run build:domain` for
-// pardusescapes.com) is checked where it was built, in website/dist, because that is what goes into the cPanel zip.
-const dist = resolve(project, 'dist');
-const target = base === '/' ? dist : repository;
-const escaped = base.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-// A root base needs a stricter pattern so closing tags and protocol-relative URLs are not read as paths.
-const reference = base === '/'
-  ? /(?<=["'(\s,])\/(?!\/)([A-Za-z0-9_][^\s"'<>),?#]*)/g
-  : new RegExp(`(?<=["'(\\s,])${escaped}([^\\s"'<>),?#]*)`, 'g');
-
-async function filesBelow(directory) {
-  const found = [];
+const target = base === '/' ? resolve(project, 'dist') : repository;
+const origin = base === '/' ? 'https://pardusescapes.com' : 'https://cartelug.github.io';
+const prefix = base.replace(/\/$/, '') + '/';
+export async function publicFiles(directory, top = true) {
+  const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const full = resolve(directory, entry.name);
-    if (entry.isDirectory()) found.push(...await filesBelow(full));
-    else found.push(full);
+    if (top && (entry.name.startsWith('.') || ['website', 'node_modules'].includes(entry.name))) continue;
+    const file = resolve(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await publicFiles(file, false)); else if (entry.isFile()) files.push(file);
   }
-  return found;
+  return files;
 }
-
-const all = await filesBelow(target);
-const publicFiles = target === dist ? all : all.filter(file => !file.startsWith(resolve(repository, '.git')) && !file.startsWith(project));
-const html = publicFiles.filter(file => extname(file) === '.html');
-const generatedPages = (await readdir(resolve(project, 'dist'))).filter(file => file.endsWith('.html')).length;
-if (html.length !== generatedPages) throw new Error(`Expected ${generatedPages} generated HTML pages; found ${html.length}.`);
-
-const textFiles = publicFiles.filter(file => ['.html', '.css', '.js', '.xml'].includes(extname(file)));
+const files = await publicFiles(target);
+const textFiles = files.filter(file => ['.html', '.css', '.js', '.xml'].includes(extname(file)));
 const missing = new Set();
-let combined = '';
 for (const file of textFiles) {
   const source = await readFile(file, 'utf8');
-  combined += source;
-  for (const match of source.matchAll(reference)) {
-    const relative = decodeURIComponent(match[1]);
-    if (!relative) continue;
-    try { await access(resolve(target, relative)); } catch { missing.add(relative); }
+  if (source.includes('api.fontshare.com') || source.includes('Montserrat-VariableFont_wght.ttf')) throw new Error('Retired font dependency: ' + relative(target, file));
+  // Resolve emitted HTML/CSS references, not arbitrary string literals in bundled application code.
+  if (extname(file) === '.js') continue;
+  const expressions = [...source.matchAll(/(?:href|src|action|poster)="([^"<>]+)"|url\(["']?([^"')]+)["']?\)/g)].map(match => match[1] || match[2]);
+  for (const set of source.matchAll(/(?:srcset|imagesrcset)="([^"]+)"/g)) expressions.push(...set[1].split(/,\s*/).map(item => item.split(/\s+/)[0]));
+  for (const raw of expressions) {
+    if (!raw.startsWith(prefix) || raw.startsWith('//')) continue;
+    const path = decodeURIComponent(raw.split(/[?#]/)[0].slice(prefix.length));
+    const resolved = resolve(target, path.endsWith('/') || !path ? path + 'index.html' : path);
+    if (!resolved.startsWith(target + '/') && resolved !== target) throw new Error('Escaping reference: ' + raw);
+    try { if (!(await stat(resolved)).isFile()) missing.add(raw); } catch { missing.add(raw); }
   }
 }
-
-if (missing.size) throw new Error(`Missing exported references:\n${[...missing].sort().join('\n')}`);
-if (combined.includes('api.fontshare.com')) throw new Error('The export still contains a Fontshare dependency.');
-if (combined.includes('Montserrat-VariableFont_wght.ttf')) throw new Error('The export still references the retired Montserrat TTF.');
-for (const retired of ['app.js', 'styles.css']) {
-  try { await access(resolve(target, retired)); throw new Error(`Retired root asset still exists: ${retired}`); } catch (error) {
-    if (error instanceof Error && error.message.startsWith('Retired')) throw error;
-  }
+if (missing.size) throw new Error('Unresolved exported references:\n' + [...missing].join('\n'));
+for (const route of canonicalRoutes) {
+  const html = await readFile(resolve(target, pageFile(route)), 'utf8');
+  const canonical = `${origin}${prefix}${route}`;
+  if (!html.includes(`rel="canonical" href="${canonical}"`) || !html.includes(`property="og:url" content="${canonical}"`)) throw new Error('Wrong canonical metadata: ' + route);
+  if (!html.includes('data-pardus-intro') || !html.includes('data-skip-intro')) throw new Error('Missing permanent opening: ' + route);
+  if (/\b(?:href|action)="[^"?#]*\.html(?:[?#"])/.test(html)) throw new Error('Legacy HTML address in public navigation: ' + route);
 }
-
-if (target === dist) {
-  // The own-domain build must point search engines and sharing at https://pardusescapes.com/, never at GitHub Pages.
-  const origin = 'https://pardusescapes.com/';
-  const robots = await readFile(resolve(dist, 'robots.txt'), 'utf8');
-  if (!robots.includes(`${origin}sitemap-index.xml`)) throw new Error('robots.txt does not point at https://pardusescapes.com/sitemap-index.xml.');
-  for (const sitemap of ['sitemap-index.xml', 'sitemap-0.xml']) {
-    const xml = await readFile(resolve(dist, sitemap), 'utf8');
-    const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-    if (!urls.length || urls.some(url => !url.startsWith(origin))) throw new Error(`${sitemap} has URLs outside ${origin}.`);
-  }
-  for (const file of html) {
-    const page = await readFile(file, 'utf8');
-    if (page.includes('cartelug.github.io')) throw new Error(`${basename(file)} still mentions cartelug.github.io.`);
-    if (basename(file) === '404.html') continue;
-    if (!page.match(/<link rel="canonical" href="https:\/\/pardusescapes\.com\//)) throw new Error(`${basename(file)} has no pardusescapes.com canonical URL.`);
-    if (!page.match(/<meta property="og:url" content="https:\/\/pardusescapes\.com\//)) throw new Error(`${basename(file)} has no pardusescapes.com og:url.`);
-  }
-  try { await access(resolve(dist, '.htaccess')); } catch { throw new Error('The domain build is missing .htaccess.'); }
+for (const [alias, route] of Object.entries(legacyRoutes)) {
+  if (alias === 'index.html') continue;
+  const html = await readFile(resolve(target, alias), 'utf8');
+  if (!html.includes('noindex,follow') || !html.includes('location.replace') || !html.includes(`${origin}${prefix}${route}`)) throw new Error('Broken compatibility entry: ' + alias);
+  if (!html.includes('data-pardus-intro')) throw new Error('Missing opening in compatibility page: ' + alias);
 }
-
-console.log(`Verified ${html.length} HTML pages and ${textFiles.length} generated text assets; every ${base} reference resolves.`);
+const sitemap = await readFile(resolve(target, 'sitemap-0.xml'), 'utf8');
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+if (urls.length !== canonicalRoutes.length || urls.some(url => url.endsWith('.html') || !url.startsWith(origin + prefix))) throw new Error('Sitemap does not match canonical route inventory.');
+for (const route of canonicalRoutes) if (!urls.includes(`${origin}${prefix}${route}`)) throw new Error('Missing sitemap route: ' + route);
+const robots = await readFile(resolve(target, 'robots.txt'), 'utf8');
+if (!robots.includes(`${origin}${prefix}sitemap-index.xml`)) throw new Error('Wrong robots sitemap.');
+const rules = await readFile(resolve(target, '.htaccess'), 'utf8');
+if (!rules.includes('BEGIN PARDUS CANONICAL ROUTES') || !rules.includes('\\s/+index\\.html')) throw new Error('Missing guarded canonical redirect rules.');
+await stat(resolve(target, '404.html'));
+await stat(resolve(target, 'release.json'));
+console.log(`Verified ${canonicalRoutes.length} canonical pages, ${canonicalRoutes.length - 1} legacy entries and the 404 artifact; ${textFiles.length} generated text files; all ${prefix} asset references resolve.`);

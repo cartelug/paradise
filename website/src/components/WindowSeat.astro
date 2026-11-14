@@ -30,7 +30,7 @@ const categories = [
       </h2>
       <p class="ws-description">Flights, stays, safaris and private escapes,<br class="ws-copy-break" /> planned around you.</p>
       <p class="ws-about">The leopard inspires our name. Personal attention shapes every journey.</p>
-      <a class="ws-difference" href={path('about.html')}><span>About Pardus</span><Icon name="arrow-right" /></a>
+      <a class="ws-difference" href={path('about/')}><span>About Pardus</span><Icon name="arrow-right" /></a>
     </section>
 
     <section class="ws-destinations" id="destinations" aria-labelledby="featured-title">
@@ -40,18 +40,18 @@ const categories = [
           <img class="ws-heading-art" src={path('images/pardus-window-choose-your-view.svg')} width="385" height="60" alt="" aria-hidden="true" loading="eager" decoding="async" data-ws-lettering />
         </h2>
         <nav class="ws-categories" aria-label="Browse destination collections">
-          {categories.map((category, i) => <a class:list={['ws-category', { 'ws-category--featured': i === 0 }]} href={`${path('destinations.html')}?category=${category.filter}`}>{category.label}</a>)}
+          {categories.map((category, i) => <a class:list={['ws-category', { 'ws-category--featured': i === 0 }]} href={`${path('destinations/')}?category=${category.filter}`}>{category.label}</a>)}
         </nav>
       </div>
       <div class="ws-cards">
         {cards.map(({ slug, photograph, alt, offer, price }) => <article class="ws-card" aria-labelledby={`ws-title-${slug}`} aria-describedby="ws-rate-terms">
-          <a class="ws-window" href={path(`destination-${slug}.html`)} aria-label={`Explore ${offer.label}`}>
-            {photograph ? <Picture name={photograph.image} alt={alt} sizes="(max-width: 760px) 28vw, 320px" /> : <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>}
+          <a class="ws-window" href={path(`destinations/${slug}/`)} aria-label={`Explore ${offer.label}`}>
+            {photograph ? <Picture name={photograph.image} alt={alt} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /> : <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>}
           </a>
           <h3 id={`ws-title-${slug}`}>{slug === 'zanzibar' ? 'Zanzibar' : offer.label}</h3>
           <p class="ws-nights">{offer.nights.replace(/-night.*$/, ' nights')}</p>
           <div class="ws-price"><span class="ws-from">{price.hasStartingPrice ? 'From' : ''}</span><strong>{price.amount}{price.hasStartingPrice && <><span aria-hidden="true"> pp</span><span class="visually-hidden"> per person</span></>}</strong>{price.hasStartingPrice && <span class="ws-basis">Two sharing</span>}</div>
-          <a class="ws-trip" href={path(`destination-${slug}.html`)} aria-label={`View ${offer.label} trip`}><Icon name="arrow-right" /></a>
+          <a class="ws-trip" href={path(`destinations/${slug}/`)} aria-label={`View ${offer.label} trip`}><Icon name="arrow-right" /></a>
         </article>)}
       </div>
       <p class="visually-hidden" id="ws-rate-terms">Prices are per person, based on two adults sharing. UGX quote available. Your dates and chosen itinerary determine the final price. Flights, visas and travel insurance are quoted separately. Full inclusions are available on each trip page.</p>
@@ -60,9 +60,9 @@ const categories = [
     <section class="ws-bespoke" aria-labelledby="ws-bespoke-title">
       <img class="ws-compass" src={path('images/pardus-window-compass.svg')} alt="" width="160" height="160" aria-hidden="true" loading="lazy" />
       <div class="ws-bespoke-copy"><h2 id="ws-bespoke-title">Your world, <em>your way.</em></h2><p>Bespoke travel planning<br />from Uganda to everywhere.</p></div>
-      <a class="ws-plan" href={path('journey.html')}><span>Plan your escape</span><Icon name="arrow-right" /></a>
+      <a class="ws-plan" href={path('journey/')}><span>Plan your escape</span><Icon name="arrow-right" /></a>
     </section>
-    <nav class="ws-services" aria-label="What Pardus arranges"><a href={path('concierge.html')}>Flights</a><a href={path('destinations.html')}>Stays</a><a href={path('destination-africa.html')}>Safaris</a><a href={path('concierge.html')}>Private escapes</a></nav>
+    <nav class="ws-services" aria-label="What Pardus arranges"><a href={path('concierge/')}>Flights</a><a href={path('destinations/')}>Stays</a><a href={path('destinations/africa/')}>Safaris</a><a href={path('concierge/')}>Private escapes</a></nav>
   </div>
 </div>
 <script>import '../scripts/window-seat';</script>

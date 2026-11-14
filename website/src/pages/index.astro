@@ -63,8 +63,8 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
       <p class="eyebrow" data-reveal>Ocean cruises</p>
       <h2 id="cruise-title" data-split>The best view is <em>from the water.</em></h2>
       <p class="lead" data-reveal>Unpack once. Wake up somewhere new. Find a sailing shaped around your dates, your pace and the people you travel with.</p>
-      <div class="yacht-rate" data-reveal><strong>Your voyage, personally planned.</strong><span>Ask for a tailored cruise proposal</span></div>
-      <a class="btn btn--gold" href={path('cruises.html')} data-reveal>Explore cruises <Icon name="arrow-right" /></a>
+      <div class="yacht-rate"><strong>Your voyage, personally planned.</strong><span>Ask for a tailored cruise proposal</span></div>
+      <a class="btn btn--gold" href={path('cruises/')} data-reveal>Explore cruises <Icon name="arrow-right" /></a>
     </div>
   </section>
 
@@ -79,7 +79,7 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
           <li><Icon name="shield" /><span><strong>Price and inclusions</strong>before you decide</span></li>
           <li><Icon name="compass" /><span><strong>Made around you</strong>never a package</span></li>
         </ul>
-        <a class="link services-more" href={path('concierge.html')} data-reveal>See everything we arrange <Icon name="arrow-right" /></a>
+        <a class="link services-more" href={path('concierge/')} data-reveal>See everything we arrange <Icon name="arrow-right" /></a>
       </div>
       <ServicePicker illustrated />
     </div>
@@ -87,30 +87,30 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
 
   <section class="sec sec--sand" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="sec-head"><h2 id="more-title" data-split>More places. <em>More possibilities.</em></h2><p class="end" data-reveal><a class="link" href={path('destinations.html')}>All destinations <Icon name="arrow-right" /></a></p></div>
+      <div class="sec-head"><h2 id="more-title" data-split>More places. <em>More possibilities.</em></h2><p class="end" data-reveal><a class="link" href={path('destinations/')}>All destinations <Icon name="arrow-right" /></a></p></div>
       <div class="dest-grid" data-stagger="130">
         {['dubai', 'maasai-mara', 'uganda-gorillas', 'africa', 'europe'].map(slug => { const offer = offerFor(slug); const place = destinationFor(slug); return (
           <article class="dest">
-            <a class="frame" data-reveal href={path(`destination-${slug}.html`)} aria-label={`Explore ${offer.label}`}><Picture name={place.image} alt={place.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
-            <div class="dest-top dest-top--illustrated"><HomeEmblem name={destinationArt[slug] || 'east-africa'} size={64} /><div><h3><a href={path(`destination-${slug}.html`)}>{offer.label}</a></h3><span class="dest-duration">{place.collection ? 'A tailored collection' : offer.nights}</span></div></div>
+            <a class="frame" data-reveal href={path(`destinations/${slug}/`)} aria-label={`Explore ${offer.label}`}><Picture name={place.image} alt={place.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
+            <div class="dest-top dest-top--illustrated"><HomeEmblem name={destinationArt[slug] || 'east-africa'} size={64} /><div><h3><a href={path(`destinations/${slug}/`)}>{offer.label}</a></h3><span class="dest-duration">{place.collection ? 'A tailored collection' : offer.nights}</span></div></div>
             <p>{offer.experience}</p>
             <OfferPrice offer={offer} />
             <PackageDetails offer={offer} />
             <PhotoCredit image={place.image} />
-            <a class="link" href={path(`destination-${slug}.html`)}>Discover {offer.label} <Icon name="arrow-right" /></a>
+            <a class="link" href={path(`destinations/${slug}/`)}>Discover {offer.label} <Icon name="arrow-right" /></a>
           </article>
         ); })}
       </div>
     </div>
     <div class="wrap signature">
-      <div class="sec-head"><div><p class="eyebrow" data-reveal>Signature journeys</p><h2 id="journeys-title" data-split>Journeys with a <em>point of view.</em></h2></div><p class="end" data-reveal><a class="link" href={path('journeys.html')}>All signature journeys <Icon name="arrow-right" /></a></p></div>
+      <div class="sec-head"><div><p class="eyebrow" data-reveal>Signature journeys</p><h2 id="journeys-title" data-split>Journeys with a <em>point of view.</em></h2></div><p class="end" data-reveal><a class="link" href={path('journeys/')}>All signature journeys <Icon name="arrow-right" /></a></p></div>
       <div class="dest-grid" data-stagger="130">
         {journeys.slice(0, 3).map(journey => (
           <article class="dest" data-reveal>
-            <a class="frame" href={path(`journey-${journey.slug}.html`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
-            <div class="dest-top"><h3><a href={path(`journey-${journey.slug}.html`)}>{journey.name}</a></h3><span>{journey.eyebrow}</span></div>
+            <a class="frame" href={path(`journeys/${journey.slug}/`)} aria-label={`Explore ${journey.name}`}><Picture name={journey.image} alt={journey.alt} sizes="(max-width: 900px) 100vw, 33vw" /></a>
+            <div class="dest-top"><h3><a href={path(`journeys/${journey.slug}/`)}>{journey.name}</a></h3><span>{journey.eyebrow}</span></div>
             <p>{journey.description}</p>
-            <a class="link" href={path(`journey-${journey.slug}.html`)}>Explore the idea <Icon name="arrow-right" /></a>
+            <a class="link" href={path(`journeys/${journey.slug}/`)}>Explore the idea <Icon name="arrow-right" /></a>
           </article>
         ))}
       </div>
@@ -130,7 +130,7 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
 
   <section class="sec sec--lagoon" id="travel-desk" aria-labelledby="desk-title">
     <div class="wrap">
-      <div class="sec-head"><h2 id="desk-title" data-split>Know before <em>you go.</em></h2><p class="end" data-reveal><a class="link" href={path('travel-desk.html')}>More travel updates <Icon name="arrow-right" /></a></p></div>
+      <div class="sec-head"><h2 id="desk-title" data-split>Know before <em>you go.</em></h2><p class="end" data-reveal><a class="link" href={path('travel-desk/')}>More travel updates <Icon name="arrow-right" /></a></p></div>
       <TravelDesk limit={3} />
     </div>
   </section>
@@ -142,9 +142,9 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
         <p class="eyebrow" data-reveal>Plan your escape</p>
         <h2 id="enquire-title" data-split>Tell us where. <em>We’ll take it from here.</em></h2>
         <p class="lead" data-reveal="blur">A destination, your dates and a little about your plans. That is all we need to start.</p>
-        <a class="link" href={path('contact.html')} data-reveal>Contact Pardus <Icon name="arrow-right" /></a>
+        <a class="link" href={path('contact/')} data-reveal>Contact Pardus <Icon name="arrow-right" /></a>
       </div>
-      <div class="enquiry-card glass" data-reveal="zoom"><SimpleEnquiry /></div>
+      <div class="enquiry-card glass"><SimpleEnquiry /></div>
     </div>
   </section>
   <StickyCta />

@@ -72,7 +72,7 @@ test('the selected headline, service sentence and both live actions are present'
   assert.doesNotMatch(hero, /hero-tagline|Travel Curated, Around You/);
   assert.match(plain(hero), /^Extraordinary journeys\./);
   assert.match(plain(hero), /Flights, stays, safaris and private experiences, arranged around you\. From Africa to the world\./);
-  assert.match(hero, /href="[^"]*journey\.html"[^>]*><span>Plan your escape<\/span>/);
+  assert.match(hero, /href="[^"]*journey\/"[^>]*><span>Plan your escape<\/span>/);
   assert.match(hero, /href="#destinations"[^>]*><span>Explore destinations<\/span><\/a>/);
   assert.ok(html.includes('id="destinations"'), 'secondary action has a real target');
   assert.match(hero, /alt="A leopard walks across a pale stone ledge/);
@@ -122,13 +122,13 @@ test('selected compact collection has portrait photographs and real destination 
   assert.match(section, /pardus-window-maldives-/);
   assert.match(section, /loading="lazy" decoding="async"/);
   assert.doesNotMatch(section, /data-escape-track|escapes-backdrop/);
-  for (const destination of ['zanzibar', 'seychelles', 'maldives']) assert.ok(section.includes(`destination-${destination}.html`));
+  for (const destination of ['zanzibar', 'seychelles', 'maldives']) assert.ok(section.includes(`destinations/${destination}/`));
 });
 
 test('the service picker retains every service as a tap target and a plain GET form', async () => {
   const markup = await read('src/components/ServicePicker.astro');
   assert.match(markup, /method="get"/);
-  assert.match(markup, /journey\.html/);
+  assert.match(markup, /journey\//);
   assert.match(markup, /type="checkbox" name="services"/);
   const grouped = serviceGroups.flatMap(group => group.items);
   assert.equal(grouped.length, 13);
@@ -139,7 +139,7 @@ test('the exported homepage retains the service picker and floating action', asy
   const html = await readFile(resolve(repo, 'index.html'), 'utf8');
   assert.equal((html.match(/<input type="checkbox" name="services"/g) || []).length, 13);
   for (const service of services) assert.ok(html.includes(`value="${service.replace(/&/g, '&amp;')}"`));
-  assert.match(html, /<form[^>]*data-picker[^>]*action="[^"]*journey\.html"/);
+  assert.match(html, /<form[^>]*data-picker[^>]*action="[^"]*journey\/"/);
   for (const hook of ['data-hero-life', 'data-leopard-box', 'data-sticky-cta']) assert.ok(html.includes(hook));
 });
 

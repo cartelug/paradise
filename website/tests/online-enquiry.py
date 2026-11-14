@@ -24,7 +24,7 @@ INTRO_KEY = "pardus-intro-v30"
 FARE_NOTICE = json.loads((Path(__file__).parent / "fixtures/owner-approved-copy.json").read_text())["fareNotice"]
 
 
-def open_page(browser, route="journey.html"):
+def open_page(browser, route="journey/"):
     context = browser.new_context(viewport={"width": 1280, "height": 900}, accept_downloads=True)
     context.add_init_script(f"try {{ sessionStorage.setItem('{INTRO_KEY}', 'seen'); }} catch (e) {{}}")
     # Capture the external email-app boundary; never navigate to a mail client

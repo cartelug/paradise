@@ -10,7 +10,7 @@ if (cta && 'IntersectionObserver' in window) {
   let heroGone = false;
   const covering = new Set<Element>();
   function update() {
-    const show = heroGone && covering.size === 0 && !root.classList.contains('menu-open') && !root.classList.contains('intro-active');
+    const show = heroGone && covering.size === 0 && !root.classList.contains('menu-open') && !root.classList.contains('intro-active') && !document.querySelector('dialog[open]') && !(document.activeElement instanceof HTMLInputElement || document.activeElement instanceof HTMLTextAreaElement || document.activeElement instanceof HTMLSelectElement);
     cta!.dataset.on = String(show);
     cta!.tabIndex = show ? 0 : -1;
     cta!.setAttribute('aria-hidden', String(!show));
@@ -22,5 +22,8 @@ if (cta && 'IntersectionObserver' in window) {
   }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
   quiet.forEach(element => watcher.observe(element));
   new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['class'] });
+  document.addEventListener('focusin', update);
+  document.addEventListener('focusout', () => requestAnimationFrame(update));
+  new MutationObserver(update).observe(document.body, { attributes: true, subtree: true, attributeFilter: ['open'] });
   update();
 }

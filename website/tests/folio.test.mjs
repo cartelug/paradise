@@ -34,3 +34,9 @@ test('removing one saved chapter preserves only the current Folio items', () => 
   }), base), base);
   assert.equal(updated.searchParams.get('saved'), 'Maldives');
 });
+
+test('an absent planner href on a nested page falls back to the correct site root', () => {
+  const result = buildPlannerUrl('', folio({ place: 'Island' }), 'https://cartelug.github.io/paradise/destinations/zanzibar/', '/paradise/');
+  assert.equal(new URL(result, base).pathname, '/paradise/planner/');
+  assert.equal(new URL(result, base).searchParams.get('place'), 'Island');
+});

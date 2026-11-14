@@ -1,25 +1,25 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
-import Icon from '../components/Icon.astro';
-import { journeys } from '../data/journeys';
-import { path, absolute } from '../data/site';
-import { largestImage } from '../data/photography.ts';
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import { journeys } from '../../data/journeys';
+import { path, absolute } from '../../data/site';
+import { largestImage } from '../../data/photography.ts';
 
 export function getStaticPaths() {
   return journeys.map((journey, index) => ({
-    params: { experience: `journey-${journey.slug}` },
+    params: { experience: journey.slug },
     props: { journey, next: journeys[(index + 1) % journeys.length] },
   }));
 }
 
 const { journey, next } = Astro.props;
-const canonical = absolute(`journey-${journey.slug}.html`);
+const canonical = absolute(`journeys/${journey.slug}/`);
 const schemas = [
   {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Journeys', item: absolute('journeys.html') },
+      { '@type': 'ListItem', position: 1, name: 'Journeys', item: absolute('journeys/') },
       { '@type': 'ListItem', position: 2, name: journey.name, item: canonical },
     ],
   },
@@ -33,7 +33,7 @@ const schemas = [
 <Layout label={journey.name} title={journey.name} description={journey.description} image={largestImage(journey.image)} class="inner journey-detail-page">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
   <PageHero image={journey.image} alt={journey.alt} eyebrow={journey.eyebrow}>
-    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys.html')}>Journeys</a><Icon name="chevron-right" /><span>{journey.name}</span></nav>
+    <nav slot="breadcrumb" class="breadcrumb" aria-label="Breadcrumb"><a href={path('journeys/')}>Journeys</a><Icon name="chevron-right" /><span>{journey.name}</span></nav>
     <Fragment slot="title">{journey.name}</Fragment>
     <p class="lead">{journey.title}</p>
   </PageHero>
@@ -69,7 +69,7 @@ const schemas = [
     <div class="wrap statement">
       <h2 id="shape-title" data-split>Make it <em>yours.</em></h2>
       <p data-reveal>This is an editorial journey concept, not a package or availability promise. The route, accommodation, transfers, experiences, timing and price are discussed and confirmed around your brief.</p>
-      <div class="actions" data-reveal><a class="btn btn--gold" href={`${path('journey.html')}?style=${encodeURIComponent(journey.name)}&place=${journey.place}&pace=${journey.pace}&reason=${journey.reason}`}>Shape this journey <Icon name="arrow-right" /></a><a class="btn btn--ghost" href={path(`journey-${next.slug}.html`)}>Next: {next.name} <Icon name="arrow-right" /></a></div>
+      <div class="actions" data-reveal><a class="btn btn--gold" href={`${path('journey/')}?style=${encodeURIComponent(journey.name)}&place=${journey.place}&pace=${journey.pace}&reason=${journey.reason}`}>Shape this journey <Icon name="arrow-right" /></a><a class="btn btn--ghost" href={path(`journeys/${next.slug}/`)}>Next: {next.name} <Icon name="arrow-right" /></a></div>
     </div>
   </section>
 </Layout>
