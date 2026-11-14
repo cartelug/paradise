@@ -4,17 +4,23 @@
   .coastal-opening-scene img { display: block; width: 100%; height: auto; }
   .home .coastal-opening .hero--atlas { z-index: 1; background: transparent; --atlas-ink: #faf8f0; --atlas-paper: transparent; }
   .home:not([data-expanded-hero]) .coastal-opening .hero-stage { background: transparent; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero-stage::before { display: block; inset: 0; height: auto; background: linear-gradient(90deg, rgb(3 17 33 / .72), rgb(3 17 33 / .38) 40%, transparent 68%); -webkit-mask-image: linear-gradient(#000 0 65%, transparent); mask-image: linear-gradient(#000 0 65%, transparent); }
+  /* V48 (14 November 2026): the approved navy and scene-filled lettering shows in its own colours on a warm ivory veil. */
+  .home:not([data-expanded-hero]) .coastal-opening .hero-stage::before { display: block; inset: 0; height: auto; background: linear-gradient(90deg, rgb(246 242 232 / .97), rgb(246 242 232 / .9) 30%, rgb(246 242 232 / .55) 46%, transparent 62%); -webkit-mask-image: linear-gradient(#000 0 70%, transparent 96%); mask-image: linear-gradient(#000 0 70%, transparent 96%); }
   .home:not([data-expanded-hero]) .coastal-opening .hero-stage::after,
   .home:not([data-expanded-hero]) .coastal-opening .hero-art::after { display: none; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero-text { color: #f3f0e8; text-shadow: none; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero-personal { color: #e4c58d; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas h1 { color: #fffaf0; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .art-heading-visual { filter: brightness(0) invert(1); }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .btn--gold { background: #e4c58d; border-color: #e4c58d; color: #07172a; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .btn--ghost { color: #fffaf0; background: rgb(5 22 42 / .48); border-color: rgb(255 250 240 / .6); }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .btn--ghost:hover { background: rgb(5 22 42 / .8); }
-  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .btn:focus-visible { outline-color: #fffaf0; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-text { color: #1d3a4d; text-shadow: none; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas h1 { color: #09283f; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .art-heading-visual { filter: drop-shadow(0 1px 0 rgb(255 255 255 / .55)); }
+  /* Personally curated. and both actions speak in the display voice. */
+  .home .coastal-opening .hero-personal { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; color: #795a23; font-family: var(--font-display); font-size: clamp(19px, 1.2rem + .5vw, 26px); font-weight: var(--fw-bold); line-height: 1.15; letter-spacing: .005em; }
+  .home .coastal-opening .hero-personal::before { content: ''; flex: none; width: 36px; height: 2px; border-radius: 2px; background: currentColor; }
+  .home .coastal-opening .hero--atlas .btn { font-family: var(--font-display); font-size: clamp(15px, .9rem + .1vw, 16px); font-weight: var(--fw-bold); letter-spacing: .01em; border-radius: 999px; min-height: 52px; padding: 14px 26px; }
+  .home .coastal-opening .hero--atlas .btn--gold { background: #09283f; border-color: #09283f; color: #fffaf0; }
+  .home .coastal-opening .hero--atlas .btn--gold:hover { background: #12384f; border-color: #12384f; }
+  .home .coastal-opening .hero--atlas .btn--gold > .icon { color: #e4c58d; }
+  .home .coastal-opening .hero--atlas .btn--ghost { color: #09283f; background: rgb(255 252 244 / .72); border: 1.5px solid #09283f; }
+  .home .coastal-opening .hero--atlas .btn--ghost:hover { background: #fffaf0; }
+  .home .coastal-opening .hero--atlas .btn:focus-visible { outline: 2px solid #09283f; outline-offset: 3px; border-radius: 999px; }
   /* Retain the approved complete animal outlines, portrait scenes and timing. */
   .home:not([data-expanded-hero]) .coastal-opening .hero-rotator { -webkit-mask-image: linear-gradient(90deg, transparent, #000 28%), linear-gradient(#000 0 82%, transparent 89%); mask-image: linear-gradient(90deg, transparent, #000 28%), linear-gradient(#000 0 82%, transparent 89%); -webkit-mask-composite: source-in; mask-composite: intersect; }
   .home .coastal-opening .window-seat { --ws-navy: #09283f; --ws-gold: #795a23; --ws-muted: #485a64; z-index: 1; background: transparent; color: #09283f; }
@@ -48,6 +54,13 @@
   .home[data-expanded-hero] .coastal-opening .ws-description,
   .home[data-expanded-hero] .coastal-opening .ws-about { max-width: 100%; width: 100%; }
 @media print { .coastal-opening-scene { display: none !important; } }
+/* V48: a tighter first screen on PC. The headline sits a calm step under the header and section 2 follows sooner. */
+@media (min-width: 1000px) {
+  .home:not([data-expanded-hero]) .coastal-opening .hero-copy { top: calc(var(--header-h) + clamp(36px, 3.4vw, 64px)); }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-text { margin-top: 18px; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero--atlas .actions { margin-top: 26px; gap: 14px; }
+  .coastal-opening .window-seat .ws-intro { padding-block: clamp(56px, 5vw, 84px) 40px; }
+}
 
 /* Portrait and tablet layouts retain the same coast, colours, headings and cards.
    Copy stays in flow and only overlaps the empty upper sky of the complete portrait. */
@@ -55,8 +68,8 @@
   .home .coastal-opening-scene { height: min(1100px, 200vw); aspect-ratio: auto; }
   .coastal-opening-scene img { height: 100%; object-fit: cover; object-position: 58% top; }
   .home:not([data-expanded-hero]) .coastal-opening .hero-stage { background: transparent; }
-  .home:not([data-expanded-hero]) .coastal-opening .hero-stage::before { background: linear-gradient(#071b2d, rgb(7 27 45 / .65)); }
-  .coastal-opening .hero-copy { padding-bottom: 24px; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-stage::before { background: linear-gradient(rgb(246 242 232 / .98), rgb(246 242 232 / .9) 30%, rgb(246 242 232 / .5) 46%, transparent 60%); -webkit-mask-image: none; mask-image: none; content: ''; position: absolute; z-index: 1; pointer-events: none; }
+  .coastal-opening .hero-copy { padding-top: calc(var(--header-h) + 22px); padding-bottom: 20px; }
   .coastal-opening .hero-copy::before, .coastal-opening .hero-text::before, .coastal-opening .hero-art::before { display: none; }
   .coastal-opening .hero-art { width: min(100%, 560px); margin: -36vw auto 0; aspect-ratio: var(--hero-portrait-ratio); }
   .coastal-opening .hero-picture, .coastal-opening .leopard-outline { display: none; }
@@ -81,12 +94,23 @@
 }
 @media (min-width: 768px) and (max-width: 999px) {
   .coastal-opening .hero-copy { padding-bottom: 50px; }
-  .coastal-opening .hero-art { margin: -120px 0 0 auto; }
+  .coastal-opening .hero-art { margin: -300px 0 0 auto; }
   .home:not([data-expanded-hero]) .coastal-opening .hero-rotator {
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 24%), linear-gradient(transparent, #000 24%, #000 84%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 24%), linear-gradient(transparent, #000 24%, #000 84%, transparent);
     -webkit-mask-composite: source-in; mask-composite: intersect;
   }
+}
+@media (max-width: 767px) {
+  .home .coastal-opening .hero--atlas .btn { min-height: 50px; padding: 12px 10px; font-size: 14px; letter-spacing: 0; gap: 8px; }
+  .home .coastal-opening .hero-personal { gap: 12px; margin-bottom: 8px; }
+  .home .coastal-opening .hero-personal::before { width: 28px; }
+  .coastal-opening .hero-art { margin-top: -70vw; }
+  .home .coastal-opening .hero--atlas .actions { display: flex; flex-wrap: wrap; }
+  .home .coastal-opening .hero--atlas .actions .btn { flex: 1 1 auto; width: auto; }
+}
+@media (max-width: 374px) {
+  .home .coastal-opening .hero--atlas .actions .btn { flex: 1 1 0; padding-inline: 8px; }
 }
 @media (max-width: 555px) {
   .coastal-opening .ws-cards { grid-template-columns: minmax(0, 1fr); gap: 32px; }

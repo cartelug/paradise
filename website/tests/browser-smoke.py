@@ -236,7 +236,7 @@ def leopard_clear(browser):
             # The leopard is static, so one measurement per size is the whole picture.
             for scale in ["static"]:
                 result = page.evaluate(probe)
-                assert result["parts"] == (12 if width <= 767 or width >= 1000 else 4), result  # phones and PCs: three photographed leopards x four parts; tablets: the one walking leopard
+                assert result["parts"] == 12, result  # V47: every viewport shows the five photographed scenes, three leopards x four parts
                 assert not result["hits"], f"Hero content covers the leopard at {width}x{height} ({reduced}, {scale}): {result['hits']}"
                 assert result["eyesOnScreen"], f"The leopard's eyes are not on the first screen at {width}x{height}"
         context.close()

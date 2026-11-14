@@ -1,3 +1,14 @@
+# V48 — section one text redesign, 14 November 2026
+
+The owner asked for the navy, scene-filled V44 “Extraordinary journeys.” lettering in its own
+colours (no white filter), “Personally curated.” and both hero buttons in MTN Brighter Sans,
+and a tighter section one. `desktop-coast.css` now places a warm ivory veil behind the copy
+on every viewport, sets “Personally curated.” as a gold display subline with a short rule,
+uses navy/outlined pill buttons in the display face, pulls the PC copy closer to the header,
+shortens the gap into section two and raises the photograph behind the copy on phones and
+tablets (only its empty sky overlaps the copy; the leopard's eyes stay on the first screen).
+Lettering artwork, scenes, animal bounds, timing and copy are unchanged.
+
 # V47 — one responsive PARDUS website, 14 November 2026
 
 The owner requested the mobile and PC versions be made one. This supersedes
