@@ -9,7 +9,7 @@ const asset = (name: string) => path(`images/${name}`);
 const imageSet = (ext: string) => artwork.desktop.widths.map(width => `${asset(`pardus-coastal-desktop-${width}.${ext}`)} ${width}w`).join(', ');
 const slideSet = (number: number, ext: string) => rotation.widths.map(width => `${asset(`${rotation.prefix}-${number}-${width}.${ext}`)} ${width}w`).join(', ');
 // A one-pixel placeholder. Each art direction resolves the other direction's picture to this, so a phone never
-// downloads the wide artwork and a desktop never downloads the five portrait photographs.
+// downloads the wide artwork and the shared portrait sequence serves phones, tablets and PCs.
 const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 // The measured outline stays inside the picture, so QA can check the complete walking leopard.
 const outline = [
@@ -55,7 +55,6 @@ const box = (r: number[], prefix: string) => `--${prefix}l:${r[0]}%;--${prefix}t
         {slides.map((slide, index) => (
           <div class="hero-slide" data-hero-slide data-state={index === 0 ? 'current' : 'idle'} aria-hidden={index === 0 ? undefined : 'true'}>
             <picture class="hero-slide-picture">
-              <source media="(min-width: 768px) and (max-width: 999px)" srcset={blank} />
               <source type="image/avif" srcset={slideSet(index + 1, 'avif')} sizes="(min-width: 1000px) 54vw, 100vw" width={rotation.width} height={rotation.height} />
               <img src={asset(`${rotation.prefix}-${index + 1}-${rotation.width}.webp`)} srcset={slideSet(index + 1, 'webp')} sizes="(min-width: 1000px) 54vw, 100vw" width={rotation.width} height={rotation.height} alt={slide.alt} decoding="async" {...(index === 0 ? { fetchpriority: 'high' } : { loading: 'lazy' })} />
             </picture>

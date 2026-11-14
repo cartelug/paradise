@@ -1,3 +1,19 @@
+# V47 — unified phone, tablet and PC design, 14 November 2026
+
+The owner asked for the different mobile/desktop experiences to become one.
+The coastal opening, ivory introduction, native section headings, rectangular
+image cards and Zanzibar photograph now share one visual system at every size.
+The five approved hero scenes also serve tablets; only stacking/panel geometry
+and responsive image resolution change. Prices, section order, full branded
+opening, approved V44 title and complete animals are retained.
+
+Both navigation presentations use the same primary records and six featured
+destination shortcuts. The full menu is now available on desktop as well.
+111 Node tests pass, including parity across all 34 canonical pages. Astro
+reports zero errors, warnings or hints; both base-path exports verify all pages,
+aliases and assets. Managed local preview exits before readiness; local visual
+QA is unverified. Verify the live release and responsive rendering after FTP.
+
 # V46 motion, responsiveness and clean URLs — 14 November 2026
 
 The owner authorized implementation, main and the existing Namecheap FTPS deployment.

@@ -23,14 +23,15 @@ test('the new illustrative desktop assets have intact masters and undistorted ex
   }
 });
 
-test('the opening has one desktop scene with a phone placeholder, while Zanzibar retains the licensed fallback', async () => {
+test('the opening and Zanzibar share their approved imagery across devices', async () => {
   const html = await read('../index.html');
   assert.equal((html.match(/class="coastal-opening-scene"/g) || []).length, 1);
   const scene = html.match(/<picture class="coastal-opening-scene"[\s\S]*?<\/picture>/)?.[0];
-  assert.match(scene, /<source media="\(max-width: 999px\)" srcset="data:image\/gif/);
+  assert.doesNotMatch(scene, /data:image\/gif|media=/);
   assert.match(scene, /pardus-v45-coastal-continuous/);
   const zanzibar = html.match(/<a class="ws-window"[^>]*destinations\/zanzibar\/[\s\S]*?<\/a>/)?.[0];
-  assert.match(zanzibar, /<source media="\(min-width: 1000px\)" type="image\/avif"[^>]*pardus-v45-zanzibar-editorial/);
-  assert.match(zanzibar, /<img[^>]*src="[^"]*zanzibar-v24/);
+  assert.match(zanzibar, /<source type="image\/avif"[^>]*pardus-v45-zanzibar-editorial/);
+  assert.doesNotMatch(zanzibar, /media=/);
+  assert.match(zanzibar, /<img[^>]*src="[^"]*pardus-v45-zanzibar-editorial/);
   assert.doesNotMatch(zanzibar, /alt="[^"]*resort/);
 });

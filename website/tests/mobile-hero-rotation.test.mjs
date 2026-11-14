@@ -49,7 +49,7 @@ test('the exported hero holds the five photographs in the owner’s order, the f
       assert.match(slide, /aria-hidden="true"/);
       assert.match(slide, /loading="lazy"/);
     }
-    assert.match(slide, /<source media="\(min-width: 768px\) and \(max-width: 999px\)" srcset="data:image\/gif/, 'tablets never download the photographs');
+    assert.doesNotMatch(slide, /srcset="data:image\/gif/, 'the same five scenes serve every device');
     assert.match(slide, /An illustrative travel composite\./);
     assert.doesNotMatch(slide, /alt=""/);
   });
@@ -81,7 +81,7 @@ test('every leopard outline sits below the copy and inside the picture', async (
 test('the rotation script is time-driven, gentle and stoppable', async () => {
   const script = await read('src/scripts/hero-rotation.ts');
   assert.match(script, /prefers-reduced-motion: reduce/);
-  assert.match(script, /max-width: 767px/);
+  assert.match(script, /min-width: 1000px/);
   assert.match(script, /motion-paused/);
   assert.match(script, /pardus:motion/);
   assert.match(script, /visibilitychange/);

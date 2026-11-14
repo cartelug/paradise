@@ -1,6 +1,4 @@
-/* V45: one photographic plane across the desktop opening. Mobile is unchanged. */
-.coastal-opening-scene { display: none; }
-@media (min-width: 1000px) {
+/* V47: one coastal visual system. Breakpoints change layout, never content or theme. */
   .home .coastal-opening { position: relative; isolation: isolate; background: #f3efe4; }
   .home .coastal-opening-scene { display: block; position: absolute; z-index: 0; inset: 0 0 auto; width: 100%; aspect-ratio: 3 / 2; pointer-events: none; -webkit-mask-image: linear-gradient(#000 0 72%, transparent); mask-image: linear-gradient(#000 0 72%, transparent); }
   .coastal-opening-scene img { display: block; width: 100%; height: auto; }
@@ -49,5 +47,51 @@
   .home[data-expanded-hero] .coastal-opening .ws-heading--intro,
   .home[data-expanded-hero] .coastal-opening .ws-description,
   .home[data-expanded-hero] .coastal-opening .ws-about { max-width: 100%; width: 100%; }
-}
 @media print { .coastal-opening-scene { display: none !important; } }
+
+/* Portrait and tablet layouts retain the same coast, colours, headings and cards.
+   Copy stays in flow and only overlaps the empty upper sky of the complete portrait. */
+@media (max-width: 999px) {
+  .home .coastal-opening-scene { height: min(1100px, 200vw); aspect-ratio: auto; }
+  .coastal-opening-scene img { height: 100%; object-fit: cover; object-position: 58% top; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-stage { background: transparent; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-stage::before { background: linear-gradient(#071b2d, rgb(7 27 45 / .65)); }
+  .coastal-opening .hero-copy { padding-bottom: 24px; }
+  .coastal-opening .hero-copy::before, .coastal-opening .hero-text::before, .coastal-opening .hero-art::before { display: none; }
+  .coastal-opening .hero-art { width: min(100%, 560px); margin: -36vw auto 0; aspect-ratio: var(--hero-portrait-ratio); }
+  .coastal-opening .hero-picture, .coastal-opening .leopard-outline { display: none; }
+  .home:not([data-expanded-hero]) .coastal-opening .hero-rotator { display: block; -webkit-mask-image: linear-gradient(transparent, #000 24%, #000 84%, transparent); mask-image: linear-gradient(transparent, #000 24%, #000 84%, transparent); }
+  .home .coastal-opening .window-seat { background: #f3efe4; }
+  .coastal-opening .window-seat::before { display: none; }
+  .coastal-opening .window-seat .ws-intro { padding-block: 36px 32px; }
+  .coastal-opening .window-seat .ws-heading--intro { width: 68%; }
+  .coastal-opening .window-seat .ws-description { max-width: 66%; }
+  .coastal-opening .window-seat .ws-about { max-width: 100%; }
+  .coastal-opening .ws-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
+  .coastal-opening .ws-collection-head { align-items: flex-start; gap: 16px; }
+  .coastal-opening .window-seat .ws-heading--collection { width: 100%; }
+  .coastal-opening .ws-categories { justify-content: flex-start; gap: 20px; }
+  .coastal-opening .window-seat .ws-bespoke { grid-template-columns: 52px minmax(0, 1fr); gap: 16px; }
+  .coastal-opening .window-seat .ws-plan { grid-column: 2; width: fit-content; font-size: .875rem; padding: 12px 18px; }
+  .coastal-opening .hero-pause { position: absolute; z-index: 3; display: inline-grid; place-items: center; right: 14px; bottom: 21%; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #fff9; background: #09283fbb; color: #fff; }
+  .coastal-opening .hero-pause .icon { width: 20px; height: 20px; }
+  .coastal-opening .hero-pause .icon-play { display: none; }
+  html.motion-paused .coastal-opening .hero-pause .icon-pause { display: none; }
+  html.motion-paused .coastal-opening .hero-pause .icon-play { display: block; }
+}
+@media (min-width: 768px) and (max-width: 999px) {
+  .coastal-opening .hero-copy { padding-bottom: 50px; }
+  .coastal-opening .hero-art { margin-top: -120px; }
+}
+@media (max-width: 555px) {
+  .coastal-opening .ws-cards { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .coastal-opening .window-seat .ws-card h3 { font-size: 1.375rem; }
+  .coastal-opening .window-seat .ws-price strong { font-size: 1.25rem; }
+  .coastal-opening .window-seat .ws-nights,
+  .coastal-opening .window-seat .ws-from,
+  .coastal-opening .window-seat .ws-basis { font-size: .875rem; line-height: 1.5; }
+  .coastal-opening .window-seat .ws-trip { margin-top: 14px; }
+}
+.coastal-opening .window-seat[data-ws-large-text] .ws-cards { grid-template-columns: minmax(0, 1fr); }
+@media (prefers-reduced-motion: reduce) { .coastal-opening .hero-pause { display: none; } }
+html:not(.js) .coastal-opening .hero-pause { display: none; }

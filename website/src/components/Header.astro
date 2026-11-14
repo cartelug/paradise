@@ -6,12 +6,21 @@ interface Props { home?: boolean; }
 const { home = false } = Astro.props;
 const current = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/$/, '').length).replace(/^\//, '');
 const activeHref = current.startsWith('destinations/') ? 'destinations/' : current.startsWith('journeys/') ? 'journeys/' : current.startsWith('journal/') ? 'journal/' : current;
-const primary = [
+const details = [
   { label: 'Destinations', href: 'destinations/', icon: 'pin' as const, note: 'Islands, safaris and cities' },
   { label: 'Signature journeys', href: 'journeys/', icon: 'compass' as const, note: 'Ideas to begin a journey with' },
   { label: 'About', href: 'about/', icon: 'heart' as const, note: 'Our story, founder and how we plan' },
   { label: 'Corporate travel', href: 'corporate/', icon: 'briefcase' as const, note: 'Executives, teams and events' },
   { label: 'Journal', href: 'journal/', icon: 'news' as const, note: 'Notes before you book' },
+];
+const primary = navigation.map(item => ({ ...details.find(detail => detail.href === item.href)!, ...item }));
+const featured = [
+  ['zanzibar', 'Zanzibar', 'Safari, culture & the coast'],
+  ['seychelles', 'Seychelles', 'Granite shores & island time'],
+  ['maldives', 'Maldives', 'Lagoon days & quiet stays'],
+  ['dubai', 'Dubai', 'City energy & desert horizons'],
+  ['maasai-mara', 'Maasai Mara', 'A safari shaped around you'],
+  ['uganda-gorillas', 'Uganda gorillas', 'Forests & considered encounters'],
 ];
 const more = [
   { label: 'Cruises & private yachts', href: 'cruises/', icon: 'anchor' as const },
@@ -34,14 +43,7 @@ const more = [
   <div id="desktop-destinations" class="desktop-destinations" hidden>
     <p class="desktop-destinations-label">Find your next escape</p>
     <div class="desktop-destinations-grid">
-      {[
-        ['zanzibar', 'Zanzibar', 'Safari, culture & the coast'],
-        ['seychelles', 'Seychelles', 'Granite shores & island time'],
-        ['maldives', 'Maldives', 'Lagoon days & quiet stays'],
-        ['dubai', 'Dubai', 'City energy & desert horizons'],
-        ['maasai-mara', 'Maasai Mara', 'A safari shaped around you'],
-        ['uganda-gorillas', 'Uganda gorillas', 'Forests & considered encounters'],
-      ].map(([slug, label, note]) => <a href={path(`destinations/${slug}/`)}><span><strong>{label}</strong><small>{note}</small></span><Icon name="arrow-right" /></a>)}
+      {featured.map(([slug, label, note]) => <a href={path(`destinations/${slug}/`)}><span><strong>{label}</strong><small>{note}</small></span><Icon name="arrow-right" /></a>)}
     </div>
     <a class="desktop-destinations-all" href={path('destinations/')}>Explore all destinations <Icon name="arrow-right" /></a>
   </div>
@@ -53,6 +55,9 @@ const more = [
     <p class="menu-kicker" style="--i:0">Where to?</p>
     <nav class="menu-nav" aria-label="Mobile navigation">
       {primary.map((item, i) => <a style={`--i:${i + 1}`} href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><span class="badge"><Icon name={item.icon} /></span><span><strong>{item.label}</strong><small>{item.note}</small></span><Icon name="chevron-right" /></a>)}
+    </nav>
+    <nav class="menu-destinations" aria-label="Featured destinations">
+      {featured.map(([slug, label]) => <a href={path(`destinations/${slug}/`)}>{label}<Icon name="arrow-right" /></a>)}
     </nav>
     <nav class="menu-more" style="--i:5" aria-label="More from Pardus">
       {more.map(item => <a href={path(item.href)} aria-current={activeHref === item.href ? 'page' : undefined}><Icon name={item.icon} /><span>{item.label}</span></a>)}

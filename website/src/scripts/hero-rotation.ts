@@ -5,7 +5,7 @@ const hero = document.querySelector<HTMLElement>('[data-hero]');
 const rotator = hero?.querySelector<HTMLElement>('[data-hero-rotator]');
 if (hero && rotator) {
   const slides = [...rotator.querySelectorAll<HTMLElement>('[data-hero-slide]')];
-  const layout = matchMedia('(max-width: 767px), (min-width: 1000px)');
+  const layout = matchMedia('(min-width: 1000px)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const hold = Number(rotator.dataset.hold) || 3000;
   const fade = Number(rotator.dataset.fade) || 1400;

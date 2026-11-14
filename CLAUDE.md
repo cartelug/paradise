@@ -1,3 +1,16 @@
+# V47 — one responsive PARDUS website, 14 November 2026
+
+The owner requested the mobile and PC versions be made one. This supersedes
+previous desktop-only coastal styling and Zanzibar image restrictions. One
+coastal theme, native section headings, rectangular destination cards and
+Zanzibar image now serve every viewport. All devices use the same five hero
+scenes; the portrait layout stacks on phones/tablets and the panel remains on
+PC so complete animal geometry is preserved. Both menus share primary link
+records and featured destination shortcuts. The full menu is available on PC.
+Only spacing, columns and image resolution adapt. Keep the existing opening,
+commercial copy, prices, animal bounds and approved V44 headline until a new
+headline design is selected. New B1–B10 concepts have not been selected.
+
 # Owner release authorization — 14 November 2026
 
 The user explicitly requested implementation of the PARDUS motion/responsive/clean-URL

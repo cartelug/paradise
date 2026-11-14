@@ -54,3 +54,19 @@
   html:not(.js) .desktop-destination-toggle { display: none; }
   html:not(.js) .header-tools { margin-left: auto; }
 }
+
+/* The same full menu is available on PC as on phones, alongside the inline links. */
+.site-header .menu-toggle, .home .site-header .menu-toggle { display: inline-grid !important; color: #e4c58d; background: transparent; border: 1px solid rgb(228 197 141 / .4); border-radius: 999px; }
+.menu, .home .menu { display: revert !important; }
+.menu:not([open]), .home .menu:not([open]) { display: none !important; }
+.home .site-header, .home .site-header.is-scrolled, .home[data-window-seat-header] .site-header { background: rgb(5 18 33 / .96); box-shadow: 0 1px 0 rgb(228 197 141 / .19); }
+.home .site-header > .brand-link > .brand-lockup-vector { display: none; }
+.home .window-seat-header-brand { display: block; width: 100%; }
+.home .desktop-nav a { color: #f1eee6; }
+.home .header-cta { color: #07172a; background: #e4c58d; border-color: #e4c58d; }
+.menu-destinations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; margin-block: 24px; }
+.menu-destinations a { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px; min-width: 0; color: #f1eee6; text-decoration: none; border-bottom: 1px solid rgb(228 197 141 / .2); padding-block: 10px; }
+.menu-destinations .icon { width: 16px; height: 16px; flex: none; color: #e4c58d; }
+@media (min-width: 1360px) { .site-header, .home .site-header { gap: 16px; } .header-tools, .home .header-tools { gap: 8px; } }
+@media (max-width: 359px) { .menu-destinations { grid-template-columns: minmax(0, 1fr); } }
+html:not(.js) .home .desktop-nav a { color: #f1eee6; }

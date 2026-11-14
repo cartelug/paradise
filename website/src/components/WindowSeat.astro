@@ -46,7 +46,7 @@ const categories = [
       <div class="ws-cards">
         {cards.map(({ slug, photograph, alt, offer, price }) => <article class="ws-card" aria-labelledby={`ws-title-${slug}`} aria-describedby="ws-rate-terms">
           <a class="ws-window" href={path(`destinations/${slug}/`)} aria-label={`Explore ${offer.label}`}>
-            {photograph ? <Picture name={photograph.image} alt={alt} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /> : <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 760px) 28vw, (min-width: 1000px) 30vw, 320px" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>}
+            {photograph ? <Picture name={photograph.image} alt={alt} sizes="(max-width: 555px) 92vw, (max-width: 999px) 45vw, 30vw" /> : <picture><source type="image/avif" srcset={images(slug, 'avif')} sizes="(max-width: 555px) 92vw, (max-width: 999px) 45vw, 30vw" /><source type="image/webp" srcset={images(slug, 'webp')} sizes="(max-width: 555px) 92vw, (max-width: 999px) 45vw, 30vw" /><img src={path(`images/pardus-window-${slug}-448.webp`)} alt={alt} width="887" height="1774" loading="lazy" decoding="async" /></picture>}
           </a>
           <h3 id={`ws-title-${slug}`}>{slug === 'zanzibar' ? 'Zanzibar' : offer.label}</h3>
           <p class="ws-nights">{offer.nights.replace(/-night.*$/, ' nights')}</p>

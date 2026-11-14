@@ -26,7 +26,6 @@ import desktopCoast from '../data/desktop-coast.json';
 import '../styles/desktop-coast.css';
 const coast = desktopCoast[0];
 const coastSet = (ext: string) => coast.widths.map(width => `${path(`images/${coast.prefix}-${width}.${ext}`)} ${width}w`).join(', ');
-const blankScene = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const heroLettering = lettering.lettering['hero-lettering'];
 const promises = [
   { art: 'personal-attention', title: 'Personal attention', text: 'One adviser and one conversation, with flights, stays, transfers and experiences brought into one clear plan.' },
@@ -34,7 +33,7 @@ const promises = [
   { art: 'seamless-service', title: 'Seamless service', text: 'Review your itinerary, price, inclusions and terms before confirming, and keep one point of contact throughout.' },
 ];
 const asset = (name: string) => path(`images/${name}`);
-// Phones preload the first of the five rotating hero photographs; wider screens preload the single desktop artwork.
+// All devices use the same five scenes; responsive sizes choose the appropriate resolution.
 const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
   ? mobileHero.widths.map(width => `${asset(`${mobileHero.prefix}-1-${width}.avif`)} ${width}w`).join(', ')
   : heroArtwork.desktop.widths.map(width => `${asset(`pardus-coastal-desktop-${width}.avif`)} ${width}w`).join(', ');
@@ -42,13 +41,11 @@ const heroSet = (scene: 'desktop' | 'mobile') => scene === 'mobile'
 <Layout class="home" simpleFooter title="Luxury travel from Uganda and East Africa" label="Welcome" description={site.description} image={`images/pardus-coastal-desktop-${heroArtwork.desktop.width}.webp`}>
   <Fragment slot="head">
     <link rel="preload" as="image" type="image/webp" imagesrcset={heroLettering.widths.map(width => `${asset(`${heroLettering.prefix}-hero-lettering-${width}.webp`)} ${width}w`).join(', ')} imagesizes="(max-width: 767px) 90vw, 46vw" />
-    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)" imagesrcset={heroSet('mobile')} imagesizes="100vw" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 999px)" imagesrcset={heroSet('desktop')} imagesizes="100vw" />
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 999px)" imagesrcset={heroSet('mobile')} imagesizes="100vw" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 1000px)" imagesrcset={heroSet('mobile')} imagesizes="54vw" />
   </Fragment>
   <div class="coastal-opening">
     <picture class="coastal-opening-scene" aria-hidden="true">
-      <source media="(max-width: 999px)" srcset={blankScene} />
       <source type="image/avif" srcset={coastSet('avif')} sizes="100vw" />
       <source type="image/webp" srcset={coastSet('webp')} sizes="100vw" />
       <img src={path(`images/${coast.prefix}-${coast.width}.webp`)} width={coast.width} height={coast.height} alt="" fetchpriority="high" decoding="async" />
