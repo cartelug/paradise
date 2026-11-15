@@ -3,7 +3,7 @@
 .brand-svg { width: 100%; height: auto; }
 svg.brand-svg { overflow: visible; }
 .brand-light { --logo-ink: #faf7ef; --logo-gold: #d9bc82; }
-.brand-lockup-vector { display: block; width: 100%; line-height: 1; }
+.brand-lockup-vector { display: block; width: 100%; line-height: 1; container-type: inline-size; }
 .brand-tagline { display: block; margin-top: 6px; text-align: center; font-family: var(--font-display); font-weight: 700; line-height: 1.3; color: #775e32; }
 .brand-light .brand-tagline, .brand-on-dark .brand-tagline { color: #e4c58d; }
 .brand-lockup-vector .brand-svg { filter: drop-shadow(0 6px 18px rgb(2 8 18 / .45)); }
@@ -189,4 +189,14 @@ html.menu-open { overflow: hidden; }
   .folio-signals { gap: 8px; }
   .folio-signals div { padding: 10px; }
   .menu-more { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* V50 (15 November 2026): the logo caption spans the logo (type.css). Below 1000px every page uses the homepage's 80px phone
+   header, so the logo can be wide enough for its 10px minimum caption to sit inside the gold rules beside "LUXURY ESCAPES". */
+@media (max-width: 999px) {
+  :root { --header-h: 80px; }
+  .site-header > .brand-link, .menu-top .brand-link { width: 144px; }
+}
+@media (max-width: 359px) {
+  .site-header > .brand-link, .home .site-header > .brand-link, .home .site-header.is-scrolled > .brand-link, .menu-top .brand-link { width: 140px; padding-block: 2px; }
 }

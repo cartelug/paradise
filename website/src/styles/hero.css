@@ -98,8 +98,8 @@
 }
 @media (max-width: 767px) {
   .home { --header-h: 80px; }
-  .home .site-header > .brand-link { width: 136px; }
-  .home .site-header.is-scrolled > .brand-link { width: 136px; }
+  .home .site-header > .brand-link { width: 144px; }
+  .home .site-header.is-scrolled > .brand-link { width: 144px; }
   .home .header-cta { display: none; }
   .hero-stage { background: #e9eae6; }
   .hero-copy { padding-top: calc(var(--header-h) + 27px); padding-bottom: 0; }

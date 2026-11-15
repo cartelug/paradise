@@ -153,7 +153,7 @@
   .window-seat .ws-plan { font-size: clamp(.75rem, 2.7vw, .8125rem); }
   .ws-plan > span { white-space: normal; text-wrap: balance; }
   .window-seat .ws-bespoke p { font-size: .75rem; }
-  .home[data-window-seat-header] .site-header > .brand-link { width: clamp(112px, 31.8vw, 176px); }
+  .home[data-window-seat-header] .site-header > .brand-link { width: clamp(140px, 36.9vw, 176px); }
 }
 @media (max-width: 359px) {
   .window-seat .ws-card h3 { font-size: .875rem; }
