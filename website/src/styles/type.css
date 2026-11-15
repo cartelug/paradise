@@ -192,3 +192,5 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
   .fare-notice-title, .package-label, .package-details summary, .desktop-destinations-label, .desktop-destinations-grid strong, .desktop-destinations-all,
   .window-seat .ws-eyebrow, .window-seat .ws-difference, .window-seat .ws-plan, .founder-plate-role,
   .intro-bottomline button) { font-family: var(--font-display); }
+/* Brighter Sans capitals are wider than Sky Text: a long eyebrow word may break rather than push the page sideways. */
+.eyebrow { overflow-wrap: anywhere; }
