@@ -36,7 +36,7 @@ const organizationSchema = {
   name: site.name,
   description: site.description,
   slogan: site.tagline,
-  ...(site.about.showFounder ? { founder: { '@type': 'Person', name: site.founder.name } } : {}),
+  ...(site.about.showFounder ? { founder: { '@type': 'Person', name: site.founder.name, jobTitle: 'Founder & Managing Director', ...(site.founder.portrait ? { image: absolute(site.founder.portrait.src) } : {}) } } : {}),
   url: `${canonical.origin}${path()}`,
   logo: absolute('brand/pardus-primary-512.png'),
   ...(site.email ? { email: site.email } : {}),

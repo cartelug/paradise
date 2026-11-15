@@ -11,7 +11,14 @@ export const site = {
   founder: {
     name: 'Saidah Namusoke',
     // Only an approved, natural photograph. Null renders no image or placeholder.
-    portrait: null as { src: string; alt: string; width: number; height: number } | null,
+    // The owner's photograph (source-assets/founder-portrait-2026-11-15/), background removed at the owner's request; likeness untouched.
+    portrait: {
+      src: 'images/pardus-founder-saidah-namusoke-cutout-853.webp',
+      srcset: [['images/pardus-founder-saidah-namusoke-cutout-640.webp', 640], ['images/pardus-founder-saidah-namusoke-cutout-853.webp', 853]] as [string, number][],
+      alt: 'Saidah Namusoke, Founder and Managing Director of Pardus Luxury Escapes, standing with folded arms in a black uniform with gold wings and gold cuff stripes.',
+      width: 853,
+      height: 1280,
+    } as { src: string; srcset?: [string, number][]; alt: string; width: number; height: number } | null,
   },
   // Supplied wording: preserve exactly and reuse in terms, forms and briefs.
   fareNotice: 'IMPORTANT FARE NOTICE\nPlease note that all quoted airfares are subject to change without prior notice, depending on airline availability and fare conditions. The quoted fare is not guaranteed until the booking is confirmed and the ticket is fully issued.\nPARDUS LUXURY ESCAPES shall not be held responsible for any fare increases arising from airline pricing adjustments or changes in availability.\nThank you for choosing PARDUS LUXURY ESCAPES.',

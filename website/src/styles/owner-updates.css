@@ -13,7 +13,6 @@
 .founder-identity { min-width: 0; }
 .founder-name { margin: 24px 0 12px; }
 .founder-role { color: #cbb788; max-width: 32ch; }
-.founder-portrait { display: block; margin-top: 32px; width: 100%; height: auto; border-radius: 3px; }
 .founder-signoff { padding-top: 24px; border-top: 1px solid rgb(228 197 141 / .32); }
 .founder-signoff .link { max-width: 100%; }
 .about-foundations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 5vw, 64px); }
@@ -78,3 +77,40 @@
   .fare-notice { padding: 20px; }
   .package-details dl > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
 }
+
+/* V50 (15 November 2026): the founder portrait. Her photograph, with its studio background removed at the owner's request,
+   stands in front of a navy arch with a gold inner line, an offset gold outline, faint globe meridians and the Pardus flight
+   path; her head rises above the arch. The likeness itself is never altered, animated or cropped at the face. */
+.founder-frame { position: relative; isolation: isolate; width: 100%; max-width: 420px; margin: 40px 0 0; aspect-ratio: 853 / 1280; }
+.founder-arch, .founder-offset { position: absolute; inset: 16% 5% 7% 5%; border-radius: 999px 999px 22px 22px; }
+.founder-offset { z-index: -2; border: 1.5px solid #c9a35f; translate: 16px 14px; opacity: .7; }
+.founder-arch { z-index: -1; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% 28%, #2f6276 0%, #173d55 38%, #0b2238 72%, #081a2c 100%); box-shadow: 0 34px 70px rgb(0 0 0 / .45), inset 0 0 0 1px rgb(228 197 141 / .55); }
+.founder-arch::after { content: ''; position: absolute; inset: 12px; border-radius: inherit; border: 1px solid rgb(228 197 141 / .35); pointer-events: none; }
+.founder-globe { position: absolute; left: 50%; top: 6%; width: 120%; translate: -50% 0; color: rgb(228 197 141 / .16); }
+.founder-glow { position: absolute; left: 50%; top: 2%; width: 80%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, rgb(240 214 160 / .38), rgb(240 214 160 / .08) 60%, transparent); }
+.founder-portrait { position: relative; z-index: 1; isolation: isolate; display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 26px rgb(0 0 0 / .45));
+  -webkit-mask-image: linear-gradient(#000 80%, transparent 93%); mask-image: linear-gradient(#000 80%, transparent 93%); }
+.founder-route { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.founder-route-line { fill: none; stroke: #d9b874; stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: .012 .018; opacity: .85; }
+.founder-plane { fill: #e4c58d; }
+.founder-plate { position: absolute; z-index: 3; left: 50%; bottom: 3%; translate: -50% 0; display: grid; justify-items: center; gap: 2px; min-width: 70%; padding: 12px 22px 13px; border: 1px solid rgb(228 197 141 / .6); border-radius: 4px; background: rgb(7 21 38 / .88); backdrop-filter: blur(6px); text-align: center; box-shadow: 0 12px 30px rgb(0 0 0 / .35); }
+.founder-plate-name { font-family: var(--font-display); font-size: var(--fs-h4); font-weight: var(--fw-bold); line-height: 1.15; color: #fffaf0; }
+.founder-plate-role { font-family: var(--font-ui); font-size: var(--fs-label); font-weight: var(--fw-bold); line-height: var(--lh-label); letter-spacing: var(--ls-caps-s); text-transform: uppercase; color: #e4c58d; }
+@media (max-width: 767px) { .founder-frame { max-width: 400px; margin-inline: auto; } .founder-offset { translate: 10px 10px; } }
+/* Arrival: the arch and outline settle, the flight path draws and the plane lands in place as the portrait scrolls into view.
+   Scroll-linked only where the browser supports view timelines; otherwise, and under reduced motion, it is simply complete. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .founder-route-line { stroke-dasharray: 1; animation: founder-route linear both; animation-timeline: view(); animation-range: entry 10% cover 45%; }
+    .founder-plane { animation: founder-plane linear both; animation-timeline: view(); animation-range: entry 25% cover 45%; }
+    .founder-offset { animation: founder-offset linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; }
+    .founder-arch { animation: founder-arch linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+    .founder-plate { animation: founder-plate linear both; animation-timeline: view(); animation-range: entry 40% cover 50%; }
+  }
+}
+@keyframes founder-route { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes founder-plane { from { opacity: 0; } to { opacity: 1; } }
+@keyframes founder-offset { from { translate: 0 0; opacity: 0; } }
+@keyframes founder-arch { from { scale: .94; opacity: .3; } }
+@keyframes founder-plate { from { opacity: 0; translate: -50% 14px; } }
+@media print, (forced-colors: active) { .founder-route, .founder-globe, .founder-glow, .founder-offset { display: none; } .founder-portrait { filter: none; } }

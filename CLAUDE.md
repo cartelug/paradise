@@ -104,8 +104,12 @@ requirements supersede the older rules below only where explicitly stated:
   first-person is the requested default. `site.about.showFounder` controls both
   the section and founder structured data. `site.founder.portrait = null` produces
   no image or placeholder; only the exact approved natural photo may replace it.
-  The user approved the portrait shown in chat for Saidah Namusoke on 12 November;
-  its original downloadable file is still needed to integrate it without recreating her likeness.
+  The user approved the portrait for Saidah Namusoke on 12 November, supplied the original
+  file on 15 November 2026 and asked for its background to be removed with a creative frame.
+  The master, the background-removed cut-out (offline segmentation, likeness untouched) and
+  their SHA-256 are in `website/source-assets/founder-portrait-2026-11-15/`. About shows the
+  cut-out in a navy arch with gold lines, globe meridians, the logo's flight path behind her and a
+  name plate. Never regenerate, retouch, animate or crop her face.
 - Six destinations lead the homepage, listing and enquiry options: Zanzibar,
   Seychelles, Maldives, Dubai, Maasai Mara, Uganda gorillas. East Africa and Europe
   follow as broader collections. The first homepage window uses the existing real

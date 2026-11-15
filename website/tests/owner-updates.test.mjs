@@ -53,7 +53,8 @@ test('the About page keeps the three collections, seven services and previous bo
 test('the founder photograph is conditional, never a generated face or placeholder, and hiding the founder hides schema too', async () => {
   const source = await read('src/pages/about.astro');
   assert.match(source, /site\.about\.showFounder && <section/);
-  assert.match(source, /portrait && <img[^>]*data-founder-portrait/);
+  // The photograph renders only inside the portrait condition (its frame wraps it); nothing renders when it is null.
+  assert.match(source, /\{portrait && \([\s\S]*?<img[^>]*data-founder-portrait[\s\S]*?\)\}/);
   assert.doesNotMatch(source, /placeholder|avatar|generated_images/);
   assert.match(await read('src/layouts/Layout.astro'), /site\.about\.showFounder \? \{ founder:/);
   if (site.founder.portrait === null) assert.doesNotMatch(about, /data-founder-portrait/);

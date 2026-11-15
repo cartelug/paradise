@@ -6,6 +6,7 @@ import Icon from '../components/Icon.astro';
 import BookingSteps from '../components/BookingSteps.astro';
 import { path, site } from '../data/site';
 import { brand } from '../data/brand';
+import logo from '../data/logo.json';
 const promises = [
   { icon: 'chat' as const, title: 'Personal attention', text: 'One adviser, one conversation. The itinerary, the arrangements and every practical question stay in one place.' },
   { icon: 'heart' as const, title: 'Thoughtful details', text: 'Your dates, budget, occasion and fellow travellers shape the plan, never a standard package.' },
@@ -46,7 +47,21 @@ const portrait = site.founder.portrait;
         <div class="founder-identity">
           <h3 class="founder-name">{site.founder.name}</h3>
           <p class="founder-role">Founder &amp; Managing Director | PARDUS LUXURY ESCAPES</p>
-          {portrait && <img class="founder-portrait" data-founder-portrait src={path(portrait.src)} alt={portrait.alt} width={portrait.width} height={portrait.height} loading="lazy" decoding="async" />}
+          {portrait && (
+            <figure class="founder-frame" data-founder-frame data-motion-still>
+              <div class="founder-offset" aria-hidden="true"></div>
+              <div class="founder-arch" aria-hidden="true">
+                <svg class="founder-globe" viewBox="0 0 400 400" focusable="false"><g fill="none" stroke="currentColor" stroke-width=".8"><circle cx="200" cy="200" r="190"/><ellipse cx="200" cy="200" rx="120" ry="190"/><ellipse cx="200" cy="200" rx="50" ry="190"/><ellipse cx="200" cy="200" rx="190" ry="110"/><ellipse cx="200" cy="200" rx="190" ry="40"/></g></svg>
+                <span class="founder-glow"></span>
+              </div>
+              <svg class="founder-route" viewBox="0 0 853 1280" aria-hidden="true" focusable="false">
+                <path class="founder-route-line" d="M60 520 C 40 250, 300 120, 520 150 S 820 260, 800 430" pathLength="1" />
+                <g class="founder-plane" transform="translate(735 238) rotate(38) scale(.42) translate(-215 -202)"><path d={logo.plane} fill-rule="evenodd" /></g>
+              </svg>
+              <img class="founder-portrait" data-founder-portrait src={path(portrait.src)} srcset={portrait.srcset?.map(([file, width]) => `${path(file)} ${width}w`).join(', ')} sizes="(min-width: 768px) 420px, 90vw" alt={portrait.alt} width={portrait.width} height={portrait.height} loading="lazy" decoding="async" />
+              <figcaption class="founder-plate"><span class="founder-plate-name">{site.founder.name}</span><span class="founder-plate-role">Founder &amp; Managing Director</span></figcaption>
+            </figure>
+          )}
         </div>
         <div class="prose">
           {brand.founder.map(paragraph => <p>{paragraph}</p>)}
