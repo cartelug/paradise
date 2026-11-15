@@ -1,3 +1,14 @@
+# V50 — no Sky Text Bold outside body copy, 15 November 2026
+
+The owner ruled that Sky Text Bold is never used on non-body text: every heading level
+(h1–h6), card/tile/panel/FAQ/menu titles, buttons, eyebrows, labels, chips, figure captions'
+bold lines, form and planner labels, saved-trip titles and the header “Saved trips” button
+use MTN Brighter Sans Bold, site-wide. `--font-title` now points at `--font-display`, and
+the closing block of `type.css` lists the remaining bold UI elements. Sky Text stays for
+paragraphs, leads, regular-weight navigation and footer links, form fields, and bold or
+links *inside* a paragraph. When adding bold non-body text, add its selector to that block;
+a Playwright scan of all 34 routes (hidden panels included) must find no other bold Sky Text.
+
 # V49 — scroll arrivals everywhere and a clean opening tagline, 15 November 2026
 
 The owner asked for as many scroll animations as possible on every device, more motion in the

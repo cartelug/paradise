@@ -28,7 +28,7 @@
      Add a face in FontFaces.astro, then point a role here; nothing else needs to change. */
   --font-ui: 'Sky Text', 'Sky Text Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'MTN Brighter Sans', 'MTN Brighter Sans Fallback', 'Sky Text', 'Sky Text Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-title: var(--font-ui);
+  --font-title: var(--font-display);
   --font-figure: var(--font-display);
 
   --gutter: clamp(20px, 5.2vw, 76px);

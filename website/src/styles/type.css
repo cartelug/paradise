@@ -2,8 +2,9 @@
 
    Three voices, all owner-licensed and self-hosted (FontFaces.astro, public/fonts/FONT-LICENSES.txt):
      Display  MTN Brighter Sans Bold   h1, h2, large titles and every price or figure. Used at 19 px and above, never smaller.
-     Title    Sky Text Bold            h3, h4, card and tile titles, buttons, navigation, labels.
-     Reading  Sky Text Regular / Light paragraphs, leads, forms, captions.
+     Title    MTN Brighter Sans Bold   (since 15 November 2026) every heading level, card, tile and panel title, buttons, labels,
+                                       eyebrows and every other bold line that is not body copy. Sky Text Bold is never used for these.
+     Reading  Sky Text Regular / Light paragraphs, leads, forms, captions, and bold inside a paragraph.
    Neither family has an italic, or a 500, 600 or 800 weight, so the only weights are 300, 400 and 700 and emphasis is upright
    and colour-led (font-synthesis is off). Sky Text has small x-height, kerning only, and proportional digits; MTN's digits are
    tabular, which is why every price and figure uses MTN.
@@ -175,3 +176,19 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 .desktop-destinations-grid strong { font-family: var(--font-title); font-size: var(--fs-body); font-weight: var(--fw-bold); line-height: var(--lh-ui); }
 .desktop-destinations-grid small { font-size: var(--fs-small); font-weight: var(--fw-regular); line-height: var(--lh-small); }
 .desktop-destinations-all { font-size: var(--fs-small); font-weight: var(--fw-bold); line-height: var(--lh-ui); }
+
+
+/* V50 (15 November 2026): Sky Text Bold is never used on anything that is not body copy. Every heading, title, label, button,
+   chip, caption heading and bold UI line below is set in MTN Brighter Sans Bold. Body paragraphs, regular-weight navigation and
+   bold emphasis inside a paragraph stay in Sky Text. The --font-title token points at the display face as well. */
+:is(h1, h2, h3, h4, h5, h6, summary, legend, dt),
+:is(.eyebrow, .btn, .link, .pill, .chip, .skip-link, .breadcrumb, .byline, .mail, .back-top, .price-label, .card-label, .card-meta, .story-meta,
+  .step-n, .concept-number, .concept-meta span, .dest-duration, .dest-top > span, .escapes-hint, .menu-kicker, .menu-more a,
+  .menu-nav strong, .header-saved, .header-saved small, .header-cta, .footer-column h2, .footer-brand .footer-tagline, .footer-contact a,
+  .folio-empty-title, .folio-signals dd, .folio-saved li small, .folio-saved li strong, .folio-saved li button, .folio-clear, .folio-status button,
+  .folio-save, .picker-q, .picker-step, .picker-clear, .picker-group-title, .pick-label, .picker-summary strong, .services-points strong,
+  .travel-update-meta span, .travel-update a, .tile strong, .planner-progress, .planner-back, .planner label, .priority-grid label,
+  .form label, .field > span, .search, .article-margin p:not(.eyebrow), .hero-personal, .who-reference-intro,
+  .fare-notice-title, .package-label, .package-details summary, .desktop-destinations-label, .desktop-destinations-grid strong, .desktop-destinations-all,
+  .window-seat .ws-eyebrow, .window-seat .ws-difference, .window-seat .ws-plan, .founder-plate-role,
+  .intro-bottomline button) { font-family: var(--font-display); }
