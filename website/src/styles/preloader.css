@@ -134,3 +134,43 @@ html.intro-quick .intro-metal-sheen { animation-duration: .2s; animation-delay: 
 html.intro-quick.intro-exiting .intro-curtain { transition-duration: .28s; }
 
 html.intro-quick .intro-progress span, html.intro-quick .intro-atmosphere { animation-duration: .24s; }
+
+/* V49 (15 November 2026): a clean, natural "LUXURY ESCAPES" line. The bitmap-traced tagline had rough edges, so the opening
+   now sets it as live lettering between two crisp gold rules, and the globe lines fade out behind the logo instead of
+   scratching across it. The rules draw outward from the words and the letters arrive one after another. */
+.intro-centre { isolation: isolate; }
+.intro-centre::before { content: ''; position: absolute; z-index: -1; left: 50%; top: 34%; width: 150%; height: 120%; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, #071528 0%, rgb(7 21 40 / .94) 46%, rgb(7 21 40 / .6) 72%, transparent 100%); pointer-events: none; }
+.intro-halo { position: absolute; z-index: -1; left: 50%; top: 36%; width: 92%; aspect-ratio: 2.1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, rgb(227 201 149 / .2), rgb(227 201 149 / .06) 55%, transparent); opacity: 0; pointer-events: none; animation: intro-halo 2.4s var(--intro-ease) .5s forwards; }
+.intro-tagline-text { fill: url(#intro-metal); font-family: var(--font-display); font-size: 31px; font-weight: 700; letter-spacing: 0; }
+.intro-tagline-text tspan { animation: intro-letter .5s var(--intro-ease) calc(1.65s + var(--i) * 45ms) both; }
+.intro-rule { stroke: #d2b071; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 170; stroke-dashoffset: 170; animation: intro-rule .9s var(--intro-ease) 1.75s forwards; }
+.intro-tagline { opacity: 1; transform: none; animation: none; }
+.intro-destinations span { display: inline-block; animation: intro-rise .55s var(--intro-ease) both; }
+.intro-destinations span:nth-of-type(1) { animation-delay: 2.3s; }
+.intro-destinations span:nth-of-type(2) { animation-delay: 2.42s; }
+.intro-destinations span:nth-of-type(3) { animation-delay: 2.54s; }
+.intro-destinations i { animation: intro-dot .4s var(--intro-ease) 2.5s both; }
+.intro-promise { animation-name: intro-rise; }
+.intro-topline { animation-name: intro-drop; }
+.intro-bottomline { animation-name: intro-rise; }
+@keyframes intro-letter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes intro-rule { to { stroke-dashoffset: 0; } }
+@keyframes intro-halo { 0% { opacity: 0; scale: .7; } 55% { opacity: 1; scale: 1.04; } 100% { opacity: .7; scale: 1; } }
+@keyframes intro-rise { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: none; } }
+@keyframes intro-drop { from { opacity: 0; translate: 0 -10px; } to { opacity: 1; translate: none; } }
+@keyframes intro-dot { from { opacity: 0; scale: 0; } to { opacity: 1; scale: 1; } }
+/* The compact first visit and the quick version keep the same choreography on their shorter clocks. */
+html.intro-full .intro-tagline-text tspan { animation-duration: .38s; animation-delay: calc(.85s + var(--i) * 32ms); }
+html.intro-full .intro-rule { animation-duration: .6s; animation-delay: 1s; }
+html.intro-full .intro-halo { animation-duration: 1.5s; animation-delay: .3s; }
+html.intro-full .intro-destinations span:nth-of-type(1) { animation-delay: 1.15s; }
+html.intro-full .intro-destinations span:nth-of-type(2) { animation-delay: 1.24s; }
+html.intro-full .intro-destinations span:nth-of-type(3) { animation-delay: 1.33s; }
+html.intro-full .intro-destinations i { animation-delay: 1.28s; }
+html.intro-quick .intro-tagline-text tspan { animation-duration: .16s; animation-delay: calc(.08s + var(--i) * 10ms); }
+html.intro-quick .intro-rule { animation-duration: .22s; animation-delay: .1s; }
+html.intro-quick .intro-halo { animation-duration: .5s; animation-delay: 0s; }
+@media (prefers-reduced-motion: reduce) {
+  .intro-rule { stroke-dashoffset: 0; }
+  .intro-halo { opacity: .7; }
+}

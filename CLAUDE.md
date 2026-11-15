@@ -1,3 +1,16 @@
+# V49 — scroll arrivals everywhere and a clean opening tagline, 15 November 2026
+
+The owner asked for as many scroll animations as possible on every device, more motion in the
+preloader, and a natural redraw of the scratchy, cut-looking “LUXURY ESCAPES” line. The opening
+now sets that line as live MTN Brighter Sans lettering (one tspan per letter, fixed `textLength`)
+between two solid gold rules that draw outward; a dark backing fades the globe lines behind the
+logo, a soft halo blooms, and the destinations stagger in (quick and reduced-motion versions kept).
+`private-view.ts` now gives headings, eyebrows, paragraphs, pictures (window opens while the
+photograph settles), list items, cards, questions, buttons and footer columns their own entrances,
+staggered in reading order, on every page. Entrances start only as a block nears the viewport;
+prices, anything inside a priced card (except its picture), forms, the hero and animals never move,
+and reduced motion or Pause turns it all off.
+
 # V48 — section one text redesign, 14 November 2026
 
 The owner asked for the navy, scene-filled V44 “Extraordinary journeys.” lettering in its own
