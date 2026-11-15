@@ -140,7 +140,8 @@ h1 em, h2 em, h3 em, h4 em, .display em { font-weight: inherit; }
 /* Logo lockup caption. It belongs to the logo, so it is sized from the lockup, not the page scale: about as wide as the wordmark
    (10 px under the 112 px phone logo, 12 to 12.5 px under the wider desktop ones), on one line, with no link underline under it. */
 .brand-lockup-vector { container-type: inline-size; }
-.brand-tagline { font-size: 10px; font-size: clamp(10px, 8.9cqw, 12.5px); letter-spacing: .01em; white-space: nowrap; }
+.brand-tagline { font-size: 10px; letter-spacing: .02em; white-space: nowrap; }
+@media (min-width: 1000px) { .site-header .brand-tagline { font-size: 11px; letter-spacing: .03em; } }
 
 /* Footer: compact reading size (the body size is too large for link lists). */
 .footer-brand p, .footer-links a, .footer-contact a { font-size: var(--fs-body-s); }
